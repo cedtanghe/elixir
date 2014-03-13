@@ -1,0 +1,10 @@
+<?php $this->extend(__DIR__ . '/layout.phtml'); ?>
+CONTENT : <?php echo 'Value key-1 : ' . $this->{'key-1'}; ?>
+
+<?php $this->start('block'); ?>
+block testPHP
+<?php 
+echo $this->parent();
+$this->end();
+echo $this->block('block');
+?>

@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Elixir\HTTP\Session\SaveHandler\DB | Elixir</title>
+                    <script type="text/javascript" src="../../../../js/jquery-1.3.2.min.js"></script>
+			
+			<link rel="stylesheet" type="text/css" href="../../../../stylesheet.css">
+			<link rel="stylesheet" type="text/css" href="../../../../styles.css">
+			
+            <link rel="stylesheet" type="text/css" href="../../../../prismjs/prism.css">
+            <script type="text/javascript" src="../../../../prismjs/prism.js" data-manual></script>
+            
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../../../classes.html">Classes</a></li>
+                            <li><a href="../../../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title">Elixir</div>
+
+            <div class="type">Class</div>
+    <h1><a href="../../../../Elixir/HTTP/Session/SaveHandler.html">Elixir\HTTP\Session\SaveHandler</a>\DB</h1>
+    </div>
+        <div class="content">
+                <p>class    <strong>DB</strong>        implements
+        <a href="../../../../Elixir/HTTP/Session/SaveHandler/SaveHandlerInterface.html"><abbr title="Elixir\HTTP\Session\SaveHandler\SaveHandlerInterface">SaveHandlerInterface</abbr></a></p>
+
+    
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method___construct">__construct</a>(<a href="../../../../Elixir/DB/DBInterface.html"><abbr title="Elixir\DB\DBInterface">DBInterface</abbr></a> $pDB, integer $pLifeTime = -1)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../../Elixir/DB/DBInterface.html"><abbr title="Elixir\DB\DBInterface">DBInterface</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getDB">getDB</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    integer
+                </td>
+                <td class="last">
+                    <a href="#method_getLifeTime">getLifeTime</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_open">open</a>(string $pSavePath, string $pName)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_close">close</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_read">read</a>(string $pId)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_write">write</a>(string $pId, string $pData)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_destroy">destroy</a>(string $pId)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_gc">gc</a>(integer $pMaxLifetime)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method___construct">
+        <div class="location">at line 30</div>
+        <code>            public            
+    <strong>__construct</strong>(<a href="../../../../Elixir/DB/DBInterface.html"><abbr title="Elixir\DB\DBInterface">DBInterface</abbr></a> $pDB, integer $pLifeTime = -1)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../../Elixir/DB/DBInterface.html"><abbr title="Elixir\DB\DBInterface">DBInterface</abbr></a></td>
+                <td>$pDB</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>integer</td>
+                <td>$pLifeTime</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getDB">
+        <div class="location">at line 48</div>
+        <code>            public            <a href="../../../../Elixir/DB/DBInterface.html"><abbr title="Elixir\DB\DBInterface">DBInterface</abbr></a>
+    <strong>getDB</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../../Elixir/DB/DBInterface.html"><abbr title="Elixir\DB\DBInterface">DBInterface</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getLifeTime">
+        <div class="location">at line 56</div>
+        <code>            public            integer
+    <strong>getLifeTime</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>integer</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_open">
+        <div class="location">at line 64</div>
+        <code>            public            boolean
+    <strong>open</strong>(string $pSavePath, string $pName)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$pSavePath</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$pName</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table>
+                    <tr>
+                <td>SaveHandlerInterface::open()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+                <h3 id="method_close">
+        <div class="location">at line 72</div>
+        <code>            public            boolean
+    <strong>close</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table>
+                    <tr>
+                <td>SaveHandlerInterface::close()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+                <h3 id="method_read">
+        <div class="location">at line 81</div>
+        <code>            public            boolean
+    <strong>read</strong>(string $pId)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$pId</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table>
+                    <tr>
+                <td>SaveHandlerInterface::read()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+                <h3 id="method_write">
+        <div class="location">at line 102</div>
+        <code>            public            boolean
+    <strong>write</strong>(string $pId, string $pData)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$pId</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$pData</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table>
+                    <tr>
+                <td>SaveHandlerInterface::write()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+                <h3 id="method_destroy">
+        <div class="location">at line 141</div>
+        <code>            public            boolean
+    <strong>destroy</strong>(string $pId)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$pId</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table>
+                    <tr>
+                <td>SaveHandlerInterface::destroy()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+                <h3 id="method_gc">
+        <div class="location">at line 152</div>
+        <code>            public            
+    <strong>gc</strong>(integer $pMaxLifetime)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>integer</td>
+                <td>$pMaxLifetime</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table>
+                    <tr>
+                <td>SaveHandlerInterface::gc()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+		<script type="text/javascript">
+			$('.description code').addClass('language-php');
+			Prism.highlightAll();
+			
+			$('.description p').each(function(e)
+			{
+				if($(this).text().substr(-1) == ':')
+				{
+					$(this).css({"font-weight": "bold"});
+				}
+			});
+			
+			$('.description p:empty').remove();
+		</script>
+    </body>
+</html>

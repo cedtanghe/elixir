@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <unit>
+        <key-3>value-3</key-3>
+        <key-4>
+            <key-4-1>value-4-1</key-4-1>
+            <key-4-2>value-4-2</key-4-2>
+            <key-4-3>{REPLACE}value-4-2</key-4-3>
+        </key-4>
+        <key-5>value-5</key-5>
+    </unit>
+    
+    <test extends="unit">
+        <key-3>new value-3</key-3>
+        <include href="include.xml"/>
+    </test>
+</root>

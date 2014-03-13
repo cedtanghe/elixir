@@ -1,0 +1,12 @@
+{
+    "name":"Elixir",
+    "autoload": 
+    {
+        "psr-0": 
+        {
+            "Elixir\\":"/src/framework/",
+            "PHPChecker_":"/src/framework/",
+            "Elixir\\Module\\":"/src/modules/"
+        }
+    }
+}

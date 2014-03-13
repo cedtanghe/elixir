@@ -1,0 +1,35 @@
+<?php
+
+namespace ElixirTest\Logging;
+
+use Elixir\ClassLoader\Loader;
+use Elixir\Logging\Logger;
+use Elixir\Logging\Writer\File;
+
+class Test extends \PHPUnit_Framework_TestCase
+{
+    protected $_loader;
+
+    public function __construct()
+    {
+        require_once __DIR__ . '/../../../elixir/framework/Elixir/ClassLoader/Loader.php';
+        
+        $this->_loader = new Loader();
+        $this->_loader->addNamespace('ElixirTest', __DIR__ . './../');
+        $this->_loader->register();
+    }
+    
+    public function testLog()
+    {
+        $logger = new Logger();
+        $logger->addWriter(new File(__DIR__ . '/../../logs/logs.txt'));
+        $logger->lock(Logger::ERR);
+        
+        $logger->clear();
+        $logger->info('value info');
+        $logger->error('value error');
+        
+        $this->assertTrue(false !== strpos(file_get_contents(__DIR__ . '/../../logs/logs.txt'), 'value info'));
+        $this->assertFalse(strpos(file_get_contents(__DIR__ . '/../../logs/logs.txt'), 'value error'));
+    }
+}

@@ -1,0 +1,1877 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Elixir\HTTP\Request | Elixir</title>
+                    <script type="text/javascript" src="../../js/jquery-1.3.2.min.js"></script>
+			
+			<link rel="stylesheet" type="text/css" href="../../stylesheet.css">
+			<link rel="stylesheet" type="text/css" href="../../styles.css">
+			
+            <link rel="stylesheet" type="text/css" href="../../prismjs/prism.css">
+            <script type="text/javascript" src="../../prismjs/prism.js" data-manual></script>
+            
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../classes.html">Classes</a></li>
+                            <li><a href="../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title">Elixir</div>
+
+            <div class="type">Class</div>
+    <h1><a href="../../Elixir/HTTP.html">Elixir\HTTP</a>\Request</h1>
+    </div>
+        <div class="content">
+                <p>class    <strong>Request</strong></p>
+
+    
+            <h2>Constants</h2>
+
+            <table>
+                    <tr>
+                <td>ATTRIBUTES</td>
+                <td class="last">
+                    <p><em>
+</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+                    <tr>
+                <td>QUERY</td>
+                <td class="last">
+                    <p><em>
+</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+                    <tr>
+                <td>POST</td>
+                <td class="last">
+                    <p><em>
+</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+                    <tr>
+                <td>SESSION</td>
+                <td class="last">
+                    <p><em>
+</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+                    <tr>
+                <td>COOKIE</td>
+                <td class="last">
+                    <p><em>
+</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+                    <tr>
+                <td>FILES</td>
+                <td class="last">
+                    <p><em>
+</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+                    <tr>
+                <td>SERVER</td>
+                <td class="last">
+                    <p><em>
+</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+                    <tr>
+                <td>ENV</td>
+                <td class="last">
+                    <p><em>
+</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+            </table>
+
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method___construct">__construct</a>(<a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|<a href="http://php.net/ArrayAccess"><abbr title="ArrayAccess">ArrayAccess</abbr></a>|array $pAttributes, <a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|<a href="http://php.net/ArrayAccess"><abbr title="ArrayAccess">ArrayAccess</abbr></a>|array $pQuery, <a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|<a href="http://php.net/ArrayAccess"><abbr title="ArrayAccess">ArrayAccess</abbr></a>|array $pPost, <a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|<a href="http://php.net/ArrayAccess"><abbr title="ArrayAccess">ArrayAccess</abbr></a>|array $pSession, <a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|<a href="http://php.net/ArrayAccess"><abbr title="ArrayAccess">ArrayAccess</abbr></a>|array $pCookie, <a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|<a href="http://php.net/ArrayAccess"><abbr title="ArrayAccess">ArrayAccess</abbr></a>|array $pFiles, <a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|<a href="http://php.net/ArrayAccess"><abbr title="ArrayAccess">ArrayAccess</abbr></a>|array $pServer, <a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|<a href="http://php.net/ArrayAccess"><abbr title="ArrayAccess">ArrayAccess</abbr></a>|array $pEnv)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_setHeaders">setHeaders</a>(<a href="../../Elixir/HTTP/Headers.html"><abbr title="Elixir\HTTP\Headers">Headers</abbr></a> $pValue)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Elixir/HTTP/Headers.html"><abbr title="Elixir\HTTP\Headers">Headers</abbr></a>|mixed
+                </td>
+                <td class="last">
+                    <a href="#method_getHeaders">getHeaders</a>(string $pKey = null, mixed $pDefault = null)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    mixed
+                </td>
+                <td class="last">
+                    <a href="#method_get">get</a>(string $pKey, mixed $pDefault = null, mixed $pSanitize = null, array $pProviders = array(self::QUERY, self::POST, self::ATTRIBUTES))
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_has">has</a>(string $pKey, array $pProviders = array(self::QUERY, self::POST, self::ATTRIBUTES))
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|mixed
+                </td>
+                <td class="last">
+                    <a href="#method_getAttributes">getAttributes</a>(string $pKey = null, mixed $pDefault = null, mixed $pSanitize = null)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|mixed
+                </td>
+                <td class="last">
+                    <a href="#method_getQuery">getQuery</a>(string $pKey = null, mixed $pDefault = null, mixed $pSanitize = null)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|mixed
+                </td>
+                <td class="last">
+                    <a href="#method_getPost">getPost</a>(string $pKey = null, mixed $pDefault = null, mixed $pSanitize = null)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|mixed
+                </td>
+                <td class="last">
+                    <a href="#method_getSession">getSession</a>(string $pKey = null, mixed $pDefault = null, mixed $pSanitize = null)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|mixed
+                </td>
+                <td class="last">
+                    <a href="#method_getCookie">getCookie</a>(string $pKey = null, mixed $pDefault = null, mixed $pSanitize = null)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|mixed
+                </td>
+                <td class="last">
+                    <a href="#method_getFiles">getFiles</a>(string $pKey = null, mixed $pDefault = null, mixed $pSanitize = null)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|mixed
+                </td>
+                <td class="last">
+                    <a href="#method_getServer">getServer</a>(string $pKey = null, mixed $pDefault = null, mixed $pSanitize = null)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|mixed
+                </td>
+                <td class="last">
+                    <a href="#method_getEnv">getEnv</a>(string $pKey = null, mixed $pDefault = null, mixed $pSanitize = null)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_setBaseURL">setBaseURL</a>(string $pValue)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getBaseURL">getBaseURL</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_setURL">setURL</a>(string $pValue)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getURL">getURL</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getIP">getIP</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_isSecure">isSecure</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getScheme">getScheme</a>(boolean $pSecure = null)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string
+                </td>
+                <td class="last">
+                    <a href="#method_getPathInfo">getPathInfo</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string|mixed
+                </td>
+                <td class="last">
+                    <a href="#method_getRequestMethod">getRequestMethod</a>(mixed $pDefault = null)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_isPost">isPost</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_isQuery">isQuery</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_isPut">isPut</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_isDelete">isDelete</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_isAjax">isAjax</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string|null
+                </td>
+                <td class="last">
+                    <a href="#method_getUser">getUser</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string|null
+                </td>
+                <td class="last">
+                    <a href="#method_getPassword">getPassword</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../Elixir/Routing/Matcher/RouteMatch.html"><abbr title="Elixir\Routing\Matcher\RouteMatch">RouteMatch</abbr></a>|null
+                </td>
+                <td class="last">
+                    <a href="#method_getRoute">getRoute</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_setRoute">setRoute</a>(<a href="../../Elixir/Routing/Matcher/RouteMatch.html"><abbr title="Elixir\Routing\Matcher\RouteMatch">RouteMatch</abbr></a> $pValue)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string|null
+                </td>
+                <td class="last">
+                    <a href="#method_getModule">getModule</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_setModule">setModule</a>(string $pValue)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string|null
+                </td>
+                <td class="last">
+                    <a href="#method_getController">getController</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_setController">setController</a>(string $pValue)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string|null
+                </td>
+                <td class="last">
+                    <a href="#method_getAction">getAction</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_setAction">setAction</a>(string $pValue)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method___construct">
+        <div class="location">at line 119</div>
+        <code>            public            
+    <strong>__construct</strong>(<a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|<a href="http://php.net/ArrayAccess"><abbr title="ArrayAccess">ArrayAccess</abbr></a>|array $pAttributes, <a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|<a href="http://php.net/ArrayAccess"><abbr title="ArrayAccess">ArrayAccess</abbr></a>|array $pQuery, <a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|<a href="http://php.net/ArrayAccess"><abbr title="ArrayAccess">ArrayAccess</abbr></a>|array $pPost, <a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|<a href="http://php.net/ArrayAccess"><abbr title="ArrayAccess">ArrayAccess</abbr></a>|array $pSession, <a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|<a href="http://php.net/ArrayAccess"><abbr title="ArrayAccess">ArrayAccess</abbr></a>|array $pCookie, <a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|<a href="http://php.net/ArrayAccess"><abbr title="ArrayAccess">ArrayAccess</abbr></a>|array $pFiles, <a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|<a href="http://php.net/ArrayAccess"><abbr title="ArrayAccess">ArrayAccess</abbr></a>|array $pServer, <a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|<a href="http://php.net/ArrayAccess"><abbr title="ArrayAccess">ArrayAccess</abbr></a>|array $pEnv)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|<a href="http://php.net/ArrayAccess"><abbr title="ArrayAccess">ArrayAccess</abbr></a>|array</td>
+                <td>$pAttributes</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|<a href="http://php.net/ArrayAccess"><abbr title="ArrayAccess">ArrayAccess</abbr></a>|array</td>
+                <td>$pQuery</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|<a href="http://php.net/ArrayAccess"><abbr title="ArrayAccess">ArrayAccess</abbr></a>|array</td>
+                <td>$pPost</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|<a href="http://php.net/ArrayAccess"><abbr title="ArrayAccess">ArrayAccess</abbr></a>|array</td>
+                <td>$pSession</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|<a href="http://php.net/ArrayAccess"><abbr title="ArrayAccess">ArrayAccess</abbr></a>|array</td>
+                <td>$pCookie</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|<a href="http://php.net/ArrayAccess"><abbr title="ArrayAccess">ArrayAccess</abbr></a>|array</td>
+                <td>$pFiles</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|<a href="http://php.net/ArrayAccess"><abbr title="ArrayAccess">ArrayAccess</abbr></a>|array</td>
+                <td>$pServer</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|<a href="http://php.net/ArrayAccess"><abbr title="ArrayAccess">ArrayAccess</abbr></a>|array</td>
+                <td>$pEnv</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setHeaders">
+        <div class="location">at line 165</div>
+        <code>            public            
+    <strong>setHeaders</strong>(<a href="../../Elixir/HTTP/Headers.html"><abbr title="Elixir\HTTP\Headers">Headers</abbr></a> $pValue)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../Elixir/HTTP/Headers.html"><abbr title="Elixir\HTTP\Headers">Headers</abbr></a></td>
+                <td>$pValue</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getHeaders">
+        <div class="location">at line 175</div>
+        <code>            public            <a href="../../Elixir/HTTP/Headers.html"><abbr title="Elixir\HTTP\Headers">Headers</abbr></a>|mixed
+    <strong>getHeaders</strong>(string $pKey = null, mixed $pDefault = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$pKey</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$pDefault</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Elixir/HTTP/Headers.html"><abbr title="Elixir\HTTP\Headers">Headers</abbr></a>|mixed</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_get">
+        <div class="location">at line 192</div>
+        <code>            public            mixed
+    <strong>get</strong>(string $pKey, mixed $pDefault = null, mixed $pSanitize = null, array $pProviders = array(self::QUERY, self::POST, self::ATTRIBUTES))</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$pKey</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$pDefault</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$pSanitize</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$pProviders</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>mixed</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_has">
+        <div class="location">at line 214</div>
+        <code>            public            boolean
+    <strong>has</strong>(string $pKey, array $pProviders = array(self::QUERY, self::POST, self::ATTRIBUTES))</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$pKey</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$pProviders</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getAttributes">
+        <div class="location">at line 237</div>
+        <code>            public            <a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|mixed
+    <strong>getAttributes</strong>(string $pKey = null, mixed $pDefault = null, mixed $pSanitize = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$pKey</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$pDefault</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$pSanitize</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|mixed</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getQuery">
+        <div class="location">at line 253</div>
+        <code>            public            <a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|mixed
+    <strong>getQuery</strong>(string $pKey = null, mixed $pDefault = null, mixed $pSanitize = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$pKey</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$pDefault</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$pSanitize</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|mixed</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getPost">
+        <div class="location">at line 269</div>
+        <code>            public            <a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|mixed
+    <strong>getPost</strong>(string $pKey = null, mixed $pDefault = null, mixed $pSanitize = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$pKey</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$pDefault</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$pSanitize</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|mixed</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getSession">
+        <div class="location">at line 285</div>
+        <code>            public            <a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|mixed
+    <strong>getSession</strong>(string $pKey = null, mixed $pDefault = null, mixed $pSanitize = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$pKey</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$pDefault</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$pSanitize</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|mixed</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getCookie">
+        <div class="location">at line 301</div>
+        <code>            public            <a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|mixed
+    <strong>getCookie</strong>(string $pKey = null, mixed $pDefault = null, mixed $pSanitize = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$pKey</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$pDefault</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$pSanitize</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|mixed</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getFiles">
+        <div class="location">at line 317</div>
+        <code>            public            <a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|mixed
+    <strong>getFiles</strong>(string $pKey = null, mixed $pDefault = null, mixed $pSanitize = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$pKey</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$pDefault</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$pSanitize</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|mixed</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getServer">
+        <div class="location">at line 333</div>
+        <code>            public            <a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|mixed
+    <strong>getServer</strong>(string $pKey = null, mixed $pDefault = null, mixed $pSanitize = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$pKey</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$pDefault</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$pSanitize</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|mixed</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getEnv">
+        <div class="location">at line 349</div>
+        <code>            public            <a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|mixed
+    <strong>getEnv</strong>(string $pKey = null, mixed $pDefault = null, mixed $pSanitize = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$pKey</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$pDefault</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$pSanitize</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Elixir/HTTP/ParametersInterface.html"><abbr title="Elixir\HTTP\ParametersInterface">ParametersInterface</abbr></a>|mixed</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setBaseURL">
+        <div class="location">at line 362</div>
+        <code>            public            
+    <strong>setBaseURL</strong>(string $pValue)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$pValue</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getBaseURL">
+        <div class="location">at line 370</div>
+        <code>            public            string
+    <strong>getBaseURL</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setURL">
+        <div class="location">at line 383</div>
+        <code>            public            
+    <strong>setURL</strong>(string $pValue)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$pValue</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getURL">
+        <div class="location">at line 391</div>
+        <code>            public            string
+    <strong>getURL</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getIP">
+        <div class="location">at line 408</div>
+        <code>            public            string
+    <strong>getIP</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_isSecure">
+        <div class="location">at line 419</div>
+        <code>            public            boolean
+    <strong>isSecure</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getScheme">
+        <div class="location">at line 429</div>
+        <code>            public            string
+    <strong>getScheme</strong>(boolean $pSecure = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>boolean</td>
+                <td>$pSecure</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getPathInfo">
+        <div class="location">at line 442</div>
+        <code>            public            string
+    <strong>getPathInfo</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getRequestMethod">
+        <div class="location">at line 459</div>
+        <code>            public            string|mixed
+    <strong>getRequestMethod</strong>(mixed $pDefault = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>mixed</td>
+                <td>$pDefault</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string|mixed</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_isPost">
+        <div class="location">at line 467</div>
+        <code>            public            boolean
+    <strong>isPost</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_isQuery">
+        <div class="location">at line 475</div>
+        <code>            public            boolean
+    <strong>isQuery</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_isPut">
+        <div class="location">at line 484</div>
+        <code>            public            boolean
+    <strong>isPut</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_isDelete">
+        <div class="location">at line 492</div>
+        <code>            public            boolean
+    <strong>isDelete</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_isAjax">
+        <div class="location">at line 500</div>
+        <code>            public            boolean
+    <strong>isAjax</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getUser">
+        <div class="location">at line 508</div>
+        <code>            public            string|null
+    <strong>getUser</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string|null</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getPassword">
+        <div class="location">at line 516</div>
+        <code>            public            string|null
+    <strong>getPassword</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string|null</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getRoute">
+        <div class="location">at line 524</div>
+        <code>            public            <a href="../../Elixir/Routing/Matcher/RouteMatch.html"><abbr title="Elixir\Routing\Matcher\RouteMatch">RouteMatch</abbr></a>|null
+    <strong>getRoute</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Elixir/Routing/Matcher/RouteMatch.html"><abbr title="Elixir\Routing\Matcher\RouteMatch">RouteMatch</abbr></a>|null</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setRoute">
+        <div class="location">at line 532</div>
+        <code>            public            
+    <strong>setRoute</strong>(<a href="../../Elixir/Routing/Matcher/RouteMatch.html"><abbr title="Elixir\Routing\Matcher\RouteMatch">RouteMatch</abbr></a> $pValue)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../Elixir/Routing/Matcher/RouteMatch.html"><abbr title="Elixir\Routing\Matcher\RouteMatch">RouteMatch</abbr></a></td>
+                <td>$pValue</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getModule">
+        <div class="location">at line 540</div>
+        <code>            public            string|null
+    <strong>getModule</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string|null</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setModule">
+        <div class="location">at line 560</div>
+        <code>            public            
+    <strong>setModule</strong>(string $pValue)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$pValue</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getController">
+        <div class="location">at line 577</div>
+        <code>            public            string|null
+    <strong>getController</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string|null</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setController">
+        <div class="location">at line 597</div>
+        <code>            public            
+    <strong>setController</strong>(string $pValue)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$pValue</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getAction">
+        <div class="location">at line 614</div>
+        <code>            public            string|null
+    <strong>getAction</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string|null</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setAction">
+        <div class="location">at line 634</div>
+        <code>            public            
+    <strong>setAction</strong>(string $pValue)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$pValue</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+		<script type="text/javascript">
+			$('.description code').addClass('language-php');
+			Prism.highlightAll();
+			
+			$('.description p').each(function(e)
+			{
+				if($(this).text().substr(-1) == ':')
+				{
+					$(this).css({"font-weight": "bold"});
+				}
+			});
+			
+			$('.description p:empty').remove();
+		</script>
+    </body>
+</html>

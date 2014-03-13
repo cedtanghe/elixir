@@ -1,0 +1,14 @@
+{
+    "repositories": [{
+            "type": "vcs",
+            "url": "https://github.com/peodev/PEOPHP2.0"
+            }],
+
+    "config": {
+        "vendor-dir": "application/vendor"
+    },
+
+    "require": {
+        "peoleo": "dev-master"
+    }
+}

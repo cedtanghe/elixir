@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="robots" content="index, follow, all" />
+        <title>Elixir\Security\RBAC\Role | Elixir</title>
+                    <script type="text/javascript" src="../../../js/jquery-1.3.2.min.js"></script>
+			
+			<link rel="stylesheet" type="text/css" href="../../../stylesheet.css">
+			<link rel="stylesheet" type="text/css" href="../../../styles.css">
+			
+            <link rel="stylesheet" type="text/css" href="../../../prismjs/prism.css">
+            <script type="text/javascript" src="../../../prismjs/prism.js" data-manual></script>
+            
+                            </head>
+        <body id="class">
+            <div class="header">
+        <ul>
+            <li><a href="../../../classes.html">Classes</a></li>
+                            <li><a href="../../../namespaces.html">Namespaces</a></li>
+                        <li><a href="../../../interfaces.html">Interfaces</a></li>
+            <li><a href="../../../doc-index.html">Index</a></li>
+            
+        </ul>
+
+        <div id="title">Elixir</div>
+
+            <div class="type">Class</div>
+    <h1><a href="../../../Elixir/Security/RBAC.html">Elixir\Security\RBAC</a>\Role</h1>
+    </div>
+        <div class="content">
+                <p>class    <strong>Role</strong></p>
+
+    
+            <h2>Constants</h2>
+
+            <table>
+                    <tr>
+                <td>ALL_PERMISSIONS_GRANTED</td>
+                <td class="last">
+                    <p><em>
+</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+            </table>
+
+    
+    
+            <h2>Methods</h2>
+
+            <table>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method___construct">__construct</a>(string|integer $pName, array $pPermisions = array())
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    string|integer
+                </td>
+                <td class="last">
+                    <a href="#method_getName">getName</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_setRBAC">setRBAC</a>(<a href="../../../Elixir/Security/RBAC/RBACInterface.html"><abbr title="Elixir\Security\RBAC\RBACInterface">RBACInterface</abbr></a> $pValue)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Elixir/Security/RBAC/RBACInterface.html"><abbr title="Elixir\Security\RBAC\RBACInterface">RBACInterface</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_getRBAC">getRBAC</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_hasChild">hasChild</a>(string|integer $pName)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_addChild">addChild</a>(<a href="../../../Elixir/Security/RBAC/Role.html"><abbr title="Elixir\Security\RBAC\Role">Role</abbr></a> $pRole)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_removeChild">removeChild</a>($pName)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_hasPermission">hasPermission</a>(string|integer $pName)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_addPermission">addPermission</a>(string|integer $pName, <abbr title="Elixir\Security\RBAC\callable">callable</abbr> $pAssert = null)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_removePermission">removePermission</a>(string|integer $pName)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    array
+                </td>
+                <td class="last">
+                    <a href="#method_getPermissions">getPermissions</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_setPermissions">setPermissions</a>(array $pData)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+            </table>
+
+
+        <h2>Details</h2>
+
+                        <h3 id="method___construct">
+        <div class="location">at line 40</div>
+        <code>            public            
+    <strong>__construct</strong>(string|integer $pName, array $pPermisions = array())</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string|integer</td>
+                <td>$pName</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$pPermisions</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getName">
+        <div class="location">at line 49</div>
+        <code>            public            string|integer
+    <strong>getName</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string|integer</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setRBAC">
+        <div class="location">at line 58</div>
+        <code>            public            
+    <strong>setRBAC</strong>(<a href="../../../Elixir/Security/RBAC/RBACInterface.html"><abbr title="Elixir\Security\RBAC\RBACInterface">RBACInterface</abbr></a> $pValue)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Elixir/Security/RBAC/RBACInterface.html"><abbr title="Elixir\Security\RBAC\RBACInterface">RBACInterface</abbr></a></td>
+                <td>$pValue</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getRBAC">
+        <div class="location">at line 66</div>
+        <code>            public            <a href="../../../Elixir/Security/RBAC/RBACInterface.html"><abbr title="Elixir\Security\RBAC\RBACInterface">RBACInterface</abbr></a>
+    <strong>getRBAC</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Elixir/Security/RBAC/RBACInterface.html"><abbr title="Elixir\Security\RBAC\RBACInterface">RBACInterface</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_hasChild">
+        <div class="location">at line 75</div>
+        <code>            public            boolean
+    <strong>hasChild</strong>(string|integer $pName)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string|integer</td>
+                <td>$pName</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_addChild">
+        <div class="location">at line 84</div>
+        <code>            public            
+    <strong>addChild</strong>(<a href="../../../Elixir/Security/RBAC/Role.html"><abbr title="Elixir\Security\RBAC\Role">Role</abbr></a> $pRole)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Elixir/Security/RBAC/Role.html"><abbr title="Elixir\Security\RBAC\Role">Role</abbr></a></td>
+                <td>$pRole</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_removeChild">
+        <div class="location">at line 93</div>
+        <code>            public            
+    <strong>removeChild</strong>($pName)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$pName</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_hasPermission">
+        <div class="location">at line 102</div>
+        <code>            public            boolean
+    <strong>hasPermission</strong>(string|integer $pName)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string|integer</td>
+                <td>$pName</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_addPermission">
+        <div class="location">at line 136</div>
+        <code>            public            
+    <strong>addPermission</strong>(string|integer $pName, <abbr title="Elixir\Security\RBAC\callable">callable</abbr> $pAssert = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string|integer</td>
+                <td>$pName</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><abbr title="Elixir\Security\RBAC\callable">callable</abbr></td>
+                <td>$pAssert</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+                <h3 id="method_removePermission">
+        <div class="location">at line 156</div>
+        <code>            public            
+    <strong>removePermission</strong>(string|integer $pName)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string|integer</td>
+                <td>$pName</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getPermissions">
+        <div class="location">at line 164</div>
+        <code>            public            array
+    <strong>getPermissions</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>array</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setPermissions">
+        <div class="location">at line 172</div>
+        <code>            public            
+    <strong>setPermissions</strong>(array $pData)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>array</td>
+                <td>$pData</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+    
+            </div>
+            <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+    </div>
+		<script type="text/javascript">
+			$('.description code').addClass('language-php');
+			Prism.highlightAll();
+			
+			$('.description p').each(function(e)
+			{
+				if($(this).text().substr(-1) == ':')
+				{
+					$(this).css({"font-weight": "bold"});
+				}
+			});
+			
+			$('.description p:empty').remove();
+		</script>
+    </body>
+</html>

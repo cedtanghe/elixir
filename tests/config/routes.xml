@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <routes>
+        <route name="xml-route" priority="10">
+            <regex>xml-route/(:key)</regex>
+            <parameters>
+                <key>value xml-route</key>
+            </parameters>
+            <options>
+                <_method>GET</_method>
+                <_attributes>true</_attributes>
+                <key>\d</key>
+            </options>
+        </route>
+
+        <route name="xml-route-2">
+            <regex>xml-route-2</regex>
+            <options>
+                <_method>
+                    <method>PUT</method>
+                    <method>DELETE</method>
+                </_method>
+                <_replacements>
+                    <replace>value replaced</replace>
+                </_replacements>
+            </options>
+        </route>
+    </routes>
+    <_globals>
+        <parameters>
+            <key-2>value global</key-2>
+        </parameters>
+        <options>
+            <_replacements>
+                <replaced>other value replaced</replaced>
+            </_replacements>
+        </options>
+    </_globals>
+</root>

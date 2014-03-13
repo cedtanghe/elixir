@@ -1,0 +1,59 @@
+<?php
+
+namespace ElixirTest\View;
+
+use Elixir\ClassLoader\Loader;
+use Elixir\View\PHP\PHP;
+use Elixir\DI\Container;
+use Elixir\View\Storage\Str;
+use Elixir\View\Manager;
+
+class Test extends \PHPUnit_Framework_TestCase
+{
+    protected $_loader;
+
+    public function __construct()
+    {
+        require_once __DIR__ . '/../../../elixir/framework/Elixir/ClassLoader/Loader.php';
+        
+        $this->_loader = new Loader();
+        $this->_loader->addNamespace('ElixirTest', __DIR__ . './../');
+        $this->_loader->register();
+    }
+    
+    public function testPHPFile()
+    {
+        $view = new PHP();
+        $view->setHelperContainer(new Container());
+        $view->set('key-1', 'value-1', true);
+        $result = $view->render(__DIR__ . '/../../views/testPHP.phtml');
+        
+        $this->assertEquals('value-1', $view->get('key-1'));
+        $this->assertRegExp('/block base/', $result);
+    }
+    
+    public function testPHPStr()
+    {
+        $view = new PHP();
+        $view->setHelperContainer(new Container());
+        $view->set('key', 'value', true);
+        
+        $str = 'My key equals "<?php echo $this->key; ?>"';
+        $result = $view->render(new Str($str));
+        
+        $this->assertEquals('My key equals "value"', $result);
+    }
+    
+    public function testManager()
+    {
+        $manager = new Manager();
+        $manager->registerExtension('^(phtml|php)$', new PHP());
+        $manager->setHelperContainer(new Container());
+        
+        $manager->set('key-1', 'value-1', true);
+        $result = $manager->render(__DIR__ . '/../../views/testPHP.phtml');
+        
+        $this->assertEquals('value-1', $manager->get('key-1'));
+        $this->assertRegExp('/block base/', $result);
+    }
+}
