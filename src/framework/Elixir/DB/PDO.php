@@ -40,16 +40,22 @@ class PDO extends DBAbstract
      */
     public function __construct($pDNS, $pUsername = null, $pPassword = null, array $pOptions = array()) 
     {
-        $options = array_merge(
-            array(
-                \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\'',
-                \PDO::ATTR_PERSISTENT => false,
-                \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
-            ),
-            $pOptions
-        );
+        if(!isset($pOptions[\PDO::MYSQL_ATTR_INIT_COMMAND]))
+        {
+            $pOptions[\PDO::MYSQL_ATTR_INIT_COMMAND] = 'SET NAMES \'UTF8\'';
+        }
         
-        $this->_connection = new \PDO($pDNS, $pUsername, $pPassword, $options);
+        if(!isset($pOptions[\PDO::ATTR_PERSISTENT]))
+        {
+            $pOptions[\PDO::ATTR_PERSISTENT] = false;
+        }
+        
+        if(!isset($pOptions[\PDO::ATTR_ERRMODE]))
+        {
+            $pOptions[\PDO::ATTR_ERRMODE] = \PDO::ERRMODE_EXCEPTION;
+        }
+        
+        $this->_connection = new \PDO($pDNS, $pUsername, $pPassword, $pOptions);
     }
     
     public function __destruct() 
