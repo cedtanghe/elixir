@@ -11,7 +11,7 @@ class Security extends \PHPUnit_Framework_TestCase
 
     public function __construct()
     {
-        require_once __DIR__ . '/../../../elixir/framework/Elixir/ClassLoader/Loader.php';
+        require_once __DIR__ . '/../../../src/framework/Elixir/ClassLoader/Loader.php';
         
         $this->_loader = new Loader();
         $this->_loader->addNamespace('ElixirTest', __DIR__ . './../');
