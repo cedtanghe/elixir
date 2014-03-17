@@ -10,9 +10,9 @@ interface EntityInterface
 {
     /**
      * @param array $pData
-     * @param boolean $pRaw
+     * @param array $pOptions
      */
-    public function hydrate(array $pData, $pRaw = true);
+    public function hydrate(array $pData, array $pOptions = array('raw' => true));
     
     /**
      * @param array $pMembers
@@ -20,7 +20,7 @@ interface EntityInterface
      * @param boolean $pRaw
      * @return array
      */
-    public function export(array $pMembers = array(), array $pOmitMembers = array(), $pRaw = true);
+    public function export(array $pMembers = array(), array $pOmitMembers = array(), $pRaw = false);
     
     /**
      * @param string $pKey

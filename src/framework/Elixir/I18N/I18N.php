@@ -226,6 +226,14 @@ class I18N extends Dispatcher implements I18NInterface
     }
     
     /**
+     * @see I18N::translate()
+     */
+    public function _($pMessage, $pLocale = null, $pTextDomain = self::ALL_TEXT_DOMAINS)
+    {
+        return $this->translate($pMessage, $pLocale, $pTextDomain);
+    }
+    
+    /**
      * @see I18NInterface::pluralize()
      */
     public function pluralize($pMessage, $pCount, $pLocale = null)
@@ -239,6 +247,30 @@ class I18N extends Dispatcher implements I18NInterface
     public function transPlural($pMessage, $pCount, $pLocale = null, $pTextDomain = self::ALL_TEXT_DOMAINS)
     {
         return $this->pluralize($this->translate($pMessage, $pLocale, $pTextDomain), $pCount, $pLocale);
+    }
+    
+    /**
+     * @param string $pMethod
+     * @param array $pArguments
+     * @return string
+     * @throws \BadMethodCallException
+     */
+    public function __call($pMethod, $pArguments) 
+    {
+        if(substr($pMethod, 0, 11) == 'transPlural')
+        {
+            $pMethod = 'transPlural';
+        }
+        else if(substr($pMethod, 0, 5) == 'trans' || substr($pMethod, 0, 1) == '_')
+        {
+            $pMethod = 'translate';
+        }
+        else
+        {
+            throw new \BadMethodCallException(sprintf('Method "%s" does not exist.', $pMethod));
+        }
+        
+        return call_user_func_array(array($this, $pMethod), $pArguments);
     }
     
     /**

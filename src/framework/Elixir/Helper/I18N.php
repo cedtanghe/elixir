@@ -41,6 +41,14 @@ class I18N implements HelperInterface
     {
         return $this->_I18N->translate($pMessage, $pLocale, $pTextDomain);
     }
+    
+    /**
+     * @see I18N::translate()
+     */
+    public function _($pMessage, $pLocale = null, $pTextDomain = I18NInterface::ALL_TEXT_DOMAINS)
+    {
+        return $this->translate($pMessage, $pLocale, $pTextDomain);
+    }
 
     /**
      * @param string|array $pMessage
@@ -65,7 +73,31 @@ class I18N implements HelperInterface
         return $this->_I18N->transPlural($pText, $pCount, $pLocale, $pTextDomain);
     }
     
-     /**
+    /**
+     * @param string $pMethod
+     * @param array $pArguments
+     * @return string
+     * @throws \BadMethodCallException
+     */
+    public function __call($pMethod, $pArguments) 
+    {
+        if(substr($pMethod, 0, 11) == 'transPlural')
+        {
+            $pMethod = 'transPlural';
+        }
+        else if(substr($pMethod, 0, 5) == 'trans' || substr($pMethod, 0, 1) == '_')
+        {
+            $pMethod = 'translate';
+        }
+        else
+        {
+            throw new \BadMethodCallException(sprintf('Method "%s" does not exist.', $pMethod));
+        }
+        
+        return call_user_func_array(array($this, $pMethod), $pArguments);
+    }
+
+    /**
      * @see I18N::translate()
      */
     public function direct()

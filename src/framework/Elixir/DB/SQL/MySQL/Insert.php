@@ -24,7 +24,7 @@ class Insert extends BaseInsert
      * @param boolean $pValue
      * @return Insert
      */
-    public function ignore($pValue)
+    public function ignore($pValue = true)
     {
         $this->_ignore = $pValue;
         return $this;

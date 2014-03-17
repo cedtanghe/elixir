@@ -12,12 +12,12 @@ class ModelFactory
 {
     /**
      * @param array $pData
-     * @param boolean $pRaw
+     * @param array $pOptions
      * @param ContainerInterface $pManager
      * @return ModelAbstract
      * @throws \InvalidArgumentException
      */
-    public static function create(array $pData, $pRaw = true, ContainerInterface $pManager = null)
+    public static function create(array $pData, array $pOptions = array('raw' => true, 'sync' => true), ContainerInterface $pManager = null)
     {
         if(!isset($pData['_class']))
         {
@@ -31,7 +31,7 @@ class ModelFactory
             $model->setConnectionManager($pManager);
         }
         
-        $model->hydrate($pData, $pRaw);
+        $model->hydrate($pData, $pOptions);
         return $model;
     }
 }

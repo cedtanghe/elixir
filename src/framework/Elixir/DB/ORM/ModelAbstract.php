@@ -97,6 +97,20 @@ abstract class ModelAbstract extends Dispatcher implements RepositoryInterface
     }
     
     /**
+     * @param mixed $pValue
+     * @return mixed
+     */
+    public static function convertIfCollection($pValue)
+    {
+        if(static::isCollection($pValue))
+        {
+            return $pValue->getArrayCopy();
+        }
+        
+        return $pValue;
+    }
+    
+    /**
      * @var array
      */
     protected static $_mutatorsGet = array();
@@ -207,7 +221,7 @@ abstract class ModelAbstract extends Dispatcher implements RepositoryInterface
         
         if(!empty($pData))
         {
-            $this->hydrate($pData);
+            $this->hydrate($pData, array('raw' => true, 'sync' => true));
         }
     }
     
@@ -811,7 +825,7 @@ abstract class ModelAbstract extends Dispatcher implements RepositoryInterface
     /**
      * @see RepositoryInterface::hydrate()
      */
-    public function hydrate(array $pData, $pRaw = true)
+    public function hydrate(array $pData, array $pOptions = array('raw' => true))
     {
         $references = array();
         $models = array();
@@ -860,10 +874,10 @@ abstract class ModelAbstract extends Dispatcher implements RepositoryInterface
             
             if(static::isCollection($value))
             {
-                $value = $this->hydrateCollection($value, $pRaw);
+                $value = $this->hydrateCollection($value, $pOptions);
             }
 
-            if($pRaw)
+            if(isset($pOptions['raw']) && $pOptions['raw'])
             {
                 $this->set($key, $value, true);
             }
@@ -879,9 +893,9 @@ abstract class ModelAbstract extends Dispatcher implements RepositoryInterface
             {
                 $model = new $value['class']();
                 $model->setConnectionManager($this->_connectionManager);
-                $model->hydrate($value['value'], $pRaw);
+                $model->hydrate($value['value'], $pOptions);
                 
-                if($pRaw)
+                if(isset($pOptions['raw']) && $pOptions['raw'])
                 {
                     $this->set($key, $model, true);
                 }
@@ -892,7 +906,7 @@ abstract class ModelAbstract extends Dispatcher implements RepositoryInterface
             }
         }
         
-        if(count($this->_original) == 0 && count($this->_fillable) > 0)
+        if(isset($pOptions['sync']) && $pOptions['sync'])
         {
             $this->sync();
         }
@@ -900,16 +914,16 @@ abstract class ModelAbstract extends Dispatcher implements RepositoryInterface
     
     /**
      * @param array $pData
-     * @param boolean $pRaw
+     * @param array $pOptions
      * @return array
      */
-    protected function hydrateCollection(array $pData, $pRaw)
+    protected function hydrateCollection(array $pData, $pOptions)
     {
         if(isset($pData['_class']))
         {
              $model = new $pData['_class']();
              $model->setConnectionManager($this->_connectionManager);
-             $model->hydrate($pData, $pRaw);
+             $model->hydrate($pData, $pOptions);
 
              $pData = $model;
         }
@@ -919,7 +933,7 @@ abstract class ModelAbstract extends Dispatcher implements RepositoryInterface
             {
                 if(static::isCollection($value))
                 {
-                    $value = $this->hydrateCollection($value->getArrayCopy(), $pRaw);
+                    $value = $this->hydrateCollection($value->getArrayCopy(), $pOptions);
                 }
             }
         }
@@ -950,7 +964,10 @@ abstract class ModelAbstract extends Dispatcher implements RepositoryInterface
                 
                 if(array_key_exists($value, $this->_related))
                 {
-                    $v = $v->getRelated();
+                    if($v instanceof RelationInterface)
+                    {
+                        $v = $v->getRelated();
+                    }
                 }
                 
                 if($v instanceof self)

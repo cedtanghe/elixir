@@ -152,6 +152,16 @@ class URL implements TemplateContextInterface, ControllerContextInterface, Helpe
         
         return $this->_router->generate($pRouteName, $pOptions, $pMode);
     }
+    
+    /**
+     * @param string $pRouteName
+     * @param mixed $pDefault
+     * @return Route
+     */
+    public function route($pRouteName, $pDefault = null)
+    {
+        return $this->_router->getCollection()->get($pRouteName, $pDefault);
+    }
 
     /**
      * @see URL::baseURL()

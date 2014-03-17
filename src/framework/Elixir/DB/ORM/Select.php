@@ -214,7 +214,7 @@ class Select
         foreach($rows as $row)
         {
             $repository = new $class($this->_repository->getConnectionManager());
-            $repository->hydrate($row);
+            $repository->hydrate($row, array('raw' => true, 'sync' => true));
             
             $this->extend($repository);
             $repositories[] = $repository;

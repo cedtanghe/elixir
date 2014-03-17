@@ -277,8 +277,17 @@ class Loader implements LoaderInterface
         $paths = array('');
         $className = $pClassName;
         
+        if(false !== strpos($className, self::NAMESPACE_SEPARATOR))
+        {
+            $type = self::NAMESPACE_SEPARATOR;
+        }
+        else
+        {
+            $type = self::PREFIX_SEPARATOR;
+        }
+        
         $last = '';
-        $search = false !== strpos($className, self::NAMESPACE_SEPARATOR) ? $this->_namespaces : $this->_prefixs;
+        $search = $type == self::NAMESPACE_SEPARATOR ? $this->_namespaces : $this->_prefixs;
         
         foreach($search as $key => $value)
         {
@@ -298,7 +307,7 @@ class Loader implements LoaderInterface
         
         foreach($paths as $path)
         {
-            $result[] =  $path . str_replace(array(self::PREFIX_SEPARATOR, self::NAMESPACE_SEPARATOR), '/', $className) . '.php';
+            $result[] =  $path . str_replace($type , '/', $className) . '.php';
         }
         
         return $result;
