@@ -42,7 +42,7 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method_hydrate">hydrate</a>(array $pData, boolean $pRaw = true)
+                    <a href="#method_hydrate">hydrate</a>(array $pData, array $pOptions = array(&#039;raw&#039; =&gt; true))
                     <p>
 </p>
                 </td>
@@ -53,7 +53,7 @@
                     array
                 </td>
                 <td class="last">
-                    <a href="#method_export">export</a>(array $pMembers = array(), array $pOmitMembers = array(), boolean $pRaw = true)
+                    <a href="#method_export">export</a>(array $pMembers = array(), array $pOmitMembers = array(), boolean $pRaw = false)
                     <p>
 </p>
                 </td>
@@ -100,7 +100,7 @@
                         <h3 id="method_hydrate">
         <div class="location">at line 15</div>
         <code>            public            
-    <strong>hydrate</strong>(array $pData, boolean $pRaw = true)</code>
+    <strong>hydrate</strong>(array $pData, array $pOptions = array(&#039;raw&#039; =&gt; true))</code>
     </h3>
     <div class="details">
         <p>
@@ -118,8 +118,8 @@
 </td>
             </tr>
                     <tr>
-                <td>boolean</td>
-                <td>$pRaw</td>
+                <td>array</td>
+                <td>$pOptions</td>
                 <td>
 </td>
             </tr>
@@ -134,7 +134,7 @@
                 <h3 id="method_export">
         <div class="location">at line 23</div>
         <code>            public            array
-    <strong>export</strong>(array $pMembers = array(), array $pOmitMembers = array(), boolean $pRaw = true)</code>
+    <strong>export</strong>(array $pMembers = array(), array $pOmitMembers = array(), boolean $pRaw = false)</code>
     </h3>
     <div class="details">
         <p>

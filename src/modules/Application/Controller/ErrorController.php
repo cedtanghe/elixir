@@ -9,6 +9,14 @@ use Elixir\MVC\Controller\ControllerAbstract;
  * @author Cédric Tanghe <c.tanghe@peoleo.fr>
  */
 
+final class Dummy
+{
+    public function translate($pStr)
+     {
+         return $pStr;
+     }
+}
+
 class ErrorController extends ControllerAbstract
 {
     /**
@@ -18,11 +26,7 @@ class ErrorController extends ControllerAbstract
     {
         $translator = $this->_container->get('helper.i18n', null, function()
         {
-            $I18N = new \stdClass();
-            $I18N->translate = function($pStr)
-            {
-                return $pStr;
-            };
+            return new Dummy();
         });
         
         $message = $translator->translate('An error has occurred !');

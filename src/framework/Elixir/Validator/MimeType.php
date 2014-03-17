@@ -30,7 +30,7 @@ class MimeType extends ValidatorAbstract
         {
             $mimeTypes = (array)$pOptions['mimeType'];
             $fileMimeType = strtolower(File::mimeType($content));
-
+            
             foreach((array)$mimeTypes as $mimeType)
             {
                 if(strtolower($mimeType) == $fileMimeType)

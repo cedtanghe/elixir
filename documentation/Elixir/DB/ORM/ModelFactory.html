@@ -42,7 +42,7 @@
                     static&nbsp;<a href="../../../Elixir/DB/ORM/ModelAbstract.html"><abbr title="Elixir\DB\ORM\ModelAbstract">ModelAbstract</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_create">create</a>(array $pData, boolean $pRaw = true, <a href="../../../Elixir/DI/ContainerInterface.html"><abbr title="Elixir\DI\ContainerInterface">ContainerInterface</abbr></a> $pManager = null)
+                    <a href="#method_create">create</a>(array $pData, array $pOptions = array(&#039;raw&#039; =&gt; true, &#039;sync&#039; =&gt; true), <a href="../../../Elixir/DI/ContainerInterface.html"><abbr title="Elixir\DI\ContainerInterface">ContainerInterface</abbr></a> $pManager = null)
                     <p>
 </p>
                 </td>
@@ -56,7 +56,7 @@
                         <h3 id="method_create">
         <div class="location">at line 20</div>
         <code>        static    public            <a href="../../../Elixir/DB/ORM/ModelAbstract.html"><abbr title="Elixir\DB\ORM\ModelAbstract">ModelAbstract</abbr></a>
-    <strong>create</strong>(array $pData, boolean $pRaw = true, <a href="../../../Elixir/DI/ContainerInterface.html"><abbr title="Elixir\DI\ContainerInterface">ContainerInterface</abbr></a> $pManager = null)</code>
+    <strong>create</strong>(array $pData, array $pOptions = array(&#039;raw&#039; =&gt; true, &#039;sync&#039; =&gt; true), <a href="../../../Elixir/DI/ContainerInterface.html"><abbr title="Elixir\DI\ContainerInterface">ContainerInterface</abbr></a> $pManager = null)</code>
     </h3>
     <div class="details">
         <p>
@@ -74,8 +74,8 @@
 </td>
             </tr>
                     <tr>
-                <td>boolean</td>
-                <td>$pRaw</td>
+                <td>array</td>
+                <td>$pOptions</td>
                 <td>
 </td>
             </tr>

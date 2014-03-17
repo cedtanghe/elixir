@@ -50,8 +50,8 @@ class Format extends ValidatorAbstract
         $this->_errors = array();
         
         $infos = Image::getSizingInfo(is_array($pContent) ? $pContent['tmp_name'] : $pContent);
-        $width = $infos->srcWidth;
-        $height = $infos->srcHeight;
+        $width = $infos['srcWidth'];
+        $height = $infos['srcHeight'];
         
         $wMin = isset($pOptions['wMin']) ? $pOptions['wMin'] : 0;
         $hMin = isset($pOptions['hMin']) ? $pOptions['hMin'] : 0;

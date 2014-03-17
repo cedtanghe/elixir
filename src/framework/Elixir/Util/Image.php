@@ -57,7 +57,7 @@ class Image
             }
             else
             {
-                $imgSize = @getimagesize($pImagePath);  
+                $imgSize = @getimagesize($pImageOrResource);  
                 $wSrc = $imgSize[0];
                 $hSrc = $imgSize[1];
             }
@@ -115,7 +115,7 @@ class Image
 
         return array(
             'resized' => ($wSrc != $w) || ($hSrc != $h),
-            'src' => $pImagePath,
+            'src' => $pImageOrResource,
             'srcWidth' => $wSrc,
             'width' => $w,
             'srcHeight' => $hSrc,
@@ -129,7 +129,12 @@ class Image
      */
     public static function isGD($pResource)
     {
-        return get_resource_type($pImageOrResource) == 'gd';
+        if(is_resource($pResource))
+        {
+            return get_resource_type($pResource) == 'gd';
+        }
+        
+        return false;
     }
 
     /**
