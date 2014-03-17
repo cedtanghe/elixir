@@ -3,9 +3,9 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-require_once dirname(__FILE__) . '/application/vendor/peoleo/src/framework/PHPChecker/Collection.php';
-require_once dirname(__FILE__) . '/application/vendor/peoleo/src/framework/PHPChecker/Requirement.php';
-require_once dirname(__FILE__) . '/application/vendor/peoleo/src/framework/PHPChecker/Factory.php';
+require_once dirname(__FILE__) . '/application/vendor/elixir/src/framework/PHPChecker/Collection.php';
+require_once dirname(__FILE__) . '/application/vendor/elixir/src/framework/PHPChecker/Requirement.php';
+require_once dirname(__FILE__) . '/application/vendor/elixir/src/framework/PHPChecker/Factory.php';
 
 $collection = new PHPChecker_Collection();
 
