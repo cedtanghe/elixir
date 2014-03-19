@@ -33,6 +33,11 @@ class BelongsTo implements RelationInterface
     protected $_otherKey;
     
     /**
+     * @var Pivot
+     */
+    protected $_pivot;
+    
+    /**
      * @var array 
      */
     protected $_criterions = array();

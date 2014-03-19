@@ -1,7 +1,7 @@
 {
     "repositories": [{
             "type": "vcs",
-            "url": "https://github.com/peodev/PEOPHP2.0"
+            "url": "https://github.com/cedtanghe/elixir"
             }],
 
     "config": {
@@ -9,6 +9,6 @@
     },
 
     "require": {
-        "peoleo": "dev-master"
+        "elixir": "dev-master"
     }
 }
