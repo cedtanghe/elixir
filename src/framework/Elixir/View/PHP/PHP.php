@@ -157,17 +157,7 @@ class PHP extends DataAbstract implements HelperInterface, EscaperInterface
      */
     public function raw($pKey, $pDefault = null)
     {
-        if($this->has($pKey))
-        {
-            return $this->_vars[$pKey];
-        }
-        
-        if(is_callable($pDefault))
-        {
-            return call_user_func($pDefault);
-        }
-        
-        return $pDefault;
+        return parent::get($pKey, $pDefault);
     }
     
     /**
@@ -221,7 +211,7 @@ class PHP extends DataAbstract implements HelperInterface, EscaperInterface
      */
     public function get($pKey, $pDefault = null) 
     {
-        $value = parent::get($pKey, $pDefault);
+        $value = $this->raw($pKey, $pDefault);
         
         if($this->_autoEscape && $pKey !== self::CONTENT_KEY)
         {
