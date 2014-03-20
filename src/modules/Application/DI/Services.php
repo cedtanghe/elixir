@@ -45,10 +45,15 @@ class Services implements ProviderInterface
         
         /************ VIEW ************/
         
-        $pContainer->set('view', function()
+        $pContainer->set('view', function($pContainer)
         {
             $manager = new Manager();
-            $manager->registerEngine('PHP', new PHP(), '^(phtml|php)$', true);
+            
+            // PHP
+            $PHP = new PHP();
+            $PHP->setEscaper($pContainer->get('helper.escaper'));
+            
+            $manager->registerEngine('PHP', $PHP, '^(phtml|php)$', true);
             
             return $manager;
         }, 
