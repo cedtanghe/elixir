@@ -2,6 +2,8 @@
 
 namespace Elixir\View;
 
+use Elixir\Filter\FilterInterface;
+
 /**
  * @author Cédric Tanghe <c.tanghe@peoleo.fr>
  */
@@ -17,7 +19,90 @@ abstract class DataAbstract implements ViewInterface, GlobalInterface
      * @var array 
      */
     protected $_global = array();
+    
+    /**
+     * @var FilterInterface 
+     */
+    protected $_escaper;
+    
+    /**
+     * @var boolean 
+     */
+    protected $_autoEscape = false;
 
+    /**
+     * @param FilterInterface $pValue
+     */
+    public function setEscaper(FilterInterface $pValue)
+    {
+        $this->_escaper = $pValue;
+    }
+    
+    /**
+     * @return FilterInterface
+     */
+    public function getEscaper()
+    {
+        return $this->_escaper;
+    }
+    
+    /**
+     * @see ViewInterface::setAutoEscape()
+     */
+    public function setAutoEscape($pValue)
+    {
+        $this->_autoEscape = $pValue;
+    }
+    
+    /**
+     * @see ViewInterface::isAutoEscape()
+     */
+    public function isAutoEscape()
+    {
+        return $this->_autoEscape;
+    }
+
+    /**
+     * @see ViewInterface::escape()
+     */
+    public function escape($pData, $pStrategy = 'html')
+    {
+        if(null !== $this->_escaper)
+        {
+            if(is_array($pData) || is_object($pData) || $pData instanceof \Traversable)
+            {
+                foreach($pData as &$value)
+                {
+                    $value = $this->escape($value, $pStrategy);
+                }
+            }
+            else
+            {
+                $pData = $this->_escaper->filter($pData, array('strategy' => $pStrategy));
+            }
+        }
+        
+        return $pData;
+    }
+    
+    /**
+     * @see ViewInterface::raw()
+     */
+    public function raw($pKey, $pDefault = null)
+    {
+        if($this->has($pKey))
+        {
+            return $this->_vars[$pKey];
+        }
+        
+        if(is_callable($pDefault))
+        {
+            return call_user_func($pDefault);
+        }
+        
+        return $pDefault;
+    }
+    
     /**
      * @see ViewInterface::has()
      */
@@ -31,17 +116,14 @@ abstract class DataAbstract implements ViewInterface, GlobalInterface
      */
     public function get($pKey, $pDefault = null)
     {
-        if($this->has($pKey))
+        $value = $this->raw($pKey, $pDefault);
+        
+        if($this->_autoEscape)
         {
-            return $this->_vars[$pKey];
+            $value = $this->escape($value);
         }
         
-        if(is_callable($pDefault))
-        {
-            return call_user_func($pDefault);
-        }
-        
-        return $pDefault;
+        return $value;
     }
     
     /**
@@ -75,7 +157,14 @@ abstract class DataAbstract implements ViewInterface, GlobalInterface
      */
     public function gets()
     {
-        return $this->_vars;
+        $values = $this->_vars;
+        
+        if($this->_autoEscape)
+        {
+            $values = $this->escape($values);
+        }
+        
+        return $values;
     }
     
     /**

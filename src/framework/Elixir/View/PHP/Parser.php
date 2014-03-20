@@ -107,7 +107,14 @@ class Parser
      */
     public function __call($pMethod, $pArguments)
     {
-        if(in_array($pMethod, array('helper', 'extend', 'start', 'parent', 'end', 'block')))
+        if(in_array($pMethod, array('helper', 
+                                    'extend', 
+                                    'start', 
+                                    'parent', 
+                                    'end', 
+                                    'block', 
+                                    'escape', 
+                                    'raw')))
         {
             return call_user_func_array(array($this->__view, $pMethod), $pArguments);
         }
