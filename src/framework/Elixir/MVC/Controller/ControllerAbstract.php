@@ -82,11 +82,16 @@ abstract class ControllerAbstract implements ControllerInterface
                 $view->globalize('_request');
             }
 
-            if($view instanceof ViewHelperInterface)
+            $views = method_exists($view, 'getEngines') ? $view->getEngines() : (array)$views;
+            
+            foreach($views as $view)
             {
-                $view->setHelperContainer($this->_container);
-                $view->getHelperContainer()->load($this->getViewHelpers());
-                $view->getHelperContainer()->setUseTag(true);
+                if($view instanceof ViewHelperInterface)
+                {
+                    $view->setHelperContainer($this->_container);
+                    $view->getHelperContainer()->load($this->getViewHelpers());
+                    $view->getHelperContainer()->setUseTag(true);
+                }
             }
         }
     }

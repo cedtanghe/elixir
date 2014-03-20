@@ -70,7 +70,7 @@ class Manager extends DataAbstract
     {
         if(isset($this->_engines[$pName]))
         {
-            return $this->_engines[$pName];
+            return $this->_engines[$pName]['view'];
         }
         
         if(is_callable($pDefault))
@@ -109,7 +109,14 @@ class Manager extends DataAbstract
      */
     public function getEngines()
     {
-        return $this->_engines;
+        $engines = array();
+        
+        foreach($this->_engines as $key => $value)
+        {
+            $engines[$key] = $value['view'];
+        }
+        
+        return $engines;
     }
     
     /**
