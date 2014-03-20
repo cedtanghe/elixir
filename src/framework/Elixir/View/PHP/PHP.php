@@ -16,6 +16,11 @@ use Elixir\View\ViewInterface;
 class PHP extends DataAbstract implements HelperInterface, EscaperInterface
 {
     /**
+     * @var string
+     */
+    const CONTENT_KEY = '_content';
+    
+    /**
      * @var string 
      */
     protected $_parent;
@@ -218,7 +223,7 @@ class PHP extends DataAbstract implements HelperInterface, EscaperInterface
     {
         $value = parent::get($pKey, $pDefault);
         
-        if($this->_autoEscape)
+        if($this->_autoEscape && $pKey !== self::CONTENT_KEY)
         {
             $value = $this->escape($value);
         }
@@ -250,9 +255,9 @@ class PHP extends DataAbstract implements HelperInterface, EscaperInterface
         
         if(!empty($this->_parent))
         {
-            $this->set('_content', $content);
+            $this->set(self::CONTENT_KEY, $content);
             $content = $this->render($this->_parent);
-            $this->remove('_content');
+            $this->remove(self::CONTENT_KEY);
         }
         else
         {

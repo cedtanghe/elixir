@@ -29,7 +29,7 @@ interface EscaperInterface
      * @return FilterInterface
      */
     public function getEscaper();
-    
+
     /**
      * @param mixed $pData
      * @param string $pStrategy
