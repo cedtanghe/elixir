@@ -29,95 +29,14 @@
     <h1><a href="../../Elixir/View.html">Elixir\View</a>\Manager</h1>
     </div>
         <div class="content">
-                <p>class    <strong>Manager</strong>        extends <a href="../../Elixir/View/DataAbstract.html"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a>        implements
-        <a href="../../Elixir/View/HelperInterface.html"><abbr title="Elixir\View\HelperInterface">HelperInterface</abbr></a></p>
+                <p>class    <strong>Manager</strong>        extends <a href="../../Elixir/View/DataAbstract.html"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a></p>
 
     
-            <h2>Constants</h2>
-
-            <table>
-                    <tr>
-                <td>DEFAULT_EXTENSION</td>
-                <td class="last">
-                    <p><em>
-</em></p>
-                    <p>
-</p>
-                </td>
-            </tr>
-            </table>
-
     
     
             <h2>Methods</h2>
 
             <table>
-                    <tr>
-                <td class="type">
-                    
-                </td>
-                <td class="last">
-                    <a href="#method_setEscaper">setEscaper</a>(<a href="../../Elixir/Filter/FilterInterface.html"><abbr title="Elixir\Filter\FilterInterface">FilterInterface</abbr></a> $pValue)
-                    <p>
-</p>
-                </td>
-                <td><small>from&nbsp;<a href="../../Elixir/View/DataAbstract.html#method_setEscaper"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a></small></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    <a href="../../Elixir/Filter/FilterInterface.html"><abbr title="Elixir\Filter\FilterInterface">FilterInterface</abbr></a>
-                </td>
-                <td class="last">
-                    <a href="#method_getEscaper">getEscaper</a>()
-                    <p>
-</p>
-                </td>
-                <td><small>from&nbsp;<a href="../../Elixir/View/DataAbstract.html#method_getEscaper"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a></small></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    
-                </td>
-                <td class="last">
-                    <a href="#method_setAutoEscape">setAutoEscape</a>(boolean $pValue)
-                    <p>
-</p>
-                </td>
-                <td><small>from&nbsp;<a href="../../Elixir/View/DataAbstract.html#method_setAutoEscape"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a></small></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    boolean
-                </td>
-                <td class="last">
-                    <a href="#method_isAutoEscape">isAutoEscape</a>()
-                    <p>
-</p>
-                </td>
-                <td><small>from&nbsp;<a href="../../Elixir/View/DataAbstract.html#method_isAutoEscape"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a></small></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    mixed
-                </td>
-                <td class="last">
-                    <a href="#method_escape">escape</a>(mixed $pData, string $pStrategy = &#039;html&#039;)
-                    <p>
-</p>
-                </td>
-                <td><small>from&nbsp;<a href="../../Elixir/View/DataAbstract.html#method_escape"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a></small></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    mixed
-                </td>
-                <td class="last">
-                    <a href="#method_raw">raw</a>(string $pKey, mixed $pDefault = null)
-                    <p>
-</p>
-                </td>
-                <td><small>from&nbsp;<a href="../../Elixir/View/DataAbstract.html#method_raw"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a></small></td>
-            </tr>
                     <tr>
                 <td class="type">
                     boolean
@@ -274,10 +193,10 @@
             </tr>
                     <tr>
                 <td class="type">
-                    
+                    <a href="../../Elixir/View/ViewInterface.html"><abbr title="Elixir\View\ViewInterface">ViewInterface</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_setDefaultExtension">setDefaultExtension</a>(string $pValue)
+                    <a href="#method_getDefaultEngine">getDefaultEngine</a>()
                     <p>
 </p>
                 </td>
@@ -299,40 +218,7 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method_registerExtension">registerExtension</a>($pExt, <a href="../../Elixir/View/ViewInterface.html"><abbr title="Elixir\View\ViewInterface">ViewInterface</abbr></a> $pView)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    
-                </td>
-                <td class="last">
-                    <a href="#method_unregisterExtension">unregisterExtension</a>($pExt)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    
-                </td>
-                <td class="last">
-                    <a href="#method_setHelperContainer">setHelperContainer</a>(<a href="../../Elixir/View/Helper/Container.html"><abbr title="Elixir\View\Helper\Container">Container</abbr></a>|<a href="../../Elixir/DI/ContainerInterface.html"><abbr title="Elixir\DI\ContainerInterface">ContainerInterface</abbr></a> $pValue)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    <a href="../../Elixir/View/Helper/Container.html"><abbr title="Elixir\View\Helper\Container">Container</abbr></a>
-                </td>
-                <td class="last">
-                    <a href="#method_getHelperContainer">getHelperContainer</a>()
+                    <a href="#method_registerEngine">registerEngine</a>(string $pName, <a href="../../Elixir/View/ViewInterface.html"><abbr title="Elixir\View\ViewInterface">ViewInterface</abbr></a> $pView, string $pExtension = null, boolean $pDefaultEngine = true)
                     <p>
 </p>
                 </td>
@@ -343,7 +229,7 @@
                     mixed
                 </td>
                 <td class="last">
-                    <a href="#method_helper">helper</a>(string $pKey)
+                    <a href="#method_getEngine">getEngine</a>(<abbr title="Elixir\View\$pName">$pName</abbr> $pName, mixed $pDefault = null)
                     <p>
 </p>
                 </td>
@@ -351,10 +237,21 @@
             </tr>
                     <tr>
                 <td class="type">
-                    <a href="../../Elixir/View/ViewInterface.html"><abbr title="Elixir\View\ViewInterface">ViewInterface</abbr></a>
+                    mixed
                 </td>
                 <td class="last">
-                    <a href="#method_getViewByExtension">getViewByExtension</a>($pExt)
+                    <a href="#method_getEngineByExtension">getEngineByExtension</a>($pExtension, $pDefault = null)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    array
+                </td>
+                <td class="last">
+                    <a href="#method_getEngines">getEngines</a>()
                     <p>
 </p>
                 </td>
@@ -376,242 +273,8 @@
 
         <h2>Details</h2>
 
-                        <h3 id="method_setEscaper">
-        <div class="location">in <a href="../../Elixir/View/DataAbstract.html#method_setEscaper"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a> at line 36</div>
-        <code>            public            
-    <strong>setEscaper</strong>(<a href="../../Elixir/Filter/FilterInterface.html"><abbr title="Elixir\Filter\FilterInterface">FilterInterface</abbr></a> $pValue)</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table>
-                    <tr>
-                <td><a href="../../Elixir/Filter/FilterInterface.html"><abbr title="Elixir\Filter\FilterInterface">FilterInterface</abbr></a></td>
-                <td>$pValue</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-            
-            
-                    </div>
-    </div>
-
-                <h3 id="method_getEscaper">
-        <div class="location">in <a href="../../Elixir/View/DataAbstract.html#method_getEscaper"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a> at line 44</div>
-        <code>            public            <a href="../../Elixir/Filter/FilterInterface.html"><abbr title="Elixir\Filter\FilterInterface">FilterInterface</abbr></a>
-    <strong>getEscaper</strong>()</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-            
-                            <h4>Return Value</h4>
-
-                    <table>
-        <tr>
-            <td><a href="../../Elixir/Filter/FilterInterface.html"><abbr title="Elixir\Filter\FilterInterface">FilterInterface</abbr></a></td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                    </div>
-    </div>
-
-                <h3 id="method_setAutoEscape">
-        <div class="location">in <a href="../../Elixir/View/DataAbstract.html#method_setAutoEscape"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a> at line 52</div>
-        <code>            public            
-    <strong>setAutoEscape</strong>(boolean $pValue)</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table>
-                    <tr>
-                <td>boolean</td>
-                <td>$pValue</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-            
-            
-                            <h4>See also</h4>
-
-                    <table>
-                    <tr>
-                <td>ViewInterface::setAutoEscape()</td>
-                <td></td>
-            </tr>
-            </table>
-
-                    </div>
-    </div>
-
-                <h3 id="method_isAutoEscape">
-        <div class="location">in <a href="../../Elixir/View/DataAbstract.html#method_isAutoEscape"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a> at line 60</div>
-        <code>            public            boolean
-    <strong>isAutoEscape</strong>()</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-            
-                            <h4>Return Value</h4>
-
-                    <table>
-        <tr>
-            <td>boolean</td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                            <h4>See also</h4>
-
-                    <table>
-                    <tr>
-                <td>ViewInterface::isAutoEscape()</td>
-                <td></td>
-            </tr>
-            </table>
-
-                    </div>
-    </div>
-
-                <h3 id="method_escape">
-        <div class="location">in <a href="../../Elixir/View/DataAbstract.html#method_escape"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a> at line 68</div>
-        <code>            public            mixed
-    <strong>escape</strong>(mixed $pData, string $pStrategy = &#039;html&#039;)</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table>
-                    <tr>
-                <td>mixed</td>
-                <td>$pData</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
-                <td>string</td>
-                <td>$pStrategy</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-                            <h4>Return Value</h4>
-
-                    <table>
-        <tr>
-            <td>mixed</td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                            <h4>See also</h4>
-
-                    <table>
-                    <tr>
-                <td>ViewInterface::escape()</td>
-                <td></td>
-            </tr>
-            </table>
-
-                    </div>
-    </div>
-
-                <h3 id="method_raw">
-        <div class="location">in <a href="../../Elixir/View/DataAbstract.html#method_raw"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a> at line 91</div>
-        <code>            public            mixed
-    <strong>raw</strong>(string $pKey, mixed $pDefault = null)</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table>
-                    <tr>
-                <td>string</td>
-                <td>$pKey</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
-                <td>mixed</td>
-                <td>$pDefault</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-                            <h4>Return Value</h4>
-
-                    <table>
-        <tr>
-            <td>mixed</td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                            <h4>See also</h4>
-
-                    <table>
-                    <tr>
-                <td>ViewInterface::raw()</td>
-                <td></td>
-            </tr>
-            </table>
-
-                    </div>
-    </div>
-
-                <h3 id="method_has">
-        <div class="location">in <a href="../../Elixir/View/DataAbstract.html#method_has"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a> at line 109</div>
+                        <h3 id="method_has">
+        <div class="location">in <a href="../../Elixir/View/DataAbstract.html#method_has"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a> at line 24</div>
         <code>            public            boolean
     <strong>has</strong>(string $pKey)</code>
     </h3>
@@ -658,7 +321,7 @@
     </div>
 
                 <h3 id="method_get">
-        <div class="location">in <a href="../../Elixir/View/DataAbstract.html#method_get"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a> at line 117</div>
+        <div class="location">in <a href="../../Elixir/View/DataAbstract.html#method_get"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a> at line 32</div>
         <code>            public            mixed
     <strong>get</strong>(string $pKey, mixed $pDefault = null)</code>
     </h3>
@@ -711,7 +374,7 @@
     </div>
 
                 <h3 id="method_set">
-        <div class="location">in <a href="../../Elixir/View/DataAbstract.html#method_set"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a> at line 132</div>
+        <div class="location">in <a href="../../Elixir/View/DataAbstract.html#method_set"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a> at line 50</div>
         <code>            public            
     <strong>set</strong>(string $pKey, mixed $pValue)</code>
     </h3>
@@ -754,7 +417,7 @@
     </div>
 
                 <h3 id="method_setGlobal">
-        <div class="location">in <a href="../../Elixir/View/DataAbstract.html#method_setGlobal"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a> at line 140</div>
+        <div class="location">in <a href="../../Elixir/View/DataAbstract.html#method_setGlobal"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a> at line 58</div>
         <code>            public            
     <strong>setGlobal</strong>(string $pKey, mixed $pValue)</code>
     </h3>
@@ -797,7 +460,7 @@
     </div>
 
                 <h3 id="method_remove">
-        <div class="location">in <a href="../../Elixir/View/DataAbstract.html#method_remove"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a> at line 149</div>
+        <div class="location">in <a href="../../Elixir/View/DataAbstract.html#method_remove"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a> at line 67</div>
         <code>            public            
     <strong>remove</strong>(string $pKey)</code>
     </h3>
@@ -834,7 +497,7 @@
     </div>
 
                 <h3 id="method_gets">
-        <div class="location">in <a href="../../Elixir/View/DataAbstract.html#method_gets"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a> at line 158</div>
+        <div class="location">in <a href="../../Elixir/View/DataAbstract.html#method_gets"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a> at line 76</div>
         <code>            public            array
     <strong>gets</strong>()</code>
     </h3>
@@ -870,7 +533,7 @@
     </div>
 
                 <h3 id="method_sets">
-        <div class="location">in <a href="../../Elixir/View/DataAbstract.html#method_sets"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a> at line 173</div>
+        <div class="location">in <a href="../../Elixir/View/DataAbstract.html#method_sets"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a> at line 91</div>
         <code>            public            
     <strong>sets</strong>(array $pData)</code>
     </h3>
@@ -907,7 +570,7 @@
     </div>
 
                 <h3 id="method_globalize">
-        <div class="location">in <a href="../../Elixir/View/DataAbstract.html#method_globalize"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a> at line 194</div>
+        <div class="location">in <a href="../../Elixir/View/DataAbstract.html#method_globalize"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a> at line 112</div>
         <code>            public            
     <strong>globalize</strong>(string $pKey)</code>
     </h3>
@@ -944,7 +607,7 @@
     </div>
 
                 <h3 id="method_isGlobal">
-        <div class="location">in <a href="../../Elixir/View/DataAbstract.html#method_isGlobal"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a> at line 205</div>
+        <div class="location">in <a href="../../Elixir/View/DataAbstract.html#method_isGlobal"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a> at line 123</div>
         <code>            public            boolean
     <strong>isGlobal</strong>(string $pKey)</code>
     </h3>
@@ -991,7 +654,7 @@
     </div>
 
                 <h3 id="method___isset">
-        <div class="location">in <a href="../../Elixir/View/DataAbstract.html#method___isset"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a> at line 213</div>
+        <div class="location">in <a href="../../Elixir/View/DataAbstract.html#method___isset"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a> at line 131</div>
         <code>            public            
     <strong>__isset</strong>($pKey)</code>
     </h3>
@@ -1028,7 +691,7 @@
     </div>
 
                 <h3 id="method___get">
-        <div class="location">in <a href="../../Elixir/View/DataAbstract.html#method___get"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a> at line 221</div>
+        <div class="location">in <a href="../../Elixir/View/DataAbstract.html#method___get"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a> at line 139</div>
         <code>            public            
     <strong>__get</strong>($pKey)</code>
     </h3>
@@ -1065,7 +728,7 @@
     </div>
 
                 <h3 id="method___set">
-        <div class="location">in <a href="../../Elixir/View/DataAbstract.html#method___set"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a> at line 229</div>
+        <div class="location">in <a href="../../Elixir/View/DataAbstract.html#method___set"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a> at line 147</div>
         <code>            public            
     <strong>__set</strong>($pKey, $pValue)</code>
     </h3>
@@ -1108,7 +771,7 @@
     </div>
 
                 <h3 id="method___unset">
-        <div class="location">in <a href="../../Elixir/View/DataAbstract.html#method___unset"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a> at line 237</div>
+        <div class="location">in <a href="../../Elixir/View/DataAbstract.html#method___unset"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a> at line 155</div>
         <code>            public            
     <strong>__unset</strong>($pKey)</code>
     </h3>
@@ -1145,7 +808,7 @@
     </div>
 
                 <h3 id="method___clone">
-        <div class="location">in <a href="../../Elixir/View/DataAbstract.html#method___clone"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a> at line 242</div>
+        <div class="location">in <a href="../../Elixir/View/DataAbstract.html#method___clone"><abbr title="Elixir\View\DataAbstract">DataAbstract</abbr></a> at line 160</div>
         <code>            public            
     <strong>__clone</strong>()</code>
     </h3>
@@ -1161,10 +824,10 @@
                     </div>
     </div>
 
-                <h3 id="method_setDefaultExtension">
-        <div class="location">at line 39</div>
-        <code>            public            
-    <strong>setDefaultExtension</strong>(string $pValue)</code>
+                <h3 id="method_getDefaultEngine">
+        <div class="location">at line 27</div>
+        <code>            public            <a href="../../Elixir/View/ViewInterface.html"><abbr title="Elixir\View\ViewInterface">ViewInterface</abbr></a>
+    <strong>getDefaultEngine</strong>()</code>
     </h3>
     <div class="details">
         <p>
@@ -1172,25 +835,24 @@
         <p>
 </p>
         <div class="tags">
-                            <h4>Parameters</h4>
+            
+                            <h4>Return Value</h4>
 
                     <table>
-                    <tr>
-                <td>string</td>
-                <td>$pValue</td>
-                <td>
+        <tr>
+            <td><a href="../../Elixir/View/ViewInterface.html"><abbr title="Elixir\View\ViewInterface">ViewInterface</abbr></a></td>
+            <td>
 </td>
-            </tr>
-            </table>
+        </tr>
+    </table>
 
-            
             
             
                     </div>
     </div>
 
                 <h3 id="method_getDefaultExtension">
-        <div class="location">at line 47</div>
+        <div class="location">at line 35</div>
         <code>            public            string
     <strong>getDefaultExtension</strong>()</code>
     </h3>
@@ -1213,101 +875,11 @@
 
             
             
-                    </div>
-    </div>
-
-                <h3 id="method_registerExtension">
-        <div class="location">at line 56</div>
-        <code>            public            
-    <strong>registerExtension</strong>($pExt, <a href="../../Elixir/View/ViewInterface.html"><abbr title="Elixir\View\ViewInterface">ViewInterface</abbr></a> $pView)</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table>
-                    <tr>
-                <td></td>
-                <td>$pExt</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
-                <td><a href="../../Elixir/View/ViewInterface.html"><abbr title="Elixir\View\ViewInterface">ViewInterface</abbr></a></td>
-                <td>$pView</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-            
-            
-                    </div>
-    </div>
-
-                <h3 id="method_unregisterExtension">
-        <div class="location">at line 64</div>
-        <code>            public            
-    <strong>unregisterExtension</strong>($pExt)</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table>
-                    <tr>
-                <td></td>
-                <td>$pExt</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-            
-            
-                    </div>
-    </div>
-
-                <h3 id="method_setHelperContainer">
-        <div class="location">at line 72</div>
-        <code>            public            
-    <strong>setHelperContainer</strong>(<a href="../../Elixir/View/Helper/Container.html"><abbr title="Elixir\View\Helper\Container">Container</abbr></a>|<a href="../../Elixir/DI/ContainerInterface.html"><abbr title="Elixir\DI\ContainerInterface">ContainerInterface</abbr></a> $pValue)</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table>
-                    <tr>
-                <td><a href="../../Elixir/View/Helper/Container.html"><abbr title="Elixir\View\Helper\Container">Container</abbr></a>|<a href="../../Elixir/DI/ContainerInterface.html"><abbr title="Elixir\DI\ContainerInterface">ContainerInterface</abbr></a></td>
-                <td>$pValue</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-            
-            
                             <h4>See also</h4>
 
                     <table>
                     <tr>
-                <td>HelperInterface::setHelperContainer()</td>
+                <td>ViewInterface::getDefaultExtension()</td>
                 <td></td>
             </tr>
             </table>
@@ -1315,46 +887,10 @@
                     </div>
     </div>
 
-                <h3 id="method_getHelperContainer">
-        <div class="location">at line 80</div>
-        <code>            public            <a href="../../Elixir/View/Helper/Container.html"><abbr title="Elixir\View\Helper\Container">Container</abbr></a>
-    <strong>getHelperContainer</strong>()</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-            
-                            <h4>Return Value</h4>
-
-                    <table>
-        <tr>
-            <td><a href="../../Elixir/View/Helper/Container.html"><abbr title="Elixir\View\Helper\Container">Container</abbr></a></td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                            <h4>See also</h4>
-
-                    <table>
-                    <tr>
-                <td>HelperInterface::getHelperContainer()</td>
-                <td></td>
-            </tr>
-            </table>
-
-                    </div>
-    </div>
-
-                <h3 id="method_helper">
-        <div class="location">at line 89</div>
-        <code>            public            mixed
-    <strong>helper</strong>(string $pKey)</code>
+                <h3 id="method_registerEngine">
+        <div class="location">at line 51</div>
+        <code>            public            
+    <strong>registerEngine</strong>(string $pName, <a href="../../Elixir/View/ViewInterface.html"><abbr title="Elixir\View\ViewInterface">ViewInterface</abbr></a> $pView, string $pExtension = null, boolean $pDefaultEngine = true)</code>
     </h3>
     <div class="details">
         <p>
@@ -1367,7 +903,59 @@
                     <table>
                     <tr>
                 <td>string</td>
-                <td>$pKey</td>
+                <td>$pName</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../Elixir/View/ViewInterface.html"><abbr title="Elixir\View\ViewInterface">ViewInterface</abbr></a></td>
+                <td>$pView</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$pExtension</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>boolean</td>
+                <td>$pDefaultEngine</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getEngine">
+        <div class="location">at line 69</div>
+        <code>            public            mixed
+    <strong>getEngine</strong>(<abbr title="Elixir\View\$pName">$pName</abbr> $pName, mixed $pDefault = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Elixir\View\$pName">$pName</abbr></td>
+                <td>$pName</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$pDefault</td>
                 <td>
 </td>
             </tr>
@@ -1386,22 +974,13 @@
 
             
             
-                            <h4>See also</h4>
-
-                    <table>
-                    <tr>
-                <td>HelperInterface::helper()</td>
-                <td></td>
-            </tr>
-            </table>
-
                     </div>
     </div>
 
-                <h3 id="method_getViewByExtension">
-        <div class="location">at line 99</div>
-        <code>            public            <a href="../../Elixir/View/ViewInterface.html"><abbr title="Elixir\View\ViewInterface">ViewInterface</abbr></a>
-    <strong>getViewByExtension</strong>($pExt)</code>
+                <h3 id="method_getEngineByExtension">
+        <div class="location">at line 89</div>
+        <code>            public            mixed
+    <strong>getEngineByExtension</strong>($pExtension, $pDefault = null)</code>
     </h3>
     <div class="details">
         <p>
@@ -1414,7 +993,13 @@
                     <table>
                     <tr>
                 <td></td>
-                <td>$pExt</td>
+                <td>$pExtension</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$pDefault</td>
                 <td>
 </td>
             </tr>
@@ -1425,29 +1010,46 @@
 
                     <table>
         <tr>
-            <td><a href="../../Elixir/View/ViewInterface.html"><abbr title="Elixir\View\ViewInterface">ViewInterface</abbr></a></td>
+            <td>mixed</td>
             <td>
 </td>
         </tr>
     </table>
 
             
-                            <h4>Exceptions</h4>
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getEngines">
+        <div class="location">at line 110</div>
+        <code>            public            array
+    <strong>getEngines</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
 
                     <table>
-                    <tr>
-                <td><a href="http://php.net/LogicException"><abbr title="LogicException">LogicException</abbr></a></td>
-                <td>
+        <tr>
+            <td>array</td>
+            <td>
 </td>
-            </tr>
-            </table>
+        </tr>
+    </table>
 
+            
             
                     </div>
     </div>
 
                 <h3 id="method_render">
-        <div class="location">at line 123</div>
+        <div class="location">at line 119</div>
         <code>            public            string
     <strong>render</strong>(string|<a href="../../Elixir/View/Storage/StorageInterface.html"><abbr title="Elixir\View\Storage\StorageInterface">StorageInterface</abbr></a> $pTemplate, array $pData = array())</code>
     </h3>
@@ -1486,6 +1088,16 @@
     </table>
 
             
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/LogicException"><abbr title="LogicException">LogicException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
             
                             <h4>See also</h4>
 

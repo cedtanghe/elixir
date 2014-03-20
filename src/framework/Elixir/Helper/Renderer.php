@@ -78,7 +78,7 @@ class Renderer implements ContextInterface, HelperInterface
                 $module,
                 Str::slug($this->_context->getRequest()->getController()),
                 Str::slug($this->_context->getRequest()->getAction()),
-                method_exists($view, 'getDefaultExtension') ? $view->getDefaultExtension() : 'phtml'
+                $view->getDefaultExtension()
             );
         }
         

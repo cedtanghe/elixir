@@ -11,29 +11,10 @@ use Elixir\View\Storage\StorageInterface;
 interface ViewInterface
 {
     /**
-     * @param boolean $pValue
+     * @return string
      */
-    public function setAutoEscape($pValue);
+    public function getDefaultExtension();
     
-    /**
-     * @return boolean
-     */
-    public function isAutoEscape();
-    
-    /**
-     * @param mixed $pData
-     * @param string $pStrategy
-     * @return mixed
-     */
-    public function escape($pData, $pStrategy = 'html');
-    
-    /**
-     * @param string $pKey
-     * @param mixed $pDefault
-     * @return mixed
-     */
-    public function raw($pKey, $pDefault = null);
-
     /**
      * @param string $pKey
      * @return boolean

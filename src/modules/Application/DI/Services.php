@@ -48,7 +48,7 @@ class Services implements ProviderInterface
         $pContainer->set('view', function()
         {
             $manager = new Manager();
-            $manager->registerExtension('^(phtml|php)$', new PHP());
+            $manager->registerEngine('PHP', new PHP(), '^(phtml|php)$', true);
             
             return $manager;
         }, 

@@ -2,128 +2,137 @@
 
 namespace Elixir\View;
 
-use Elixir\DI\ContainerInterface;
 use Elixir\Util\File;
-use Elixir\View\Helper\Container;
 use Elixir\View\Storage\Str;
 
 /**
  * @author Cédric Tanghe <c.tanghe@peoleo.fr>
  */
 
-class Manager extends DataAbstract implements HelperInterface
+class Manager extends DataAbstract
 {
-    /**
-     * @var string
-     */
-    const DEFAULT_EXTENSION = 'phtml';
-    
-    /**
-     * @var string
-     */
-    protected $_defaultExtension = self::DEFAULT_EXTENSION;
-
-    /**
-     * @var Container|ContainerInterface
-     */
-    protected $_helper;
-    
     /**
      * @var array
      */
     protected $_engines = array();
     
     /**
-     * @param string $pValue
+     * @var ViewInterface 
      */
-    public function setDefaultExtension($pValue)
+    protected $_defaultEngine;
+
+    /**
+     * @return ViewInterface
+     */
+    public function getDefaultEngine()
     {
-        $this->_defaultExtension = $pValue;
+        return $this->_defaultEngine;
     }
     
     /**
-     * @return string
+     * @see ViewInterface::getDefaultExtension()
      */
     public function getDefaultExtension()
     {
-        return $this->_defaultExtension;
+        if(null !== $this->_defaultEngine)
+        {
+            return $this->_defaultEngine->getDefaultExtension();
+        }
+        
+        return null;
     }
     
     /**
-     * @param string $pExtension
+     * @param string $pName
      * @param ViewInterface $pView
-     */
-    public function registerExtension($pExt, ViewInterface $pView)
-    {
-        $this->_engines[$pExt] = $pView;
-    }
-    
-    /**
      * @param string $pExtension
+     * @param boolean $pDefaultEngine
      */
-    public function unregisterExtension($pExt)
+    public function registerEngine($pName, ViewInterface $pView, $pExtension = null, $pDefaultEngine = true)
     {
-        unset($this->_engines[$pExt]);
+        $this->_engines[$pName] = array(
+            'extension' => $pExtension ?: $pView->getDefaultExtension(), 
+            'view' => $pView
+        );
+        
+        if($pDefaultEngine)
+        {
+            $this->_defaultEngine = $pView;
+        }
     }
     
     /**
-     * @see HelperInterface::setHelperContainer()
+     * @param $pName $pName
+     * @param mixed $pDefault
+     * @return mixed
      */
-    public function setHelperContainer($pValue)
+    public function getEngine($pName, $pDefault = null)
     {
-        $this->_helper = $pValue instanceof Container ? $pValue : new Container($pValue);
+        if(isset($this->_engines[$pName]))
+        {
+            return $this->_engines[$pName];
+        }
+        
+        if(is_callable($pDefault))
+        {
+            return call_user_func($pDefault);
+        }
+        
+        return $pDefault;
     }
     
     /**
-     * @see HelperInterface::getHelperContainer()
+     * @param string $pExt
+     * @param mixed $pDefault
+     * @return mixed
      */
-    public function getHelperContainer()
-    {
-        return $this->_helper;
-    }
-    
-    /**
-     * @see HelperInterface::helper()
-     * @throws \LogicException
-     */
-    public function helper($pKey)
-    {
-        throw new \LogicException('You can not use view helper via a manager.');
-    }
-    
-    /**
-     * @param string $pExtension
-     * @return ViewInterface
-     * @throws \LogicException
-     */
-    public function getViewByExtension($pExt)
+    public function getEngineByExtension($pExtension, $pDefault = null)
     {
         foreach($this->_engines as $key => $value)
         {
-            if(preg_match('/' . $key . '/i', $pExt))
+            if(preg_match('/' . $value['extension'] . '/i', $pExtension))
             {
-                if(null !== $this->_helper)
-                {
-                    if($value instanceof HelperInterface)
-                    {
-                        $value->setHelperContainer($this->_helper);
-                    }
-                }
-                
-                return $value;
+                return $value['view'];
             }
         }
         
-        throw new \LogicException(sprintf('No view engine for "%s" extension.', $pExt));
+        if(is_callable($pDefault))
+        {
+            return call_user_func($pDefault);
+        }
+        
+        return $pDefault;
+    }
+    
+    /**
+     * @return array
+     */
+    public function getEngines()
+    {
+        return $this->_engines;
     }
     
     /**
      * @see ViewInterface::render()
+     * @throws \LogicException
      */
     public function render($pTemplate, array $pData = array())
     {
-        $extension = !($pTemplate instanceof Str) ? File::extension($pTemplate) : $this->getDefaultExtension();
-        $view = $this->getViewByExtension($extension);
+        if(!($pTemplate instanceof Str))
+        {
+            $extension = File::extension($pTemplate);
+            $view = $this->getEngineByExtension($extension, null);
+
+            if(null === $view)
+            {
+                throw new \LogicException(sprintf('No view engine for "%s" extension.', $extension));
+            }
+        }
+        else
+        {
+            $view = $this->getDefaultEngine();
+        }
+        
         $view->sets(array_merge($this->gets(), $pData));
         
         if($view instanceof GlobalInterface)

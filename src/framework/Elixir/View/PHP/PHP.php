@@ -2,7 +2,9 @@
 
 namespace Elixir\View\PHP;
 
+use Elixir\Filter\FilterInterface;
 use Elixir\View\DataAbstract;
+use Elixir\View\EscaperInterface;
 use Elixir\View\Helper\Container;
 use Elixir\View\HelperInterface;
 use Elixir\View\ViewInterface;
@@ -11,7 +13,7 @@ use Elixir\View\ViewInterface;
  * @author Cédric Tanghe <c.tanghe@peoleo.fr>
  */
 
-class PHP extends DataAbstract implements HelperInterface
+class PHP extends DataAbstract implements HelperInterface, EscaperInterface
 {
     /**
      * @var string 
@@ -32,6 +34,16 @@ class PHP extends DataAbstract implements HelperInterface
      * @var Parser
      */
     protected $_parser;
+    
+    /**
+     * @var FilterInterface 
+     */
+    protected $_escaper;
+    
+    /**
+     * @var boolean 
+     */
+    protected $_autoEscape = false;
     
     public function __construct() 
     {
@@ -54,6 +66,14 @@ class PHP extends DataAbstract implements HelperInterface
     {
         return $this->_parser;
     }
+    
+    /**
+     * @return string
+     */
+    public function getDefaultExtension()
+    {
+        return 'phtml';
+    }
 
     /**
      * @see HelperInterface::setHelperContainer()
@@ -70,6 +90,79 @@ class PHP extends DataAbstract implements HelperInterface
     public function getHelperContainer()
     {
         return $this->_helper;
+    }
+    
+    /**
+     * @param FilterInterface $pValue
+     */
+    public function setEscaper(FilterInterface $pValue)
+    {
+        $this->_escaper = $pValue;
+    }
+    
+    /**
+     * @return FilterInterface
+     */
+    public function getEscaper()
+    {
+        return $this->_escaper;
+    }
+    
+    /**
+     * @see EscaperInterface::setAutoEscape()
+     */
+    public function setAutoEscape($pValue)
+    {
+        $this->_autoEscape = $pValue;
+    }
+    
+    /**
+     * @see EscaperInterface::isAutoEscape()
+     */
+    public function isAutoEscape()
+    {
+        return $this->_autoEscape;
+    }
+
+    /**
+     * @see EscaperInterface::escape()
+     */
+    public function escape($pData, $pStrategy = 'html')
+    {
+        if(null !== $this->_escaper)
+        {
+            if(is_array($pData) || is_object($pData) || $pData instanceof \Traversable)
+            {
+                foreach($pData as &$value)
+                {
+                    $value = $this->escape($value, $pStrategy);
+                }
+            }
+            else
+            {
+                $pData = $this->_escaper->filter($pData, array('strategy' => $pStrategy));
+            }
+        }
+        
+        return $pData;
+    }
+    
+    /**
+     * @see EscaperInterface::raw()
+     */
+    public function raw($pKey, $pDefault = null)
+    {
+        if($this->has($pKey))
+        {
+            return $this->_vars[$pKey];
+        }
+        
+        if(is_callable($pDefault))
+        {
+            return call_user_func($pDefault);
+        }
+        
+        return $pDefault;
     }
     
     /**
@@ -118,6 +211,21 @@ class PHP extends DataAbstract implements HelperInterface
         return $this->_blocks->mask($pBlock, '');
     }
     
+    /**
+     * @see ViewInterface::get()
+     */
+    public function get($pKey, $pDefault = null) 
+    {
+        $value = parent::get($pKey, $pDefault);
+        
+        if($this->_autoEscape)
+        {
+            $value = $this->escape($value);
+        }
+        
+        return $value;
+    }
+
     /**
      * @see ViewInterface::render()
      */
