@@ -27,6 +27,11 @@ class Pivot
     protected $_otherKey;
     
     /**
+     * @var array 
+     */
+    protected $_criterions = array();
+    
+    /**
      * @param string $pPivot
      * @param string $pForeignKey
      * @param string $pOtherKey
@@ -63,6 +68,24 @@ class Pivot
     }
     
     /**
+     * @param \Closure $pCriterion
+     * @return Pivot
+     */
+    public function addCriterion(\Closure $pCriterion)
+    {
+        $this->_criterions[] = $pCriterion;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getCriterions()
+    {
+        return $this->_criterions;
+    }
+    
+    /**
      * @param RelationInterface $pRelation
      * @param Select $pSelect
      */
@@ -72,10 +95,11 @@ class Pivot
         $foreignKey = $this->_foreignKey;
         $otherKey = $this->_otherKey;
         $relation = $pRelation;
+        $criterions = $this->_criterions;
         
         $pSelect->join(
             $pivot,
-            function(JoinClause $pSQL) use($pivot, $foreignKey, $otherKey, $relation)
+            function(JoinClause $pSQL) use($pivot, $foreignKey, $otherKey, $relation, $criterions)
             {
                 $pSQL->on(
                     sprintf(
@@ -95,6 +119,11 @@ class Pivot
                         $relation->getOtherKey()
                     )
                 );
+                
+                foreach($criterions as $contraint)
+                {
+                    $contraint($pSQL);
+                }
             }
         );
     }

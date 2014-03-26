@@ -132,7 +132,6 @@ class BelongsTo implements RelationInterface
     
     /**
      * @param \Closure $pCriterion
-     * @param string $pName
      * @return BelongsTo
      */
     public function addCriterion(\Closure $pCriterion)
@@ -207,6 +206,10 @@ class BelongsTo implements RelationInterface
             if(false !== $this->eagerCriterions($select))
             {
                 $this->setRelated($select->one(), true);
+            }
+            else
+            {
+                $this->setRelated(null, true);
             }
         }
         else

@@ -72,6 +72,11 @@ class Uploader
     protected $_errors = array();
     
     /**
+     * @var boolean
+     */
+    protected $_errorBreak = true;
+    
+    /**
      * @var array 
      */
     protected $_errorMessageTemplates = array(self::UNKNOWN_ERROR => 'An error occurred during upload.');
@@ -228,6 +233,22 @@ class Uploader
         {
             $this->setErrorMessageTemplate($key, $value);
         }
+    }
+    
+    /**
+     * @param boolean $pValue
+     */
+    public function setErrorBreak($pValue)
+    {
+        $this->_errorBreak = $pValue;
+    }
+    
+    /**
+     * @return boolean
+     */
+    public function isErrorBreak()
+    {
+        return $this->_errorBreak;
     }
     
     /**
@@ -389,6 +410,11 @@ class Uploader
                                 if(!$validator['validator']->isValid($file, $validator['options']))
                                 {
                                     $this->_errors = array_merge($this->_errors, (array)$validator['validator']->errors());
+                                
+                                    if($this->_errorBreak)
+                                    {
+                                        break;
+                                    }
                                 }
                             }
                         }

@@ -42,6 +42,15 @@ class File extends FieldAbstract
         $this->_parent->setAttributes(array_merge($this->_parent->getAttributes(),
                                                   array('enctype' => FormInterface::ENCTYPE_MULTIPART)));
     }
+    
+    /**
+     * @see FieldAbstract::setErrorBreak()
+     */
+    public function setErrorBreak($pValue)
+    {
+        parent::setErrorBreak($pValue);
+        $this->getUploader()->setErrorBreak($this->_errorBreak);
+    }
 
     /**
      * @return Uploader 
@@ -51,6 +60,7 @@ class File extends FieldAbstract
         if(null === $this->_uploader)
         {
             $this->setUploader(new Uploader());
+            $this->_uploader->setErrorBreak($this->_errorBreak);
         }
         
         return $this->_uploader;

@@ -109,11 +109,14 @@ class URL implements TemplateContextInterface, ControllerContextInterface, Helpe
             }
             else   
             {
-                $this->_request = $this->_context->get('_request');
-                
-                if(null === $this->_request && method_exists($this->_context, 'helper'))
+                if(null !== $this->_context)
                 {
-                    $this->_request = $this->_context->helper('helper.request');
+                    $this->_request = $this->_context->get('_request');
+
+                    if(null === $this->_request && method_exists($this->_context, 'helper'))
+                    {
+                        $this->_request = $this->_context->helper('helper.request');
+                    }
                 }
                 
                 if(null === $this->_request)

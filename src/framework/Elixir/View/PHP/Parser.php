@@ -123,8 +123,15 @@ class Parser
         
         if(null !== $helper)
         {
-            $method = $helper instanceof HelperInterface ? 'direct' : 'filter';
-            return call_user_func_array(array($helper, $method), $pArguments);
+            if($helper instanceof \Closure)
+            {
+                return call_user_func_array($helper, $pArguments);
+            }
+            else
+            {
+                $method = $helper instanceof HelperInterface ? 'direct' : 'filter';
+                return call_user_func_array(array($helper, $method), $pArguments);
+            }
         }
         
         throw new \BadMethodCallException(sprintf('Helper "%s" is not defined.', $pMethod));

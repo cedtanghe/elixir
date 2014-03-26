@@ -140,7 +140,6 @@ class HasOneOrMany implements RelationInterface
     
     /**
      * @param \Closure $pCriterion
-     * @param string $pName
      * @return RelationInterface
      */
     public function addCriterion(\Closure $pCriterion)
@@ -215,6 +214,13 @@ class HasOneOrMany implements RelationInterface
             if(false !== $this->eagerCriterions($select))
             {
                 $this->setRelated($this->match($select), true);
+            }
+            else
+            {
+                $this->setRelated(
+                    $this->_type === self::HAS_ONE ? null : new Collection(array(), true),
+                    true
+                );
             }
         }
         else

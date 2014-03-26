@@ -175,11 +175,16 @@ class File
             return true;
         }
         
-        if(!is_dir(dirname($pNewName)))
+        if(file_exists($pOldName))
         {
-            @mkdir(dirname($pNewName), 0777, true);
+            if(!is_dir(dirname($pNewName)))
+            {
+                @mkdir(dirname($pNewName), 0777, true);
+            }
+
+            return rename($pOldName, $pNewName);
         }
         
-        return rename($pOldName, $pNewName);
+        return false;
     }
 }

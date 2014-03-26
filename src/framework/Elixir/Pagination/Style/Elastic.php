@@ -19,9 +19,9 @@ class Elastic implements StyleInterface
         $pageRange  = $pPagination->getItemsPerPage();
         $totalItems = $pPagination->getTotalItems();
         $currentItem = $pPagination->getCurrentItem();
-        $delta = $pageRange >> 1;
-        $lowerBound = $currentItem - $delta < 0 ? 0 : $currentItem - $delta;
-        $upperBound = $currentItem + $delta < $pageRange ? $pageRange : $currentItem + $delta;
+        $delta = $pageRange / 2;
+        $lowerBound = $currentItem - $delta < 0 ? 0 : floor($currentItem - $delta);
+        $upperBound = $currentItem + $delta < $pageRange ? $pageRange : ceil($currentItem + $delta);
         
         if($upperBound > $totalItems)
         {

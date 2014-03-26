@@ -38,6 +38,13 @@ class JoinClause
      */
     public function on($pCond, $pValue = null)
     {
+        if(is_callable($pCond))
+        {
+            $join = new static($this->_SQL);
+            call_user_func_array($pCond, array($join));
+            $pCond = $join->render();
+        }
+        
         $this->_ons[] = array('query' => $this->_SQL->assemble($pCond, $pValue), 'type' => 'AND');
         return $this;
     }
@@ -49,6 +56,13 @@ class JoinClause
      */
     public function orOn($pCond, $pValue = null)
     {
+        if(is_callable($pCond))
+        {
+            $join = new static($this->_SQL);
+            call_user_func_array($pCond, array($join));
+            $pCond = $join->render();
+        }
+        
         $this->_ons[] = array('query' => $this->_SQL->assemble($pCond, $pValue), 'type' => 'OR');
         return $this;
     }

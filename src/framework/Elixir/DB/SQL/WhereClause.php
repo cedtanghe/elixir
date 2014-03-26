@@ -33,6 +33,13 @@ class WhereClause
      */
     public function where($pCond, $pValue = null)
     {
+        if(is_callable($pCond))
+        {
+            $where = new static($this->_SQL);
+            call_user_func_array($pCond, array($where));
+            $pCond = $where->render();
+        }
+        
         $this->_wheres[] = array('query' => $this->_SQL->assemble($pCond, $pValue), 'type' => 'AND');
         return $this;
     }
@@ -44,6 +51,13 @@ class WhereClause
      */
     public function orWhere($pCond, $pValue = null)
     {
+        if(is_callable($pCond))
+        {
+            $where = new static($this->_SQL);
+            call_user_func_array($pCond, array($where));
+            $pCond = $where->render();
+        }
+        
         $this->_wheres[] = array('query' => $this->_SQL->assemble($pCond, $pValue), 'type' => 'OR');
         return $this;
     }
