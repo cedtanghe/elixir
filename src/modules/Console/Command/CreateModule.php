@@ -41,6 +41,12 @@ class CreateModule extends Command
         $dir = $input->getOption('dir');
         $modulePath = rtrim($dir, '/') . '/' . $name;
         
+        if(!preg_match('/^[a-z0-9]{2,}$/i', $name))
+        {
+            $output->writeln(sprintf('Name of the %s module is invalid', $name));
+            return;
+        }
+        
         if(!file_exists($modulePath))
         {
             if(File::copy(__DIR__ . '/../resources/module_skeleton', $modulePath))
