@@ -20,9 +20,10 @@ class CreateModule extends Command
                 InputArgument::REQUIRED,
                 'Name of module'
              )
-             ->addArgument(
+             ->addOption(
                 'parent',
-                InputArgument::OPTIONAL,
+                null,
+                InputOption::VALUE_REQUIRED,
                 'Parent of module'
              )
              ->addOption(
@@ -43,7 +44,7 @@ class CreateModule extends Command
     protected function execute(InputInterface $pInput, OutputInterface $pOutput)
     {
         $name = $pInput->getArgument('name');
-        $parent = $pInput->getArgument('parent');
+        $parent = $pInput->getOption('parent');
         
         if(null === $parent)
         {
@@ -54,7 +55,13 @@ class CreateModule extends Command
             $parent = "public function getParent()\n\t{\n\t\treturn '' . $parent . '';\n\t}";
         }
         
-        $namespace = $pInput->getOption('namespace') ?: $name;
+        $namespace = $pInput->getOption('namespace');
+        
+        if(null === $namespace)
+        {
+            $namespace = $name;
+        }
+        
         $dir = $pInput->getOption('dir');
         $modulePath = rtrim($dir, '/') . '/' . $name;
         
