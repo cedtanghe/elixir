@@ -5,7 +5,7 @@ namespace Elixir\Config\I18N;
 use Elixir\I18N\I18NInterface;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 abstract class WriterAbstract implements WriterInterface

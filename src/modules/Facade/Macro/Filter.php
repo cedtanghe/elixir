@@ -7,7 +7,7 @@ use Elixir\Filter\Escaper;
 use Elixir\Filter\NbrFormat;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class Filter

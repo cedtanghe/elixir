@@ -8,7 +8,7 @@ use Elixir\MVC\Controller\ControllerInterface;
 use Elixir\MVC\Controller\Helper\ContextInterface;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class Forward implements ContextInterface, HelperInterface

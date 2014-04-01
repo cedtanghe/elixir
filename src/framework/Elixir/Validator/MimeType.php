@@ -5,7 +5,7 @@ namespace Elixir\Validator;
 use Elixir\Util\File;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class MimeType extends ValidatorAbstract

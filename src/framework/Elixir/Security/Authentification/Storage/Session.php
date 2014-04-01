@@ -6,7 +6,7 @@ use Elixir\Security\Authentification\Identity;
 use Elixir\HTTP\Session\SessionInterface;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class Session implements StorageInterface

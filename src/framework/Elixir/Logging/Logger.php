@@ -6,7 +6,7 @@ use Elixir\Dispatcher\Dispatcher;
 use Elixir\Logging\Writer\WriterInterface;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class Logger extends Dispatcher implements LoggerInterface

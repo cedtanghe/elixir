@@ -8,7 +8,7 @@ use Elixir\DB\SQL\Insert;
 use Elixir\DB\SQL\Update;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class DB implements SaveHandlerInterface

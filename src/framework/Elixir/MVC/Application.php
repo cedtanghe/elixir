@@ -15,7 +15,7 @@ use Elixir\Util\Arr;
 use Elixir\Util\Str;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class Application extends Dispatcher implements ApplicationInterface

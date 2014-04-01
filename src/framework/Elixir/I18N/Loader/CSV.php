@@ -5,7 +5,7 @@ namespace Elixir\I18N\Loader;
 use Elixir\Util\CSV as CSVUtils;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class CSV implements LoaderInterface

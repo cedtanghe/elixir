@@ -6,7 +6,7 @@ use Elixir\Form\FormFactory;
 use Elixir\Form\FormInterface;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class CSRF implements ExtensionInterface

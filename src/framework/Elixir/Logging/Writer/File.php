@@ -5,7 +5,7 @@ namespace Elixir\Logging\Writer;
 use Elixir\Util\File as FileUtils;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class File extends WriterAbstract

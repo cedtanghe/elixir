@@ -8,7 +8,7 @@ use Elixir\HTTP\Session\SessionInterface;
 require_once 'LoaderInterface.php';
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class Loader implements LoaderInterface

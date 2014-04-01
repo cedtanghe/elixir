@@ -6,7 +6,7 @@ use Elixir\Helper\HelperInterface;
 use Elixir\MVC\Exception\NotFoundException;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 abstract class RESTFulControllerAbstract extends ControllerAbstract
@@ -49,9 +49,13 @@ abstract class RESTFulControllerAbstract extends ControllerAbstract
                 }
             }
 
-            throw new NotFoundException(sprintf('Action "%s" could not be recovered for the request method "%s".',
-                                                substr($pMethod, 0, -6),
-                                                $requestMethod));
+            throw new NotFoundException(
+                sprintf(
+                    'Action "%s" could not be recovered for the request method "%s".',
+                    substr($pMethod, 0, -6),
+                    $requestMethod
+                )
+            );
         }
         
         $helper = $this->helper('helper.' . $pMethod);

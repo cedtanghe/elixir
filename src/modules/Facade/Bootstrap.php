@@ -15,7 +15,7 @@ use Elixir\Facade\View;
 use Elixir\MVC\Module\ModuleAbstract;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class Bootstrap extends ModuleAbstract

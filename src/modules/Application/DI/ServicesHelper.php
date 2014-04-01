@@ -15,7 +15,7 @@ use Elixir\MVC\Controller\Helper\Container as ControllerHelper;
 use Elixir\View\Helper\Container as ViewHelper;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class ServicesHelper implements ProviderInterface

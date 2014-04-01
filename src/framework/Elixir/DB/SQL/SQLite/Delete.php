@@ -5,7 +5,7 @@ namespace Elixir\DB\SQL\SQLite;
 use Elixir\DB\SQL\Delete as BaseDelete;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class Delete extends BaseDelete

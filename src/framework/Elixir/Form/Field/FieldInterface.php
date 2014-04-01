@@ -6,7 +6,7 @@ use Elixir\Dispatcher\DispatcherInterface;
 use Elixir\Form\FormInterface;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 interface FieldInterface extends DispatcherInterface

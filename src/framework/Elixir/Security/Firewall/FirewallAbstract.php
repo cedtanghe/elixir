@@ -7,7 +7,7 @@ use Elixir\Security\Authentification\Manager;
 use Elixir\Security\Firewall\Writer\WriterInterface;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 abstract class FirewallAbstract extends Dispatcher implements FirewallInterface

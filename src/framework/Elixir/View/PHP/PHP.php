@@ -10,7 +10,7 @@ use Elixir\View\HelperInterface;
 use Elixir\View\ViewInterface;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class PHP extends DataAbstract implements HelperInterface, EscaperInterface

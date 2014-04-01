@@ -6,7 +6,7 @@ use Elixir\HTTP\Session\Session;
 use Elixir\MVC\Application;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class RequestFactory

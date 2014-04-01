@@ -8,7 +8,7 @@ use Elixir\Form\FormInterface;
 use Elixir\Validator\ValidatorInterface;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 abstract class FieldAbstract extends Dispatcher implements FieldInterface
@@ -513,7 +513,7 @@ abstract class FieldAbstract extends Dispatcher implements FieldInterface
     public function isEmpty()
     {
         $value = $this->getValue(false);
-        return empty($value);
+        return empty(trim($value));
     }
     
     /**

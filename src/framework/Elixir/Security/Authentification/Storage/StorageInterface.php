@@ -5,7 +5,7 @@ namespace Elixir\Security\Authentification\Storage;
 use Elixir\Security\Authentification\Identity;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 interface StorageInterface

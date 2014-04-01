@@ -3,7 +3,7 @@
 namespace Elixir\DB\Result;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class PDO extends SetAbstract
@@ -82,6 +82,14 @@ class PDO extends SetAbstract
     public function fetchObject($pClassName = 'stdClass', array $pArgs = array())
     {
         return $this->_resource->fetchObject($pClassName, $pArgs);
+    }
+    
+    /**
+     * @see SetAbstract::fetchAssoc()
+     */
+    public function fetchAssoc()
+    {
+        return $this->fetch(self::FETCH_ASSOC);
     }
     
     /**

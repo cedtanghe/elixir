@@ -6,7 +6,7 @@ use Elixir\DB\ORM\Select;
 use Elixir\DB\SQL\JoinClause;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class Pivot

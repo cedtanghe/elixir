@@ -5,7 +5,7 @@ namespace Elixir\Config\Writer;
 use Elixir\Config\ConfigInterface;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 abstract class WriterAbstract implements WriterInterface

@@ -3,7 +3,7 @@
 namespace Elixir\Security\Authentification;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 interface AuthInterface

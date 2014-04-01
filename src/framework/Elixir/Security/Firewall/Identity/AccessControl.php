@@ -6,7 +6,7 @@ use Elixir\Security\Firewall\AccessControlAbstract;
 use Elixir\Security\Firewall\AccessControlInterface;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class AccessControl extends AccessControlAbstract

@@ -7,7 +7,7 @@ use Elixir\DB\ORM\RepositoryInterface;
 use Elixir\DB\ORM\Select;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class BelongsTo implements RelationInterface

@@ -5,7 +5,7 @@ namespace Elixir\Helper;
 use Elixir\I18N\I18NInterface;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class I18N implements HelperInterface

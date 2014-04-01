@@ -12,7 +12,7 @@ use Elixir\View\Storage\StorageInterface;
 use Elixir\View\ViewInterface;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class Renderer implements ContextInterface, HelperInterface

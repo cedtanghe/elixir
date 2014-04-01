@@ -6,7 +6,7 @@ use Elixir\Cache\Encoder\EncoderInterface;
 use Elixir\Util\Str;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 abstract class CacheAbstract implements CacheInterface

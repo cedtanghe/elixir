@@ -5,7 +5,7 @@ namespace Elixir\Filter;
 use Elixir\I18N\Locale;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class NbrFormat extends FilterAbstract

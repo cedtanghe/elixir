@@ -3,7 +3,7 @@
 namespace Elixir\DB\Result;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 abstract class SetAbstract
@@ -78,6 +78,13 @@ abstract class SetAbstract
      * @return mixed;
      */
     abstract public function fetchObject($pClassName = 'stdClass', array $pArgs = array());
+    
+    /**
+     * @param string $pClassName
+     * @param array $pArgs
+     * @return mixed;
+     */
+    abstract public function fetchAssoc();
     
     /**
      * @return integer

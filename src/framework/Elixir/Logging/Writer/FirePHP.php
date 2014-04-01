@@ -6,7 +6,7 @@ use Elixir\Logging\LoggerInterface;
 
 /**
  * @see http://www.firephp.org/Wiki/Reference/Protocol
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class FirePHP extends WriterAbstract

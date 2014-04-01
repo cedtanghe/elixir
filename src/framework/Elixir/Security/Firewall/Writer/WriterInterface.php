@@ -5,7 +5,7 @@ namespace Elixir\Security\Firewall\Writer;
 use Elixir\Security\Firewall\FirewallInterface;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 interface WriterInterface 

@@ -7,7 +7,7 @@ use Elixir\Form\Field\FieldInterface;
 use Elixir\Form\FormInterface;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class Form
@@ -515,7 +515,7 @@ class Form
         foreach($data as $key => $value)
         {
             $a = array_slice($attributes, 0);
-            $id = isset($a['id']) ? $a['id'] : $a['name'];
+            $id = isset($a['id']) ? $a['id'] : $count > 1 ? substr($a['name'], 0, -2) : $a['name'];
             
             if($increment)
             {

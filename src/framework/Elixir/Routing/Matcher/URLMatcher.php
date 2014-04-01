@@ -7,7 +7,7 @@ use Elixir\Routing\Collection;
 use Elixir\Routing\Route;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class URLMatcher implements MatcherInterface

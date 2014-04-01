@@ -3,7 +3,7 @@
 namespace Elixir\I18N\Loader;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 interface LoaderInterface 

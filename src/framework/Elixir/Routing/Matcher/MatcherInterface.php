@@ -6,7 +6,7 @@ use Elixir\HTTP\Request;
 use Elixir\Routing\Collection;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 interface MatcherInterface

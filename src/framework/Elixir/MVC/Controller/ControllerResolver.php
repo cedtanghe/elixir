@@ -9,7 +9,7 @@ use Elixir\MVC\Controller\ControllerInterface;
 use Elixir\MVC\Exception\NotFoundException;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class ControllerResolver implements ControllerResolverInterface

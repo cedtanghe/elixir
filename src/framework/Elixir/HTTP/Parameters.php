@@ -5,7 +5,7 @@ namespace Elixir\HTTP;
 use Elixir\Util\Arr;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class Parameters implements ParametersInterface, \ArrayAccess, \Iterator, \Countable

@@ -6,7 +6,7 @@ use Elixir\Util\Str;
 use Elixir\Util\File;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class Rename extends FilterAbstract

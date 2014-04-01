@@ -6,7 +6,7 @@ use Elixir\Config\I18N\WriterInterface;
 use Elixir\Dispatcher\Dispatcher;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class I18N extends Dispatcher implements I18NInterface

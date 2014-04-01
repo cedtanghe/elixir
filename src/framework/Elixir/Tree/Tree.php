@@ -6,7 +6,7 @@ use Elixir\Util\Arr;
 
 /**
  * @author Nicola Pertosa <n.pertosa@peoleo.fr>
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class Tree implements TreeInterface

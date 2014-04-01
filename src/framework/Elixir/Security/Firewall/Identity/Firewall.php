@@ -7,7 +7,7 @@ use Elixir\Security\Firewall\FirewallEvent;
 use Elixir\Security\Firewall\Loader\LoaderFactory;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class Firewall extends FirewallAbstract

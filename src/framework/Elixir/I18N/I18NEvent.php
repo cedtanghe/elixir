@@ -5,7 +5,7 @@ namespace Elixir\I18N;
 use Elixir\Dispatcher\Event;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class I18NEvent extends Event

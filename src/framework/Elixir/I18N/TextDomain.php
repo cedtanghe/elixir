@@ -6,7 +6,7 @@ use Elixir\Util\Arr;
 use Elixir\I18N\Loader\LoaderFactory;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class TextDomain

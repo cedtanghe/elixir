@@ -8,7 +8,7 @@ use Elixir\HTTP\Request;
 use Elixir\HTTP\Response;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 interface ApplicationInterface extends DispatcherInterface

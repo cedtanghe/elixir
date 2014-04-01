@@ -11,7 +11,7 @@ use Elixir\DB\SQL\SQLite\Select as SQLiteSelect;
 use Elixir\DB\SQL\SQLite\Update as SQLiteUpdate;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class SQLFactory

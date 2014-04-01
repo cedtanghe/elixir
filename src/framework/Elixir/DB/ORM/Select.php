@@ -8,7 +8,7 @@ use Elixir\DB\Result\SetAbstract;
 use Elixir\DB\SQL\Select as SQLSelect;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class Select

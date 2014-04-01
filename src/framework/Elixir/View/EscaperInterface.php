@@ -5,7 +5,7 @@ namespace Elixir\View;
 use Elixir\Filter\FilterInterface;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 interface EscaperInterface

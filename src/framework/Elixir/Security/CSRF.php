@@ -5,7 +5,7 @@ namespace Elixir\Security;
 use Elixir\HTTP\Request;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class CSRF

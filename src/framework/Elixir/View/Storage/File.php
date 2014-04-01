@@ -3,7 +3,7 @@
 namespace Elixir\View\Storage;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class File implements StorageInterface

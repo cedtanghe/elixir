@@ -5,7 +5,7 @@ namespace Elixir\Routing\Generator;
 use Elixir\Routing\Route;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class QueryGenerator extends URLGenerator

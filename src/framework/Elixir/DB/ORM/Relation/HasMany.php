@@ -5,7 +5,7 @@ namespace Elixir\DB\ORM\Relation;
 use Elixir\DB\ORM\RepositoryInterface;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class HasMany extends HasOneOrMany

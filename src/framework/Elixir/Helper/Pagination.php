@@ -7,7 +7,7 @@ use Elixir\View\Helper\ContextInterface;
 use Elixir\View\ViewInterface;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class Pagination implements ContextInterface, HelperInterface

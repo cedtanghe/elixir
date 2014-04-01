@@ -5,7 +5,7 @@ namespace Elixir\Filter;
 use Elixir\Util\Str;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class Protect extends FilterAbstract

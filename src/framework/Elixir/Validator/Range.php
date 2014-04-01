@@ -3,7 +3,7 @@
 namespace Elixir\Validator;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class Range extends ValidatorAbstract

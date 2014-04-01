@@ -5,7 +5,7 @@ namespace Elixir\DB\ORM;
 use Elixir\DI\ContainerInterface;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class ModelFactory

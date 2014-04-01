@@ -7,7 +7,7 @@ use Elixir\DB\SQL\Expr;
 use Elixir\DB\SQL\SQLAbstract;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class PDO extends DBAbstract

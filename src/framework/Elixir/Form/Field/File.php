@@ -6,7 +6,7 @@ use Elixir\Form\FormInterface;
 use Elixir\HTTP\Uploader;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class File extends FieldAbstract

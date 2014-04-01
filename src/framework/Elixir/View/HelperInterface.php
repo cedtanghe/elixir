@@ -6,7 +6,7 @@ use Elixir\DI\ContainerInterface;
 use Elixir\View\Helper\Container;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 interface HelperInterface

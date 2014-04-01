@@ -3,7 +3,7 @@
 namespace Elixir\Form\Field;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class Radio extends MultipleAbstract

@@ -6,7 +6,7 @@ use Elixir\HTTP\Response;
 use Elixir\MVC\Controller\ControllerAbstract;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 final class Dummy

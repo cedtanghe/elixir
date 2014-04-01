@@ -6,7 +6,7 @@ use Elixir\HTTP\RequestFactory;
 use Elixir\Security\CSRF as Context;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class CSRF extends ValidatorAbstract

@@ -5,7 +5,7 @@ namespace Elixir\View\PHP;
 use Elixir\Dispatcher\Dispatcher;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class Blocks extends Dispatcher

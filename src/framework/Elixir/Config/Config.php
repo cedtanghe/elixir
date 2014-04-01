@@ -8,7 +8,7 @@ use Elixir\Config\Writer\WriterInterface;
 use Elixir\Util\Arr;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class Config implements ConfigInterface, \ArrayAccess, \Iterator, \Countable

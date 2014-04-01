@@ -5,7 +5,7 @@ namespace Elixir\DB\SQL\MySQL;
 use Elixir\DB\SQL\Update as BaseUpdate;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class Update extends BaseUpdate

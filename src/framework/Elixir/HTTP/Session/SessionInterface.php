@@ -6,7 +6,7 @@ use Elixir\Dispatcher\DispatcherInterface;
 use Elixir\HTTP\Session\SaveHandler\SaveHandlerInterface;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 interface SessionInterface extends DispatcherInterface

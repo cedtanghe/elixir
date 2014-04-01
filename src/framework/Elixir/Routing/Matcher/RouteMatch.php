@@ -5,7 +5,7 @@ namespace Elixir\Routing\Matcher;
 use Elixir\Routing\Route;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class RouteMatch

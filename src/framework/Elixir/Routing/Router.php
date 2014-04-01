@@ -11,7 +11,7 @@ use Elixir\Routing\Matcher\RouteMatch;
 use Elixir\Routing\Writer\WriterInterface;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class Router extends Dispatcher implements RouterInterface

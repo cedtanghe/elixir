@@ -5,7 +5,7 @@ namespace Elixir\Module\Facade\Macro;
 use Elixir\Facade\Validator as Facade;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class Validator

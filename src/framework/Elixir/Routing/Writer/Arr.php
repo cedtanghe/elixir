@@ -3,7 +3,7 @@
 namespace Elixir\Routing\Writer;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class Arr extends WriterAbstract

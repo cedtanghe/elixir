@@ -5,7 +5,7 @@ namespace Elixir\HTTP;
 use Elixir\Routing\Matcher\RouteMatch;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class Request

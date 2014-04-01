@@ -7,7 +7,7 @@ use Elixir\HTTP\Parameters;
 use Elixir\HTTP\Session\SaveHandler\SaveHandlerInterface;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class Session extends Dispatcher implements SessionInterface, \ArrayAccess, \Iterator, \Countable

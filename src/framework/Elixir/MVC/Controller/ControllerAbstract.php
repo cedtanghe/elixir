@@ -12,7 +12,7 @@ use Elixir\View\GlobalInterface;
 use Elixir\View\HelperInterface as ViewHelperInterface;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 abstract class ControllerAbstract implements ControllerInterface

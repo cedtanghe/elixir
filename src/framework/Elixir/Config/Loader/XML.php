@@ -5,7 +5,7 @@ namespace Elixir\Config\Loader;
 use Elixir\Util\Arr as ArrayUtils;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class XML extends LoaderAbstract

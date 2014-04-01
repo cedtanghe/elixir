@@ -5,7 +5,7 @@ namespace Elixir\Pagination;
 use Elixir\Pagination\Style\StyleInterface;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 interface PaginationInterface 

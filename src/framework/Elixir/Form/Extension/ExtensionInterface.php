@@ -5,7 +5,7 @@ namespace Elixir\Form\Extension;
 use Elixir\Form\FormInterface;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 interface ExtensionInterface

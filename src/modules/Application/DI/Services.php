@@ -13,7 +13,7 @@ use Elixir\View\Manager;
 use Elixir\View\PHP\PHP;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class Services implements ProviderInterface

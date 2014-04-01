@@ -5,7 +5,7 @@ namespace Elixir\Form;
 use Elixir\Dispatcher\Event;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class FormEvent extends Event

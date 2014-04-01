@@ -6,7 +6,7 @@ use Elixir\Filter\FilterInterface;
 use Elixir\Validator\ValidatorInterface;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class Uploader

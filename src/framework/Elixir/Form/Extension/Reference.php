@@ -7,7 +7,7 @@ use Elixir\Form\FormEvent;
 use Elixir\Form\FormInterface;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class Reference implements ExtensionInterface

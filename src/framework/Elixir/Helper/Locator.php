@@ -5,7 +5,7 @@ namespace Elixir\Helper;
 use Elixir\MVC\ApplicationInterface;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class Locator implements HelperInterface

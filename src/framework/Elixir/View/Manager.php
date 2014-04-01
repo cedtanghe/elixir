@@ -6,7 +6,7 @@ use Elixir\Util\File;
 use Elixir\View\Storage\Str;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class Manager extends DataAbstract

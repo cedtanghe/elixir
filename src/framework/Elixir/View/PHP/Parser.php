@@ -7,7 +7,7 @@ use Elixir\View\Storage\StorageInterface;
 use Elixir\View\Storage\Str;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class Parser

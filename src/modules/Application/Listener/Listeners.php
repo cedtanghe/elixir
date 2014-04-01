@@ -12,7 +12,7 @@ use Elixir\MVC\Module\SelectedInterface;
 use Elixir\Routing\Route;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class Listeners implements SubscriberInterface

@@ -6,7 +6,7 @@ use Elixir\DB\ORM\Collection;
 use Elixir\DB\ORM\RepositoryInterface;
 
 /**
- * @author Cédric Tanghe <c.tanghe@peoleo.fr>
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
 class Relation implements RelationInterface
