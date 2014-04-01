@@ -1,0 +1,24 @@
+<?php $this->extend($this->helper('helper.locator')->locateFile('(@{MODULE})/resources/views/layout/core.phtml')); ?>
+
+<div style="padding:10px;">
+<h1 style="text-align:center; margin-bottom:25px;"><?php echo $this->message; ?></h1>
+
+<?php if (APPLICATION_ENV != 'production'): ?>
+    <table>
+    <?php foreach($this->exception as $key => $value): ?>
+        <tr>
+            <td><?php echo $key; ?></td>
+            
+            <?php 
+            if($key == 'code')
+            {
+                $value = '<pre style="margin:5px;">' . $value . '</pre>';
+            }
+            ?>
+            
+            <td><?php echo $value; ?></td>
+        </tr>
+    <?php endforeach; ?>
+    </table>
+<?php endif; ?>
+</div>
