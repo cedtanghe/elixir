@@ -31,13 +31,6 @@ class CreateModule extends Command
                 null,
                 InputOption::VALUE_REQUIRED,
                 'Modules namespace'
-             )
-             ->addOption(
-                'dir',
-                null,
-                InputOption::VALUE_REQUIRED,
-                'Modules location',
-                APPLICATION_PATH . '/modules/'
              );
     }
 
@@ -62,8 +55,7 @@ class CreateModule extends Command
             $namespace = $name;
         }
         
-        $dir = $pInput->getOption('dir');
-        $modulePath = rtrim($dir, '/') . '/' . $name;
+        $modulePath = APPLICATION_PATH . '/modules/' . $name;
         
         if(!preg_match('/^[A-Z][a-zA-Z0-9]{2,}$/', $name))
         {
@@ -76,13 +68,15 @@ class CreateModule extends Command
             $dialog = $this->getHelperSet()->get('dialog');
 
             if(!$dialog->askConfirmation($pOutput,
-                                         sprintf('<question>The %s module already exists, continue anyway ? (y/n)</question>', $name),
+                                         sprintf('<question>The %s module already exists, continue anyway ? [y,n]</question>', $name),
                                          false
                                         )) 
             {
                 return;
             }
         }
+        
+        $error = false;
 		
         if(File::copy(__DIR__ . '/../resources/module_skeleton', $modulePath))
         {
@@ -98,16 +92,97 @@ class CreateModule extends Command
                 file_put_contents($file, $content);
             }
             
-            $pOutput->writeln(sprintf('<info>Module %s created !</info>', $name));
-        }
-        else
-        {
-            if(file_exists($modulePath))
+            // Register module
+            $r = fopen(APPLICATION_PATH . '/app.php', 'r+');
+            $lines = array();
+            $content = '';
+
+            while(($buffer = fgets($r, 4096)) !== false) 
             {
-                @unlink($modulePath);
+                $lines[] = $buffer;
+                $content .= $buffer;
             }
 
-            $pOutput->writeln(sprintf('<error>Error when creating %s module, can not copy</error>', $name));
+            $pattern = '/new\s+[\\\]' . $namespace . '[\\\]Bootstrap/';
+            
+            if(!preg_match($pattern, $content))
+            {
+                $i = count($lines);
+
+                while(--$i)
+                {
+                    if(preg_match('/^\$application->addModule/', $lines[$i]))
+                    {
+                        array_splice(
+                            $lines, 
+                            $i + 1, 
+                            0, 
+                            array(
+                                '$application->addModule(new \\' . $namespace . '\Bootstrap());',
+                                "\n"
+                            )
+                        );
+
+                        break;
+                    }
+                }
+
+                ftruncate($r, 0);
+                rewind($r);
+                fwrite($r, implode('', $lines));
+                fclose($r);
+            }
+            
+            // Register autoload
+            $r = fopen(APPLICATION_PATH . '/autoload.php', 'r+');
+            $lines = array();
+            $content = '';
+
+            while(($buffer = fgets($r, 4096)) !== false) 
+            {
+                $lines[] = $buffer;
+                $content .= $buffer;
+            }
+
+            $pattern = '/\$loader->addNamespace\(\s*[\'"]' . $namespace . '[\'"]/';
+            
+            if(!preg_match($pattern, $content))
+            {
+                $i = count($lines);
+
+                while(--$i)
+                {
+                    if(preg_match('/^\$loader->addNamespace/', $lines[$i]))
+                    {
+                        array_splice(
+                            $lines, 
+                            $i + 1, 
+                            0, 
+                            array(
+                                "\n",
+                                '$loader->addNamespace(\'' . $namespace . '\', __DIR__ . \'/modules/' . $name . '/\');'
+                            )
+                        );
+
+                        break;
+                    }
+                }
+
+                ftruncate($r, 0);
+                rewind($r);
+                fwrite($r, implode('', $lines));
+                fclose($r);
+            }
+
+            $pOutput->writeln(sprintf('<info>Module %s created !</info>', $name));
+            return;
         }
+        
+        if(file_exists($modulePath))
+        {
+            @unlink($modulePath);
+        }
+
+        $pOutput->writeln(sprintf('<error>Error when creating %s module, can not copy</error>', $name));
     }
 }
