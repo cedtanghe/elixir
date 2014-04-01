@@ -4,7 +4,7 @@ namespace Elixir\Module\Console\DI;
 
 use Elixir\DI\ContainerInterface;
 use Elixir\DI\ProviderInterface;
-use Elixir\Module\Console\Command\GreetCommand;
+use Elixir\Module\Console\Command\CreateModule;
 use Symfony\Component\Console\Application;
 
 /**
@@ -23,7 +23,7 @@ class Services implements ProviderInterface
         $pContainer->set('console', function($pContainer)
         {
             $console = new Application();
-            $console->add(new GreetCommand());
+            $console->add(new CreateModule());
             
             return $console;
         }, 
