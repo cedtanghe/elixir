@@ -51,7 +51,7 @@ class CreateModule extends Command
         }
         else
         {
-            $parent = "public function getParent()\n\t{\n\t\treturn \'' . $parent . '\';\n\t}";
+            $parent = "public function getParent()\n\t{\n\t\treturn '' . $parent . '';\n\t}";
         }
         
         $namespace = $pInput->getOption('namespace') ?: $name;
