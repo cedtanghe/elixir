@@ -86,11 +86,6 @@ class File
      */
     public static function copy($pSrcPath, $pDstPath, $pOverride = true)
     {
-        if(!is_dir(dirname($pDstPath)))
-        {
-            @mkdir(dirname($pDstPath), 0777, true);
-        }
-        
         if(is_file($pSrcPath))
         {
             if(!$pOverride && is_file($pDstPath))
@@ -116,6 +111,11 @@ class File
         }
         else if(is_dir($pSrcPath))
         {
+            if(!file_exists($pDstPath))
+            {
+                @mkdir($pDstPath, 0777, true);
+            }
+		
             $pSrcPath = realpath($pSrcPath);
             $pDstPath = realpath($pDstPath);
             
@@ -124,13 +124,44 @@ class File
 
             foreach($iterator as $fileinfo)
             {
-                static::copy($fileinfo->getPathname(),
-                             str_replace($pSrcPath, $pDstPath, $fileinfo->getPathname()),
-                             $pOverride);
+                if(!static::copy($fileinfo->getPathname(),
+                            str_replace($pSrcPath, $pDstPath, $fileinfo->getPathname()),
+                            $pOverride))
+                {
+                        return false;
+                }
             }
+			
+            return true;
         }
         
         return false;
+    }
+    
+    /**
+     * @param string $pPath
+     * @return array
+     */
+    public static function filesList($pPath)
+    {
+        $list = array();
+        
+        if(is_file($pPath))
+        {
+            $list[] = $pPath;
+        }
+        else if(is_dir($pPath))
+        {
+            $iterator = new \RecursiveDirectoryIterator($pPath, \FilesystemIterator::SKIP_DOTS | \FilesystemIterator::FOLLOW_SYMLINKS);
+            $iterator = new \RecursiveIteratorIterator($iterator, \RecursiveIteratorIterator::SELF_FIRST);
+
+            foreach($iterator as $fileinfo)
+            {
+                $list = array_merge($list, static::filesList($fileinfo->getPathname()));
+            }
+        }
+        
+        return $list;
     }
     
     /**
@@ -177,9 +208,9 @@ class File
         
         if(file_exists($pOldName))
         {
-            if(!is_dir(dirname($pNewName)))
+            if(is_dir($pOldName) && !file_exists($pNewName))
             {
-                @mkdir(dirname($pNewName), 0777, true);
+                @mkdir($pNewName, 0777, true);
             }
 
             return rename($pOldName, $pNewName);

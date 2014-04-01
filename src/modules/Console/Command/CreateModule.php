@@ -26,42 +26,81 @@ class CreateModule extends Command
                 'Parent of module'
              )
              ->addOption(
+                'namespace',
+                null,
+                InputOption::VALUE_REQUIRED,
+                'Modules namespace'
+             )
+             ->addOption(
                 'dir',
                 null,
                 InputOption::VALUE_REQUIRED,
                 'Modules location',
-                '../../../../../modules/'
+                APPLICATION_PATH . '/modules/'
              );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $pInput, OutputInterface $pOutput)
     {
-        $name = $input->getArgument('name');
-        $parent = $input->getArgument('parent');
-        $dir = $input->getOption('dir');
-        $modulePath = rtrim($dir, '/') . '/' . $name;
+        $name = $pInput->getArgument('name');
+        $parent = $pInput->getArgument('parent');
         
-        if(!preg_match('/^[a-z0-9]{2,}$/i', $name))
+        if(null === $parent)
         {
-            $output->writeln(sprintf('Name of the %s module is invalid', $name));
-            return;
-        }
-        
-        if(!file_exists($modulePath))
-        {
-            if(File::copy(__DIR__ . '/../resources/module_skeleton', $modulePath))
-            {
-                $output->writeln('Module created !');
-            }
-            else
-            {
-                @unlink($modulePath);
-                $output->writeln('Error when creating module, can not copy');
-            }
+            $parent = '';
         }
         else
         {
-            $output->writeln(sprintf('Error when creating module, the %s module already exists', $name));
+            $parent = "public function getParent()\n\t{\n\t\treturn \'' . $parent . '\';\n\t}";
+        }
+        
+        $namespace = $pInput->getOption('namespace') ?: $name;
+        $dir = $pInput->getOption('dir');
+        $modulePath = rtrim($dir, '/') . '/' . $name;
+        
+        if(!preg_match('/^[A-Z][a-zA-Z0-9]{2,}$/', $name))
+        {
+            $pOutput->writeln(sprintf('<error>Name of the %s module is invalid</error>', $name));
+            return;
+        }
+        
+        if(file_exists($modulePath))
+        {
+            $dialog = $this->getHelperSet()->get('dialog');
+
+            if(!$dialog->askConfirmation($pOutput,
+                                         sprintf('<question>The %s module already exists, continue anyway ? (y/n)</question>', $name),
+                                         false
+                                        )) 
+            {
+                return;
+            }
+        }
+		
+        if(File::copy(__DIR__ . '/../resources/module_skeleton', $modulePath))
+        {
+            $list = File::filesList($modulePath);
+            
+            foreach($list as $file)
+            {
+                $content = file_get_contents($file); 
+                $content = str_replace('{NAMESPACE}', $namespace, $content);
+                $content = str_replace('{MODULE}', $name, $content);
+                $content = str_replace('{MODULE_PARENT}', $parent, $content);
+                
+                file_put_contents($file, $content);
+            }
+            
+            $pOutput->writeln(sprintf('<info>Module %s created !</info>', $name));
+        }
+        else
+        {
+            if(file_exists($modulePath))
+            {
+                @unlink($modulePath);
+            }
+
+            $pOutput->writeln(sprintf('<error>Error when creating %s module, can not copy</error>', $name));
         }
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace {MODULE}\Controller;
+namespace {NAMESPACE}\Controller;
 
 use Elixir\MVC\Controller\ControllerAbstract;
 
