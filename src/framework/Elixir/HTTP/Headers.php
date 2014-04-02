@@ -401,7 +401,7 @@ class Headers
         if(!$this->has('Cache-Control') && !$this->has('Etag', false) && 
            !$this->has('Last-Modified') && !$this->has('Expires'))
         {
-            return 'no-cache';
+            return 'no-cache'; // Or 'no-cache, must-revalidate' ?
         }
         
         if(!$this->has('Cache-Control', false))

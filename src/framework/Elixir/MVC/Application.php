@@ -559,6 +559,11 @@ class Application extends Dispatcher implements ApplicationInterface
     {
         if(!$pResponse->isSent())
         {
+            if(null === $pResponse->getRequest())
+            {
+                $pResponse->setRequest($pRequest);
+            }
+            
             $pResponse->send();
         }
         

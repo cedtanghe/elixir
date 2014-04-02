@@ -145,6 +145,11 @@ class Response
      * @var boolean
      */
     protected $_send = false;
+    
+    /**
+     * @var Request
+     */
+    protected $_request;
 
     /**
      * @param string $pContent
@@ -163,6 +168,23 @@ class Response
         
         $this->_headers = new Headers();
         $this->_headers->sets($pHeaders);
+    }
+    
+    /**
+     * @param Request $pValue
+     */
+    public function setRequest(Request $pValue)
+    {
+        $this->_request = $pValue;
+        $this->setProtocol($this->_request->getServer('SERVER_PROTOCOL', 'HTTP/1.1'));
+    }
+    
+    /**
+     * @return Request
+     */
+    public function getRequest()
+    {
+        return $this->_request;
     }
 
     /**
@@ -308,21 +330,32 @@ class Response
     /**
      * @param Request $pRequest
      * @return boolean
+     * @throws \InvalidArgumentException
      */
-    public function isNotModified(Request $pRequest)
+    public function isNotModified(Request $pRequest = null)
     {
+        if(null !== $pRequest)
+        {
+            $this->setRequest($pRequest);
+        }
+        
+        if(null === $this->_request)
+        {
+            throw new \InvalidArgumentException('Request is not defined.');
+        }
+        
         $lastModified = $this->_headers->get('Last-Modified');
         $etag = $this->_headers->get('Etag');
         
-        if(null !== $pRequest->getHeaders())
+        if(null !== $this->_request->getHeaders())
         {
-            $ifModifiedSince = $pRequest->getHeaders('If-Modified-Since');
-            $ifNoneMatch = $pRequest->getHeaders('If-None-Match');
+            $ifModifiedSince = $this->_request->getHeaders('If-Modified-Since');
+            $ifNoneMatch = $this->_request->getHeaders('If-None-Match');
         }
         else
         {
-            $ifModifiedSince = $pRequest->getServer('HTTP_IF_MODIFIED_SINCE');
-            $ifNoneMatch = $pRequest->getServer('HTTP_IF_NONE_MATCH');
+            $ifModifiedSince = $this->_request->getServer('HTTP_IF_MODIFIED_SINCE');
+            $ifNoneMatch = $this->_request->getServer('HTTP_IF_NONE_MATCH');
         }
         
         if(null !== $lastModified && null !== $ifModifiedSince)
@@ -384,18 +417,49 @@ class Response
         
         if('HTTP/1.0' == $protocol && false !== strpos('no-cache', $this->_headers->get('Cache-Control')))
         {
-            $this->_headers->set('Expires', 'Sat, 26 Jul 1997 05:00:00 GMT');
+            $this->_headers->set('Expires', -1);
             $this->_headers->set('Pragma', 'no-cache');
         }
         
-        $this->_headers->set(sprintf('%s %s %s',
-                                     $protocol,
-                                     $this->_statusCode,
-                                     $this->getReasonPhrase()));
+        $this->_headers->set(
+            sprintf(
+                '%s %s %s',
+                $protocol,
+                $this->_statusCode,
+                $this->getReasonPhrase()
+            )
+        );
+        
+        if(null === $this->_request)
+        {
+            $userAgent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
+            $isSecure = false;
+            
+            if(isset($_SERVER['HTTPS']))
+            {
+                $isSecure = (strtoupper($_SERVER['HTTPS']) == 'ON' || $_SERVER['HTTPS'] == 1) ? true : false;
+            }
+        }
+        else
+        {
+            $userAgent = $this->_request->getServer('HTTP_USER_AGENT');
+            $isSecure = $this->_request->isSecure();
+        }
+        
+        // Remove Cache-Control for SSL encrypted downloads when using IE < 9 (http://support.microsoft.com/kb/323308)
+        if (false !== stripos($this->_headers->get('Content-Disposition'), 'attachment') && 
+            preg_match('/MSIE (.*?);/i', $userAgent, $match) == 1 && 
+            $isSecure)
+        {
+            if (intval(preg_replace('/(MSIE )(.*?);/', '$2', $match[0])) < 9) 
+            {
+                $this->_headers->remove('Cache-Control');
+            }
+        }
     }
     
     /**
-     * @return boolean;
+     * @return boolean
      */
     public function isSent()
     {
