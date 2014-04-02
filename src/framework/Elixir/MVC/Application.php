@@ -327,9 +327,12 @@ class Application extends Dispatcher implements ApplicationInterface
         
         $module = ucfirst(Str::camelize($pModule));
         
-        if(isset($this->_map[$module]))
+        foreach($this->_map as $key => $value)
         {
-            return $this->_map[$module];
+            if(in_array($module, $value))
+            {
+                return $this->_map[$key];
+            }
         }
         
         if(is_callable($pDefault))

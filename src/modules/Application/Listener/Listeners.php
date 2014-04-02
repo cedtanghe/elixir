@@ -119,7 +119,7 @@ class Listeners implements SubscriberInterface
     public function onSelectedModules(ApplicationEvent $e)
     {
         $application = $this->_container->get('application');
-        $hierarchy = $application->getModuleHierarchy($e->getRequest()->getModule(), array());
+        $hierarchy = array_reverse($application->getModuleHierarchy($e->getRequest()->getModule(), array()));
         
         foreach($hierarchy as $m)
         {
@@ -145,10 +145,8 @@ class Listeners implements SubscriberInterface
             
             $e->getRequest()->getAttributes()->sets(array('exception' => $e->getException()));
 
-            if(!$application->hasModule(preg_match('/\(@([^\)]+)\)/', $module, $matches) ? $matches[1] : $module))
-            {
-                $module = '(@Application)';
-            }
+            $hierarchy = array_reverse($application->getModuleHierarchy($module, array('Application')));
+            $module = sprintf('(@%s)', $hierarchy[0]);
            
             $e->getRequest()->setModule($module);
             $e->getRequest()->setController('error');
