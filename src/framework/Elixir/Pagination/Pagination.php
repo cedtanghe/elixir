@@ -117,13 +117,14 @@ class Pagination implements PaginationInterface
     {
         $pValue = (int)$pValue;
         
+        if($pValue > $this->getTotalItems())
+        {
+            $pValue = $this->getTotalItems();
+        }
+        
         if($pValue < 1)
         {
             $pValue = 1;
-        }
-        else if($pValue > $this->getTotalItems())
-        {
-            $pValue = $this->getTotalItems();
         }
         
         $this->_currentItem = $pValue;
