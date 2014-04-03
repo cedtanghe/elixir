@@ -2,12 +2,17 @@
 
 namespace Elixir\Module\Console\Command;
 
+use Elixir\MVC\Application;
 use Elixir\Util\File;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+
+/**
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
+ */
 
 class CreateModule extends Command
 {
@@ -34,8 +39,12 @@ class CreateModule extends Command
              );
     }
 
+    /**
+     * @see Command::execute()
+     */
     protected function execute(InputInterface $pInput, OutputInterface $pOutput)
     {
+        $application = Application::$registry->get('application');
         $name = $pInput->getArgument('name');
         $parent = $pInput->getOption('parent');
         
@@ -45,6 +54,12 @@ class CreateModule extends Command
         }
         else
         {
+            if(!$application->hasModule($parent))
+            {
+                $pOutput->writeln(sprintf('<error>The %s module does not exist</error>', $parent));
+                return;
+            }
+            
             $parent = "public function getParent()\n\t{\n\t\treturn '" . $parent . "';\n\t}";
         }
         
@@ -63,7 +78,7 @@ class CreateModule extends Command
             return;
         }
         
-        if(file_exists($modulePath))
+        if(file_exists($modulePath) || $application->hasModule($name))
         {
             $dialog = $this->getHelperSet()->get('dialog');
 
