@@ -18,7 +18,7 @@ class CreateModule extends Command
 {
     protected function configure()
     {
-        $this->setName('base:create-module')
+        $this->setName('create-module')
              ->setDescription('Creating a new module')
              ->addArgument(
                 'name',
