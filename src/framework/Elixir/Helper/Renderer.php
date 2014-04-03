@@ -66,7 +66,8 @@ class Renderer implements ContextInterface, HelperInterface
         
         if(null === $pTemplate)
         {
-            $module = Str::slug($this->_context->getRequest()->getModule());
+            $module = $this->_context->getRequest()->getModule();
+            $module = ucfirst(Str::camelize($module));
             
             if(!preg_match('/\(@([^\)]+)\)/', $module))
             {
@@ -76,8 +77,8 @@ class Renderer implements ContextInterface, HelperInterface
             $pTemplate = sprintf(
                 '%s/resources/views/%s/%s.%s', 
                 $module,
-                Str::slug($this->_context->getRequest()->getController()),
-                Str::slug($this->_context->getRequest()->getAction()),
+                Str::slug(Str::snake($this->_context->getRequest()->getController())),
+                Str::slug(Str::snake($this->_context->getRequest()->getAction())),
                 $view->getDefaultExtension()
             );
         }

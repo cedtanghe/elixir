@@ -80,11 +80,35 @@ class Str
      */
     public static function slug($pStr, $pSeparator = '-')
     {
-        $pStr = preg_replace('/[^\p{L}\p{Nd}]+/u', $pSeparator, static::removeAccents($pStr));
-        $pStr = preg_replace('/(' . preg_quote($pSeparator, '/') . '){2,}/', '$1', $pStr);
-        $pStr = trim($pStr, $pSeparator);
-
-        return strtolower($pStr);
+        $pStr = preg_replace(
+            '/[^' . preg_quote($pSeparator, '/') . '\pL\pN\s]+/u',
+            '',
+            strtolower(static::removeAccents($pStr))
+        );
+        
+        $pStr = preg_replace(
+            '/[' . preg_quote($pSeparator == '-' ? '_' : '-', '/') . ']+/u',
+            $pSeparator,
+            $pStr
+        );
+        
+        $pStr = preg_replace(
+            '/[' . preg_quote($pSeparator, '/') . '\s]+/u', 
+            $pSeparator, 
+            $pStr
+        );
+        
+        return trim($pStr, $pSeparator);
+    }
+    
+    /**
+     * @param string $pStr
+     * @param string $pDelimiter
+     * @return string
+     */
+    public static function snake($pStr, $pDelimiter = '-')
+    {
+        return strtolower(preg_replace('/(.)([A-Z])/', '$1' . $pDelimiter . '$2', $pStr));
     }
     
     /**
