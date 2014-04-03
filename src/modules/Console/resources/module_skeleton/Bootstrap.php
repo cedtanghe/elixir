@@ -2,7 +2,9 @@
 
 namespace {NAMESPACE};
 
+use Elixir\DI\ContainerInterface;
 use Elixir\MVC\Module\ModuleAbstract;
+use {NAMESPACE}\DI\Services;
 
 class Bootstrap extends ModuleAbstract
 {
@@ -10,6 +12,7 @@ class Bootstrap extends ModuleAbstract
     
     public function boot()
     {
-        // Not yet
+        $this->_container->setLockMode(ContainerInterface::IGNORE_IF_ALREADY_EXISTS);
+        $this->_container->load(new Services());
     }
 }

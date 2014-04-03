@@ -84,7 +84,7 @@ class Str
         $pStr = preg_replace('/(' . preg_quote($pSeparator, '/') . '){2,}/', '$1', $pStr);
         $pStr = trim($pStr, $pSeparator);
 
-        return $pStr;
+        return strtolower($pStr);
     }
     
     /**
