@@ -371,7 +371,45 @@ class Request
     {
         if(null === $this->_base)
         {
-            $this->setBaseURL($this->getScheme() . $this->getServer('HTTP_HOST', ''));
+            if($this->getServer('SCRIPT_NAME')) 
+            {
+                $base = dirname($this->getServer('SCRIPT_NAME'));
+            } 
+            else if($this->getServer('PHP_SELF')) 
+            {
+                $base = dirname($this->getServer('PHP_SELF'));
+            }
+            else
+            {
+                $base = '';
+            }
+            
+            if(!empty($base))
+            {
+                $requestUri = $this->getServer('REQUEST_URI');
+                $qpos = strpos($requestUri, '?');
+
+                if (false !== $qpos) 
+                {
+                    $requestUri = substr($requestUri, 0, $qpos);
+                }
+
+                if(false === strpos($requestUri, $base))
+                {
+                    // Using mod_rewrite ?
+                    $segments = explode('/', trim($base, '/'));
+                    $search = '';
+
+                    do 
+                    {
+                        array_pop($segments);
+                        $base = '/' . implode('/', $segments);
+                    } 
+                    while(count($segments) > 0 && false === strpos($requestUri, $base));
+                }
+            }
+            
+            $this->setBaseURL($this->getScheme() . $this->getServer('HTTP_HOST', '') . $base);
         }
         
         return $this->_base;

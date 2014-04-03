@@ -66,7 +66,7 @@ class Listeners implements SubscriberInterface
         {
             $config = $this->_container->get('config');
             
-            if(isset($config['url']))
+            if(!empty($config['url']))
             {
                 $e->getRequest()->setBaseURL($config['url']);
             }
