@@ -28,6 +28,7 @@ class Parser
     /**
      * @param string|StorageInterface $pTemplate
      * @return string
+     * @throws \UnexpectedValueException
      * @throws \Exception
      */
     public function parse($pTemplate)
@@ -45,7 +46,12 @@ class Parser
             }
             else
             {
-                require $__template;
+                $include = include $__template;
+                
+                if(false === $include)
+                {
+                    throw new \UnexpectedValueException(sprintf('File "%s" include failed.', $__template));
+                }
             }
             
             $content = ob_get_clean();

@@ -13,6 +13,6 @@ class ForbiddenException extends \Exception
      */
     public function __construct($pMessage = 'Forbidden') 
     {
-        parent::__construct($pMessage, 500);
+        parent::__construct($pMessage, 403);
     }
 }

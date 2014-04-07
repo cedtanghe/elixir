@@ -24,9 +24,9 @@ class File extends CacheAbstract
      */
     public function __construct($pIdentifier, $pPath = 'application/cache/') 
     {
-        if(!is_dir(dirname($pPath)))
+        if(!is_dir($pPath))
         {
-            @mkdir(dirname($pPath), 0777, true);
+            @mkdir($pPath, 0777, true);
         }
         
         $this->_path = rtrim($pPath, '/');
