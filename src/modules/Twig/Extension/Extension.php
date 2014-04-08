@@ -41,4 +41,33 @@ class Extension extends Twig_Extension
             'helper' => new Helper($this->_view),
         );
     }
+    
+    /**
+     * @see Twig_Extension::getFunctions()
+     */
+    public function getFunctions() 
+    {
+        return array(
+            new \Twig_SimpleFunction(
+                'filter_*' ,
+                function($pMethod)
+                {
+                    $args = func_get_args();
+                    array_shift($args);
+                    
+                    return call_user_func_array(array('\Elixir\Facade\Filter', $pMethod), $args);
+                }
+            ),
+            new \Twig_SimpleFunction(
+                'validator_*' ,
+                function($pMethod)
+                {
+                    $args = func_get_args();
+                    array_shift($args);
+                    
+                    return call_user_func_array(array('\Elixir\Facade\Validator', $pMethod), $args);
+                }
+            )
+        );
+    }
 }
