@@ -2,11 +2,13 @@
 
 namespace Elixir\DI;
 
+use Elixir\Dispatcher\Dispatcher;
+
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
-class Container implements ContainerInterface
+class Container extends Dispatcher implements ContainerInterface
 {
     /**
      * @var array 
@@ -143,6 +145,8 @@ class Container implements ContainerInterface
                     'tags' => $tags
                 );
                 
+                $this->dispatch(new ContainerEvent(ContainerEvent::SERVICE_CREATED, $pKey, null, self::SIMPLE));
+                
                 foreach($aliases as $alias)
                 {
                     $this->addAlias($pKey, $alias);
@@ -228,6 +232,7 @@ class Container implements ContainerInterface
             }
             
             $this->_aliases[$pAlias] = $pKey;
+            $this->dispatch(new ContainerEvent(ContainerEvent::SERVICE_ALIAS, $pKey, $pAlias, null));
         }
     }
     
@@ -353,7 +358,7 @@ class Container implements ContainerInterface
      * @throws \InvalidArgumentException
      * @throws \LogicException
      */
-    public function singleton($pKey, $pValue, $pTags = null, $pAliases = null)
+    public function singleton($pKey, $pValue, $pTags = array(), $pAliases = array())
     {
         switch($this->_lockMode)
         {
@@ -394,15 +399,14 @@ class Container implements ContainerInterface
         $this->_data[$pKey] = array(
             'type' => self::SINGLETON, 
             'value' => $value,
-            'tags' => null === $pTags ? array() : (array)$pTags
+            'tags' => (array)$pTags
         );
         
-        if(null !== $pAliases)
+        $this->dispatch(new ContainerEvent(ContainerEvent::SERVICE_CREATED, $pKey, null, self::SINGLETON));
+        
+        foreach((array)$pAliases as $alias)
         {
-            foreach((array)$pAliases as $alias)
-            {
-                $this->addAlias($pKey, $alias);
-            }
+            $this->addAlias($pKey, $alias);
         }
     }
     
@@ -414,7 +418,7 @@ class Container implements ContainerInterface
      * @throws \InvalidArgumentException
      * @throws \LogicException
      */
-    public function protect($pKey, $pValue, $pTags = null, $pAliases = null)
+    public function protect($pKey, $pValue, $pTags = array(), $pAliases = array())
     {
         switch($this->_lockMode)
         {
@@ -448,26 +452,23 @@ class Container implements ContainerInterface
         $this->_data[$pKey] = array(
             'type' => self::PROTECT, 
             'value' => $value,
-            'tags' => null === $pTags ? array() : (array)$pTags
+            'tags' => (array)$pTags
         );
         
-        if(null !== $pAliases)
+        $this->dispatch(new ContainerEvent(ContainerEvent::SERVICE_CREATED, $pKey, null, self::PROTECT));
+        
+        foreach((array)$pAliases as $alias)
         {
-            foreach((array)$pAliases as $alias)
-            {
-                $this->addAlias($pKey, $alias);
-            }
+            $this->addAlias($pKey, $alias);
         }
     }
     
     /**
      * @param string $pKey
      * @param callable $pValue
-     * @param mixed $pTags
-     * @param mixed $pAliases
      * @throws \InvalidArgumentException
      */
-    public function extend($pKey, $pValue = null, $pTags = null, $pAliases = null)
+    public function extend($pKey, $pValue = null)
     {
         if(!$this->has($pKey))
         {
@@ -517,16 +518,6 @@ class Container implements ContainerInterface
                 
                 return call_user_func_array($pValue, array($service(), $pContainer));
             };
-        }
-        
-        $this->_data[$pKey]['tags'] = array_merge($this->_data[$pKey]['tags'], null === $pTags ? array() : (array)$pTags);
-        
-        if(null !== $pAliases)
-        {
-            foreach((array)$pAliases as $aliases)
-            {
-                $this->addAliases($pKey, $aliases);
-            }
         }
     }
     

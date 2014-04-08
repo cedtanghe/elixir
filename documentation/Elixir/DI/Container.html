@@ -29,7 +29,7 @@
     <h1><a href="../../Elixir/DI.html">Elixir\DI</a>\Container</h1>
     </div>
         <div class="content">
-                <p>class    <strong>Container</strong>        implements
+                <p>class    <strong>Container</strong>        extends <a href="../../Elixir/Dispatcher/Dispatcher.html"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a>        implements
         <a href="../../Elixir/DI/ContainerInterface.html"><abbr title="Elixir\DI\ContainerInterface">ContainerInterface</abbr></a></p>
 
     
@@ -38,6 +38,116 @@
             <h2>Methods</h2>
 
             <table>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method___construct">__construct</a>(mixed $pTarget = null)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Elixir/Dispatcher/Dispatcher.html#method___construct"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    mixed
+                </td>
+                <td class="last">
+                    <a href="#method_getTarget">getTarget</a>()
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Elixir/Dispatcher/Dispatcher.html#method_getTarget"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_setTarget">setTarget</a>(mixed $pValue)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Elixir/Dispatcher/Dispatcher.html#method_setTarget"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_hasListener">hasListener</a>(string $pType)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Elixir/Dispatcher/Dispatcher.html#method_hasListener"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_addListener">addListener</a>(string $pType, <abbr title="Elixir\Dispatcher\callable">callable</abbr> $pCallback, integer $pPriority)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Elixir/Dispatcher/Dispatcher.html#method_addListener"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_removeListener">removeListener</a>(string $pType, <abbr title="Elixir\Dispatcher\callable">callable</abbr> $pCallback)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Elixir/Dispatcher/Dispatcher.html#method_removeListener"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_removeListeners">removeListeners</a>()
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Elixir/Dispatcher/Dispatcher.html#method_removeListeners"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_addSubscriber">addSubscriber</a>(<a href="../../Elixir/Dispatcher/SubscriberInterface.html"><abbr title="Elixir\Dispatcher\SubscriberInterface">SubscriberInterface</abbr></a> $pSubscriber)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Elixir/Dispatcher/Dispatcher.html#method_addSubscriber"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_removeSubscriber">removeSubscriber</a>(<a href="../../Elixir/Dispatcher/SubscriberInterface.html"><abbr title="Elixir\Dispatcher\SubscriberInterface">SubscriberInterface</abbr></a> $pSubscriber)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Elixir/Dispatcher/Dispatcher.html#method_removeSubscriber"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_dispatch">dispatch</a>(<a href="../../Elixir/Dispatcher/Event.html"><abbr title="Elixir\Dispatcher\Event">Event</abbr></a> $pEvent)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Elixir/Dispatcher/Dispatcher.html#method_dispatch"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a></small></td>
+            </tr>
                     <tr>
                 <td class="type">
                     
@@ -197,7 +307,7 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method_singleton">singleton</a>(string $pKey, <abbr title="Elixir\DI\callable">callable</abbr> $pValue, mixed $pTags = null, mixed $pAliases = null)
+                    <a href="#method_singleton">singleton</a>(string $pKey, <abbr title="Elixir\DI\callable">callable</abbr> $pValue, mixed $pTags = array(), mixed $pAliases = array())
                     <p>
 </p>
                 </td>
@@ -208,7 +318,7 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method_protect">protect</a>(string $pKey, <abbr title="Elixir\DI\callable">callable</abbr> $pValue, mixed $pTags = null, mixed $pAliases = null)
+                    <a href="#method_protect">protect</a>(string $pKey, <abbr title="Elixir\DI\callable">callable</abbr> $pValue, mixed $pTags = array(), mixed $pAliases = array())
                     <p>
 </p>
                 </td>
@@ -219,7 +329,7 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method_extend">extend</a>(string $pKey, <abbr title="Elixir\DI\callable">callable</abbr> $pValue = null, mixed $pTags = null, mixed $pAliases = null)
+                    <a href="#method_extend">extend</a>(string $pKey, <abbr title="Elixir\DI\callable">callable</abbr> $pValue = null)
                     <p>
 </p>
                 </td>
@@ -263,8 +373,357 @@
 
         <h2>Details</h2>
 
-                        <h3 id="method_setLockMode">
-        <div class="location">at line 29</div>
+                        <h3 id="method___construct">
+        <div class="location">in <a href="../../Elixir/Dispatcher/Dispatcher.html#method___construct"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a> at line 29</div>
+        <code>            public            
+    <strong>__construct</strong>(mixed $pTarget = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>mixed</td>
+                <td>$pTarget</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_getTarget">
+        <div class="location">in <a href="../../Elixir/Dispatcher/Dispatcher.html#method_getTarget"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a> at line 37</div>
+        <code>            public            mixed
+    <strong>getTarget</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>mixed</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setTarget">
+        <div class="location">in <a href="../../Elixir/Dispatcher/Dispatcher.html#method_setTarget"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a> at line 50</div>
+        <code>            public            
+    <strong>setTarget</strong>(mixed $pValue)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>mixed</td>
+                <td>$pValue</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_hasListener">
+        <div class="location">in <a href="../../Elixir/Dispatcher/Dispatcher.html#method_hasListener"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a> at line 58</div>
+        <code>            public            
+    <strong>hasListener</strong>(string $pType)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$pType</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table>
+                    <tr>
+                <td>DispatcherInterface::hasListener()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+                <h3 id="method_addListener">
+        <div class="location">in <a href="../../Elixir/Dispatcher/Dispatcher.html#method_addListener"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a> at line 67</div>
+        <code>            public            
+    <strong>addListener</strong>(string $pType, <abbr title="Elixir\Dispatcher\callable">callable</abbr> $pCallback, integer $pPriority)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$pType</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><abbr title="Elixir\Dispatcher\callable">callable</abbr></td>
+                <td>$pCallback</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>integer</td>
+                <td>$pPriority</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table>
+                    <tr>
+                <td>DispatcherInterface::addListener()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+                <h3 id="method_removeListener">
+        <div class="location">in <a href="../../Elixir/Dispatcher/Dispatcher.html#method_removeListener"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a> at line 111</div>
+        <code>            public            
+    <strong>removeListener</strong>(string $pType, <abbr title="Elixir\Dispatcher\callable">callable</abbr> $pCallback)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$pType</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><abbr title="Elixir\Dispatcher\callable">callable</abbr></td>
+                <td>$pCallback</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table>
+                    <tr>
+                <td>DispatcherInterface::removeListener()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+                <h3 id="method_removeListeners">
+        <div class="location">in <a href="../../Elixir/Dispatcher/Dispatcher.html#method_removeListeners"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a> at line 138</div>
+        <code>            public            
+    <strong>removeListeners</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table>
+                    <tr>
+                <td>DispatcherInterface::removeListeners()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+                <h3 id="method_addSubscriber">
+        <div class="location">in <a href="../../Elixir/Dispatcher/Dispatcher.html#method_addSubscriber"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a> at line 147</div>
+        <code>            public            
+    <strong>addSubscriber</strong>(<a href="../../Elixir/Dispatcher/SubscriberInterface.html"><abbr title="Elixir\Dispatcher\SubscriberInterface">SubscriberInterface</abbr></a> $pSubscriber)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../Elixir/Dispatcher/SubscriberInterface.html"><abbr title="Elixir\Dispatcher\SubscriberInterface">SubscriberInterface</abbr></a></td>
+                <td>$pSubscriber</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table>
+                    <tr>
+                <td>DispatcherInterface::addSubscriber()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+                <h3 id="method_removeSubscriber">
+        <div class="location">in <a href="../../Elixir/Dispatcher/Dispatcher.html#method_removeSubscriber"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a> at line 155</div>
+        <code>            public            
+    <strong>removeSubscriber</strong>(<a href="../../Elixir/Dispatcher/SubscriberInterface.html"><abbr title="Elixir\Dispatcher\SubscriberInterface">SubscriberInterface</abbr></a> $pSubscriber)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../Elixir/Dispatcher/SubscriberInterface.html"><abbr title="Elixir\Dispatcher\SubscriberInterface">SubscriberInterface</abbr></a></td>
+                <td>$pSubscriber</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table>
+                    <tr>
+                <td>DispatcherInterface::removeSubscriber()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+                <h3 id="method_dispatch">
+        <div class="location">in <a href="../../Elixir/Dispatcher/Dispatcher.html#method_dispatch"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a> at line 178</div>
+        <code>            public            
+    <strong>dispatch</strong>(<a href="../../Elixir/Dispatcher/Event.html"><abbr title="Elixir\Dispatcher\Event">Event</abbr></a> $pEvent)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../Elixir/Dispatcher/Event.html"><abbr title="Elixir\Dispatcher\Event">Event</abbr></a></td>
+                <td>$pEvent</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table>
+                    <tr>
+                <td>DispatcherInterface::dispatch()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+                <h3 id="method_setLockMode">
+        <div class="location">at line 31</div>
         <code>            public            
     <strong>setLockMode</strong>(string $pValue)</code>
     </h3>
@@ -301,7 +760,7 @@
     </div>
 
                 <h3 id="method_getLockMode">
-        <div class="location">at line 37</div>
+        <div class="location">at line 39</div>
         <code>            public            string
     <strong>getLockMode</strong>()</code>
     </h3>
@@ -337,7 +796,7 @@
     </div>
 
                 <h3 id="method_has">
-        <div class="location">at line 45</div>
+        <div class="location">at line 47</div>
         <code>            public            boolean
     <strong>has</strong>(string $pKey)</code>
     </h3>
@@ -384,7 +843,7 @@
     </div>
 
                 <h3 id="method_get">
-        <div class="location">at line 59</div>
+        <div class="location">at line 61</div>
         <code>            public            mixed
     <strong>get</strong>(string $pKey, array $pArguments = null, mixed $pDefault = null)</code>
     </h3>
@@ -429,6 +888,16 @@
     </table>
 
             
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/LogicException"><abbr title="LogicException">LogicException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
             
                             <h4>See also</h4>
 
@@ -443,7 +912,7 @@
     </div>
 
                 <h3 id="method_set">
-        <div class="location">at line 101</div>
+        <div class="location">at line 103</div>
         <code>            public            
     <strong>set</strong>(string $pKey, <abbr title="Elixir\DI\callable">callable</abbr> $pValue, array $pOptions = array())</code>
     </h3>
@@ -478,6 +947,16 @@
 
             
             
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/LogicException"><abbr title="LogicException">LogicException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
             
                             <h4>See also</h4>
 
@@ -492,7 +971,7 @@
     </div>
 
                 <h3 id="method_remove">
-        <div class="location">at line 157</div>
+        <div class="location">at line 161</div>
         <code>            public            
     <strong>remove</strong>(string $pKey)</code>
     </h3>
@@ -529,7 +1008,7 @@
     </div>
 
                 <h3 id="method_gets">
-        <div class="location">at line 178</div>
+        <div class="location">at line 182</div>
         <code>            public            array
     <strong>gets</strong>(array $pOptions = array())</code>
     </h3>
@@ -576,7 +1055,7 @@
     </div>
 
                 <h3 id="method_sets">
-        <div class="location">at line 195</div>
+        <div class="location">at line 199</div>
         <code>            public            
     <strong>sets</strong>(array $pData, array $pOptions = array())</code>
     </h3>
@@ -619,7 +1098,7 @@
     </div>
 
                 <h3 id="method_hasAlias">
-        <div class="location">at line 208</div>
+        <div class="location">at line 212</div>
         <code>            public            boolean
     <strong>hasAlias</strong>(string $pAlias, string $pKey = null)</code>
     </h3>
@@ -672,7 +1151,7 @@
     </div>
 
                 <h3 id="method_addAlias">
-        <div class="location">at line 221</div>
+        <div class="location">at line 225</div>
         <code>            public            
     <strong>addAlias</strong>(string $pKey, string $pAlias)</code>
     </h3>
@@ -715,7 +1194,7 @@
     </div>
 
                 <h3 id="method_hasTag">
-        <div class="location">at line 237</div>
+        <div class="location">at line 242</div>
         <code>            public            boolean
     <strong>hasTag</strong>(string $pKey, string $pTag)</code>
     </h3>
@@ -768,7 +1247,7 @@
     </div>
 
                 <h3 id="method_addTag">
-        <div class="location">at line 255</div>
+        <div class="location">at line 260</div>
         <code>            public            
     <strong>addTag</strong>(string $pKey, string $pTag)</code>
     </h3>
@@ -811,7 +1290,7 @@
     </div>
 
                 <h3 id="method_getValuesByTag">
-        <div class="location">at line 277</div>
+        <div class="location">at line 282</div>
         <code>            public            array|mixed
     <strong>getValuesByTag</strong>(string $pTag, mixed $pDefault = null, array $pOptions = array())</code>
     </h3>
@@ -861,7 +1340,7 @@
     </div>
 
                 <h3 id="method_raw">
-        <div class="location">at line 316</div>
+        <div class="location">at line 321</div>
         <code>            public            mixed
     <strong>raw</strong>(string $pKey, boolean $pWithConfiguration = false)</code>
     </h3>
@@ -900,6 +1379,16 @@
     </table>
 
             
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
             
                             <h4>See also</h4>
 
@@ -914,9 +1403,9 @@
     </div>
 
                 <h3 id="method_singleton">
-        <div class="location">at line 356</div>
+        <div class="location">at line 361</div>
         <code>            public            
-    <strong>singleton</strong>(string $pKey, <abbr title="Elixir\DI\callable">callable</abbr> $pValue, mixed $pTags = null, mixed $pAliases = null)</code>
+    <strong>singleton</strong>(string $pKey, <abbr title="Elixir\DI\callable">callable</abbr> $pValue, mixed $pTags = array(), mixed $pAliases = array())</code>
     </h3>
     <div class="details">
         <p>
@@ -975,9 +1464,9 @@
     </div>
 
                 <h3 id="method_protect">
-        <div class="location">at line 417</div>
+        <div class="location">at line 421</div>
         <code>            public            
-    <strong>protect</strong>(string $pKey, <abbr title="Elixir\DI\callable">callable</abbr> $pValue, mixed $pTags = null, mixed $pAliases = null)</code>
+    <strong>protect</strong>(string $pKey, <abbr title="Elixir\DI\callable">callable</abbr> $pValue, mixed $pTags = array(), mixed $pAliases = array())</code>
     </h3>
     <div class="details">
         <p>
@@ -1036,9 +1525,9 @@
     </div>
 
                 <h3 id="method_extend">
-        <div class="location">at line 470</div>
+        <div class="location">at line 471</div>
         <code>            public            
-    <strong>extend</strong>(string $pKey, <abbr title="Elixir\DI\callable">callable</abbr> $pValue = null, mixed $pTags = null, mixed $pAliases = null)</code>
+    <strong>extend</strong>(string $pKey, <abbr title="Elixir\DI\callable">callable</abbr> $pValue = null)</code>
     </h3>
     <div class="details">
         <p>
@@ -1061,18 +1550,6 @@
                 <td>
 </td>
             </tr>
-                    <tr>
-                <td>mixed</td>
-                <td>$pTags</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
-                <td>mixed</td>
-                <td>$pAliases</td>
-                <td>
-</td>
-            </tr>
             </table>
 
             
@@ -1092,7 +1569,7 @@
     </div>
 
                 <h3 id="method_getStorageType">
-        <div class="location">at line 537</div>
+        <div class="location">at line 528</div>
         <code>            public            string
     <strong>getStorageType</strong>(string $pKey)</code>
     </h3>
@@ -1130,7 +1607,7 @@
     </div>
 
                 <h3 id="method_load">
-        <div class="location">at line 546</div>
+        <div class="location">at line 537</div>
         <code>            public            
     <strong>load</strong>(<a href="../../Elixir/DI/ProviderInterface.html"><abbr title="Elixir\DI\ProviderInterface">ProviderInterface</abbr></a> $pProvider)</code>
     </h3>
@@ -1167,7 +1644,7 @@
     </div>
 
                 <h3 id="method_merge">
-        <div class="location">at line 555</div>
+        <div class="location">at line 546</div>
         <code>            public            
     <strong>merge</strong>(array|<a href="../../Elixir/DI/ContainerInterface.html"><abbr title="Elixir\DI\ContainerInterface">ContainerInterface</abbr></a> $pData)</code>
     </h3>
@@ -1190,6 +1667,16 @@
 
             
             
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/LogicException"><abbr title="LogicException">LogicException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
             
                             <h4>See also</h4>
 
