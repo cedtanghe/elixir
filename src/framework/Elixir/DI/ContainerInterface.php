@@ -119,6 +119,12 @@ interface ContainerInterface
     
     /**
      * @param string $pKey
+     * @param callable $pValue
+     */
+    public function extend($pKey, $pValue);
+    
+    /**
+     * @param string $pKey
      * @param boolean $pWithConfiguration
      * @return mixed 
      */

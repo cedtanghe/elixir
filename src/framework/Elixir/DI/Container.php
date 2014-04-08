@@ -464,11 +464,10 @@ class Container extends Dispatcher implements ContainerInterface
     }
     
     /**
-     * @param string $pKey
-     * @param callable $pValue
+     * @see ContainerInterface::extend()
      * @throws \InvalidArgumentException
      */
-    public function extend($pKey, $pValue = null)
+    public function extend($pKey, $pValue)
     {
         if(!$this->has($pKey))
         {
@@ -480,45 +479,42 @@ class Container extends Dispatcher implements ContainerInterface
             $pKey = $this->_aliases[$pKey];
         }
         
-        if(null !== $pValue)
+        if(!is_callable($pValue))
         {
-            if(!is_callable($pValue))
+            throw new \InvalidArgumentException(sprintf('This object for key "%s" must be a callable.', $pKey));
+        }
+
+        $me = $this;
+        $value = $this->_data[$pKey]['value'];
+
+        $service = function() use($me, $value)
+        {
+            if(is_callable($value))
             {
-                throw new \InvalidArgumentException(sprintf('This object for key "%s" must be a callable.', $pKey));
+                return call_user_func_array($value, array($me));
             }
 
-            $me = $this;
-            $value = $this->_data[$pKey]['value'];
-            
-            $service = function() use($me, $value)
+            return $value;
+        };
+
+        $type = $this->_data[$pKey]['type'];
+
+        $this->_data[$pKey]['value'] = function(self $pContainer) use ($service, $pValue, $type) 
+        {
+            if($type == self::SINGLETON)
             {
-                if(is_callable($value))
+                static $instance;
+
+                if(null === $instance)
                 {
-                    return call_user_func_array($value, array($me));
+                    $instance = call_user_func_array($pValue, array($service(), $pContainer));
                 }
 
-                return $value;
-            };
-            
-            $type = $this->_data[$pKey]['type'];
-            
-            $this->_data[$pKey]['value'] = function(self $pContainer) use ($service, $pValue, $type) 
-            {
-                if($type == self::SINGLETON)
-                {
-                    static $instance;
+                return $instance;
+            }
 
-                    if(null === $instance)
-                    {
-                        $instance = call_user_func_array($pValue, array($service(), $pContainer));
-                    }
-
-                    return $instance;
-                }
-                
-                return call_user_func_array($pValue, array($service(), $pContainer));
-            };
-        }
+            return call_user_func_array($pValue, array($service(), $pContainer));
+        };
     }
     
     /**

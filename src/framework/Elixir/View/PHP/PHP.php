@@ -73,7 +73,7 @@ class PHP extends DataAbstract implements HelperInterface, EscaperInterface
     }
     
     /**
-     * @return string
+     * @see ViewInterface::getDefaultExtension()
      */
     public function getDefaultExtension()
     {

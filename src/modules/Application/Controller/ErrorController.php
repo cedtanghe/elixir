@@ -60,7 +60,7 @@ class ErrorController extends ControllerAbstract
             'line' => $exception->getLine(),
             'code' => implode('', $lines)
         );
-		
+	
         return $this->render(array('message' => $message, 'exception' => $exception), $statusCode);
     }
     
@@ -71,8 +71,17 @@ class ErrorController extends ControllerAbstract
      */
     protected function render(array $pData, $pStatusCode)
     {
+        if(defined('APPLICATION_ENV') && APPLICATION_ENV != 'production')
+        {
+            $data = '<pre>' . print_r($pData, true) . '</pre>';
+        }
+        else
+        {
+            $data = $pData['message'];
+        }
+        
         return $this->helper('helper.render')->renderTextResponse(
-            $pData['message'],
+            $data,
             $pStatusCode
         );
     }
