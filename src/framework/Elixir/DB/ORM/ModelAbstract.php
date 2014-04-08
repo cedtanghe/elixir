@@ -43,7 +43,7 @@ abstract class ModelAbstract extends Dispatcher implements RepositoryInterface
     /**
      * @var string
      */
-    const DEFAULT_CONNECTION_KEY = 'DB.default';
+    const DEFAULT_CONNECTION_KEY = 'db.default';
     
     /**
      * @param ContainerInterface $pConnectionManager

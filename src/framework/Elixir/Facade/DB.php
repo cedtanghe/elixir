@@ -13,6 +13,6 @@ class DB extends FacadeAbstract
      */
     protected static function getFacadeAccessor()
     {
-        return 'DB.default';
+        return 'db.default';
     }
 }
