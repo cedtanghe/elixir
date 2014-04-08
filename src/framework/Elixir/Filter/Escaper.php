@@ -17,6 +17,11 @@ class Escaper extends FilterAbstract
     /**
      * @var string
      */
+    const UNESCAPE_HTML = 'unescape_html';
+    
+    /**
+     * @var string
+     */
     const HTML_ATTR = 'html_attr';
     
     /**
@@ -43,6 +48,11 @@ class Escaper extends FilterAbstract
      * @var string
      */
     const URL = 'url';
+    
+    /**
+     * @var string
+     */
+    const UNESCAPE_URL = 'unescape_url';
     
     /**
      * @var string
@@ -83,7 +93,10 @@ class Escaper extends FilterAbstract
         switch($strategy)
         {
             case self::HTML:
-                return $this->escapeHTML($pContent);
+                return $this->escapeHTML($pContent, isset($pOptions['flags']) ? $pOptions['flags'] : null);
+            break;
+            case self::UNESCAPE_HTML:
+                return $this->unescapeHTML($pContent, isset($pOptions['flags']) ? $pOptions['flags'] : null);
             break;
             case self::XML:
                 return $this->escapeXML($pContent);
@@ -102,6 +115,9 @@ class Escaper extends FilterAbstract
             break;
             case self::URL:
                 return $this->escapeURL($pContent);
+            break;
+            case self::UNESCAPE_URL:
+                return $this->unescapeURL($pContent);
             break;
         }
         
