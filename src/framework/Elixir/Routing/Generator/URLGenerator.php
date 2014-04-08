@@ -76,7 +76,7 @@ class URLGenerator implements GeneratorInterface
      */
     public function clean($pMatches)
     {
-        return preg_replace_callback('/\((.*)\)\?/', array($this, 'clean'), $pMatches[1]);
+        return preg_replace_callback('/\((.*)\)\?/U', array($this, 'clean'), $pMatches[1]);
     }
     
     /**
@@ -204,7 +204,8 @@ class URLGenerator implements GeneratorInterface
             $url = str_replace('{' . $value . '}', '', $url);
         }
         
-        $url = trim(preg_replace_callback('/\((.*)\)\?/', array($this, 'clean'), $url), '/');
+        $url = preg_replace('/\((\/+)\)\?/U', '', $url);
+        $url = trim(preg_replace_callback('/\((.*)\)\?/U', array($this, 'clean'), $url), '/');
         $url = strtr(
             rawurlencode($url), 
             array(

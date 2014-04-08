@@ -152,7 +152,9 @@ class QueryGenerator extends URLGenerator
             $query = array();
         }
         
-        $query[$this->_queryKey] = trim(preg_replace_callback('/\((.*)\)\?/', array($this, 'clean'), $url), '/');
+        $url = preg_replace('/\((\/+)\)\?/U', '', $url);
+        $url = trim(preg_replace_callback('/\((.*)\)\?/U', array($this, 'clean'), $url), '/');
+        $query[$this->_queryKey] = $url;
         
         $url = '?' . strtr(
             http_build_query($query),
