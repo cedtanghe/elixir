@@ -119,6 +119,7 @@ class Parser
                                     'parent', 
                                     'end', 
                                     'block', 
+                                    'show', 
                                     'escape', 
                                     'raw')))
         {
