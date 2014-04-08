@@ -54,7 +54,8 @@ class Twig extends DataAbstract implements HelperInterface
             array_merge(
                 array(
                     'cache' => APPLICATION_PATH . '/cache/twig',
-                    'debug' => APPLICATION_ENV != 'production'
+                    'debug' => APPLICATION_ENV != 'production',
+                    'strict_variables' => true
                 ),
                 $pConfig
             )

@@ -9,7 +9,7 @@ use Elixir\Module\Twig\View\Twig;
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
-class Helper
+class Helper implements \ArrayAccess
 {
      /**
      * @var Twig
@@ -21,9 +21,44 @@ class Helper
      */
     public function __construct(Twig $pView)
     {
-        $this->_view = $pEnvironment;
+        $this->_view = $pView;
     }
+    
+    /**
+     * @see Config::has()
+     */
+    public function offsetExists($pKey) 
+    { 
+        return isset($this->$pKey);
+    } 
 
+    /**
+     * @param mixed $pKey
+     * @param mixed $pValue
+     * @throws \LogicException
+     */
+    public function offsetSet($pKey, $pValue) 
+    { 
+        throw new \LogicException('You can not execute this method in this context.');
+    } 
+
+    /**
+     * @see Helper::__get()
+     */
+    public function offsetGet($pKey) 
+    { 
+        return $this->$pKey;
+    } 
+
+    /**
+     * @param mixed $pKey
+     * @throws \LogicException
+     */
+    public function offsetUnset($pKey) 
+    { 
+        throw new \LogicException('You can not execute this method in this context.');
+    } 
+    
     /**
      * @param string $pName
      * @return mixed
@@ -39,6 +74,15 @@ class Helper
         }
         
         return $helper;
+    }
+    
+    /**
+     * @param string $pName
+     * @return boolean
+     */
+    public function __isset($pName)
+    {
+        return null !== $this->_view->getHelperContainer()->has('helper.' . $pName);
     }
     
     /**

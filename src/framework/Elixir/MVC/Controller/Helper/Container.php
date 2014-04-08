@@ -123,23 +123,10 @@ class Container
      */
     public function get($pKey, $pDefault = null)
     {
-        if($this->_useTag)
+        if($this->has($pKey))
         {
-            if(!$this->_container->hasTag($pKey, self::HELPER_TAG_KEY))
-            {
-                if(is_callable($pDefault))
-                {
-                    return call_user_func($pDefault);
-                }
-
-                return $pDefault;
-            }
-        }
-        
-        $helper = $this->_container->get($pKey, null, null);
-        
-        if(null !== $helper)
-        {
+            $helper = $this->_container->get($pKey);
+            
             if(null !== $this->_controller)
             {
                 if($helper instanceof ContextInterface)
@@ -157,5 +144,22 @@ class Container
         }
         
         return $pDefault;
+    }
+    
+    /**
+     * @param string $pKey
+     * @return boolean
+     */
+    public function has($pKey)
+    {
+        if($this->_useTag)
+        {
+            if(!$this->_container->hasTag($pKey, self::HELPER_TAG_KEY))
+            {
+                return false;
+            }
+        }
+        
+        return $this->_container->has($pKey);
     }
 }

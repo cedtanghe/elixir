@@ -2,7 +2,6 @@
 
 namespace Elixir\Module\Twig\Extension;
 
-use Elixir\Module\Twig\View\Helper;
 use Elixir\Module\Twig\View\Twig;
 use Twig_Extension;
 
