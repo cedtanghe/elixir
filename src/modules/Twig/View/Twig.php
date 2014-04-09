@@ -150,27 +150,20 @@ class Twig extends DataAbstract implements HelperInterface
         
         if($pTemplate instanceof Str)
         {
-            $pTemplate = $pTemplate->getContent();
             $this->_environment->setLoader($this->getLoaderString());
         }
         else
         {
-            if($pTemplate instanceof File)
-            {
-                $pTemplate = $pTemplate->getContent();
-            }
+            $pTemplate = str_replace(
+                APPLICATION_PATH, 
+                '', 
+                $pTemplate
+            );
             
             $this->_environment->setLoader($this->getLoaderFilesystem());
         }
         
-        $content = $this->_environment->render(
-            str_replace(
-                APPLICATION_PATH, 
-                '', 
-                $pTemplate
-            ), 
-            $this->gets()
-        );
+        $content = $this->_environment->render($pTemplate, $this->gets());
         
         foreach($pData as $key => $value)
         {
