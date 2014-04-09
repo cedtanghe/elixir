@@ -14,11 +14,14 @@ use Symfony\Component\Console\Output\OutputInterface;
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
-class CreateModule extends Command
+class ModuleCreate extends Command
 {
+    /**
+     * @see Command::configure()
+     */
     protected function configure()
     {
-        $this->setName('create-module')
+        $this->setName('module:create')
              ->setDescription('Creating a new module')
              ->addArgument(
                 'name',
@@ -35,7 +38,7 @@ class CreateModule extends Command
                 'namespace',
                 null,
                 InputOption::VALUE_REQUIRED,
-                'Modules namespace'
+                'Module namespace'
              );
     }
 
@@ -84,8 +87,7 @@ class CreateModule extends Command
 
             if(!$dialog->askConfirmation($pOutput,
                                          sprintf('<question>The %s module already exists, continue anyway ? [y,n]</question>', $name),
-                                         false
-                                        )) 
+                                         false)) 
             {
                 return;
             }
@@ -189,7 +191,7 @@ class CreateModule extends Command
                 fclose($r);
             }
 
-            $pOutput->writeln(sprintf('<info>Module %s created !</info>', $name));
+            $pOutput->writeln(sprintf('<info>Module %s created</info>', $name));
             return;
         }
         

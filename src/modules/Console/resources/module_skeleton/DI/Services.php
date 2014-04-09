@@ -5,10 +5,6 @@ namespace {NAMESPACE}\DI;
 use Elixir\DI\ContainerInterface;
 use Elixir\DI\ProviderInterface;
 
-/**
- * @author Cédric Tanghe <ced.tanghe@gmail.com>
- */
-
 class Services implements ProviderInterface
 {
     /**

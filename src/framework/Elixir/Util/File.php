@@ -96,8 +96,14 @@ class File
                 }
             }
             
-            $src = fopen($pSrcPath, 'r'); 
+            if(!file_exists(dirname($pDstPath)))
+            {
+                @mkdir(dirname($pDstPath), 0777, true);
+            }
+            
+            $src = fopen($pSrcPath, 'r');
             $dest = fopen($pDstPath, 'w+'); 
+            
             stream_copy_to_stream($src, $dest); 
             fclose($src); 
             fclose($dest);

@@ -4,7 +4,9 @@ namespace Elixir\Module\Console\DI;
 
 use Elixir\DI\ContainerInterface;
 use Elixir\DI\ProviderInterface;
-use Elixir\Module\Console\Command\CreateModule;
+use Elixir\Module\Console\Command\AssetsExport;
+use Elixir\Module\Console\Command\AssetsImport;
+use Elixir\Module\Console\Command\ModuleCreate;
 use Symfony\Component\Console\Application;
 
 /**
@@ -23,7 +25,9 @@ class Services implements ProviderInterface
         $pContainer->set('console', function()
         {
             $console = new Application();
-            $console->add(new CreateModule());
+            $console->add(new ModuleCreate());
+            $console->add(new AssetsExport());
+            $console->add(new AssetsImport());
             
             return $console;
         }, 
