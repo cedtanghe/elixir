@@ -63,7 +63,7 @@ class ModuleCreate extends Command
                 return;
             }
             
-            $parent = "public function getParent()\n\t{\n\t\treturn '" . $parent . "';\n\t}";
+            $parent = "public function getParent()\n    {\n        return '" . $parent . "';\n    }";
         }
         
         $namespace = $pInput->getOption('namespace');
