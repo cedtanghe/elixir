@@ -38,6 +38,11 @@ class Loader implements LoaderInterface
      */
     protected $_namespaces = array();
     
+    /**
+     * @var array 
+     */
+    protected $_classMap = array();
+    
     public function __construct() 
     {
         $basePath = __DIR__ . '/../../../';
@@ -110,12 +115,53 @@ class Loader implements LoaderInterface
     }
     
     /**
+     * @param string $pClassName
+     * @param string $pPath
+     * @param boolean $pOverride
+     */
+    public function map($pClassName, $pPath, $pOverride = true)
+    {
+        if($pOverride || !isset($this->_classMap[$pClassName]))
+        {
+            $this->_classMap[$pClassName] = array();
+        }
+        
+        $this->_classMap[$pClassName][] = $pPath;
+    }
+    
+    /**
+     * @return array
+     */
+    public function getClassMap()
+    {
+        return $this->_classMap;
+    }
+    
+    /**
+     * @param array $pData
+     */
+    public function setClassMap(array $pData)
+    {
+        $this->_classMap = array();
+        
+        foreach($pData as $className => $paths)
+        {
+            foreach((array)$paths as $path)
+            {
+                $this->map($className, $path);
+            }
+        }
+    }
+
+    /**
      * @param string $pPrefix
      * @param string $pPath 
      * @param boolean $pOverride 
      */
-    public function addPrefix($pPrefix, $pPath, $pOverride = false)
+    public function addPrefix($pPrefix, $pPath, $pOverride = true)
     {
+        $pPrefix = rtrim($pPrefix, '_');
+        
         if($pOverride || !isset($this->_prefixs[$pPrefix]))
         {
             $this->_prefixs[$pPrefix] = array();
@@ -153,8 +199,10 @@ class Loader implements LoaderInterface
      * @param string $pPath 
      * @param boolean $pOverride 
      */
-    public function addNamespace($pNamespace, $pPath, $pOverride = false)
+    public function addNamespace($pNamespace, $pPath, $pOverride = true)
     {
+        $pNamespace = rtrim($pNamespace, '\\');
+        
         if($pOverride || !isset($this->_namespaces[$pNamespace]))
         {
             $this->_namespaces[$pNamespace] = array();
@@ -274,6 +322,11 @@ class Loader implements LoaderInterface
      */
     protected function paths($pClassName)
     {
+        if(isset($this->_classMap[$pClassName]))
+        {
+            return $this->_classMap[$pClassName];
+        }
+        
         $paths = array('');
         $className = $pClassName;
         
