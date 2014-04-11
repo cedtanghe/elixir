@@ -410,12 +410,6 @@ class ModelGenerate extends Command
                         array_splice($classLines, 1, 0, $value);
                         array_splice($allLines, $classStart + 1, 0, $value);
                     }
-<<<<<<< HEAD
-=======
-                    
-                    //$start = substr($allLines[$classStart - 1], -1) == '{' ? $classStart : $classStart + 1;
-                    //array_splice($allLines, $start, 0, str_pad(' ', 4) . 'protected $' . $key . ' = ' . $value . ';');
->>>>>>> 19f83aa67607ea91a0f9f244a11fffe615b42df4
                 }
             }
         }
