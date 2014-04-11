@@ -2,7 +2,7 @@
 
 namespace Elixir\Module\Console\Command;
 
-use Elixir\MVC\Application;
+use Elixir\MVC\ApplicationInterface;
 use Elixir\Util\File;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -27,6 +27,20 @@ class AssetsExport extends Command
     const XML = 'xml';
     
     /**
+     * @var ApplicationInterface 
+     */
+    protected $_application;
+    
+    /**
+     * @param ApplicationInterface $pApplication
+     */
+    public function __construct(ApplicationInterface $pApplication) 
+    {
+        $this->_application = $pApplication;
+        parent::__construct(null);
+    }
+    
+    /**
      * @see Command::configure()
      */
     protected function configure()
@@ -38,6 +52,7 @@ class AssetsExport extends Command
                 InputArgument::OPTIONAL,
                 'Name of the module containing the assets for export'
              )
+                
             ->addOption(
                 'shared',
                 null,
@@ -66,11 +81,9 @@ class AssetsExport extends Command
      */
     protected function execute(InputInterface $pInput, OutputInterface $pOutput)
     {
-        $application = Application::$registry->get('application');
-        
         $module = $pInput->getArgument('module');
         $sharedFolders = $pInput->getOption('shared');
-        $directory = trim($pInput->getOption('dir'), '/\\');
+        $directory = rtrim($pInput->getOption('dir'), '/\\');
         $mode = $pInput->getOption('mode');
         
         if(!in_array($mode, array(self::COPY, self::XML)))
@@ -83,13 +96,13 @@ class AssetsExport extends Command
         
         if(null !== $module)
         {
-            if(!$application->hasModule($module))
+            if(!$this->_application->hasModule($module))
             {
                 $pOutput->writeln(sprintf('<error>The %s module does not exist</error>', $module));
                 return;
             }
             
-            $modules[] = $application->getModule($module);
+            $modules[] = $this->_application->getModule($module);
         }
         else
         {
@@ -102,7 +115,7 @@ class AssetsExport extends Command
                 return;
             }
             
-            $modules = $application->getModules();
+            $modules = $this->_application->getModules();
         }
         
         foreach($modules as $module)
@@ -165,17 +178,13 @@ class AssetsExport extends Command
                 $dom->loadXML($xml->asXML());
                 $dom->save($module->getPath() . '/resources/public/export.xml');
                 
-                $pOutput->writeln('Copying files');
-                
                 if($mode == self::COPY)
                 {
+                    $pOutput->writeln('Copying files');
+                    
                     foreach($files as $key => $value)
                     {
-                        if(!File::copy($key, $value))
-                        {
-                            $pOutput->writeln(sprintf('<error>Error when export %s module, can not copy</error>', $module->getName()));
-                            return;
-                        }
+                        File::copy($key, $value);
                     }
 
                     $pOutput->writeln(sprintf('<info>Assets for the module %s are exported</info>', $module->getName()));
@@ -190,5 +199,7 @@ class AssetsExport extends Command
                 $pOutput->writeln(sprintf('<comment>No assets available for export in %s module</comment>', $module->getName()));
             }
         }
+        
+        $pOutput->writeln('<info>Export finished</info>');
     }
 }
