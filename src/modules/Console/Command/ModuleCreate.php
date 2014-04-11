@@ -2,7 +2,7 @@
 
 namespace Elixir\Module\Console\Command;
 
-use Elixir\MVC\Application;
+use Elixir\MVC\ApplicationInterface;
 use Elixir\Util\File;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -16,6 +16,20 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ModuleCreate extends Command
 {
+    /**
+     * @var ApplicationInterface 
+     */
+    protected $_application;
+    
+    /**
+     * @param ApplicationInterface $pApplication
+     */
+    public function __construct(ApplicationInterface $pApplication) 
+    {
+        $this->_application = $pApplication;
+        parent::__construct(null);
+    }
+    
     /**
      * @see Command::configure()
      */
@@ -47,7 +61,6 @@ class ModuleCreate extends Command
      */
     protected function execute(InputInterface $pInput, OutputInterface $pOutput)
     {
-        $application = Application::$registry->get('application');
         $name = $pInput->getArgument('name');
         $parent = $pInput->getOption('parent');
         
@@ -57,7 +70,7 @@ class ModuleCreate extends Command
         }
         else
         {
-            if(!$application->hasModule($parent))
+            if(!$this->_application->hasModule($parent))
             {
                 $pOutput->writeln(sprintf('<error>The %s module does not exist</error>', $parent));
                 return;
@@ -81,7 +94,7 @@ class ModuleCreate extends Command
             return;
         }
         
-        if(file_exists($modulePath) || $application->hasModule($name))
+        if(file_exists($modulePath) || $this->_application->hasModule($name))
         {
             $dialog = $this->getHelperSet()->get('dialog');
 
@@ -95,7 +108,7 @@ class ModuleCreate extends Command
         
         $error = false;
 		
-        if(File::copy(__DIR__ . '/../resources/module_skeleton', $modulePath))
+        if(File::copy(__DIR__ . '/../resources/module-skeleton', $modulePath))
         {
             $list = File::filesList($modulePath);
             
@@ -109,17 +122,11 @@ class ModuleCreate extends Command
                 file_put_contents($file, $content);
             }
             
-            // Register module
-            $r = fopen(APPLICATION_PATH . '/app.php', 'r+');
-            $lines = array();
-            $content = '';
-
-            while(($buffer = fgets($r, 4096)) !== false) 
-            {
-                $lines[] = $buffer;
-                $content .= $buffer;
-            }
-
+            /************ REGISTER MODULE ************/
+            
+            $file = APPLICATION_PATH . '/app.php';
+            $lines = file($file, FILE_IGNORE_NEW_LINES);
+            $content = implode("\n", $lines);
             $pattern = '/new\s+[\\\]' . $namespace . '[\\\]Bootstrap/';
             
             if(!preg_match($pattern, $content))
@@ -134,64 +141,66 @@ class ModuleCreate extends Command
                             $lines, 
                             $i + 1, 
                             0, 
-                            array(
-                                '$application->addModule(new \\' . $namespace . '\Bootstrap());',
-                                "\n"
-                            )
+                            '$application->addModule(new \\' . $namespace . '\Bootstrap());'
                         );
 
                         break;
                     }
                 }
 
-                ftruncate($r, 0);
-                rewind($r);
-                fwrite($r, implode('', $lines));
-                fclose($r);
+                file_put_contents($file, implode("\n", $lines));
             }
             
-            // Register autoload
-            $r = fopen(APPLICATION_PATH . '/autoload.php', 'r+');
-            $lines = array();
-            $content = '';
-
-            while(($buffer = fgets($r, 4096)) !== false) 
-            {
-                $lines[] = $buffer;
-                $content .= $buffer;
-            }
-
+            /************ REGISTER AUTOLOAD ************/
+            
+            $file = APPLICATION_PATH . '/autoload.php';
+            $lines = file($file, FILE_IGNORE_NEW_LINES);
+            $content = implode("\n", $lines);
             $pattern = '/\$loader->addNamespace\(\s*[\'"]' . $namespace . '[\'"]/';
             
             if(!preg_match($pattern, $content))
             {
                 $i = count($lines);
+                $added = false;
 
                 while(--$i)
                 {
                     if(preg_match('/^\$loader->addNamespace/', $lines[$i]))
                     {
+                        $added = true;
+                        
                         array_splice(
                             $lines, 
                             $i + 1, 
                             0, 
-                            array(
-                                "\n",
-                                '$loader->addNamespace(\'' . $namespace . '\', __DIR__ . \'/modules/' . $name . '/\');'
-                            )
+                            '$loader->addNamespace(\'' . $namespace . '\', __DIR__ . \'/modules/' . $name . '/\');'
                         );
 
                         break;
                     }
                 }
-
-                ftruncate($r, 0);
-                rewind($r);
-                fwrite($r, implode('', $lines));
-                fclose($r);
+                
+                if(!$added)
+                {
+                    if(false !== strpos($lines[count($lines) - 1], '?>'))
+                    {
+                        array_splice(
+                            $lines, 
+                            count($lines) - 1, 
+                            0, 
+                            array('$loader->addNamespace(\'' . $namespace . '\', __DIR__ . \'/modules/' . $name . '/\');', '')
+                        );
+                    }
+                    else
+                    {
+                        $lines[] = '$loader->addNamespace(\'' . $namespace . '\', __DIR__ . \'/modules/' . $name . '/\');';
+                    }
+                }
             }
 
+            file_put_contents($file, implode("\n", $lines));
             $pOutput->writeln(sprintf('<info>Module %s created</info>', $name));
+            
             return;
         }
         

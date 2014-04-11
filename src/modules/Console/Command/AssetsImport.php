@@ -2,7 +2,7 @@
 
 namespace Elixir\Module\Console\Command;
 
-use Elixir\MVC\Application;
+use Elixir\MVC\ApplicationInterface;
 use Elixir\Util\File;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -16,6 +16,20 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class AssetsImport extends Command
 {
+    /**
+     * @var ApplicationInterface 
+     */
+    protected $_application;
+    
+    /**
+     * @param ApplicationInterface $pApplication
+     */
+    public function __construct(ApplicationInterface $pApplication) 
+    {
+        $this->_application = $pApplication;
+        parent::__construct(null);
+    }
+    
     /**
      * @see Command::configure()
      */
@@ -42,22 +56,20 @@ class AssetsImport extends Command
      */
     protected function execute(InputInterface $pInput, OutputInterface $pOutput)
     {
-        $application = Application::$registry->get('application');
-        
         $module = $pInput->getArgument('module');
-        $directory = trim($pInput->getOption('dir'), '/\\');
+        $directory = rtrim($pInput->getOption('dir'), '/\\');
         
         $modules = array();
         
         if(null !== $module)
         {
-            if(!$application->hasModule($module))
+            if(!$this->_application->hasModule($module))
             {
                 $pOutput->writeln(sprintf('<error>The %s module does not exist</error>', $module));
                 return;
             }
             
-            $modules[] = $application->getModule($module);
+            $modules[] = $this->_application->getModule($module);
         }
         else
         {
@@ -70,7 +82,7 @@ class AssetsImport extends Command
                 return;
             }
             
-            $modules = $application->getModules();
+            $modules = $this->_application->getModules();
         }
         
         foreach($modules as $module)
@@ -89,15 +101,12 @@ class AssetsImport extends Command
             foreach($xml as $file)
             {
                 $scr = $directory . '/' . ($file['shared'] ? '' : $module->getName() . '/') . $file;
-                
-                if(!File::copy($scr, $destination . '/' . $file))
-                {
-                    $pOutput->writeln(sprintf('<error>Error when import assets for %s module, can not copy</error>', $module->getName()));
-                    return;
-                }
+                File::copy($scr, $destination . '/' . $file);
             }
             
             $pOutput->writeln(sprintf('<info>Assets for the module %s are imported</info>', $module->getName()));
         }
+        
+        $pOutput->writeln('<info>Import finished</info>');
     }
 }
