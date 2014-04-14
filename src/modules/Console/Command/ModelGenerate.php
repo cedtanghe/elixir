@@ -334,13 +334,15 @@ class ModelGenerate extends Command
                 if(preg_match('/\$this->' . $key . '\s*=/', $methodeContent))
                 {
                     $i = 0;
+                    $matched = false;
 
                     foreach($methodLines as $line)
                     {
                         preg_replace_callback(
-                            '/.*\$this->' . $key . '\s*=\s*((?:\'|")?[a-zA-Z_0.9]*(?:\'|")?)\s*;/', 
-                            function($pMatches) use($i, $value, &$allLines, $methodStart)
+                            '/.*\$this->' . $key . '\s*=\s*((?:\'|")?[a-zA-Z_0-9]*(?:\'|")?)\s*;/', 
+                            function($pMatches) use($i, $value, &$allLines, $methodStart, &$matched)
                             {
+                                $matched = true;
                                 $replace = str_replace($pMatches[1], $value, $pMatches[0]);
                                 array_splice($allLines, $methodStart - 1 + $i, 1, $replace);
 
@@ -348,6 +350,11 @@ class ModelGenerate extends Command
                             },
                             $line
                         );
+                        
+                        if($matched)
+                        {
+                            break;
+                        }
 
                         ++$i;
                     }
@@ -367,8 +374,6 @@ class ModelGenerate extends Command
                         array_splice($allLines, $methodStart + 1, 0, $value);
                     }
                 }
-                
-                 print_r($allLines);
             }
         }
         else
@@ -378,13 +383,15 @@ class ModelGenerate extends Command
                 if(preg_match('/protected\s+\$' . $key . '/', $classContent))
                 {
                     $i = 0;
-
+                    $matched = false;
+                    
                     foreach($classLines as $line)
                     {
                         preg_replace_callback(
-                            '/.*protected\s+\$' . $key . '\s*=\s*((?:\'|")?[a-zA-Z_0.9]*(?:\'|")?)\s*;/', 
-                            function($pMatches) use($i, $value, &$allLines, $classStart)
+                            '/.*protected\s+\$' . $key . '\s*=\s*((?:\'|")?[a-zA-Z_0-9]*(?:\'|")?)\s*;/', 
+                            function($pMatches) use($i, $value, &$allLines, $classStart, &$matched)
                             {
+                                $matched = true;
                                 $replace = str_replace($pMatches[1], $value, $pMatches[0]);
                                 array_splice($allLines, $classStart - 1 + $i, 1, $replace);
 
@@ -392,6 +399,11 @@ class ModelGenerate extends Command
                             },
                             $line
                         );
+                            
+                        if($matched)
+                        {
+                            break;
+                        }
 
                         ++$i;
                     }

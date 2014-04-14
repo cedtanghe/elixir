@@ -128,20 +128,6 @@ class PHP extends DataAbstract implements HelperInterface, EscaperInterface
     {
         return $this->_autoEscape;
     }
-    
-    /**
-     * @param mixed $pData
-     * @param string|boolean $pStrategy
-     */
-    public function show($pData, $pStrategy = 'html')
-    {
-        if(false !== $pStrategy)
-        {
-            $pData = $this->escape($pData);
-        }
-        
-        echo $pData;
-    }
 
     /**
      * @see EscaperInterface::escape()
