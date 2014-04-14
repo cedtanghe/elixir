@@ -49,7 +49,7 @@ class ModelGenerate extends Command
     protected function configure()
     {
         $this->setName('model:generate')
-             ->setDescription('Generate(s) (or update) model(s) via the database')
+             ->setDescription('Generate (or update) model(s) via the database')
              ->addArgument(
                 'module',
                 InputArgument::REQUIRED,

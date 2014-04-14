@@ -37,7 +37,7 @@ class Services implements ProviderInterface
             // Import assets
             $console->add(new AssetsImport($application));
             
-            // Generates models
+            // Generate models
             $console->add(new ModelGenerate($application, $pContainer));
             
             return $console;
