@@ -285,6 +285,8 @@ class ModelGenerate extends Command
         $classLines = array_slice($allLines, $classStart - 1, $classEnd - $classStart + 1);
         $classContent = implode("\n", $classLines);
 
+        /************ COLUMNS ************/
+        
         $method = $class->getMethod('defineColumns');
         
         if($method->getDeclaringClass()->getName() !== $class->getName())
@@ -296,8 +298,6 @@ class ModelGenerate extends Command
             
             return false;
         }
-        
-        /************ COLUMNS ************/
         
         $methodStart = $method->getStartLine();
         $methodEnd = $method->getEndLine();
