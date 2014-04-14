@@ -314,10 +314,27 @@ class ModelGenerate extends Command
         
         /************ CONFIGURATION ************/
         
+        $autoIncrement = $pDefinition['auto_increment'] ? 'true' : 'false';
+        
+        if(null === $pDefinition['primary'])
+        {
+            $primaryKey = 'null';
+        }
+        else if(is_array($pDefinition['primary']))
+        {
+            $primaryKey = 'array(\'' . implode('\', \'', $pDefinition['primary']) . '\')';
+        }
+        else
+        {
+            $primaryKey = '\'' . $pDefinition['primary'] . '\'';
+        }
+        
+        $table = '\'' .$pDefinition['table'] . '\'';
+        
         $configuration = array(
-            '_autoIncrement' => $pDefinition['auto_increment'] ? 'true' : 'false',
-            '_primaryKey' => is_array($pDefinition['primary']) ? 'array(\'' . implode('\', \'', $pDefinition['primary']) . '\')' : '\'' . $pDefinition['primary'] . '\'',
-            '_table' => '\'' .$pDefinition['table'] . '\''
+            '_autoIncrement' => $autoIncrement,
+            '_primaryKey' => $primaryKey,
+            '_table' => $table
         );
         
         $method = $class->getMethod('__construct');
