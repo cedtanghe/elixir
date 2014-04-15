@@ -55,10 +55,11 @@ class ModelGenerate extends Command
                 InputArgument::REQUIRED,
                 'Module name when exporting models'
              )
-             ->addArgument(
+             ->addOption(
                 'table',
-                InputArgument::OPTIONAL | InputArgument::IS_ARRAY,
-                'Name(s) of the table(s) used to generate model(s) (separate with spaces)'
+                null,
+                InputOption::VALUE_REQUIRED,
+                'Name(s) of the table(s) used to generate model(s) (separated by a comma)'
              )
              ->addOption(
                 'prefix',
@@ -94,7 +95,18 @@ class ModelGenerate extends Command
     protected function execute(InputInterface $pInput, OutputInterface $pOutput)
     {
         $module = $pInput->getArgument('module');
-        $tables = $pInput->getArgument('table');
+        
+        $tables = $pInput->getOption('table');
+        
+        if(null !== $tables)
+        {
+            $tables = explode(',', $tables);
+        }
+        else
+        {
+            $tables = array();
+        }
+        
         $DBName = $pInput->getOption('db');
         
         $DB = $this->_container->get($DBName);
