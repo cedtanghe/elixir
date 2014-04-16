@@ -140,12 +140,7 @@ class Headers
             return count($header) > 0 ? $header : $header[0];
         }
         
-        if(is_callable($pDefault))
-        {
-            return call_user_func($pDefault);
-        }
-        
-        return $pDefault;
+        return is_callable($pDefault) ? $pDefault() : $pDefault;
     }
 
     /**

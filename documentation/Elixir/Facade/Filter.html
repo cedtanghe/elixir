@@ -86,7 +86,7 @@
                     static&nbsp;
                 </td>
                 <td class="last">
-                    <a href="#method_macro">macro</a>(string $pMethod, <abbr title="Elixir\Facade\Closure">Closure</abbr> $pMacro)
+                    <a href="#method_macro">macro</a>(string $pMethod, <abbr title="Elixir\Facade\callable">callable</abbr> $pMacro)
                     <p>
 </p>
                 </td>
@@ -174,7 +174,7 @@
     </div>
 
                 <h3 id="method_resolveInstance">
-        <div class="location">at line 36</div>
+        <div class="location">at line 42</div>
         <code>        static    public            mixed
     <strong>resolveInstance</strong>($pKey)</code>
     </h3>
@@ -221,7 +221,7 @@
     </div>
 
                 <h3 id="method___callStatic">
-        <div class="location">at line 87</div>
+        <div class="location">at line 93</div>
         <code>        static    public            mixed
     <strong>__callStatic</strong>(string $pMethod, array $pArguments)</code>
     </h3>
@@ -260,14 +260,24 @@
     </table>
 
             
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/LogicException"><abbr title="LogicException">LogicException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
             
                     </div>
     </div>
 
                 <h3 id="method_macro">
-        <div class="location">at line 20</div>
+        <div class="location">at line 21</div>
         <code>        static    public            
-    <strong>macro</strong>(string $pMethod, <abbr title="Elixir\Facade\Closure">Closure</abbr> $pMacro)</code>
+    <strong>macro</strong>(string $pMethod, <abbr title="Elixir\Facade\callable">callable</abbr> $pMacro)</code>
     </h3>
     <div class="details">
         <p>
@@ -285,7 +295,7 @@
 </td>
             </tr>
                     <tr>
-                <td><abbr title="Elixir\Facade\Closure">Closure</abbr></td>
+                <td><abbr title="Elixir\Facade\callable">callable</abbr></td>
                 <td>$pMacro</td>
                 <td>
 </td>
@@ -294,12 +304,22 @@
 
             
             
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
             
                     </div>
     </div>
 
                 <h3 id="method_filter">
-        <div class="location">at line 75</div>
+        <div class="location">at line 81</div>
         <code>        static    public            mixed
     <strong>filter</strong>(string $pClassOrKey, string $pContent, array $pOptions = array())</code>
     </h3>

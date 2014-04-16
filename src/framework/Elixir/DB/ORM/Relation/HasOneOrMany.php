@@ -139,11 +139,17 @@ class HasOneOrMany implements RelationInterface
     }
     
     /**
-     * @param \Closure $pCriterion
+     * @param callable $pCriterion
      * @return RelationInterface
+     * @throws \InvalidArgumentException
      */
-    public function addCriterion(\Closure $pCriterion)
+    public function addCriterion($pCriterion)
     {
+        if(!is_callable($pCriterion))
+        {
+            throw new \InvalidArgumentException('Criterion argument must be a callable.');
+        }
+        
         $this->_criterions[] = $pCriterion;
         $this->setFilled(false);
         

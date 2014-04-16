@@ -41,7 +41,7 @@ class JoinClause
         if(is_callable($pCond))
         {
             $join = new static($this->_SQL);
-            call_user_func_array($pCond, array($join));
+            $pCond($join);
             $pCond = $join->render();
         }
         
@@ -59,7 +59,7 @@ class JoinClause
         if(is_callable($pCond))
         {
             $join = new static($this->_SQL);
-            call_user_func_array($pCond, array($join));
+            $pCond($join);
             $pCond = $join->render();
         }
         

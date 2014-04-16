@@ -36,12 +36,7 @@ abstract class DataAbstract implements ViewInterface, GlobalInterface
             return $this->_vars[$pKey];
         }
         
-        if(is_callable($pDefault))
-        {
-            return call_user_func($pDefault);
-        }
-        
-        return $pDefault;
+        return is_callable($pDefault) ? $pDefault() : $pDefault;
     }
     
     /**

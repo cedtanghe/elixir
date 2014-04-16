@@ -94,12 +94,7 @@ class Blocks extends Dispatcher
             return sprintf('{BLOCK : %s}', $pKey);
         }
         
-        if(is_callable($pDefault))
-        {
-            return call_user_func($pDefault);
-        }
-        
-        return $pDefault;
+        return is_callable($pDefault) ? $pDefault() : $pDefault;
     }
 
     /**
@@ -160,12 +155,7 @@ class Blocks extends Dispatcher
             return $content;
         }
         
-        if(is_callable($pDefault))
-        {
-            return call_user_func($pDefault);
-        }
-        
-        return $pDefault;
+        return is_callable($pDefault) ? $pDefault() : $pDefault;
     }
     
     /**

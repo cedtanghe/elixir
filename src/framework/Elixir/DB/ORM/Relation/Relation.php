@@ -22,15 +22,21 @@ class Relation implements RelationInterface
     protected $_filled = false;
     
     /**
-     * @var \Closure
+     * @var callable
      */
     protected $_callback;
     
     /**
-     * @param \Closure $pCallable
+     * @param callable $pCallable
+     * @throws \InvalidArgumentException
      */
-    public function __construct(\Closure $pCallback)
+    public function __construct($pCallback)
     {
+        if(!is_callable($pCriterion))
+        {
+            throw new \InvalidArgumentException('Callback argument must be a callable.');
+        }
+        
         $this->_callback = $pCallback;
     }
     

@@ -73,12 +73,7 @@ class Manager extends DataAbstract
             return $this->_engines[$pName]['view'];
         }
         
-        if(is_callable($pDefault))
-        {
-            return call_user_func($pDefault);
-        }
-        
-        return $pDefault;
+        return is_callable($pDefault) ? $pDefault() : $pDefault;
     }
     
     /**
@@ -96,12 +91,7 @@ class Manager extends DataAbstract
             }
         }
         
-        if(is_callable($pDefault))
-        {
-            return call_user_func($pDefault);
-        }
-        
-        return $pDefault;
+        return is_callable($pDefault) ? $pDefault() : $pDefault;
     }
     
     /**

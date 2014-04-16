@@ -81,12 +81,7 @@ class RBAC implements RBACInterface
             return $this->_roles[$pRole];
         }
         
-        if(is_callable($pDefault))
-        {
-            return call_user_func($pDefault);
-        }
-        
-        return $pDefault;
+        return is_callable($pDefault) ? $pDefault() : $pDefault;
     }
 
     /**

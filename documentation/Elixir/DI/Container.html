@@ -197,7 +197,7 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method_set">set</a>(string $pKey, <abbr title="Elixir\DI\callable">callable</abbr> $pValue, array $pOptions = array())
+                    <a href="#method_set">set</a>(string $pKey, mixed $pValue, array $pOptions = array())
                     <p>
 </p>
                 </td>
@@ -307,7 +307,7 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method_singleton">singleton</a>(string $pKey, <abbr title="Elixir\DI\callable">callable</abbr> $pValue, mixed $pTags = array(), mixed $pAliases = array())
+                    <a href="#method_singleton">singleton</a>(string $pKey, mixed $pValue, mixed $pTags = array(), mixed $pAliases = array())
                     <p>
 </p>
                 </td>
@@ -888,6 +888,16 @@
     </table>
 
             
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/LogicException"><abbr title="LogicException">LogicException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
             
                             <h4>See also</h4>
 
@@ -902,9 +912,9 @@
     </div>
 
                 <h3 id="method_set">
-        <div class="location">at line 103</div>
+        <div class="location">at line 98</div>
         <code>            public            
-    <strong>set</strong>(string $pKey, <abbr title="Elixir\DI\callable">callable</abbr> $pValue, array $pOptions = array())</code>
+    <strong>set</strong>(string $pKey, mixed $pValue, array $pOptions = array())</code>
     </h3>
     <div class="details">
         <p>
@@ -922,7 +932,7 @@
 </td>
             </tr>
                     <tr>
-                <td><abbr title="Elixir\DI\callable">callable</abbr></td>
+                <td>mixed</td>
                 <td>$pValue</td>
                 <td>
 </td>
@@ -937,6 +947,16 @@
 
             
             
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/LogicException"><abbr title="LogicException">LogicException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
             
                             <h4>See also</h4>
 
@@ -951,7 +971,7 @@
     </div>
 
                 <h3 id="method_remove">
-        <div class="location">at line 161</div>
+        <div class="location">at line 156</div>
         <code>            public            
     <strong>remove</strong>(string $pKey)</code>
     </h3>
@@ -988,7 +1008,7 @@
     </div>
 
                 <h3 id="method_gets">
-        <div class="location">at line 182</div>
+        <div class="location">at line 177</div>
         <code>            public            array
     <strong>gets</strong>(array $pOptions = array())</code>
     </h3>
@@ -1035,7 +1055,7 @@
     </div>
 
                 <h3 id="method_sets">
-        <div class="location">at line 199</div>
+        <div class="location">at line 194</div>
         <code>            public            
     <strong>sets</strong>(array $pData, array $pOptions = array())</code>
     </h3>
@@ -1078,7 +1098,7 @@
     </div>
 
                 <h3 id="method_hasAlias">
-        <div class="location">at line 212</div>
+        <div class="location">at line 207</div>
         <code>            public            boolean
     <strong>hasAlias</strong>(string $pAlias, string $pKey = null)</code>
     </h3>
@@ -1131,7 +1151,7 @@
     </div>
 
                 <h3 id="method_addAlias">
-        <div class="location">at line 225</div>
+        <div class="location">at line 220</div>
         <code>            public            
     <strong>addAlias</strong>(string $pKey, string $pAlias)</code>
     </h3>
@@ -1174,7 +1194,7 @@
     </div>
 
                 <h3 id="method_hasTag">
-        <div class="location">at line 242</div>
+        <div class="location">at line 237</div>
         <code>            public            boolean
     <strong>hasTag</strong>(string $pKey, string $pTag)</code>
     </h3>
@@ -1227,7 +1247,7 @@
     </div>
 
                 <h3 id="method_addTag">
-        <div class="location">at line 260</div>
+        <div class="location">at line 255</div>
         <code>            public            
     <strong>addTag</strong>(string $pKey, string $pTag)</code>
     </h3>
@@ -1270,7 +1290,7 @@
     </div>
 
                 <h3 id="method_getValuesByTag">
-        <div class="location">at line 282</div>
+        <div class="location">at line 277</div>
         <code>            public            array|mixed
     <strong>getValuesByTag</strong>(string $pTag, mixed $pDefault = null, array $pOptions = array())</code>
     </h3>
@@ -1320,7 +1340,7 @@
     </div>
 
                 <h3 id="method_raw">
-        <div class="location">at line 321</div>
+        <div class="location">at line 311</div>
         <code>            public            mixed
     <strong>raw</strong>(string $pKey, boolean $pWithConfiguration = false)</code>
     </h3>
@@ -1359,6 +1379,16 @@
     </table>
 
             
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
             
                             <h4>See also</h4>
 
@@ -1373,9 +1403,9 @@
     </div>
 
                 <h3 id="method_singleton">
-        <div class="location">at line 361</div>
+        <div class="location">at line 350</div>
         <code>            public            
-    <strong>singleton</strong>(string $pKey, <abbr title="Elixir\DI\callable">callable</abbr> $pValue, mixed $pTags = array(), mixed $pAliases = array())</code>
+    <strong>singleton</strong>(string $pKey, mixed $pValue, mixed $pTags = array(), mixed $pAliases = array())</code>
     </h3>
     <div class="details">
         <p>
@@ -1393,7 +1423,7 @@
 </td>
             </tr>
                     <tr>
-                <td><abbr title="Elixir\DI\callable">callable</abbr></td>
+                <td>mixed</td>
                 <td>$pValue</td>
                 <td>
 </td>
@@ -1418,11 +1448,6 @@
 
                     <table>
                     <tr>
-                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
-                <td>
-</td>
-            </tr>
-                    <tr>
                 <td><a href="http://php.net/LogicException"><abbr title="LogicException">LogicException</abbr></a></td>
                 <td>
 </td>
@@ -1434,7 +1459,7 @@
     </div>
 
                 <h3 id="method_protect">
-        <div class="location">at line 421</div>
+        <div class="location">at line 405</div>
         <code>            public            
     <strong>protect</strong>(string $pKey, <abbr title="Elixir\DI\callable">callable</abbr> $pValue, mixed $pTags = array(), mixed $pAliases = array())</code>
     </h3>
@@ -1479,12 +1504,12 @@
 
                     <table>
                     <tr>
-                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
+                <td><a href="http://php.net/LogicException"><abbr title="LogicException">LogicException</abbr></a></td>
                 <td>
 </td>
             </tr>
                     <tr>
-                <td><a href="http://php.net/LogicException"><abbr title="LogicException">LogicException</abbr></a></td>
+                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
                 <td>
 </td>
             </tr>
@@ -1495,7 +1520,7 @@
     </div>
 
                 <h3 id="method_extend">
-        <div class="location">at line 470</div>
+        <div class="location">at line 454</div>
         <code>            public            
     <strong>extend</strong>(string $pKey, <abbr title="Elixir\DI\callable">callable</abbr> $pValue)</code>
     </h3>
@@ -1524,6 +1549,16 @@
 
             
             
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
             
                             <h4>See also</h4>
 
@@ -1538,7 +1573,7 @@
     </div>
 
                 <h3 id="method_getStorageType">
-        <div class="location">at line 524</div>
+        <div class="location">at line 503</div>
         <code>            public            string
     <strong>getStorageType</strong>(string $pKey)</code>
     </h3>
@@ -1576,7 +1611,7 @@
     </div>
 
                 <h3 id="method_load">
-        <div class="location">at line 533</div>
+        <div class="location">at line 512</div>
         <code>            public            
     <strong>load</strong>(<a href="../../Elixir/DI/ProviderInterface.html"><abbr title="Elixir\DI\ProviderInterface">ProviderInterface</abbr></a> $pProvider)</code>
     </h3>
@@ -1613,7 +1648,7 @@
     </div>
 
                 <h3 id="method_merge">
-        <div class="location">at line 542</div>
+        <div class="location">at line 521</div>
         <code>            public            
     <strong>merge</strong>(array|<a href="../../Elixir/DI/ContainerInterface.html"><abbr title="Elixir\DI\ContainerInterface">ContainerInterface</abbr></a> $pData)</code>
     </h3>
@@ -1636,6 +1671,16 @@
 
             
             
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/LogicException"><abbr title="LogicException">LogicException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
             
                             <h4>See also</h4>
 

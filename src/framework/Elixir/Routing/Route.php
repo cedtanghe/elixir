@@ -225,12 +225,7 @@ class Route
             return $this->_parameters[$pKey];
         }
         
-        if(is_callable($pDefault))
-        {
-            return call_user_func($pDefault);
-        }
-        
-        return $pDefault;
+        return is_callable($pDefault) ? $pDefault() : $pDefault;
     }
     
     /**
@@ -484,12 +479,7 @@ class Route
             return $this->_options[$pKey];
         }
         
-        if(is_callable($pDefault))
-        {
-            return call_user_func($pDefault);
-        }
-        
-        return $pDefault;
+        return is_callable($pDefault) ? $pDefault() : $pDefault;
     }
     
     /**

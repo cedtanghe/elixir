@@ -161,7 +161,7 @@ abstract class ControllerAbstract implements ControllerInterface
         
         $helper = $this->helper('helper.' . $pMethod);
         
-        if($helper instanceof \Closure)
+        if(is_callable($helper))
         {
             return call_user_func_array($helper, $pArguments);
         }

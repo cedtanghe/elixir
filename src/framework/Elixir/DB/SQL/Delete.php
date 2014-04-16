@@ -49,7 +49,7 @@ class Delete extends SQLAbstract
         if(is_callable($pCond))
         {
             $where = new WhereClause($this);
-            call_user_func_array($pCond, array($where));
+            $pCond($where);
             $pCond = $where->render();
         }
         
@@ -67,7 +67,7 @@ class Delete extends SQLAbstract
         if(is_callable($pCond))
         {
             $where = new WhereClause($this);
-            call_user_func_array($pCond, array($where));
+            $pCond($where);
             $pCond = $where->render();
         }
         

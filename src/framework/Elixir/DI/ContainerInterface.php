@@ -69,7 +69,7 @@ interface ContainerInterface
     
     /**
      * @param string $pKey
-     * @param callable $pValue 
+     * @param mixed $pValue 
      * @param array $pOptions 
      */
     public function set($pKey, $pValue, array $pOptions = array());

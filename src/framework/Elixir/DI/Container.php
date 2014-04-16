@@ -88,12 +88,7 @@ class Container extends Dispatcher implements ContainerInterface
             return $data;
         }
         
-        if(is_callable($pDefault))
-        {
-            return call_user_func($pDefault);
-        }
-        
-        return $pDefault;
+        return is_callable($pDefault) ? $pDefault() : $pDefault;
     }
 
     /**
@@ -303,12 +298,7 @@ class Container extends Dispatcher implements ContainerInterface
         
         if(count($result) == 0)
         {
-            if(is_callable($pDefault))
-            {
-                return call_user_func($pDefault);
-            }
-
-            return $pDefault;
+            return is_callable($pDefault) ? $pDefault() : $pDefault;
         }
         
         return $result;
@@ -352,10 +342,9 @@ class Container extends Dispatcher implements ContainerInterface
     
     /**
      * @param string $pKey
-     * @param callable $pValue
+     * @param mixed $pValue
      * @param mixed $pTags
      * @param mixed $pAliases
-     * @throws \InvalidArgumentException
      * @throws \LogicException
      */
     public function singleton($pKey, $pValue, $pTags = array(), $pAliases = array())
@@ -379,18 +368,13 @@ class Container extends Dispatcher implements ContainerInterface
             break;
         }
         
-        if(!is_callable($pValue))
-        {
-            throw new \InvalidArgumentException(sprintf('This object for key "%s" must be a callable.', $pKey));
-        }
-        
         $value = function(self $pContainer) use ($pValue)
         {
             static $instance;
             
             if(null === $instance)
             {
-                $instance = call_user_func_array($pValue, array($pContainer));
+                $instance = is_callable($pValue) ? $pValue($pContainer) : $pValue;
             }
             
             return $instance;
@@ -415,11 +399,16 @@ class Container extends Dispatcher implements ContainerInterface
      * @param callable $pValue
      * @param mixed $pTags
      * @param mixed $pAliases
-     * @throws \InvalidArgumentException
      * @throws \LogicException
+     * @throws \InvalidArgumentException
      */
     public function protect($pKey, $pValue, $pTags = array(), $pAliases = array())
     {
+        if(!is_callable($pValue))
+        {
+            throw new \InvalidArgumentException('Value argument must be a callable.');
+        }
+        
         switch($this->_lockMode)
         {
             case self::READ_ONLY:
@@ -437,11 +426,6 @@ class Container extends Dispatcher implements ContainerInterface
                     return;
                 }
             break;
-        }
-        
-        if(!is_callable($pValue))
-        {
-            throw new \InvalidArgumentException(sprintf('This object for key "%s" must be a callable.', $pKey));
         }
         
         $value = function() use ($pValue)
@@ -474,14 +458,14 @@ class Container extends Dispatcher implements ContainerInterface
             throw new \InvalidArgumentException(sprintf('Key "%s" is not defined.', $pKey));
         }
         
+        if(!is_callable($pValue))
+        {
+            throw new \InvalidArgumentException('Value argument must be a callable.');
+        }
+        
         if(isset($this->_aliases[$pKey]))
         {
             $pKey = $this->_aliases[$pKey];
-        }
-        
-        if(!is_callable($pValue))
-        {
-            throw new \InvalidArgumentException(sprintf('This object for key "%s" must be a callable.', $pKey));
         }
 
         $me = $this;
@@ -489,12 +473,7 @@ class Container extends Dispatcher implements ContainerInterface
 
         $service = function() use($me, $value)
         {
-            if(is_callable($value))
-            {
-                return call_user_func_array($value, array($me));
-            }
-
-            return $value;
+            return is_callable($value) ? $value($me) : $value;
         };
 
         $type = $this->_data[$pKey]['type'];
@@ -507,13 +486,13 @@ class Container extends Dispatcher implements ContainerInterface
 
                 if(null === $instance)
                 {
-                    $instance = call_user_func_array($pValue, array($service(), $pContainer));
+                    $instance = $pValue($service(), $pContainer);
                 }
 
                 return $instance;
             }
 
-            return call_user_func_array($pValue, array($service(), $pContainer));
+            return $pValue($service(), $pContainer);
         };
     }
     

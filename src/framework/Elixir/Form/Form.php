@@ -189,12 +189,7 @@ class Form extends Dispatcher implements FormInterface
             return $this->_attributes[$pKey];
         }
         
-        if(is_callable($pDefault))
-        {
-            return call_user_func($pDefault);
-        }
-        
-        return $pDefault;
+        return is_callable($pDefault) ? $pDefault() : $pDefault;
     }
     
     /**
@@ -276,12 +271,7 @@ class Form extends Dispatcher implements FormInterface
             return $this->_options[$pKey];
         }
         
-        if(is_callable($pDefault))
-        {
-            return call_user_func($pDefault);
-        }
-        
-        return $pDefault;
+        return is_callable($pDefault) ? $pDefault() : $pDefault;
     }
     
     /**
@@ -406,12 +396,7 @@ class Form extends Dispatcher implements FormInterface
             }
         }
         
-        if(is_callable($pDefault))
-        {
-            return call_user_func($pDefault);
-        }
-        
-        return $pDefault;
+        return is_callable($pDefault) ? $pDefault() : $pDefault;
     }
     
     /**

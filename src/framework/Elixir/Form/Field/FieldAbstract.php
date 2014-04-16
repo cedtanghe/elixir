@@ -201,12 +201,7 @@ abstract class FieldAbstract extends Dispatcher implements FieldInterface
             return $this->_attributes[$pKey];
         }
         
-        if(is_callable($pDefault))
-        {
-            return call_user_func($pDefault);
-        }
-        
-        return $pDefault;
+        return is_callable($pDefault) ? $pDefault() : $pDefault;
     }
     
     /**
@@ -298,12 +293,7 @@ abstract class FieldAbstract extends Dispatcher implements FieldInterface
             return $this->_options[$pKey];
         }
         
-        if(is_callable($pDefault))
-        {
-            return call_user_func($pDefault);
-        }
-        
-        return $pDefault;
+        return is_callable($pDefault) ? $pDefault() : $pDefault;
     }
     
     /**

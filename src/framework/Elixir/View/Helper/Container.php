@@ -107,7 +107,7 @@ class Container
                     $helper = $value;
                 }
                 
-                if(!($helper instanceof \Closure))
+                if(!is_callable($helper))
                 {
                     $helper = function() use ($helper)
                     { 
@@ -140,12 +140,7 @@ class Container
             return $helper;
         }
         
-        if(is_callable($pDefault))
-        {
-            return call_user_func($pDefault);
-        }
-        
-        return $pDefault;
+        return is_callable($pDefault) ? $pDefault() : $pDefault;
     }
     
     /**

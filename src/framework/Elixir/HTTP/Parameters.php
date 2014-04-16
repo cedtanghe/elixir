@@ -91,7 +91,7 @@ class Parameters implements ParametersInterface, \ArrayAccess, \Iterator, \Count
                         $filter = $pSanitize['filter'];
                         $options = $pSanitize['options'];
                     }
-                    else if($pSanitize instanceof \Closure)
+                    else if(is_callable($pSanitize))
                     {
                         $filter = FILTER_CALLBACK;
                         $options = array('options' => $pSanitize);
@@ -113,12 +113,7 @@ class Parameters implements ParametersInterface, \ArrayAccess, \Iterator, \Count
             return $v;
         }
         
-        if(is_callable($pDefault))
-        {
-            return call_user_func($pDefault);
-        }
-        
-        return $pDefault;
+        return is_callable($pDefault) ? $pDefault() : $pDefault;
     }
     
     /**
@@ -153,7 +148,7 @@ class Parameters implements ParametersInterface, \ArrayAccess, \Iterator, \Count
                     $filter = $pSanitize['filter'];
                     $options = $pSanitize['options'];
                 }
-                else if($pSanitize instanceof \Closure)
+                else if(is_callable($pSanitize))
                 {
                     $filter = FILTER_CALLBACK;
                     $options = array('options' => $pSanitize);

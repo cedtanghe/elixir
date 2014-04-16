@@ -68,11 +68,17 @@ class Pivot
     }
     
     /**
-     * @param \Closure $pCriterion
+     * @param callable $pCriterion
      * @return Pivot
+     * @throws \InvalidArgumentException
      */
-    public function addCriterion(\Closure $pCriterion)
+    public function addCriterion($pCriterion)
     {
+        if(!is_callable($pCriterion))
+        {
+            throw new \InvalidArgumentException('Criterion argument must be a callable.');
+        }
+        
         $this->_criterions[] = $pCriterion;
         return $this;
     }

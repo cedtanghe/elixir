@@ -123,7 +123,7 @@ class Select extends SQLAbstract
         if(is_callable($pCond))
         {
             $join = new JoinClause($this);
-            call_user_func_array($pCond, array($join));
+            $pCond($join);
             $pCond = $join->render();
         }
         
@@ -147,7 +147,7 @@ class Select extends SQLAbstract
         if(is_callable($pCond))
         {
             $where = new WhereClause($this);
-            call_user_func_array($pCond, array($where));
+            $pCond($where);
             $pCond = $where->render();
         }
         
@@ -165,7 +165,7 @@ class Select extends SQLAbstract
         if(is_callable($pCond))
         {
             $where = new WhereClause($this);
-            call_user_func_array($pCond, array($where));
+            $pCond($where);
             $pCond = $where->render();
         }
         
@@ -193,7 +193,7 @@ class Select extends SQLAbstract
         if(is_callable($pCond))
         {
             $where = new WhereClause($this);
-            call_user_func_array($pCond, array($where));
+            $pCond($where);
             $pCond = $where->render();
         }
         
@@ -211,7 +211,7 @@ class Select extends SQLAbstract
         if(is_callable($pCond))
         {
             $where = new WhereClause($this);
-            call_user_func_array($pCond, array($where));
+            $pCond($where);
             $pCond = $where->render();
         }
         

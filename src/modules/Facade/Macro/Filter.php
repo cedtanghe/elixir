@@ -30,7 +30,7 @@ class Filter
             'callback', 
             function($pContent, $pOptions = array())
             {
-                if($pOptions instanceof \Closure)
+                if(is_callable($pOptions))
                 {
                     $pOptions = array('options' => $pOptions);
                 }

@@ -46,9 +46,11 @@ class Test extends \PHPUnit_Framework_TestCase
     
     public function testManager()
     {
+        $PHP = new PHP();
+        $PHP->setHelperContainer(new Container());
+        
         $manager = new Manager();
-        $manager->registerExtension('^(phtml|php)$', new PHP());
-        $manager->setHelperContainer(new Container());
+        $manager->registerEngine('PHP', $PHP, '^(phtml|php)$');
         
         $manager->set('key-1', 'value-1', true);
         $result = $manager->render(__DIR__ . '/../../views/testPHP.phtml');

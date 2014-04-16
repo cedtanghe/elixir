@@ -131,7 +131,7 @@
                     <a href="../../../../Elixir/DB/ORM/Relation/RelationInterface.html"><abbr title="Elixir\DB\ORM\Relation\RelationInterface">RelationInterface</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_addCriterion">addCriterion</a>(<abbr title="Elixir\DB\ORM\Relation\Closure">Closure</abbr> $pCriterion)
+                    <a href="#method_addCriterion">addCriterion</a>(<abbr title="Elixir\DB\ORM\Relation\callable">callable</abbr> $pCriterion)
                     <p>
 </p>
                 </td>
@@ -476,9 +476,9 @@
     </div>
 
                 <h3 id="method_addCriterion">
-        <div class="location">at line 145</div>
+        <div class="location">at line 146</div>
         <code>            public            <a href="../../../../Elixir/DB/ORM/Relation/RelationInterface.html"><abbr title="Elixir\DB\ORM\Relation\RelationInterface">RelationInterface</abbr></a>
-    <strong>addCriterion</strong>(<abbr title="Elixir\DB\ORM\Relation\Closure">Closure</abbr> $pCriterion)</code>
+    <strong>addCriterion</strong>(<abbr title="Elixir\DB\ORM\Relation\callable">callable</abbr> $pCriterion)</code>
     </h3>
     <div class="details">
         <p>
@@ -490,7 +490,7 @@
 
                     <table>
                     <tr>
-                <td><abbr title="Elixir\DB\ORM\Relation\Closure">Closure</abbr></td>
+                <td><abbr title="Elixir\DB\ORM\Relation\callable">callable</abbr></td>
                 <td>$pCriterion</td>
                 <td>
 </td>
@@ -509,12 +509,22 @@
     </table>
 
             
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
             
                     </div>
     </div>
 
                 <h3 id="method_getCriterions">
-        <div class="location">at line 156</div>
+        <div class="location">at line 162</div>
         <code>            public            array
     <strong>getCriterions</strong>()</code>
     </h3>
@@ -541,7 +551,7 @@
     </div>
 
                 <h3 id="method_setRelated">
-        <div class="location">at line 164</div>
+        <div class="location">at line 170</div>
         <code>            public            
     <strong>setRelated</strong>(<a href="../../../../Elixir/DB/ORM/RepositoryInterface.html"><abbr title="Elixir\DB\ORM\RepositoryInterface">RepositoryInterface</abbr></a>|<a href="../../../../Elixir/DB/ORM/Collection.html"><abbr title="Elixir\DB\ORM\Collection">Collection</abbr></a>|null $pValue, boolean $pFilled = true)</code>
     </h3>
@@ -584,7 +594,7 @@
     </div>
 
                 <h3 id="method_getRelated">
-        <div class="location">at line 178</div>
+        <div class="location">at line 184</div>
         <code>            public            <a href="../../../../Elixir/DB/ORM/RepositoryInterface.html"><abbr title="Elixir\DB\ORM\RepositoryInterface">RepositoryInterface</abbr></a>|<a href="../../../../Elixir/DB/ORM/Collection.html"><abbr title="Elixir\DB\ORM\Collection">Collection</abbr></a>|null
     <strong>getRelated</strong>()</code>
     </h3>
@@ -620,7 +630,7 @@
     </div>
 
                 <h3 id="method_setFilled">
-        <div class="location">at line 186</div>
+        <div class="location">at line 192</div>
         <code>            public            
     <strong>setFilled</strong>(boolean $pValue)</code>
     </h3>
@@ -657,7 +667,7 @@
     </div>
 
                 <h3 id="method_isFilled">
-        <div class="location">at line 194</div>
+        <div class="location">at line 200</div>
         <code>            public            boolean
     <strong>isFilled</strong>()</code>
     </h3>
@@ -693,7 +703,7 @@
     </div>
 
                 <h3 id="method_load">
-        <div class="location">at line 202</div>
+        <div class="location">at line 208</div>
         <code>            public            
     <strong>load</strong>()</code>
     </h3>

@@ -51,15 +51,7 @@ class Memcached extends CacheAbstract
      */
     public function get($pKey, $pDefault = null)
     {
-        return $this->_memcached->get($pKey, function() use($pDefault)
-        {
-            if(is_callable($pDefault))
-            {
-                return call_user_func($pDefault);
-            }
-
-            return $pDefault;
-        });
+        return $this->_memcached->get($pKey, $pDefault);
     }
     
     /**

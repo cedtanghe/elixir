@@ -111,22 +111,6 @@ class Test extends \PHPUnit_Framework_TestCase
         $this->assertEquals('This is an extension', $service['data']);
     }
     
-    public function testExtendWithExtendAbstractClass()
-    {
-        $container = new Container();
-        
-        $container->set('param', function($pContainer)
-        {
-            $data = array();
-            return $data;
-        });
-        
-        $container->extend('param', new Extend());
-        $service = $container->get('param');
-        
-        $this->assertEquals('This is an extension', $service['data']);
-    }
-    
     public function testAddSingletonServiceWithTags()
     {
         $container = new Container();

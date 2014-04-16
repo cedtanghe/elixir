@@ -98,7 +98,7 @@ class Update extends SQLAbstract
         if(is_callable($pCond))
         {
             $where = new WhereClause($this);
-            call_user_func_array($pCond, array($where));
+            $pCond($where);
             $pCond = $where->render();
         }
         
@@ -116,7 +116,7 @@ class Update extends SQLAbstract
         if(is_callable($pCond))
         {
             $where = new WhereClause($this);
-            call_user_func_array($pCond, array($where));
+            $pCond($where);
             $pCond = $where->render();
         }
         

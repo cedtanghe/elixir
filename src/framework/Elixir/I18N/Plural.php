@@ -50,9 +50,9 @@ class Plural
      */
     public function addRule($pLocale, $pRule)
     {
-        if(!is_callable($pValue))
+        if(!is_callable($pRule))
         {
-            throw new \InvalidArgumentException(sprintf('The rule for locale "%s" must be a callable.', $pLocale));
+            throw new \InvalidArgumentException('Rule argument must be a callable.');
         }
         
         $this->_rules[$pLocale] = $pRule;

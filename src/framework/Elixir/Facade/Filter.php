@@ -15,10 +15,16 @@ class Filter extends FacadeAbstract
 
     /**
      * @param string $pMethod
-     * @param \Closure $pMacro
+     * @param callable $pMacro
+     * @throws \InvalidArgumentException
      */
-    public static function macro($pMethod, \Closure $pMacro)
+    public static function macro($pMethod, $pMacro)
     {
+        if(!is_callable($pMacro))
+        {
+            throw new \InvalidArgumentException('Macro argument must be a callable.');
+        }
+        
         static::$_macros[$pMethod] = $pMacro;
     }
     

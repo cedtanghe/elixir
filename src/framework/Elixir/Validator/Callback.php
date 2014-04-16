@@ -18,7 +18,7 @@ class Callback extends ValidatorAbstract
         
         $options = isset($pOptions['options']) ? $pOptions['options'] : $pOptions[0];
         
-        if(false === call_user_func_array($options, array($pContent)))
+        if(false === $options($pContent))
         {
             $this->_errors[] = $this->getErrorMessageTemplate(self::ERROR);
         }

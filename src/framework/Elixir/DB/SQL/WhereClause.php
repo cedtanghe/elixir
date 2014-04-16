@@ -36,7 +36,7 @@ class WhereClause
         if(is_callable($pCond))
         {
             $where = new static($this->_SQL);
-            call_user_func_array($pCond, array($where));
+            $pCond($where);
             $pCond = $where->render();
         }
         
@@ -54,7 +54,7 @@ class WhereClause
         if(is_callable($pCond))
         {
             $where = new static($this->_SQL);
-            call_user_func_array($pCond, array($where));
+            $pCond($where);
             $pCond = $where->render();
         }
         

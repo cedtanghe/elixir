@@ -39,7 +39,7 @@ interface ControllerInterface
     
     /**
      * @param string $pKey
-     * @return callable|null
+     * @return mixed
      */
     public function helper($pKey);
 }

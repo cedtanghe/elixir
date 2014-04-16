@@ -60,7 +60,11 @@ abstract class RESTFulControllerAbstract extends ControllerAbstract
         
         $helper = $this->helper('helper.' . $pMethod);
         
-        if(null !== $helper)
+        if(is_callable($helper))
+        {
+            return call_user_func_array($helper, $pArguments);
+        }
+        else
         {
             $method = $helper instanceof HelperInterface ? 'direct' : 'filter';
             return call_user_func_array(array($helper, $method), $pArguments);

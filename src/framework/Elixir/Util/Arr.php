@@ -46,12 +46,7 @@ class Arr
         {
             if(!is_array($data) || !array_key_exists($segment, $data))
             {
-                if(is_callable($pDefault))
-                {
-                    return call_user_func($pDefault);
-                }
-
-                return $pDefault;
+                return is_callable($pDefault) ? $pDefault() : $pDefault;
             }
             
             $data = $data[$segment];

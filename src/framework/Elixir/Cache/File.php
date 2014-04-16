@@ -98,12 +98,7 @@ class File extends CacheAbstract
                 fclose($handle);
                 unlink($file);
                 
-                if(is_callable($pDefault))
-                {
-                    return call_user_func($pDefault);
-                }
-
-                return $pDefault;
+                return is_callable($pDefault) ? $pDefault() : $pDefault;
             }
             
             $data = '';
@@ -117,12 +112,7 @@ class File extends CacheAbstract
             return $this->getEncoder()->decode($data);
         }
         
-        if(is_callable($pDefault))
-        {
-            return call_user_func($pDefault);
-        }
-        
-        return $pDefault;
+        return is_callable($pDefault) ? $pDefault() : $pDefault;
     }
     
     /**

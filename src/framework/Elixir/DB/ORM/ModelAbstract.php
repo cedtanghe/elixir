@@ -402,13 +402,17 @@ abstract class ModelAbstract extends Dispatcher implements RepositoryInterface
     }
     
     /**
-     * @param string|ModelAbstract $pTarget
-     * @param string $pForeignKey
-     * @param string $pOtherKey
+     * @param callable $pCallback
      * @return Relation
+     * @throws \InvalidArgumentException
      */
-    protected function relation(\Closure $pCallback)
+    protected function relation($pCallback)
     {
+        if(!is_callable($pCallback))
+        {
+            throw new \InvalidArgumentException('Callback argument must be a callable.');
+        }
+        
         return new Relation($pCallback);
     }
     

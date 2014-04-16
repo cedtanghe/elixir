@@ -16,6 +16,6 @@ class Callback extends FilterAbstract
         $pOptions = array_merge($this->_options, $pOptions);
         
         $options = isset($pOptions['options']) ? $pOptions['options'] : $pOptions[0];
-        return call_user_func_array($options, array($pContent));
+        return $options($pContent);
     }
 }

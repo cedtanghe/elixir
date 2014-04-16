@@ -86,7 +86,7 @@
                     <a href="../../../../Elixir/DB/ORM/Relation/Pivot.html"><abbr title="Elixir\DB\ORM\Relation\Pivot">Pivot</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_addCriterion">addCriterion</a>(<abbr title="Elixir\DB\ORM\Relation\Closure">Closure</abbr> $pCriterion)
+                    <a href="#method_addCriterion">addCriterion</a>(<abbr title="Elixir\DB\ORM\Relation\callable">callable</abbr> $pCriterion)
                     <p>
 </p>
                 </td>
@@ -241,9 +241,9 @@
     </div>
 
                 <h3 id="method_addCriterion">
-        <div class="location">at line 74</div>
+        <div class="location">at line 75</div>
         <code>            public            <a href="../../../../Elixir/DB/ORM/Relation/Pivot.html"><abbr title="Elixir\DB\ORM\Relation\Pivot">Pivot</abbr></a>
-    <strong>addCriterion</strong>(<abbr title="Elixir\DB\ORM\Relation\Closure">Closure</abbr> $pCriterion)</code>
+    <strong>addCriterion</strong>(<abbr title="Elixir\DB\ORM\Relation\callable">callable</abbr> $pCriterion)</code>
     </h3>
     <div class="details">
         <p>
@@ -255,7 +255,7 @@
 
                     <table>
                     <tr>
-                <td><abbr title="Elixir\DB\ORM\Relation\Closure">Closure</abbr></td>
+                <td><abbr title="Elixir\DB\ORM\Relation\callable">callable</abbr></td>
                 <td>$pCriterion</td>
                 <td>
 </td>
@@ -274,12 +274,22 @@
     </table>
 
             
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
             
                     </div>
     </div>
 
                 <h3 id="method_getCriterions">
-        <div class="location">at line 83</div>
+        <div class="location">at line 89</div>
         <code>            public            array
     <strong>getCriterions</strong>()</code>
     </h3>
@@ -306,7 +316,7 @@
     </div>
 
                 <h3 id="method_join">
-        <div class="location">at line 92</div>
+        <div class="location">at line 98</div>
         <code>            public            
     <strong>join</strong>(<a href="../../../../Elixir/DB/ORM/Relation/RelationInterface.html"><abbr title="Elixir\DB\ORM\Relation\RelationInterface">RelationInterface</abbr></a> $pRelation, <a href="../../../../Elixir/DB/ORM/Select.html"><abbr title="Elixir\DB\ORM\Select">Select</abbr></a> $pSelect)</code>
     </h3>
