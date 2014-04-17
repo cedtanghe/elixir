@@ -32,7 +32,7 @@ class Relation implements RelationInterface
      */
     public function __construct($pCallback)
     {
-        if(!is_callable($pCriterion))
+        if(!is_callable($pCallback))
         {
             throw new \InvalidArgumentException('Callback argument must be a callable.');
         }
