@@ -65,7 +65,7 @@
                     string
                 </td>
                 <td class="last">
-                    <a href="#method_translate">translate</a>(string|array $pMessage, string $pLocale = null, string $pTextDomain = I18NInterface::ALL_TEXT_DOMAINS)
+                    <a href="#method_translate">translate</a>($pMessage, array $pOptions = array())
                     <p>
 </p>
                 </td>
@@ -76,7 +76,7 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method__">_</a>($pMessage, $pLocale = null, $pTextDomain = I18NInterface::ALL_TEXT_DOMAINS)
+                    <a href="#method__">_</a>($pMessage, array $pOptions = array())
                     <p>
 </p>
                 </td>
@@ -87,7 +87,7 @@
                     string
                 </td>
                 <td class="last">
-                    <a href="#method_pluralize">pluralize</a>(array $pMessage, <abbr title="Elixir\Helper\float">float</abbr> $pCount, string $pLocale = null)
+                    <a href="#method_pluralize">pluralize</a>(array $pMessage, <abbr title="Elixir\Helper\float">float</abbr> $pCount, array $pOptions = array())
                     <p>
 </p>
                 </td>
@@ -98,7 +98,7 @@
                     string
                 </td>
                 <td class="last">
-                    <a href="#method_transPlural">transPlural</a>(string|array $pMessage, <abbr title="Elixir\Helper\float">float</abbr> $pCount, string $pLocale = null, string $pTextDomain = I18NInterface::ALL_TEXT_DOMAINS)
+                    <a href="#method_transPlural">transPlural</a>(string|array $pMessage, <abbr title="Elixir\Helper\float">float</abbr> $pCount, array $pOptions = array())
                     <p>
 </p>
                 </td>
@@ -189,7 +189,7 @@
                 <h3 id="method_translate">
         <div class="location">at line 40</div>
         <code>            public            string
-    <strong>translate</strong>(string|array $pMessage, string $pLocale = null, string $pTextDomain = I18NInterface::ALL_TEXT_DOMAINS)</code>
+    <strong>translate</strong>($pMessage, array $pOptions = array())</code>
     </h3>
     <div class="details">
         <p>
@@ -201,20 +201,14 @@
 
                     <table>
                     <tr>
-                <td>string|array</td>
+                <td></td>
                 <td>$pMessage</td>
                 <td>
 </td>
             </tr>
                     <tr>
-                <td>string</td>
-                <td>$pLocale</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
-                <td>string</td>
-                <td>$pTextDomain</td>
+                <td>array</td>
+                <td>$pOptions</td>
                 <td>
 </td>
             </tr>
@@ -237,9 +231,9 @@
     </div>
 
                 <h3 id="method__">
-        <div class="location">at line 48</div>
+        <div class="location">at line 63</div>
         <code>            public            
-    <strong>_</strong>($pMessage, $pLocale = null, $pTextDomain = I18NInterface::ALL_TEXT_DOMAINS)</code>
+    <strong>_</strong>($pMessage, array $pOptions = array())</code>
     </h3>
     <div class="details">
         <p>
@@ -257,14 +251,8 @@
 </td>
             </tr>
                     <tr>
-                <td></td>
-                <td>$pLocale</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
-                <td></td>
-                <td>$pTextDomain</td>
+                <td>array</td>
+                <td>$pOptions</td>
                 <td>
 </td>
             </tr>
@@ -286,9 +274,9 @@
     </div>
 
                 <h3 id="method_pluralize">
-        <div class="location">at line 59</div>
+        <div class="location">at line 74</div>
         <code>            public            string
-    <strong>pluralize</strong>(array $pMessage, <abbr title="Elixir\Helper\float">float</abbr> $pCount, string $pLocale = null)</code>
+    <strong>pluralize</strong>(array $pMessage, <abbr title="Elixir\Helper\float">float</abbr> $pCount, array $pOptions = array())</code>
     </h3>
     <div class="details">
         <p>
@@ -312,8 +300,8 @@
 </td>
             </tr>
                     <tr>
-                <td>string</td>
-                <td>$pLocale</td>
+                <td>array</td>
+                <td>$pOptions</td>
                 <td>
 </td>
             </tr>
@@ -336,9 +324,9 @@
     </div>
 
                 <h3 id="method_transPlural">
-        <div class="location">at line 71</div>
+        <div class="location">at line 93</div>
         <code>            public            string
-    <strong>transPlural</strong>(string|array $pMessage, <abbr title="Elixir\Helper\float">float</abbr> $pCount, string $pLocale = null, string $pTextDomain = I18NInterface::ALL_TEXT_DOMAINS)</code>
+    <strong>transPlural</strong>(string|array $pMessage, <abbr title="Elixir\Helper\float">float</abbr> $pCount, array $pOptions = array())</code>
     </h3>
     <div class="details">
         <p>
@@ -362,14 +350,8 @@
 </td>
             </tr>
                     <tr>
-                <td>string</td>
-                <td>$pLocale</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
-                <td>string</td>
-                <td>$pTextDomain</td>
+                <td>array</td>
+                <td>$pOptions</td>
                 <td>
 </td>
             </tr>
@@ -392,7 +374,7 @@
     </div>
 
                 <h3 id="method___call">
-        <div class="location">at line 82</div>
+        <div class="location">at line 119</div>
         <code>            public            string
     <strong>__call</strong>(string $pMethod, array $pArguments)</code>
     </h3>
@@ -446,7 +428,7 @@
     </div>
 
                 <h3 id="method_direct">
-        <div class="location">at line 103</div>
+        <div class="location">at line 140</div>
         <code>            public            
     <strong>direct</strong>()</code>
     </h3>

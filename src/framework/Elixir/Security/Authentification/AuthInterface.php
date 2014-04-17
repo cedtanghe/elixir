@@ -9,7 +9,7 @@ namespace Elixir\Security\Authentification;
 interface AuthInterface
 {
     /**
-     * @return boolean
+     * @return Result
      */
     public function authenticate();
 }

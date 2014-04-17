@@ -32,6 +32,11 @@ interface ModuleInterface
     public function getPath();
     
     /**
+     * @return string|array|null
+     */
+    public function getRequired();
+    
+    /**
      * @param DispatcherInterface $pDispatcher
      * @param ContainerInterface $pContainer
      */

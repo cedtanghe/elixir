@@ -187,13 +187,26 @@ class Application extends Dispatcher implements ApplicationInterface
             throw new \LogicException(sprintf('A module with name "%s" is already registered.', $name));
         }
         
+        $required = $pModule->getRequired();
+        
+        if(null !== $required)
+        {
+            foreach((array)$required as $module)
+            {
+                if(!$this->hasModule($module))
+                {
+                    throw new \LogicException(sprintf('The "%s" module requires the use of the module "%s".', $name, $module));
+                }
+            }
+        }
+        
         $parent = $pModule->getParent();
         
         if(null !== $parent)
         {
             if(!$this->hasModule($parent))
             {
-                throw new \LogicException(sprintf('Module "%s" extends the unregistered module(%s).', $name, $parent));
+                throw new \LogicException(sprintf('Module "%s" extends the unregistered module "%s".', $name, $parent));
             }
         }
         

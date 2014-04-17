@@ -33,44 +33,81 @@ class I18N implements HelperInterface
 
     /**
      * @param string|array $pMessage
-     * @param string $pLocale
+     * @param array $pOptions
      * @param string $pTextDomain
      * @return string
      */
-    public function translate($pMessage, $pLocale = null, $pTextDomain = I18NInterface::ALL_TEXT_DOMAINS)
+    public function translate($pMessage, array $pOptions = array())
     {
-        return $this->_I18N->translate($pMessage, $pLocale, $pTextDomain);
+        $pOptions = array_merge(
+            array(
+                'locale' => null, 
+                'textDomain' => I18NInterface::ALL_TEXT_DOMAINS
+            ),
+            $pOptions
+        );
+        
+        $result = $this->_I18N->translate($pMessage, $pOptions['locale'], $pOptions['textDomain']);
+        
+        if(isset($pOptions['replace']))
+        {
+            $result = str_replace(array_keys($pOptions['replace']), array_values($pOptions['replace']), $result);
+        }
+        
+        return $result;
     }
     
     /**
      * @see I18N::translate()
      */
-    public function _($pMessage, $pLocale = null, $pTextDomain = I18NInterface::ALL_TEXT_DOMAINS)
+    public function _($pMessage, array $pOptions = array())
     {
-        return $this->translate($pMessage, $pLocale, $pTextDomain);
+        return $this->translate($pMessage, $pOptions);
     }
 
     /**
      * @param string|array $pMessage
      * @param float $pCount
-     * @param string $pLocale
+     * @param array $pOptions
      * @return string
      */
-    public function pluralize(array $pMessage, $pCount, $pLocale = null)
+    public function pluralize(array $pMessage, $pCount, array $pOptions = array())
     {
-        return $this->_I18N->plurialize($pMessage, $pCount, $pLocale);
+        $pOptions = array_merge(array('locale' => null), $pOptions);
+        $result = $this->_I18N->plurialize($pMessage, $pCount, $pOptions['locale']);
+        
+        if(isset($pOptions['replace']))
+        {
+            $result = str_replace(array_keys($pOptions['replace']), array_values($pOptions['replace']), $result);
+        }
+        
+        return $result;
     }
     
     /**
      * @param string|array $pMessage
      * @param float $pCount
-     * @param string $pLocale
-     * @param string $pTextDomain
+     * @param array $pOptions
      * @return string
      */
-    public function transPlural($pMessage, $pCount, $pLocale = null, $pTextDomain = I18NInterface::ALL_TEXT_DOMAINS)
+    public function transPlural($pMessage, $pCount, array $pOptions = array())
     {
-        return $this->_I18N->transPlural($pText, $pCount, $pLocale, $pTextDomain);
+        $pOptions = array_merge(
+            array(
+                'locale' => null, 
+                'textDomain' => I18NInterface::ALL_TEXT_DOMAINS
+            ),
+            $pOptions
+        );
+        
+        $result = $this->_I18N->transPlural($pMessage, $pOptions['locale'], $pOptions['textDomain']);
+        
+        if(isset($pOptions['replace']))
+        {
+            $result = str_replace(array_keys($pOptions['replace']), array_values($pOptions['replace']), $result);
+        }
+        
+        return $result;
     }
     
     /**

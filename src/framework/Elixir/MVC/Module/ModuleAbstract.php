@@ -86,6 +86,14 @@ abstract class ModuleAbstract implements ModuleInterface
     }
     
     /**
+     * @see ModuleInterface::getRequired()
+     */
+    public function getRequired()
+    {
+        return null;
+    }
+    
+    /**
      * @see ModuleInterface::register()
      */
     public function register(DispatcherInterface $pDispatcher, ContainerInterface $pContainer)
