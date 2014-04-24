@@ -494,6 +494,12 @@ class Form
         
         $options = array_merge($pField->getOptions(), $pOptions);
         
+        $placement = isset($options['placement']) ? $options['placement'] : 'inner';
+        if(!in_array($placement, array('inner', 'before', 'after')))
+        {
+            $placement = 'inner';
+        }
+        
         $data = $options['data'];
         $dataUseKeys = $options['data-use-keys'];
         $separator = isset($options['separator']) ? $options['separator'] : '';
@@ -560,12 +566,33 @@ class Form
                     $labelAttributes['for'] = $a['id'];
                 }
                 
-                $input = sprintf(
-                    '<label%s>%s%s</label>', 
-                    $this->HTMLAtributes($labelAttributes), 
-                    $input, 
-                    $value
-                );
+                switch($placement)
+                {
+                    case 'inner':
+                        $input = sprintf(
+                            '<label%s>%s%s</label>', 
+                            $this->HTMLAtributes($labelAttributes), 
+                            $input, 
+                            $value
+                        );
+                    break;
+                    case 'before':
+                        $input = sprintf(
+                            '<label%s>%s</label>%s', 
+                            $this->HTMLAtributes($labelAttributes), 
+                            $value,
+                            $input
+                        );
+                    break;
+                    case 'after':
+                        $input = sprintf(
+                            '%s<label%s>%s</label>', 
+                            $input,
+                            $this->HTMLAtributes($labelAttributes), 
+                            $value
+                        );
+                    break;
+                }
             }
             
             if(isset($options['wrap']))
@@ -600,6 +627,12 @@ class Form
         }
         
         $options = array_merge($pField->getOptions(), $pOptions);
+        
+        $placement = isset($options['placement']) ? $options['placement'] : 'inner';
+        if(!in_array($placement, array('inner', 'before', 'after')))
+        {
+            $placement = 'inner';
+        }
         
         $data = $options['data'];
         $dataUseKeys = $options['data-use-keys'];
@@ -641,12 +674,33 @@ class Form
                     $labelAttributes['for'] = $a['id'];
                 }
                 
-                $input = sprintf(
-                    '<label%s>%s%s</label>', 
-                    $this->HTMLAtributes($labelAttributes), 
-                    $input, 
-                    $value
-                );
+                switch($placement)
+                {
+                    case 'inner':
+                        $input = sprintf(
+                            '<label%s>%s%s</label>', 
+                            $this->HTMLAtributes($labelAttributes), 
+                            $input, 
+                            $value
+                        );
+                    break;
+                    case 'before':
+                        $input = sprintf(
+                            '<label%s>%s</label>%s', 
+                            $this->HTMLAtributes($labelAttributes), 
+                            $value,
+                            $input
+                        );
+                    break;
+                    case 'after':
+                        $input = sprintf(
+                            '%s<label%s>%s</label>', 
+                            $input,
+                            $this->HTMLAtributes($labelAttributes), 
+                            $value
+                        );
+                    break;
+                }
             }
             
             if(isset($options['wrap']))

@@ -38,7 +38,8 @@ class BlockEvent extends Event
      */
     public function __construct($pType, $pBlock = null, $pContent = null, array $pOptions = array()) 
     {
-        $this->_type = $pType;
+        parent::__construct($pType);
+        
         $this->_block = $pBlock;
         $this->_content = $pContent;
         $this->_options = $pOptions;

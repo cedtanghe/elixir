@@ -126,9 +126,9 @@ class Pivot
                     )
                 );
                 
-                foreach($criterions as $contraint)
+                foreach($criterions as $criterion)
                 {
-                    $contraint($pSQL);
+                    $criterion($pSQL);
                 }
             }
         );

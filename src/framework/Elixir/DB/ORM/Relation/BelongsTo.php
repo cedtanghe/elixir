@@ -262,9 +262,9 @@ class BelongsTo implements RelationInterface
      */
     protected function eagerCriterions(Select $pSelect)
     {
-        foreach($this->_criterions as $contraint)
+        foreach($this->_criterions as $criterion)
         {
-            if(false === $contraint($pSelect))
+            if(false === $criterion($pSelect))
             {
                 return false;
             }
