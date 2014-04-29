@@ -4,7 +4,6 @@ namespace Elixir\Helper;
 
 use Elixir\Helper\HelperInterface;
 use Elixir\Helper\Locator;
-use Elixir\Helper\Locator;
 use Elixir\HTTP\Request;
 use Elixir\HTTP\RequestFactory;
 use Elixir\MVC\Controller\ControllerInterface;
