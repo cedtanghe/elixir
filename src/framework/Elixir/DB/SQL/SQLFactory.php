@@ -2,17 +2,17 @@
 
 namespace Elixir\DB\SQL;
 
+use Elixir\DB\SQL\Delete;
+use Elixir\DB\SQL\Insert;
 use Elixir\DB\SQL\MySQL\Delete as MySQLDelete;
 use Elixir\DB\SQL\MySQL\Insert as MySQLInsert;
 use Elixir\DB\SQL\MySQL\Update as MySQLUpdate;
-use Elixir\DB\SQL\SQLite\Delete;
+use Elixir\DB\SQL\Select;
 use Elixir\DB\SQL\SQLite\Delete as SQLiteDelete;
-use Elixir\DB\SQL\SQLite\Insert;
 use Elixir\DB\SQL\SQLite\Insert as SQLiteInsert;
-use Elixir\DB\SQL\SQLite\Select;
 use Elixir\DB\SQL\SQLite\Select as SQLiteSelect;
-use Elixir\DB\SQL\SQLite\Update;
 use Elixir\DB\SQL\SQLite\Update as SQLiteUpdate;
+use Elixir\DB\SQL\Update;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
