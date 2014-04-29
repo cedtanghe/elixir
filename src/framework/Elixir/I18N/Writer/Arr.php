@@ -1,8 +1,8 @@
 <?php
 
-use Elixir\Config\I18N\WriterAbstract;
-
 namespace Elixir\Config\I18N;
+
+use Elixir\Config\I18N\WriterAbstract;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
