@@ -16,9 +16,19 @@ class Callback extends ValidatorAbstract
         $pOptions = array_merge($this->_options, $pOptions);
         $this->_errors = array();
         
-        $options = isset($pOptions['options']) ? $pOptions['options'] : $pOptions[0];
+        if(isset($pOptions['options']) || isset($pOptions['callback']))
+        {
+            $callable = isset($pOptions['options']) ? $pOptions['options'] : $pOptions['callback'];
+            unset($pOptions['options']);
+            unset($pOptions['callback']);
+        }
+        else
+        {
+            $callable = $pOptions[0];
+            array_shift($pOptions);
+        }
         
-        if(false === $options($pContent))
+        if(false === $callable($pContent, $pOptions))
         {
             $this->_errors[] = $this->getErrorMessageTemplate(self::ERROR);
         }

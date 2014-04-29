@@ -127,7 +127,10 @@ class Listeners implements SubscriberInterface
             
             if($module instanceof SelectedInterface)
             {
-                $module->selected();
+                if(!$module->isSelected())
+                {
+                    $module->selected();
+                }
             }
         }
     }

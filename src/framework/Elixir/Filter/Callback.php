@@ -15,7 +15,18 @@ class Callback extends FilterAbstract
     {
         $pOptions = array_merge($this->_options, $pOptions);
         
-        $options = isset($pOptions['options']) ? $pOptions['options'] : $pOptions[0];
-        return $options($pContent);
+        if(isset($pOptions['options']) || isset($pOptions['callback']))
+        {
+            $callable = isset($pOptions['options']) ? $pOptions['options'] : $pOptions['callback'];
+            unset($pOptions['options']);
+            unset($pOptions['callback']);
+        }
+        else
+        {
+            $callable = $pOptions[0];
+            array_shift($pOptions);
+        }
+        
+        return $callable($pContent, $pOptions);
     }
 }

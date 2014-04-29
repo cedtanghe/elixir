@@ -8,5 +8,10 @@ namespace Elixir\MVC\Module;
 
 interface SelectedInterface
 {
+    /**
+     * @return boolean
+     */
+    public function isSelected();
+    
     public function selected();
 }

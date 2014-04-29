@@ -286,6 +286,11 @@ class ModelGenerate extends Command
             $skeleton = str_replace('{NAMESPACE}', $pModule->getNamespace(), $skeleton);
             $skeleton = str_replace('{MODEL}', $pModel, $skeleton);
             
+            if(!file_exists($directory))
+            {
+                @mkdir($directory, 0777, true);
+            }
+            
             file_put_contents($file, $skeleton);
         }
         
@@ -316,7 +321,7 @@ class ModelGenerate extends Command
         $methodLines = array_slice($allLines, $methodStart - 1, $methodEnd - $methodStart + 1);
         $methodeContent = implode("\n", $methodLines);
         
-        foreach($pDefinition['columns'] as $column)
+        foreach(array_reverse($pDefinition['columns']) as $column)
         {
             if(!preg_match('/\$this->' . $column . '\s*=/', $methodeContent))
             {

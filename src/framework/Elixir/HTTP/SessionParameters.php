@@ -70,7 +70,7 @@ class SessionParameters implements ParametersInterface
      */
     public function gets($pSanitize = null)
     {
-        return $this->_session->gets($pSanitize);
+        return $this->_session->gets();
     }
     
     /**

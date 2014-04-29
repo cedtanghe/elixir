@@ -6,7 +6,7 @@ namespace Elixir\Facade;
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
-class Filter extends FacadeAbstract
+class Helper extends FacadeAbstract
 {
     /**
      * @var array
@@ -44,7 +44,7 @@ class Filter extends FacadeAbstract
         $className = $pKey;
         $key = $pKey;
         
-        if(substr($pKey, 0, 7) != 'filter.')
+        if(substr($pKey, 0, 7) != 'helper.')
         {
             if(strpos($key, '\\'))
             {
@@ -55,7 +55,7 @@ class Filter extends FacadeAbstract
                 $key = end(explode('_', $key));
             }
             
-            $key = 'filter.' . strtolower($key);
+            $key = 'helper.' . strtolower($key);
         }
         
         $instance = parent::resolveInstance($key);
@@ -74,14 +74,13 @@ class Filter extends FacadeAbstract
     
     /**
      * @param string $pClassOrKey
-     * @param string $pContent
-     * @param array $pOptions
+     * @param array $pArguments
      * @return mixed
      */
-    public static function filter($pClassOrKey, $pContent, array $pOptions = array())
+    public static function helper($pClassOrKey, array $pArguments = array())
     {
         $filter = static::resolveInstance($pClassOrKey);
-        return $filter->filter($pContent, $pOptions);
+        return call_user_func_array(array($filter, 'direct'), $pArguments);
     }
     
     /**
@@ -97,6 +96,6 @@ class Filter extends FacadeAbstract
             return call_user_func_array(static::$_macros[$pMethod], $pArguments);
         }
         
-        throw new \LogicException('No filter instance in dependency injection container.');
+        throw new \LogicException('No helper instance in dependency injection container.');
     }
 }

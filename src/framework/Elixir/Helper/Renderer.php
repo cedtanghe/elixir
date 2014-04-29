@@ -53,15 +53,12 @@ class Renderer implements ContextInterface, HelperInterface
         if(is_array($pDataOrView))
         {
             $view = $this->_context->getContainer()->get('view');
-            
-            foreach($pDataOrView as $key => $value)
-            {
-                $view->set($key, $value);
-            }
+            $parameters =$pDataOrView;
         }
         else
         {
             $view = $pDataOrView;
+            $parameters = array();
         }
         
         if(null === $pTemplate)
@@ -93,7 +90,7 @@ class Renderer implements ContextInterface, HelperInterface
             $pTemplate = $this->_application->locateFile($pTemplate, false);
         }
         
-        return $view->render($pTemplate);
+        return $view->render($pTemplate, $parameters);
     }
     
     /**
