@@ -3,8 +3,8 @@
 namespace Elixir\Routing\Generator;
 
 use Elixir\HTTP\Request;
-use Elixir\Routing\Route;
 use Elixir\Routing\Generator\GeneratorInterface;
+use Elixir\Routing\Route;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
