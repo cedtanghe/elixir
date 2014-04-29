@@ -1,8 +1,8 @@
 <?php
 
-require_once 'LoaderInterface.php';
-
 namespace Elixir\ClassLoader;
+
+require_once 'LoaderInterface.php';
 
 use Elixir\Cache\CacheInterface;
 use Elixir\ClassLoader\LoaderInterface;
