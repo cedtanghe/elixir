@@ -2,6 +2,8 @@
 
 namespace Elixir\I18N\Loader;
 
+use Elixir\I18N\Loader\LoaderInterface;
+
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */

@@ -2,6 +2,8 @@
 
 namespace Elixir\HTTP;
 
+use Elixir\HTTP\Parameters;
+use Elixir\HTTP\ParametersInterface;
 use Elixir\Routing\Matcher\RouteMatch;
 
 /**

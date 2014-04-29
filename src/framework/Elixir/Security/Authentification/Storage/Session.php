@@ -2,8 +2,9 @@
 
 namespace Elixir\Security\Authentification\Storage;
 
-use Elixir\Security\Authentification\Identity;
 use Elixir\HTTP\Session\SessionInterface;
+use Elixir\Security\Authentification\Identity;
+use Elixir\Security\Authentification\Storage\StorageInterface;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

@@ -3,6 +3,8 @@
 namespace Elixir\Logging;
 
 use Elixir\Dispatcher\Dispatcher;
+use Elixir\Logging\LoggerEvent;
+use Elixir\Logging\LoggerInterface;
 use Elixir\Logging\Writer\WriterInterface;
 
 /**

@@ -2,6 +2,7 @@
 
 namespace Elixir\Tree;
 
+use Elixir\Tree\TreeInterface;
 use Elixir\Util\Arr;
 
 /**

@@ -3,6 +3,7 @@
 namespace Elixir\MVC\Controller;
 
 use Elixir\Helper\HelperInterface;
+use Elixir\MVC\Controller\ControllerAbstract;
 use Elixir\MVC\Exception\NotFoundException;
 
 /**

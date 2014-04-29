@@ -2,8 +2,9 @@
 
 namespace Elixir\Pagination;
 
-use Elixir\Util\Arr;
+use Elixir\Pagination\PaginationInterface;
 use Elixir\Pagination\Style\StyleInterface;
+use Elixir\Util\Arr;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

@@ -2,6 +2,12 @@
 
 namespace Elixir\I18N\Loader;
 
+use Elixir\I18N\Loader\Arr;
+use Elixir\I18N\Loader\CSV;
+use Elixir\I18N\Loader\Gettext;
+use Elixir\I18N\Loader\JSON;
+use Elixir\I18N\Loader\LoaderInterface;
+
 class LoaderFactory
 {
     /**

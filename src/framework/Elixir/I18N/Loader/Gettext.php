@@ -2,6 +2,8 @@
 
 namespace Elixir\I18N\Loader;
 
+use Elixir\I18N\Loader\LoaderInterface;
+
 /**
  * @see Zend/I18n/Translator/Loader/Gettext.php
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

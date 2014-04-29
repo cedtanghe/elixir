@@ -2,12 +2,13 @@
 
 namespace Elixir\Helper;
 
-use Elixir\Util\Str;
+use Elixir\Helper\HelperInterface;
 use Elixir\HTTP\Response;
 use Elixir\HTTP\ResponseFactory;
 use Elixir\MVC\ApplicationInterface;
 use Elixir\MVC\Controller\ControllerInterface;
 use Elixir\MVC\Controller\Helper\ContextInterface;
+use Elixir\Util\Str;
 use Elixir\View\Storage\StorageInterface;
 use Elixir\View\ViewInterface;
 

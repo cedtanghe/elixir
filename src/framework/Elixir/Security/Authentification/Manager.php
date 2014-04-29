@@ -3,6 +3,10 @@
 namespace Elixir\Security\Authentification;
 
 use Elixir\Dispatcher\Dispatcher;
+use Elixir\Security\Authentification\AuthEvent;
+use Elixir\Security\Authentification\AuthInterface;
+use Elixir\Security\Authentification\Identity;
+use Elixir\Security\Authentification\Result;
 use Elixir\Security\Authentification\Storage\StorageInterface;
 
 /**

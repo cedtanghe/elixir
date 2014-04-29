@@ -21,7 +21,7 @@ interface TreeInterface
     
     /**
      * @internal
-     * @param integer $pLevel
+     * @param integer $pValue
      */
     public function setLevel($pValue);
     
@@ -39,7 +39,7 @@ interface TreeInterface
     public function sort();
     
     /**
-     * @param array $pParameter
+     * @param array $pParameters
      * @param integer $pLevel
      * @param boolean $pAll
      * @return TreeInterface|array

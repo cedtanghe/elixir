@@ -6,6 +6,7 @@ use Elixir\Dispatcher\Dispatcher;
 use Elixir\HTTP\Parameters;
 use Elixir\HTTP\Session\SaveHandler\SaveHandlerInterface;
 use Elixir\HTTP\Session\SessionEvent;
+use Elixir\HTTP\Session\SessionInterface;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

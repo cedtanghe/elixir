@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="robots" content="index, follow, all" />
-        <title>Elixir\Config\I18N\WriterInterface | Elixir</title>
+        <title>Elixir\I18N\Writer\WriterAbstract | Elixir</title>
                     <script type="text/javascript" src="../../../js/jquery-1.3.2.min.js"></script>
 			
 			<link rel="stylesheet" type="text/css" href="../../../stylesheet.css">
@@ -25,11 +25,12 @@
 
         <div id="title">Elixir</div>
 
-            <div class="type">Interface</div>
-    <h1><a href="../../../Elixir/Config/I18N.html">Elixir\Config\I18N</a>\WriterInterface</h1>
+            <div class="type">Class</div>
+    <h1><a href="../../../Elixir/I18N/Writer.html">Elixir\I18N\Writer</a>\WriterAbstract</h1>
     </div>
         <div class="content">
-                <p>interface    <strong>WriterInterface</strong></p>
+                <p>abstract class    <strong>WriterAbstract</strong>        implements
+        <a href="../../../Elixir/I18N/Writer/WriterInterface.html"><abbr title="Elixir\I18N\Writer\WriterInterface">WriterInterface</abbr></a></p>
 
     
     
@@ -37,6 +38,17 @@
             <h2>Methods</h2>
 
             <table>
+                    <tr>
+                <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method___construct">__construct</a>(<a href="../../../Elixir/I18N/I18NInterface.html"><abbr title="Elixir\I18N\I18NInterface">I18NInterface</abbr></a> $pI18N = null)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
                     <tr>
                 <td class="type">
                     
@@ -50,21 +62,10 @@
             </tr>
                     <tr>
                 <td class="type">
-                    mixed
+                    <a href="../../../Elixir/I18N/I18NInterface.html"><abbr title="Elixir\I18N\I18NInterface">I18NInterface</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_write">write</a>()
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    boolean
-                </td>
-                <td class="last">
-                    <a href="#method_export">export</a>(string $pFile)
+                    <a href="#method_getI18N">getI18N</a>()
                     <p>
 </p>
                 </td>
@@ -75,8 +76,36 @@
 
         <h2>Details</h2>
 
-                        <h3 id="method_setI18N">
-        <div class="location">at line 16</div>
+                        <h3 id="method___construct">
+        <div class="location">at line 22</div>
+        <code>            public            
+    <strong>__construct</strong>(<a href="../../../Elixir/I18N/I18NInterface.html"><abbr title="Elixir\I18N\I18NInterface">I18NInterface</abbr></a> $pI18N = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Elixir/I18N/I18NInterface.html"><abbr title="Elixir\I18N\I18NInterface">I18NInterface</abbr></a></td>
+                <td>$pI18N</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_setI18N">
+        <div class="location">at line 30</div>
         <code>            public            
     <strong>setI18N</strong>(<a href="../../../Elixir/I18N/I18NInterface.html"><abbr title="Elixir\I18N\I18NInterface">I18NInterface</abbr></a> $pValue)</code>
     </h3>
@@ -103,10 +132,10 @@
                     </div>
     </div>
 
-                <h3 id="method_write">
-        <div class="location">at line 21</div>
-        <code>            public            mixed
-    <strong>write</strong>()</code>
+                <h3 id="method_getI18N">
+        <div class="location">at line 38</div>
+        <code>            public            <a href="../../../Elixir/I18N/I18NInterface.html"><abbr title="Elixir\I18N\I18NInterface">I18NInterface</abbr></a>
+    <strong>getI18N</strong>()</code>
     </h3>
     <div class="details">
         <p>
@@ -119,45 +148,7 @@
 
                     <table>
         <tr>
-            <td>mixed</td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                    </div>
-    </div>
-
-                <h3 id="method_export">
-        <div class="location">at line 27</div>
-        <code>            public            boolean
-    <strong>export</strong>(string $pFile)</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table>
-                    <tr>
-                <td>string</td>
-                <td>$pFile</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-                            <h4>Return Value</h4>
-
-                    <table>
-        <tr>
-            <td>boolean</td>
+            <td><a href="../../../Elixir/I18N/I18NInterface.html"><abbr title="Elixir\I18N\I18NInterface">I18NInterface</abbr></a></td>
             <td>
 </td>
         </tr>

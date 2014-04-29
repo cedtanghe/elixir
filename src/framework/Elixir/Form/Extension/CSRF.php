@@ -2,6 +2,7 @@
 
 namespace Elixir\Form\Extension;
 
+use Elixir\Form\Extension\ExtensionInterface;
 use Elixir\Form\FormFactory;
 use Elixir\Form\FormInterface;
 

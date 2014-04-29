@@ -2,6 +2,11 @@
 
 namespace Elixir\Security\Firewall\Loader;
 
+use Elixir\Security\Firewall\Loader\Arr;
+use Elixir\Security\Firewall\Loader\JSON;
+use Elixir\Security\Firewall\Loader\LoaderInterface;
+use Elixir\Security\Firewall\Loader\XML;
+
 class LoaderFactory
 {
     /**

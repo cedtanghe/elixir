@@ -2,6 +2,8 @@
 
 namespace Elixir\Form\Field;
 
+use Elixir\Form\Field\FieldAbstract;
+use Elixir\Form\Field\FieldEvent;
 use Elixir\Form\FormInterface;
 use Elixir\HTTP\Uploader;
 

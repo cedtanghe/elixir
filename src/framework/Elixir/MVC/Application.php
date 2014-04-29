@@ -9,6 +9,8 @@ use Elixir\HTTP\Request;
 use Elixir\HTTP\Response;
 use Elixir\HTTP\ResponseFactory;
 use Elixir\HTTP\Session\SessionInterface;
+use Elixir\MVC\ApplicationEvent;
+use Elixir\MVC\ApplicationInterface;
 use Elixir\MVC\Controller\ControllerResolverInterface;
 use Elixir\MVC\Module\ModuleInterface;
 use Elixir\Util\Arr;

@@ -4,6 +4,7 @@ namespace Elixir\Security\Firewall\Identity;
 
 use Elixir\Security\Firewall\FirewallAbstract;
 use Elixir\Security\Firewall\FirewallEvent;
+use Elixir\Security\Firewall\Identity\AccessControl;
 use Elixir\Security\Firewall\Loader\LoaderFactory;
 
 /**

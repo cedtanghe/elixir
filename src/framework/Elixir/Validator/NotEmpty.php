@@ -2,6 +2,8 @@
 
 namespace Elixir\Validator;
 
+use Elixir\Validator\Regex;
+
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */

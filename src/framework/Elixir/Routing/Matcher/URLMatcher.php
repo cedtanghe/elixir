@@ -4,6 +4,8 @@ namespace Elixir\Routing\Matcher;
 
 use Elixir\HTTP\Request;
 use Elixir\Routing\Collection;
+use Elixir\Routing\Matcher\MatcherInterface;
+use Elixir\Routing\Matcher\RouteMatch;
 use Elixir\Routing\Route;
 
 /**

@@ -2,8 +2,10 @@
 
 namespace Elixir\Module\Twig\Extension;
 
+use Elixir\Module\Twig\Extension\Helper;
 use Elixir\Module\Twig\View\Twig;
 use Twig_Extension;
+use Twig_SimpleFunction;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
@@ -48,7 +50,7 @@ class Extension extends Twig_Extension
     public function getFunctions() 
     {
         return array(
-            new \Twig_SimpleFunction(
+            new Twig_SimpleFunction(
                 'filter_*' ,
                 function($pMethod)
                 {
@@ -58,7 +60,7 @@ class Extension extends Twig_Extension
                     return call_user_func_array(array('\Elixir\Facade\Filter', $pMethod), $args);
                 }
             ),
-            new \Twig_SimpleFunction(
+            new Twig_SimpleFunction(
                 'validator_*' ,
                 function($pMethod)
                 {

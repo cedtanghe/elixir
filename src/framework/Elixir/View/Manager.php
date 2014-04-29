@@ -3,7 +3,10 @@
 namespace Elixir\View;
 
 use Elixir\Util\File;
+use Elixir\View\DataAbstract;
+use Elixir\View\GlobalInterface;
 use Elixir\View\Storage\Str;
+use Elixir\View\ViewInterface;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
@@ -77,7 +80,7 @@ class Manager extends DataAbstract
     }
     
     /**
-     * @param string $pExt
+     * @param string $pExtension
      * @param mixed $pDefault
      * @return mixed
      */

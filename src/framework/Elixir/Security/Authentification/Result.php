@@ -2,6 +2,8 @@
 
 namespace Elixir\Security\Authentification;
 
+use Elixir\Security\Authentification\Identity;
+
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */

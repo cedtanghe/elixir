@@ -2,6 +2,8 @@
 
 namespace Elixir\Security\Firewall\Loader;
 
+use Elixir\Security\Firewall\Loader\LoaderInterface;
+
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */

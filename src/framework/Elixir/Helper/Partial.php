@@ -2,6 +2,8 @@
 
 namespace Elixir\Helper;
 
+use Elixir\Helper\HelperInterface;
+use Elixir\Helper\Locator;
 use Elixir\View\Helper\ContextInterface;
 use Elixir\View\Storage\StorageInterface;
 use Elixir\View\ViewInterface;

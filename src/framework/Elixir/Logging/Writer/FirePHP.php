@@ -3,6 +3,7 @@
 namespace Elixir\Logging\Writer;
 
 use Elixir\Logging\LoggerInterface;
+use Elixir\Logging\Writer\WriterAbstract;
 
 /**
  * @see http://www.firephp.org/Wiki/Reference/Protocol
@@ -40,7 +41,7 @@ class FirePHP extends WriterAbstract
     }
 
     /**
-     * @see WriterInterface::write()
+     * @see WriterAbstract::write()
      */
     public function write($pMessage, $pSeverity)
     {

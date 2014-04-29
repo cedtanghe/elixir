@@ -2,6 +2,8 @@
 
 namespace Elixir\View\Storage;
 
+use Elixir\View\Storage\StorageInterface;
+
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */

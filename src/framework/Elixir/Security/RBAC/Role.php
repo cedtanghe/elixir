@@ -2,6 +2,8 @@
 
 namespace Elixir\Security\RBAC;
 
+use Elixir\Security\RBAC\RBACInterface;
+
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */

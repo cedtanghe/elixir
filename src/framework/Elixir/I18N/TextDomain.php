@@ -2,8 +2,8 @@
 
 namespace Elixir\I18N;
 
-use Elixir\Util\Arr;
 use Elixir\I18N\Loader\LoaderFactory;
+use Elixir\Util\Arr;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

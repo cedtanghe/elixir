@@ -3,6 +3,7 @@
 namespace Elixir\Security\Firewall\Writer;
 
 use Elixir\Security\Firewall\FirewallInterface;
+use Elixir\Security\Firewall\Writer\WriterInterface;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
@@ -16,7 +17,7 @@ abstract class WriterAbstract implements WriterInterface
     protected $_firewall;
     
     /**
-     * @param FirewallInterface $pRouter
+     * @param FirewallInterface $pFirewall
      */
     public function __construct(FirewallInterface $pFirewall = null)
     {

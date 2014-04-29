@@ -2,6 +2,9 @@
 
 namespace Elixir\Validator;
 
+use Elixir\Validator\ValidatorAbstract;
+use Elixir\Validator\ValidatorInterface;
+
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */

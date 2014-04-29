@@ -4,6 +4,8 @@ namespace Elixir\Security\Firewall;
 
 use Elixir\Dispatcher\Dispatcher;
 use Elixir\Security\Authentification\Manager;
+use Elixir\Security\Firewall\AccessControlInterface;
+use Elixir\Security\Firewall\FirewallInterface;
 use Elixir\Security\Firewall\Writer\WriterInterface;
 
 /**

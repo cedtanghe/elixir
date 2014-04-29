@@ -2,11 +2,12 @@
 
 namespace Elixir\MVC\Controller;
 
-use Elixir\Util\Str;
 use Elixir\HTTP\Request;
 use Elixir\MVC\ApplicationInterface;
 use Elixir\MVC\Controller\ControllerInterface;
+use Elixir\MVC\Controller\ControllerResolverInterface;
 use Elixir\MVC\Exception\NotFoundException;
+use Elixir\Util\Str;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

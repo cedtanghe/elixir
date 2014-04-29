@@ -2,6 +2,9 @@
 
 namespace Elixir\View;
 
+use Elixir\View\GlobalInterface;
+use Elixir\View\ViewInterface;
+
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */

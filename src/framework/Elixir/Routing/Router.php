@@ -4,10 +4,13 @@ namespace Elixir\Routing;
 
 use Elixir\Dispatcher\Dispatcher;
 use Elixir\HTTP\Request;
+use Elixir\Routing\Collection;
 use Elixir\Routing\Generator\GeneratorInterface;
 use Elixir\Routing\Loader\LoaderFactory;
 use Elixir\Routing\Matcher\MatcherInterface;
 use Elixir\Routing\Matcher\RouteMatch;
+use Elixir\Routing\RouterEvent;
+use Elixir\Routing\RouterInterface;
 use Elixir\Routing\Writer\WriterInterface;
 
 /**

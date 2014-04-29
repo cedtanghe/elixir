@@ -2,6 +2,9 @@
 
 namespace Elixir\HTTP;
 
+use Elixir\HTTP\Parameters;
+use Elixir\HTTP\Uploader;
+
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */

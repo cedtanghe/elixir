@@ -6,6 +6,8 @@ use Elixir\Dispatcher\Dispatcher;
 use Elixir\Dispatcher\Event;
 use Elixir\Form\Extension\ExtensionInterface;
 use Elixir\Form\Field\FieldInterface;
+use Elixir\Form\FormEvent;
+use Elixir\Form\FormInterface;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

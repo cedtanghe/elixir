@@ -2,6 +2,7 @@
 
 namespace Elixir\Helper;
 
+use Elixir\Helper\HelperInterface;
 use Elixir\I18N\I18NInterface;
 
 /**

@@ -3,6 +3,7 @@
 namespace Elixir\Security\Firewall;
 
 use Elixir\Dispatcher\Event;
+use Elixir\Security\Firewall\AccessControlInterface;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

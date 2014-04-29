@@ -2,6 +2,7 @@
 
 namespace Elixir\Logging\Writer;
 
+use Elixir\Logging\Writer\WriterAbstract;
 use Elixir\Util\File as FileUtils;
 
 /**
@@ -44,7 +45,7 @@ class File extends WriterAbstract
     }
 
     /**
-     * @see WriterInterface::write()
+     * @see WriterAbstract::write()
      */
     public function write($pMessage, $pSeverity)
     {

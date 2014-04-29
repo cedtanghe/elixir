@@ -5,8 +5,8 @@ namespace Elixir\Security\Firewall\Behavior;
 use Elixir\HTTP\Request;
 use Elixir\HTTP\RequestFactory;
 use Elixir\HTTP\ResponseFactory;
-use Elixir\Security\Firewall\FirewallInterface;
 use Elixir\HTTP\Session\SessionInterface;
+use Elixir\Security\Firewall\FirewallInterface;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

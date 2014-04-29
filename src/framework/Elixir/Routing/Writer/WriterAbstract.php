@@ -3,6 +3,7 @@
 namespace Elixir\Routing\Writer;
 
 use Elixir\Routing\RouterInterface;
+use Elixir\Routing\Writer\WriterInterface;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

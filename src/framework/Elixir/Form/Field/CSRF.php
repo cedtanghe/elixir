@@ -3,6 +3,8 @@
 namespace Elixir\Form\Field;
 
 use Elixir\Filter\FilterInterface;
+use Elixir\Form\Field\FieldAbstract;
+use Elixir\Form\Field\FieldEvent;
 use Elixir\Validator\CSRF as CSRFValidator;
 use Elixir\Validator\ValidatorInterface;
 
@@ -18,7 +20,7 @@ class CSRF extends FieldAbstract
     const HIDDEN = 'hidden';
     
     /**
-     * @var \Elixir\Validator\CSRF
+     * @var CSRFValidator
      */
     protected $_CSRFValidator;
     
@@ -47,7 +49,7 @@ class CSRF extends FieldAbstract
     }
     
     /**
-     * @param \Elixir\Validator\CSRF $pValidator
+     * @param CSRFValidator $pValidator
      * @param array $pOptions
      */
     public function setCSRFValidator(CSRFValidator $pValidator, array $pOptions = array())
@@ -61,7 +63,7 @@ class CSRF extends FieldAbstract
     }
     
     /**
-     * @return \Elixir\Validator\CSRF
+     * @return CSRFValidator
      */
     public function getCSRFValidator()
     {

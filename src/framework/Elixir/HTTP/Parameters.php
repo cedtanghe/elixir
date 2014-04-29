@@ -2,6 +2,8 @@
 
 namespace Elixir\HTTP;
 
+use Elixir\HTTP\ParametersInterface;
+use Elixir\HTTP\Sanitizer;
 use Elixir\Util\Arr;
 
 /**

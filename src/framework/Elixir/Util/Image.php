@@ -2,6 +2,8 @@
 
 namespace Elixir\Util;
 
+use Elixir\Util\File;
+
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */

@@ -3,6 +3,8 @@
 namespace Elixir\Validator;
 
 use Elixir\Form\Field\FieldInterface;
+use Elixir\Validator\ValidatorAbstract;
+use Elixir\Validator\ValidatorInterface;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

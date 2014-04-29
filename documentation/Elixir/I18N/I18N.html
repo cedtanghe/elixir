@@ -208,7 +208,7 @@
                     boolean
                 </td>
                 <td class="last">
-                    <a href="#method_export">export</a>(<a href="../../Elixir/Config/I18N/WriterInterface.html"><abbr title="Elixir\Config\I18N\WriterInterface">WriterInterface</abbr></a> $pWriter, string $pFile)
+                    <a href="#method_export">export</a>(<a href="../../Elixir/I18N/Writer/WriterInterface.html"><abbr title="Elixir\I18N\Writer\WriterInterface">WriterInterface</abbr></a> $pWriter, string $pFile)
                     <p>
 </p>
                 </td>
@@ -293,17 +293,6 @@
             </tr>
                     <tr>
                 <td class="type">
-                    
-                </td>
-                <td class="last">
-                    <a href="#method__">_</a>($pMessage, $pLocale = null, $pTextDomain = self::ALL_TEXT_DOMAINS)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
                     string
                 </td>
                 <td class="last">
@@ -352,7 +341,7 @@
         <h2>Details</h2>
 
                         <h3 id="method___construct">
-        <div class="location">at line 33</div>
+        <div class="location">at line 38</div>
         <code>            public            
     <strong>__construct</strong>(array $pTextDomains = array(), string $pLocale = null)</code>
     </h3>
@@ -513,6 +502,16 @@
 
             
             
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
             
                             <h4>See also</h4>
 
@@ -707,7 +706,7 @@
     </div>
 
                 <h3 id="method_setLocale">
-        <div class="location">at line 46</div>
+        <div class="location">at line 51</div>
         <code>            public            
     <strong>setLocale</strong>(string $pValue)</code>
     </h3>
@@ -744,7 +743,7 @@
     </div>
 
                 <h3 id="method_getLocale">
-        <div class="location">at line 54</div>
+        <div class="location">at line 59</div>
         <code>            public            string
     <strong>getLocale</strong>()</code>
     </h3>
@@ -780,7 +779,7 @@
     </div>
 
                 <h3 id="method_setPlural">
-        <div class="location">at line 67</div>
+        <div class="location">at line 72</div>
         <code>            public            
     <strong>setPlural</strong>(<a href="../../Elixir/I18N/Plural.html"><abbr title="Elixir\I18N\Plural">Plural</abbr></a> $pValue)</code>
     </h3>
@@ -808,7 +807,7 @@
     </div>
 
                 <h3 id="method_getPlural">
-        <div class="location">at line 75</div>
+        <div class="location">at line 80</div>
         <code>            public            <a href="../../Elixir/I18N/Plural.html"><abbr title="Elixir\I18N\Plural">Plural</abbr></a>
     <strong>getPlural</strong>()</code>
     </h3>
@@ -835,7 +834,7 @@
     </div>
 
                 <h3 id="method_load">
-        <div class="location">at line 89</div>
+        <div class="location">at line 94</div>
         <code>            public            
     <strong>load</strong>($pResource, $pLocale = null)</code>
     </h3>
@@ -869,9 +868,9 @@
     </div>
 
                 <h3 id="method_export">
-        <div class="location">at line 121</div>
+        <div class="location">at line 126</div>
         <code>            public            boolean
-    <strong>export</strong>(<a href="../../Elixir/Config/I18N/WriterInterface.html"><abbr title="Elixir\Config\I18N\WriterInterface">WriterInterface</abbr></a> $pWriter, string $pFile)</code>
+    <strong>export</strong>(<a href="../../Elixir/I18N/Writer/WriterInterface.html"><abbr title="Elixir\I18N\Writer\WriterInterface">WriterInterface</abbr></a> $pWriter, string $pFile)</code>
     </h3>
     <div class="details">
         <p>
@@ -883,7 +882,7 @@
 
                     <table>
                     <tr>
-                <td><a href="../../Elixir/Config/I18N/WriterInterface.html"><abbr title="Elixir\Config\I18N\WriterInterface">WriterInterface</abbr></a></td>
+                <td><a href="../../Elixir/I18N/Writer/WriterInterface.html"><abbr title="Elixir\I18N\Writer\WriterInterface">WriterInterface</abbr></a></td>
                 <td>$pWriter</td>
                 <td>
 </td>
@@ -913,7 +912,7 @@
     </div>
 
                 <h3 id="method_hasTextDomain">
-        <div class="location">at line 131</div>
+        <div class="location">at line 136</div>
         <code>            public            boolean
     <strong>hasTextDomain</strong>(string $pName)</code>
     </h3>
@@ -951,7 +950,7 @@
     </div>
 
                 <h3 id="method_addTextDomain">
-        <div class="location">at line 140</div>
+        <div class="location">at line 145</div>
         <code>            public            
     <strong>addTextDomain</strong>(<a href="../../Elixir/I18N/TextDomain.html"><abbr title="Elixir\I18N\TextDomain">TextDomain</abbr></a> $pTextDomain, string $pName = self::DEFAULT_TEXT_DOMAIN)</code>
     </h3>
@@ -985,7 +984,7 @@
     </div>
 
                 <h3 id="method_getTextDomain">
-        <div class="location">at line 157</div>
+        <div class="location">at line 162</div>
         <code>            public            mixed
     <strong>getTextDomain</strong>(string $pName, mixed $pDefault = null)</code>
     </h3>
@@ -1029,7 +1028,7 @@
     </div>
 
                 <h3 id="method_removeTextDomain">
-        <div class="location">at line 170</div>
+        <div class="location">at line 175</div>
         <code>            public            
     <strong>removeTextDomain</strong>(string $pName)</code>
     </h3>
@@ -1057,7 +1056,7 @@
     </div>
 
                 <h3 id="method_getTextDomains">
-        <div class="location">at line 178</div>
+        <div class="location">at line 183</div>
         <code>            public            array
     <strong>getTextDomains</strong>()</code>
     </h3>
@@ -1084,7 +1083,7 @@
     </div>
 
                 <h3 id="method_setTextDomains">
-        <div class="location">at line 186</div>
+        <div class="location">at line 191</div>
         <code>            public            
     <strong>setTextDomains</strong>(array $pData)</code>
     </h3>
@@ -1112,7 +1111,7 @@
     </div>
 
                 <h3 id="method_translate">
-        <div class="location">at line 199</div>
+        <div class="location">at line 204</div>
         <code>            public            string
     <strong>translate</strong>(string|array $pMessage, string $pLocale = null, string $pTextDomain = self::ALL_TEXT_DOMAINS)</code>
     </h3>
@@ -1170,57 +1169,8 @@
                     </div>
     </div>
 
-                <h3 id="method__">
-        <div class="location">at line 226</div>
-        <code>            public            
-    <strong>_</strong>($pMessage, $pLocale = null, $pTextDomain = self::ALL_TEXT_DOMAINS)</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table>
-                    <tr>
-                <td></td>
-                <td>$pMessage</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
-                <td></td>
-                <td>$pLocale</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
-                <td></td>
-                <td>$pTextDomain</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-            
-            
-                            <h4>See also</h4>
-
-                    <table>
-                    <tr>
-                <td>I18N::translate()</td>
-                <td></td>
-            </tr>
-            </table>
-
-                    </div>
-    </div>
-
                 <h3 id="method_pluralize">
-        <div class="location">at line 234</div>
+        <div class="location">at line 231</div>
         <code>            public            string
     <strong>pluralize</strong>(string|array $pMessage, <abbr title="Elixir\I18N\float">float</abbr> $pCount, string $pLocale = null)</code>
     </h3>
@@ -1279,7 +1229,7 @@
     </div>
 
                 <h3 id="method_transPlural">
-        <div class="location">at line 242</div>
+        <div class="location">at line 239</div>
         <code>            public            string
     <strong>transPlural</strong>(string|array $pMessage, <abbr title="Elixir\I18N\float">float</abbr> $pCount, string $pLocale = null, string $pTextDomain = self::ALL_TEXT_DOMAINS)</code>
     </h3>
@@ -1344,7 +1294,7 @@
     </div>
 
                 <h3 id="method___call">
-        <div class="location">at line 253</div>
+        <div class="location">at line 250</div>
         <code>            public            string
     <strong>__call</strong>(string $pMethod, array $pArguments)</code>
     </h3>
@@ -1398,7 +1348,7 @@
     </div>
 
                 <h3 id="method_merge">
-        <div class="location">at line 274</div>
+        <div class="location">at line 271</div>
         <code>            public            
     <strong>merge</strong>(array|<a href="../../Elixir/I18N/I18NInterface.html"><abbr title="Elixir\I18N\I18NInterface">I18NInterface</abbr></a> $pData)</code>
     </h3>

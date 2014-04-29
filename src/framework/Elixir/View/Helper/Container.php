@@ -3,6 +3,7 @@
 namespace Elixir\View\Helper;
 
 use Elixir\DI\ContainerInterface;
+use Elixir\View\Helper\ContextInterface;
 use Elixir\View\ViewInterface;
 
 /**

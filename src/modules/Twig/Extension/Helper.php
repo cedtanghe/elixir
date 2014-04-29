@@ -25,7 +25,8 @@ class Helper implements \ArrayAccess
     }
     
     /**
-     * @see Config::has()
+     * @param mixed $pKey
+     * @return boolean
      */
     public function offsetExists($pKey) 
     { 

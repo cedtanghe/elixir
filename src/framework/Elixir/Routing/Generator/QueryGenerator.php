@@ -2,6 +2,7 @@
 
 namespace Elixir\Routing\Generator;
 
+use Elixir\Routing\Generator\URLGenerator;
 use Elixir\Routing\Route;
 
 /**

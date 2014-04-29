@@ -2,6 +2,8 @@
 
 namespace Elixir\Form\Field;
 
+use Elixir\Form\Field\MultipleAbstract;
+
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */

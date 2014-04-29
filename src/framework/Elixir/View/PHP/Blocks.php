@@ -3,6 +3,7 @@
 namespace Elixir\View\PHP;
 
 use Elixir\Dispatcher\Dispatcher;
+use Elixir\View\PHP\BlockEvent;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

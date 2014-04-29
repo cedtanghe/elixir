@@ -4,7 +4,7 @@ namespace Elixir\MVC\Module;
 
 use Elixir\DI\ContainerInterface;
 use Elixir\Dispatcher\DispatcherInterface;
-
+use Elixir\MVC\Module\ModuleInterface;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */

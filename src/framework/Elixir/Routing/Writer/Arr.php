@@ -2,6 +2,8 @@
 
 namespace Elixir\Routing\Writer;
 
+use Elixir\Routing\Writer\WriterAbstract;
+
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */

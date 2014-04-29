@@ -2,6 +2,7 @@
 
 namespace Elixir\Helper;
 
+use Elixir\Helper\HelperInterface;
 use Elixir\Security\Authentification\Manager;
 use Elixir\Security\RBAC\RBACInterface;
 

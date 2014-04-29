@@ -4,6 +4,8 @@ namespace Elixir\Validator;
 
 use Elixir\HTTP\RequestFactory;
 use Elixir\Security\CSRF as Context;
+use Elixir\Validator\ValidatorAbstract;
+use Elixir\Validator\ValidatorInterface;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
@@ -17,12 +19,12 @@ class CSRF extends ValidatorAbstract
     protected $_errorMessageTemplates = array(self::ERROR => 'Possibility of attack CSRF flaw.');
     
     /**
-     * @var \Elixir\Security\CSRF
+     * @var Context
      */
     protected $_CSRF;
     
     /**
-     * @param \Elixir\Security\CSRF $pCSRF
+     * @param Context $pCSRF
      */
     public function __construct(Context $pCSRF = null) 
     {
@@ -30,7 +32,7 @@ class CSRF extends ValidatorAbstract
     }
     
     /**
-     * @param \Elixir\Security\CSRF $pValue
+     * @param Context $pValue
      */
     public function setCSRF(Context $pValue)
     {
@@ -38,7 +40,7 @@ class CSRF extends ValidatorAbstract
     }
     
     /**
-     * @return \Elixir\Security\CSRF
+     * @return Context
      */
     public function getCSRF()
     {

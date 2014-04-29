@@ -4,6 +4,7 @@ namespace Elixir\Routing\Generator;
 
 use Elixir\HTTP\Request;
 use Elixir\Routing\Route;
+use Elixir\Routing\Generator\GeneratorInterface;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

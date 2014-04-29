@@ -2,8 +2,13 @@
 
 namespace Elixir\I18N;
 
-use Elixir\Config\I18N\WriterInterface;
 use Elixir\Dispatcher\Dispatcher;
+use Elixir\I18N\I18NEvent;
+use Elixir\I18N\I18NInterface;
+use Elixir\I18N\Locale;
+use Elixir\I18N\Plural;
+use Elixir\I18N\TextDomain;
+use Elixir\I18N\Writer\WriterInterface;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
@@ -218,14 +223,6 @@ class I18N extends Dispatcher implements I18NInterface
         $this->dispatch($event);
         
         return $event->getMessage();
-    }
-    
-    /**
-     * @see I18N::translate()
-     */
-    public function _($pMessage, $pLocale = null, $pTextDomain = self::ALL_TEXT_DOMAINS)
-    {
-        return $this->translate($pMessage, $pLocale, $pTextDomain);
     }
     
     /**

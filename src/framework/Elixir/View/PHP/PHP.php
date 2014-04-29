@@ -7,6 +7,8 @@ use Elixir\View\DataAbstract;
 use Elixir\View\EscaperInterface;
 use Elixir\View\Helper\Container;
 use Elixir\View\HelperInterface;
+use Elixir\View\PHP\Blocks;
+use Elixir\View\PHP\Parser;
 use Elixir\View\ViewInterface;
 
 /**

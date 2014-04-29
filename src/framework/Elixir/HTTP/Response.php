@@ -2,6 +2,9 @@
 
 namespace Elixir\HTTP;
 
+use Elixir\HTTP\Headers;
+use Elixir\HTTP\Request;
+
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */

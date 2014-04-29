@@ -3,6 +3,7 @@
 namespace Elixir\View\PHP;
 
 use Elixir\Helper\HelperInterface;
+use Elixir\View\PHP\PHP;
 use Elixir\View\Storage\StorageInterface;
 use Elixir\View\Storage\Str;
 

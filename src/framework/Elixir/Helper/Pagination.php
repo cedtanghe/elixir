@@ -2,6 +2,8 @@
 
 namespace Elixir\Helper;
 
+use Elixir\Helper\HelperInterface;
+use Elixir\Helper\Locator;
 use Elixir\Pagination\PaginationInterface;
 use Elixir\View\Helper\ContextInterface;
 use Elixir\View\ViewInterface;

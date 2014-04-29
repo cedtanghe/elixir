@@ -3,6 +3,7 @@
 namespace Elixir\Routing\Loader;
 
 use Elixir\Routing\Collection;
+use Elixir\Routing\Loader\LoaderInterface;
 use Elixir\Routing\Route;
 
 /**

@@ -2,6 +2,8 @@
 
 namespace Elixir\HTTP;
 
+use Elixir\HTTP\Response;
+
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */

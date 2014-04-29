@@ -4,6 +4,7 @@ namespace Elixir\Pagination\Style;
 
 use Elixir\Pagination\Item;
 use Elixir\Pagination\PaginationInterface;
+use Elixir\Pagination\Style\StyleInterface;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

@@ -2,6 +2,8 @@
 
 namespace Elixir\HTTP;
 
+use Elixir\HTTP\Cookie;
+
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
@@ -291,16 +293,6 @@ class Headers
     public function removeCookie($pName, $pPath = '/', $pDomain = '')
     {
         unset($this->_cookies[$pDomain][$pPath][$pName]);
-        
-        if(empty($this->_cookies[$pDomain][$pPath]))
-        {
-            unset($this->_cookies[$pDomain][$pPath]);
-            
-            if(empty($this->_cookies[$pDomain]))
-            {
-                unset($this->_cookies[$pDomain]);
-            }
-        }
     }
     
     /**

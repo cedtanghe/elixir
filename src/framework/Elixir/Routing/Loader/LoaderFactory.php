@@ -2,6 +2,11 @@
 
 namespace Elixir\Routing\Loader;
 
+use Elixir\Config\Loader\LoaderInterface;
+use Elixir\Routing\Loader\Arr;
+use Elixir\Routing\Loader\JSON;
+use Elixir\Routing\Loader\XML;
+
 class LoaderFactory
 {
     /**

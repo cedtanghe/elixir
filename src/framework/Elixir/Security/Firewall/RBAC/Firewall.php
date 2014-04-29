@@ -5,6 +5,7 @@ namespace Elixir\Security\Firewall\RBAC;
 use Elixir\Security\Firewall\FirewallAbstract;
 use Elixir\Security\Firewall\FirewallEvent;
 use Elixir\Security\Firewall\Loader\LoaderFactory;
+use Elixir\Security\Firewall\RBAC\AccessControl;
 use Elixir\Security\RBAC\RBACInterface;
 
 /**

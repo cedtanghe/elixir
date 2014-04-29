@@ -3,6 +3,7 @@
 namespace Elixir\Logging\Writer;
 
 use Elixir\Logging\LoggerInterface;
+use Elixir\Logging\Writer\WriterInterface;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

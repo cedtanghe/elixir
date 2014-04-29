@@ -2,6 +2,7 @@
 
 namespace Elixir\Helper;
 
+use Elixir\Helper\HelperInterface;
 use Elixir\MVC\ApplicationInterface;
 use Elixir\MVC\Controller\ControllerInterface;
 use Elixir\MVC\Controller\Helper\ContextInterface;

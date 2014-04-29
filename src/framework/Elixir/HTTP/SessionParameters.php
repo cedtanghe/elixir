@@ -2,9 +2,9 @@
 
 namespace Elixir\HTTP;
 
-use Elixir\Util\Arr;
 use Elixir\HTTP\ParametersInterface;
 use Elixir\HTTP\Session\SessionInterface;
+use Elixir\Util\Arr;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

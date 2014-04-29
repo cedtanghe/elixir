@@ -3,6 +3,7 @@
 namespace Elixir\Security\Authentification;
 
 use Elixir\Dispatcher\Dispatcher;
+use Elixir\Security\Authentification\AuthEvent;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

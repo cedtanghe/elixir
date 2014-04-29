@@ -1,6 +1,7 @@
 {
     "name":"cedtanghe/elixir",
     "description":"Library PHP",
+    "license":"proprietary",
     "autoload": 
     {
         "psr-0": 

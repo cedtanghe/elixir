@@ -2,8 +2,9 @@
 
 namespace Elixir\Form;
 
-use Elixir\Util\Str;
 use Elixir\Form\Field\FieldInterface;
+use Elixir\Form\FormInterface;
+use Elixir\Util\Str;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

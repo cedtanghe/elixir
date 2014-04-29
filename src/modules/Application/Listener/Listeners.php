@@ -3,7 +3,7 @@
 namespace Elixir\Module\Application\Listener;
 
 use Elixir\DI\ContainerInterface;
-use Elixir\Dispatcher\Dispatcher;
+use Elixir\Dispatcher\DispatcherInterface;
 use Elixir\Dispatcher\SubscriberInterface;
 use Elixir\MVC\ApplicationEvent;
 use Elixir\MVC\ApplicationInterface;
@@ -33,7 +33,7 @@ class Listeners implements SubscriberInterface
     /**
      * @see SubscriberInterface::subscribe()
      */
-    public function subscribe(Dispatcher $pDispatcher)
+    public function subscribe(DispatcherInterface $pDispatcher)
     {   
         /************ FILTER REQUEST ************/
         
@@ -51,7 +51,7 @@ class Listeners implements SubscriberInterface
     /**
      * @see SubscriberInterface::unsubscribe()
      */
-    public function unsubscribe(Dispatcher $pDispatcher)
+    public function unsubscribe(DispatcherInterface $pDispatcher)
     {
         // Not yet
     }

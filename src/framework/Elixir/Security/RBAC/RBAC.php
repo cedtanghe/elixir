@@ -2,6 +2,9 @@
 
 namespace Elixir\Security\RBAC;
 
+use Elixir\Security\RBAC\RBACInterface;
+use Elixir\Security\RBAC\Role;
+
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */

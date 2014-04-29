@@ -3,6 +3,7 @@
 namespace Elixir\Routing\Matcher;
 
 use Elixir\Routing\Collection;
+use Elixir\Routing\Matcher\URLMatcher;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

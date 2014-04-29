@@ -6,6 +6,7 @@ use Elixir\DI\ContainerInterface;
 use Elixir\Dispatcher\DispatcherInterface;
 use Elixir\Helper\HelperInterface;
 use Elixir\HTTP\Request;
+use Elixir\MVC\Controller\ControllerInterface;
 use Elixir\MVC\Controller\Helper\Container;
 use Elixir\MVC\Exception\NotFoundException;
 use Elixir\View\GlobalInterface;

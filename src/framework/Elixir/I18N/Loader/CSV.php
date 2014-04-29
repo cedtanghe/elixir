@@ -2,6 +2,7 @@
 
 namespace Elixir\I18N\Loader;
 
+use Elixir\I18N\Loader\LoaderInterface;
 use Elixir\Util\CSV as CSVUtils;
 
 /**

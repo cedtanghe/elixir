@@ -4,6 +4,7 @@ namespace Elixir\MVC\Controller\Helper;
 
 use Elixir\DI\ContainerInterface;
 use Elixir\MVC\Controller\ControllerInterface;
+use Elixir\MVC\Controller\Helper\ContextInterface;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

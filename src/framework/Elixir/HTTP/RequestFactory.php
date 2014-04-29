@@ -2,7 +2,13 @@
 
 namespace Elixir\HTTP;
 
+use Elixir\HTTP\FileParameters;
+use Elixir\HTTP\Headers;
+use Elixir\HTTP\Parameters;
+use Elixir\HTTP\Request;
+use Elixir\HTTP\Sanitizer;
 use Elixir\HTTP\Session\Session;
+use Elixir\HTTP\SessionParameters;
 use Elixir\MVC\Application;
 
 /**

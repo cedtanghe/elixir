@@ -2,6 +2,8 @@
 
 namespace Elixir\Helper;
 
+use Elixir\Helper\HelperInterface;
+use Elixir\Helper\Locator;
 use Elixir\Helper\Locator;
 use Elixir\HTTP\Request;
 use Elixir\HTTP\RequestFactory;
@@ -48,7 +50,7 @@ class URL implements TemplateContextInterface, ControllerContextInterface, Helpe
     }
     
     /**
-     * @see \Elixir\View\Helper\ContextInterface::setView();
+     * @see TemplateContextInterface::setView();
      */
     public function setView(ViewInterface $pValue)
     {
@@ -56,7 +58,7 @@ class URL implements TemplateContextInterface, ControllerContextInterface, Helpe
     }
     
     /**
-     * @see \Elixir\MVC\Controller\Helper\ContextInterface::setController();
+     * @see ControllerContextInterface::setController();
      */
     public function setController(ControllerInterface $pValue)
     {

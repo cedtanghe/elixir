@@ -2,6 +2,8 @@
 
 namespace Elixir\Routing;
 
+use Elixir\Routing\Route;
+
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
@@ -33,7 +35,7 @@ class Collection
     }
     
     /**
-     * @param strins $pName
+     * @param string $pName
      * @param mixed $pDefault
      * @return mixed
      */

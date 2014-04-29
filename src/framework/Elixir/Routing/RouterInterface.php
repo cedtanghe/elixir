@@ -4,6 +4,7 @@ namespace Elixir\Routing;
 
 use Elixir\Dispatcher\DispatcherInterface;
 use Elixir\HTTP\Request;
+use Elixir\Routing\Collection;
 use Elixir\Routing\Generator\GeneratorInterface;
 use Elixir\Routing\Matcher\RouteMatch;
 

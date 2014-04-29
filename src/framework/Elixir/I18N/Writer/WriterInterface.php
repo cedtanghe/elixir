@@ -1,6 +1,6 @@
 <?php
 
-namespace Elixir\Config\I18N;
+namespace Elixir\I18N\Writer;
 
 use Elixir\I18N\I18NInterface;
 

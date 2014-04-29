@@ -4,6 +4,8 @@ namespace Elixir\Form\Field;
 
 use Elixir\Dispatcher\Dispatcher;
 use Elixir\Filter\FilterInterface;
+use Elixir\Form\Field\FieldEvent;
+use Elixir\Form\Field\FieldInterface;
 use Elixir\Form\FormInterface;
 use Elixir\Validator\ValidatorInterface;
 
