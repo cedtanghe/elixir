@@ -73,8 +73,6 @@ class Dispatcher implements DispatcherInterface
         
         if($this->hasListener($pType))
         {
-            $i = count($this->_listeners[$pType]);
-            
             foreach($this->_listeners[$pType] as $listener)
             {
                 if($listener['callback'] === $pCallback)

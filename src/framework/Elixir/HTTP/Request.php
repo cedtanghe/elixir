@@ -398,7 +398,6 @@ class Request
                 {
                     // Using mod_rewrite ?
                     $segments = explode('/', trim($base, '/'));
-                    $search = '';
 
                     do 
                     {

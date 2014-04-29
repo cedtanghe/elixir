@@ -106,8 +106,6 @@ class ModuleCreate extends Command
             }
         }
         
-        $error = false;
-		
         if(File::copy(__DIR__ . '/../resources/module-skeleton', $modulePath))
         {
             $list = File::filesList($modulePath);

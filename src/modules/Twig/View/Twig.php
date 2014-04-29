@@ -5,7 +5,6 @@ namespace Elixir\Module\Twig\View;
 use Elixir\View\DataAbstract;
 use Elixir\View\Helper\Container;
 use Elixir\View\HelperInterface;
-use Elixir\View\Storage\File;
 use Elixir\View\Storage\Str;
 use Elixir\View\ViewInterface;
 use Twig_Environment;

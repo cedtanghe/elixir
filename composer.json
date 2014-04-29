@@ -1,5 +1,6 @@
 {
-    "name":"elixir",
+    "name":"cedtanghe/elixir",
+    "description":"Library PHP",
     "autoload": 
     {
         "psr-0": 

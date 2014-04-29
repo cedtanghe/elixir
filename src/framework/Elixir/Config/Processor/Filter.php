@@ -41,7 +41,7 @@ class Filter extends ProcessorAbstract
             return $this->processConfig($pValue);
         }
         
-        if(is_array($pValue) || is_object($pValue) || $pValue instanceof Traversable)
+        if(is_array($pValue) || is_object($pValue) || $pValue instanceof \Traversable)
         {
             foreach($pValue as &$value)
             {
