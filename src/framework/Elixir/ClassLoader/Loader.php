@@ -2,7 +2,10 @@
 
 namespace Elixir\ClassLoader;
 
-require_once 'LoaderInterface.php';
+if(!class_exists('\Elixir\ClassLoader\LoaderInterface'))
+{
+    require_once 'LoaderInterface.php';
+}
 
 use Elixir\Cache\CacheInterface;
 use Elixir\ClassLoader\LoaderInterface;

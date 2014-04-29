@@ -3,6 +3,7 @@
 namespace Elixir\DB\SQL;
 
 use Elixir\DB\SQL\SQLAbstract;
+use Elixir\DB\SQL\WhereClause;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

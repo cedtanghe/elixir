@@ -2,6 +2,8 @@
 
 namespace Elixir\Security\Firewall\Writer;
 
+use Elixir\Security\Firewall\Writer\WriterAbstract;
+
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */

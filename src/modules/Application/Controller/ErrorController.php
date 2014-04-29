@@ -9,14 +9,6 @@ use Elixir\MVC\Controller\ControllerAbstract;
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
-final class Dummy
-{
-    public function translate($pStr)
-     {
-         return $pStr;
-     }
-}
-
 class ErrorController extends ControllerAbstract
 {
     /**
@@ -24,12 +16,7 @@ class ErrorController extends ControllerAbstract
      */
     public function indexAction()
     {
-        $translator = $this->_container->get('helper.i18n', null, function()
-        {
-            return new Dummy();
-        });
-        
-        $message = $translator->translate('An error has occurred !');
+        $message = 'An error has occurred !';
         $statusCode = 500;
         
         $exception = $this->_request->getAttributes('exception');
@@ -39,11 +26,11 @@ class ErrorController extends ControllerAbstract
             switch($exception->getCode())
             {
                 case 403:
-                    $message = $translator->translate('Access Denied !');
+                    $message = 'Access Denied !';
                     $statusCode = 403;
                 break;
                 case 404:
-                    $message = $translator->translate('Page not found !');
+                    $message = 'Page not found !';
                     $statusCode = 404;
                 break;
             }

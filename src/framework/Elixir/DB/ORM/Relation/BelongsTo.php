@@ -3,6 +3,7 @@
 namespace Elixir\DB\ORM\Relation;
 
 use Elixir\DB\ORM\Collection;
+use Elixir\DB\ORM\Relation\Pivot;
 use Elixir\DB\ORM\Relation\RelationInterface;
 use Elixir\DB\ORM\RepositoryInterface;
 use Elixir\DB\ORM\Select;
@@ -134,13 +135,13 @@ class BelongsTo implements RelationInterface
     /**
      * @param callable $pCriterion
      * @return BelongsTo
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function addCriterion($pCriterion)
     {
         if(!is_callable($pCriterion))
         {
-            throw new \InvalidArgumentException('Criterion argument must be a callable.');
+            throw new InvalidArgumentException('Criterion argument must be a callable.');
         }
         
         $this->_criterions[] = $pCriterion;
