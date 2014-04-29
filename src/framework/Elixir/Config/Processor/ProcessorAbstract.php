@@ -3,6 +3,7 @@
 namespace Elixir\Config\Processor;
 
 use Elixir\Config\ConfigInterface;
+use Elixir\Config\Processor\ProcessorInterface;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

@@ -2,12 +2,16 @@
 
 namespace Elixir\DB\ORM;
 
+use Elixir\DB\ORM\Collection;
+use Elixir\DB\ORM\ModelEvent;
 use Elixir\DB\ORM\Relation\BelongsTo;
 use Elixir\DB\ORM\Relation\HasMany;
 use Elixir\DB\ORM\Relation\HasOne;
 use Elixir\DB\ORM\Relation\Pivot;
 use Elixir\DB\ORM\Relation\Relation;
 use Elixir\DB\ORM\Relation\RelationInterface;
+use Elixir\DB\ORM\RepositoryInterface;
+use Elixir\DB\ORM\Select;
 use Elixir\DB\SQL\Insert;
 use Elixir\DB\SQL\Update;
 use Elixir\DI\ContainerInterface;

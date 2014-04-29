@@ -2,6 +2,8 @@
 
 namespace Elixir\DB\Result;
 
+use Elixir\DB\Result\SetAbstract;
+
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */

@@ -2,6 +2,8 @@
 
 namespace Elixir\DB\SQL;
 
+use Elixir\DB\SQL\Expr;
+
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */

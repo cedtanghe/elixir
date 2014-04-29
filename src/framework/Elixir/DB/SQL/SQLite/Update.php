@@ -61,7 +61,7 @@ class Update extends BaseUpdate
     }
     
     /**
-     * @see \Elixir\DB\SQL\Update::render()
+     * @see BaseUpdate::render()
      */
     public function render()
     {

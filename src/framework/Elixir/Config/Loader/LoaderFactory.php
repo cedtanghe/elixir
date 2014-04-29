@@ -2,6 +2,11 @@
 
 namespace Elixir\Config\Loader;
 
+use Elixir\Config\Loader\Arr;
+use Elixir\Config\Loader\INI;
+use Elixir\Config\Loader\JSON;
+use Elixir\Config\Loader\XML;
+
 class LoaderFactory
 {
     /**

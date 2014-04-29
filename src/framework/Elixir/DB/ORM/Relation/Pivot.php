@@ -2,6 +2,7 @@
 
 namespace Elixir\DB\ORM\Relation;
 
+use Elixir\DB\ORM\Relation\RelationInterface;
 use Elixir\DB\ORM\Select;
 use Elixir\DB\SQL\JoinClause;
 

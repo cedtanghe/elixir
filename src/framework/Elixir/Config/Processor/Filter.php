@@ -3,6 +3,7 @@
 namespace Elixir\Config\Processor;
 
 use Elixir\Config\ConfigInterface;
+use Elixir\Config\Processor\ProcessorAbstract;
 use Elixir\Filter\FilterInterface;
 
 /**

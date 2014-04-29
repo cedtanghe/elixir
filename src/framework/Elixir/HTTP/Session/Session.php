@@ -5,6 +5,7 @@ namespace Elixir\HTTP\Session;
 use Elixir\Dispatcher\Dispatcher;
 use Elixir\HTTP\Parameters;
 use Elixir\HTTP\Session\SaveHandler\SaveHandlerInterface;
+use Elixir\HTTP\Session\SessionEvent;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

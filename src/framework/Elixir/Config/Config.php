@@ -2,6 +2,7 @@
 
 namespace Elixir\Config;
 
+use Elixir\Config\ConfigInterface;
 use Elixir\Config\Loader\LoaderFactory;
 use Elixir\Config\Processor\ProcessorInterface;
 use Elixir\Config\Writer\WriterInterface;

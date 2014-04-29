@@ -17,7 +17,7 @@ class Chain extends ValidatorAbstract
      * @param ValidatorInterface $pValidator
      * @param array $pOptions
      */
-    public function addValidator($pValidator, array $pOptions = array())
+    public function addValidator(ValidatorInterface $pValidator, array $pOptions = array())
     {
         $this->_validators[] = array('validator' => $pValidator, 'options' => $pOptions);
     }

@@ -2,6 +2,7 @@
 
 namespace Elixir\Cache;
 
+use Elixir\Cache\CacheInterface;
 use Elixir\Cache\Encoder\EncoderInterface;
 use Elixir\Util\Str;
 

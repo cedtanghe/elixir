@@ -2,6 +2,8 @@
 
 namespace Elixir\DI;
 
+use Elixir\DI\ProviderInterface;
+
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */

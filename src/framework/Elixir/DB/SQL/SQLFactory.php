@@ -9,6 +9,10 @@ use Elixir\DB\SQL\SQLite\Delete as SQLiteDelete;
 use Elixir\DB\SQL\SQLite\Insert as SQLiteInsert;
 use Elixir\DB\SQL\SQLite\Select as SQLiteSelect;
 use Elixir\DB\SQL\SQLite\Update as SQLiteUpdate;
+use Elixir\DB\SQL\SQLite\Select;
+use Elixir\DB\SQL\SQLite\Insert;
+use Elixir\DB\SQL\SQLite\Update;
+use Elixir\DB\SQL\SQLite\Delete;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

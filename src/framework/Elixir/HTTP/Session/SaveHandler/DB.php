@@ -6,6 +6,7 @@ use Elixir\DB\DBInterface;
 use Elixir\DB\Result\SetAbstract;
 use Elixir\DB\SQL\Insert;
 use Elixir\DB\SQL\Update;
+use Elixir\HTTP\Session\SaveHandler\SaveHandlerInterface;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

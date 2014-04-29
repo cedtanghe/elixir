@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="robots" content="index, follow, all" />
-        <title>Elixir\Facade\Validator | Elixir</title>
+        <title>Elixir\Facade\Helper | Elixir</title>
                     <script type="text/javascript" src="../../js/jquery-1.3.2.min.js"></script>
 			
 			<link rel="stylesheet" type="text/css" href="../../stylesheet.css">
@@ -26,10 +26,10 @@
         <div id="title">Elixir</div>
 
             <div class="type">Class</div>
-    <h1><a href="../../Elixir/Facade.html">Elixir\Facade</a>\Validator</h1>
+    <h1><a href="../../Elixir/Facade.html">Elixir\Facade</a>\Helper</h1>
     </div>
         <div class="content">
-                <p>class    <strong>Validator</strong>        extends <a href="../../Elixir/Facade/FacadeAbstract.html"><abbr title="Elixir\Facade\FacadeAbstract">FacadeAbstract</abbr></a></p>
+                <p>class    <strong>Helper</strong>        extends <a href="../../Elixir/Facade/FacadeAbstract.html"><abbr title="Elixir\Facade\FacadeAbstract">FacadeAbstract</abbr></a></p>
 
     
     
@@ -72,7 +72,7 @@
             </tr>
                     <tr>
                 <td class="type">
-                    static&nbsp;boolean
+                    static&nbsp;mixed
                 </td>
                 <td class="last">
                     <a href="#method___callStatic">__callStatic</a>(string $pMethod, array $pArguments)
@@ -94,10 +94,10 @@
             </tr>
                     <tr>
                 <td class="type">
-                    static&nbsp;boolean
+                    static&nbsp;mixed
                 </td>
                 <td class="last">
-                    <a href="#method_valid">valid</a>(string $pClassOrKey, string $pContent, array $pOptions = array())
+                    <a href="#method_helper">helper</a>(string $pClassOrKey, array $pArguments = array())
                     <p>
 </p>
                 </td>
@@ -221,8 +221,8 @@
     </div>
 
                 <h3 id="method___callStatic">
-        <div class="location">at line 95</div>
-        <code>        static    public            boolean
+        <div class="location">at line 94</div>
+        <code>        static    public            mixed
     <strong>__callStatic</strong>(string $pMethod, array $pArguments)</code>
     </h3>
     <div class="details">
@@ -253,7 +253,7 @@
 
                     <table>
         <tr>
-            <td>boolean</td>
+            <td>mixed</td>
             <td>
 </td>
         </tr>
@@ -308,10 +308,10 @@
                     </div>
     </div>
 
-                <h3 id="method_valid">
-        <div class="location">at line 83</div>
-        <code>        static    public            boolean
-    <strong>valid</strong>(string $pClassOrKey, string $pContent, array $pOptions = array())</code>
+                <h3 id="method_helper">
+        <div class="location">at line 82</div>
+        <code>        static    public            mixed
+    <strong>helper</strong>(string $pClassOrKey, array $pArguments = array())</code>
     </h3>
     <div class="details">
         <p>
@@ -329,14 +329,8 @@
 </td>
             </tr>
                     <tr>
-                <td>string</td>
-                <td>$pContent</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
                 <td>array</td>
-                <td>$pOptions</td>
+                <td>$pArguments</td>
                 <td>
 </td>
             </tr>
@@ -347,7 +341,7 @@
 
                     <table>
         <tr>
-            <td>boolean</td>
+            <td>mixed</td>
             <td>
 </td>
         </tr>

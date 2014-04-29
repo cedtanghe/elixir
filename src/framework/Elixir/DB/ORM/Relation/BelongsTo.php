@@ -3,6 +3,7 @@
 namespace Elixir\DB\ORM\Relation;
 
 use Elixir\DB\ORM\Collection;
+use Elixir\DB\ORM\Relation\RelationInterface;
 use Elixir\DB\ORM\RepositoryInterface;
 use Elixir\DB\ORM\Select;
 

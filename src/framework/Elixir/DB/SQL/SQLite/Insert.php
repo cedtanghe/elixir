@@ -26,7 +26,7 @@ class Insert extends BaseInsert
     }
     
     /**
-     * @see \Elixir\DB\SQL\Insert::render()
+     * @see BaseInsert::render()
      */
     public function render()
     {

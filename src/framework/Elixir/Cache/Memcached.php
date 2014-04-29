@@ -2,6 +2,8 @@
 
 namespace Elixir\Cache;
 
+use Elixir\Cache\CacheAbstract;
+
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */

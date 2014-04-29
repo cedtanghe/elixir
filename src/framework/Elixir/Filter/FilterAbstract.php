@@ -2,6 +2,8 @@
 
 namespace Elixir\Filter;
 
+use Elixir\Filter\FilterInterface;
+
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */

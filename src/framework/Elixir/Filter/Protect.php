@@ -2,6 +2,8 @@
 
 namespace Elixir\Filter;
 
+use Elixir\Filter\FilterAbstract;
+use Elixir\Filter\FilterInterface;
 use Elixir\Util\Str;
 
 /**

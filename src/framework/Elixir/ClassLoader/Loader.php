@@ -1,11 +1,12 @@
 <?php
 
+require_once 'LoaderInterface.php';
+
 namespace Elixir\ClassLoader;
 
 use Elixir\Cache\CacheInterface;
+use Elixir\ClassLoader\LoaderInterface;
 use Elixir\HTTP\Session\SessionInterface;
-
-require_once 'LoaderInterface.php';
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

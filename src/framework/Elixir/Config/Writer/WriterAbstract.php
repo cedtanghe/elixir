@@ -3,6 +3,7 @@
 namespace Elixir\Config\Writer;
 
 use Elixir\Config\ConfigInterface;
+use Elixir\Config\Writer\WriterInterface;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

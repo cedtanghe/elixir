@@ -2,6 +2,8 @@
 
 namespace Elixir\Facade;
 
+use Elixir\Facade\FacadeAbstract;
+
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */

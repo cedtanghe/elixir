@@ -2,6 +2,9 @@
 
 namespace Elixir\Filter;
 
+use Elixir\Filter\FilterAbstract;
+use Elixir\Filter\FilterInterface;
+
 /**
  * @see Zend/Escaper/Escaper.php
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

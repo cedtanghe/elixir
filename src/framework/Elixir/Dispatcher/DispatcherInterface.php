@@ -2,6 +2,8 @@
 
 namespace Elixir\Dispatcher;
 
+use Elixir\Dispatcher\SubscriberInterface;
+
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */

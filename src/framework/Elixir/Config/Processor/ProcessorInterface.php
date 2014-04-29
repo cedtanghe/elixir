@@ -11,7 +11,7 @@ use Elixir\Config\ConfigInterface;
 interface ProcessorInterface 
 {
     /**
-     * @param ConfigInterface $pValue
+     * @param ConfigInterface $pConfig
      */
     public function processConfig(ConfigInterface $pConfig);
     

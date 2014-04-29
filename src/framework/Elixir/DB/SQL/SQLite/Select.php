@@ -11,7 +11,7 @@ use Elixir\DB\SQL\Select as BaseSelect;
 class Select extends BaseSelect
 {
     /**
-     * @see \Elixir\DB\SQL\Select::renderOrders()
+     * @see BaseSelect::renderOrders()
      */
     protected function renderOrders()
     {

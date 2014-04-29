@@ -2,6 +2,9 @@
 
 namespace Elixir\DB;
 
+use Elixir\DB\DBInterface;
+use Elixir\DB\PDO;
+
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
@@ -20,7 +23,7 @@ class DBFactory
     
     /**
      * @param array $pConfig
-     * @return DBAbstract|null
+     * @return DBInterface|null
      * @throws \RuntimeException
      */
     public static function create(array $pConfig)

@@ -2,6 +2,9 @@
 
 namespace Elixir\Filter;
 
+use Elixir\Filter\FilterAbstract;
+use Elixir\Filter\FilterInterface;
+
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
@@ -30,7 +33,7 @@ class Chain extends FilterAbstract
      * @param FilterInterface $pFilter
      * @param array $pOptions
      */
-    public function addFilter($pFilter, array $pOptions = array())
+    public function addFilter(FilterInterface $pFilter, array $pOptions = array())
     {
         $this->_filters[] = array('filter' => $pFilter, 'options' => $pOptions);
     }

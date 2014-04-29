@@ -2,6 +2,8 @@
 
 namespace Elixir\DB\ORM\Relation;
 
+use Elixir\DB\ORM\Relation\HasOneOrMany;
+use Elixir\DB\ORM\Relation\Pivot;
 use Elixir\DB\ORM\RepositoryInterface;
 
 /**

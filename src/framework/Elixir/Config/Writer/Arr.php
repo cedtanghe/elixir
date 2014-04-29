@@ -2,6 +2,8 @@
 
 namespace Elixir\Config\Writer;
 
+use Elixir\Config\Writer\WriterAbstract;
+
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */

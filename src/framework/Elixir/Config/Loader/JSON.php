@@ -2,6 +2,8 @@
 
 namespace Elixir\Config\Loader;
 
+use Elixir\Config\Loader\LoaderAbstract;
+use Elixir\Config\Loader\LoaderFactory;
 use Elixir\Util\Arr as ArrayUtils;
 
 /**

@@ -2,6 +2,8 @@
 
 namespace Elixir\DB;
 
+use Elixir\DB\DBAbstract;
+use Elixir\DB\DBEvent;
 use Elixir\DB\Result\PDO as ResultSet;
 use Elixir\DB\SQL\Expr;
 use Elixir\DB\SQL\SQLAbstract;
@@ -88,7 +90,7 @@ class PDO extends DBAbstract
     }
     
     /**
-     * @see DBInterface::begin()
+     * @see DBAbstract::begin()
      */
     public function begin() 
     {
@@ -107,7 +109,7 @@ class PDO extends DBAbstract
     }
     
     /**
-     * @see DBInterface::rollBack()
+     * @see DBAbstract::rollBack()
      */
     public function rollBack()
     {
@@ -126,7 +128,7 @@ class PDO extends DBAbstract
     }
 
     /**
-     * @see DBInterface::commit()
+     * @see DBAbstract::commit()
      */
     public function commit()
     {
@@ -145,7 +147,7 @@ class PDO extends DBAbstract
     }
     
     /**
-     * @see DBInterface::inTransaction()
+     * @see DBAbstract::inTransaction()
      */
     public function inTransaction()
     {
@@ -153,7 +155,7 @@ class PDO extends DBAbstract
     }
     
     /**
-     * @see DBInterface::quote()
+     * @see DBAbstract::quote()
      */
     public function quote($pValue, $pType = null)
     {
@@ -200,7 +202,7 @@ class PDO extends DBAbstract
     }
 
     /**
-     * @see DBInterface::query()
+     * @see DBAbstract::query()
      */
     public function query($pSQL, array $pValues = array(), array $pOptions = array())
     {
@@ -306,7 +308,7 @@ class PDO extends DBAbstract
     }
     
     /**
-     * @see DBInterface::lastInsertId()
+     * @see DBAbstract::lastInsertId()
      */
     public function lastInsertId() 
     {

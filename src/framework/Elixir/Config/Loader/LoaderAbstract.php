@@ -2,6 +2,8 @@
 
 namespace Elixir\Config\Loader;
 
+use Elixir\Config\Loader\LoaderInterface;
+
 abstract class LoaderAbstract implements LoaderInterface
 {
     /**

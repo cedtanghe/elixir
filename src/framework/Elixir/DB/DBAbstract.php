@@ -2,6 +2,7 @@
 
 namespace Elixir\DB;
 
+use Elixir\DB\DBInterface;
 use Elixir\DB\SQL\SQLFactory;
 use Elixir\Dispatcher\Dispatcher;
 

@@ -2,10 +2,11 @@
 
 namespace Elixir\DB\ORM;
 
-use Elixir\Util\Str;
 use Elixir\DB\DBInterface;
+use Elixir\DB\ORM\RepositoryInterface;
 use Elixir\DB\Result\SetAbstract;
 use Elixir\DB\SQL\Select as SQLSelect;
+use Elixir\Util\Str;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
@@ -29,7 +30,7 @@ class Select
     protected $_DB;
     
     /**
-     * @var Elixir\DB\SQL\Select
+     * @var SQLSelect
      */
     protected $_SQL;
     
@@ -44,7 +45,7 @@ class Select
     }
     
     /**
-     * @see Elixir\DB\SQL\Select::table()
+     * @see SQLSelect::table()
      * @return Select
      * @throws \LogicException
      */
@@ -136,7 +137,7 @@ class Select
     }
     
     /**
-     * @see Elixir\DB\SQL\Select::reset()
+     * @see SQLSelect::reset()
      * @return Select
      */
     public function reset($pPart)

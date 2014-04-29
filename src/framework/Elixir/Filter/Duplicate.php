@@ -2,6 +2,7 @@
 
 namespace Elixir\Filter;
 
+use Elixir\Filter\FilterInterface;
 use Elixir\Util\File;
 
 /**

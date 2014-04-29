@@ -2,6 +2,9 @@
 
 namespace Elixir\DI;
 
+use Elixir\DI\ContainerEvent;
+use Elixir\DI\ContainerInterface;
+use Elixir\DI\ProviderInterface;
 use Elixir\Dispatcher\Dispatcher;
 
 /**

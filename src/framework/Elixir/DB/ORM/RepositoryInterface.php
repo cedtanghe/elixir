@@ -3,6 +3,8 @@
 namespace Elixir\DB\ORM;
 
 use Elixir\DB\DBInterface;
+use Elixir\DB\ORM\EntityInterface;
+use Elixir\DB\SQL\SQLite\Select;
 use Elixir\DI\ContainerInterface;
 
 /**

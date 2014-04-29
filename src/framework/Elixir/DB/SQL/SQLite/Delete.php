@@ -61,7 +61,7 @@ class Delete extends BaseDelete
     }
     
     /**
-     * @see \Elixir\DB\SQL\Delete::render()
+     * @see BaseDelete::render()
      */
     public function render()
     {
