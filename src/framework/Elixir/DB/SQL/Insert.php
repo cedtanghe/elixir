@@ -99,19 +99,48 @@ class Insert extends SQLAbstract
         }
         else
         {
-            $keys = array_keys($pValues);
-            
-            if(is_string(current($keys)))
-            {
-                $this->columns($keys);
-            }
-            
             if($pType == self::VALUES_SET || !is_array($this->_values))
             {
                 $this->_values = array();
             }
             
-            $this->_values[] = array_values($pValues);
+            $columns = false;
+            
+            foreach($pValues as $key => $value)
+            {
+                if(!$columns)
+                {
+                    if(is_string($key))
+                    {
+                        $this->columns(array_keys($pValues));
+                        $columns = true;
+                    }
+                }
+                
+                if(is_array($value))
+                {
+                    if(!$columns)
+                    {
+                        foreach($value as $k => $v)
+                        {
+                            if(is_string($k))
+                            {
+                                $this->columns(array_keys($value));
+                                $columns = true;
+                            }
+                            
+                            break;
+                        }
+                    }
+                    
+                    $this->_values[] = array_values($value);
+                }
+                else
+                {
+                    $this->_values[] = array_values($pValues);
+                    break;
+                }
+            }
         }
         
         return $this;

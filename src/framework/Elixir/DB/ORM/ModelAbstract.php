@@ -1115,4 +1115,12 @@ abstract class ModelAbstract extends Dispatcher implements RepositoryInterface
     {
         $this->set($pKey, $this->_ignoreValue, false);
     }
+    
+    /**
+     * @return string
+     */
+    public function __toString() 
+    {
+        return $this->export();
+    }
 }

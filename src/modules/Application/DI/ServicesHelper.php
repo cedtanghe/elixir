@@ -105,7 +105,10 @@ class ServicesHelper implements ProviderInterface
         }, 
         array(
             'type' => ContainerInterface::SINGLETON,
-            'tags' => array(ViewHelper::HELPER_TAG_KEY),
+            'tags' => array(
+                ViewHelper::HELPER_TAG_KEY, 
+                ControllerHelper::HELPER_TAG_KEY
+            ),
             'aliases' => array('filter.escaper')
         ));
         
