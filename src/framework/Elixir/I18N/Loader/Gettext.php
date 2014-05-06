@@ -44,6 +44,9 @@ class Gettext implements LoaderInterface
             throw new \InvalidArgumentException('This is not a valid gettext file.');
         }
         
+        // Major revision
+        $this->readInteger() >> 16;
+        
         $numStrings = $this->readInteger();
         
         $originalStringTableOffset = $this->readInteger();
