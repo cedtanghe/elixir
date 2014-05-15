@@ -339,7 +339,7 @@ class ModelGenerate extends Command
         }
         else if(is_array($pDefinition['primary']))
         {
-            $primaryKey = 'array(\'' . implode('\', \'', $pDefinition['primary']) . '\')';
+            $primaryKey = '[\'' . implode('\', \'', $pDefinition['primary']) . '\']';
         }
         else
         {
