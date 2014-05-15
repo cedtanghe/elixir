@@ -14,7 +14,7 @@ class Email extends FilterAbstract
     /**
      * @see FilterInterface::filter()
      */
-    public function filter($pContent, array $pOptions = array())
+    public function filter($pContent, array $pOptions = [])
     {
         return filter_var($pContent, FILTER_SANITIZE_EMAIL);
     }

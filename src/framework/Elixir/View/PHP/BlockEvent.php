@@ -36,7 +36,7 @@ class BlockEvent extends Event
      * @param string $pContent
      * @param array $pOptions
      */
-    public function __construct($pType, $pBlock = null, $pContent = null, array $pOptions = array()) 
+    public function __construct($pType, $pBlock = null, $pContent = null, array $pOptions = []) 
     {
         parent::__construct($pType);
         

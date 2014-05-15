@@ -109,6 +109,6 @@ class Security implements HelperInterface
     public function direct()
     {
         $args = func_get_args();
-        return call_user_func_array(array($this, 'hasIdentity'), $args);
+        return call_user_func_array([$this, 'hasIdentity'], $args);
     }
 }

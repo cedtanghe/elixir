@@ -47,7 +47,7 @@ class HasOneOrMany implements RelationInterface
     /**
      * @var array 
      */
-    protected $_criterions = array();
+    protected $_criterions = [];
     
     /**
      * @var RepositoryInterface|Collection
@@ -226,7 +226,7 @@ class HasOneOrMany implements RelationInterface
             else
             {
                 $this->setRelated(
-                    $this->_type === self::HAS_ONE ? null : new Collection(array(), true),
+                    $this->_type === self::HAS_ONE ? null : new Collection([], true),
                     true
                 );
             }
@@ -234,7 +234,7 @@ class HasOneOrMany implements RelationInterface
         else
         {
             $this->setRelated(
-                $this->_type === self::HAS_ONE ? null : new Collection(array(), true),
+                $this->_type === self::HAS_ONE ? null : new Collection([], true),
                 true
             );
         }

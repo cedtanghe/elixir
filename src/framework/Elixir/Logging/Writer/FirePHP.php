@@ -69,7 +69,7 @@ class FirePHP extends WriterAbstract
                     break;
                 }
                 
-                $content = json_encode(array(array('Type' => $type), $this->format($pMessage, $pSeverity)));
+                $content = json_encode([['Type' => $type], $this->format($pMessage, $pSeverity)]);
                 header('X-Wf-1-1-1-' . ++$this->_counter . ': ' . strlen($content) . '|' . $content . '|');
             }
         }

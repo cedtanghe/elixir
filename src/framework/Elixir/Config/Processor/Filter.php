@@ -20,13 +20,13 @@ class Filter extends ProcessorAbstract
     /**
      * @var array 
      */
-    protected $_filterOptions = array();
+    protected $_filterOptions = [];
     
     /**
      * @param FilterInterface $pFilter
      * @param array $pOptions
      */
-    public function __construct(FilterInterface $pFilter, array $pOptions = array()) 
+    public function __construct(FilterInterface $pFilter, array $pOptions = []) 
     {
         $this->_filter = $pFilter;
         $this->_filterOptions = $pOptions;

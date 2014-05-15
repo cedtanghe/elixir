@@ -36,31 +36,31 @@ class Test extends \PHPUnit_Framework_TestCase
         $form->add($input);
         
         $this->assertEquals('my-form', $form->getName());
-        $this->assertTrue($form->submit(array('iten-not-exist' => 'ok')));
+        $this->assertTrue($form->submit(['iten-not-exist' => 'ok']));
         
         $input->setRequired(true);
         
-        $this->assertFalse($form->submit(array('iten-not-exist' => 'ok')));
-        $this->assertTrue($form->submit(array('item-input' => 'ok')));
+        $this->assertFalse($form->submit(['iten-not-exist' => 'ok']));
+        $this->assertTrue($form->submit(['item-input' => 'ok']));
     }
     
     public function testFormWithFactory()
     {
-        $form = FormFactory::createForm(array('name' => 'my-form',
-                                              'attributes' => array('id' => 'my-id'),
-                                              'options' => array('test' => 'value'),
+        $form = FormFactory::createForm(['name' => 'my-form',
+                                              'attributes' => ['id' => 'my-id'],
+                                              'options' => ['test' => 'value'],
                                               'errorMessage' => 'An error has been detected',
-                                              'items' => array('item-input' => array('type' => 'Elixir\Form\Field\Input',
+                                              'items' => ['item-input' => ['type' => 'Elixir\Form\Field\Input',
                                                                                      'required' => false,
-                                                                                     'validators' => array(new NotEmpty())))));
+                                                                                     'validators' => [new NotEmpty()]]]]);
         
         $this->assertEquals('my-form', $form->getName());
-        $this->assertTrue($form->submit(array('iten-not-exist' => 'ok')));
+        $this->assertTrue($form->submit(['iten-not-exist' => 'ok']));
         
         $input = $form->get('item-input');
         $input->setRequired(true);
         
-        $this->assertFalse($form->submit(array('iten-not-exist' => 'ok')));
-        $this->assertTrue($form->submit(array('item-input' => 'ok')));
+        $this->assertFalse($form->submit(['iten-not-exist' => 'ok']));
+        $this->assertTrue($form->submit(['item-input' => 'ok']));
     }
 }

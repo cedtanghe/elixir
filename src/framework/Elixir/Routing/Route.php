@@ -123,7 +123,7 @@ class Route
      * @param array $pParameters
      * @param array $pOptions
      */
-    public function __construct($pPattern, array $pParameters = array(), array $pOptions = array())
+    public function __construct($pPattern, array $pParameters = [], array $pOptions = [])
     {
         $this->_pattern = trim($pPattern, '/');
         $this->setParameters($pParameters);
@@ -276,7 +276,7 @@ class Route
      */
     public function setParameters(array $pData)
     {
-        $this->_parameters = array();
+        $this->_parameters = [];
         
         foreach($pData as $key => $value)
         {
@@ -329,7 +329,7 @@ class Route
      */
     public function getMethods()
     {
-        return $this->getOption(self::METHOD, array());
+        return $this->getOption(self::METHOD, []);
     }
     
     /**
@@ -338,7 +338,7 @@ class Route
      */
     public function setMethods(array $pData)
     {
-        $methods = array('POST', 'GET', 'PUT', 'DELETE');
+        $methods = ['POST', 'GET', 'PUT', 'DELETE'];
         
         foreach($pData as &$method)
         {
@@ -546,7 +546,7 @@ class Route
      */
     public function setOptions(array $pData)
     {
-        $this->_options = array();
+        $this->_options = [];
         
         foreach($pData as $key => $value)
         {

@@ -29,7 +29,7 @@ class Services implements ProviderInterface
         {
             return new Config(defined('APPLICATION_ENV') ? APPLICATION_ENV : null);
         }, 
-        array('type' => ContainerInterface::SINGLETON));
+        ['type' => ContainerInterface::SINGLETON]);
         
         /************ ROUTER ************/
         
@@ -41,7 +41,7 @@ class Services implements ProviderInterface
             
             return $router;
         }, 
-        array('type' => ContainerInterface::SINGLETON));
+        ['type' => ContainerInterface::SINGLETON]);
         
         /************ VIEW ************/
         
@@ -57,6 +57,6 @@ class Services implements ProviderInterface
             
             return $manager;
         }, 
-        array('type' => ContainerInterface::SINGLETON));
+        ['type' => ContainerInterface::SINGLETON]);
     }
 }

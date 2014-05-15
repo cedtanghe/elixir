@@ -13,5 +13,5 @@ interface FilterInterface
      * @param array $pOptions 
      * @return mixed
      */
-    public function filter($pContent, array $pOptions = array());
+    public function filter($pContent, array $pOptions = []);
 }

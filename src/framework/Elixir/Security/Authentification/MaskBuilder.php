@@ -27,7 +27,7 @@ class MaskBuilder
      */
     public function explode(array $pReferences)
     {
-        $codes = array();
+        $codes = [];
         
         foreach($pReferences as $code)
         {

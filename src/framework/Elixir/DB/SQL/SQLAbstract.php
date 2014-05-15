@@ -137,7 +137,7 @@ abstract class SQLAbstract
     /**
      * @var array
      */
-    protected $_bindValues = array();
+    protected $_bindValues = [];
     
     /**
      * @param callable $pValue
@@ -167,7 +167,7 @@ abstract class SQLAbstract
      */
     public function quote($pParameter)
     {
-        return call_user_func_array($this->_quoteMethod, array($pParameter));
+        return call_user_func_array($this->_quoteMethod, [$pParameter]);
     }
     
     /**
@@ -215,12 +215,12 @@ abstract class SQLAbstract
 
                 if($isUniqArrayParameter)
                 {
-                    $pValues = array($pValues);
+                    $pValues = [$pValues];
                 }
             }
             
-            $keys = array();
-            $values = array();
+            $keys = [];
+            $values = [];
             $limit = -1;
 
             foreach($pValues as $key => $value)

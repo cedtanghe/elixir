@@ -15,7 +15,7 @@ class Arr extends WriterAbstract
      */
     public function write()
     {
-        $data = array();
+        $data = [];
         
         foreach($this->_I18N->getTextDomains() as $key => $domain)
         {

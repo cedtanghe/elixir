@@ -23,17 +23,17 @@ abstract class ValidatorAbstract implements ValidatorInterface
     /**
      * @var array
      */
-    protected $_errors = array();
+    protected $_errors = [];
     
     /**
      * @var array 
      */
-    protected $_errorMessageTemplates = array(self::ERROR => 'Error when validating');
+    protected $_errorMessageTemplates = [self::ERROR => 'Error when validating'];
     
     /**
      * @var array
      */
-    protected $_options = array();
+    protected $_options = [];
 
     /**
      * @param array $pValue

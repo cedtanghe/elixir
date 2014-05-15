@@ -128,11 +128,11 @@ class Input extends FieldAbstract
     /**
      * @var array
      */
-    protected static $_excludes = array(
+    protected static $_excludes = [
         self::FILE => '\Elixir\Form\Field\File',
         self::CHECKBOX => '\Elixir\Form\Field\Checkbox',
         self::RADIO => '\Elixir\Form\Field\Radio'
-    );
+    ];
 
     /**
      * @see FieldAbstract::__construct()

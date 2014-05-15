@@ -147,7 +147,7 @@ class PHP extends DataAbstract implements HelperInterface, EscaperInterface
             }
             else
             {
-                $pData = $this->_escaper->filter($pData, array('strategy' => $pStrategy));
+                $pData = $this->_escaper->filter($pData, ['strategy' => $pStrategy]);
             }
         }
         
@@ -226,7 +226,7 @@ class PHP extends DataAbstract implements HelperInterface, EscaperInterface
     /**
      * @see ViewInterface::render()
      */
-    public function render($pTemplate, array $pData = array())
+    public function render($pTemplate, array $pData = [])
     {
         foreach($pData as $key => $value)
         {

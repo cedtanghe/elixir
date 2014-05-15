@@ -42,22 +42,22 @@ class Application extends Dispatcher implements ApplicationInterface
     /**
      * @var array
      */
-    protected $_modules = array();
+    protected $_modules = [];
 
     /**
      * @var array 
      */
-    protected $_map = array();
+    protected $_map = [];
     
     /**
      * @var array 
      */
-    protected $_classesLoaded = array();
+    protected $_classesLoaded = [];
     
     /**
      * @var array 
      */
-    protected $_filesLoaded = array();
+    protected $_filesLoaded = [];
     
     /**
      * @var ControllerResolverInterface
@@ -94,15 +94,15 @@ class Application extends Dispatcher implements ApplicationInterface
      */
     public function loadFromCache($pCache, $pKey = self::DEFAULT_CACHE_KEY)
     {
-        $data = $pCache->get($pKey, array()) ?: array();
+        $data = $pCache->get($pKey, []) ?: [];
         
         $this->_classesLoaded = array_merge(
-            Arr::get('classes', $data, array()),
+            Arr::get('classes', $data, []),
             $this->_classesLoaded
         );
         
         $this->_filesLoaded = array_merge(
-            Arr::get('files', $data, array()),
+            Arr::get('files', $data, []),
             $this->_filesLoaded
         );
     }
@@ -115,10 +115,10 @@ class Application extends Dispatcher implements ApplicationInterface
     {
         $pCache->set(
             $pKey, 
-            array(
+            [
                 'classes' => $this->_classesLoaded,
                 'files' => $this->_filesLoaded
-            )
+            ]
         );
     }
     
@@ -229,7 +229,7 @@ class Application extends Dispatcher implements ApplicationInterface
      */
     public function setModules(array $pData)
     {
-        $this->_modules = array();
+        $this->_modules = [];
         
         foreach($pData as $module)
         {
@@ -256,7 +256,7 @@ class Application extends Dispatcher implements ApplicationInterface
             return;
         }
         
-        $extended = array();
+        $extended = [];
         
         foreach($this->_modules as $module)
         {
@@ -287,11 +287,11 @@ class Application extends Dispatcher implements ApplicationInterface
             $extended[$name] = null;
         }
         
-        $this->_map = array();
+        $this->_map = [];
         
         foreach($extended as $key => $value)
         {
-            $this->_map[$key] = array($key);
+            $this->_map[$key] = [$key];
             
             if(null !== $value)
             {
@@ -358,7 +358,7 @@ class Application extends Dispatcher implements ApplicationInterface
             return $this->_classesLoaded[$pClassName];
         }
         
-        $search = array();
+        $search = [];
         
         if(preg_match('/^\(@([^\)]+)\)/', $pClassName, $matches))
         {
@@ -372,7 +372,7 @@ class Application extends Dispatcher implements ApplicationInterface
         }
         else
         {
-            $search = array($pClassName);
+            $search = [$pClassName];
         }
         
         foreach($search as $class)
@@ -398,7 +398,7 @@ class Application extends Dispatcher implements ApplicationInterface
             return $pAll ? $files : $files[0];
         }
         
-        $search = array();
+        $search = [];
 
         if(preg_match('/\(@([^\)]+)\)/', $pFilePath, $matches))
         {
@@ -423,10 +423,10 @@ class Application extends Dispatcher implements ApplicationInterface
         }
         else
         {
-            $search = array($pFilePath);
+            $search = [$pFilePath];
         }
 
-        $files = array();
+        $files = [];
 
         foreach($search as $file)
         {

@@ -46,7 +46,7 @@ class Tree implements TreeInterface
      * @param array $pParameters
      * @param array $pChildren
      */
-    public function __construct(array $pParameters = array(), array $pChildren = array())
+    public function __construct(array $pParameters = [], array $pChildren = [])
     {
         $this->setParameters($pParameters);
         $this->setChildren($pChildren);
@@ -84,9 +84,9 @@ class Tree implements TreeInterface
     public function addChild(TreeInterface $pTree, $pPriority = 0)
     {
         $this->_sorted = false;
-        $this->_trees[] = array('tree' => $pTree,
+        $this->_trees[] = ['tree' => $pTree,
                                 'priority' =>$pPriority, 
-                                'serial' => $this->_serial++);
+                                'serial' => $this->_serial++];
     }
     
     /**
@@ -94,7 +94,7 @@ class Tree implements TreeInterface
      */
     public function getChildren($pWithInfos = false)
     {
-        $trees = array();
+        $trees = [];
             
         foreach($this->_trees as $value)
         {
@@ -109,7 +109,7 @@ class Tree implements TreeInterface
      */
     public function setChildren(array $pData)
     {
-        $this->_trees = array();
+        $this->_trees = [];
         $this->_serial = 0;
         
         foreach($pData as $data)
@@ -197,7 +197,7 @@ class Tree implements TreeInterface
     {
         if(!$this->_sorted)
         {
-            usort($this->_trees, array($this, 'compare'));
+            usort($this->_trees, [$this, 'compare']);
             $this->_sorted = true;
         }
         
@@ -226,7 +226,7 @@ class Tree implements TreeInterface
     /**
      * @see TreeInterface:find()
      */
-    public function find(array $pParameters = array(), $pLevel = self::ALL_LEVEL, $pAll = false)
+    public function find(array $pParameters = [], $pLevel = self::ALL_LEVEL, $pAll = false)
     {
         if($this->_level == 0)
         {
@@ -237,7 +237,7 @@ class Tree implements TreeInterface
         
         if($pAll)
         {
-            $return = array();
+            $return = [];
         }
         
         if($this->searchByParameters($pParameters))

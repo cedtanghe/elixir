@@ -113,7 +113,7 @@ class DB implements SaveHandlerInterface
         if((int)$result->fetchColumn(0) > 0)
         {
             $update = $this->_DB->createUpdate('`sessions`')
-                      ->set(array('`expires`' => $life, '`data`' => $pData), Update::VALUES_SET)
+                      ->set(['`expires`' => $life, '`data`' => $pData], Update::VALUES_SET)
                       ->where('`id` = ?', $pId);
             
             $result = $this->_DB->query($update);
@@ -122,11 +122,11 @@ class DB implements SaveHandlerInterface
         {
             $insert = $this->_DB->createInsert('`sessions`')
                       ->values(
-                          array(
+                          [
                               '`id`' => $pId,
                               '`expires`' => $life,
                               '`data`' => $pData
-                          ),
+                          ],
                           Insert::VALUES_SET
                       );
             

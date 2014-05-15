@@ -19,7 +19,7 @@ class Identity extends Dispatcher
     /**
      * @var array 
      */
-    protected $_data = array();
+    protected $_data = [];
     
     /**
      * @var string 
@@ -30,7 +30,7 @@ class Identity extends Dispatcher
      * @param array $pData
      * @param mixed $pSecurityContext
      */
-    public function __construct(array $pData = array(), $pSecurityContext = null)
+    public function __construct(array $pData = [], $pSecurityContext = null)
     {
         $this->setData($pData);
         $this->_securityContext = $pSecurityContext;

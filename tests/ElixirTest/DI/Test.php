@@ -97,7 +97,7 @@ class Test extends \PHPUnit_Framework_TestCase
     {
         $container = new Container();
         
-        $data = array();
+        $data = [];
         $container->set('param', $data);
         
         $container->extend('param', function($pService, $pContainer)
@@ -119,8 +119,8 @@ class Test extends \PHPUnit_Framework_TestCase
         {
             return 'This is a service';
         }, 
-        array('type' => ContainerInterface::SINGLETON, 
-              'tags' => 'tag'));
+        ['type' => ContainerInterface::SINGLETON, 
+              'tags' => 'tag']);
         
         $services = array_values($container->getValuesByTag('tag'));
         $this->assertEquals('This is a service', $services[0]);

@@ -11,7 +11,7 @@ class Plural
     /**
      * @var array
      */
-    protected $_rules = array();
+    protected $_rules = [];
 
     public function __construct() 
     {
@@ -30,7 +30,7 @@ class Plural
                 $result = count($pMessages) >= 3 ? $pMessages[2] : $pMessages[1];
             }
             
-            return $result;
+            return str_replace('{COUNT}', $pNumber, $result);
         };
     }
 
@@ -111,7 +111,7 @@ class Plural
     {
         if(!is_array($pMessage))
         {
-            $messages = array();
+            $messages = [];
             
             if(preg_match_all('/\[([^\]\|]+\|[^\]]+)\]/', $pMessage, $matches, PREG_SET_ORDER))
             {
@@ -123,10 +123,10 @@ class Plural
         }
         else
         {
-            $messages = array($pMessage);
+            $messages = [$pMessage];
         }
         
-        foreach(array($pLocale, '*') as $locale)
+        foreach([$pLocale, '*'] as $locale)
         {
             if($this->hasRule($locale))
             {

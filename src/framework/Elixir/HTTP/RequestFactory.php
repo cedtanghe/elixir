@@ -45,7 +45,7 @@ class RequestFactory
         };
         
         $request = new Request(
-            $param(array(), true),
+            $param([], true),
             $param($_GET, true),
             $param($_POST, true),
             new SessionParameters(Session::instance() ?: new Session()),

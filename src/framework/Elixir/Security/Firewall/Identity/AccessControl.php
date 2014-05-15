@@ -19,13 +19,13 @@ class AccessControl extends AccessControlAbstract
     /**
      * @var array
      */
-    protected $_options = array('domains' => array());
+    protected $_options = ['domains' => []];
     
     /**
      * @param string $pPattern
      * @param array $pOptions
      */
-    public function __construct($pPattern, array $pOptions = array())
+    public function __construct($pPattern, array $pOptions = [])
     {
         $this->_pattern = $pPattern;
         
@@ -52,7 +52,7 @@ class AccessControl extends AccessControlAbstract
         {
             if(null === $pValue)
             {
-                $pValue = array();
+                $pValue = [];
             }
             
             $this->setDomains((array)$pValue);
@@ -87,7 +87,7 @@ class AccessControl extends AccessControlAbstract
      */
     public function setDomains(array $pData)
     {
-        $this->_options['domains'] = array();
+        $this->_options['domains'] = [];
         
         foreach($pData as $domain)
         {

@@ -20,7 +20,7 @@ class Pagination implements PaginationInterface
     /**
      * @var array 
      */
-    protected $_parameters = array();
+    protected $_parameters = [];
     
     /**
      * @var integer 

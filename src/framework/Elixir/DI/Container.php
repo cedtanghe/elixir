@@ -16,12 +16,12 @@ class Container extends Dispatcher implements ContainerInterface
     /**
      * @var array 
      */
-    protected $_data = array();
+    protected $_data = [];
     
     /**
      * @var array 
      */
-    protected $_aliases = array();
+    protected $_aliases = [];
     
     /**
      * @var string 
@@ -71,7 +71,7 @@ class Container extends Dispatcher implements ContainerInterface
             }
             
             $data = $this->_data[$pKey]['value'];
-            $arguments = array($this);
+            $arguments = [$this];
             
             if(null !== $pArguments)
             {
@@ -98,7 +98,7 @@ class Container extends Dispatcher implements ContainerInterface
      * @see ContainerInterface::set()
      * @throws \LogicException
      */
-    public function set($pKey, $pValue, array $pOptions = array())
+    public function set($pKey, $pValue, array $pOptions = [])
     {
         switch($this->_lockMode)
         {
@@ -125,8 +125,8 @@ class Container extends Dispatcher implements ContainerInterface
         }
         
         $type = $pOptions['type'];
-        $tags = (array)(isset($pOptions['tags']) ? $pOptions['tags'] : array());
-        $aliases = (array)(isset($pOptions['aliases']) ? $pOptions['aliases'] : array());
+        $tags = (array)(isset($pOptions['tags']) ? $pOptions['tags'] : []);
+        $aliases = (array)(isset($pOptions['aliases']) ? $pOptions['aliases'] : []);
         
         switch($type)
         {
@@ -137,11 +137,11 @@ class Container extends Dispatcher implements ContainerInterface
                 $this->protect($pKey, $pValue, $tags, $aliases);
             break;
             default:
-                $this->_data[$pKey] = array(
+                $this->_data[$pKey] = [
                     'type' => self::SIMPLE, 
                     'value' => $pValue,
                     'tags' => $tags
-                );
+                ];
                 
                 $this->dispatch(new ContainerEvent(ContainerEvent::SERVICE_CREATED, $pKey, null, self::SIMPLE));
                 
@@ -177,9 +177,9 @@ class Container extends Dispatcher implements ContainerInterface
     /**
      * @see ContainerInterface::gets()
      */
-    public function gets(array $pOptions = array())
+    public function gets(array $pOptions = [])
     {
-        $data = array();
+        $data = [];
         $raw = isset($pOptions['raw']) && $pOptions['raw'];
         $withConfiguration = isset($pOptions['withConfiguration']) && $pOptions['withConfiguration'];
         
@@ -194,9 +194,9 @@ class Container extends Dispatcher implements ContainerInterface
     /**
      * @see ContainerInterface::sets()
      */
-    public function sets(array $pData, array $pOptions = array())
+    public function sets(array $pData, array $pOptions = [])
     {
-        $this->_data = array();
+        $this->_data = [];
         
         foreach($pData as $key => $value)
         {
@@ -277,9 +277,9 @@ class Container extends Dispatcher implements ContainerInterface
      * @param array $pOptions
      * @return array|mixed 
      */
-    public function getValuesByTag($pTag, $pDefault = null, array $pOptions = array())
+    public function getValuesByTag($pTag, $pDefault = null, array $pOptions = [])
     {
-        $keys = array();
+        $keys = [];
         
         foreach($this->_data as $key => $value)
         {
@@ -292,7 +292,7 @@ class Container extends Dispatcher implements ContainerInterface
         $raw = isset($pOptions['raw']) && $pOptions['raw'];
         $withConfiguration = isset($pOptions['withConfiguration']) && $pOptions['withConfiguration'];
 
-        $result = array();
+        $result = [];
         
         foreach($keys as $value)
         {
@@ -327,7 +327,7 @@ class Container extends Dispatcher implements ContainerInterface
         
         if($pWithConfiguration)
         {
-            $data['aliases'] = array();
+            $data['aliases'] = [];
             
             foreach($this->_aliases as $key => $value)
             {
@@ -350,7 +350,7 @@ class Container extends Dispatcher implements ContainerInterface
      * @param mixed $pAliases
      * @throws \LogicException
      */
-    public function singleton($pKey, $pValue, $pTags = array(), $pAliases = array())
+    public function singleton($pKey, $pValue, $pTags = [], $pAliases = [])
     {
         switch($this->_lockMode)
         {
@@ -383,11 +383,11 @@ class Container extends Dispatcher implements ContainerInterface
             return $instance;
         };
         
-        $this->_data[$pKey] = array(
+        $this->_data[$pKey] = [
             'type' => self::SINGLETON, 
             'value' => $value,
             'tags' => (array)$pTags
-        );
+        ];
         
         $this->dispatch(new ContainerEvent(ContainerEvent::SERVICE_CREATED, $pKey, null, self::SINGLETON));
         
@@ -405,7 +405,7 @@ class Container extends Dispatcher implements ContainerInterface
      * @throws \LogicException
      * @throws \InvalidArgumentException
      */
-    public function protect($pKey, $pValue, $pTags = array(), $pAliases = array())
+    public function protect($pKey, $pValue, $pTags = [], $pAliases = [])
     {
         if(!is_callable($pValue))
         {
@@ -436,11 +436,11 @@ class Container extends Dispatcher implements ContainerInterface
             return $pValue;
         };
         
-        $this->_data[$pKey] = array(
+        $this->_data[$pKey] = [
             'type' => self::PROTECT, 
             'value' => $value,
             'tags' => (array)$pTags
-        );
+        ];
         
         $this->dispatch(new ContainerEvent(ContainerEvent::SERVICE_CREATED, $pKey, null, self::PROTECT));
         
@@ -525,10 +525,10 @@ class Container extends Dispatcher implements ContainerInterface
     {
         if($pData instanceof self)
         {
-            $pData = $pData->gets(array('raw' => true, 'withConfiguration' => true));
+            $pData = $pData->gets(['raw' => true, 'withConfiguration' => true]);
         }
         
-        $aliases = array();
+        $aliases = [];
         
         foreach($pData as $key => &$value)
         {

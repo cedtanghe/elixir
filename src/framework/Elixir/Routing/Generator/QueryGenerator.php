@@ -37,7 +37,7 @@ class QueryGenerator extends URLGenerator
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function generate(Route $pRoute, array $pOptions = array(), $pMode = self::URL_RELATIVE)
+    public function generate(Route $pRoute, array $pOptions = [], $pMode = self::URL_RELATIVE)
     {
         if(null === $this->_request)
         {
@@ -47,7 +47,7 @@ class QueryGenerator extends URLGenerator
         if($pRoute->hasOption(Route::GENERATE_FILTER))
         {
             $call = $pRoute->getOption(Route::GENERATE_FILTER);
-            $result = call_user_func_array($call, array(&$pOptions));
+            $result = call_user_func_array($call, [&$pOptions]);
             
             if($result)
             {
@@ -55,8 +55,8 @@ class QueryGenerator extends URLGenerator
             }
         }
         
-        $parameters = array();
-        $query = array();
+        $parameters = [];
+        $query = [];
         
         if($pRoute->hasParameter(Route::QUERY))
         {
@@ -150,16 +150,16 @@ class QueryGenerator extends URLGenerator
         
         if(count($query) == 0)
         {
-            $query = array();
+            $query = [];
         }
         
         $url = preg_replace('/\((\/+)\)\?/U', '', $url);
-        $url = trim(preg_replace_callback('/\((.*)\)\?/U', array($this, 'clean'), $url), '/');
+        $url = trim(preg_replace_callback('/\((.*)\)\?/U', [$this, 'clean'], $url), '/');
         $query[$this->_queryKey] = $url;
         
         $url = '?' . strtr(
             http_build_query($query),
-            array(
+            [
                 '%2F' => '/',
                 '%40' => '@',
                 '%3A' => ':',
@@ -170,7 +170,7 @@ class QueryGenerator extends URLGenerator
                 '%21' => '!',
                 '%2A' => '*',
                 '%7C' => '|'
-            )
+            ]
         );
         
         if(!empty($attributes))

@@ -46,7 +46,7 @@ class Action implements ContextInterface, HelperInterface
      * @param boolean $pResetOthersAttributes
      * @return string
      */
-    public function get($pPathInfo, array $pAttributes = array(), $pResetOthersAttributes = true)
+    public function get($pPathInfo, array $pAttributes = [], $pResetOthersAttributes = true)
     {
         if(null === $this->_application)
         {
@@ -84,6 +84,6 @@ class Action implements ContextInterface, HelperInterface
     public function direct()
     {
         $args = func_get_args();
-        return call_user_func_array(array($this, 'get'), $args);
+        return call_user_func_array([$this, 'get'], $args);
     }
 }

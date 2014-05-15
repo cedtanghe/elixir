@@ -37,5 +37,5 @@ interface GeneratorInterface
      * @param string $pMode
      * @return string
      */
-    public function generate(Route $pRoute, array $pOptions = array(), $pMode = self::URL_RELATIVE);
+    public function generate(Route $pRoute, array $pOptions = [], $pMode = self::URL_RELATIVE);
 }

@@ -142,7 +142,7 @@ class URL implements TemplateContextInterface, ControllerContextInterface, Helpe
      * @return string
      * @throws \RuntimeException
      */
-    public function generate($pRouteName, $pOptions = array(), $pMode = GeneratorInterface::URL_ABSOLUTE)
+    public function generate($pRouteName, $pOptions = [], $pMode = GeneratorInterface::URL_ABSOLUTE)
     {
         if(null === $this->_router)
         {
@@ -151,7 +151,7 @@ class URL implements TemplateContextInterface, ControllerContextInterface, Helpe
         
         if(is_string($pOptions))
         {
-            $pOptions = array(Route::MVC => $pOptions);
+            $pOptions = [Route::MVC => $pOptions];
         }
         
         return $this->_router->generate($pRouteName, $pOptions, $pMode);
@@ -173,6 +173,6 @@ class URL implements TemplateContextInterface, ControllerContextInterface, Helpe
     public function direct()
     {
         $args = func_get_args();
-        return call_user_func_array(array($this, 'baseURL'), $args);
+        return call_user_func_array([$this, 'baseURL'], $args);
     }
 }

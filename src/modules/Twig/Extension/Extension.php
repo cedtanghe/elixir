@@ -39,9 +39,9 @@ class Extension extends Twig_Extension
      */
     public function getGlobals()
     {
-        return array(
+        return [
             'helper' => new Helper($this->_view),
-        );
+        ];
     }
     
     /**
@@ -49,7 +49,7 @@ class Extension extends Twig_Extension
      */
     public function getFunctions() 
     {
-        return array(
+        return [
             new Twig_SimpleFunction(
                 'filter_*' ,
                 function($pMethod)
@@ -57,7 +57,7 @@ class Extension extends Twig_Extension
                     $args = func_get_args();
                     array_shift($args);
                     
-                    return call_user_func_array(array('\Elixir\Facade\Filter', $pMethod), $args);
+                    return call_user_func_array(['\Elixir\Facade\Filter', $pMethod], $args);
                 }
             ),
             new Twig_SimpleFunction(
@@ -67,9 +67,9 @@ class Extension extends Twig_Extension
                     $args = func_get_args();
                     array_shift($args);
                     
-                    return call_user_func_array(array('\Elixir\Facade\Validator', $pMethod), $args);
+                    return call_user_func_array(['\Elixir\Facade\Validator', $pMethod], $args);
                 }
             )
-        );
+        ];
     }
 }

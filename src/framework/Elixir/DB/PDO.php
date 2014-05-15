@@ -40,7 +40,7 @@ class PDO extends DBAbstract
      * @param string $pPassword
      * @param array $pOptions
      */
-    public function __construct($pDNS, $pUsername = null, $pPassword = null, array $pOptions = array()) 
+    public function __construct($pDNS, $pUsername = null, $pPassword = null, array $pOptions = []) 
     {
         if(!isset($pOptions[\PDO::MYSQL_ATTR_INIT_COMMAND]))
         {
@@ -196,7 +196,7 @@ class PDO extends DBAbstract
         $this->dispatch(new DBEvent(DBEvent::PRE_QUERY, $pSQL));
         $time = microtime(true);
         $result = $this->_connection->exec($pSQL);
-        $this->dispatch(new DBEvent(DBEvent::QUERY, $pSQL, array(), microtime(true) - $time));
+        $this->dispatch(new DBEvent(DBEvent::QUERY, $pSQL, [], microtime(true) - $time));
         
         return $result;
     }
@@ -204,7 +204,7 @@ class PDO extends DBAbstract
     /**
      * @see DBAbstract::query()
      */
-    public function query($pSQL, array $pValues = array(), array $pOptions = array())
+    public function query($pSQL, array $pValues = [], array $pOptions = [])
     {
         if($pSQL instanceof SQLAbstract)
         {
@@ -213,7 +213,7 @@ class PDO extends DBAbstract
         }
         
         $sql = $pSQL;
-        $values = array();
+        $values = [];
         
         if(count($pValues) > 0)
         {
@@ -230,7 +230,7 @@ class PDO extends DBAbstract
                 
                 if(is_array($value))
                 {
-                    $keys = array();
+                    $keys = [];
                     $pos = 0;
                     
                     foreach($value as $v)
@@ -378,6 +378,6 @@ class PDO extends DBAbstract
             $pMethod = 'begin';
         }
         
-        return call_user_func_array(array($context, $pMethod), $pArguments);
+        return call_user_func_array([$context, $pMethod], $pArguments);
     }
 }

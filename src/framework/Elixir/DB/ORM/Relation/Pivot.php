@@ -30,7 +30,7 @@ class Pivot
     /**
      * @var array 
      */
-    protected $_criterions = array();
+    protected $_criterions = [];
     
     /**
      * @param string $pPivot

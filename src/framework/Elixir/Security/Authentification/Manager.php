@@ -28,7 +28,7 @@ class Manager extends Dispatcher
     /**
      * @var array
      */
-    protected $_identities = array();
+    protected $_identities = [];
 
     /**
      * @param StorageInterface $pStorage
@@ -93,12 +93,12 @@ class Manager extends Dispatcher
         {
             if(!$identity->hasListener(AuthEvent::IDENTITY_REMOVED))
             {
-                $identity->addListener(AuthEvent::IDENTITY_REMOVED, array($this, 'onIdentityRemoved'));
+                $identity->addListener(AuthEvent::IDENTITY_REMOVED, [$this, 'onIdentityRemoved']);
             }
             
             if(!$identity->hasListener(AuthEvent::UPDATE))
             {
-                $identity->addListener(AuthEvent::UPDATE, array($this, 'onIdentityUpdated'));
+                $identity->addListener(AuthEvent::UPDATE, [$this, 'onIdentityUpdated']);
             }
         }
         
@@ -113,8 +113,8 @@ class Manager extends Dispatcher
     {
         $this->_storage->set($pKey, $pIdentity);
         $pIdentity->setDomain($pKey);
-        $pIdentity->addListener(AuthEvent::IDENTITY_REMOVED, array($this, 'onIdentityRemoved'));
-        $pIdentity->addListener(AuthEvent::UPDATE, array($this, 'onIdentityUpdated'));
+        $pIdentity->addListener(AuthEvent::IDENTITY_REMOVED, [$this, 'onIdentityRemoved']);
+        $pIdentity->addListener(AuthEvent::UPDATE, [$this, 'onIdentityUpdated']);
         
         $this->_identities[$pKey] = $pIdentity;
     }
@@ -146,8 +146,8 @@ class Manager extends Dispatcher
         
         if($identity instanceof Identity)
         {
-            $identity->removeListener(AuthEvent::IDENTITY_REMOVED, array($this, 'onIdentityRemoved'));
-            $identity->removeListener(AuthEvent::UPDATE, array($this, 'onIdentityUpdated'));
+            $identity->removeListener(AuthEvent::IDENTITY_REMOVED, [$this, 'onIdentityRemoved']);
+            $identity->removeListener(AuthEvent::UPDATE, [$this, 'onIdentityUpdated']);
         }
         
         $this->_storage->remove($pKey);
@@ -170,11 +170,11 @@ class Manager extends Dispatcher
         
         foreach($identities as $identity)
         {
-            $identity->removeListener(AuthEvent::IDENTITY_REMOVED, array($this, 'onIdentityRemoved'));
-            $identity->removeListener(AuthEvent::UPDATE, array($this, 'onIdentityUpdated'));
+            $identity->removeListener(AuthEvent::IDENTITY_REMOVED, [$this, 'onIdentityRemoved']);
+            $identity->removeListener(AuthEvent::UPDATE, [$this, 'onIdentityUpdated']);
         }
 
-        $this->_storage->sets(array());
+        $this->_storage->sets([]);
 
         foreach($pData as $key => $value)
         {

@@ -18,7 +18,7 @@ class WhereClause
     /**
      * @var array 
      */
-    protected $_wheres = array();
+    protected $_wheres = [];
     
     /**
      * @param SQLAbstract $pSQL
@@ -42,7 +42,7 @@ class WhereClause
             $pCond = $where->render();
         }
         
-        $this->_wheres[] = array('query' => $this->_SQL->assemble($pCond, $pValue), 'type' => 'AND');
+        $this->_wheres[] = ['query' => $this->_SQL->assemble($pCond, $pValue), 'type' => 'AND'];
         return $this;
     }
     
@@ -60,7 +60,7 @@ class WhereClause
             $pCond = $where->render();
         }
         
-        $this->_wheres[] = array('query' => $this->_SQL->assemble($pCond, $pValue), 'type' => 'OR');
+        $this->_wheres[] = ['query' => $this->_SQL->assemble($pCond, $pValue), 'type' => 'OR'];
         return $this;
     }
     
@@ -69,7 +69,7 @@ class WhereClause
      */
     public function reset()
     {
-        $this->_wheres = array();
+        $this->_wheres = [];
         return $this;
     }
     

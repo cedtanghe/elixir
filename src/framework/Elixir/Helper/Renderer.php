@@ -49,7 +49,7 @@ class Renderer implements ContextInterface, HelperInterface
      * @param array|ViewInterface $pDataOrView
      * @return string
      */
-    public function render($pTemplate, $pDataOrView = array())
+    public function render($pTemplate, $pDataOrView = [])
     {
         if(is_array($pDataOrView))
         {
@@ -59,7 +59,7 @@ class Renderer implements ContextInterface, HelperInterface
         else
         {
             $view = $pDataOrView;
-            $parameters = array();
+            $parameters = [];
         }
         
         if(null === $pTemplate)
@@ -103,10 +103,10 @@ class Renderer implements ContextInterface, HelperInterface
      * @return Response
      */
     public function renderResponse($pTemplate,
-                                   $pDataOrView = array(),
+                                   $pDataOrView = [],
                                    $pStatus = 200,
                                    $pProtocol = null,
-                                   array $pHeaders = array())
+                                   array $pHeaders = [])
     {
         return ResponseFactory::create(
             $this->render($pTemplate, $pDataOrView),
@@ -126,7 +126,7 @@ class Renderer implements ContextInterface, HelperInterface
     public function renderTextResponse($pText,
                                        $pStatus = 200,
                                        $pProtocol = null,
-                                       array $pHeaders = array())
+                                       array $pHeaders = [])
     {
         return ResponseFactory::create(
             $pText,
@@ -142,6 +142,6 @@ class Renderer implements ContextInterface, HelperInterface
     public function direct()
     {
         $args = func_get_args();
-        return call_user_func_array(array($this, 'render'), $args);
+        return call_user_func_array([$this, 'render'], $args);
     }
 }

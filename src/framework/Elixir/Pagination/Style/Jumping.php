@@ -29,7 +29,7 @@ class Jumping implements StyleInterface
             $upperBound = $totalItems;
         }
         
-        $range = array();
+        $range = [];
         
         for($i = $lowerBound; $i < $upperBound; ++$i)
         {

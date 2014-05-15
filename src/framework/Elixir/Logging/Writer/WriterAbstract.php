@@ -24,7 +24,7 @@ abstract class WriterAbstract implements WriterInterface
     /**
      * @var array
      */
-    protected $_locked = array();
+    protected $_locked = [];
     
     /**
      * @param string $pValue

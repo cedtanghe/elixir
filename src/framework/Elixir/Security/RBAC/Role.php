@@ -28,18 +28,18 @@ class Role
     /**
      * @var array
      */
-    protected $_permissions = array();
+    protected $_permissions = [];
     
     /**
      * @var array
      */
-    protected $_children = array();
+    protected $_children = [];
     
     /**
      * @param string|integer $pName
      * @param array $pPermisions
      */
-    public function __construct($pName, array $pPermisions = array())
+    public function __construct($pName, array $pPermisions = [])
     {
         $this->_name = $pName;
         $this->setPermissions($pPermisions);
@@ -103,7 +103,7 @@ class Role
      */
     public function hasPermission($pName)
     {
-        foreach(array($pName, self::ALL_PERMISSIONS_GRANTED) as $permission)
+        foreach([$pName, self::ALL_PERMISSIONS_GRANTED] as $permission)
         {
             if(array_key_exists($this->_permissions[$permission]))
             {
@@ -173,7 +173,7 @@ class Role
      */
     public function setPermissions(array $pData)
     {
-        $this->_permissions = array();
+        $this->_permissions = [];
         
         foreach($pData as $data)
         {

@@ -71,7 +71,7 @@ abstract class MultipleAbstract extends FieldAbstract implements MultipleInterfa
      */
     public function getData()
     {
-        return $this->getOption('data', array());
+        return $this->getOption('data', []);
     }
     
     /**
@@ -80,7 +80,7 @@ abstract class MultipleAbstract extends FieldAbstract implements MultipleInterfa
      */
     public function removeOption($pKey)
     {
-        if(in_array($pKey, array('data', 'data-use-keys')))
+        if(in_array($pKey, ['data', 'data-use-keys']))
         {
             throw new \LogicException(sprintf('You can not delete the option "%s".', $pKey));
         }

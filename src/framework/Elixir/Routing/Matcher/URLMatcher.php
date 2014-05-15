@@ -27,7 +27,7 @@ class URLMatcher implements MatcherInterface
     /**
      * @var array 
      */
-    protected $_references = array();
+    protected $_references = [];
 
     /**
      * @param Request $pRequest
@@ -103,7 +103,7 @@ class URLMatcher implements MatcherInterface
                 {
                     $call = $value->getOption(Route::ASSERT);
                     
-                    if(false === call_user_func_array($call, array($routeMatch)))
+                    if(false === call_user_func_array($call, [$routeMatch]))
                     {
                         continue;
                     }
@@ -112,7 +112,7 @@ class URLMatcher implements MatcherInterface
                 if($value->hasOption(Route::MATCHED_FILTER))
                 {
                     $call = $value->getOption(Route::MATCHED_FILTER);
-                    call_user_func_array($call, array($routeMatch));
+                    call_user_func_array($call, [$routeMatch]);
                 }
                 
                 return $routeMatch;

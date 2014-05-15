@@ -37,7 +37,7 @@ abstract class FirewallAbstract extends Dispatcher implements FirewallInterface
     /**
      * @var array
      */
-    protected $_accessControls = array();
+    protected $_accessControls = [];
     
     /**
      * @param Manager $pAuthManager
@@ -97,9 +97,9 @@ abstract class FirewallAbstract extends Dispatcher implements FirewallInterface
         if(!$this->hasAccessControl($pAccessControl))
         {
             $this->_sorted = false;
-            $this->_accessControls[] = array('accessControl' => $pAccessControl,
+            $this->_accessControls[] = ['accessControl' => $pAccessControl,
                                              'priority' =>$pPriority, 
-                                             'serial' => $this->_serial++);
+                                             'serial' => $this->_serial++];
         }
     }
     
@@ -127,7 +127,7 @@ abstract class FirewallAbstract extends Dispatcher implements FirewallInterface
      */
     public function getAccessControls($pWithInfos = false)
     {
-        $accessControls = array();
+        $accessControls = [];
             
         foreach($this->_accessControls as $data)
         {
@@ -142,7 +142,7 @@ abstract class FirewallAbstract extends Dispatcher implements FirewallInterface
      */
     public function setAccessControls(array $pData)
     {
-        $this->_accessControls = array();
+        $this->_accessControls = [];
         $this->_serial = 0;
         
         foreach($pData as $data)
@@ -171,7 +171,7 @@ abstract class FirewallAbstract extends Dispatcher implements FirewallInterface
     {
         if(!$this->_sorted)
         {
-            usort($this->_accessControls, array($this, 'compare'));
+            usort($this->_accessControls, [$this, 'compare']);
             $this->_sorted = true;
         }
     }
@@ -225,11 +225,11 @@ abstract class FirewallAbstract extends Dispatcher implements FirewallInterface
                     }
                 }
                 
-                $this->_accessControls[] = array(
+                $this->_accessControls[] = [
                     'accessControl' => $ac,
                     'priority' => $priority, 
                     'serial' => ($this->_serial++) + $serial
-                );
+                ];
             }
         }
     }

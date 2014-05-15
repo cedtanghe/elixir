@@ -198,7 +198,7 @@ class Router extends Dispatcher implements RouterInterface
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function generate($pName, array $pOptions = array(), $pMode = GeneratorInterface::URL_ABSOLUTE)
+    public function generate($pName, array $pOptions = [], $pMode = GeneratorInterface::URL_ABSOLUTE)
     {
         if(null === $this->_URLGenerator)
         {

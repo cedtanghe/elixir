@@ -15,15 +15,15 @@ class Extension extends ValidatorAbstract
     /**
      * @var array 
      */
-    protected $_errorMessageTemplates = array(self::ERROR => 'Value is not a valid extension.');
+    protected $_errorMessageTemplates = [self::ERROR => 'Value is not a valid extension.'];
     
     /**
      * @see ValidatorInterface::isValid()
      */
-    public function isValid($pContent, array $pOptions = array()) 
+    public function isValid($pContent, array $pOptions = []) 
     {
         $pOptions = array_merge($this->_options, $pOptions);
-        $this->_errors = array();
+        $this->_errors = [];
         
         $found = false;
         $content = is_array($pContent) ? $pContent['name'] : $pContent;

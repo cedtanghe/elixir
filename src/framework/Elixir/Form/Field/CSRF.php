@@ -27,7 +27,7 @@ class CSRF extends FieldAbstract
     /**
      * @var array
      */
-    protected $_CSRFValidatorOptions = array();
+    protected $_CSRFValidatorOptions = [];
 
     /**
      * @see FieldAbstract::__construct()
@@ -52,7 +52,7 @@ class CSRF extends FieldAbstract
      * @param CSRFValidator $pValidator
      * @param array $pOptions
      */
-    public function setCSRFValidator(CSRFValidator $pValidator, array $pOptions = array())
+    public function setCSRFValidator(CSRFValidator $pValidator, array $pOptions = [])
     {
         $this->_CSRFValidator = $pValidator;
         
@@ -78,7 +78,7 @@ class CSRF extends FieldAbstract
     /**
      * @param array $pOptions
      */
-    public function setCSRFValidatorOptions(array $pValue = array())
+    public function setCSRFValidatorOptions(array $pValue = [])
     {
         $this->_CSRFValidatorOptions = $pValue;
     }
@@ -131,7 +131,7 @@ class CSRF extends FieldAbstract
      * @see FieldAbstract::addValidator()
      * @throws \LogicException
      */
-    public function addValidator(ValidatorInterface $pValidator, array $pOptions = array())
+    public function addValidator(ValidatorInterface $pValidator, array $pOptions = [])
     {
         if($pValidator instanceof CSRFValidator)
         {
@@ -147,7 +147,7 @@ class CSRF extends FieldAbstract
      * @see FieldAbstract::addFilter()
      * @throws \LogicException
      */
-    public function addFilter(FilterInterface $pFilter, array $pOptions = array(), $pType = self::FILTER_OUT)
+    public function addFilter(FilterInterface $pFilter, array $pOptions = [], $pType = self::FILTER_OUT)
     {
         throw new \LogicException('No filter available for CSRF field.');
     }
@@ -159,14 +159,14 @@ class CSRF extends FieldAbstract
     {
         if(!$this->isPrepared())
         {
-            $params = array($this->getName());
+            $params = [$this->getName()];
             
             if(isset($this->_CSRFValidatorOptions['time']))
             {
                 $params[] = $this->_CSRFValidatorOptions['time'];
             }
             
-            $this->_value = call_user_func_array(array($this->getCSRFValidator(), 'createToken'), $params);
+            $this->_value = call_user_func_array([$this->getCSRFValidator(), 'createToken'], $params);
             parent::prepare();
         }
     }
@@ -176,7 +176,7 @@ class CSRF extends FieldAbstract
      */
     public function isValid($pValue = null) 
     {
-        $this->_errors = array();
+        $this->_errors = [];
         
         if(null !== $pValue)
         {

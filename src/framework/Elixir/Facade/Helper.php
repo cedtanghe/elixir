@@ -13,7 +13,7 @@ class Helper extends FacadeAbstract
     /**
      * @var array
      */
-    protected static $_macros = array();
+    protected static $_macros = [];
 
     /**
      * @param string $pMethod
@@ -79,10 +79,10 @@ class Helper extends FacadeAbstract
      * @param array $pArguments
      * @return mixed
      */
-    public static function helper($pClassOrKey, array $pArguments = array())
+    public static function helper($pClassOrKey, array $pArguments = [])
     {
         $filter = static::resolveInstance($pClassOrKey);
-        return call_user_func_array(array($filter, 'direct'), $pArguments);
+        return call_user_func_array([$filter, 'direct'], $pArguments);
     }
     
     /**

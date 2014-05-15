@@ -19,7 +19,7 @@ abstract class FacadeAbstract
     /**
      * @var array
      */
-    protected static $_resolvedInstances = array();
+    protected static $_resolvedInstances = [];
     
     /**
      * @return ContainerInterface
@@ -88,6 +88,6 @@ abstract class FacadeAbstract
     public static function __callStatic($pMethod, $pArguments)
     {
         $instance = static::resolveInstance(static::getFacadeAccessor());
-        return call_user_func_array(array($instance, $pMethod), $pArguments);
+        return call_user_func_array([$instance, $pMethod], $pArguments);
     }
 }

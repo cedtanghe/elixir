@@ -30,13 +30,13 @@ class CSRF implements ExtensionInterface
     /**
      * @var array
      */
-    protected $_options = array();
+    protected $_options = [];
 
     /**
      * @param string $pName
      * @param array $pOptions
      */
-    public function __construct($pName = self::DEFAULT_NAME, array $pOptions = array())
+    public function __construct($pName = self::DEFAULT_NAME, array $pOptions = [])
     {
         $this->_name = $pName;
         $this->_options = $pOptions;
@@ -65,12 +65,12 @@ class CSRF implements ExtensionInterface
     {
         $this->_form = $pForm;
         
-        $this->_form->add(FormFactory::createField(array(
+        $this->_form->add(FormFactory::createField([
             'type' => 'Elixir\Form\Field\CSRF',
             'name' => $this->_name,
             'required' => true,
             'CSRFValidatorOptions' => $this->_options
-        )));
+        ]));
     }
     
     /**

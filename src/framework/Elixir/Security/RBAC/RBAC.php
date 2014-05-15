@@ -14,12 +14,12 @@ class RBAC implements RBACInterface
     /**
      * @var array
      */
-    protected $_roles = array();
+    protected $_roles = [];
     
     /**
      * @param array $pRoles
      */
-    public function __construct(array $pRoles = array()) 
+    public function __construct(array $pRoles = []) 
     {
         $this->setRoles($pRoles);
     }
@@ -36,7 +36,7 @@ class RBAC implements RBACInterface
      * @param mixed $pRole
      * @param string|array $pParents
      */
-    public function addRole($pRole, $pParents = array())
+    public function addRole($pRole, $pParents = [])
     {
         if(!$pRole instanceof Role)
         {
@@ -100,13 +100,13 @@ class RBAC implements RBACInterface
      */
     public function setRoles(array $pData)
     {
-        $this->_roles = array();
+        $this->_roles = [];
         
         foreach($pData as $data)
         {
             $role = $data;
-            $permissions = array();
-            $parents = array();
+            $permissions = [];
+            $parents = [];
             
             if(is_array($role))
             {
@@ -166,7 +166,7 @@ class RBAC implements RBACInterface
                 throw new \InvalidArgumentException('Assert method must be a callable.');
             }
 
-            if(true === call_user_func_array($pAssert, array($hasRole, $hasPermission, $this)))
+            if(true === call_user_func_array($pAssert, [$hasRole, $hasPermission, $this]))
             {
                 return true;
             }

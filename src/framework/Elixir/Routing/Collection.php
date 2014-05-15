@@ -13,7 +13,7 @@ class Collection
     /**
      * @var array
      */
-    protected $_routes = array();
+    protected $_routes = [];
     
     /**
      * @var integer
@@ -57,9 +57,9 @@ class Collection
     public function add($pName, Route $pRoute, $pPriority = 0)
     {
         $this->_sorted = false;
-        $this->_routes[$pName] = array('route' => $pRoute,
+        $this->_routes[$pName] = ['route' => $pRoute,
                                        'priority' => $pPriority, 
-                                       'serial' => $this->_serial++);
+                                       'serial' => $this->_serial++];
     }
     
     /**
@@ -76,7 +76,7 @@ class Collection
      */
     public function gets($pWithInfos = false)
     {
-        $routes = array();
+        $routes = [];
 
         foreach($this->_routes as $key => $value)
         {
@@ -91,7 +91,7 @@ class Collection
      */
     public function sets(array $pData)
     {
-        $this->_routes = array();
+        $this->_routes = [];
         $this->_serial = 0;
         
         foreach($pData as $name => $route)
@@ -134,7 +134,7 @@ class Collection
     {
         if(!$this->_sorted)
         {
-            uasort($this->_routes, array($this, 'compare'));
+            uasort($this->_routes, [$this, 'compare']);
             $this->_sorted = true;
         }
     }
@@ -173,11 +173,11 @@ class Collection
                     }
                 }
                 
-                $this->_routes[$name] = array(
+                $this->_routes[$name] = [
                     'route' => $route,
                     'priority' => $priority, 
                     'serial' => ($this->_serial++) + $serial
-                );
+                ];
             }
         }
     }
@@ -190,7 +190,7 @@ class Collection
     {
         foreach($this->_routes as $data)
         {
-            call_user_func_array(array($data['route'], $pMethod), $pArguments);
+            call_user_func_array([$data['route'], $pMethod], $pArguments);
         }
     }
 }

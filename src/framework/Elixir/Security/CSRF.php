@@ -58,14 +58,14 @@ class CSRF
         }
         
         $token = uniqid(rand(), true);
-        $this->_request->getSession()->set(array(self::TOKEN_KEY, $pName . $token), time() + $pTime);
+        $this->_request->getSession()->set([self::TOKEN_KEY, $pName . $token], time() + $pTime);
         
         return $token;
     }
     
     public function invalidate()
     {
-        $tokens = $this->_request->getSession()->get(self::TOKEN_KEY, array());
+        $tokens = $this->_request->getSession()->get(self::TOKEN_KEY, []);
         $time = time();
             
         foreach($tokens as $key => $value)
@@ -97,7 +97,7 @@ class CSRF
         if(!$error)
         {
             $name = $pName . $token;
-            $time = $this->_request->getSession()->get(array(self::TOKEN_KEY, $name), null);
+            $time = $this->_request->getSession()->get([self::TOKEN_KEY, $name], null);
             
             if(null === $time)
             {
@@ -106,7 +106,7 @@ class CSRF
             
             if(!$error)
             {
-                $this->_request->getSession()->remove(array(self::TOKEN_KEY, $name));
+                $this->_request->getSession()->remove([self::TOKEN_KEY, $name]);
                 
                 if(time() > $time)
                 {

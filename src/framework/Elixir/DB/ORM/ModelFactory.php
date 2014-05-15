@@ -17,7 +17,7 @@ class ModelFactory
      * @return ModelAbstract
      * @throws \InvalidArgumentException
      */
-    public static function create(array $pData, array $pOptions = array('raw' => true, 'sync' => true), ContainerInterface $pManager = null)
+    public static function create(array $pData, array $pOptions = ['raw' => true, 'sync' => true], ContainerInterface $pManager = null)
     {
         if(!isset($pData['_class']))
         {

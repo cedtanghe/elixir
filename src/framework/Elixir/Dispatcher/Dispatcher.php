@@ -20,12 +20,12 @@ class Dispatcher implements DispatcherInterface
     /**
      * @var array 
      */
-    protected $_listeners = array();
+    protected $_listeners = [];
     
     /**
      * @var array 
      */
-    protected $_serials = array();
+    protected $_serials = [];
     
     /**
      * @param mixed $pTarget 
@@ -88,22 +88,22 @@ class Dispatcher implements DispatcherInterface
                 }
             }
             
-            $this->_listeners[$pType][] = array(
+            $this->_listeners[$pType][] = [
                 'callback' => $pCallback,
                 'priority' => (int)$pPriority,
                 'serial' => $this->_serials[$pType]++
-            );
+            ];
         }
         else
         {
             $this->_serials[$pType] = 0;
-            $this->_listeners[$pType] = array(
-                array(
+            $this->_listeners[$pType] = [
+                [
                     'callback' => $pCallback,
                     'priority' => (int)$pPriority,
                     'serial' => $this->_serials[$pType]++
-                )
-            );
+                ]
+            ];
         }
     }
     
@@ -139,8 +139,8 @@ class Dispatcher implements DispatcherInterface
      */
     public function removeListeners()
     {
-        $this->_listeners = array();
-        $this->_serials = array();
+        $this->_listeners = [];
+        $this->_serials = [];
     }
     
     /**
@@ -184,11 +184,11 @@ class Dispatcher implements DispatcherInterface
             $pEvent->setTarget($this->getTarget());
             
             $listeners = &$this->_listeners[$pEvent->getType()];
-            usort($listeners, array($this, 'compare'));
+            usort($listeners, [$this, 'compare']);
             
             foreach($listeners as $listener)
             {
-                call_user_func_array($listener['callback'], array($pEvent));
+                call_user_func_array($listener['callback'], [$pEvent]);
                 
                 if($pEvent->isStopped())
                 {

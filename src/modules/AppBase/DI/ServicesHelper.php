@@ -31,10 +31,10 @@ class ServicesHelper implements ProviderInterface
         {
             return $pContainer->get('request');
         }, 
-        array(
+        [
             'type' => ContainerInterface::SINGLETON, 
-            'tags' => array(ViewHelper::HELPER_TAG_KEY)
-        ));
+            'tags' => [ViewHelper::HELPER_TAG_KEY]
+        ]);
         
         /************ LOCATOR ************/
         
@@ -42,13 +42,13 @@ class ServicesHelper implements ProviderInterface
         {
             return new Locator($pContainer->get('application'));
         }, 
-        array(
+        [
             'type' => ContainerInterface::SINGLETON, 
-            'tags' => array(
+            'tags' => [
                 ViewHelper::HELPER_TAG_KEY, 
                 ControllerHelper::HELPER_TAG_KEY
-            )
-        ));
+            ]
+        ]);
         
         /************ INTERNAL REDIRECTION ************/
         
@@ -56,10 +56,10 @@ class ServicesHelper implements ProviderInterface
         {
             return new Forward();
         }, 
-        array(
+        [
             'type' => ContainerInterface::SINGLETON, 
-            'tags' => array(ControllerHelper::HELPER_TAG_KEY)
-        ));
+            'tags' => [ControllerHelper::HELPER_TAG_KEY]
+        ]);
         
         /************ INTERNAL CLIENT ************/
         
@@ -67,10 +67,10 @@ class ServicesHelper implements ProviderInterface
         {
             return new Action();
         }, 
-        array(
+        [
             'type' => ContainerInterface::SINGLETON, 
-            'tags' => array(ControllerHelper::HELPER_TAG_KEY)
-        ));
+            'tags' => [ControllerHelper::HELPER_TAG_KEY]
+        ]);
         
         /************ RENDER ************/
         
@@ -78,10 +78,10 @@ class ServicesHelper implements ProviderInterface
         {
             return new Renderer();
         }, 
-        array(
+        [
             'type' => ContainerInterface::SINGLETON, 
-            'tags' => array(ControllerHelper::HELPER_TAG_KEY)
-        ));
+            'tags' => [ControllerHelper::HELPER_TAG_KEY]
+        ]);
         
         /************ PARTIAL ************/
         
@@ -92,10 +92,10 @@ class ServicesHelper implements ProviderInterface
             
             return $partial;
         }, 
-        array(
+        [
             'type' => ContainerInterface::SINGLETON, 
-            'tags' => array(ViewHelper::HELPER_TAG_KEY)
-        ));
+            'tags' => [ViewHelper::HELPER_TAG_KEY]
+        ]);
         
         /************ ESCAPER ************/
         
@@ -103,14 +103,14 @@ class ServicesHelper implements ProviderInterface
         {
             return new Escaper('UTF-8');
         }, 
-        array(
+        [
             'type' => ContainerInterface::SINGLETON,
-            'tags' => array(
+            'tags' => [
                 ViewHelper::HELPER_TAG_KEY, 
                 ControllerHelper::HELPER_TAG_KEY
-            ),
-            'aliases' => array('filter.escaper')
-        ));
+            ],
+            'aliases' => ['filter.escaper']
+        ]);
         
         /************ URL ************/
         
@@ -122,12 +122,12 @@ class ServicesHelper implements ProviderInterface
             
             return $URL;
         }, 
-        array(
+        [
             'type' => ContainerInterface::SINGLETON, 
-            'tags' => array(
+            'tags' => [
                 ViewHelper::HELPER_TAG_KEY,
                 ControllerHelper::HELPER_TAG_KEY
-            )
-        ));
+            ]
+        ]);
     }
 }

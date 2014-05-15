@@ -22,8 +22,8 @@ class CSV
      */
     public static function CSVToArray($pCsv, $pDelimiter = ';', $pEnclosure = '"', $pAssociate = false)
     {
-        $return = array();
-        $datas = array();
+        $return = [];
+        $datas = [];
         
         if(is_file($pCsv))
         {
@@ -62,7 +62,7 @@ class CSV
                     {
                         if($j === 0)
                         {
-                            $return[$i] = array();
+                            $return[$i] = [];
                         }
                         
                         $return[$i][$associate[$j]] = $data[$j];
@@ -72,7 +72,7 @@ class CSV
                 {
                     if($j === 0)
                     {
-                        $return[$i] = array();
+                        $return[$i] = [];
                     }
                     
                     $return[$i][] = $data[$j];
@@ -98,8 +98,8 @@ class CSV
         {
             if($pAssociate)
             {
-                $columns = array();
-                $work = array();
+                $columns = [];
+                $work = [];
 
                 foreach ($pData[0] as $key => $value)
                 {

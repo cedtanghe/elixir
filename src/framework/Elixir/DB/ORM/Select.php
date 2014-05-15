@@ -17,7 +17,7 @@ class Select
     /**
      * @var array 
      */
-    protected $_loads = array();
+    protected $_loads = [];
     
     /**
      * @var RepositoryInterface
@@ -100,7 +100,7 @@ class Select
      */
     public function scope($pMethod)
     {
-        $options = array();
+        $options = [];
         
         if(func_num_args() > 1)
         {
@@ -111,7 +111,7 @@ class Select
         }
         
         array_unshift($options, $this);
-        call_user_func_array(array($this->_repository, 'scope' . Str::camelize($pMethod)), $options);
+        call_user_func_array([$this->_repository, 'scope' . Str::camelize($pMethod)], $options);
         
         return $this;
     }
@@ -122,7 +122,7 @@ class Select
      */
     public function load($pMethod)
     {
-        $options = array();
+        $options = [];
         
         if(func_num_args() > 1)
         {
@@ -145,7 +145,7 @@ class Select
         switch($pPart)
         {
             case 'loads':
-                $this->_loads = array();
+                $this->_loads = [];
             break;
         }
         
@@ -209,13 +209,13 @@ class Select
     public function all()
     {
         $rows = $this->raw();
-        $repositories = array();
+        $repositories = [];
         $class = get_class($this->_repository);
         
         foreach($rows as $row)
         {
             $repository = new $class($this->_repository->getConnectionManager());
-            $repository->hydrate($row, array('raw' => true, 'sync' => true));
+            $repository->hydrate($row, ['raw' => true, 'sync' => true]);
             
             $this->extend($repository);
             $repositories[] = $repository;
@@ -235,7 +235,7 @@ class Select
             
             if(method_exists($pRepository, $method))
             {
-                call_user_func_array(array($pRepository, $method), $value);
+                call_user_func_array([$pRepository, $method], $value);
             }
             else
             {
@@ -252,7 +252,7 @@ class Select
      */
     public function __call($pMethod, $pArguments) 
     {
-        $result = call_user_func_array(array($this->_SQL, $pMethod), $pArguments);
+        $result = call_user_func_array([$this->_SQL, $pMethod], $pArguments);
         
         if($result instanceof SQLSelect)
         {

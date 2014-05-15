@@ -82,7 +82,7 @@ class Locale
     {
         if(class_exists('\Locale'))
         {
-            return call_user_func_array(array('\Locale', $pMethod), $pArguments);
+            return call_user_func_array(['\Locale', $pMethod], $pArguments);
         }
         
         throw new \RuntimeException('Class "\Locale" does not exist, please install the "intl" extension.');

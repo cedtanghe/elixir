@@ -15,19 +15,19 @@ class Arr extends WriterAbstract
      */
     public function write()
     {
-        $data = array();
+        $data = [];
         
         $collection = $this->_router->getCollection();
         $collection->sort();
         
         foreach($collection->gets(true) as $key => $value)
         {
-            $data[$key] = array(
+            $data[$key] = [
                 'regex' => $value['route']->getPattern(),
                 'parameters' => $value['route']->getParameters(),
                 'options' => $value['route']->getOptions(),
                 'priority' => $value['priority'],
-            );
+            ];
         }
         
         return $data;

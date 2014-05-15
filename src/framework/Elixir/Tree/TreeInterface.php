@@ -44,5 +44,5 @@ interface TreeInterface
      * @param boolean $pAll
      * @return TreeInterface|array
      */
-    public function find(array $pParameters = array(), $pLevel = self::ALL_LEVEL, $pAll = false);
+    public function find(array $pParameters = [], $pLevel = self::ALL_LEVEL, $pAll = false);
 }

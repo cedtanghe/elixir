@@ -17,7 +17,7 @@ class Duplicate extends Chain
      * @throws \RuntimeException
      * @throws \Exception
      */
-    public function filter($pContent, array $pOptions = array())
+    public function filter($pContent, array $pOptions = [])
     {
         $pOptions = array_merge($this->_options, $pOptions);
         

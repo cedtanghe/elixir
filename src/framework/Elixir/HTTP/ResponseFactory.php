@@ -20,7 +20,7 @@ class ResponseFactory
     public static function create($pContent = '',
                                   $pStatus = 200,
                                   $pProtocol = null,
-                                  array $pHeaders = array())
+                                  array $pHeaders = [])
     {
         return new Response(
             $pContent,
@@ -39,13 +39,13 @@ class ResponseFactory
     public static function redirect($pLocation,
                                     $pStatus = 302, 
                                     $pProtocol = null,
-                                    array $pHeaders = array())
+                                    array $pHeaders = [])
     {
         $response = static::create(
             '',
             $pStatus,
             $pProtocol,
-            array_merge($pHeaders, array('Location' => $pLocation))
+            array_merge($pHeaders, ['Location' => $pLocation])
         );
         
         $response->send();
@@ -62,13 +62,13 @@ class ResponseFactory
     public static function json($pContent = '',
                                 $pStatus = 200,
                                 $pProtocol = null,
-                                array $pHeaders = array())
+                                array $pHeaders = [])
     {
         return static::create(
             $pContent, 
             $pStatus, 
             $pProtocol, 
-            array_merge($pHeaders, array('Content-Type' => 'application/json'))
+            array_merge($pHeaders, ['Content-Type' => 'application/json'])
         );
     }
 
@@ -84,7 +84,7 @@ class ResponseFactory
                                   $pFileName = null,
                                   $pStatus = 200,
                                   $pProtocol = null,
-                                  array $pHeaders = array('Content-Type' => 'application/octet-stream'))
+                                  array $pHeaders = ['Content-Type' => 'application/octet-stream'])
     {
         $file = null !== $pFileName;
         

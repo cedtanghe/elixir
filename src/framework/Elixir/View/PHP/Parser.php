@@ -114,16 +114,16 @@ class Parser
      */
     public function __call($pMethod, $pArguments)
     {
-        if(in_array($pMethod, array('helper', 
+        if(in_array($pMethod, ['helper', 
                                     'extend', 
                                     'start', 
                                     'parent', 
                                     'end', 
                                     'block', 
                                     'escape', 
-                                    'raw')))
+                                    'raw']))
         {
-            return call_user_func_array(array($this->__view, $pMethod), $pArguments);
+            return call_user_func_array([$this->__view, $pMethod], $pArguments);
         }
         
         $helper = $this->__view->helper('helper.' . $pMethod);
@@ -137,7 +137,7 @@ class Parser
             else
             {
                 $method = $helper instanceof HelperInterface ? 'direct' : 'filter';
-                return call_user_func_array(array($helper, $method), $pArguments);
+                return call_user_func_array([$helper, $method], $pArguments);
             }
         }
         

@@ -77,7 +77,7 @@ class URLGenerator implements GeneratorInterface
      */
     public function clean($pMatches)
     {
-        return preg_replace_callback('/\((.*)\)\?/U', array($this, 'clean'), $pMatches[1]);
+        return preg_replace_callback('/\((.*)\)\?/U', [$this, 'clean'], $pMatches[1]);
     }
     
     /**
@@ -85,7 +85,7 @@ class URLGenerator implements GeneratorInterface
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function generate(Route $pRoute, array $pOptions = array(), $pMode = self::URL_RELATIVE)
+    public function generate(Route $pRoute, array $pOptions = [], $pMode = self::URL_RELATIVE)
     {
         if(null === $this->_request)
         {
@@ -95,7 +95,7 @@ class URLGenerator implements GeneratorInterface
         if($pRoute->hasOption(Route::GENERATE_FILTER))
         {
             $call = $pRoute->getOption(Route::GENERATE_FILTER);
-            $result = call_user_func_array($call, array(&$pOptions));
+            $result = call_user_func_array($call, [&$pOptions]);
             
             if($result)
             {
@@ -103,8 +103,8 @@ class URLGenerator implements GeneratorInterface
             }
         }
         
-        $parameters = array();
-        $query = array();
+        $parameters = [];
+        $query = [];
         
         if($pRoute->hasParameter(Route::QUERY))
         {
@@ -206,10 +206,10 @@ class URLGenerator implements GeneratorInterface
         }
         
         $url = preg_replace('/\((\/+)\)\?/U', '', $url);
-        $url = trim(preg_replace_callback('/\((.*)\)\?/U', array($this, 'clean'), $url), '/');
+        $url = trim(preg_replace_callback('/\((.*)\)\?/U', [$this, 'clean'], $url), '/');
         $url = strtr(
             rawurlencode($url), 
-            array(
+            [
                 '%2F' => '/',
                 '%40' => '@',
                 '%3A' => ':',
@@ -220,7 +220,7 @@ class URLGenerator implements GeneratorInterface
                 '%21' => '!',
                 '%2A' => '*',
                 '%7C' => '|'
-            )
+            ]
         );
         
         if(!empty($attributes))

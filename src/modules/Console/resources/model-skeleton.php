@@ -8,7 +8,7 @@ use Elixir\MVC\Application;
 
 class {MODEL} extends ModelAbstract 
 {
-    public function __construct(ContainerInterface $pManager = null, array $pData = array()) 
+    public function __construct(ContainerInterface $pManager = null, array $pData = []) 
     {
         $this->_table = '';
         $this->_primaryKey = 'id';

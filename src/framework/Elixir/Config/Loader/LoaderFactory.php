@@ -15,7 +15,7 @@ class LoaderFactory
      * @return LoaderInterface
      * @throws \InvalidArgumentException
      */
-    public static function create($pConfig, array $pOptions = array())
+    public static function create($pConfig, array $pOptions = [])
     {
         $environment = isset($pOptions['environment']) ? $pOptions['environment'] : null;
         $strict = isset($pOptions['strict']) ? $pOptions['strict'] : false;

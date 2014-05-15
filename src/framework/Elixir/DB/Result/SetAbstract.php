@@ -77,7 +77,7 @@ abstract class SetAbstract
      * @param array $pArgs
      * @return mixed;
      */
-    abstract public function fetchObject($pClassName = 'stdClass', array $pArgs = array());
+    abstract public function fetchObject($pClassName = 'stdClass', array $pArgs = []);
     
     /**
      * @param string $pClassName

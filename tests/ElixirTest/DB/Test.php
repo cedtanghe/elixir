@@ -25,8 +25,8 @@ class Test extends \PHPUnit_Framework_TestCase
     {
         $insert = new Insert('`test`');
         $insert->ignore(true)
-               ->values(array('`name`' => 'my name',
-                              '`firstname`' => 'my firstname'));
+               ->values(['`name`' => 'my name',
+                         '`firstname`' => 'my firstname']);
         
         $compare = "INSERT IGNORE INTO `test` (`name`, `firstname`) VALUES ('my name', 'my firstname')";
         $this->assertEquals($compare, preg_replace('/[\n\t\r]/', '', $insert->render()));
@@ -42,7 +42,7 @@ class Test extends \PHPUnit_Framework_TestCase
                })
                ->having(function($pSQL)
                {
-                    $pSQL->where('`test`.`firstname` = :firstname', array('firstname' => 'my firstname'));
+                    $pSQL->where('`test`.`firstname` = :firstname', ['firstname' => 'my firstname']);
                })
                ->orderBy('`test2`.id')
                ->quantifier(Select::QUANTIFIER_DISTINCT)
@@ -57,7 +57,7 @@ class Test extends \PHPUnit_Framework_TestCase
     {
         $update = new Update('`test`');
         $update->where('`test`.`type` = ?', 'my type')
-               ->set(array('`test`.`type`' => 'my new type'))
+               ->set(['`test`.`type`' => 'my new type'])
                ->orderBy('RAND()', null)
                ->limit(1);
         

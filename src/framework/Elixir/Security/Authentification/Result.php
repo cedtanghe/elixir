@@ -55,7 +55,7 @@ class Result
      * @param Identity $pIdentity
      * @param array $pMessages
      */
-    public function __construct($pCode, Identity $pIdentity = null, array $pMessages = array()) 
+    public function __construct($pCode, Identity $pIdentity = null, array $pMessages = []) 
     {
         $this->_code = $pCode;
         $this->_identity = $pIdentity;

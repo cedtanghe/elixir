@@ -27,12 +27,12 @@ class Config implements ConfigInterface, \ArrayAccess, \Iterator, \Countable
     /**
      * @var array
      */
-    protected $_processors = array();
+    protected $_processors = [];
     
     /**
      * @param string $pEnvironment
      */
-    public function __construct($pEnvironment = null, array $pParameters = array()) 
+    public function __construct($pEnvironment = null, array $pParameters = []) 
     {
         $this->_environment = $pEnvironment;
         $this->sets($pParameters);
@@ -42,7 +42,7 @@ class Config implements ConfigInterface, \ArrayAccess, \Iterator, \Countable
      * @param mixed $pConfig
      * @param array $pOptions
      */
-    public function load($pConfig, array $pOptions = array())
+    public function load($pConfig, array $pOptions = [])
     {
         $recursive = isset($pOptions['recursive']) ? $pOptions['recursive'] : false;
         
@@ -97,7 +97,7 @@ class Config implements ConfigInterface, \ArrayAccess, \Iterator, \Countable
      */
     public function setProcessors(array $pData)
     {
-        $this->_processors = array();
+        $this->_processors = [];
         
         foreach($pData as $processor)
         {

@@ -32,19 +32,19 @@ class Test extends \PHPUnit_Framework_TestCase
     
     public function testAddKey()
     {
-        Session::instance()->set(array('container', 'key'), 'value');
-        $this->assertEquals(array('key' => 'value'), Session::instance()->get('container'));
+        Session::instance()->set(['container', 'key'], 'value');
+        $this->assertEquals(['key' => 'value'], Session::instance()->get('container'));
         
-        Session::instance()->set(array('container', 'key'), 'new value');
-        $this->assertEquals('new value', Session::instance()->get(array('container', 'key')));
+        Session::instance()->set(['container', 'key'], 'new value');
+        $this->assertEquals('new value', Session::instance()->get(['container', 'key']));
     }
     
     public function testRemoveKey()
     {
-        Session::instance()->set(array('container', 'key'), 'value');
-        Session::instance()->remove(array('container', 'key'));
+        Session::instance()->set(['container', 'key'], 'value');
+        Session::instance()->remove(['container', 'key']);
         
-        $this->assertEquals(array(), Session::instance()->get('container'));
+        $this->assertEquals([], Session::instance()->get('container'));
     }
     
     public function testFlashKey()
@@ -53,6 +53,6 @@ class Test extends \PHPUnit_Framework_TestCase
         
         $this->assertEquals('value', Session::instance()->flash('key'));
         $this->assertEquals(null, Session::instance()->flash('key'));
-        $this->assertEquals(array(), Session::instance()->flash());
+        $this->assertEquals([], Session::instance()->flash());
     }
 }

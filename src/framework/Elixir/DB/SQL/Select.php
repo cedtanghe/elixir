@@ -20,7 +20,7 @@ class Select extends SQLAbstract
     /**
      * @var array 
      */
-    protected $_columns = array();
+    protected $_columns = [];
     
     /**
      * @var string 
@@ -30,27 +30,27 @@ class Select extends SQLAbstract
     /**
      * @var array 
      */
-    protected $_joins = array();
+    protected $_joins = [];
     
     /**
      * @var array 
      */
-    protected $_wheres = array();
+    protected $_wheres = [];
     
     /**
      * @var array 
      */
-    protected $_groups = array();
+    protected $_groups = [];
     
     /**
      * @var array 
      */
-    protected $_havings = array();
+    protected $_havings = [];
     
     /**
      * @var array 
      */
-    protected $_orders = array();
+    protected $_orders = [];
     
     /**
      * @var integer 
@@ -65,7 +65,7 @@ class Select extends SQLAbstract
     /**
      * @var array 
      */
-    protected $_combines = array();
+    protected $_combines = [];
     
     /**
      * @param string $pTable
@@ -97,7 +97,7 @@ class Select extends SQLAbstract
     {
         if($pReset)
         {
-            $this->_columns = array();
+            $this->_columns = [];
         }
         
         $this->_columns = array_merge($this->_columns, (array)$pColumns);
@@ -131,7 +131,7 @@ class Select extends SQLAbstract
             $pCond = $join->render();
         }
         
-        $this->_joins[] = array('query' => $this->assemble($pCond, $pValue), 'type' => $pType, 'table' => $pTable);
+        $this->_joins[] = ['query' => $this->assemble($pCond, $pValue), 'type' => $pType, 'table' => $pTable];
             
         if(null !== $pColumns)
         {
@@ -155,7 +155,7 @@ class Select extends SQLAbstract
             $pCond = $where->render();
         }
         
-        $this->_wheres[] = array('query' => $this->assemble($pCond, $pValue), 'type' => 'AND');
+        $this->_wheres[] = ['query' => $this->assemble($pCond, $pValue), 'type' => 'AND'];
         return $this;
     }
     
@@ -173,7 +173,7 @@ class Select extends SQLAbstract
             $pCond = $where->render();
         }
         
-        $this->_wheres[] = array('query' => $this->assemble($pCond, $pValue), 'type' => 'OR');
+        $this->_wheres[] = ['query' => $this->assemble($pCond, $pValue), 'type' => 'OR'];
         return $this;
     }
     
@@ -201,7 +201,7 @@ class Select extends SQLAbstract
             $pCond = $where->render();
         }
         
-        $this->_havings[] = array('query' => $this->assemble($pCond, $pValue), 'type' => 'AND');
+        $this->_havings[] = ['query' => $this->assemble($pCond, $pValue), 'type' => 'AND'];
         return $this;
     }
     
@@ -219,7 +219,7 @@ class Select extends SQLAbstract
             $pCond = $where->render();
         }
         
-        $this->_havings[] = array('query' => $this->assemble($pCond, $pValue), 'type' => 'OR');
+        $this->_havings[] = ['query' => $this->assemble($pCond, $pValue), 'type' => 'OR'];
         return $this;
     }
     
@@ -232,7 +232,7 @@ class Select extends SQLAbstract
     {
         foreach((array)$pOrder as $order)
         {
-            $this->_orders[] = array('column' => $order, 'type' => $pType);
+            $this->_orders[] = ['column' => $order, 'type' => $pType];
         }
         
         return $this;
@@ -283,22 +283,22 @@ class Select extends SQLAbstract
                 $this->_quantifier = null;
             break;
             case 'columns':
-                $this->_columns = array();
+                $this->_columns = [];
             break;
             case 'join':
-                $this->_joins = array();
+                $this->_joins = [];
             break;
             case 'where':
-                $this->_wheres = array();
+                $this->_wheres = [];
             break;
             case 'group':
-                $this->_groups = array();
+                $this->_groups = [];
             break;
             case 'having':
-                $this->_havings = array();
+                $this->_havings = [];
             break;
             case 'order':
-                $this->_orders = array();
+                $this->_orders = [];
             break;
             case 'limit':
                 $this->_limit = null;
@@ -307,7 +307,7 @@ class Select extends SQLAbstract
                 $this->_offset = null;
             break;
             case 'combine':
-                $this->_combines = array();
+                $this->_combines = [];
             break;
         }
         

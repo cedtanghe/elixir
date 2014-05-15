@@ -13,7 +13,7 @@ class RouteMatch
     /**
      * @var array 
      */
-    protected $_params = array();
+    protected $_params = [];
     
     /**
      * @var string
@@ -24,7 +24,7 @@ class RouteMatch
      * @param string $pRouteName
      * @param array $pParams
      */
-    public function __construct($pRouteName, array $pParams = array())
+    public function __construct($pRouteName, array $pParams = [])
     {
         $this->_routeName = $pRouteName;
         $this->sets($pParams);
@@ -121,7 +121,7 @@ class RouteMatch
      */
     public function sets(array $pData)
     {
-        $this->_params = array();
+        $this->_params = [];
         
         foreach($pData as $key => $value)
         {

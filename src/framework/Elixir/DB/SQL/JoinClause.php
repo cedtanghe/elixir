@@ -18,12 +18,12 @@ class JoinClause
     /**
      * @var array 
      */
-    protected $_ons = array();
+    protected $_ons = [];
     
     /**
      * @var array 
      */
-    protected $_usings = array();
+    protected $_usings = [];
     
     /**
      * @param Select $pSQL
@@ -47,7 +47,7 @@ class JoinClause
             $pCond = $join->render();
         }
         
-        $this->_ons[] = array('query' => $this->_SQL->assemble($pCond, $pValue), 'type' => 'AND');
+        $this->_ons[] = ['query' => $this->_SQL->assemble($pCond, $pValue), 'type' => 'AND'];
         return $this;
     }
     
@@ -65,7 +65,7 @@ class JoinClause
             $pCond = $join->render();
         }
         
-        $this->_ons[] = array('query' => $this->_SQL->assemble($pCond, $pValue), 'type' => 'OR');
+        $this->_ons[] = ['query' => $this->_SQL->assemble($pCond, $pValue), 'type' => 'OR'];
         return $this;
     }
     
@@ -99,10 +99,10 @@ class JoinClause
         switch($pPart)
         {
             case 'on':
-                $this->_ons = array();
+                $this->_ons = [];
             break;
             case 'using':
-                $this->_usings = array();
+                $this->_usings = [];
             break;
         }
         

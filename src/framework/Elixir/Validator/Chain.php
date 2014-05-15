@@ -14,15 +14,15 @@ class Chain extends ValidatorAbstract
     /**
      * @var array
      */
-    protected $_validators = array();
+    protected $_validators = [];
     
     /**
      * @param ValidatorInterface $pValidator
      * @param array $pOptions
      */
-    public function addValidator(ValidatorInterface $pValidator, array $pOptions = array())
+    public function addValidator(ValidatorInterface $pValidator, array $pOptions = [])
     {
-        $this->_validators[] = array('validator' => $pValidator, 'options' => $pOptions);
+        $this->_validators[] = ['validator' => $pValidator, 'options' => $pOptions];
     }
     
     /**
@@ -38,12 +38,12 @@ class Chain extends ValidatorAbstract
      */
     public function setValidators(array $pData)
     {
-        $this->_validators = array();
+        $this->_validators = [];
         
         foreach($pData as $data)
         {
             $validator = $data;
-            $options = array();
+            $options = [];
             
             if(is_array($data))
             {
@@ -62,10 +62,10 @@ class Chain extends ValidatorAbstract
     /**
      * @see ValidatorInterface::isValid()
      */
-    public function isValid($pContent, array $pOptions = array()) 
+    public function isValid($pContent, array $pOptions = []) 
     {
         $pOptions = array_merge($this->_options, $pOptions);
-        $this->_errors = array();
+        $this->_errors = [];
         
         foreach($this->_validators as $data)
         {

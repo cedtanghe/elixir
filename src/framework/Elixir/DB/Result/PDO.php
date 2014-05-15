@@ -51,7 +51,7 @@ class PDO extends SetAbstract
         $args = func_get_args();
         $args[0] = $this->convert($args[0]);
         
-        return call_user_func_array(array($this->_resource, 'fetch'), $args);
+        return call_user_func_array([$this->_resource, 'fetch'], $args);
     }
     
     /**
@@ -67,7 +67,7 @@ class PDO extends SetAbstract
         $args = func_get_args();
         $args[0] = $this->convert($args[0]);
         
-        return call_user_func_array(array($this->_resource, 'fetchAll'), $args);
+        return call_user_func_array([$this->_resource, 'fetchAll'], $args);
     }
     
     /**
@@ -81,7 +81,7 @@ class PDO extends SetAbstract
     /**
      * @see SetAbstract::fetchObject()
      */
-    public function fetchObject($pClassName = 'stdClass', array $pArgs = array())
+    public function fetchObject($pClassName = 'stdClass', array $pArgs = [])
     {
         return $this->_resource->fetchObject($pClassName, $pArgs);
     }
@@ -109,6 +109,6 @@ class PDO extends SetAbstract
      */
     public function __call($pMethod, $pArguments)
     {
-        return call_user_func_array(array($this->_resource, $pMethod), $pArguments);
+        return call_user_func_array([$this->_resource, $pMethod], $pArguments);
     }
 }

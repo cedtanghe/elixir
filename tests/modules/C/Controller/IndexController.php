@@ -9,7 +9,7 @@ class IndexController extends ControllerAbstract
 {
     protected function getControllerHelpers() 
     {
-        $helpers = array();
+        $helpers = [];
         
         $helpers['helper.forward'] = function()
         {

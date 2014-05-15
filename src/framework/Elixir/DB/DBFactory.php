@@ -55,7 +55,7 @@ class DBFactory
 
             $username = isset($pConfig['username']) ? $pConfig['username'] : null;
             $password = isset($pConfig['password']) ? $pConfig['password'] : null;
-            $options = isset($pConfig['options']) ? $pConfig['options'] : array();
+            $options = isset($pConfig['options']) ? $pConfig['options'] : [];
             
             return new PDO($DNS, $username, $password, $options);
         }

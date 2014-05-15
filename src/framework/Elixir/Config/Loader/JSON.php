@@ -28,8 +28,8 @@ class JSON extends LoaderAbstract
         
         $pConfig = json_decode($pConfig, true);
         
-        $result = array();
-        $supers = array();
+        $result = [];
+        $supers = [];
         
         $m = $this->_environment;
         
@@ -98,14 +98,14 @@ class JSON extends LoaderAbstract
             $data = include $pData;
         }
         
-        $includes = array();
+        $includes = [];
         
         foreach($data as $key => &$value)
         {  
             if($key === '@include')
             {
                 $file = $pDirname . '/' . $value;
-                $loader = LoaderFactory::create($file, array('environment' => $this->_environment, 'strict' => $this->_strict));
+                $loader = LoaderFactory::create($file, ['environment' => $this->_environment, 'strict' => $this->_strict]);
                 
                 if(!$loader instanceof LoaderAbstract)
                 {

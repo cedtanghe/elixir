@@ -16,7 +16,7 @@ class Validator
         
         Facade::macro(
             'boolean', 
-            function($pContent, array $pOptions = array())
+            function($pContent, array $pOptions = [])
             {
                 return Facade::valid('\Elixir\Validator\Boolean', $pContent, $pOptions);
             }
@@ -26,7 +26,7 @@ class Validator
         
         Facade::macro(
             'csrf', 
-            function($pContent, array $pOptions = array())
+            function($pContent, array $pOptions = [])
             {
                 return Facade::valid('validator.csrf', $pContent, $pOptions);
             }
@@ -36,11 +36,11 @@ class Validator
         
         Facade::macro(
             'callback', 
-            function($pContent, $pOptions = array())
+            function($pContent, $pOptions = [])
             {
                 if(is_callable($pOptions))
                 {
-                    $pOptions = array('options' => $pOptions);
+                    $pOptions = ['options' => $pOptions];
                 }
             
                 return Facade::valid('\Elixir\Validator\Callback', $pContent, $pOptions);
@@ -51,7 +51,7 @@ class Validator
         
         Facade::macro(
             'chain', 
-            function($pContent, array $pValidators, array $pOptions = array())
+            function($pContent, array $pValidators, array $pOptions = [])
             {
                 $chain = Facade::resolveInstance('\Elixir\Validator\Chain');
                 $chain->setValidators($pValidators);
@@ -64,7 +64,7 @@ class Validator
         
         Facade::macro(
             'date', 
-            function($pContent, array $pOptions = array())
+            function($pContent, array $pOptions = [])
             {
                 return Facade::valid('\Elixir\Validator\Date', $pContent, $pOptions);
             }
@@ -74,7 +74,7 @@ class Validator
         
         Facade::macro(
             'email', 
-            function($pContent, array $pOptions = array())
+            function($pContent, array $pOptions = [])
             {
                 return Facade::valid('\Elixir\Validator\Email', $pContent, $pOptions);
             }
@@ -84,7 +84,7 @@ class Validator
         
         Facade::macro(
             'equal', 
-            function($pContent, array $pOptions = array())
+            function($pContent, array $pOptions = [])
             {
                 return Facade::valid('\Elixir\Validator\Equal', $pContent, $pOptions);
             }
@@ -94,7 +94,7 @@ class Validator
         
         Facade::macro(
             'extension', 
-            function($pContent, array $pOptions = array())
+            function($pContent, array $pOptions = [])
             {
                 return Facade::valid('\Elixir\Validator\Extension', $pContent, $pOptions);
             }
@@ -104,7 +104,7 @@ class Validator
         
         Facade::macro(
             'fileSize', 
-            function($pContent, array $pOptions = array())
+            function($pContent, array $pOptions = [])
             {
                 return Facade::valid('\Elixir\Validator\FileSize', $pContent, $pOptions);
             }
@@ -114,7 +114,7 @@ class Validator
         
         Facade::macro(
             'float', 
-            function($pContent, array $pOptions = array())
+            function($pContent, array $pOptions = [])
             {
                 return Facade::valid('\Elixir\Validator\Float', $pContent, $pOptions);
             }
@@ -124,7 +124,7 @@ class Validator
         
         Facade::macro(
             'format', 
-            function($pContent, array $pOptions = array())
+            function($pContent, array $pOptions = [])
             {
                 return Facade::valid('\Elixir\Validator\Format', $pContent, $pOptions);
             }
@@ -134,7 +134,7 @@ class Validator
         
         Facade::macro(
             'ip', 
-            function($pContent, array $pOptions = array())
+            function($pContent, array $pOptions = [])
             {
                 return Facade::valid('\Elixir\Validator\IP', $pContent, $pOptions);
             }
@@ -144,7 +144,7 @@ class Validator
         
         Facade::macro(
             'int', 
-            function($pContent, array $pOptions = array())
+            function($pContent, array $pOptions = [])
             {
                 return Facade::valid('\Elixir\Validator\Int', $pContent, $pOptions);
             }
@@ -154,7 +154,7 @@ class Validator
         
         Facade::macro(
             'length', 
-            function($pContent, array $pOptions = array())
+            function($pContent, array $pOptions = [])
             {
                 return Facade::valid('\Elixir\Validator\Length', $pContent, $pOptions);
             }
@@ -164,7 +164,7 @@ class Validator
         
         Facade::macro(
             'mimeType', 
-            function($pContent, array $pOptions = array())
+            function($pContent, array $pOptions = [])
             {
                 return Facade::valid('\Elixir\Validator\MimeType', $pContent, $pOptions);
             }
@@ -174,7 +174,7 @@ class Validator
         
         Facade::macro(
             'notEmpty', 
-            function($pContent, array $pOptions = array())
+            function($pContent, array $pOptions = [])
             {
                 return Facade::valid('\Elixir\Validator\NotEmpty', $pContent, $pOptions);
             }
@@ -184,7 +184,7 @@ class Validator
         
         Facade::macro(
             'range', 
-            function($pContent, array $pOptions = array())
+            function($pContent, array $pOptions = [])
             {
                 return Facade::valid('\Elixir\Validator\Range', $pContent, $pOptions);
             }
@@ -194,7 +194,7 @@ class Validator
         
         Facade::macro(
             'regex', 
-            function($pContent, array $pOptions = array())
+            function($pContent, array $pOptions = [])
             {
                 return Facade::valid('\Elixir\Validator\Regex', $pContent, $pOptions);
             }
@@ -204,7 +204,7 @@ class Validator
         
         Facade::macro(
             'url', 
-            function($pContent, array $pOptions = array())
+            function($pContent, array $pOptions = [])
             {
                 return Facade::valid('\Elixir\Validator\URL', $pContent, $pOptions);
             }

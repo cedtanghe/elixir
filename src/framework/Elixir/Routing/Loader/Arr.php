@@ -34,8 +34,8 @@ class Arr implements LoaderInterface
             $name = $key;
             $priority = isset($value['priority']) ? $value['priority'] : 0;
             $regex = $value['regex'];
-            $parameters = isset($value['parameters']) ? $value['parameters'] : array();
-            $options = isset($value['options']) ? $value['options'] : array();
+            $parameters = isset($value['parameters']) ? $value['parameters'] : [];
+            $options = isset($value['options']) ? $value['options'] : [];
             
             $collection->add($name, new Route($regex, $parameters, $options), $priority);
         }
@@ -67,7 +67,7 @@ class Arr implements LoaderInterface
                     {
                         if($key === Route::REPLACEMENTS)
                         {
-                            $replacements = array();
+                            $replacements = [];
 
                             foreach($value as $k => $v)
                             {
@@ -76,7 +76,7 @@ class Arr implements LoaderInterface
                             
                             $route->setOption(Route::REPLACEMENTS, 
                                               array_merge($replacements,
-                                                          $route->getOption(Route::REPLACEMENTS, array())));
+                                                          $route->getOption(Route::REPLACEMENTS, [])));
                         }
                         else if(!$route->hasOption($key))
                         {

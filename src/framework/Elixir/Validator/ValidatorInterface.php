@@ -13,7 +13,7 @@ interface ValidatorInterface
      * @param array $pOptions
      * @return boolean
      */
-    public function isValid($pContent, array $pOptions = array());
+    public function isValid($pContent, array $pOptions = []);
     
     /**
      * @return boolean

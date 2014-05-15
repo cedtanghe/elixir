@@ -105,7 +105,7 @@ class Helper implements \ArrayAccess
             else
             {
                 $method = $helper instanceof HelperInterface ? 'direct' : 'filter';
-                return call_user_func_array(array($helper, $method), $pArguments);
+                return call_user_func_array([$helper, $method], $pArguments);
             }
         }
         

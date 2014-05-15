@@ -30,8 +30,8 @@ class XML implements LoaderInterface
             $priority = isset($route['priority']) ? (int)$route['priority'] : 0;
             $regex = (string)$route->regex;
             
-            $parameters = array();
-            $options = array();
+            $parameters = [];
+            $options = [];
             
             if(isset($route->parameters))
             {
@@ -54,7 +54,7 @@ class XML implements LoaderInterface
                                 continue;
                             }
 
-                            $methods = array();
+                            $methods = [];
 
                             foreach($value->method as $method)
                             {
@@ -64,7 +64,7 @@ class XML implements LoaderInterface
                             $options[Route::METHOD] = $methods;
                         break;
                         case Route::REPLACEMENTS:
-                            $replacements = array();
+                            $replacements = [];
                             
                             foreach($value->children() as $k => $v)
                             {
@@ -119,7 +119,7 @@ class XML implements LoaderInterface
                                         continue;
                                     }
 
-                                    $methods = array();
+                                    $methods = [];
 
                                     foreach($value->method as $method)
                                     {
@@ -130,7 +130,7 @@ class XML implements LoaderInterface
                                 }
                             break;
                             case Route::REPLACEMENTS:
-                                $replacements = array();
+                                $replacements = [];
 
                                 foreach($value->children() as $k => $v)
                                 {
@@ -139,7 +139,7 @@ class XML implements LoaderInterface
 
                                 $route->setOption(Route::REPLACEMENTS, 
                                                   array_merge($replacements,
-                                                              $route->getOption(Route::REPLACEMENTS, array())));
+                                                              $route->getOption(Route::REPLACEMENTS, [])));
                             break;
                             default:
                                 if(!$route->hasOption($key))

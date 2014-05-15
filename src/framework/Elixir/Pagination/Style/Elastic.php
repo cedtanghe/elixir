@@ -39,7 +39,7 @@ class Elastic implements StyleInterface
             }
         }
         
-        $range = array();
+        $range = [];
         
         for($i = $lowerBound; $i < $upperBound; ++$i)
         {

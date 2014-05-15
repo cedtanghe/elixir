@@ -98,7 +98,7 @@ class FormFactory
             
             if(method_exists($form, $m))
             {
-                call_user_func_array(array($form, $m), !is_array($value) ? array($value) : $value);
+                call_user_func_array([$form, $m], !is_array($value) ? [$value] : $value);
             }
         }
         
@@ -220,7 +220,7 @@ class FormFactory
 
                 if(method_exists($item, $m))
                 {
-                    call_user_func_array(array($item, $m), !is_array($value) ? array($value) : $value);
+                    call_user_func_array([$item, $m], !is_array($value) ? [$value] : $value);
                 }
             }
             

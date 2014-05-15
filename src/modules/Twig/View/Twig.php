@@ -46,16 +46,16 @@ class Twig extends DataAbstract implements HelperInterface
      * @param array $pConfig
      * @param array $pPaths
      */
-    public function __construct(array $pConfig = array(), array $pPaths = array())
+    public function __construct(array $pConfig = [], array $pPaths = [])
     {
         $this->_environment = new Twig_Environment(
             null, 
             array_merge(
-                array(
+                [
                     'cache' => APPLICATION_PATH . '/cache/twig',
                     'debug' => APPLICATION_ENV != 'production',
                     'strict_variables' => true
-                ),
+                ],
                 $pConfig
             )
         );
@@ -135,7 +135,7 @@ class Twig extends DataAbstract implements HelperInterface
     /**
      * @see ViewInterface::render()
      */
-    public function render($pTemplate, array $pData = array())
+    public function render($pTemplate, array $pData = [])
     {
         foreach($pData as $key => $value)
         {
@@ -178,6 +178,6 @@ class Twig extends DataAbstract implements HelperInterface
      */
     public function __call($pMethod, $pArguments) 
     {
-        return call_user_func_array(array($this->_environment, $pMethod), $pArguments);
+        return call_user_func_array([$this->_environment, $pMethod], $pArguments);
     }
 }

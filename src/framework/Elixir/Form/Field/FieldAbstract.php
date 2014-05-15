@@ -33,12 +33,12 @@ abstract class FieldAbstract extends Dispatcher implements FieldInterface
     /**
      * @var array
      */
-    protected $_attributes = array();
+    protected $_attributes = [];
     
     /**
      * @var array
      */
-    protected $_options = array();
+    protected $_options = [];
     
     /**
      * @var boolean
@@ -53,12 +53,12 @@ abstract class FieldAbstract extends Dispatcher implements FieldInterface
     /**
      * @var array
      */
-    protected $_filters = array();
+    protected $_filters = [];
     
     /**
      * @var array
      */
-    protected $_validators = array();
+    protected $_validators = [];
     
     /**
      * @var boolean
@@ -68,7 +68,7 @@ abstract class FieldAbstract extends Dispatcher implements FieldInterface
     /**
      * @var array
      */
-    protected $_errors = array();
+    protected $_errors = [];
     
     /**
      * @var boolean
@@ -266,7 +266,7 @@ abstract class FieldAbstract extends Dispatcher implements FieldInterface
     public function setAttributes(array $pData) 
     {
         $pData['name'] = $this->getName();
-        $this->_attributes = array();
+        $this->_attributes = [];
         
         foreach($pData as $key => $value)
         {
@@ -329,7 +329,7 @@ abstract class FieldAbstract extends Dispatcher implements FieldInterface
     public function setOptions(array $pData) 
     {
         $label = $this->getLabel();
-        $this->_options = array();
+        $this->_options = [];
         
         foreach($pData as $key => $value)
         {
@@ -362,9 +362,9 @@ abstract class FieldAbstract extends Dispatcher implements FieldInterface
      * @param ValidatorInterface $pValidator
      * @param array $pOptions
      */
-    public function addValidator(ValidatorInterface $pValidator, array $pOptions = array())
+    public function addValidator(ValidatorInterface $pValidator, array $pOptions = [])
     {
-        $this->_validators[] = array('validator' => $pValidator, 'options' => $pOptions);
+        $this->_validators[] = ['validator' => $pValidator, 'options' => $pOptions];
     }
 
     /**
@@ -380,12 +380,12 @@ abstract class FieldAbstract extends Dispatcher implements FieldInterface
      */
     public function setValidators(array $pData)
     {
-        $this->_validators = array();
+        $this->_validators = [];
         
         foreach($pData as $data)
         {
             $validator = $data;
-            $options = array();
+            $options = [];
             
             if(is_array($data))
             {
@@ -406,9 +406,9 @@ abstract class FieldAbstract extends Dispatcher implements FieldInterface
      * @param array $pOptions
      * @param integer $pType
      */
-    public function addFilter(FilterInterface $pFilter, array $pOptions = array(), $pType = self::FILTER_OUT)
+    public function addFilter(FilterInterface $pFilter, array $pOptions = [], $pType = self::FILTER_OUT)
     {
-        $this->_filters[] = array('filter' => $pFilter, 'options' => $pOptions, 'type' => $pType);
+        $this->_filters[] = ['filter' => $pFilter, 'options' => $pOptions, 'type' => $pType];
     }
     
     /**
@@ -424,12 +424,12 @@ abstract class FieldAbstract extends Dispatcher implements FieldInterface
      */
     public function setFilters(array $pData)
     {
-        $this->_filters = array();
+        $this->_filters = [];
         
         foreach($pData as $data)
         {
             $filter = $data;
-            $options = array();
+            $options = [];
             $type = self::FILTER_OUT;
             
             if(is_array($data))
@@ -534,7 +534,7 @@ abstract class FieldAbstract extends Dispatcher implements FieldInterface
      */
     public function isValid($pValue = null)
     {
-        $this->_errors = array();
+        $this->_errors = [];
         
         if(null !== $pValue)
         {
@@ -595,7 +595,7 @@ abstract class FieldAbstract extends Dispatcher implements FieldInterface
      */
     public function reset()
     {
-        $this->_errors = array();
+        $this->_errors = [];
         $this->_value = null;
     }
 }

@@ -18,7 +18,7 @@ class Filter
         
         Facade::macro(
             'boolean', 
-            function($pContent, array $pOptions = array())
+            function($pContent, array $pOptions = [])
             {
                 return Facade::filter('\Elixir\Filter\Boolean', $pContent, $pOptions);
             }
@@ -28,11 +28,11 @@ class Filter
         
         Facade::macro(
             'callback', 
-            function($pContent, $pOptions = array())
+            function($pContent, $pOptions = [])
             {
                 if(is_callable($pOptions))
                 {
-                    $pOptions = array('options' => $pOptions);
+                    $pOptions = ['options' => $pOptions];
                 }
             
                 return Facade::filter('\Elixir\Filter\Callback', $pContent, $pOptions);
@@ -56,7 +56,7 @@ class Filter
         
         Facade::macro(
             'crop', 
-            function($pContent, array $pOptions = array())
+            function($pContent, array $pOptions = [])
             {
                 return Facade::filter('\Elixir\Filter\Crop', $pContent, $pOptions);
             }
@@ -66,7 +66,7 @@ class Filter
         
         Facade::macro(
             'date', 
-            function($pContent, array $pOptions = array())
+            function($pContent, array $pOptions = [])
             {
                 return Facade::filter('\Elixir\Filter\Date', $pContent, $pOptions);
             }
@@ -76,7 +76,7 @@ class Filter
         
         Facade::macro(
             'duplicate', 
-            function($pContent, array $pOptions = array())
+            function($pContent, array $pOptions = [])
             {
                 return Facade::filter('\Elixir\Filter\Duplicate', $pContent, $pOptions);
             }
@@ -86,7 +86,7 @@ class Filter
         
         Facade::macro(
             'email', 
-            function($pContent, array $pOptions = array())
+            function($pContent, array $pOptions = [])
             {
                 return Facade::filter('\Elixir\Filter\Email', $pContent, $pOptions);
             }
@@ -96,7 +96,7 @@ class Filter
         
         Facade::macro(
             'enlarge', 
-            function($pContent, array $pOptions = array())
+            function($pContent, array $pOptions = [])
             {
                 return Facade::filter('\Elixir\Filter\Enlarge', $pContent, $pOptions);
             }
@@ -106,7 +106,7 @@ class Filter
         
         Facade::macro(
             'escape', 
-            function($pContent, array $pOptions = array())
+            function($pContent, array $pOptions = [])
             {
                 return Facade::filter('\Elixir\Filter\Escaper', $pContent, $pOptions);
             }
@@ -114,63 +114,63 @@ class Filter
         
         Facade::macro(
             'escapeHTML', 
-            function($pContent, array $pOptions = array())
+            function($pContent, array $pOptions = [])
             {
-                $pOptions = array_merge(array('strategy' => Escaper::HTML), $pOptions);
+                $pOptions = array_merge(['strategy' => Escaper::HTML], $pOptions);
                 return Facade::filter('\Elixir\Filter\Escaper', $pContent, $pOptions);
             }
         );
         
         Facade::macro(
             'escapeXML', 
-            function($pContent, array $pOptions = array())
+            function($pContent, array $pOptions = [])
             {
-                $pOptions = array_merge(array('strategy' => Escaper::XML), $pOptions);
+                $pOptions = array_merge(['strategy' => Escaper::XML], $pOptions);
                 return Facade::filter('\Elixir\Filter\Escaper', $pContent, $pOptions);
             }
         );
         
         Facade::macro(
             'escapeHTMLAttr', 
-            function($pContent, array $pOptions = array())
+            function($pContent, array $pOptions = [])
             {
-                $pOptions = array_merge(array('strategy' => Escaper::HTML_ATTR), $pOptions);
+                $pOptions = array_merge(['strategy' => Escaper::HTML_ATTR], $pOptions);
                 return Facade::filter('\Elixir\Filter\Escaper', $pContent, $pOptions);
             }
         );
         
         Facade::macro(
             'escapeXMLAttr', 
-            function($pContent, array $pOptions = array())
+            function($pContent, array $pOptions = [])
             {
-                $pOptions = array_merge(array('strategy' => Escaper::XML_ATTR), $pOptions);
+                $pOptions = array_merge(['strategy' => Escaper::XML_ATTR], $pOptions);
                 return Facade::filter('\Elixir\Filter\Escaper', $pContent, $pOptions);
             }
         );
         
         Facade::macro(
             'escapeJS', 
-            function($pContent, array $pOptions = array())
+            function($pContent, array $pOptions = [])
             {
-                $pOptions = array_merge(array('strategy' => Escaper::JS), $pOptions);
+                $pOptions = array_merge(['strategy' => Escaper::JS], $pOptions);
                 return Facade::filter('\Elixir\Filter\Escaper', $pContent, $pOptions);
             }
         );
         
         Facade::macro(
             'escapeCSS', 
-            function($pContent, array $pOptions = array())
+            function($pContent, array $pOptions = [])
             {
-                $pOptions = array_merge(array('strategy' => Escaper::CSS), $pOptions);
+                $pOptions = array_merge(['strategy' => Escaper::CSS], $pOptions);
                 return Facade::filter('\Elixir\Filter\Escaper', $pContent, $pOptions);
             }
         );
         
         Facade::macro(
             'escapeURL', 
-            function($pContent, array $pOptions = array())
+            function($pContent, array $pOptions = [])
             {
-                $pOptions = array_merge(array('strategy' => Escaper::URL), $pOptions);
+                $pOptions = array_merge(['strategy' => Escaper::URL], $pOptions);
                 return Facade::filter('\Elixir\Filter\Escaper', $pContent, $pOptions);
             }
         );
@@ -179,7 +179,7 @@ class Filter
         
         Facade::macro(
             'float', 
-            function($pContent, array $pOptions = array())
+            function($pContent, array $pOptions = [])
             {
                 return Facade::filter('\Elixir\Filter\Float', $pContent, $pOptions);
             }
@@ -199,7 +199,7 @@ class Filter
         
         Facade::macro(
             'nbrFormat', 
-            function($pContent, array $pOptions = array())
+            function($pContent, array $pOptions = [])
             {
                 return Facade::filter('\Elixir\Filter\NbrFormat', $pContent, $pOptions);
             }
@@ -207,18 +207,18 @@ class Filter
         
         Facade::macro(
             'formatNumber', 
-            function($pContent, array $pOptions = array())
+            function($pContent, array $pOptions = [])
             {
-                $pOptions = array_merge(array('strategy' => NbrFormat::FORMAT), $pOptions);
+                $pOptions = array_merge(['strategy' => NbrFormat::FORMAT], $pOptions);
                 return Facade::filter('\Elixir\Filter\NbrFormat', $pContent, $pOptions);
             }
         );
         
         Facade::macro(
             'formatCurrency', 
-            function($pContent, array $pOptions = array())
+            function($pContent, array $pOptions = [])
             {
-                $pOptions = array_merge(array('strategy' => NbrFormat::FORMAT_CURRENCY), $pOptions);
+                $pOptions = array_merge(['strategy' => NbrFormat::FORMAT_CURRENCY], $pOptions);
                 return Facade::filter('\Elixir\Filter\NbrFormat', $pContent, $pOptions);
             }
         );
@@ -237,7 +237,7 @@ class Filter
         
         Facade::macro(
             'rename', 
-            function($pContent, array $pOptions = array())
+            function($pContent, array $pOptions = [])
             {
                 return Facade::filter('\Elixir\Filter\Rename', $pContent, $pOptions);
             }
@@ -247,7 +247,7 @@ class Filter
         
         Facade::macro(
             'replace', 
-            function($pContent, array $pOptions = array())
+            function($pContent, array $pOptions = [])
             {
                 return Facade::filter('\Elixir\Filter\Replace', $pContent, $pOptions);
             }
@@ -257,7 +257,7 @@ class Filter
         
         Facade::macro(
             'resize', 
-            function($pContent, array $pOptions = array())
+            function($pContent, array $pOptions = [])
             {
                 return Facade::filter('\Elixir\Filter\Resize', $pContent, $pOptions);
             }
@@ -267,7 +267,7 @@ class Filter
         
         Facade::macro(
             'trim', 
-            function($pContent, array $pOptions = array())
+            function($pContent, array $pOptions = [])
             {
                 return Facade::filter('\Elixir\Filter\Trim', $pContent, $pOptions);
             }

@@ -115,14 +115,14 @@ class Image
             $h = $pHeight;
         }
 
-        return array(
+        return [
             'resized' => ($wSrc != $w) || ($hSrc != $h),
             'src' => $pImageOrResource,
             'srcWidth' => $wSrc,
             'width' => $w,
             'srcHeight' => $hSrc,
             'height' => $h
-        );
+        ];
     }
     
     /**
@@ -189,9 +189,9 @@ class Image
                 throw new \InvalidArgumentException('You must set the mime type of a resource.');
             }
             
-            if(!in_array($pTypeMime, array(self::TYPE_MIME_JPG, 
+            if(!in_array($pTypeMime, [self::TYPE_MIME_JPG, 
                                            self::TYPE_MIME_PNG, 
-                                           self::TYPE_MIME_GIF)))
+                                           self::TYPE_MIME_GIF]))
             {
                 throw new \InvalidArgumentException(sprintf('Mime type "%s" is not supported.', $pTypeMime));
             }
@@ -278,8 +278,8 @@ class Image
         {
             $ressDst = imagecreatetruecolor($infos['width'], $infos['height']);
 
-            if(in_array($this->_mimeType, array(self::TYPE_MIME_PNG,
-                                                self::TYPE_MIME_GIF)))
+            if(in_array($this->_mimeType, [self::TYPE_MIME_PNG,
+                                                self::TYPE_MIME_GIF]))
             {
                 imagesavealpha($ressDst, true);
                 $transColor = imagecolorallocatealpha($ressDst, 0, 0, 0, 127);
@@ -322,8 +322,8 @@ class Image
         {
             $ressDst = imagecreatetruecolor($infos['width'], $infos['height']);
 
-            if(in_array($this->_mimeType, array(self::TYPE_MIME_PNG,
-                                                self::TYPE_MIME_GIF)))
+            if(in_array($this->_mimeType, [self::TYPE_MIME_PNG,
+                                                self::TYPE_MIME_GIF]))
             {
                 imagesavealpha($ressDst, true);
                 $transColor = imagecolorallocatealpha($ressDst, 0, 0, 0, 127);
@@ -365,8 +365,8 @@ class Image
         {
             $ressDst = imagecreatetruecolor($infos['width'], $infos['height']);
 
-            if(in_array($this->_mimeType, array(self::TYPE_MIME_PNG,
-                                                self::TYPE_MIME_GIF)))
+            if(in_array($this->_mimeType, [self::TYPE_MIME_PNG,
+                                                self::TYPE_MIME_GIF]))
             {
                 imagesavealpha($ressDst, true);
                 $transColor = imagecolorallocatealpha($ressDst, 0, 0, 0, 127);

@@ -165,12 +165,12 @@ class Session extends Dispatcher implements SessionInterface, \ArrayAccess, \Ite
             if(null !== $this->_saveHandler)
             {
                 session_set_save_handler(
-                    array($this->_saveHandler, 'open'),
-                    array($this->_saveHandler, 'close'),
-                    array($this->_saveHandler, 'read'),
-                    array($this->_saveHandler, 'write'),
-                    array($this->_saveHandler, 'destroy'),
-                    array($this->_saveHandler, 'gc')
+                    [$this->_saveHandler, 'open'],
+                    [$this->_saveHandler, 'close'],
+                    [$this->_saveHandler, 'read'],
+                    [$this->_saveHandler, 'write'],
+                    [$this->_saveHandler, 'destroy'],
+                    [$this->_saveHandler, 'gc']
                 );
                 
                 register_shutdown_function('session_write_close');
@@ -369,12 +369,12 @@ class Session extends Dispatcher implements SessionInterface, \ArrayAccess, \Ite
      */
     public function flash($pKey = null, $pValue = null)
     {
-        $flash = $this->_parameters->get(self::FLASH_KEY, array());
+        $flash = $this->_parameters->get(self::FLASH_KEY, []);
         
         if(null === $pKey)
         {
             $result = $flash;
-            $flash = array();
+            $flash = [];
         }
         else
         {
@@ -407,7 +407,7 @@ class Session extends Dispatcher implements SessionInterface, \ArrayAccess, \Ite
      */
     public function clear()
     {
-        $this->_parameters->sets(array());
+        $this->_parameters->sets([]);
         $this->dispatch(new SessionEvent(SessionEvent::CLEAR));
     }
     

@@ -35,7 +35,7 @@ class Session implements StorageInterface
      */
     public function isEmpty()
     {
-        return count($this->_session->get(self::STORAGE_KEY, array())) == 0;
+        return count($this->_session->get(self::STORAGE_KEY, [])) == 0;
     }
     
     /**
@@ -43,7 +43,7 @@ class Session implements StorageInterface
      */
     public function has($pKey)
     {
-        return $this->_session->has(array(self::STORAGE_KEY, $pKey));
+        return $this->_session->has([self::STORAGE_KEY, $pKey]);
     }
     
     /**
@@ -51,7 +51,7 @@ class Session implements StorageInterface
      */
     public function get($pKey, $pDefault = null)
     {
-        $identity = $this->_session->get(array(self::STORAGE_KEY, $pKey), null);
+        $identity = $this->_session->get([self::STORAGE_KEY, $pKey], null);
         
         if(null !== $identity)
         {
@@ -66,7 +66,7 @@ class Session implements StorageInterface
      */
     public function set($pKey, Identity $pIdentity)
     {
-        $this->_session->set(array(self::STORAGE_KEY, $pKey), $pIdentity);
+        $this->_session->set([self::STORAGE_KEY, $pKey], $pIdentity);
     }
     
     /**
@@ -74,7 +74,7 @@ class Session implements StorageInterface
      */
     public function remove($pKey)
     {
-        $this->_session->remove(array(self::STORAGE_KEY, $pKey));
+        $this->_session->remove([self::STORAGE_KEY, $pKey]);
     }
     
     /**
@@ -82,7 +82,7 @@ class Session implements StorageInterface
      */
     public function gets()
     {
-        return $this->_session->get(self::STORAGE_KEY, array());
+        return $this->_session->get(self::STORAGE_KEY, []);
     }
     
     /**

@@ -14,18 +14,18 @@ class TextDomain
     /**
      * @var array 
      */
-    protected $_resources = array();
+    protected $_resources = [];
     
     /**
      * @var array 
      */
-    protected $_data = array();
+    protected $_data = [];
     
     /**
      * @param array $pResources
      * @param array $pData
      */
-    public function __construct(array $pResources = array(), array $pData = array()) 
+    public function __construct(array $pResources = [], array $pData = []) 
     {
         $this->setResources($pResources);
         $this->sets($pData);
@@ -39,7 +39,7 @@ class TextDomain
     {
         if (!isset($this->_resources[$pLocale])) 
         {
-            $this->_resources[$pLocale] = array();
+            $this->_resources[$pLocale] = [];
         }
         
         $this->_resources[$pLocale][] = $pResource;
@@ -58,7 +58,7 @@ class TextDomain
      */
     public function setResources(array $pData)
     {
-        $this->_resources = array();
+        $this->_resources = [];
         
         foreach($pData as $locale => $resources)
         {
@@ -77,7 +77,7 @@ class TextDomain
     public function has($pKey, $pLocale)
     {
         $this->load($pLocale);
-        $key = array($pLocale);
+        $key = [$pLocale];
         
         foreach((array)$pKey as $k)
         {
@@ -96,7 +96,7 @@ class TextDomain
     public function set($pKey, $pValue, $pLocale)
     {
         $this->load($pLocale);
-        $key = array($pLocale);
+        $key = [$pLocale];
         
         foreach((array)$pKey as $k)
         {
@@ -116,7 +116,7 @@ class TextDomain
     public function get($pKey, $pLocale, $pDefault = null)
     {
         $this->load($pLocale);
-        $key = array($pLocale);
+        $key = [$pLocale];
         
         foreach((array)$pKey as $k)
         {
@@ -145,7 +145,7 @@ class TextDomain
     public function remove($pKey, $pLocale)
     {
         $this->load($pLocale);
-        $key = array($pLocale);
+        $key = [$pLocale];
         
         foreach((array)$pKey as $k)
         {
@@ -179,7 +179,7 @@ class TextDomain
      */
     public function sets(array $pData)
     {
-        $this->_data = array();
+        $this->_data = [];
         
         foreach($pData as $locale => $data)
         {
@@ -211,7 +211,7 @@ class TextDomain
             foreach($resources as $resource)
             {
                 $loader = LoaderFactory::create($resource);
-                $data = array($pLocale => $loader->load($resource));
+                $data = [$pLocale => $loader->load($resource)];
                 
                 $this->mergeData($data);
             } 

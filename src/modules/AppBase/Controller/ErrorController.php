@@ -39,16 +39,16 @@ class ErrorController extends ControllerAbstract
         $start = $exception->getLine() - 4;
         $lines = array_slice(file($exception->getFile()), $start < 0 ? 0 : $start, 7);
 
-        $exception = array(
+        $exception = [
             'type' => get_class($exception),
             'message' => $exception->getMessage(),
             'status-code' => $exception->getCode(),
             'file' => $exception->getFile(),
             'line' => $exception->getLine(),
             'code' => implode('', $lines)
-        );
+        ];
 	
-        return $this->render(array('message' => $message, 'exception' => $exception), $statusCode);
+        return $this->render(['message' => $message, 'exception' => $exception], $statusCode);
     }
     
     /**

@@ -36,5 +36,5 @@ interface RouterInterface extends DispatcherInterface
      * @param string $pMode
      * @return string
      */
-    public function generate($pName, array $pOptions = array(), $pMode = GeneratorInterface::URL_ABSOLUTE);
+    public function generate($pName, array $pOptions = [], $pMode = GeneratorInterface::URL_ABSOLUTE);
 }

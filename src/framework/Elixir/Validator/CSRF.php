@@ -16,7 +16,7 @@ class CSRF extends ValidatorAbstract
     /**
      * @var array 
      */
-    protected $_errorMessageTemplates = array(self::ERROR => 'Possibility of attack CSRF flaw.');
+    protected $_errorMessageTemplates = [self::ERROR => 'Possibility of attack CSRF flaw.'];
     
     /**
      * @var Context
@@ -66,10 +66,10 @@ class CSRF extends ValidatorAbstract
     /**
      * @see ValidatorInterface::isValid()
      */
-    public function isValid($pContent, array $pOptions = array()) 
+    public function isValid($pContent, array $pOptions = []) 
     {
         $pOptions = array_merge($this->_options, $pOptions);
-        $this->_errors = array();
+        $this->_errors = [];
         
         if(!$this->getCSRF()->isValid($pContent, isset($pOptions['referer']) ? $pOptions['referer'] : null))
         {

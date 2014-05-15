@@ -25,7 +25,7 @@ class NbrFormat extends FilterAbstract
     /**
      * @see FilterInterface::filter()
      */
-    public function filter($pContent, array $pOptions = array())
+    public function filter($pContent, array $pOptions = [])
     {
         $pOptions = array_merge($this->_options, $pOptions);
         $filter = isset($pOptions['filter']) ? $pOptions['filter'] : self::FORMAT;

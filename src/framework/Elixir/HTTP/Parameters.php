@@ -30,7 +30,7 @@ class Parameters implements ParametersInterface, \ArrayAccess, \Iterator, \Count
     /**
      * @param array|\ArrayAccess $pData
      */
-    public function __construct(&$pData = array())
+    public function __construct(&$pData = [])
     {
         $this->_data = &$pData;
     }
@@ -96,12 +96,12 @@ class Parameters implements ParametersInterface, \ArrayAccess, \Iterator, \Count
                     else if(is_callable($pSanitize))
                     {
                         $filter = FILTER_CALLBACK;
-                        $options = array('options' => $pSanitize);
+                        $options = ['options' => $pSanitize];
                     }
                     else
                     {
                         $filter = $pSanitize;
-                        $options = array();
+                        $options = [];
                     }
                     
                     $v = $this->filter($v, $filter, $options);
@@ -153,12 +153,12 @@ class Parameters implements ParametersInterface, \ArrayAccess, \Iterator, \Count
                 else if(is_callable($pSanitize))
                 {
                     $filter = FILTER_CALLBACK;
-                    $options = array('options' => $pSanitize);
+                    $options = ['options' => $pSanitize];
                 }
                 else
                 {
                     $filter = $pSanitize;
-                    $options = array();
+                    $options = [];
                 }
 
                 $data = $this->filter($data, $filter, $options);
@@ -177,7 +177,7 @@ class Parameters implements ParametersInterface, \ArrayAccess, \Iterator, \Count
      */
     public function sets(array $pData) 
     {
-        $globals = array(
+        $globals = [
             $GLOBALS,
             $_SERVER,
             $_GET,
@@ -186,7 +186,7 @@ class Parameters implements ParametersInterface, \ArrayAccess, \Iterator, \Count
             $_COOKIE,
             $_REQUEST,
             $_ENV
-        );
+        ];
         
         if(isset($_SESSION))
         {
@@ -330,7 +330,7 @@ class Parameters implements ParametersInterface, \ArrayAccess, \Iterator, \Count
     {
         if($pData instanceof self)
         {
-            $pData = $pData->gets(array('filter' => false));
+            $pData = $pData->gets(['filter' => false]);
         }
         
         if($pRecursive)
@@ -350,7 +350,7 @@ class Parameters implements ParametersInterface, \ArrayAccess, \Iterator, \Count
      * @return mixed
      * @throws \RuntimeException
      */
-    public function filter($pContent, $pSanitize = 'FILTER_SANITIZE_FULL_SPECIAL_CHARS', array $pOptions = array())
+    public function filter($pContent, $pSanitize = 'FILTER_SANITIZE_FULL_SPECIAL_CHARS', array $pOptions = [])
     {
         if(null === $this->_sanitizer)
         {

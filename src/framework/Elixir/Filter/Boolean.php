@@ -14,7 +14,7 @@ class Boolean extends FilterAbstract
     /**
      * @see FilterInterface::filter()
      */
-    public function filter($pContent, array $pOptions = array())
+    public function filter($pContent, array $pOptions = [])
     {
         $pOptions = array_merge($this->_options, $pOptions);
         
@@ -24,7 +24,7 @@ class Boolean extends FilterAbstract
         }
         else
         {
-            $search = array(true, 'true', 'TRUE', 'yes', 'YES', '1', 1);
+            $search = [true, 'true', 'TRUE', 'yes', 'YES', '1', 1];
         }
         
         return in_array($pContent, $search, isset($pOptions['strict']) ? $pOptions['strict'] : true);

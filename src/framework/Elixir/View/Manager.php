@@ -17,7 +17,7 @@ class Manager extends DataAbstract
     /**
      * @var array
      */
-    protected $_engines = array();
+    protected $_engines = [];
     
     /**
      * @var ViewInterface 
@@ -53,10 +53,10 @@ class Manager extends DataAbstract
      */
     public function registerEngine($pName, ViewInterface $pView, $pExtension = null, $pDefaultEngine = true)
     {
-        $this->_engines[$pName] = array(
+        $this->_engines[$pName] = [
             'extension' => $pExtension ?: $pView->getDefaultExtension(), 
             'view' => $pView
-        );
+        ];
         
         if($pDefaultEngine)
         {
@@ -102,7 +102,7 @@ class Manager extends DataAbstract
      */
     public function getEngines()
     {
-        $engines = array();
+        $engines = [];
         
         foreach($this->_engines as $key => $value)
         {
@@ -116,7 +116,7 @@ class Manager extends DataAbstract
      * @see ViewInterface::render()
      * @throws \LogicException
      */
-    public function render($pTemplate, array $pData = array())
+    public function render($pTemplate, array $pData = [])
     {
         if(!($pTemplate instanceof Str))
         {

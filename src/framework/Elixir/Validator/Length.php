@@ -14,15 +14,15 @@ class Length extends ValidatorAbstract
     /**
      * @var array 
      */
-    protected $_errorMessageTemplates = array(self::ERROR => 'The size of string is invalid.');
+    protected $_errorMessageTemplates = [self::ERROR => 'The size of string is invalid.'];
     
     /**
      * @see ValidatorInterface::isValid()
      */
-    public function isValid($pContent, array $pOptions = array()) 
+    public function isValid($pContent, array $pOptions = []) 
     {
         $pOptions = array_merge($this->_options, $pOptions);
-        $this->_errors = array();
+        $this->_errors = [];
         
         $len = isset($pOptions['mb']) && $pOptions['mb'] ? mb_strlen($pContent) : strlen($pContent);
         $min = isset($pOptions['min']) ? $pOptions['min'] : null;
@@ -30,8 +30,8 @@ class Length extends ValidatorAbstract
         
         if((null !== $min && $len < $min) || (null !== $max && $len > $max))
         {
-            $this->_errors[] = str_replace(array('{MIN}', '{MAX}'), 
-                                           array($min, $max),
+            $this->_errors[] = str_replace(['{MIN}', '{MAX}'], 
+                                           [$min, $max],
                                            $this->getErrorMessageTemplate(self::ERROR));
         }
         
@@ -39,8 +39,8 @@ class Length extends ValidatorAbstract
         {
             if(isset($pOptions['error']))
             {
-                $this->_errors = (array)str_replace(array('{MIN}', '{MAX}'), 
-                                                    array($min, $max),
+                $this->_errors = (array)str_replace(['{MIN}', '{MAX}'], 
+                                                    [$min, $max],
                                                     $pOptions['error']);
             }
             

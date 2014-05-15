@@ -24,7 +24,7 @@ class I18N extends Dispatcher implements I18NInterface
     /**
      * @var array
      */
-    protected $_textDomains = array();
+    protected $_textDomains = [];
     
     /**
      * @var Plural 
@@ -35,7 +35,7 @@ class I18N extends Dispatcher implements I18NInterface
      * @param array $pTextDomains
      * @param string $pLocale
      */
-    public function __construct($pTextDomains = array(), $pLocale = null) 
+    public function __construct($pTextDomains = [], $pLocale = null) 
     {
         $this->setTextDomains($pTextDomains);
         
@@ -190,7 +190,7 @@ class I18N extends Dispatcher implements I18NInterface
      */
     public function setTextDomains(array $pData)
     {
-        $this->_textDomains = array();
+        $this->_textDomains = [];
         
         foreach($pData as $name => $textDomain)
         {
@@ -204,7 +204,7 @@ class I18N extends Dispatcher implements I18NInterface
     public function translate($pMessage, $pLocale = null, $pTextDomain = self::ALL_TEXT_DOMAINS)
     {
         $message = $pMessage;
-        $textDomains = $pTextDomain == self::ALL_TEXT_DOMAINS ? array_keys($this->_textDomains) : array($pTextDomain); 
+        $textDomains = $pTextDomain == self::ALL_TEXT_DOMAINS ? array_keys($this->_textDomains) : [$pTextDomain]; 
         $locale = $pLocale ?: $this->getLocale();
         $type = I18NEvent::MISSING_TRANSLATION;
         
@@ -262,7 +262,7 @@ class I18N extends Dispatcher implements I18NInterface
             throw new \BadMethodCallException(sprintf('Method "%s" does not exist.', $pMethod));
         }
         
-        return call_user_func_array(array($this, $pMethod), $pArguments);
+        return call_user_func_array([$this, $pMethod], $pArguments);
     }
     
     /**

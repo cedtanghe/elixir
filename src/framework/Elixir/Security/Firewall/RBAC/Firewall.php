@@ -94,7 +94,7 @@ class Firewall extends FirewallAbstract
 
                         if(count($permissions) == 0)
                         {
-                            $permissions = array(null);
+                            $permissions = [null];
                         }
 
                         foreach($roles as $role)

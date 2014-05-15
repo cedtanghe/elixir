@@ -173,5 +173,5 @@ interface FormInterface extends DispatcherInterface
     /**
      * @param array $pOmit
      */
-    public function reset(array $pOmit = array());
+    public function reset(array $pOmit = []);
 }

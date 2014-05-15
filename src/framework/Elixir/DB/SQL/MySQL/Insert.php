@@ -18,7 +18,7 @@ class Insert extends BaseInsert
     /**
      * @var array
      */
-    protected $_duplicateKeyUpdate = array();
+    protected $_duplicateKeyUpdate = [];
     
     /**
      * @param boolean $pValue

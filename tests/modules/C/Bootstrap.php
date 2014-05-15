@@ -11,9 +11,9 @@ class Bootstrap extends ModuleAbstract
     {
         $router = $this->_container->get('router');
         $router->getCollection()->add('C', new Route('/c/{_controller}/{_action}',
-                                                     array('_module' => '(@C)'),
-                                                     array('_controller' => '[a-z0-9-]+',
+                                                     ['_module' => '(@C)'],
+                                                     ['_controller' => '[a-z0-9-]+',
                                                            '_action' => '[a-z0-9-]+',
-                                                           '*' => true)));
+                                                           '*' => true]));
     }
 }

@@ -118,6 +118,6 @@ class Memcached extends CacheAbstract
      */
     public function __call($pMethod, $pArguments) 
     {
-        return call_user_func_array(array($this->_memcached, $pMethod), $pArguments);
+        return call_user_func_array([$this->_memcached, $pMethod], $pArguments);
     }
 }

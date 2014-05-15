@@ -58,7 +58,7 @@ class AssetsExport extends Command
                 null,
                 InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
                 'Names of folders shared with other modules',
-                array('vendor')
+                ['vendor']
              )
              ->addOption(
                 'dir',
@@ -86,13 +86,13 @@ class AssetsExport extends Command
         $directory = rtrim($pInput->getOption('dir'), '/\\');
         $mode = $pInput->getOption('mode');
         
-        if(!in_array($mode, array(self::COPY, self::XML)))
+        if(!in_array($mode, [self::COPY, self::XML]))
         {
             $pOutput->writeln(sprintf('<error>Mode "%s" is invalid, use copy or xml</error>', $mode));
             return;
         }
         
-        $modules = array();
+        $modules = [];
         
         if(null !== $module)
         {
@@ -129,7 +129,7 @@ class AssetsExport extends Command
                 $search = 'resources/public' . DIRECTORY_SEPARATOR;
                 $xml = new \SimpleXMLElement('<data></data>');
                 
-                $files = array();
+                $files = [];
                 
                 foreach($list as $file)
                 {
@@ -143,7 +143,7 @@ class AssetsExport extends Command
                             $file, 
                             strpos($file, $search) + strlen($search)
                         ),
-                        array(DIRECTORY_SEPARATOR => '/')
+                        [DIRECTORY_SEPARATOR => '/']
                     );
                     
                     $child = $xml->addChild('file', $value);

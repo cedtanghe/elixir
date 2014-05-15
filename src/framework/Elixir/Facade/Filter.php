@@ -13,7 +13,7 @@ class Filter extends FacadeAbstract
     /**
      * @var array
      */
-    protected static $_macros = array();
+    protected static $_macros = [];
 
     /**
      * @param string $pMethod
@@ -80,7 +80,7 @@ class Filter extends FacadeAbstract
      * @param array $pOptions
      * @return mixed
      */
-    public static function filter($pClassOrKey, $pContent, array $pOptions = array())
+    public static function filter($pClassOrKey, $pContent, array $pOptions = [])
     {
         $filter = static::resolveInstance($pClassOrKey);
         return $filter->filter($pContent, $pOptions);

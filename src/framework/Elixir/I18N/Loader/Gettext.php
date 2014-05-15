@@ -58,7 +58,7 @@ class Gettext implements LoaderInterface
         fseek($this->_file, $translationStringTableOffset);
         $translationStringTable = $this->readIntegerList(2 * $numStrings);
         
-        $data = array();
+        $data = [];
         
         for($i = 0; $i < $numStrings; ++$i) 
         {
@@ -68,7 +68,7 @@ class Gettext implements LoaderInterface
             $originalStringOffset = $originalStringTable[$offsetKey];
             $translationStringSize = $translationStringTable[$sizeKey];
             $translationStringOffset = $translationStringTable[$offsetKey];
-            $originalString = array('');
+            $originalString = [''];
             
             if($originalStringSize > 0) 
             {

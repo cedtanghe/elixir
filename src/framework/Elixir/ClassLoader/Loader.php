@@ -25,27 +25,27 @@ class Loader implements LoaderInterface
     /**
      * @var array 
      */
-    protected $_classes = array();
+    protected $_classes = [];
     
     /**
      * @var array 
      */
-    protected $_loaded = array();
+    protected $_loaded = [];
     
     /**
      * @var array 
      */
-    protected $_prefixs = array();
+    protected $_prefixs = [];
     
     /**
      * @var array 
      */
-    protected $_namespaces = array();
+    protected $_namespaces = [];
     
     /**
      * @var array 
      */
-    protected $_classMap = array();
+    protected $_classMap = [];
     
     public function __construct() 
     {
@@ -61,7 +61,7 @@ class Loader implements LoaderInterface
      */
     public function register()
     {
-        spl_autoload_register(array($this, 'loadClass'));
+        spl_autoload_register([$this, 'loadClass']);
     }
 
     /**
@@ -69,7 +69,7 @@ class Loader implements LoaderInterface
      */
     public function unregister()
     {
-        spl_autoload_unregister(array($this, 'loadClass'));
+        spl_autoload_unregister([$this, 'loadClass']);
     }
     
     /**
@@ -78,7 +78,7 @@ class Loader implements LoaderInterface
      */
     public function loadFromCache($pCache, $pKey = self::DEFAULT_CACHE_KEY)
     {
-        $data = $pCache->get($pKey, array()) ?: array();
+        $data = $pCache->get($pKey, []) ?: [];
         
         $this->_classes = array_merge(
             $data,
@@ -127,7 +127,7 @@ class Loader implements LoaderInterface
     {
         if($pOverride || !isset($this->_classMap[$pClassName]))
         {
-            $this->_classMap[$pClassName] = array();
+            $this->_classMap[$pClassName] = [];
         }
         
         $this->_classMap[$pClassName][] = $pPath;
@@ -146,7 +146,7 @@ class Loader implements LoaderInterface
      */
     public function setClassMap(array $pData)
     {
-        $this->_classMap = array();
+        $this->_classMap = [];
         
         foreach($pData as $className => $paths)
         {
@@ -168,7 +168,7 @@ class Loader implements LoaderInterface
         
         if($pOverride || !isset($this->_prefixs[$pPrefix]))
         {
-            $this->_prefixs[$pPrefix] = array();
+            $this->_prefixs[$pPrefix] = [];
         }
         
         $this->_prefixs[$pPrefix][] = $pPath;
@@ -187,7 +187,7 @@ class Loader implements LoaderInterface
      */
     public function setPrefixs(array $pData)
     {
-        $this->_prefixs = array();
+        $this->_prefixs = [];
         
         foreach($pData as $prefix => $paths)
         {
@@ -209,7 +209,7 @@ class Loader implements LoaderInterface
         
         if($pOverride || !isset($this->_namespaces[$pNamespace]))
         {
-            $this->_namespaces[$pNamespace] = array();
+            $this->_namespaces[$pNamespace] = [];
         }
         
         $this->_namespaces[$pNamespace][] = $pPath;
@@ -228,7 +228,7 @@ class Loader implements LoaderInterface
      */
     public function setNamespaces(array $pData)
     {
-        $this->_namespaces = array();
+        $this->_namespaces = [];
         
         foreach($pData as $namespace => $paths)
         {
@@ -331,7 +331,7 @@ class Loader implements LoaderInterface
             return $this->_classMap[$pClassName];
         }
         
-        $paths = array('');
+        $paths = [''];
         $className = $pClassName;
         
         if(false !== strpos($className, self::NAMESPACE_SEPARATOR))
@@ -360,7 +360,7 @@ class Loader implements LoaderInterface
             }
         }
         
-        $result = array();
+        $result = [];
         
         foreach($paths as $path)
         {

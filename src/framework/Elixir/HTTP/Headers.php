@@ -46,17 +46,17 @@ class Headers
     /**
      * @var array 
      */
-    protected $_headers = array();
+    protected $_headers = [];
     
     /**
      * @var array 
      */
-    protected $_cacheControl = array();
+    protected $_cacheControl = [];
     
     /**
      * @var array 
      */
-    protected $_cookies = array();
+    protected $_cookies = [];
 
     /**
      * @param string $pKey
@@ -95,7 +95,7 @@ class Headers
             $this->setCookie(Cookie::fromString($pValue));
             return;
         }
-        else if(in_array($pKey, array('Expires', 'Last-Modified')) && $pValue instanceof \DateTime)
+        else if(in_array($pKey, ['Expires', 'Last-Modified']) && $pValue instanceof \DateTime)
         {
             $date = new \DateTime('@' . $pValue->getTimestamp(), new \DateTimeZone('GMT'));
             $pValue = $date->format('D, d-M-Y H:i:s \G\M\T');
@@ -152,7 +152,7 @@ class Headers
     {
         if($pKey == 'Cache-Control')
         {
-            $this->setCacheControlDirectives(array());
+            $this->setCacheControlDirectives([]);
             return;
         }
         
@@ -173,7 +173,7 @@ class Headers
      */
     public function sets(array $pData)
     {
-        $this->_headers = array();
+        $this->_headers = [];
         
         foreach($pData as $key => $value)
         {
@@ -252,7 +252,7 @@ class Headers
      */
     public function setCacheControlDirectives(array $pData)
     {
-        $this->_cacheControl = array();
+        $this->_cacheControl = [];
         
         foreach($pData as $key => $value)
         {
@@ -316,7 +316,7 @@ class Headers
             return $this->_cookies;
         }
 
-        $cookies = array();
+        $cookies = [];
 
         foreach($this->_cookies as $domain)
         {
@@ -337,7 +337,7 @@ class Headers
      */
     public function setCookies(array $pData)
     {
-        $this->_cookies = array();
+        $this->_cookies = [];
         
         foreach($pData as $cookie)
         {
@@ -353,7 +353,7 @@ class Headers
         $this->_headers['Cache-Control'] = $this->parseCacheControl();
         ksort($this->_headers);
         
-        $headers = array();
+        $headers = [];
         
         foreach($this->_headers as $key => $value)
         {
@@ -397,7 +397,7 @@ class Headers
         }
         
         ksort($this->_cacheControl);
-        $control = array();
+        $control = [];
         
         foreach($this->_cacheControl as $key => $value)
         {

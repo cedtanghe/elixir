@@ -23,7 +23,7 @@ class Test extends \PHPUnit_Framework_TestCase
     
     public function testCreateSimpleResponse()
     {
-        $response = ResponseFactory::create('Hello world', 200, 'HTTP/1.1', array());
+        $response = ResponseFactory::create('Hello world', 200, 'HTTP/1.1', []);
         
         $this->assertEquals('Hello world', $response->getContent());
         $this->assertEquals(200, $response->getStatusCode());
@@ -32,7 +32,7 @@ class Test extends \PHPUnit_Framework_TestCase
     
     public function testCreateResponseFromString()
     {
-        $response = ResponseFactory::create('Page not found', 404, 'HTTP/1.1', array('Cache-Control' => array('public' => true)));
+        $response = ResponseFactory::create('Page not found', 404, 'HTTP/1.1', ['Cache-Control' => ['public' => true]]);
         $response->getHeaders()->setCookie(new Cookie('test', 'cookie value'));
         
         $response = Response::fromString($response);

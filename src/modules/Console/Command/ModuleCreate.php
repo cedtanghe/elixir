@@ -186,7 +186,7 @@ class ModuleCreate extends Command
                             $lines, 
                             count($lines) - 1, 
                             0, 
-                            array('$loader->addNamespace(\'' . $namespace . '\', __DIR__ . \'/modules/' . $name . '/\');', '')
+                            ['$loader->addNamespace(\'' . $namespace . '\', __DIR__ . \'/modules/' . $name . '/\');', '']
                         );
                     }
                     else

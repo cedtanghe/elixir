@@ -47,6 +47,6 @@ class DI
             }
         }
         
-        return call_user_func_array(array(static::$_container, $pMethod), $pArguments);
+        return call_user_func_array([static::$_container, $pMethod], $pArguments);
     }
 }

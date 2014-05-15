@@ -26,8 +26,8 @@ class XML extends LoaderAbstract
             $pConfig = simplexml_load_file($pConfig);
         }
         
-        $result = array();
-        $supers = array();
+        $result = [];
+        $supers = [];
         
         $m = $this->_environment;
         
@@ -95,15 +95,15 @@ class XML extends LoaderAbstract
         }
         else
         {
-            $includes = array();
-            $r = array();
+            $includes = [];
+            $r = [];
             
             foreach($data->children() as $key => $value)
             {
                 if($key === 'include' && isset($data->{$key}['href']))
                 {
                     $file = $pDirname . '/' . $data->{$key}['href'];
-                    $loader = LoaderFactory::create($file, array('environment' => $this->_environment, 'strict' => $this->_strict));
+                    $loader = LoaderFactory::create($file, ['environment' => $this->_environment, 'strict' => $this->_strict]);
                 
                     if(!$loader instanceof LoaderAbstract)
                     {

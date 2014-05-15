@@ -24,19 +24,19 @@ class FileSize extends ValidatorAbstract
     /**
      * @var array 
      */
-    protected $_errorMessageTemplates = array(
+    protected $_errorMessageTemplates = [
         self::ERROR => 'File size is invalid.',
         self::MAX_ERROR => 'File is too large.',
         self::MIN_ERROR => 'File is too light.'
-    );
+    ];
     
     /**
      * @see ValidatorInterface::isValid()
      */
-    public function isValid($pContent, array $pOptions = array()) 
+    public function isValid($pContent, array $pOptions = []) 
     {
         $pOptions = array_merge($this->_options, $pOptions);
-        $this->_errors = array();
+        $this->_errors = [];
         
         $size = is_array($pContent) ? $pContent['size'] : filesize($pContent);
         

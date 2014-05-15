@@ -17,7 +17,7 @@ class Cookie
         $segments = explode(';', $pValue);
         $part = explode('=', array_shift($segments));
         
-        $data = array(
+        $data = [
             'name' => trim($part[0]), 
             'value' => rawurldecode(trim($part[1])), 
             'expires' => 0, 
@@ -25,7 +25,7 @@ class Cookie
             'domain' => '', 
             'secure' => false, 
             'httponly' => false
-        );
+        ];
         
         foreach($segments as $segment)
         {
@@ -305,7 +305,7 @@ class Cookie
     public function toString()
     {
         $name = rawurlencode($this->_name);
-        $cookies = array();
+        $cookies = [];
         
         if(is_array($this->_value))
         {
@@ -319,7 +319,7 @@ class Cookie
             $cookies[$name] = rawurlencode($this->_value);
         }
         
-        $return = array();
+        $return = [];
         
         foreach($cookies as $key => $value)
         {

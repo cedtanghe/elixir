@@ -21,7 +21,7 @@ abstract class RESTFulControllerAbstract extends ControllerAbstract
         if(substr($pMethod, -6) == 'Action')
         {
             $requestMethod = $this->_request->getRequestMethod('GET');
-            $prefixs = array($requestMethod);
+            $prefixs = [$requestMethod];
             
             switch($requestMethod)
             {
@@ -46,7 +46,7 @@ abstract class RESTFulControllerAbstract extends ControllerAbstract
 
                 if(method_exists($this, $m))
                 {
-                    return call_user_func_array(array($this, $m), $pArguments);
+                    return call_user_func_array([$this, $m], $pArguments);
                 }
             }
 
@@ -68,7 +68,7 @@ abstract class RESTFulControllerAbstract extends ControllerAbstract
         else
         {
             $method = $helper instanceof HelperInterface ? 'direct' : 'filter';
-            return call_user_func_array(array($helper, $method), $pArguments);
+            return call_user_func_array([$helper, $method], $pArguments);
         }
         
         throw new \BadMethodCallException(sprintf('Helper "%s" is not defined.', $pMethod));

@@ -1,5 +1,5 @@
 <?php
 
-return array('key-3' => 'value-3');
+return ['key-3' => 'value-3'];
 
 ?>

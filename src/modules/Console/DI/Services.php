@@ -42,6 +42,6 @@ class Services implements ProviderInterface
             
             return $console;
         }, 
-        array('type' => ContainerInterface::SINGLETON));
+        ['type' => ContainerInterface::SINGLETON]);
     }
 }

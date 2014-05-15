@@ -22,7 +22,7 @@ class XML implements LoaderInterface
         
         if(isset($pConfig->{self::GLOBALS}))
         {
-            $globals = array();
+            $globals = [];
             
             foreach($pConfig->{self::GLOBALS}->children() as $key => $value)
             {
@@ -30,13 +30,13 @@ class XML implements LoaderInterface
             }
         }
         
-        $access = array();
+        $access = [];
         
         foreach($pConfig->accesscontrol as $ac)
         {
             $priority = isset($ac['priority']) ? (int)$ac['priority'] : 0;
             $regex = (string)$ac->regex;
-            $options = array();
+            $options = [];
             
             if(isset($ac->options))
             {
@@ -51,7 +51,7 @@ class XML implements LoaderInterface
                 $options = array_merge($globals, $options);
             }
             
-            $access[$regex] = array('options' => $options, 'priority' => $priority);
+            $access[$regex] = ['options' => $options, 'priority' => $priority];
         }
         
         return $access;
@@ -69,7 +69,7 @@ class XML implements LoaderInterface
         }
         else
         {
-            $r = array();
+            $r = [];
             
             foreach($pData->children() as $key => $value)
             {

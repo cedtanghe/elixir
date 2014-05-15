@@ -59,7 +59,7 @@ class AssetsImport extends Command
         $module = $pInput->getArgument('module');
         $directory = rtrim($pInput->getOption('dir'), '/\\');
         
-        $modules = array();
+        $modules = [];
         
         if(null !== $module)
         {

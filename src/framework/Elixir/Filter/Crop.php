@@ -16,7 +16,7 @@ class Crop extends FilterAbstract
      * @see FilterInterface::filter()
      * @throws \RuntimeException
      */
-    public function filter($pContent, array $pOptions = array())
+    public function filter($pContent, array $pOptions = [])
     {
         $pOptions = array_merge($this->_options, $pOptions);
         

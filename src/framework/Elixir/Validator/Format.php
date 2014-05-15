@@ -35,21 +35,21 @@ class Format extends ValidatorAbstract
     /**
      * @var array 
      */
-    protected $_errorMessageTemplates = array(
+    protected $_errorMessageTemplates = [
         self::ERROR => 'Dimensions of the file are invalid.',
         self::MAX_WIDTH_ERROR => 'Maximum width of file is invalid.',
         self::MAX_HEIGHT_ERROR => 'Maximum height of file is invalid.',
         self::MIN_WIDTH_ERROR => 'Minimum width of file is invalid.',
         self::MIN_HEIGHT_ERROR => 'Minimum height of file is invalid.'
-    );
+    ];
     
     /**
      * @see ValidatorInterface::isValid()
      */
-    public function isValid($pContent, array $pOptions = array()) 
+    public function isValid($pContent, array $pOptions = []) 
     {
         $pOptions = array_merge($this->_options, $pOptions);
-        $this->_errors = array();
+        $this->_errors = [];
         
         $infos = Image::getSizingInfo(is_array($pContent) ? $pContent['tmp_name'] : $pContent);
         $width = $infos['srcWidth'];

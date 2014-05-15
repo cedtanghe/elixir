@@ -13,18 +13,18 @@ class NotEmpty extends Regex
     /**
      * @var array 
      */
-    protected $_errorMessageTemplates = array(self::ERROR => 'String is empty.');
+    protected $_errorMessageTemplates = [self::ERROR => 'String is empty.'];
     
     /**
      * @see Regex::isValid()
      */
-    public function isValid($pContent, array $pOptions = array()) 
+    public function isValid($pContent, array $pOptions = []) 
     {
         return parent::isValid(
             $pContent, 
             array_merge(
                 array_merge($this->_options, $pOptions), 
-                array('regex' => '/^\s*$/', 'match' => false)
+                ['regex' => '/^\s*$/', 'match' => false]
             )
         );
     }

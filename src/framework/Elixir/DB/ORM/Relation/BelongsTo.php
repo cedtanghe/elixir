@@ -42,7 +42,7 @@ class BelongsTo implements RelationInterface
     /**
      * @var array 
      */
-    protected $_criterions = array();
+    protected $_criterions = [];
     
     /**
      * @var RepositoryInterface|Collection

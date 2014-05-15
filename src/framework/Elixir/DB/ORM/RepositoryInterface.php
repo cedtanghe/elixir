@@ -64,7 +64,7 @@ interface RepositoryInterface extends EntityInterface
      * @param array $pOmitMembers
      * @return boolean
      */
-    public function update(array $pMembers = array(), array $pOmitMembers = array());
+    public function update(array $pMembers = [], array $pOmitMembers = []);
     
     /**
      * @return boolean

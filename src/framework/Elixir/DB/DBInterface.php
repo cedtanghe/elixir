@@ -74,5 +74,5 @@ interface DBInterface extends DispatcherInterface
      * @param array $pOptions
      * @return SetAbstract|boolean
      */
-    public function query($pSQL, array $pValues = array(), array $pOptions = array());
+    public function query($pSQL, array $pValues = [], array $pOptions = []);
 }

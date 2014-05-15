@@ -14,22 +14,22 @@ class Blocks extends Dispatcher
     /**
      * @var array
      */
-    protected $_blocks = array();
+    protected $_blocks = [];
     
     /**
      * @var array
      */
-    protected $_contents = array();
+    protected $_contents = [];
     
     /**
      * @var array
      */
-    protected $_options = array();
+    protected $_options = [];
     
     /**
      * @var array
      */
-    protected $_compiled = array();
+    protected $_compiled = [];
     
     /**
      * @var string 
@@ -41,7 +41,7 @@ class Blocks extends Dispatcher
      * @param array $pOptions
      * @throws \LogicException
      */
-    public function start($pKey, array $pOptions = array())
+    public function start($pKey, array $pOptions = [])
     {
         if(in_array($pKey, $this->_blocks))
         {
@@ -54,7 +54,7 @@ class Blocks extends Dispatcher
         $this->_blocks[] = $this->_block;
         $this->_contents[$pKey][] = '';
         $this->_options[$pKey] = array_merge(
-            isset($this->_options[$pKey]) ? $this->_options[$pKey] : array(), 
+            isset($this->_options[$pKey]) ? $this->_options[$pKey] : [], 
             $pOptions
         );
         
@@ -119,10 +119,10 @@ class Blocks extends Dispatcher
         {
             if(!$pCompiled)
             {
-                return array(
+                return [
                     'contents' => $this->_contents[$pKey],
                     'options' => $this->_options[$pKey]
-                );
+                ];
             }
             
             if(isset($this->_compiled[$pKey]))
@@ -165,7 +165,7 @@ class Blocks extends Dispatcher
      * @param array $pOptions
      * @param boolean $pReplace
      */
-    public function set($pKey, $pValue, array $pOptions = array(), $pReplace = true)
+    public function set($pKey, $pValue, array $pOptions = [], $pReplace = true)
     {
         $pos = array_search($pKey, $this->_blocks);
         
@@ -179,12 +179,12 @@ class Blocks extends Dispatcher
         
         if($pReplace)
         {
-            $this->_contents[$pKey] = array();
-            $this->_options[$pKey] = array();
+            $this->_contents[$pKey] = [];
+            $this->_options[$pKey] = [];
         }
         
         $this->_options[$pKey] = array_merge(
-            isset($this->_options[$pKey]) ? $this->_options[$pKey] : array(), 
+            isset($this->_options[$pKey]) ? $this->_options[$pKey] : [], 
             $pOptions
         );
         
@@ -214,14 +214,14 @@ class Blocks extends Dispatcher
      */
     public function gets()
     {
-        $blocks = array();
+        $blocks = [];
         
         foreach($this->_contents as $key => $value)
         {
-            $blocks[$key] = array(
+            $blocks[$key] = [
                 'contents' => $value,
                 'options' => $this->_options[$key]
-            );
+            ];
         }
         
         return $blocks;
@@ -241,7 +241,7 @@ class Blocks extends Dispatcher
                 $this->set(
                     $key, 
                     $value['content'], 
-                    isset($value['options']) ? $value['options'] : array()
+                    isset($value['options']) ? $value['options'] : []
                 );
             }
             else
@@ -260,10 +260,10 @@ class Blocks extends Dispatcher
             ob_end_clean();
         }
         
-        $this->_compiled = array();
-        $this->_blocks = array();
-        $this->_contents = array();
-        $this->_options = array();
+        $this->_compiled = [];
+        $this->_blocks = [];
+        $this->_contents = [];
+        $this->_options = [];
     }
 
     /**

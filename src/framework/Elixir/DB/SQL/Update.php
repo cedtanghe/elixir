@@ -34,12 +34,12 @@ class Update extends SQLAbstract
     /**
      * @var array 
      */
-    protected $_sets = array();
+    protected $_sets = [];
     
     /**
      * @var array 
      */
-    protected $_wheres = array();
+    protected $_wheres = [];
     
     /**
      * @param string $pTable
@@ -105,7 +105,7 @@ class Update extends SQLAbstract
             $pCond = $where->render();
         }
         
-        $this->_wheres[] = array('query' => $this->assemble($pCond, $pValue), 'type' => 'AND');
+        $this->_wheres[] = ['query' => $this->assemble($pCond, $pValue), 'type' => 'AND'];
         return $this;
     }
     
@@ -123,7 +123,7 @@ class Update extends SQLAbstract
             $pCond = $where->render();
         }
         
-        $this->_wheres[] = array('query' => $this->assemble($pCond, $pValue), 'type' => 'OR');
+        $this->_wheres[] = ['query' => $this->assemble($pCond, $pValue), 'type' => 'OR'];
         return $this;
     }
     
@@ -136,10 +136,10 @@ class Update extends SQLAbstract
         switch($pPart)
         {
             case 'where':
-                $this->_wheres = array();
+                $this->_wheres = [];
             break;
             case 'set':
-                $this->_sets = array();
+                $this->_sets = [];
             break;
         }
         
@@ -165,7 +165,7 @@ class Update extends SQLAbstract
     protected function renderSets()
     {
         $sql = 'SET ';
-        $sets = array();
+        $sets = [];
         
         foreach($this->_sets as $key => $value)
         {

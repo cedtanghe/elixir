@@ -14,15 +14,15 @@ class Email extends ValidatorAbstract
     /**
      * @var array 
      */
-    protected $_errorMessageTemplates = array(self::ERROR => 'Value is not a valid email.');
+    protected $_errorMessageTemplates = [self::ERROR => 'Value is not a valid email.'];
     
     /**
      * @see ValidatorInterface::isValid()
      */
-    public function isValid($pContent, array $pOptions = array()) 
+    public function isValid($pContent, array $pOptions = []) 
     {
         $pOptions = array_merge($this->_options, $pOptions);
-        $this->_errors = array();
+        $this->_errors = [];
         
         if(false === filter_var($pContent, FILTER_VALIDATE_EMAIL))
         {

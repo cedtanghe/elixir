@@ -31,7 +31,7 @@ class Utils
      */
     public static function getDataByPrefix(array $pData, $pPrefix, $pRemovePrefix = true)
     {
-        $result = array();
+        $result = [];
         
         foreach($pData as $key => &$value)
         {
@@ -115,7 +115,7 @@ class Utils
      */
     public static function createOptions(array $pData, $pIdentifier, $pWording = null, $pMask = '%s')
     {
-        $options = array();
+        $options = [];
         
         foreach($pData as $data)
         {
@@ -135,14 +135,14 @@ class Utils
             {
                 if(is_array($pWording))
                 {
-                    $value = array();
+                    $value = [];
                     
                     foreach($pWording as $word)
                     {
                         $value[] = $data[$word];
                     }
                     
-                    $options[$data[$pIdentifier]] = call_user_func_array('sprintf', array_merge(array($pMask), $value));
+                    $options[$data[$pIdentifier]] = call_user_func_array('sprintf', array_merge([$pMask], $value));
                 }
                 else
                 {

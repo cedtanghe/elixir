@@ -101,6 +101,6 @@ class SessionParameters implements ParametersInterface
      */
     public function __call($pMethod, $pArguments)
     {
-        return call_user_func_array(array($this->_session, $pMethod), $pArguments);
+        return call_user_func_array([$this->_session, $pMethod], $pArguments);
     }
 }

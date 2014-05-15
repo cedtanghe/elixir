@@ -54,7 +54,7 @@ class Partial implements ContextInterface, HelperInterface
      * @return string
      * @throws \InvalidArgumentException
      */
-    public function renderLoop($pTemplate, array $pParams = array())
+    public function renderLoop($pTemplate, array $pParams = [])
     {
         if(null !== $this->_locator)
         {
@@ -73,7 +73,7 @@ class Partial implements ContextInterface, HelperInterface
         {
             if(null === $row)
             {
-                $row = array();
+                $row = [];
             }
             else if(!is_array($row))
             {
@@ -106,9 +106,9 @@ class Partial implements ContextInterface, HelperInterface
     /**
      * @see Partial::renderLoop()
      */
-    public function render($pTemplate, array $pParams = array())
+    public function render($pTemplate, array $pParams = [])
     {
-        return $this->renderLoop($pTemplate, array($pParams));
+        return $this->renderLoop($pTemplate, [$pParams]);
     }
     
     /**
@@ -117,6 +117,6 @@ class Partial implements ContextInterface, HelperInterface
     public function direct()
     {
         $args = func_get_args();
-        return call_user_func_array(array($this, 'render'), $args);
+        return call_user_func_array([$this, 'render'], $args);
     }
 }

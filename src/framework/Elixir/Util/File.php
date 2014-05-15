@@ -150,7 +150,7 @@ class File
      */
     public static function filesList($pPath)
     {
-        $list = array();
+        $list = [];
         
         if(is_file($pPath))
         {

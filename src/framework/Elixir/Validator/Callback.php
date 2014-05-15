@@ -14,10 +14,10 @@ class Callback extends ValidatorAbstract
     /**
      * @see ValidatorInterface::isValid()
      */
-    public function isValid($pContent, array $pOptions = array()) 
+    public function isValid($pContent, array $pOptions = []) 
     {
         $pOptions = array_merge($this->_options, $pOptions);
-        $this->_errors = array();
+        $this->_errors = [];
         
         if(isset($pOptions['options']) || isset($pOptions['callback']))
         {

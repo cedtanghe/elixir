@@ -43,7 +43,7 @@ abstract class ControllerAbstract implements ControllerInterface
      */
     protected function getControllerHelpers() 
     {
-        return array();
+        return [];
     }
     
     /**
@@ -51,7 +51,7 @@ abstract class ControllerAbstract implements ControllerInterface
      */
     protected function getViewHelpers()
     {
-        return array();
+        return [];
     }
     
     /**
@@ -169,7 +169,7 @@ abstract class ControllerAbstract implements ControllerInterface
         else
         {
             $method = $helper instanceof HelperInterface ? 'direct' : 'filter';
-            return call_user_func_array(array($helper, $method), $pArguments);
+            return call_user_func_array([$helper, $method], $pArguments);
         }
         
         throw new \BadMethodCallException(sprintf('Helper "%s" is not defined.', $pMethod));

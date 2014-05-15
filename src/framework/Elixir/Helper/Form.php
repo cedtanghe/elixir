@@ -115,7 +115,7 @@ class Form
      * @param array $pAttributes
      * @return string
      */
-    public function openFormTag(FormInterface $pForm, array $pAttributes = array())
+    public function openFormTag(FormInterface $pForm, array $pAttributes = [])
     {
         $attributes = array_merge($pForm->getAttributes(), $pAttributes);
         
@@ -140,7 +140,7 @@ class Form
      * @param array $pAttributes
      * @return string
      */
-    public function openFieldsetTag($pLegend = null, array $pAttributes = array())
+    public function openFieldsetTag($pLegend = null, array $pAttributes = [])
     {
         $result = sprintf('<fieldset%s>', $this->HTMLAtributes($pAttributes));
         
@@ -164,7 +164,7 @@ class Form
      * @param array $pAttributes
      * @return string
      */
-    public function openLabelTag(array $pAttributes = array())
+    public function openLabelTag(array $pAttributes = [])
     {
         return sprintf('<label%s>', $this->HTMLAtributes($pAttributes));
     }
@@ -207,11 +207,11 @@ class Form
         if($pUseLabel && null !== $pField->getLabel())
         {
             $attributes = $pField->getAttributes();
-            $labelAttributes = isset($attributes['label']) ? (array)$attributes['label'] : array();
+            $labelAttributes = isset($attributes['label']) ? (array)$attributes['label'] : [];
             
             $result .= $this->openLabelTag(
                 array_merge(
-                    array('class' => 'form-label', 'for' => $pField->getName()),
+                    ['class' => 'form-label', 'for' => $pField->getName()],
                     $labelAttributes
                 )
             );
@@ -226,7 +226,7 @@ class Form
         }
         else
         {
-            $result .= call_user_func_array($pField->getHelper(), array($pField));
+            $result .= call_user_func_array($pField->getHelper(), [$pField]);
         }
         
         if($pUseError && $pField->hasError())
@@ -243,13 +243,13 @@ class Form
      * @param array $pAttributes
      * @return string
      */
-    public function fieldErrors(FieldInterface $pField, $pTag = 'ul', array $pAttributes = array('class' => 'form-error'))
+    public function fieldErrors(FieldInterface $pField, $pTag = 'ul', array $pAttributes = ['class' => 'form-error'])
     {
         $result = '';
         
         if($pField->hasError())
         {
-            if(in_array(strtolower($pTag), array('ul', 'ol')))
+            if(in_array(strtolower($pTag), ['ul', 'ol']))
             {
                 $result = sprintf('<%s%s>', $pTag, $this->HTMLAtributes($pAttributes));
 
@@ -295,7 +295,7 @@ class Form
      * @param array $pAttributes
      * @return string
      */
-    public function input(FieldInterface $pField, array $pAttributes = array())
+    public function input(FieldInterface $pField, array $pAttributes = [])
     {
         $pField->prepare();
         $attributes = array_merge($pField->getAttributes(), $pAttributes);
@@ -316,7 +316,7 @@ class Form
             $this->HTMLAtributes(
                 array_merge(
                     $attributes, 
-                    array('value' => $pField->getValue(false))
+                    ['value' => $pField->getValue(false)]
                 )
             )
         );
@@ -336,7 +336,7 @@ class Form
      * @param array $pAttributes
      * @return string
      */
-    public function button(FieldInterface $pField, array $pAttributes = array())
+    public function button(FieldInterface $pField, array $pAttributes = [])
     {
         $pField->prepare();
         $attributes = array_merge($pField->getAttributes(), $pAttributes);
@@ -359,7 +359,7 @@ class Form
      * @param array $pAttributes
      * @return string
      */
-    public function textarea(FieldInterface $pField, array $pAttributes = array())
+    public function textarea(FieldInterface $pField, array $pAttributes = [])
     {
         $pField->prepare();
         $attributes = array_merge($pField->getAttributes(), $pAttributes);
@@ -381,7 +381,7 @@ class Form
      * @param FieldInterface $pField
      * @return string
      */
-    public function select(FieldInterface $pField, array $pAttributes = array(), array $pOptions = array())
+    public function select(FieldInterface $pField, array $pAttributes = [], array $pOptions = [])
     {
         $pField->prepare();
         $attributes = array_merge($pField->getAttributes(), $pAttributes);
@@ -442,14 +442,14 @@ class Form
             {
                 $result .= sprintf(
                     '<optgroup%s>%s</optgroup>',
-                    $this->HTMLAtributes(array('label' => $key)),
+                    $this->HTMLAtributes(['label' => $key]),
                     $this->createOptions($pValue, $value, $pDataUseKeys)
                 );
                 
                 continue;
             }
             
-            $a = array();
+            $a = [];
             
             if($pDataUseKeys)
             {
@@ -481,7 +481,7 @@ class Form
      * @param array $pOptions
      * @return string
      */
-    public function checkbox(FieldInterface $pField, array $pAttributes = array(), array $pOptions = array())
+    public function checkbox(FieldInterface $pField, array $pAttributes = [], array $pOptions = [])
     {
         $pField->prepare();
         $attributes = array_merge($pField->getAttributes(), $pAttributes);
@@ -495,7 +495,7 @@ class Form
         $options = array_merge($pField->getOptions(), $pOptions);
         
         $placement = isset($options['placement']) ? $options['placement'] : 'inner';
-        if(!in_array($placement, array('inner', 'before', 'after')))
+        if(!in_array($placement, ['inner', 'before', 'after']))
         {
             $placement = 'inner';
         }
@@ -557,8 +557,8 @@ class Form
             if($count > 1 || $dataUseKeys)
             {
                 $labelAttributes = array_merge(
-                    array('class' => 'checkbox-label'),
-                    isset($attributes['label']) ? (array)$attributes['label'] : array()
+                    ['class' => 'checkbox-label'],
+                    isset($attributes['label']) ? (array)$attributes['label'] : []
                 );
                 
                 if(isset($a['id']))
@@ -615,7 +615,7 @@ class Form
      * @param array $pOptions
      * @return string
      */
-    public function radio(FieldInterface $pField, array $pAttributes = array(), array $pOptions = array())
+    public function radio(FieldInterface $pField, array $pAttributes = [], array $pOptions = [])
     {
         $pField->prepare();
         $attributes = array_merge($pField->getAttributes(), $pAttributes);
@@ -629,7 +629,7 @@ class Form
         $options = array_merge($pField->getOptions(), $pOptions);
         
         $placement = isset($options['placement']) ? $options['placement'] : 'inner';
-        if(!in_array($placement, array('inner', 'before', 'after')))
+        if(!in_array($placement, ['inner', 'before', 'after']))
         {
             $placement = 'inner';
         }
@@ -665,8 +665,8 @@ class Form
             if($count > 1 || $dataUseKeys)
             {
                 $labelAttributes = array_merge(
-                    array('class' => 'radio-label'), 
-                    isset($attributes['label']) ? (array)$attributes['label'] : array()
+                    ['class' => 'radio-label'], 
+                    isset($attributes['label']) ? (array)$attributes['label'] : []
                 );
                 
                 if(isset($a['id']))
@@ -723,7 +723,7 @@ class Form
      * @param array $pOptions
      * @return string
      */
-    public function file(FieldInterface $pField, array $pAttributes = array(), array $pOptions = array())
+    public function file(FieldInterface $pField, array $pAttributes = [], array $pOptions = [])
     {
         $pField->prepare();
         $attributes = array_merge($pField->getAttributes(), $pAttributes);
@@ -744,12 +744,12 @@ class Form
             $result .= sprintf(
                 '<input%s/>', 
                 $this->HTMLAtributes(
-                    array(
+                    [
                         'name' => 'APC_UPLOAD_PROGRESS',
                         'type' => 'hidden',
                         'id' => $data['id'],
                         'value' => $data['value']
-                    )
+                    ]
                 )
             );
         }
@@ -759,11 +759,11 @@ class Form
             $result .= sprintf(
                 '<input%s/>', 
                 $this->HTMLAtributes(
-                    array(
+                    [
                         'name' => 'MAX_FILE_SIZE',
                         'type' => 'hidden',
                         'value' => $options['MAX_FILE_SIZE']
-                    )
+                    ]
                 )
             );
         }
@@ -825,6 +825,6 @@ class Form
     public function direct()
     {
         $args = func_get_args();
-        return call_user_func_array(array($this, 'form'), $args);
+        return call_user_func_array([$this, 'form'], $args);
     }
 }

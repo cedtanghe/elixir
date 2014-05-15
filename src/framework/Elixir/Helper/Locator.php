@@ -46,6 +46,6 @@ class Locator implements HelperInterface
     public function direct()
     {
         $args = func_get_args();
-        return call_user_func_array(array($this, 'locateFile'), $args);
+        return call_user_func_array([$this, 'locateFile'], $args);
     }
 }

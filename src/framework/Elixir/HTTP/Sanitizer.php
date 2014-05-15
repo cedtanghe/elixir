@@ -48,7 +48,7 @@ class Sanitizer
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function filter($pContent, $pFilter = 'FILTER_SANITIZE_FULL_SPECIAL_CHARS', array $pOptions = array())
+    public function filter($pContent, $pFilter = 'FILTER_SANITIZE_FULL_SPECIAL_CHARS', array $pOptions = [])
     {
         if($pFilter === 'FILTER_SANITIZE_FULL_SPECIAL_CHARS')
         {

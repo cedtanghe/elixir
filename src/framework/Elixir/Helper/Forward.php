@@ -51,7 +51,7 @@ class Forward implements ContextInterface, HelperInterface
     public function to($pModule = null,
                        $pController = null,
                        $pAction = null,
-                       array $pAttributes = array(),
+                       array $pAttributes = [],
                        $pResetOthersAttributes = true)
     {
         if(null === $this->_application)
@@ -92,6 +92,6 @@ class Forward implements ContextInterface, HelperInterface
     public function direct()
     {
         $args = func_get_args();
-        return call_user_func_array(array($this, 'to'), $args);
+        return call_user_func_array([$this, 'to'], $args);
     }
 }

@@ -24,19 +24,19 @@ class Range extends ValidatorAbstract
     /**
      * @var array 
      */
-    protected $_errorMessageTemplates = array(
+    protected $_errorMessageTemplates = [
         self::ERROR => 'Error when validating.',
         self::NUMERIC_ERROR => 'Value is not numeric.',
         self::RANGE_ERROR => 'Value is outside this range.'
-    );
+    ];
     
     /**
      * @see ValidatorInterface::isValid()
      */
-    public function isValid($pContent, array $pOptions = array()) 
+    public function isValid($pContent, array $pOptions = []) 
     {
         $pOptions = array_merge($this->_options, $pOptions);
-        $this->_errors = array();
+        $this->_errors = [];
         
         $min = isset($pOptions['min']) ? $pOptions['min'] : null;
         $max = isset($pOptions['max']) ? $pOptions['max'] : null;

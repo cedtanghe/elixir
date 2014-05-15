@@ -16,7 +16,7 @@ class CSV implements LoaderInterface
      */
     public function load($pResource)
     {
-        $data = array();
+        $data = [];
         $CSV = CSVUtils::CSVToArray($pResource);
         
         foreach($CSV as $line)

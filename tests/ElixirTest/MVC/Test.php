@@ -7,7 +7,7 @@ use Elixir\MVC\Application;
 use Elixir\DI\Container;
 use Elixir\HTTP\RequestFactory;
 use Elixir\MVC\Controller\ControllerResolver;
-use Elixir\Module\Application\Bootstrap;
+use Elixir\Module\AppBase\Bootstrap;
 use A\Bootstrap as ABootstrap;
 use B\Bootstrap as BBootstrap;
 use C\Bootstrap as CBootstrap;

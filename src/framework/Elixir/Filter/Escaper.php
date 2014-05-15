@@ -81,7 +81,7 @@ class Escaper extends FilterAbstract
     /**
      * @see FilterInterface::filter()
      */
-    public function filter($pContent, array $pOptions = array())
+    public function filter($pContent, array $pOptions = [])
     {
         $pOptions = array_merge($this->_options, $pOptions);
         
@@ -145,7 +145,7 @@ class Escaper extends FilterAbstract
             return $string;
         }
         
-        $result = preg_replace_callback('/[^a-z0-9,\._]/iSu', array($this, 'JSCallback'), $string);
+        $result = preg_replace_callback('/[^a-z0-9,\._]/iSu', [$this, 'JSCallback'], $string);
         
         if($this->_encoding != 'UTF-8')
         {
@@ -190,7 +190,7 @@ class Escaper extends FilterAbstract
             return $string;
         }
         
-        $result = preg_replace_callback('/[^a-z0-9]/iSu', array($this, 'CSSCallback'), $string);
+        $result = preg_replace_callback('/[^a-z0-9]/iSu', [$this, 'CSSCallback'], $string);
         
         if($this->_encoding != 'UTF-8')
         {
@@ -292,7 +292,7 @@ class Escaper extends FilterAbstract
             return $string;
         }
         
-        $result = preg_replace_callback('/[^a-z0-9,\.\-_]/iSu', array($this, 'HTLMAttrCallback'), $string);
+        $result = preg_replace_callback('/[^a-z0-9,\.\-_]/iSu', [$this, 'HTLMAttrCallback'], $string);
         
         if($this->_encoding != 'UTF-8')
         {
@@ -324,10 +324,10 @@ class Escaper extends FilterAbstract
         $hex = bin2hex($chr);
         $ord = hexdec($hex);
         
-        $htmlNamedEntityMap = array(34 => 'quot',
+        $htmlNamedEntityMap = [34 => 'quot',
                                     38 => 'amp',
                                     60 => 'lt',
-                                    62 => 'gt');
+                                    62 => 'gt'];
         
         if (isset($htmlNamedEntityMap[$ord]))
         {

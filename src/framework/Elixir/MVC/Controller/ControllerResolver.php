@@ -97,7 +97,7 @@ class ControllerResolver implements ControllerResolverInterface
             );
         }
         
-        return array($controller, lcfirst(Str::camelize($action)) . 'Action');
+        return [$controller, lcfirst(Str::camelize($action)) . 'Action'];
     }
     
     /**
@@ -105,6 +105,6 @@ class ControllerResolver implements ControllerResolverInterface
      */
     public function getArguments(Request $pRequest, $pController)
     {
-        return array();
+        return [];
     }
 }

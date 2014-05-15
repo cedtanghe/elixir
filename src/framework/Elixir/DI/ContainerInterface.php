@@ -74,7 +74,7 @@ interface ContainerInterface
      * @param mixed $pValue 
      * @param array $pOptions 
      */
-    public function set($pKey, $pValue, array $pOptions = array());
+    public function set($pKey, $pValue, array $pOptions = []);
     
     /**
      * @param string $pKey 
@@ -85,13 +85,13 @@ interface ContainerInterface
      * @param array $pOptions
      * @return array 
      */
-    public function gets(array $pOptions = array());
+    public function gets(array $pOptions = []);
     
     /**
      * @param array $pData
      * @param array $pOptions
      */
-    public function sets(array $pData, array $pOptions = array());
+    public function sets(array $pData, array $pOptions = []);
 
     /**
      * @param string $pAlias

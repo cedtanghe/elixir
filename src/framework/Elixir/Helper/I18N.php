@@ -38,13 +38,13 @@ class I18N implements HelperInterface
      * @param string $pTextDomain
      * @return string
      */
-    public function translate($pMessage, array $pOptions = array())
+    public function translate($pMessage, array $pOptions = [])
     {
         $pOptions = array_merge(
-            array(
+            [
                 'locale' => null, 
                 'textDomain' => I18NInterface::ALL_TEXT_DOMAINS
-            ),
+            ],
             $pOptions
         );
         
@@ -61,7 +61,7 @@ class I18N implements HelperInterface
     /**
      * @see I18N::translate()
      */
-    public function _($pMessage, array $pOptions = array())
+    public function _($pMessage, array $pOptions = [])
     {
         return $this->translate($pMessage, $pOptions);
     }
@@ -72,9 +72,9 @@ class I18N implements HelperInterface
      * @param array $pOptions
      * @return string
      */
-    public function pluralize(array $pMessage, $pCount, array $pOptions = array())
+    public function pluralize(array $pMessage, $pCount, array $pOptions = [])
     {
-        $pOptions = array_merge(array('locale' => null), $pOptions);
+        $pOptions = array_merge(['locale' => null], $pOptions);
         $result = $this->_I18N->plurialize($pMessage, $pCount, $pOptions['locale']);
         
         if(isset($pOptions['replace']))
@@ -91,13 +91,13 @@ class I18N implements HelperInterface
      * @param array $pOptions
      * @return string
      */
-    public function transPlural($pMessage, $pCount, array $pOptions = array())
+    public function transPlural($pMessage, $pCount, array $pOptions = [])
     {
         $pOptions = array_merge(
-            array(
+            [
                 'locale' => null, 
                 'textDomain' => I18NInterface::ALL_TEXT_DOMAINS
-            ),
+            ],
             $pOptions
         );
         
@@ -132,7 +132,7 @@ class I18N implements HelperInterface
             throw new \BadMethodCallException(sprintf('Method "%s" does not exist.', $pMethod));
         }
         
-        return call_user_func_array(array($this, $pMethod), $pArguments);
+        return call_user_func_array([$this, $pMethod], $pArguments);
     }
 
     /**
@@ -141,6 +141,6 @@ class I18N implements HelperInterface
     public function direct()
     {
         $args = func_get_args();
-        return call_user_func_array(array($this, 'translate'), $args);
+        return call_user_func_array([$this, 'translate'], $args);
     }
 }

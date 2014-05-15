@@ -37,15 +37,15 @@ class Listeners implements SubscriberInterface
     {   
         /************ FILTER REQUEST ************/
         
-        $pDispatcher->addListener(ApplicationEvent::FILTER_REQUEST, array($this, 'onSelectedModules'), -1);
-        $pDispatcher->addListener(ApplicationEvent::FILTER_REQUEST, array($this, 'onMatchRoute'), 900);
-        $pDispatcher->addListener(ApplicationEvent::FILTER_REQUEST, array($this, 'onConfigureURL'), 1000);
+        $pDispatcher->addListener(ApplicationEvent::FILTER_REQUEST, [$this, 'onSelectedModules'], -1);
+        $pDispatcher->addListener(ApplicationEvent::FILTER_REQUEST, [$this, 'onMatchRoute'], 900);
+        $pDispatcher->addListener(ApplicationEvent::FILTER_REQUEST, [$this, 'onConfigureURL'], 1000);
         
         /************ EXCEPTIONS ************/
         
-        $pDispatcher->addListener(ApplicationEvent::EXCEPTION_403, array($this, 'onExceptionCatched'));
-        $pDispatcher->addListener(ApplicationEvent::EXCEPTION_404, array($this, 'onExceptionCatched'));
-        $pDispatcher->addListener(ApplicationEvent::EXCEPTION_500, array($this, 'onExceptionCatched'));
+        $pDispatcher->addListener(ApplicationEvent::EXCEPTION_403, [$this, 'onExceptionCatched']);
+        $pDispatcher->addListener(ApplicationEvent::EXCEPTION_404, [$this, 'onExceptionCatched']);
+        $pDispatcher->addListener(ApplicationEvent::EXCEPTION_500, [$this, 'onExceptionCatched']);
     }
     
     /**
@@ -119,7 +119,7 @@ class Listeners implements SubscriberInterface
     public function onSelectedModules(ApplicationEvent $e)
     {
         $application = $this->_container->get('application');
-        $hierarchy = array_reverse($application->getModuleHierarchy($e->getRequest()->getModule(), array()));
+        $hierarchy = array_reverse($application->getModuleHierarchy($e->getRequest()->getModule(), []));
         
         foreach($hierarchy as $m)
         {
@@ -146,9 +146,9 @@ class Listeners implements SubscriberInterface
             $application = $this->_container->get('application');
             $module = $e->getRequest()->getModule();
             
-            $e->getRequest()->getAttributes()->sets(array('exception' => $e->getException()));
+            $e->getRequest()->getAttributes()->sets(['exception' => $e->getException()]);
 
-            $hierarchy = array_reverse($application->getModuleHierarchy($module, array('AppBase')));
+            $hierarchy = array_reverse($application->getModuleHierarchy($module, ['AppBase']));
             $module = sprintf('(@%s)', $hierarchy[0]);
            
             $e->getRequest()->setModule($module);

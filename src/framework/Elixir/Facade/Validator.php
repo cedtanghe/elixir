@@ -13,7 +13,7 @@ class Validator extends FacadeAbstract
     /**
      * @var array
      */
-    protected static $_macros = array();
+    protected static $_macros = [];
 
     /**
      * @param string $pMethod
@@ -80,7 +80,7 @@ class Validator extends FacadeAbstract
      * @param array $pOptions
      * @return boolean
      */
-    public static function valid($pClassOrKey, $pContent, array $pOptions = array())
+    public static function valid($pClassOrKey, $pContent, array $pOptions = [])
     {
         $validator = static::resolveInstance($pClassOrKey);
         return $validator->isValid($pContent, $pOptions);

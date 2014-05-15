@@ -59,17 +59,17 @@ class Uploader
     /**
      * @var array
      */
-    protected $_filters = array();
+    protected $_filters = [];
     
     /**
      * @var array
      */
-    protected $_validators = array();
+    protected $_validators = [];
     
     /**
      * @var array
      */
-    protected $_errors = array();
+    protected $_errors = [];
     
     /**
      * @var boolean
@@ -79,7 +79,7 @@ class Uploader
     /**
      * @var array 
      */
-    protected $_errorMessageTemplates = array(self::UNKNOWN_ERROR => 'An error occurred during upload.');
+    protected $_errorMessageTemplates = [self::UNKNOWN_ERROR => 'An error occurred during upload.'];
     
     /**
      * @var array
@@ -121,7 +121,7 @@ class Uploader
     {
         if(null === $this->_fileName)
         {
-            $result = array();
+            $result = [];
             $filesInfos = $this->getFileInfo();
 
             if(null === $filesInfos)
@@ -145,7 +145,7 @@ class Uploader
      */
     public function getTempName()
     {
-        $result = array();
+        $result = [];
         $filesInfos = $this->getFileInfo();
             
         if(null === $filesInfos)
@@ -222,7 +222,7 @@ class Uploader
      */
     public function setErrorMessageTemplates(array $pData)
     {
-        $this->_errorMessageTemplates = array();
+        $this->_errorMessageTemplates = [];
         
         foreach($pData as $key => $value)
         {
@@ -250,9 +250,9 @@ class Uploader
      * @param ValidatorInterface $pValidator
      * @param array $pOptions
      */
-    public function addValidator(ValidatorInterface $pValidator, array $pOptions = array())
+    public function addValidator(ValidatorInterface $pValidator, array $pOptions = [])
     {
-        $this->_validators[] = array('validator' => $pValidator, 'options' => $pOptions);
+        $this->_validators[] = ['validator' => $pValidator, 'options' => $pOptions];
     }
     
     /**
@@ -268,12 +268,12 @@ class Uploader
      */
     public function setValidators(array $pData)
     {
-        $this->_validators = array();
+        $this->_validators = [];
         
         foreach($pData as $data)
         {
             $validator = $data;
-            $options = array();
+            $options = [];
             
             if(is_array($data))
             {
@@ -293,9 +293,9 @@ class Uploader
      * @param FilterInterface $pFilter
      * @param array $pOptions
      */
-    public function addFilter(FilterInterface $pFilter, array $pOptions = array())
+    public function addFilter(FilterInterface $pFilter, array $pOptions = [])
     {
-        $this->_filters[] = array('filter' => $pFilter, 'options' => $pOptions);
+        $this->_filters[] = ['filter' => $pFilter, 'options' => $pOptions];
     }
     
     /**
@@ -311,12 +311,12 @@ class Uploader
      */
     public function setFilters(array $pData)
     {
-        $this->_filters = array();
+        $this->_filters = [];
         
         foreach($pData as $data)
         {
             $filter = $data;
-            $options = array();
+            $options = [];
             
             if(is_array($data))
             {
@@ -340,7 +340,7 @@ class Uploader
     {
         if(isset($_FILES[$this->_name]))
         {
-            $this->_fileInfos = array();
+            $this->_fileInfos = [];
             
             $file = $_FILES[$this->_name];
             $len = count((array)$file['name']);
@@ -387,7 +387,7 @@ class Uploader
      */
     public function isValid()
     {
-        $this->_errors = array();
+        $this->_errors = [];
         $filesInfos = $this->getFileInfo();
         $unknowError = $this->getErrorMessageTemplate(self::UNKNOWN_ERROR);
         
@@ -460,7 +460,7 @@ class Uploader
             
         if(null !== $filesInfos)
         {
-            $moved = array();
+            $moved = [];
             
             foreach($filesInfos as $file)
             {
@@ -521,7 +521,7 @@ class Uploader
     
     public function reset()
     {
-        $this->_errors = array();
+        $this->_errors = [];
         $this->_fileInfos = null;
         $this->_fileName = null;
         $this->_receive = false;

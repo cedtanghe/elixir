@@ -31,7 +31,7 @@ class Reference implements ExtensionInterface
     /**
      * @var array 
      */
-    protected $_references = array();
+    protected $_references = [];
     
     /**
      * @param FieldInterface $pReference
@@ -65,9 +65,9 @@ class Reference implements ExtensionInterface
     public function load(FormInterface $pForm) 
     {
         $this->_form = $pForm;
-        $this->_form->addListener(FormEvent::PRE_BIND, array($this, 'onPreBind'));
-        $this->_form->addListener(FormEvent::PRE_SUBMIT, array($this, 'onPreSubmit'));
-        $this->_form->addListener(FormEvent::PRE_VALUES, array($this, 'onPreValues'));
+        $this->_form->addListener(FormEvent::PRE_BIND, [$this, 'onPreBind']);
+        $this->_form->addListener(FormEvent::PRE_SUBMIT, [$this, 'onPreSubmit']);
+        $this->_form->addListener(FormEvent::PRE_VALUES, [$this, 'onPreValues']);
     }
     
     /**
@@ -80,7 +80,7 @@ class Reference implements ExtensionInterface
         
         if(isset($data[$this->_inputReference->getName()]))
         {
-            $this->_references = array();
+            $this->_references = [];
             
             $me = $this;
             $pattern = preg_replace_callback('/{([^}]+)}/', function($matches) use($me) 
@@ -163,9 +163,9 @@ class Reference implements ExtensionInterface
     {
         if(null !== $this->_form)
         {
-            $this->_form->removeListener(FormEvent::PRE_BIND, array($this, 'onPreBind'));
-            $this->_form->removeListener(FormEvent::PRE_SUBMIT, array($this, 'onPreSubmit'));
-            $this->_form->removeListener(FormEvent::PRE_VALUES, array($this, 'onPreValues'));
+            $this->_form->removeListener(FormEvent::PRE_BIND, [$this, 'onPreBind']);
+            $this->_form->removeListener(FormEvent::PRE_SUBMIT, [$this, 'onPreSubmit']);
+            $this->_form->removeListener(FormEvent::PRE_VALUES, [$this, 'onPreValues']);
             $this->_form = null;
         }
     }

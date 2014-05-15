@@ -41,7 +41,7 @@ class DBEvent extends Event
      * @param array $pValues
      * @param float $pTime
      */
-    public function __construct($pType, $pSQL = null, array $pValues = array(), $pTime = 0) 
+    public function __construct($pType, $pSQL = null, array $pValues = [], $pTime = 0) 
     {
         parent::__construct($pType);
         

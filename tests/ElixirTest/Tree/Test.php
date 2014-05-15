@@ -20,9 +20,9 @@ class Test extends \PHPUnit_Framework_TestCase
     
     public function testParameters()
     {
-        $params = array('id' => 1,
+        $params = ['id' => 1,
                         'name' => 'test',
-                        'url' => 'http://www.example.com');
+                        'url' => 'http://www.example.com'];
         
         $tree = new Item();
         $tree->setParameter('test', $params);
@@ -87,14 +87,14 @@ class Test extends \PHPUnit_Framework_TestCase
             
             if($i == 0)
             {
-                $this->assertEquals($tree1, $tree->find(array('id' => 2)));
+                $this->assertEquals($tree1, $tree->find(['id' => 2]));
             }
         }
         
-        $this->assertInstanceOf('Elixir\Tree\Tree', $tree->find(array('reference' => 'ref')));
-        $this->assertCount(2, $tree->find(array('reference' => 'ref'), 1, true));
-        $this->assertCount(2, $tree->find(array('child_level' => 1), -1, true));
-        $this->assertCount(18, $tree->find(array('reference' => 'ref'), -1, true));
+        $this->assertInstanceOf('Elixir\Tree\Tree', $tree->find(['reference' => 'ref']));
+        $this->assertCount(2, $tree->find(['reference' => 'ref'], 1, true));
+        $this->assertCount(2, $tree->find(['child_level' => 1], -1, true));
+        $this->assertCount(18, $tree->find(['reference' => 'ref'], -1, true));
         $this->assertEquals($tree, $tree->find());
     }
 }

@@ -14,12 +14,12 @@ abstract class DataAbstract implements ViewInterface, GlobalInterface
     /**
      * @var array 
      */
-    protected $_vars = array();
+    protected $_vars = [];
     
     /**
      * @var array 
      */
-    protected $_global = array();
+    protected $_global = [];
     
     /**
      * @see ViewInterface::has()
@@ -88,7 +88,7 @@ abstract class DataAbstract implements ViewInterface, GlobalInterface
      */
     public function sets(array $pData)
     {
-        $this->_vars = array();
+        $this->_vars = [];
         
         foreach($pData as $key => $value)
         {

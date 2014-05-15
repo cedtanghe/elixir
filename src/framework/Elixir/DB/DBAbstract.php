@@ -23,7 +23,7 @@ abstract class DBAbstract extends Dispatcher implements DBInterface
     public function createSelect($pTable = null)
     {
        $select = SQLFactory::select($pTable, $this->getDriver());
-       $select->setQuoteMethod(array($this, 'quote'));
+       $select->setQuoteMethod([$this, 'quote']);
        
        return $select;
     }
@@ -34,7 +34,7 @@ abstract class DBAbstract extends Dispatcher implements DBInterface
     public function createInsert($pTable = null)
     {
         $insert = SQLFactory::insert($pTable, $this->getDriver());
-        $insert->setQuoteMethod(array($this, 'quote'));
+        $insert->setQuoteMethod([$this, 'quote']);
 
         return $insert;
     }
@@ -45,7 +45,7 @@ abstract class DBAbstract extends Dispatcher implements DBInterface
     public function createDelete($pTable = null)
     {
         $delete = SQLFactory::delete($pTable, $this->getDriver());
-        $delete->setQuoteMethod(array($this, 'quote'));
+        $delete->setQuoteMethod([$this, 'quote']);
 
         return $delete;
     }
@@ -56,7 +56,7 @@ abstract class DBAbstract extends Dispatcher implements DBInterface
     public function createUpdate($pTable = null)
     {
         $update = SQLFactory::update($pTable, $this->getDriver());
-        $update->setQuoteMethod(array($this, 'quote'));
+        $update->setQuoteMethod([$this, 'quote']);
 
         return $update;
     }

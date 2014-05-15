@@ -13,7 +13,7 @@ class Update extends BaseUpdate
     /**
      * @var array 
      */
-    protected $_orders = array();
+    protected $_orders = [];
     
     /**
      * @var integer 
@@ -34,7 +34,7 @@ class Update extends BaseUpdate
     {
         foreach((array)$pOrder as $order)
         {
-            $this->_orders[] = array('column' => $order, 'type' => $pType);
+            $this->_orders[] = ['column' => $order, 'type' => $pType];
         }
         
         return $this;

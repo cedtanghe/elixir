@@ -104,7 +104,7 @@ class ModelGenerate extends Command
         }
         else
         {
-            $tables = array();
+            $tables = [];
         }
         
         $DBName = $pInput->getOption('db');
@@ -200,7 +200,7 @@ class ModelGenerate extends Command
      */
     protected function getTablesList(DBInterface $pDB)
     {
-        $tables = array();
+        $tables = [];
         $stmt = $pDB->query('SHOW TABLES');
         
         foreach($stmt->fetchAll(SetAbstract::FETCH_NUM) as $row)
@@ -220,12 +220,12 @@ class ModelGenerate extends Command
     {
         try 
         {
-            $definition = array(
+            $definition = [
                 'table' => $pTable,
-                'columns' => array(),
+                'columns' => [],
                 'primary' => null,
                 'auto_increment' => false
-            );
+            ];
             
             $stmt = $pDB->query('DESCRIBE ' . $pTable);
             $rows = $stmt->fetchAll();
@@ -244,7 +244,7 @@ class ModelGenerate extends Command
                     {
                         if(!is_array($definition['primary']))
                         {
-                            $definition['primary'] = array($definition['primary']);
+                            $definition['primary'] = [$definition['primary']];
                         }
                         
                         $definition['primary'][] = $row['Field'];
@@ -348,11 +348,11 @@ class ModelGenerate extends Command
         
         $table = '\'' .$pDefinition['table'] . '\'';
         
-        $configuration = array(
+        $configuration = [
             '_autoIncrement' => $autoIncrement,
             '_primaryKey' => $primaryKey,
             '_table' => $table
-        );
+        ];
         
         $method = $class->getMethod('__construct');
 

@@ -13,7 +13,7 @@ abstract class FilterAbstract implements FilterInterface
     /**
      * @var array
      */
-    protected $_options = array();
+    protected $_options = [];
 
     /**
      * @param array $pValue

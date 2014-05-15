@@ -15,15 +15,15 @@ class MimeType extends ValidatorAbstract
     /**
      * @var array 
      */
-    protected $_errorMessageTemplates = array(self::ERROR => 'Mime type of file is invalid.');
+    protected $_errorMessageTemplates = [self::ERROR => 'Mime type of file is invalid.'];
     
     /**
      * @see ValidatorInterface::isValid()
      */
-    public function isValid($pContent, array $pOptions = array()) 
+    public function isValid($pContent, array $pOptions = []) 
     {
         $pOptions = array_merge($this->_options, $pOptions);
-        $this->_errors = array();
+        $this->_errors = [];
         
         $found = false;
         $content = is_array($pContent) ? $pContent['tmp_name'] : $pContent;

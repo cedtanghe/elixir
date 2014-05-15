@@ -22,7 +22,7 @@ class Collection extends \ArrayObject
      * @param boolean $pAutoCreated
      * @return Collection
      */
-    public static function create(array $pData = array(), $pAutoCreated = false)
+    public static function create(array $pData = [], $pAutoCreated = false)
     {
         return new static($pData, $pAutoCreated);
     }
@@ -36,7 +36,7 @@ class Collection extends \ArrayObject
      * @param array $pData
      * @param boolean $pAutoCreated
      */
-    public function __construct(array $pData = array(), $pAutoCreated = false) 
+    public function __construct(array $pData = [], $pAutoCreated = false) 
     {
         parent::__construct($pData, \ArrayObject::STD_PROP_LIST);
         $this->_autoCreated = $pAutoCreated;
@@ -97,7 +97,7 @@ class Collection extends \ArrayObject
      * @param integer $pLength
      * @param array $pReplacement
      */
-    public function splice($pOffset, $pLength, $pReplacement = array())
+    public function splice($pOffset, $pLength, $pReplacement = [])
     {
         $data = $this->getArrayCopy();
         array_splice($data, $pOffset, $pLength, $pReplacement);
@@ -147,7 +147,7 @@ class Collection extends \ArrayObject
      */
     public function export()
     {
-        $data = array();
+        $data = [];
         
         foreach($this->getArrayCopy() as $key => $value)
         {

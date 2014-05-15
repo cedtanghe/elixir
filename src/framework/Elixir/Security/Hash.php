@@ -21,12 +21,12 @@ class Hash
      * @return string
      * @throws \InvalidArgumentException
      */
-    public static function generateSalt($pType = CRYPT_BLOWFISH, array $pConfig = array())
+    public static function generateSalt($pType = CRYPT_BLOWFISH, array $pConfig = [])
     {
         switch($pType)
         {
             case CRYPT_BLOWFISH:
-                $config = array_merge(array('cost' => 14), $pConfig);
+                $config = array_merge(['cost' => 14], $pConfig);
                 $cost = $config['cost'];
                 
                 if($cost < 4 || $cost > 31)

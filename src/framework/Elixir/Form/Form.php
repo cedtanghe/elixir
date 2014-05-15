@@ -28,27 +28,27 @@ class Form extends Dispatcher implements FormInterface
     /**
      * @var array
      */
-    protected $_keys = array();
+    protected $_keys = [];
     
     /**
      * @var array
      */
-    protected $_fields = array();
+    protected $_fields = [];
     
     /**
      * @var array
      */
-    protected $_forms = array();
+    protected $_forms = [];
     
     /**
      * @var array
      */
-    protected $_attributes = array('method' => self::POST, 'action' => '');
+    protected $_attributes = ['method' => self::POST, 'action' => ''];
     
     /**
      * @var array
      */
-    protected $_options = array();
+    protected $_options = [];
     
     /**
      * @var string
@@ -58,7 +58,7 @@ class Form extends Dispatcher implements FormInterface
     /**
      * @var array
      */
-    protected $_errors = array();
+    protected $_errors = [];
     
     /**
      * @var boolean
@@ -239,7 +239,7 @@ class Form extends Dispatcher implements FormInterface
     public function setAttributes(array $pData) 
     {
         $name = $this->getName();
-        $this->_attributes = array();
+        $this->_attributes = [];
         
         foreach($pData as $key => $value)
         {
@@ -306,7 +306,7 @@ class Form extends Dispatcher implements FormInterface
      */
     public function setOptions(array $pData) 
     {
-        $this->_options = array();
+        $this->_options = [];
         
         foreach($pData as $key => $value)
         {
@@ -445,7 +445,7 @@ class Form extends Dispatcher implements FormInterface
 
         $items = array_merge($this->_fields, $this->_forms);
         $recursive = ($pMask & self::ALL_FIELDS) == self::ALL_FIELDS;
-        $result = array();
+        $result = [];
 
         foreach($this->_keys as $key)
         {
@@ -474,9 +474,9 @@ class Form extends Dispatcher implements FormInterface
      */
     public function sets(array $pData) 
     {
-        $this->_keys = array();
-        $this->_fields = array();
-        $this->_forms = array();
+        $this->_keys = [];
+        $this->_fields = [];
+        $this->_forms = [];
         
         foreach($pData as $item)
         {
@@ -548,7 +548,7 @@ class Form extends Dispatcher implements FormInterface
             $pData = $result;
         }
         
-        $this->_errors = array();
+        $this->_errors = [];
         
         if(!empty($pData))
         {
@@ -583,7 +583,7 @@ class Form extends Dispatcher implements FormInterface
     public function values($pFiltered = true)
     {
         $this->dispatch(new FormEvent(FormEvent::PRE_VALUES));
-        $values = array();
+        $values = [];
         
         foreach($this->_fields as $field)
         {
@@ -635,7 +635,7 @@ class Form extends Dispatcher implements FormInterface
         {
             foreach($this->_errors as $key => $value)
             {
-                return array($key => $value);
+                return [$key => $value];
             }
         }
         
@@ -645,9 +645,9 @@ class Form extends Dispatcher implements FormInterface
     /**
      * @see FormInterface::reset()
      */
-    public function reset(array $pOmit = array())
+    public function reset(array $pOmit = [])
     {
-        $this->_errors = array();
+        $this->_errors = [];
         
         foreach(array_merge($this->_fields, $this->_forms) as $item)
         {
@@ -665,7 +665,7 @@ class Form extends Dispatcher implements FormInterface
      */
     public function dispatch(Event $pEvent) 
     {
-        if($this->_submit && in_array($pEvent->getType(), array(FormEvent::PRE_BIND, FormEvent::BIND)))
+        if($this->_submit && in_array($pEvent->getType(), [FormEvent::PRE_BIND, FormEvent::BIND]))
         {
             return;
         }

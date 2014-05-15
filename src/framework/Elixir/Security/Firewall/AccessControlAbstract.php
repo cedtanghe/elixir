@@ -13,7 +13,7 @@ abstract class AccessControlAbstract implements AccessControlInterface
     /**
      * @var array
      */
-    protected $_options = array();
+    protected $_options = [];
     
     /**
      * @param string $pKey
@@ -69,7 +69,7 @@ abstract class AccessControlAbstract implements AccessControlInterface
      */
     public function setOptions(array $pData)
     {
-        $this->_options = array();
+        $this->_options = [];
         
         foreach($pData as $key => $value)
         {

@@ -37,7 +37,7 @@ class Arr implements LoaderInterface
             
             if(!isset($value['options']))
             {
-                $value['options'] = array();
+                $value['options'] = [];
             }
             
             if(isset($globals))

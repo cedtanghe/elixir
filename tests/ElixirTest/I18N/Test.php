@@ -24,11 +24,11 @@ class Test extends \PHPUnit_Framework_TestCase
         $translate = new I18N();
         $translate->setLocale('fr-FR');
         
-        $translate->load(array(
+        $translate->load([
                 __DIR__ . '/../../languages/translations.mo',
                 __DIR__ . '/../../languages/translations.json',
                 __DIR__ . '/../../languages/translations.csv'
-            ),
+            ],
             'fr-FR'
         );
         
@@ -40,7 +40,7 @@ class Test extends \PHPUnit_Framework_TestCase
     public function testPluralize()
     {
         $plural = new Plural();
-        $messages = array('There are no dogs', 'There is 1 dog', 'There are {COUNT} dogs');
+        $messages = ['There are no dogs', 'There is 1 dog', 'There are {COUNT} dogs'];
         
         $this->assertEquals('There are no dogs', $plural->pluralize($messages, -5, 'fr-FR'));
         $this->assertEquals('There is 1 dog', $plural->pluralize($messages, 1, 'fr-FR'));

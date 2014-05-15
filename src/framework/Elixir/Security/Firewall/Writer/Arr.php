@@ -15,7 +15,7 @@ class Arr extends WriterAbstract
      */
     public function write()
     {
-        $data = array();
+        $data = [];
         
         if(method_exists($this->_firewall, 'sort'))
         {
@@ -24,11 +24,11 @@ class Arr extends WriterAbstract
         
         foreach($this->_firewall->getAccessControls(true) as $value)
         {
-            $data[] = array(
+            $data[] = [
                 'regex' => $value['accessControl']->getPattern(),
                 'options' => $value['accessControl']->getOptions(),
                 'priority' => $value['priority'],
-            );
+            ];
         }
         
         return $data;

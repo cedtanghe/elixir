@@ -14,12 +14,12 @@ class Chain extends FilterAbstract
     /**
      * @var array
      */
-    protected $_filters = array();
+    protected $_filters = [];
     
     /**
      * @var array
      */
-    protected $_steps = array();
+    protected $_steps = [];
     
     /**
      * @return array
@@ -33,9 +33,9 @@ class Chain extends FilterAbstract
      * @param FilterInterface $pFilter
      * @param array $pOptions
      */
-    public function addFilter(FilterInterface $pFilter, array $pOptions = array())
+    public function addFilter(FilterInterface $pFilter, array $pOptions = [])
     {
-        $this->_filters[] = array('filter' => $pFilter, 'options' => $pOptions);
+        $this->_filters[] = ['filter' => $pFilter, 'options' => $pOptions];
     }
     
     /**
@@ -51,12 +51,12 @@ class Chain extends FilterAbstract
      */
     public function setFilters(array $pData)
     {
-        $this->_filters = array();
+        $this->_filters = [];
         
         foreach($pData as $data)
         {
             $filter = $data;
-            $options = array();
+            $options = [];
             
             if(is_array($data))
             {
@@ -75,9 +75,9 @@ class Chain extends FilterAbstract
     /**
      * @see FilterInterface::filter()
      */
-    public function filter($pContent, array $pOptions = array())
+    public function filter($pContent, array $pOptions = [])
     {
-        $this->_steps = array($pContent);
+        $this->_steps = [$pContent];
         
         foreach($this->_filters as $data)
         {

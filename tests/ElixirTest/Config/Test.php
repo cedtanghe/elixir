@@ -23,9 +23,9 @@ class Test extends \PHPUnit_Framework_TestCase
     public function testConfig()
     {
         $config = new Config('test');
-        $config->load(array(__DIR__ . '/../../config/config.php',
-                            __DIR__ . '/../../config/config.json',
-                            __DIR__ . '/../../config/config.xml'));
+        $config->load([__DIR__ . '/../../config/config.php',
+                       __DIR__ . '/../../config/config.json',
+                       __DIR__ . '/../../config/config.xml']);
         
         $this->assertEquals('new value-2', $config->get('key-2'));
     }
@@ -35,11 +35,11 @@ class Test extends \PHPUnit_Framework_TestCase
         $config = new Config('test');
         $config->load(__DIR__ . '/../../config/config.xml');
         
-        $this->assertEquals('{REPLACE}value-4-2', $config->get(array('key-4', 'key-4-3')));
+        $this->assertEquals('{REPLACE}value-4-2', $config->get(['key-4', 'key-4-3']));
         
-        $processor = new Filter(new Replace(), array('regex' => '/{REPLACE}/', 'by' => 'VALUE_REPLACED_'));
+        $processor = new Filter(new Replace(), ['regex' => '/{REPLACE}/', 'by' => 'VALUE_REPLACED_']);
         $config->addProcessor($processor);
         
-        $this->assertEquals('VALUE_REPLACED_value-4-2', $config->get(array('key-4', 'key-4-3')));
+        $this->assertEquals('VALUE_REPLACED_value-4-2', $config->get(['key-4', 'key-4-3']));
     }
 }

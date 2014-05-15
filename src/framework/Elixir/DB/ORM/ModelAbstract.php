@@ -54,7 +54,7 @@ abstract class ModelAbstract extends Dispatcher implements RepositoryInterface
      * @param array $pData
      * @return ModelAbstract
      */
-    public static function create(ContainerInterface $pManager = null, array $pData = array())
+    public static function create(ContainerInterface $pManager = null, array $pData = [])
     {
         return new static($pManager, $pData);
     }
@@ -69,7 +69,7 @@ abstract class ModelAbstract extends Dispatcher implements RepositoryInterface
     {
         $model = new static();
         $keys = $model->getColumnKeys();
-        $columns = array();
+        $columns = [];
         
         foreach($keys as $column)
         {
@@ -117,12 +117,12 @@ abstract class ModelAbstract extends Dispatcher implements RepositoryInterface
     /**
      * @var array
      */
-    protected static $_mutatorsGet = array();
+    protected static $_mutatorsGet = [];
 
     /**
      * @var array
      */
-    protected static $_mutatorsSet = array();
+    protected static $_mutatorsSet = [];
     
     /**
      * @var ContainerInterface
@@ -157,32 +157,32 @@ abstract class ModelAbstract extends Dispatcher implements RepositoryInterface
     /**
      * @var array
      */
-    protected $_fillable = array();
+    protected $_fillable = [];
     
     /**
      * @var array
      */
-    protected $_original = array();
+    protected $_original = [];
     
     /**
      * @var array
      */
-    protected $_guarded = array();
+    protected $_guarded = [];
     
     /**
      * @var array
      */
-    protected $_related = array();
+    protected $_related = [];
     
     /**
      * @var array
      */
-    protected $_data = array();
+    protected $_data = [];
     
     /**
      * @var array
      */
-    protected $_filled = array();
+    protected $_filled = [];
     
     /**
      * @var string
@@ -194,7 +194,7 @@ abstract class ModelAbstract extends Dispatcher implements RepositoryInterface
      * @param array $pData
      * @throws \LogicException
      */
-    public function __construct(ContainerInterface $pManager = null, array $pData = array()) 
+    public function __construct(ContainerInterface $pManager = null, array $pData = []) 
     {
         $this->_connectionManager = $pManager;
         $this->_className = get_class($this);
@@ -225,7 +225,7 @@ abstract class ModelAbstract extends Dispatcher implements RepositoryInterface
         
         if(!empty($pData))
         {
-            $this->hydrate($pData, array('raw' => true, 'sync' => true));
+            $this->hydrate($pData, ['raw' => true, 'sync' => true]);
         }
     }
     
@@ -307,7 +307,7 @@ abstract class ModelAbstract extends Dispatcher implements RepositoryInterface
             return null;
         }
         
-        $result = array();
+        $result = [];
         
         foreach((array)$this->_primaryKey as $primary)
         {
@@ -621,7 +621,7 @@ abstract class ModelAbstract extends Dispatcher implements RepositoryInterface
      */
     protected function getModified()
     {
-        $modified = array();
+        $modified = [];
 
         foreach($this->_fillable as $column)
         {
@@ -666,14 +666,14 @@ abstract class ModelAbstract extends Dispatcher implements RepositoryInterface
         $this->dispatch(new ModelEvent(ModelEvent::PRE_INSERT));
         
         $DB = $this->getConnection('DB.write');
-        $data = array();
+        $data = [];
 
         foreach($this->_fillable as $column)
         {
             $data[$column] = $this->get($column);
         }
         
-        $values = array();
+        $values = [];
         
         foreach($data as $key => $value)
         {
@@ -712,7 +712,7 @@ abstract class ModelAbstract extends Dispatcher implements RepositoryInterface
      * @see RepositoryInterface::update()
      * @throws \LogicException
      */
-    public function update(array $pMembers = array(), array $pOmitMembers = array())
+    public function update(array $pMembers = [], array $pOmitMembers = [])
     {
         if($this->isReadOnly())
         {
@@ -728,7 +728,7 @@ abstract class ModelAbstract extends Dispatcher implements RepositoryInterface
         }
         
         $DB = $this->getConnection('DB.write');
-        $data = array();
+        $data = [];
 
         foreach(array_keys($this->getModified()) as $column)
         {
@@ -744,7 +744,7 @@ abstract class ModelAbstract extends Dispatcher implements RepositoryInterface
             $data[$column] = $this->get($column);
         }
         
-        $values = array();
+        $values = [];
         
         foreach($data as $key => $value)
         {
@@ -833,10 +833,10 @@ abstract class ModelAbstract extends Dispatcher implements RepositoryInterface
     /**
      * @see RepositoryInterface::hydrate()
      */
-    public function hydrate(array $pData, array $pOptions = array('raw' => true))
+    public function hydrate(array $pData, array $pOptions = ['raw' => true])
     {
-        $references = array();
-        $models = array();
+        $references = [];
+        $models = [];
         
         foreach($pData as $key => $value)
         {
@@ -872,7 +872,7 @@ abstract class ModelAbstract extends Dispatcher implements RepositoryInterface
                 {
                     if(!isset($models[$reference]))
                     {
-                        $models[$reference] = array('class' => $class, 'value' => array());
+                        $models[$reference] = ['class' => $class, 'value' => []];
                     }
                     
                     $models[$reference]['value'][$segments[1]] = $value;
@@ -952,9 +952,9 @@ abstract class ModelAbstract extends Dispatcher implements RepositoryInterface
     /**
      * @see RepositoryInterface::export()
      */
-    public function export(array $pMembers = array(), array $pOmitMembers = array(), $pRaw = true)
+    public function export(array $pMembers = [], array $pOmitMembers = [], $pRaw = true)
     {
-        $data = array();
+        $data = [];
         
         foreach(array_keys($this->_data) as $value)
         {
@@ -980,7 +980,7 @@ abstract class ModelAbstract extends Dispatcher implements RepositoryInterface
                 
                 if($v instanceof self)
                 {
-                    $v = $v->export(array(), array(), $pRaw);
+                    $v = $v->export([], [], $pRaw);
                 }
                 else if(static::isCollection($v))
                 {
@@ -1010,7 +1010,7 @@ abstract class ModelAbstract extends Dispatcher implements RepositoryInterface
             }
             else if($value instanceof self)
             {
-                $value = $value->export(array(), array(), $pRaw);
+                $value = $value->export([], [], $pRaw);
             }
         }
         

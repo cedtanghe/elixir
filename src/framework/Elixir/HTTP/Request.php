@@ -128,7 +128,7 @@ class Request
                                 $pServer,
                                 $pEnv) 
     {
-        $providers = array(
+        $providers = [
             self::ATTRIBUTES => $pAttributes,
             self::QUERY => $pQuery,
             self::POST => $pPost,
@@ -137,7 +137,7 @@ class Request
             self::FILES => $pFiles,
             self::SERVER => $pServer,
             self::ENV => $pEnv
-        );
+        ];
         
         foreach($providers as $key => $value)
         {
@@ -192,9 +192,9 @@ class Request
      * @param array $pProviders
      * @return mixed
      */
-    public function get($pKey, $pDefault = null, $pSanitize = null, $pProviders = array(self::QUERY,
+    public function get($pKey, $pDefault = null, $pSanitize = null, $pProviders = [self::QUERY,
                                                                                         self::POST,
-                                                                                        self::ATTRIBUTES))
+                                                                                        self::ATTRIBUTES])
     {
         foreach($pProviders as $provider)
         {
@@ -214,9 +214,9 @@ class Request
      * @param array $pProviders
      * @return boolean
      */
-    public function has($pKey, $pProviders = array(self::QUERY,
+    public function has($pKey, $pProviders = [self::QUERY,
                                                    self::POST,
-                                                   self::ATTRIBUTES))
+                                                   self::ATTRIBUTES])
     {
         foreach($pProviders as $provider)
         {

@@ -42,7 +42,7 @@ class File extends FieldAbstract
         parent::setParent($pValue);
         
         $this->_parent->setAttributes(array_merge($this->_parent->getAttributes(),
-                                                  array('enctype' => FormInterface::ENCTYPE_MULTIPART)));
+                                                  ['enctype' => FormInterface::ENCTYPE_MULTIPART]));
     }
     
     /**
@@ -83,7 +83,7 @@ class File extends FieldAbstract
      */
     public function setAPCUploadProgressData($pId, $pValue = null)
     {
-        $this->setOption('APC_UPLOAD_PROGRESS_DATA', array('id' => $pId, 'value' => $pValue ? $pValue : uniqid()));
+        $this->setOption('APC_UPLOAD_PROGRESS_DATA', ['id' => $pId, 'value' => $pValue ? $pValue : uniqid()]);
     }
     
     /**
@@ -175,7 +175,7 @@ class File extends FieldAbstract
      */
     public function isValid($pValue = null) 
     {
-        $this->_errors = array();
+        $this->_errors = [];
         
         $event = new FieldEvent(FieldEvent::PRE_VALIDATION, $this->_value);
         $this->dispatch($event);
@@ -207,7 +207,7 @@ class File extends FieldAbstract
      */
     public function receive()
     {
-        $filters = array();
+        $filters = [];
         
         foreach($this->_filters as $data)
         {
@@ -228,7 +228,7 @@ class File extends FieldAbstract
     public function reset()
     {
         $this->getUploader()->reset();
-        $this->_errors = array();
+        $this->_errors = [];
         $this->_value = null;
     }
 }

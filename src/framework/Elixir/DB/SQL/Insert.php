@@ -34,7 +34,7 @@ class Insert extends SQLAbstract
     /**
      * @var array
      */
-    protected $_columns = array();
+    protected $_columns = [];
     
     /**
      * @var string|array
@@ -101,7 +101,7 @@ class Insert extends SQLAbstract
         {
             if($pType == self::VALUES_SET || !is_array($this->_values))
             {
-                $this->_values = array();
+                $this->_values = [];
             }
             
             $columns = false;
@@ -155,13 +155,13 @@ class Insert extends SQLAbstract
         switch($pPart)
         {
             case 'columns':
-                $this->_columns = array();
+                $this->_columns = [];
             break;
             case 'values':
                 $this->_values = null;
             break;
             case 'data':
-                $this->_columns = array();
+                $this->_columns = [];
                 $this->_values = null;
             break;
         }

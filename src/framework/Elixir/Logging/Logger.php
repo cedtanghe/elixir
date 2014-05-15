@@ -16,7 +16,7 @@ class Logger extends Dispatcher implements LoggerInterface
     /**
      * @var array
      */
-    protected $_writers = array();
+    protected $_writers = [];
     
     /**
      * @var boolean 
@@ -60,7 +60,7 @@ class Logger extends Dispatcher implements LoggerInterface
      */
     public function setWriters(array $pData)
     {
-        $this->_writers = array();
+        $this->_writers = [];
         
         foreach($pData as $writer)
         {
@@ -186,7 +186,7 @@ class Logger extends Dispatcher implements LoggerInterface
     {
         foreach($this->_writers as $writer)
         {
-            call_user_func_array(array($writer, $pMethod), $pArguments);
+            call_user_func_array([$writer, $pMethod], $pArguments);
         }
     }
 }

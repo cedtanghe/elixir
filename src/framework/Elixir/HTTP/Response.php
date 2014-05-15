@@ -35,8 +35,8 @@ class Response
         
         $protocol = $matches['protocol'];
         $status = $matches['status'];
-        $headers = array();
-        $content = array();
+        $headers = [];
+        $content = [];
         $type = 'header';
         
         while(count($lines) > 0)
@@ -63,7 +63,7 @@ class Response
     /**
      * @var array 
      */
-    public static $statusCodesAndReasonPhrases = array(
+    public static $statusCodesAndReasonPhrases = [
         100 => 'Continue',
         101 => 'Switching Protocols',
         102 => 'Processing',
@@ -122,7 +122,7 @@ class Response
         508 => 'Loop Detected',
         510 => 'Not Extended',
         511 => 'Network Authentication Required'
-    );
+    ];
     
     /**
      * @var integer
@@ -163,7 +163,7 @@ class Response
     public function __construct($pContent = '',
                                 $pStatus = 200,
                                 $pProtocol = 'HTTP/1.1',
-                                array $pHeaders = array()) 
+                                array $pHeaders = []) 
     {
         $this->setContent($pContent);
         $this->setStatusCode($pStatus);
@@ -226,7 +226,7 @@ class Response
      */
     public function setProtocol($pValue)
     {
-        if(!in_array($pValue, array('HTTP/1.0', 'HTTP/1.1')))
+        if(!in_array($pValue, ['HTTP/1.0', 'HTTP/1.1']))
         {
             throw new \InvalidArgumentException(sprintf('The protocol "%s" is invalid.', $pValue));
         }

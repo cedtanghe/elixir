@@ -54,5 +54,5 @@ interface ViewInterface
      * @param array $pData
      * @return string
      */
-    public function render($pTemplate, array $pData = array());
+    public function render($pTemplate, array $pData = []);
 }

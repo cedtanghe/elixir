@@ -66,10 +66,10 @@ class Pagination implements ContextInterface, HelperInterface
             $pFilePath, 
             array_merge(
                 $pPagination->getParameters(), 
-                array(
+                [
                     'pagination' => $pPagination, 
                     'range' => $pPagination->getPageRange()
-                )
+                ]
             )
         );
     }
@@ -80,6 +80,6 @@ class Pagination implements ContextInterface, HelperInterface
     public function direct()
     {
         $args = func_get_args();
-        return call_user_func_array(array($this, 'paginate'), $args);
+        return call_user_func_array([$this, 'paginate'], $args);
     }
 }

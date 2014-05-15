@@ -70,7 +70,7 @@ class Arr
             
             if(!is_array($pData) || !array_key_exists($segment, $pData))
             {
-                $pData[$segment] = array();
+                $pData[$segment] = [];
             }
             
             $pData = &$pData[$segment];

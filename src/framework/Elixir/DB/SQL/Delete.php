@@ -19,7 +19,7 @@ class Delete extends SQLAbstract
     /**
      * @var array 
      */
-    protected $_wheres = array();
+    protected $_wheres = [];
     
     /**
      * @param string $pTable
@@ -56,7 +56,7 @@ class Delete extends SQLAbstract
             $pCond = $where->render();
         }
         
-        $this->_wheres[] = array('query' => $this->assemble($pCond, $pValue), 'type' => 'AND');
+        $this->_wheres[] = ['query' => $this->assemble($pCond, $pValue), 'type' => 'AND'];
         return $this;
     }
     
@@ -74,7 +74,7 @@ class Delete extends SQLAbstract
             $pCond = $where->render();
         }
         
-        $this->_wheres[] = array('query' => $this->assemble($pCond, $pValue), 'type' => 'OR');
+        $this->_wheres[] = ['query' => $this->assemble($pCond, $pValue), 'type' => 'OR'];
         return $this;
     }
     
@@ -87,7 +87,7 @@ class Delete extends SQLAbstract
         switch($pPart)
         {
             case 'where':
-                $this->_wheres = array();
+                $this->_wheres = [];
             break;
         }
         

@@ -13,15 +13,15 @@ class Regex extends ValidatorAbstract
     /**
      * @var array 
      */
-    protected $_errorMessageTemplates = array(self::ERROR => 'No match found.');
+    protected $_errorMessageTemplates = [self::ERROR => 'No match found.'];
     
     /**
      * @see ValidatorInterface::isValid()
      */
-    public function isValid($pContent, array $pOptions = array())
+    public function isValid($pContent, array $pOptions = [])
     {
         $pOptions = array_merge($this->_options, $pOptions);
-        $this->_errors = array();
+        $this->_errors = [];
         
         if(is_array($pContent) && count($pContent) > 0)
         {

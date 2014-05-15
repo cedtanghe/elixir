@@ -65,7 +65,7 @@ class Str
             '', 
             ucwords(
                 str_replace(
-                    array('-', '_', '.'), 
+                    ['-', '_', '.'], 
                     ' ', 
                     static::removeAccents($pStr)
                 )
