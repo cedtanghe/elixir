@@ -98,36 +98,30 @@ class Pivot
      */
     public function join(RelationInterface $pRelation, Select $pSelect)
     {
-        $pivot = $this->_pivot;
-        $foreignKey = $this->_foreignKey;
-        $otherKey = $this->_otherKey;
-        $relation = $pRelation;
-        $criterions = $this->_criterions;
-        
         $pSelect->join(
-            $pivot,
-            function(JoinClause $pSQL) use($pivot, $foreignKey, $otherKey, $relation, $criterions)
+            $this->_pivot,
+            function(JoinClause $pSQL) use($pRelation)
             {
                 $pSQL->on(
                     sprintf(
                         '`%s`.`%s` = ?', 
-                        $pivot,
-                        $foreignKey
+                        $this->_pivot,
+                        $this->_foreignKey
                     ),
-                    $relation->getRepository()->get($relation->getForeignKey())
+                    $pRelation->getRepository()->get($pRelation->getForeignKey())
                 );
                 
                 $pSQL->on(
                     sprintf(
                         '`%s`.`%s` = `%s`.`%s`', 
-                        $pivot,
-                        $otherKey,
-                        $relation->getTarget()->getTable(),
-                        $relation->getOtherKey()
+                        $this->_pivot,
+                        $this->_otherKey,
+                        $pRelation->getTarget()->getTable(),
+                        $pRelation->getOtherKey()
                     )
                 );
                 
-                foreach($criterions as $criterion)
+                foreach($this->_criterions as $criterion)
                 {
                     $criterion($pSQL);
                 }

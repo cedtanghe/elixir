@@ -220,15 +220,14 @@ class Insert extends SQLAbstract
         {
             $sql .= 'VALUES ';
             $first = true;
-            $me = $this;
 
             foreach($this->_values as $values)
             {
                 if(!$this->_raw)
                 {
-                    $values = array_map(function($value) use($me)
+                    $values = array_map(function($value)
                     {
-                        return $me->quote($value);
+                        return $this->quote($value);
                     }, 
                     $values);
                 }

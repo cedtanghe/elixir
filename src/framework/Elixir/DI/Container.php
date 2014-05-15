@@ -471,12 +471,10 @@ class Container extends Dispatcher implements ContainerInterface
             $pKey = $this->_aliases[$pKey];
         }
 
-        $me = $this;
-        $value = $this->_data[$pKey]['value'];
-
-        $service = function() use($me, $value)
+        $service = function()
         {
-            return is_callable($value) ? $value($me) : $value;
+            $value = $this->_data[$pKey]['value'];
+            return is_callable($value) ? $value($this) : $value;
         };
 
         $type = $this->_data[$pKey]['type'];

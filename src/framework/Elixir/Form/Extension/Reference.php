@@ -82,10 +82,9 @@ class Reference implements ExtensionInterface
         {
             $this->_references = [];
             
-            $me = $this;
-            $pattern = preg_replace_callback('/{([^}]+)}/', function($matches) use($me) 
+            $pattern = preg_replace_callback('/{([^}]+)}/', function($matches) 
             {
-                return '(?P<' . $me->protect($matches[1]) . '>.*)';
+                return '(?P<' . $this->protect($matches[1]) . '>.*)';
             },
             $this->_format);
             
@@ -139,17 +138,16 @@ class Reference implements ExtensionInterface
     {
         $eligible = true;
         
-        $form = $this->_form;
-        $value = preg_replace_callback('/{([^}]+)}/', function($matches) use($form, &$eligible) 
+        $value = preg_replace_callback('/{([^}]+)}/', function($matches) use(&$eligible) 
         {
-            $item = $form->get($matches[1], true);
+            $item = $this->_form->get($matches[1], true);
             
             if(!$item->isEligible())
             {
                 $eligible = false;
             }
             
-            return $form->get($matches[1], true)->getValue(true);
+            return $this->_form->get($matches[1], true)->getValue(true);
         },
         $this->_format);
         
