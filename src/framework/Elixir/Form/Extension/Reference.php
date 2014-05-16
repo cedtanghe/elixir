@@ -34,7 +34,7 @@ class Reference implements ExtensionInterface
     protected $_references = [];
     
     /**
-     * @param FieldInterface $pReference
+     * @param FieldInterface $pInputReference
      * @param string $pFormat
      */
     public function __construct(FieldInterface $pInputReference, $pFormat)

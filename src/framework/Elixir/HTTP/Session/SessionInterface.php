@@ -3,7 +3,6 @@
 namespace Elixir\HTTP\Session;
 
 use Elixir\Dispatcher\DispatcherInterface;
-use Elixir\HTTP\Session\SaveHandler\SaveHandlerInterface;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
@@ -32,14 +31,14 @@ interface SessionInterface extends DispatcherInterface
     const FLASH_ERROR = 'error';
     
     /**
-     * @param SaveHandlerInterface $pValue
+     * @param \SessionHandlerInterface $pValue
      */
-    public function setSaveHandler(SaveHandlerInterface $pValue);
+    public function setHandler(\SessionHandlerInterface $pValue);
     
     /**
-     * @return SaveHandlerInterface
+     * @return \SessionHandlerInterface
      */
-    public function getSaveHandler();
+    public function geHandler();
     
     /**
      * @return boolean

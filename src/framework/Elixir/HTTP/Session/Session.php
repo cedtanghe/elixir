@@ -4,7 +4,6 @@ namespace Elixir\HTTP\Session;
 
 use Elixir\Dispatcher\Dispatcher;
 use Elixir\HTTP\Parameters;
-use Elixir\HTTP\Session\SaveHandler\SaveHandlerInterface;
 use Elixir\HTTP\Session\SessionEvent;
 use Elixir\HTTP\Session\SessionInterface;
 
@@ -25,9 +24,9 @@ class Session extends Dispatcher implements SessionInterface, \ArrayAccess, \Ite
     protected static $_instance;
     
     /**
-     * @var SaveHandlerInterface
+     * @var \SessionHandlerInterface
      */
-    protected $_saveHandler;
+    protected $_handler;
     
     /**
      * @var Parameters
@@ -56,25 +55,25 @@ class Session extends Dispatcher implements SessionInterface, \ArrayAccess, \Ite
     }
     
     /**
-     * @see SessionInterface::setSaveHandler()
+     * @see SessionInterface::setHandler()
      * @throws \LogicException
      */
-    public function setSaveHandler(SaveHandlerInterface $pValue)
+    public function setHandler(\SessionHandlerInterface $pValue)
     {
         if($this->exist())
         {
             throw new \LogicException('Cannot set session handler after a session has already started.');
         }
         
-        $this->_saveHandler = $pValue;
+        $this->_handler = $pValue;
     }
 
     /**
-     * @see SessionInterface::getSaveHandler()
+     * @see SessionInterface::getHandler()
      */
-    public function getSaveHandler()
+    public function geHandler()
     {
-        return $this->_saveHandler;
+        return $this->_handler;
     }
 
     /**
@@ -162,18 +161,9 @@ class Session extends Dispatcher implements SessionInterface, \ArrayAccess, \Ite
     {
         if(!$this->exist())
         {
-            if(null !== $this->_saveHandler)
+            if(null !== $this->_handler)
             {
-                session_set_save_handler(
-                    [$this->_saveHandler, 'open'],
-                    [$this->_saveHandler, 'close'],
-                    [$this->_saveHandler, 'read'],
-                    [$this->_saveHandler, 'write'],
-                    [$this->_saveHandler, 'destroy'],
-                    [$this->_saveHandler, 'gc']
-                );
-                
-                register_shutdown_function('session_write_close');
+                session_set_save_handler($this->_handler, true);
             }
             else
             {

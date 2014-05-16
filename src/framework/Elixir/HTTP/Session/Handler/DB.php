@@ -1,18 +1,17 @@
 <?php
 
-namespace Elixir\HTTP\Session\SaveHandler;
+namespace Elixir\HTTP\Session\Handler;
 
 use Elixir\DB\DBInterface;
 use Elixir\DB\Result\SetAbstract;
 use Elixir\DB\SQL\Insert;
 use Elixir\DB\SQL\Update;
-use Elixir\HTTP\Session\SaveHandler\SaveHandlerInterface;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
-class DB implements SaveHandlerInterface
+class DB implements \SessionHandlerInterface
 {
     /**
      * @var DBInterface 
@@ -60,7 +59,7 @@ class DB implements SaveHandlerInterface
     }
 
     /**
-     * @see SaveHandlerInterface::open()
+     * @see \SessionHandlerInterface::open()
      */
     public function open($pSavePath, $pName)
     {
@@ -68,7 +67,7 @@ class DB implements SaveHandlerInterface
     }
     
     /**
-     * @see SaveHandlerInterface::close()
+     * @see \SessionHandlerInterface::close()
      */
     public function close()
     {
@@ -77,7 +76,7 @@ class DB implements SaveHandlerInterface
     }
     
     /**
-     * @see SaveHandlerInterface::read()
+     * @see \SessionHandlerInterface::read()
      */
     public function read($pId)
     {
@@ -98,7 +97,7 @@ class DB implements SaveHandlerInterface
     }
     
     /**
-     * @see SaveHandlerInterface::write()
+     * @see \SessionHandlerInterface::write()
      */
     public function write($pId, $pData)
     {
@@ -137,7 +136,7 @@ class DB implements SaveHandlerInterface
     }
     
     /**
-     * @see SaveHandlerInterface::destroy()
+     * @see \SessionHandlerInterface::destroy()
      */
     public function destroy($pId)
     {
@@ -148,7 +147,7 @@ class DB implements SaveHandlerInterface
     }
     
     /**
-     * @see SaveHandlerInterface::gc()
+     * @see \SessionHandlerInterface::gc()
      */
     public function gc($pMaxLifetime)
     {
