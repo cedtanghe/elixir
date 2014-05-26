@@ -629,6 +629,7 @@ class Form
         $options = array_merge($pField->getOptions(), $pOptions);
         
         $placement = isset($options['placement']) ? $options['placement'] : 'inner';
+        
         if(!in_array($placement, ['inner', 'before', 'after']))
         {
             $placement = 'inner';

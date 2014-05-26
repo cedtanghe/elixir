@@ -171,7 +171,7 @@ class File
     }
     
     /**
-     * @param string $pFilePath
+     * @param string $pPath
      * @return boolean
      */
     public static function remove($pPath)

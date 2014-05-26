@@ -45,6 +45,51 @@
                 </td>
             </tr>
                     <tr>
+                <td>TOP</td>
+                <td class="last">
+                    <p><em>
+</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+                    <tr>
+                <td>BOTTOM</td>
+                <td class="last">
+                    <p><em>
+</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+                    <tr>
+                <td>CENTER</td>
+                <td class="last">
+                    <p><em>
+</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+                    <tr>
+                <td>LEFT</td>
+                <td class="last">
+                    <p><em>
+</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+                    <tr>
+                <td>RIGHT</td>
+                <td class="last">
+                    <p><em>
+</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+                    <tr>
                 <td>TYPE_MIME_JPG</td>
                 <td class="last">
                     <p><em>
@@ -135,6 +180,17 @@
                 </td>
                 <td class="last">
                     <a href="#method_createFromImage">createFromImage</a>(string $pImage)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    static&nbsp;<abbr title="Elixir\Util\resource">resource</abbr>
+                </td>
+                <td class="last">
+                    <a href="#method_createResource">createResource</a>(string $pImagePath)
                     <p>
 </p>
                 </td>
@@ -255,6 +311,17 @@
                     boolean
                 </td>
                 <td class="last">
+                    <a href="#method_merge">merge</a>(<abbr title="Elixir\Util\resource">resource</abbr>|<a href="../../Elixir/Util/Image.html"><abbr title="Elixir\Util\Image">Image</abbr></a> $pResource, integer $pOpacity = 100, string $pHPos = self::TOP, string $pWPos = self::LEFT, array $pOptions = array())
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
                     <a href="#method_filter">filter</a>(integer $pFiltertype, integer $pArg1 = null, integer $pArg2 = null, integer $pArg3 = null, integer $pArg4 = null)
                     <p>
 </p>
@@ -278,7 +345,7 @@
         <h2>Details</h2>
 
                         <h3 id="method_getSizingInfo">
-        <div class="location">at line 51</div>
+        <div class="location">at line 76</div>
         <code>        static    public            array
     <strong>getSizingInfo</strong>(string|<abbr title="Elixir\Util\resource">resource</abbr> $pImageOrResource, integer $pWidth, integer $pHeight, boolean $pRatio = true, string $pMode = self::RESIZE)</code>
     </h3>
@@ -340,7 +407,7 @@
     </div>
 
                 <h3 id="method_isGD">
-        <div class="location">at line 132</div>
+        <div class="location">at line 157</div>
         <code>        static    public            boolean
     <strong>isGD</strong>(<abbr title="Elixir\Util\resource">resource</abbr> $pResource)</code>
     </h3>
@@ -378,7 +445,7 @@
     </div>
 
                 <h3 id="method_createFromResource">
-        <div class="location">at line 147</div>
+        <div class="location">at line 172</div>
         <code>        static    public            <a href="../../Elixir/Util/Image.html"><abbr title="Elixir\Util\Image">Image</abbr></a>
     <strong>createFromResource</strong>(<abbr title="Elixir\Util\resource">resource</abbr> $pResource, string $pTypeMime)</code>
     </h3>
@@ -422,7 +489,7 @@
     </div>
 
                 <h3 id="method_createFromImage">
-        <div class="location">at line 156</div>
+        <div class="location">at line 181</div>
         <code>        static    public            <a href="../../Elixir/Util/Image.html"><abbr title="Elixir\Util\Image">Image</abbr></a>
     <strong>createFromImage</strong>(string $pImage)</code>
     </h3>
@@ -459,8 +526,56 @@
                     </div>
     </div>
 
+                <h3 id="method_createResource">
+        <div class="location">at line 191</div>
+        <code>        static    public            <abbr title="Elixir\Util\resource">resource</abbr>
+    <strong>createResource</strong>(string $pImagePath)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$pImagePath</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><abbr title="Elixir\Util\resource">resource</abbr></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
                 <h3 id="method___construct">
-        <div class="location">at line 181</div>
+        <div class="location">at line 232</div>
         <code>            public            
     <strong>__construct</strong>(string|<abbr title="Elixir\Util\resource">resource</abbr> $pImageOrResource, string $pTypeMime = null)</code>
     </h3>
@@ -504,7 +619,7 @@
     </div>
 
                 <h3 id="method___destruct">
-        <div class="location">at line 222</div>
+        <div class="location">at line 273</div>
         <code>            public            
     <strong>__destruct</strong>()</code>
     </h3>
@@ -521,7 +636,7 @@
     </div>
 
                 <h3 id="method_getOriginalImagePath">
-        <div class="location">at line 230</div>
+        <div class="location">at line 281</div>
         <code>            public            string
     <strong>getOriginalImagePath</strong>()</code>
     </h3>
@@ -548,7 +663,7 @@
     </div>
 
                 <h3 id="method_getMimeType">
-        <div class="location">at line 238</div>
+        <div class="location">at line 289</div>
         <code>            public            string
     <strong>getMimeType</strong>()</code>
     </h3>
@@ -575,7 +690,7 @@
     </div>
 
                 <h3 id="method_getWidth">
-        <div class="location">at line 246</div>
+        <div class="location">at line 297</div>
         <code>            public            integer
     <strong>getWidth</strong>()</code>
     </h3>
@@ -602,7 +717,7 @@
     </div>
 
                 <h3 id="method_getHeight">
-        <div class="location">at line 254</div>
+        <div class="location">at line 305</div>
         <code>            public            integer
     <strong>getHeight</strong>()</code>
     </h3>
@@ -629,7 +744,7 @@
     </div>
 
                 <h3 id="method_getResource">
-        <div class="location">at line 262</div>
+        <div class="location">at line 313</div>
         <code>            public            <abbr title="Elixir\Util\resource">resource</abbr>
     <strong>getResource</strong>()</code>
     </h3>
@@ -656,7 +771,7 @@
     </div>
 
                 <h3 id="method_resize">
-        <div class="location">at line 273</div>
+        <div class="location">at line 324</div>
         <code>            public            boolean
     <strong>resize</strong>(integer $pWMax, integer $pHMax, boolean $pRatio = true)</code>
     </h3>
@@ -706,7 +821,7 @@
     </div>
 
                 <h3 id="method_enlarge">
-        <div class="location">at line 317</div>
+        <div class="location">at line 368</div>
         <code>            public            boolean
     <strong>enlarge</strong>(integer $pWMin, integer $pHMin, boolean $pRatio = true)</code>
     </h3>
@@ -756,7 +871,7 @@
     </div>
 
                 <h3 id="method_crop">
-        <div class="location">at line 360</div>
+        <div class="location">at line 411</div>
         <code>            public            boolean
     <strong>crop</strong>(integer $pWEnd, integer $pHEnd)</code>
     </h3>
@@ -799,8 +914,80 @@
                     </div>
     </div>
 
+                <h3 id="method_merge">
+        <div class="location">at line 484</div>
+        <code>            public            boolean
+    <strong>merge</strong>(<abbr title="Elixir\Util\resource">resource</abbr>|<a href="../../Elixir/Util/Image.html"><abbr title="Elixir\Util\Image">Image</abbr></a> $pResource, integer $pOpacity = 100, string $pHPos = self::TOP, string $pWPos = self::LEFT, array $pOptions = array())</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><abbr title="Elixir\Util\resource">resource</abbr>|<a href="../../Elixir/Util/Image.html"><abbr title="Elixir\Util\Image">Image</abbr></a></td>
+                <td>$pResource</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>integer</td>
+                <td>$pOpacity</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$pHPos</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$pWPos</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$pOptions</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
                 <h3 id="method_filter">
-        <div class="location">at line 432</div>
+        <div class="location">at line 554</div>
         <code>            public            boolean
     <strong>filter</strong>(integer $pFiltertype, integer $pArg1 = null, integer $pArg2 = null, integer $pArg3 = null, integer $pArg4 = null)</code>
     </h3>
@@ -862,7 +1049,7 @@
     </div>
 
                 <h3 id="method_save">
-        <div class="location">at line 449</div>
+        <div class="location">at line 571</div>
         <code>            public            boolean
     <strong>save</strong>(string $pImagePath = null, integer $pQuality = self::DEFAULT_QUALITY)</code>
     </h3>

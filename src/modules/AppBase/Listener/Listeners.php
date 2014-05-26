@@ -146,8 +146,16 @@ class Listeners implements SubscriberInterface
             $application = $this->_container->get('application');
             $module = $e->getRequest()->getModule();
             
-            $e->getRequest()->getAttributes()->sets(['exception' => $e->getException()]);
-
+            $r = clone $e->getRequest();
+            
+            
+            $e->getRequest()->getAttributes()->sets(
+                [
+                    'exception' => $e->getException(),
+                    'last_request' => clone $e->getRequest()
+                ]
+            );
+            
             $hierarchy = array_reverse($application->getModuleHierarchy($module, ['AppBase']));
             $module = sprintf('(@%s)', $hierarchy[0]);
            

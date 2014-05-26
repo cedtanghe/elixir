@@ -3,6 +3,7 @@
 namespace Elixir\Module\AppBase\Controller;
 
 use Elixir\HTTP\Response;
+use Elixir\HTTP\Sanitizer;
 use Elixir\MVC\Controller\ControllerAbstract;
 
 /**
@@ -58,6 +59,9 @@ class ErrorController extends ControllerAbstract
      */
     protected function render(array $pData, $pStatusCode)
     {
+        $sanitizer = new Sanitizer();
+        $pData = $sanitizer->filter($pData);
+        
         if(defined('APPLICATION_ENV') && APPLICATION_ENV != 'production')
         {
             $data = '<pre>' . print_r($pData, true) . '</pre>';

@@ -2,7 +2,7 @@
 
 namespace {NAMESPACE}\Controller;
 
-use Elixir\Module\Application\Controller\ErrorController as ParentErrorController;
+use Elixir\Module\AppBase\Controller\ErrorController as ParentErrorController;
 
 class ErrorController extends ParentErrorController
 {

@@ -192,6 +192,41 @@ abstract class FirewallAbstract extends Dispatcher implements FirewallInterface
     }
     
     /**
+     * @param string $pResource
+     * @param boolean $pAll
+     * @return array|AccessControlInterface|null
+     */
+    public function getRequiredAccessControl($pResource, $pAll = false)
+    {
+        $accessControls = [];
+        
+        $this->sort();
+        $pResource = trim($pResource, '/');
+        
+        foreach($this->_accessControls as $data)
+        {
+            $accessControl = $data['accessControl'];
+            
+            if(preg_match($accessControl->getPattern(), $pResource))
+            {
+                $accessControls[] = $accessControl;
+                
+                if(!$pAll)
+                {
+                    break;
+                }
+            }
+        }
+        
+        if(count($accessControls) > 0)
+        {
+            return $pAll ? $accessControls : $accessControls[0];
+        }
+        
+        return null;
+    }
+    
+    /**
      * @param array $pData
      */
     public function merge($pData)

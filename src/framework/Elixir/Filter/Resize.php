@@ -4,7 +4,7 @@ namespace Elixir\Filter;
 
 use Elixir\Filter\FilterAbstract;
 use Elixir\Filter\FilterInterface;
-use Elixir\Image;
+use Elixir\Util\Image;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

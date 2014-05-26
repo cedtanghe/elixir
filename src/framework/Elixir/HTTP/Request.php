@@ -684,4 +684,9 @@ class Request
             $this->getAttributes()->set('_action', $pValue);
         }
     }
+    
+    public function __clone()
+    {
+        $this->_attributes = clone $this->_attributes;
+    }
 }

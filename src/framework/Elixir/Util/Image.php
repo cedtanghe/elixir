@@ -18,6 +18,31 @@ class Image
     /**
      * @var string
      */
+    const TOP = 'top';
+    
+    /**
+     * @var string
+     */
+    const BOTTOM = 'bottom';
+    
+    /**
+     * @var string
+     */
+    const CENTER = 'center';
+    
+    /**
+     * @var string
+     */
+    const LEFT = 'left';
+    
+    /**
+     * @var string
+     */
+    const RIGHT = 'right';
+    
+    /**
+     * @var string
+     */
     const TYPE_MIME_JPG = 'image/jpeg';
     
     /**
@@ -157,6 +182,32 @@ class Image
     {
         return new static($pImage);
     }
+    
+    /**
+     * @param string $pImagePath
+     * @return resource
+     * @throws \InvalidArgumentException
+     */
+    public static function createResource($pImagePath)
+    {
+        $mimeType = File::mimeType($pImagePath);
+
+        switch($mimeType)
+        {
+            case self::TYPE_MIME_JPG:
+                return imagecreatefromjpeg($pImagePath);
+            break;
+            case self::TYPE_MIME_PNG:
+                return imagecreatefrompng($pImagePath);
+            break;
+            case self::TYPE_MIME_GIF:
+                return imagecreatefromgif($pImagePath);
+            break;
+            default:
+                throw new \InvalidArgumentException(sprintf('Mime type "%s" is not supported.', $mimeType));
+            break;
+        }
+    }
 
     /**
      * @var string
@@ -190,8 +241,8 @@ class Image
             }
             
             if(!in_array($pTypeMime, [self::TYPE_MIME_JPG, 
-                                           self::TYPE_MIME_PNG, 
-                                           self::TYPE_MIME_GIF]))
+                                      self::TYPE_MIME_PNG, 
+                                      self::TYPE_MIME_GIF]))
             {
                 throw new \InvalidArgumentException(sprintf('Mime type "%s" is not supported.', $pTypeMime));
             }
@@ -279,7 +330,7 @@ class Image
             $ressDst = imagecreatetruecolor($infos['width'], $infos['height']);
 
             if(in_array($this->_mimeType, [self::TYPE_MIME_PNG,
-                                                self::TYPE_MIME_GIF]))
+                                           self::TYPE_MIME_GIF]))
             {
                 imagesavealpha($ressDst, true);
                 $transColor = imagecolorallocatealpha($ressDst, 0, 0, 0, 127);
@@ -323,7 +374,7 @@ class Image
             $ressDst = imagecreatetruecolor($infos['width'], $infos['height']);
 
             if(in_array($this->_mimeType, [self::TYPE_MIME_PNG,
-                                                self::TYPE_MIME_GIF]))
+                                           self::TYPE_MIME_GIF]))
             {
                 imagesavealpha($ressDst, true);
                 $transColor = imagecolorallocatealpha($ressDst, 0, 0, 0, 127);
@@ -366,7 +417,7 @@ class Image
             $ressDst = imagecreatetruecolor($infos['width'], $infos['height']);
 
             if(in_array($this->_mimeType, [self::TYPE_MIME_PNG,
-                                                self::TYPE_MIME_GIF]))
+                                           self::TYPE_MIME_GIF]))
             {
                 imagesavealpha($ressDst, true);
                 $transColor = imagecolorallocatealpha($ressDst, 0, 0, 0, 127);
@@ -422,6 +473,77 @@ class Image
     }
     
     /**
+     * @param resource|Image $pResource
+     * @param integer $pOpacity
+     * @param string $pHPos
+     * @param string $pWPos
+     * @param array $pOptions
+     * @return boolean
+     * @throws \InvalidArgumentException
+     */
+    public function merge($pResource, $pOpacity = 100, $pHPos = self::TOP, $pWPos = self::LEFT, array $pOptions = [])
+    {
+        if($pResource instanceof self)
+        {
+            $pResource = $pResource->getResource();
+        }
+        
+        if(!static::isGD($pResource))
+        {
+            throw  new \InvalidArgumentException('This is not a valid resource.');
+        }
+        
+        $m = isset($pOptions['margin']) ? $pOptions['margin'] : 0;
+        $mH = isset($pOptions['marginHeight']) ? $pOptions['marginHeight'] : $m;
+        $mW = isset($pOptions['marginWidth']) ? $pOptions['marginWidth'] : $m;
+        
+        $srcW = imagesx($this->_resource);
+        $srcH = imagesy($this->_resource);
+        $resW = imagesx($pResource);
+        $resH = imagesy($pResource);
+        
+        switch($pHPos)
+        {
+            case self::TOP:
+                $dstY = $mH;
+            break;
+            case self::CENTER:
+                $dstY = ($srcH - $resH) >> 1;
+            break;
+            case self::BOTTOM:
+                $dstY = $srcH - $resH - $mH;
+            break;
+        }
+
+        switch($pWPos)
+        {
+            case self::LEFT:
+                $dstX = $mW;
+            break;
+            case self::CENTER:
+                $dstX = ($srcW - $resW) >> 1;
+            break;
+            case self::RIGHT:
+                $dstX = $srcW - $resW - $mW;
+            break;
+        }
+        
+        $result = imagecopymerge(
+            $this->_resource, 
+            $pResource, 
+            $dstX, 
+            $dstY, 
+            isset($pOptions['resX']) ? $pOptions['resX'] : 0, 
+            isset($pOptions['resY']) ? $pOptions['resY'] : 0,  
+            $resW, 
+            $resH, 
+            $pOpacity
+        );
+        
+        return $result;
+    }
+    
+    /**
      * @param integer $pFiltertype
      * @param integer $pArg1
      * @param integer $pArg2
@@ -440,7 +562,7 @@ class Image
             $pArg4
         );
     }
-    
+
     /**
      * @param string $pImagePath
      * @param integer $pQuality
