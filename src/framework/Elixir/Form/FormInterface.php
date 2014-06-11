@@ -24,6 +24,21 @@ interface FormInterface extends DispatcherInterface
     /**
      * @var string
      */
+    const PUT = 'put';
+    
+    /**
+     * @var string
+     */
+    const DELETE = 'delete';
+    
+    /**
+     * @var string
+     */
+    const METHOD_FIELD = '_method';
+    
+    /**
+     * @var string
+     */
     const ENCTYPE_URLENCODED = 'application/x-www-form-urlencoded';
     
     /**
@@ -73,7 +88,7 @@ interface FormInterface extends DispatcherInterface
     public function setName($pValue);
     
     /**
-     * @see FormInterface::getName()
+     * @return string
      */
     public function getName();
     

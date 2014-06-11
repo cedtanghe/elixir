@@ -214,9 +214,9 @@ class File
         
         if(file_exists($pOldName))
         {
-            if(is_dir($pOldName) && !file_exists($pNewName))
+            if(!file_exists($pNewName))
             {
-                @mkdir($pNewName, 0777, true);
+                @mkdir(dirname($pNewName), 0777, true);
             }
 
             return rename($pOldName, $pNewName);

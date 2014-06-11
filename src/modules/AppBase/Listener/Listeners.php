@@ -152,7 +152,7 @@ class Listeners implements SubscriberInterface
             $e->getRequest()->getAttributes()->sets(
                 [
                     'exception' => $e->getException(),
-                    'last_request' => clone $e->getRequest()
+                    'lastRequest' => clone $e->getRequest()
                 ]
             );
             

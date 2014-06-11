@@ -193,8 +193,8 @@ class Request
      * @return mixed
      */
     public function get($pKey, $pDefault = null, $pSanitize = null, $pProviders = [self::QUERY,
-                                                                                        self::POST,
-                                                                                        self::ATTRIBUTES])
+                                                                                   self::POST,
+                                                                                   self::ATTRIBUTES])
     {
         foreach($pProviders as $provider)
         {
@@ -206,7 +206,7 @@ class Request
             }
         }
         
-        return $pDefault;
+        return is_callable($pDefault) ? $pDefault() : $pDefault;
     }
     
     /**
@@ -498,7 +498,16 @@ class Request
      */
     public function getRequestMethod($pDefault = null)
     {
-        return strtoupper($this->getServer('REQUEST_METHOD', $pDefault));
+        return strtoupper(
+            $this->get(
+                '_method', 
+                function() use($pDefault)
+                {
+                    return $this->getServer('REQUEST_METHOD', $pDefault);
+                }, 
+                null, [self::QUERY, self::POST]
+            )
+        );
     }
 
     /**

@@ -6,6 +6,7 @@ use Elixir\Dispatcher\Dispatcher;
 use Elixir\Dispatcher\Event;
 use Elixir\Form\Extension\ExtensionInterface;
 use Elixir\Form\Field\FieldInterface;
+use Elixir\Form\Field\Input;
 use Elixir\Form\FormEvent;
 use Elixir\Form\FormInterface;
 
@@ -19,6 +20,11 @@ class Form extends Dispatcher implements FormInterface
      * @var boolean
      */
     protected $_submit = false;
+    
+    /**
+     * @var boolean
+     */
+    protected $_submited = false;
     
     /**
      * @var FormInterface
@@ -106,6 +112,38 @@ class Form extends Dispatcher implements FormInterface
     public function getName()
     {
         return $this->getAttribute('name');
+    }
+    
+    /**
+     * @param string $pValue
+     */
+    public function setMethod($pValue)
+    {
+        $this->setAttribute('method', $pValue);
+    }
+    
+    /**
+     * @return string
+     */
+    public function getMethod()
+    {
+        return $this->getAttribute('method');
+    }
+    
+    /**
+     * @param string $pValue
+     */
+    public function setAction($pValue)
+    {
+        $this->setAttribute('action', $pValue);
+    }
+    
+    /**
+     * @return string
+     */
+    public function getAction()
+    {
+        return $this->getAttribute('action');
     }
     
     /**
@@ -201,7 +239,29 @@ class Form extends Dispatcher implements FormInterface
      */
     public function setAttribute($pKey, $pValue)
     {
-        if($pKey == 'name')
+        if($pKey == 'method')
+        {
+            if(in_array(strtolower($pValue), [self::PUT, self::DELETE]))
+            {
+                $input = $this->get(self::METHOD_FIELD, true, null);
+                
+                if(null === $input)
+                {
+                    $input = new Input(self::METHOD_FIELD);
+                    $input->setType(Input::HIDDEN);
+                    
+                    $this->add($input);
+                }
+                
+                $input->setValue($pValue);
+                $pValue = self::POST;
+            }
+            else
+            {
+                $this->remove(self::METHOD_FIELD);
+            }
+        }
+        else if($pKey == 'name')
         {
             $name = $this->getAttribute('name');
             
@@ -222,6 +282,11 @@ class Form extends Dispatcher implements FormInterface
      */
     public function removeAttribute($pKey)
     {
+        if($pKey == 'method')
+        {
+            $this->remove(self::METHOD_FIELD);
+        }
+        
         unset($this->_attributes[$pKey]);
     }
     
@@ -249,6 +314,11 @@ class Form extends Dispatcher implements FormInterface
         if(null !== $name && !$this->hasAttribute('name'))
         {
             $this->setName($name);
+        }
+        
+        if(!$this->hasAttribute('method'))
+        {
+            $this->remove(self::METHOD_FIELD);
         }
     }
     
@@ -489,6 +559,8 @@ class Form extends Dispatcher implements FormInterface
      */
     public function bind(array $pData, $pFiltered = true)
     {
+        $this->_submited = false;
+        
         $e = new FormEvent(FormEvent::PRE_BIND, $pData);
         $this->dispatch($e);
         
@@ -534,6 +606,14 @@ class Form extends Dispatcher implements FormInterface
     }
     
     /**
+     * @return boolean
+     */
+    public function isSubmited()
+    {
+        return $this->_submited;
+    }
+
+    /**
      * @see FormInterface::submit()
      */
     public function submit(array $pData = null)
@@ -573,8 +653,43 @@ class Form extends Dispatcher implements FormInterface
             }
         }
         
+        $this->_submited = true;
+        
         $this->dispatch(new FormEvent(FormEvent::SUBMIT));
         return !$this->hasError();
+    }
+    
+    /**
+     * @param array $pMembers
+     * @param array $pOmitMembers
+     * @param array $pData
+     * @return boolean
+     */
+    public function required(array $pMembers = [], array $pOmitMembers = [], array $pData = null)
+    {
+        if(null !== $pData || !$this->_submited)
+        {
+            $this->submit($pData);
+        }
+        
+        foreach($this->_keys as $key)
+        {
+            if(in_array($key, $pOmitMembers))
+            {
+                continue;
+            }
+            else if(count($pMembers) > 0 && !in_array($key, $pMembers))
+            {
+                continue;
+            }
+            
+            if(isset($this->_errors[$key]))
+            {
+                return false;
+            }
+        }
+        
+        return true;
     }
     
     /**
@@ -648,6 +763,7 @@ class Form extends Dispatcher implements FormInterface
     public function reset(array $pOmit = [])
     {
         $this->_errors = [];
+        $this->_submited = false;
         
         foreach(array_merge($this->_fields, $this->_forms) as $item)
         {

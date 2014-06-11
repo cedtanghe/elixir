@@ -18,7 +18,14 @@ abstract class SQLAbstract
     {
         if($pParameter instanceof Expr)
         {
-            return $pParameter->getExpr();
+            $pParameter = $pParameter->getExpr();
+            
+            if(null === $pParameter)
+            {
+                return 'NULL';
+            }
+            
+            return $pParameter;
         }
         
         if(is_array($pParameter))

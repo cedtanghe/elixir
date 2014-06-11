@@ -55,6 +55,33 @@
                 </td>
             </tr>
                     <tr>
+                <td>PUT</td>
+                <td class="last">
+                    <p><em>
+</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+                    <tr>
+                <td>DELETE</td>
+                <td class="last">
+                    <p><em>
+</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+                    <tr>
+                <td>METHOD_FIELD</td>
+                <td class="last">
+                    <p><em>
+</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+                    <tr>
                 <td>ENCTYPE_URLENCODED</td>
                 <td class="last">
                     <p><em>
@@ -236,7 +263,7 @@
             </tr>
                     <tr>
                 <td class="type">
-                    
+                    string
                 </td>
                 <td class="last">
                     <a href="#method_getName">getName</a>()
@@ -663,7 +690,7 @@
     </div>
 
                 <h3 id="method_setParent">
-        <div class="location">at line 63</div>
+        <div class="location">at line 78</div>
         <code>            public            
     <strong>setParent</strong>(<a href="../../Elixir/Form/FormInterface.html"><abbr title="Elixir\Form\FormInterface">FormInterface</abbr></a> $pValue)</code>
     </h3>
@@ -691,7 +718,7 @@
     </div>
 
                 <h3 id="method_getParent">
-        <div class="location">at line 68</div>
+        <div class="location">at line 83</div>
         <code>            public            <a href="../../Elixir/Form/FormInterface.html"><abbr title="Elixir\Form\FormInterface">FormInterface</abbr></a>
     <strong>getParent</strong>()</code>
     </h3>
@@ -718,7 +745,7 @@
     </div>
 
                 <h3 id="method_setName">
-        <div class="location">at line 73</div>
+        <div class="location">at line 88</div>
         <code>            public            
     <strong>setName</strong>(string $pValue)</code>
     </h3>
@@ -746,8 +773,8 @@
     </div>
 
                 <h3 id="method_getName">
-        <div class="location">at line 78</div>
-        <code>            public            
+        <div class="location">at line 93</div>
+        <code>            public            string
     <strong>getName</strong>()</code>
     </h3>
     <div class="details">
@@ -757,22 +784,23 @@
 </p>
         <div class="tags">
             
-            
-            
-                            <h4>See also</h4>
+                            <h4>Return Value</h4>
 
                     <table>
-                    <tr>
-                <td>FormInterface::getName()</td>
-                <td></td>
-            </tr>
-            </table>
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
 
+            
+            
                     </div>
     </div>
 
                 <h3 id="method_setErrorMessage">
-        <div class="location">at line 83</div>
+        <div class="location">at line 98</div>
         <code>            public            
     <strong>setErrorMessage</strong>(string $pValue)</code>
     </h3>
@@ -800,7 +828,7 @@
     </div>
 
                 <h3 id="method_getErrorMessage">
-        <div class="location">at line 88</div>
+        <div class="location">at line 103</div>
         <code>            public            string
     <strong>getErrorMessage</strong>()</code>
     </h3>
@@ -827,7 +855,7 @@
     </div>
 
                 <h3 id="method_getAttributes">
-        <div class="location">at line 93</div>
+        <div class="location">at line 108</div>
         <code>            public            array
     <strong>getAttributes</strong>()</code>
     </h3>
@@ -854,7 +882,7 @@
     </div>
 
                 <h3 id="method_setAttributes">
-        <div class="location">at line 98</div>
+        <div class="location">at line 113</div>
         <code>            public            
     <strong>setAttributes</strong>(array $pData)</code>
     </h3>
@@ -882,7 +910,7 @@
     </div>
 
                 <h3 id="method_getOptions">
-        <div class="location">at line 103</div>
+        <div class="location">at line 118</div>
         <code>            public            array
     <strong>getOptions</strong>()</code>
     </h3>
@@ -909,7 +937,7 @@
     </div>
 
                 <h3 id="method_setOptions">
-        <div class="location">at line 108</div>
+        <div class="location">at line 123</div>
         <code>            public            
     <strong>setOptions</strong>(array $pData)</code>
     </h3>
@@ -937,7 +965,7 @@
     </div>
 
                 <h3 id="method_add">
-        <div class="location">at line 113</div>
+        <div class="location">at line 128</div>
         <code>            public            
     <strong>add</strong>(<a href="../../Elixir/Form/Field/FieldInterface.html"><abbr title="Elixir\Form\Field\FieldInterface">FieldInterface</abbr></a>|<a href="../../Elixir/Form/FormInterface.html"><abbr title="Elixir\Form\FormInterface">FormInterface</abbr></a> $pItem)</code>
     </h3>
@@ -965,7 +993,7 @@
     </div>
 
                 <h3 id="method_remove">
-        <div class="location">at line 119</div>
+        <div class="location">at line 134</div>
         <code>            public            
     <strong>remove</strong>(string $pName, boolean $pUseSubForms = false)</code>
     </h3>
@@ -999,7 +1027,7 @@
     </div>
 
                 <h3 id="method_gets">
-        <div class="location">at line 125</div>
+        <div class="location">at line 140</div>
         <code>            public            array
     <strong>gets</strong>(integer $pMask = self::ALL_FIELDS)</code>
     </h3>
@@ -1037,7 +1065,7 @@
     </div>
 
                 <h3 id="method_sets">
-        <div class="location">at line 130</div>
+        <div class="location">at line 145</div>
         <code>            public            
     <strong>sets</strong>(array $pData)</code>
     </h3>
@@ -1065,7 +1093,7 @@
     </div>
 
                 <h3 id="method_prepare">
-        <div class="location">at line 133</div>
+        <div class="location">at line 148</div>
         <code>            public            
     <strong>prepare</strong>()</code>
     </h3>
@@ -1082,7 +1110,7 @@
     </div>
 
                 <h3 id="method_isPrepared">
-        <div class="location">at line 138</div>
+        <div class="location">at line 153</div>
         <code>            public            boolean
     <strong>isPrepared</strong>()</code>
     </h3>
@@ -1109,7 +1137,7 @@
     </div>
 
                 <h3 id="method_isEmpty">
-        <div class="location">at line 143</div>
+        <div class="location">at line 158</div>
         <code>            public            boolean
     <strong>isEmpty</strong>()</code>
     </h3>
@@ -1136,7 +1164,7 @@
     </div>
 
                 <h3 id="method_bind">
-        <div class="location">at line 149</div>
+        <div class="location">at line 164</div>
         <code>            public            
     <strong>bind</strong>(array $pData, boolean $pFiltered = true)</code>
     </h3>
@@ -1170,7 +1198,7 @@
     </div>
 
                 <h3 id="method_submit">
-        <div class="location">at line 155</div>
+        <div class="location">at line 170</div>
         <code>            public            boolean
     <strong>submit</strong>(array $pData = null)</code>
     </h3>
@@ -1208,7 +1236,7 @@
     </div>
 
                 <h3 id="method_values">
-        <div class="location">at line 161</div>
+        <div class="location">at line 176</div>
         <code>            public            array
     <strong>values</strong>(boolean $pFiltered = true)</code>
     </h3>
@@ -1246,7 +1274,7 @@
     </div>
 
                 <h3 id="method_hasError">
-        <div class="location">at line 166</div>
+        <div class="location">at line 181</div>
         <code>            public            boolean
     <strong>hasError</strong>()</code>
     </h3>
@@ -1273,7 +1301,7 @@
     </div>
 
                 <h3 id="method_errors">
-        <div class="location">at line 171</div>
+        <div class="location">at line 186</div>
         <code>            public            string|array
     <strong>errors</strong>()</code>
     </h3>
@@ -1300,7 +1328,7 @@
     </div>
 
                 <h3 id="method_reset">
-        <div class="location">at line 176</div>
+        <div class="location">at line 191</div>
         <code>            public            
     <strong>reset</strong>(array $pOmit = array())</code>
     </h3>

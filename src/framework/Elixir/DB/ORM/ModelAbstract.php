@@ -665,7 +665,7 @@ abstract class ModelAbstract extends Dispatcher implements RepositoryInterface
         
         $this->dispatch(new ModelEvent(ModelEvent::PRE_INSERT));
         
-        $DB = $this->getConnection('DB.write');
+        $DB = $this->getConnection('db.write');
         $data = [];
 
         foreach($this->_fillable as $column)
@@ -727,7 +727,7 @@ abstract class ModelAbstract extends Dispatcher implements RepositoryInterface
             return true;
         }
         
-        $DB = $this->getConnection('DB.write');
+        $DB = $this->getConnection('db.write');
         $data = [];
 
         foreach(array_keys($this->getModified()) as $column)
@@ -795,7 +795,7 @@ abstract class ModelAbstract extends Dispatcher implements RepositoryInterface
         
         $this->dispatch(new ModelEvent(ModelEvent::PRE_DELETE));
         
-        $DB = $this->getConnection('DB.write');
+        $DB = $this->getConnection('db.write');
         $SQL = $DB->createDelete('`' . $this->_table . '`');
 
         if(null === $this->_primaryKey)
@@ -825,9 +825,9 @@ abstract class ModelAbstract extends Dispatcher implements RepositoryInterface
     /**
      * @see RepositoryInterface::select()
      */
-    public function select()
+    public function select($pAlias = null)
     {
-        return new Select($this);
+        return new Select($this, $pAlias);
     }
     
     /**
@@ -880,7 +880,7 @@ abstract class ModelAbstract extends Dispatcher implements RepositoryInterface
                 }
             }
             
-            if(static::isCollection($value))
+            if(static::isCollection($value) || is_array($value))
             {
                 $value = $this->hydrateCollection($value, $pOptions);
             }
@@ -921,7 +921,7 @@ abstract class ModelAbstract extends Dispatcher implements RepositoryInterface
     }
     
     /**
-     * @param array $pData
+     * @param array|Collection $pData
      * @param array $pOptions
      * @return array
      */
@@ -939,9 +939,9 @@ abstract class ModelAbstract extends Dispatcher implements RepositoryInterface
         {
             foreach($pData as $key => &$value)
             {
-                if(static::isCollection($value))
+                if(static::isCollection($value) || is_array($value))
                 {
-                    $value = $this->hydrateCollection($value->getArrayCopy(), $pOptions);
+                    $value = $this->hydrateCollection($value, $pOptions);
                 }
             }
         }

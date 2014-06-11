@@ -13,6 +13,11 @@ use Elixir\MVC\Exception\NotFoundException;
 abstract class RESTFulControllerAbstract extends ControllerAbstract
 {
     /**
+     * @var boolean
+     */
+    protected $_strict = false;
+    
+    /**
      * @see ControllerAbstract::__call()
      * @throws NotFoundException
      */
@@ -23,22 +28,23 @@ abstract class RESTFulControllerAbstract extends ControllerAbstract
             $requestMethod = $this->_request->getRequestMethod('GET');
             $prefixs = [$requestMethod];
             
-            switch($requestMethod)
+            if(!$this->_strict)
             {
-                case 'HEAD':
-                    $prefixs[] = 'GET';
-                break;
-                case 'PUT':
-                case 'PATCH':
-                case 'DELETE':
-                case 'TRACE':
-                case 'CONNECT':
-                case 'OPTIONS':
-                    $prefixs[] = 'POST';
-                break;
+                switch($requestMethod)
+                {
+                    case 'HEAD':
+                        $prefixs[] = 'GET';
+                    break;
+                    case 'PUT':
+                    case 'PATCH':
+                    case 'DELETE':
+                    case 'TRACE':
+                    case 'CONNECT':
+                    case 'OPTIONS':
+                        $prefixs[] = 'POST';
+                    break;
+                }
             }
-            
-            $prefixs = array_unique($prefixs);
             
             foreach($prefixs as $prefix)
             {

@@ -45,9 +45,10 @@ interface RepositoryInterface extends EntityInterface
     public function getPrimaryValue();
     
     /**
+     * @param string $pAlias
      * @return Select
      */
-    public function select();
+    public function select($pAlias = null);
     
     /**
      * @return boolean

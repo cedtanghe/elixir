@@ -504,7 +504,14 @@ abstract class FieldAbstract extends Dispatcher implements FieldInterface
      */
     public function isEmpty()
     {
-        $value = trim($this->getValue(false));
+        $value = $this->getValue(false);
+        
+        if(is_array($value))
+        {
+            return count($value) == 0;
+        }
+        
+        $value = trim($value);
         return empty($value);
     }
     

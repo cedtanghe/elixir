@@ -161,7 +161,14 @@ class PDO extends DBAbstract
     {
         if($pValue instanceof Expr)
         {
-            return $pValue->getExpr();
+            $pValue = $pValue->getExpr();
+            
+            if(null === $pValue)
+            {
+                return 'NULL';
+            }
+            
+            return $pValue;
         }
         
         if(null === $pValue || 'NULL' === $pValue)

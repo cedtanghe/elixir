@@ -36,12 +36,21 @@ class Select
     
     /**
      * @param RepositoryInterface $pRepository
+     * @param string $pAlias
      */
-    public function __construct(RepositoryInterface $pRepository) 
+    public function __construct(RepositoryInterface $pRepository, $pAlias = null) 
     {
         $this->_repository = $pRepository;
-        $this->_DB = $this->_repository->getConnection('DB.read');
-        $this->_SQL = $this->_DB->createSelect('`' . $this->_repository->getTable() . '`');
+        $this->_DB = $this->_repository->getConnection('db.read');
+        
+        $table = '`' . $this->_repository->getTable() . '`';
+        
+        if(null !== $pAlias)
+        {
+            $table .= ' AS `' . $pAlias . '`';
+        }
+        
+        $this->_SQL = $this->_DB->createSelect($table);
     }
     
     /**

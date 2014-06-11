@@ -144,6 +144,22 @@ class Input extends FieldAbstract
     }
     
     /**
+     * @param string $pValue
+     */
+    public function setType($pValue)
+    {
+        $this->setAttribute('type', $pValue);
+    }
+    
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->getAttribute('type');
+    }
+
+    /**
      * @see FieldAbstract::setAttribute()
      * @throws \LogicException
      */
@@ -153,8 +169,12 @@ class Input extends FieldAbstract
         {
             if(array_key_exists($pValue, static::$_excludes))
             {
-                throw new \LogicException(sprintf('The class "%s" class is better predisposed to such use.',
-                                                  static::$_excludes[$pValue]));
+                throw new \LogicException(
+                    sprintf(
+                        'The class "%s" class is better predisposed to such use.',
+                        static::$_excludes[$pValue]
+                    )
+                );
             }
         }
         

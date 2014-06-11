@@ -33,4 +33,20 @@ class Button extends FieldAbstract
         parent::__construct($pName);
         $this->_helper = 'button';
     }
+    
+    /**
+     * @param string $pValue
+     */
+    public function setType($pValue)
+    {
+        $this->setAttribute('type', $pValue);
+    }
+    
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->getAttribute('type');
+    }
 }
