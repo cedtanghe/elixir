@@ -29,7 +29,15 @@ class RBAC implements RBACInterface
      */
     public function hasRole($pRole)
     {
-        return isset($this->_roles[(string)$pRole]);
+        foreach($this->_roles as $role)
+        {
+            if($role->getName() == $pRole)
+            {
+                return true;
+            }
+        }
+        
+        return false;
     }
     
     /**
@@ -44,7 +52,7 @@ class RBAC implements RBACInterface
         }
         
         $pRole->setRBAC($this);
-        $this->_roles[$pRole->getName()] = $pRole;
+        $this->_roles[] = $pRole;
         
         foreach((array)$pParents as $parent)
         {
@@ -64,7 +72,17 @@ class RBAC implements RBACInterface
      */
     public function removeRole($pRole)
     {
-        unset($this->_roles[$pRole]);
+        $i = count($this->_roles);
+        
+        while($i--)
+        {
+            $role = $this->_roles[i];
+            
+            if($role->getName() == $pRole)
+            {
+                array_splice($this->_roles, $i, 1);
+            }
+        }
         
         foreach($this->_roles as $role)
         {
@@ -79,9 +97,12 @@ class RBAC implements RBACInterface
      */
     public function getRole($pRole, $pDefault = null)
     {
-        if($this->hasRole($pRole))
+        foreach($this->_roles as $role)
         {
-            return $this->_roles[$pRole];
+            if($role->getName() == $pRole)
+            {
+                return $role;
+            }
         }
         
         return is_callable($pDefault) ? $pDefault() : $pDefault;

@@ -46,7 +46,7 @@ class MaskBuilder
      */
     public function has($pCode)
     {
-        return ($this->_code & $pCode) == $pCode;
+        return ($this->_code & $pCode) != 0;
     }
     
     /**
