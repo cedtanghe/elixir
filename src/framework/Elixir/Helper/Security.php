@@ -3,7 +3,9 @@
 namespace Elixir\Helper;
 
 use Elixir\Helper\HelperInterface;
+use Elixir\HTTP\Request;
 use Elixir\Security\Authentification\Manager;
+use Elixir\Security\Firewall\FirewallInterface;
 use Elixir\Security\RBAC\RBACInterface;
 
 /**
@@ -12,6 +14,11 @@ use Elixir\Security\RBAC\RBACInterface;
 
 class Security implements HelperInterface
 {
+    /**
+     * @var string
+     */
+    const TEMPORARY_PARAMETERS = '_security';
+    
     /**
      * @var Manager 
      */
@@ -23,27 +30,45 @@ class Security implements HelperInterface
     protected $_RBAC;
     
     /**
-     * @param Manager $pManager
+     * @var FirewallInterface 
      */
-    public function __construct(Manager $pManager)
+    protected $_firewall;
+    
+    /**
+     * @var Request 
+     */
+    protected $_request;
+    
+    /**
+     * @param Manager $pValue
+     */
+    public function setManager(Manager $pValue)
     {
-        $this->_manager = $pManager;
+        $this->_manager = $pValue;
     }
     
     /**
-     * @param string $pName
+     * @return Manager
      */
-    public function configureByIdentity($pName)
+    public function getManager()
     {
-        if($this->hasIdentity($pName))
-        {
-            $identity = $this->_manager->get($pName);
-            
-            if($identity->getSecurityContext() instanceof RBACInterface)
-            {
-                $this->setRBAC($identity->getSecurityContext());
-            }
-        }
+        return $this->_manager;
+    }
+    
+    /**
+     * @param Request $pValue
+     */
+    public function setRequest(Request $pValue)
+    {
+        $this->_request = $pValue;
+    }
+    
+    /**
+     * @return Request
+     */
+    public function getRequest()
+    {
+        return $this->_request;
     }
 
     /**
@@ -63,11 +88,33 @@ class Security implements HelperInterface
     }
     
     /**
+     * @param FirewallInterface $pValue
+     */
+    public function setFirewall(FirewallInterface $pValue)
+    {
+        $this->_firewall = clone $pValue;
+        $this->_firewall->removeListeners();
+    }
+    
+    /**
+     * @return FirewallInterface
+     */
+    public function getFirewall()
+    {
+        return $this->_firewall;
+    }
+    
+    /**
      * @param string $pIdentity
      * @return boolean
      */
     public function hasIdentity($pIdentity)
     {
+        if(null === $this->_manager)
+        {
+            throw new \RuntimeException('Authentification manager component is not available.');
+        }
+        
         return $this->_manager->has($pIdentity);
     }
     
@@ -93,7 +140,7 @@ class Security implements HelperInterface
      * @return boolean
      * @throws \RuntimeException
      */
-    public function isGranted($pRole, $pPermission = null, $pAssert = null)
+    public function isGrantedRole($pRole, $pPermission = null, $pAssert = null)
     {
         if(null === $this->_RBAC)
         {
@@ -101,6 +148,39 @@ class Security implements HelperInterface
         }
         
         return $this->_RBAC->isGranted($pRole, $pPermission, $pAssert);
+    }
+    
+    /**
+     * @param string $pResource
+     * @param array $pTempParameters
+     * @return boolean
+     * @throws \RuntimeException
+     */
+    public function isGrantedResource($pResource, array $pTempParameters = [])
+    {
+        if(null === $this->_firewall)
+        {
+            throw new \RuntimeException('Firewall component is not available.');
+        }
+        
+        if(count($pTempParameters) > 0)
+        {
+            if(null === $this->_request)
+            {
+                throw new \RuntimeException('Request component is not available.');
+            }
+            
+            $this->_request->getAttributes()->set(self::TEMPORARY_PARAMETERS, $pTempParameters);
+        }
+        
+        $result = $this->_firewall->analyze($pResource);
+        
+        if(null !== $this->_request)
+        {
+            $this->_request->getAttributes()->remove(self::TEMPORARY_PARAMETERS);
+        }
+        
+        return $result;
     }
 
     /**

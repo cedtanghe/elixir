@@ -135,6 +135,14 @@ class Dispatcher implements DispatcherInterface
     }
     
     /**
+     * @see DispatcherInterface::getListeners()
+     */
+    public function getListeners()
+    {
+        return $this->_listeners;
+    }
+    
+    /**
      * @see DispatcherInterface::removeListeners()
      */
     public function removeListeners()

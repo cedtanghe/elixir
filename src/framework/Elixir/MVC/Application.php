@@ -35,6 +35,11 @@ class Application extends Dispatcher implements ApplicationInterface
     const DEFAULT_CACHE_KEY = '___CACHE_APPLICATION___';
     
     /**
+     * @var string|numeric|null
+     */
+    protected $_cacheVersion = null;
+    
+    /**
      * @var ContainerInterface
      */
     protected $_container;
@@ -89,22 +94,42 @@ class Application extends Dispatcher implements ApplicationInterface
     }
     
     /**
+     * @param string|numeric|null $pValue
+     */
+    public function setCacheVersion($pValue)
+    {
+        $this->_cacheVersion = $pValue;
+    }
+    
+    /**
+     * @return string|numeric|null
+     */
+    public function getCacheVersion()
+    {
+        return $this->_cacheVersion;
+    }
+
+    /**
      * @param CacheInterface|SessionInterface $pCache
      * @param string $pKey
      */
     public function loadFromCache($pCache, $pKey = self::DEFAULT_CACHE_KEY)
     {
         $data = $pCache->get($pKey, []) ?: [];
+        $version = Arr::get('cache-version', $data);
         
-        $this->_classesLoaded = array_merge(
-            Arr::get('classes', $data, []),
-            $this->_classesLoaded
-        );
-        
-        $this->_filesLoaded = array_merge(
-            Arr::get('files', $data, []),
-            $this->_filesLoaded
-        );
+        if(null === $this->_cacheVersion || null === $version || $version === $this->_cacheVersion)
+        {
+            $this->_classesLoaded = array_merge(
+                Arr::get('classes', $data, []),
+                $this->_classesLoaded
+            );
+
+            $this->_filesLoaded = array_merge(
+                Arr::get('files', $data, []),
+                $this->_filesLoaded
+            );
+        }
     }
     
     /**
@@ -117,7 +142,8 @@ class Application extends Dispatcher implements ApplicationInterface
             $pKey, 
             [
                 'classes' => $this->_classesLoaded,
-                'files' => $this->_filesLoaded
+                'files' => $this->_filesLoaded,
+                'cache-version' => $this->_cacheVersion
             ]
         );
     }

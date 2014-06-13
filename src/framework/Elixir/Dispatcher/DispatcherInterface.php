@@ -23,6 +23,11 @@ interface DispatcherInterface
     public function addListener($pType, $pCallback, $pPriority = 0);
     
     /**
+     * @return array
+     */
+    public function getListeners();
+
+    /**
      * @param string $pType
      * @param callable $pCallback 
      */

@@ -23,6 +23,11 @@ class Loader implements LoaderInterface
     const DEFAULT_CACHE_KEY = '___CACHE_LOADER___';
     
     /**
+     * @var string|numeric|null
+     */
+    protected $_cacheVersion = null;
+    
+    /**
      * @var array 
      */
     protected $_classes = [];
@@ -73,17 +78,37 @@ class Loader implements LoaderInterface
     }
     
     /**
+     * @param string|numeric|null $pValue
+     */
+    public function setCacheVersion($pValue)
+    {
+        $this->_cacheVersion = $pValue;
+    }
+    
+    /**
+     * @return string|numeric|null
+     */
+    public function getCacheVersion()
+    {
+        return $this->_cacheVersion;
+    }
+    
+    /**
      * @param CacheInterface|SessionInterface $pCache
      * @param string $pKey
      */
     public function loadFromCache($pCache, $pKey = self::DEFAULT_CACHE_KEY)
     {
         $data = $pCache->get($pKey, []) ?: [];
+        $version = Arr::get('cache-version', $data);
         
-        $this->_classes = array_merge(
-            $data,
-            $this->_classes
-        );
+        if(null === $this->_cacheVersion || null === $version || $version === $this->_cacheVersion)
+        {
+            $this->_classes = array_merge(
+                Arr::get('classes', $data, []),
+                $this->_classes
+            );
+        }
     }
     
     /**
@@ -92,7 +117,13 @@ class Loader implements LoaderInterface
      */
     public function exportToCache($pCache, $pKey = self::DEFAULT_CACHE_KEY)
     {
-        $pCache->set($pKey, $this->_classes);
+        $pCache->set(
+            $pKey, 
+            [
+                'classes' => $this->_classes,
+                'cache-version' => $this->_cacheVersion
+            ]
+        );
     }
     
     /**

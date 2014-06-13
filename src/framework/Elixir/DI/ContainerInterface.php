@@ -8,7 +8,7 @@ use Elixir\DI\ProviderInterface;
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
-interface ContainerInterface 
+interface ContainerInterface
 {
     /**
      * @var string

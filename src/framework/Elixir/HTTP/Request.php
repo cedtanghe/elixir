@@ -186,7 +186,7 @@ class Request
     }
     
     /**
-     * @param string $pKey
+     * @param mixed $pKey
      * @param mixed $pDefault
      * @param mixed $pSanitize
      * @param array $pProviders
@@ -210,13 +210,13 @@ class Request
     }
     
     /**
-     * @param string $pKey
+     * @param mixed $pKey
      * @param array $pProviders
      * @return boolean
      */
     public function has($pKey, $pProviders = [self::QUERY,
-                                                   self::POST,
-                                                   self::ATTRIBUTES])
+                                              self::POST,
+                                              self::ATTRIBUTES])
     {
         foreach($pProviders as $provider)
         {
@@ -232,7 +232,7 @@ class Request
     }
     
     /**
-     * @param string $pKey
+     * @param mixed $pKey
      * @param mixed $pDefault
      * @param mixed $pSanitize
      * @return ParametersInterface|mixed
@@ -248,7 +248,7 @@ class Request
     }
     
     /**
-     * @param string $pKey
+     * @param mixed $pKey
      * @param mixed $pDefault
      * @param mixed $pSanitize
      * @return ParametersInterface|mixed
@@ -264,7 +264,7 @@ class Request
     }
     
     /**
-     * @param string $pKey
+     * @param mixed $pKey
      * @param mixed $pDefault
      * @param mixed $pSanitize
      * @return ParametersInterface|mixed
@@ -280,7 +280,7 @@ class Request
     }
     
     /**
-     * @param string $pKey
+     * @param mixed $pKey
      * @param mixed $pDefault
      * @param mixed $pSanitize
      * @return ParametersInterface|mixed
@@ -296,7 +296,7 @@ class Request
     }
     
     /**
-     * @param string $pKey
+     * @param mixed $pKey
      * @param mixed $pDefault
      * @param mixed $pSanitize
      * @return ParametersInterface|mixed
@@ -312,7 +312,7 @@ class Request
     }
     
     /**
-     * @param string $pKey
+     * @param mixed $pKey
      * @param mixed $pDefault
      * @param mixed $pSanitize
      * @return ParametersInterface|mixed
@@ -328,7 +328,7 @@ class Request
     }
     
     /**
-     * @param string $pKey
+     * @param mixed $pKey
      * @param mixed $pDefault
      * @param mixed $pSanitize
      * @return ParametersInterface|mixed
@@ -344,7 +344,7 @@ class Request
     }
     
     /**
-     * @param string $pKey
+     * @param mixed $pKey
      * @param mixed $pDefault
      * @param mixed $pSanitize
      * @return ParametersInterface|mixed
