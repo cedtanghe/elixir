@@ -146,9 +146,6 @@ class Listeners implements SubscriberInterface
             $application = $this->_container->get('application');
             $module = $e->getRequest()->getModule();
             
-            $r = clone $e->getRequest();
-            
-            
             $e->getRequest()->getAttributes()->sets(
                 [
                     'exception' => $e->getException(),

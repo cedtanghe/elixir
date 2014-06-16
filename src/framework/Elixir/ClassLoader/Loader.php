@@ -10,6 +10,7 @@ if(!class_exists('\Elixir\ClassLoader\LoaderInterface'))
 use Elixir\Cache\CacheInterface;
 use Elixir\ClassLoader\LoaderInterface;
 use Elixir\HTTP\Session\SessionInterface;
+use Elixir\Util\Arr;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
