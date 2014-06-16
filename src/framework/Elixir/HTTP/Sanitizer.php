@@ -50,42 +50,54 @@ class Sanitizer
      */
     public function filter($pContent, $pFilter = 'FILTER_SANITIZE_FULL_SPECIAL_CHARS', array $pOptions = [])
     {
-        if($pFilter === 'FILTER_SANITIZE_FULL_SPECIAL_CHARS')
+        if(is_array($pContent) || is_object($pContent) || $pContent instanceof \Traversable)
         {
-            if(defined('FILTER_SANITIZE_FULL_SPECIAL_CHARS'))
+            foreach($pContent as &$value)
             {
-                return filter_var($pContent, FILTER_SANITIZE_FULL_SPECIAL_CHARS, $pOptions);
+                $value = $this->filter($value, $pFilter, $pOptions);
             }
-            else
+            
+            return $pContent;
+        }
+        else
+        {
+            if($pFilter === 'FILTER_SANITIZE_FULL_SPECIAL_CHARS')
             {
-                $flags = ENT_QUOTES;
-
-                if(defined('ENT_SUBSTITUTE'))
+                if(defined('FILTER_SANITIZE_FULL_SPECIAL_CHARS'))
                 {
-                    $flags |= ENT_SUBSTITUTE;
+                    return filter_var($pContent, FILTER_SANITIZE_FULL_SPECIAL_CHARS, $pOptions);
                 }
+                else
+                {
+                    $flags = ENT_QUOTES;
 
-                return htmlspecialchars($pContent, $flags, 'UTF-8');
+                    if(defined('ENT_SUBSTITUTE'))
+                    {
+                        $flags |= ENT_SUBSTITUTE;
+                    }
+
+                    return htmlspecialchars($pContent, $flags, 'UTF-8');
+                }
             }
+
+            if(is_int($pFilter))
+            {
+                 return filter_var($pContent, $pFilter, $pOptions);
+            }
+
+            if(null === $this->_container)
+            {
+                throw new \RuntimeException('Container is not defined.');
+            }
+
+            $filter = $this->_container->get($pFilter);
+
+            if(!$filter instanceof FilterInterface)
+            {
+                throw new \InvalidArgumentException(sprintf('Filter "%s" does not exist.', $pFilter));
+            }
+
+            return $filter->filter($pContent, $pOptions);
         }
-        
-        if(is_int($pFilter))
-        {
-             return filter_var($pContent, $pFilter, $pOptions);
-        }
-        
-        if(null === $this->_container)
-        {
-            throw new \RuntimeException('Container is not defined.');
-        }
-        
-        $filter = $this->_container->get($pFilter);
-        
-        if(!$filter instanceof FilterInterface)
-        {
-            throw new \InvalidArgumentException(sprintf('Filter "%s" does not exist.', $pFilter));
-        }
-        
-        return $filter->filter($pContent, $pOptions);
     }
 }

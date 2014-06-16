@@ -357,18 +357,6 @@ class Parameters implements ParametersInterface, \ArrayAccess, \Iterator, \Count
             throw new \RuntimeException('The Sanitizer class is not defined.');
         }
         
-        if(is_array($pContent) || is_object($pContent) || $pContent instanceof \Traversable)
-        {
-            foreach($pContent as &$value)
-            {
-                $value = $this->filter($value, $pSanitize, $pOptions);
-            }
-        }
-        else
-        {
-            $pContent = $this->_sanitizer->filter($pContent, $pSanitize, $pOptions);
-        }
-        
-        return $pContent;
+        return $this->_sanitizer->filter($pContent, $pSanitize, $pOptions);
     }
 }

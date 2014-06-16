@@ -110,44 +110,62 @@ class Security implements HelperInterface
      */
     public function hasIdentity($pIdentity)
     {
-        if(null === $this->_manager)
+        if(null !== $this->_manager)
         {
-            throw new \RuntimeException('Authentification manager component is not available.');
+            return $this->_manager->has($pIdentity);
         }
         
-        return $this->_manager->has($pIdentity);
+        return false;
     }
     
     /**
      * @param string $pRole
+     * @param string $pIdentity
      * @return boolean
-     * @throws \RuntimeException
      */
-    public function hasRole($pRole)
+    public function hasRole($pRole, $pIdentity = null)
     {
-        if(null === $this->_RBAC)
+        if(null !== $pIdentity && null !== $this->_manager)
         {
-            throw new \RuntimeException('RBAC component is not available.');
+            $identity = $this->_manager->get($pIdentity);
+
+            if(null !== $identity && $identity->getSecurityContext() instanceof RBACInterface)
+            {
+                return $identity->getSecurityContext()->hasRole($pRole);
+            }
+        }
+        else if(null !== $this->_RBAC)
+        {
+            return $this->_RBAC->hasRole($pRole);
         }
         
-        return $this->_RBAC->hasRole($pRole);
+        return false;
     }
 
     /**
-     * @param string|integer $pRole
-     * @param string|integer $pPermission
+     * @param string $pRole
+     * @param string $pPermission
      * @param callable $pAssert
+     * @param string $pIdentity
      * @return boolean
-     * @throws \RuntimeException
      */
-    public function isGrantedRole($pRole, $pPermission = null, $pAssert = null)
+    public function isGrantedRole($pRole, $pPermission = null, $pAssert = null, $pIdentity = null)
     {
-        if(null === $this->_RBAC)
+        if(null !== $pIdentity && null !== $this->_manager)
         {
-            throw new \RuntimeException('RBAC component is not available.');
+            $identity = $this->_manager->get($pIdentity);
+
+            if(null !== $identity && $identity->getSecurityContext() instanceof RBACInterface)
+            {
+                return $identity->getSecurityContext()->isGranted($pRole, $pPermission, $pAssert);
+            }
+        }
+        else if(null !== $this->_RBAC)
+        {
+            return $this->_RBAC->isGranted($pRole, $pPermission, $pAssert);
         }
         
-        return $this->_RBAC->isGranted($pRole, $pPermission, $pAssert);
+        return false;
     }
     
     /**
@@ -158,37 +176,37 @@ class Security implements HelperInterface
      */
     public function isGrantedResource($pResource, array $pTempParameters = [])
     {
-        if(null === $this->_firewall)
+        if(null !== $this->_firewall)
         {
-            throw new \RuntimeException('Firewall component is not available.');
-        }
-        
-        if(count($pTempParameters) > 0)
-        {
-            if(null === $this->_request)
+            if(count($pTempParameters) > 0)
             {
-                throw new \RuntimeException('Request component is not available.');
+                if(null === $this->_request)
+                {
+                    throw new \RuntimeException('Request component is not available.');
+                }
+
+                $this->_request->getAttributes()->set(self::TEMPORARY_PARAMETERS, $pTempParameters);
             }
-            
-            $this->_request->getAttributes()->set(self::TEMPORARY_PARAMETERS, $pTempParameters);
+
+            $result = $this->_firewall->analyze($pResource);
+
+            if(null !== $this->_request)
+            {
+                $this->_request->getAttributes()->remove(self::TEMPORARY_PARAMETERS);
+            }
+
+            return $result;
         }
         
-        $result = $this->_firewall->analyze($pResource);
-        
-        if(null !== $this->_request)
-        {
-            $this->_request->getAttributes()->remove(self::TEMPORARY_PARAMETERS);
-        }
-        
-        return $result;
+        return false;
     }
 
     /**
-     * @see Security::hasIdentity()
+     * @see Security::isGrantedResource()
      */
     public function direct()
     {
         $args = func_get_args();
-        return call_user_func_array([$this, 'hasIdentity'], $args);
+        return call_user_func_array([$this, 'isGrantedResource'], $args);
     }
 }
