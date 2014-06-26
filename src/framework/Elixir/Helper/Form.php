@@ -188,7 +188,7 @@ class Form
     {
         $render = null;
         
-        if(method_exists($this, $pField->getHelper()))
+        if(is_string($pField->getHelper()) && method_exists($this, $pField->getHelper()))
         {
             $render = 'inner';
         }
