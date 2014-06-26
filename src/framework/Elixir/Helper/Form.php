@@ -188,13 +188,13 @@ class Form
     {
         $render = null;
         
-        if(is_callable($pField->getHelper()))
-        {
-            $render = 'outer';
-        }
-        else if(method_exists($this, $pField->getHelper()))
+        if(method_exists($this, $pField->getHelper()))
         {
             $render = 'inner';
+        }
+        else if(is_callable($pField->getHelper()))
+        {
+            $render = 'outer';
         }
         
         if(null === $render)
@@ -783,24 +783,17 @@ class Form
         
         foreach($pAttributes as $key => $value)
         {
-            if(!empty($value))
+            if(is_array($value))
             {
-                if(is_array($value))
-                {
-                    continue;
-                }
-                
-                if(null !== $this->_escaper && $this->_protection)
-                {
-                    $value = $this->_escaper->escapeHTMLAttr($value);
-                }
-                
-                $result .= sprintf(' %s="%s"', $key, $value);
+                continue;
             }
-            else
+
+            if(null !== $this->_escaper && $this->_protection)
             {
-                $result .= sprintf(' %s', $key);
+                $value = $this->_escaper->escapeHTMLAttr($value);
             }
+
+            $result .= sprintf(' %s="%s"', $key, $value);
         }
         
         return $result;

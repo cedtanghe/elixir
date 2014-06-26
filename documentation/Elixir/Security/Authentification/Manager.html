@@ -232,7 +232,7 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method_set">set</a>($pKey, <a href="../../../Elixir/Security/Authentification/Identity.html"><abbr title="Elixir\Security\Authentification\Identity">Identity</abbr></a> $pIdentity)
+                    <a href="#method_set">set</a>(string $pKey, <a href="../../../Elixir/Security/Authentification/Identity.html"><abbr title="Elixir\Security\Authentification\Identity">Identity</abbr></a> $pIdentity)
                     <p>
 </p>
                 </td>
@@ -310,7 +310,7 @@
         <h2>Details</h2>
 
                         <h3 id="method___construct">
-        <div class="location">at line 36</div>
+        <div class="location">at line 31</div>
         <code>            public            
     <strong>__construct</strong>(<a href="../../../Elixir/Security/Authentification/Storage/StorageInterface.html"><abbr title="Elixir\Security\Authentification\Storage\StorageInterface">StorageInterface</abbr></a> $pStorage)</code>
     </h3>
@@ -465,16 +465,6 @@
 
             
             
-                            <h4>Exceptions</h4>
-
-                    <table>
-                    <tr>
-                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
-                <td>
-</td>
-            </tr>
-            </table>
-
             
                             <h4>See also</h4>
 
@@ -705,7 +695,7 @@
     </div>
 
                 <h3 id="method_getStorage">
-        <div class="location">at line 44</div>
+        <div class="location">at line 39</div>
         <code>            public            <a href="../../../Elixir/Security/Authentification/Storage/StorageInterface.html"><abbr title="Elixir\Security\Authentification\Storage\StorageInterface">StorageInterface</abbr></a>
     <strong>getStorage</strong>()</code>
     </h3>
@@ -732,7 +722,7 @@
     </div>
 
                 <h3 id="method_authenticate">
-        <div class="location">at line 54</div>
+        <div class="location">at line 49</div>
         <code>            public            <a href="../../../Elixir/Security/Authentification/Result.html"><abbr title="Elixir\Security\Authentification\Result">Result</abbr></a>
     <strong>authenticate</strong>(<a href="../../../Elixir/Security/Authentification/AuthInterface.html"><abbr title="Elixir\Security\Authentification\AuthInterface">AuthInterface</abbr></a> $pAuth, string $pIdentity = self::DEFAULT_IDENTITY)</code>
     </h3>
@@ -776,7 +766,7 @@
     </div>
 
                 <h3 id="method_isEmpty">
-        <div class="location">at line 69</div>
+        <div class="location">at line 64</div>
         <code>            public            boolean
     <strong>isEmpty</strong>()</code>
     </h3>
@@ -803,7 +793,7 @@
     </div>
 
                 <h3 id="method_has">
-        <div class="location">at line 78</div>
+        <div class="location">at line 73</div>
         <code>            public            boolean
     <strong>has</strong>(string $pKey)</code>
     </h3>
@@ -841,7 +831,7 @@
     </div>
 
                 <h3 id="method_get">
-        <div class="location">at line 88</div>
+        <div class="location">at line 83</div>
         <code>            public            mixed
     <strong>get</strong>(string $pKey = self::DEFAULT_IDENTITY, mixed $pDefault = null)</code>
     </h3>
@@ -885,9 +875,9 @@
     </div>
 
                 <h3 id="method_set">
-        <div class="location">at line 112</div>
+        <div class="location">at line 92</div>
         <code>            public            
-    <strong>set</strong>($pKey, <a href="../../../Elixir/Security/Authentification/Identity.html"><abbr title="Elixir\Security\Authentification\Identity">Identity</abbr></a> $pIdentity)</code>
+    <strong>set</strong>(string $pKey, <a href="../../../Elixir/Security/Authentification/Identity.html"><abbr title="Elixir\Security\Authentification\Identity">Identity</abbr></a> $pIdentity)</code>
     </h3>
     <div class="details">
         <p>
@@ -899,7 +889,7 @@
 
                     <table>
                     <tr>
-                <td></td>
+                <td>string</td>
                 <td>$pKey</td>
                 <td>
 </td>
@@ -919,7 +909,7 @@
     </div>
 
                 <h3 id="method_onIdentityRemoved">
-        <div class="location">at line 126</div>
+        <div class="location">at line 102</div>
         <code>            public            
     <strong>onIdentityRemoved</strong>(<a href="../../../Elixir/Security/Authentification/AuthEvent.html"><abbr title="Elixir\Security\Authentification\AuthEvent">AuthEvent</abbr></a> $e)</code>
     </h3>
@@ -947,7 +937,7 @@
     </div>
 
                 <h3 id="method_onIdentityUpdated">
-        <div class="location">at line 135</div>
+        <div class="location">at line 111</div>
         <code>            public            
     <strong>onIdentityUpdated</strong>(<a href="../../../Elixir/Security/Authentification/AuthEvent.html"><abbr title="Elixir\Security\Authentification\AuthEvent">AuthEvent</abbr></a> $e)</code>
     </h3>
@@ -975,7 +965,7 @@
     </div>
 
                 <h3 id="method_remove">
-        <div class="location">at line 143</div>
+        <div class="location">at line 119</div>
         <code>            public            
     <strong>remove</strong>(string $pKey)</code>
     </h3>
@@ -1003,7 +993,7 @@
     </div>
 
                 <h3 id="method_gets">
-        <div class="location">at line 159</div>
+        <div class="location">at line 127</div>
         <code>            public            array
     <strong>gets</strong>()</code>
     </h3>
@@ -1030,7 +1020,7 @@
     </div>
 
                 <h3 id="method_sets">
-        <div class="location">at line 167</div>
+        <div class="location">at line 135</div>
         <code>            public            
     <strong>sets</strong>(array $pData)</code>
     </h3>
@@ -1058,7 +1048,7 @@
     </div>
 
                 <h3 id="method_update">
-        <div class="location">at line 189</div>
+        <div class="location">at line 149</div>
         <code>            public            
     <strong>update</strong>(<a href="../../../Elixir/Security/Authentification/Identity.html"><abbr title="Elixir\Security\Authentification\Identity">Identity</abbr></a> $pIdentity)</code>
     </h3>

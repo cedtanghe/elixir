@@ -27,7 +27,7 @@ class Date extends FilterAbstract
         {
             $input = isset($pOptions['input']) ? $pOptions['input'] : 'd/m/Y';
             $date = \DateTime::createFromFormat($input, $pContent);
-           
+            
             if(!$date)
             {
                 return '';

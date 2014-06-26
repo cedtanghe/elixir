@@ -22,9 +22,10 @@ class Boolean extends ValidatorAbstract
     public function isValid($pContent, array $pOptions = []) 
     {
         $pOptions = array_merge($this->_options, $pOptions);
+        
         $this->_errors = [];
         
-        if(false === filter_var($pContent, FILTER_VALIDATE_BOOLEAN))
+        if(null === filter_var($pContent, FILTER_VALIDATE_BOOLEAN, ['flags' => FILTER_NULL_ON_FAILURE]))
         {
             $this->_errors[] = $this->getErrorMessageTemplate(self::ERROR);
         }

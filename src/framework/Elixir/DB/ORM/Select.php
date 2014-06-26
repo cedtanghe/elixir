@@ -6,6 +6,7 @@ use Elixir\DB\DBInterface;
 use Elixir\DB\ORM\RepositoryInterface;
 use Elixir\DB\Result\SetAbstract;
 use Elixir\DB\SQL\Select as SQLSelect;
+use Elixir\DB\SQL\SQLAbstract;
 use Elixir\Util\Str;
 
 /**
@@ -54,18 +55,14 @@ class Select
     }
     
     /**
-     * @see SQLSelect::table()
+     * @param array $pSQLs
+     * @param string $pType
      * @return Select
-     * @throws \LogicException
      */
-    public function table($pTable)
+    public function combine(array $pSQLs, $pType = SQLAbstract::COMBINE_UNION)
     {
-        if(false === strpos($pTable, $this->_repository->getTable()))
-        {
-            throw new \LogicException(sprintf('The table is closely related to repository "%s".', get_class($this)));
-        }
-        
-        $this->_SQL->table($pTable);
+        $this->_SQL->table(null);
+        $this->_SQL->combine($pSQLs, $pType);
         return $this;
     }
     

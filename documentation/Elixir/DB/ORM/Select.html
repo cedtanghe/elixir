@@ -53,7 +53,7 @@
                     <a href="../../../Elixir/DB/ORM/Select.html"><abbr title="Elixir\DB\ORM\Select">Select</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_table">table</a>($pTable)
+                    <a href="#method_combine">combine</a>(array $pSQLs, string $pType = SQLAbstract::COMBINE_UNION)
                     <p>
 </p>
                 </td>
@@ -208,7 +208,7 @@
         <h2>Details</h2>
 
                         <h3 id="method___construct">
-        <div class="location">at line 41</div>
+        <div class="location">at line 42</div>
         <code>            public            
     <strong>__construct</strong>(<a href="../../../Elixir/DB/ORM/RepositoryInterface.html"><abbr title="Elixir\DB\ORM\RepositoryInterface">RepositoryInterface</abbr></a> $pRepository, string $pAlias = null)</code>
     </h3>
@@ -241,10 +241,10 @@
                     </div>
     </div>
 
-                <h3 id="method_table">
-        <div class="location">at line 61</div>
+                <h3 id="method_combine">
+        <div class="location">at line 62</div>
         <code>            public            <a href="../../../Elixir/DB/ORM/Select.html"><abbr title="Elixir\DB\ORM\Select">Select</abbr></a>
-    <strong>table</strong>($pTable)</code>
+    <strong>combine</strong>(array $pSQLs, string $pType = SQLAbstract::COMBINE_UNION)</code>
     </h3>
     <div class="details">
         <p>
@@ -256,8 +256,14 @@
 
                     <table>
                     <tr>
-                <td></td>
-                <td>$pTable</td>
+                <td>array</td>
+                <td>$pSQLs</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$pType</td>
                 <td>
 </td>
             </tr>
@@ -275,31 +281,12 @@
     </table>
 
             
-                            <h4>Exceptions</h4>
-
-                    <table>
-                    <tr>
-                <td><a href="http://php.net/LogicException"><abbr title="LogicException">LogicException</abbr></a></td>
-                <td>
-</td>
-            </tr>
-            </table>
-
             
-                            <h4>See also</h4>
-
-                    <table>
-                    <tr>
-                <td>SQLSelect::table()</td>
-                <td></td>
-            </tr>
-            </table>
-
                     </div>
     </div>
 
                 <h3 id="method_current">
-        <div class="location">at line 75</div>
+        <div class="location">at line 72</div>
         <code>            public            <a href="../../../Elixir/DB/ORM/Select.html"><abbr title="Elixir\DB\ORM\Select">Select</abbr></a>
     <strong>current</strong>()</code>
     </h3>
@@ -326,7 +313,7 @@
     </div>
 
                 <h3 id="method_primary">
-        <div class="location">at line 95</div>
+        <div class="location">at line 92</div>
         <code>            public            <a href="../../../Elixir/DB/ORM/Select.html"><abbr title="Elixir\DB\ORM\Select">Select</abbr></a>
     <strong>primary</strong>(integer|array $pId)</code>
     </h3>
@@ -374,7 +361,7 @@
     </div>
 
                 <h3 id="method_scope">
-        <div class="location">at line 110</div>
+        <div class="location">at line 107</div>
         <code>            public            <a href="../../../Elixir/DB/ORM/Select.html"><abbr title="Elixir\DB\ORM\Select">Select</abbr></a>
     <strong>scope</strong>(string $pMethod)</code>
     </h3>
@@ -412,7 +399,7 @@
     </div>
 
                 <h3 id="method_load">
-        <div class="location">at line 132</div>
+        <div class="location">at line 129</div>
         <code>            public            <a href="../../../Elixir/DB/ORM/Select.html"><abbr title="Elixir\DB\ORM\Select">Select</abbr></a>
     <strong>load</strong>(string $pMethod)</code>
     </h3>
@@ -450,7 +437,7 @@
     </div>
 
                 <h3 id="method_reset">
-        <div class="location">at line 152</div>
+        <div class="location">at line 149</div>
         <code>            public            <a href="../../../Elixir/DB/ORM/Select.html"><abbr title="Elixir\DB\ORM\Select">Select</abbr></a>
     <strong>reset</strong>($pPart)</code>
     </h3>
@@ -497,7 +484,7 @@
     </div>
 
                 <h3 id="method_has">
-        <div class="location">at line 168</div>
+        <div class="location">at line 165</div>
         <code>            public            boolean
     <strong>has</strong>()</code>
     </h3>
@@ -524,7 +511,7 @@
     </div>
 
                 <h3 id="method_count">
-        <div class="location">at line 176</div>
+        <div class="location">at line 173</div>
         <code>            public            integer
     <strong>count</strong>()</code>
     </h3>
@@ -551,7 +538,7 @@
     </div>
 
                 <h3 id="method_raw">
-        <div class="location">at line 198</div>
+        <div class="location">at line 195</div>
         <code>            public            array
     <strong>raw</strong>()</code>
     </h3>
@@ -578,7 +565,7 @@
     </div>
 
                 <h3 id="method_one">
-        <div class="location">at line 207</div>
+        <div class="location">at line 204</div>
         <code>            public            <a href="../../../Elixir/DB/ORM/RepositoryInterface.html"><abbr title="Elixir\DB\ORM\RepositoryInterface">RepositoryInterface</abbr></a>|null
     <strong>one</strong>()</code>
     </h3>
@@ -605,7 +592,7 @@
     </div>
 
                 <h3 id="method_all">
-        <div class="location">at line 218</div>
+        <div class="location">at line 215</div>
         <code>            public            array
     <strong>all</strong>()</code>
     </h3>
@@ -632,7 +619,7 @@
     </div>
 
                 <h3 id="method___call">
-        <div class="location">at line 262</div>
+        <div class="location">at line 259</div>
         <code>            public            <a href="../../../Elixir/DB/ORM/Select.html"><abbr title="Elixir\DB\ORM\Select">Select</abbr></a>
     <strong>__call</strong>(string $pMethod, array $pArguments)</code>
     </h3>
@@ -676,7 +663,7 @@
     </div>
 
                 <h3 id="method___toString">
-        <div class="location">at line 277</div>
+        <div class="location">at line 274</div>
         <code>            public            string
     <strong>__toString</strong>()</code>
     </h3>
@@ -703,7 +690,7 @@
     </div>
 
                 <h3 id="method___clone">
-        <div class="location">at line 282</div>
+        <div class="location">at line 279</div>
         <code>            public            
     <strong>__clone</strong>()</code>
     </h3>
