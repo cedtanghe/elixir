@@ -52,7 +52,6 @@ class AssetsExport extends Command
                 InputArgument::OPTIONAL,
                 'Name of the module containing the assets for export'
              )
-                
             ->addOption(
                 'shared',
                 null,

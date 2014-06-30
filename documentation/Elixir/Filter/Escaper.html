@@ -227,7 +227,7 @@
                     string
                 </td>
                 <td class="last">
-                    <a href="#method_escapeHTML">escapeHTML</a>(string $pValue, integer $pFlags = null)
+                    <a href="#method_escapeHTML">escapeHTML</a>(string $pValue, integer $pFlags = null, boolean $pDoubleEncode = true)
                     <p>
 </p>
                 </td>
@@ -457,7 +457,7 @@
     </div>
 
                 <h3 id="method_escapeJS">
-        <div class="location">at line 134</div>
+        <div class="location">at line 137</div>
         <code>            public            string
     <strong>escapeJS</strong>(string $pValue)</code>
     </h3>
@@ -495,7 +495,7 @@
     </div>
 
                 <h3 id="method_escapeCSS">
-        <div class="location">at line 179</div>
+        <div class="location">at line 182</div>
         <code>            public            string
     <strong>escapeCSS</strong>(string $pValue)</code>
     </h3>
@@ -533,7 +533,7 @@
     </div>
 
                 <h3 id="method_escapeURL">
-        <div class="location">at line 228</div>
+        <div class="location">at line 231</div>
         <code>            public            string
     <strong>escapeURL</strong>(string $pValue)</code>
     </h3>
@@ -571,7 +571,7 @@
     </div>
 
                 <h3 id="method_unescapeURL">
-        <div class="location">at line 237</div>
+        <div class="location">at line 240</div>
         <code>            public            string
     <strong>unescapeURL</strong>(string $pValue)</code>
     </h3>
@@ -609,9 +609,9 @@
     </div>
 
                 <h3 id="method_escapeHTML">
-        <div class="location">at line 247</div>
+        <div class="location">at line 251</div>
         <code>            public            string
-    <strong>escapeHTML</strong>(string $pValue, integer $pFlags = null)</code>
+    <strong>escapeHTML</strong>(string $pValue, integer $pFlags = null, boolean $pDoubleEncode = true)</code>
     </h3>
     <div class="details">
         <p>
@@ -634,6 +634,12 @@
                 <td>
 </td>
             </tr>
+                    <tr>
+                <td>boolean</td>
+                <td>$pDoubleEncode</td>
+                <td>
+</td>
+            </tr>
             </table>
 
             
@@ -653,7 +659,7 @@
     </div>
 
                 <h3 id="method_unescapeHTML">
-        <div class="location">at line 267</div>
+        <div class="location">at line 271</div>
         <code>            public            string
     <strong>unescapeHTML</strong>(string $pValue, integer $pFlags = null)</code>
     </h3>
@@ -697,7 +703,7 @@
     </div>
 
                 <h3 id="method_escapeHTMLAttr">
-        <div class="location">at line 281</div>
+        <div class="location">at line 285</div>
         <code>            public            string
     <strong>escapeHTMLAttr</strong>(string $pValue)</code>
     </h3>
@@ -735,7 +741,7 @@
     </div>
 
                 <h3 id="method_escapeXML">
-        <div class="location">at line 348</div>
+        <div class="location">at line 352</div>
         <code>            public            
     <strong>escapeXML</strong>($pValue)</code>
     </h3>
@@ -772,7 +778,7 @@
     </div>
 
                 <h3 id="method_escapeXMLAttr">
-        <div class="location">at line 356</div>
+        <div class="location">at line 360</div>
         <code>            public            
     <strong>escapeXMLAttr</strong>($pValue)</code>
     </h3>
@@ -809,7 +815,7 @@
     </div>
 
                 <h3 id="method_convertEncoding">
-        <div class="location">at line 368</div>
+        <div class="location">at line 372</div>
         <code>            public            string
     <strong>convertEncoding</strong>(string $pValue, string $pTo, string $pFrom)</code>
     </h3>

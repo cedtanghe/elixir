@@ -807,7 +807,7 @@ class Form
     {
         if(null !== $this->_escaper && $this->_protection)
         {
-            return $this->_escaper->escapeHTML($pStr);
+            return $this->_escaper->escapeHTML($pStr, null, false);
         }
         
         return $pStr;

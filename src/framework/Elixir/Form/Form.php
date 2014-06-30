@@ -633,7 +633,7 @@ class Form extends Dispatcher implements FormInterface
         if(!empty($pData))
         {
             $this->_submit = true;
-            $this->bind($pData, false);
+            $this->bind($pData, true);
             $this->_submit = false;
         }
         

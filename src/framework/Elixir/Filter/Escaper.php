@@ -96,7 +96,10 @@ class Escaper extends FilterAbstract
         switch($strategy)
         {
             case self::HTML:
-                return $this->escapeHTML($pContent, isset($pOptions['flags']) ? $pOptions['flags'] : null);
+                return $this->escapeHTML(
+                    $pContent, 
+                    isset($pOptions['flags']) ? $pOptions['flags'] : null,
+                    isset($pOptions['double-encode']) ? $pOptions['double-encode'] : null);
             break;
             case self::UNESCAPE_HTML:
                 return $this->unescapeHTML($pContent, isset($pOptions['flags']) ? $pOptions['flags'] : null);
@@ -242,9 +245,10 @@ class Escaper extends FilterAbstract
     /**
      * @param string $pValue
      * @param integer $pFlags
+     * @param boolean $pDoubleEncode
      * @return string 
      */
-    public function escapeHTML($pValue, $pFlags = null)
+    public function escapeHTML($pValue, $pFlags = null, $pDoubleEncode = true)
     {
         if(null === $pFlags)
         {
@@ -256,7 +260,7 @@ class Escaper extends FilterAbstract
             }
         }
         
-        return htmlspecialchars($pValue, $pFlags, $this->_encoding);
+        return htmlspecialchars($pValue, $pFlags, $this->_encoding, $pDoubleEncode);
     }
     
     /**
