@@ -2,6 +2,8 @@
 
 namespace Elixir\DB\SQL;
 
+use Elixir\DB\SQL\Constraint;
+
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
