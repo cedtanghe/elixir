@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="robots" content="index, follow, all" />
-        <title>Elixir\DB\SQL\Delete | Elixir</title>
+        <title>Elixir\DB\SQL\Create | Elixir</title>
                     <script type="text/javascript" src="../../../js/jquery-1.3.2.min.js"></script>
 			
 			<link rel="stylesheet" type="text/css" href="../../../stylesheet.css">
@@ -26,10 +26,10 @@
         <div id="title">Elixir</div>
 
             <div class="type">Class</div>
-    <h1><a href="../../../Elixir/DB/SQL.html">Elixir\DB\SQL</a>\Delete</h1>
+    <h1><a href="../../../Elixir/DB/SQL.html">Elixir\DB\SQL</a>\Create</h1>
     </div>
         <div class="content">
-                <p>class    <strong>Delete</strong>        extends <a href="../../../Elixir/DB/SQL/SQLAbstract.html"><abbr title="Elixir\DB\SQL\SQLAbstract">SQLAbstract</abbr></a></p>
+                <p>class    <strong>Create</strong>        extends <a href="../../../Elixir/DB/SQL/SQLAbstract.html"><abbr title="Elixir\DB\SQL\SQLAbstract">SQLAbstract</abbr></a></p>
 
     
             <h2>Constants</h2>
@@ -399,7 +399,7 @@
             </tr>
                     <tr>
                 <td class="type">
-                    <a href="../../../Elixir/DB/SQL/Delete.html"><abbr title="Elixir\DB\SQL\Delete">Delete</abbr></a>
+                    <a href="../../../Elixir/DB/SQL/Create.html"><abbr title="Elixir\DB\SQL\Create">Create</abbr></a>
                 </td>
                 <td class="last">
                     <a href="#method_table">table</a>(string $pTable)
@@ -410,10 +410,10 @@
             </tr>
                     <tr>
                 <td class="type">
-                    <a href="../../../Elixir/DB/SQL/Delete.html"><abbr title="Elixir\DB\SQL\Delete">Delete</abbr></a>
+                    <a href="../../../Elixir/DB/SQL/Create.html"><abbr title="Elixir\DB\SQL\Create">Create</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_where">where</a>(mixed $pCond, mixed $pValue = null)
+                    <a href="#method_temporary">temporary</a>(boolean $pValue)
                     <p>
 </p>
                 </td>
@@ -421,10 +421,10 @@
             </tr>
                     <tr>
                 <td class="type">
-                    <a href="../../../Elixir/DB/SQL/Delete.html"><abbr title="Elixir\DB\SQL\Delete">Delete</abbr></a>
+                    <a href="../../../Elixir/DB/SQL/Create.html"><abbr title="Elixir\DB\SQL\Create">Create</abbr></a>
                 </td>
                 <td class="last">
-                    <a href="#method_orWhere">orWhere</a>(mixed $pCond, mixed $pValue = null)
+                    <a href="#method_column">column</a>(<a href="../../../Elixir/DB/SQL/Column.html"><abbr title="Elixir\DB\SQL\Column">Column</abbr></a> $pColumn)
                     <p>
 </p>
                 </td>
@@ -432,7 +432,29 @@
             </tr>
                     <tr>
                 <td class="type">
-                    <a href="../../../Elixir/DB/SQL/Delete.html"><abbr title="Elixir\DB\SQL\Delete">Delete</abbr></a>
+                    <a href="../../../Elixir/DB/SQL/Create.html"><abbr title="Elixir\DB\SQL\Create">Create</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_constraint">constraint</a>(<a href="../../../Elixir/DB/SQL/Constraint.html"><abbr title="Elixir\DB\SQL\Constraint">Constraint</abbr></a> $pConstraint)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Elixir/DB/SQL/Create.html"><abbr title="Elixir\DB\SQL\Create">Create</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_option">option</a>($pOption, $pValue = null)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    <a href="../../../Elixir/DB/SQL/Create.html"><abbr title="Elixir\DB\SQL\Create">Create</abbr></a>
                 </td>
                 <td class="last">
                     <a href="#method_reset">reset</a>(string $pPart)
@@ -729,7 +751,7 @@
     </div>
 
                 <h3 id="method_render">
-        <div class="location">at line 100</div>
+        <div class="location">at line 134</div>
         <code>            public            string
     <strong>render</strong>()</code>
     </h3>
@@ -791,7 +813,7 @@
     </div>
 
                 <h3 id="method___construct">
-        <div class="location">at line 27</div>
+        <div class="location">at line 39</div>
         <code>            public            
     <strong>__construct</strong>(string $pTable = null)</code>
     </h3>
@@ -819,8 +841,8 @@
     </div>
 
                 <h3 id="method_table">
-        <div class="location">at line 39</div>
-        <code>            public            <a href="../../../Elixir/DB/SQL/Delete.html"><abbr title="Elixir\DB\SQL\Delete">Delete</abbr></a>
+        <div class="location">at line 51</div>
+        <code>            public            <a href="../../../Elixir/DB/SQL/Create.html"><abbr title="Elixir\DB\SQL\Create">Create</abbr></a>
     <strong>table</strong>(string $pTable)</code>
     </h3>
     <div class="details">
@@ -845,7 +867,7 @@
 
                     <table>
         <tr>
-            <td><a href="../../../Elixir/DB/SQL/Delete.html"><abbr title="Elixir\DB\SQL\Delete">Delete</abbr></a></td>
+            <td><a href="../../../Elixir/DB/SQL/Create.html"><abbr title="Elixir\DB\SQL\Create">Create</abbr></a></td>
             <td>
 </td>
         </tr>
@@ -856,10 +878,10 @@
                     </div>
     </div>
 
-                <h3 id="method_where">
-        <div class="location">at line 50</div>
-        <code>            public            <a href="../../../Elixir/DB/SQL/Delete.html"><abbr title="Elixir\DB\SQL\Delete">Delete</abbr></a>
-    <strong>where</strong>(mixed $pCond, mixed $pValue = null)</code>
+                <h3 id="method_temporary">
+        <div class="location">at line 61</div>
+        <code>            public            <a href="../../../Elixir/DB/SQL/Create.html"><abbr title="Elixir\DB\SQL\Create">Create</abbr></a>
+    <strong>temporary</strong>(boolean $pValue)</code>
     </h3>
     <div class="details">
         <p>
@@ -871,13 +893,7 @@
 
                     <table>
                     <tr>
-                <td>mixed</td>
-                <td>$pCond</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
-                <td>mixed</td>
+                <td>boolean</td>
                 <td>$pValue</td>
                 <td>
 </td>
@@ -889,7 +905,7 @@
 
                     <table>
         <tr>
-            <td><a href="../../../Elixir/DB/SQL/Delete.html"><abbr title="Elixir\DB\SQL\Delete">Delete</abbr></a></td>
+            <td><a href="../../../Elixir/DB/SQL/Create.html"><abbr title="Elixir\DB\SQL\Create">Create</abbr></a></td>
             <td>
 </td>
         </tr>
@@ -900,10 +916,10 @@
                     </div>
     </div>
 
-                <h3 id="method_orWhere">
-        <div class="location">at line 68</div>
-        <code>            public            <a href="../../../Elixir/DB/SQL/Delete.html"><abbr title="Elixir\DB\SQL\Delete">Delete</abbr></a>
-    <strong>orWhere</strong>(mixed $pCond, mixed $pValue = null)</code>
+                <h3 id="method_column">
+        <div class="location">at line 71</div>
+        <code>            public            <a href="../../../Elixir/DB/SQL/Create.html"><abbr title="Elixir\DB\SQL\Create">Create</abbr></a>
+    <strong>column</strong>(<a href="../../../Elixir/DB/SQL/Column.html"><abbr title="Elixir\DB\SQL\Column">Column</abbr></a> $pColumn)</code>
     </h3>
     <div class="details">
         <p>
@@ -915,13 +931,89 @@
 
                     <table>
                     <tr>
-                <td>mixed</td>
-                <td>$pCond</td>
+                <td><a href="../../../Elixir/DB/SQL/Column.html"><abbr title="Elixir\DB\SQL\Column">Column</abbr></a></td>
+                <td>$pColumn</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Elixir/DB/SQL/Create.html"><abbr title="Elixir\DB\SQL\Create">Create</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_constraint">
+        <div class="location">at line 81</div>
+        <code>            public            <a href="../../../Elixir/DB/SQL/Create.html"><abbr title="Elixir\DB\SQL\Create">Create</abbr></a>
+    <strong>constraint</strong>(<a href="../../../Elixir/DB/SQL/Constraint.html"><abbr title="Elixir\DB\SQL\Constraint">Constraint</abbr></a> $pConstraint)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../../Elixir/DB/SQL/Constraint.html"><abbr title="Elixir\DB\SQL\Constraint">Constraint</abbr></a></td>
+                <td>$pConstraint</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../../Elixir/DB/SQL/Create.html"><abbr title="Elixir\DB\SQL\Create">Create</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+                <h3 id="method_option">
+        <div class="location">at line 103</div>
+        <code>            public            <a href="../../../Elixir/DB/SQL/Create.html"><abbr title="Elixir\DB\SQL\Create">Create</abbr></a>
+    <strong>option</strong>($pOption, $pValue = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td></td>
+                <td>$pOption</td>
                 <td>
 </td>
             </tr>
                     <tr>
-                <td>mixed</td>
+                <td></td>
                 <td>$pValue</td>
                 <td>
 </td>
@@ -933,7 +1025,7 @@
 
                     <table>
         <tr>
-            <td><a href="../../../Elixir/DB/SQL/Delete.html"><abbr title="Elixir\DB\SQL\Delete">Delete</abbr></a></td>
+            <td><a href="../../../Elixir/DB/SQL/Create.html"><abbr title="Elixir\DB\SQL\Create">Create</abbr></a></td>
             <td>
 </td>
         </tr>
@@ -945,8 +1037,8 @@
     </div>
 
                 <h3 id="method_reset">
-        <div class="location">at line 85</div>
-        <code>            public            <a href="../../../Elixir/DB/SQL/Delete.html"><abbr title="Elixir\DB\SQL\Delete">Delete</abbr></a>
+        <div class="location">at line 113</div>
+        <code>            public            <a href="../../../Elixir/DB/SQL/Create.html"><abbr title="Elixir\DB\SQL\Create">Create</abbr></a>
     <strong>reset</strong>(string $pPart)</code>
     </h3>
     <div class="details">
@@ -971,7 +1063,7 @@
 
                     <table>
         <tr>
-            <td><a href="../../../Elixir/DB/SQL/Delete.html"><abbr title="Elixir\DB\SQL\Delete">Delete</abbr></a></td>
+            <td><a href="../../../Elixir/DB/SQL/Create.html"><abbr title="Elixir\DB\SQL\Create">Create</abbr></a></td>
             <td>
 </td>
         </tr>

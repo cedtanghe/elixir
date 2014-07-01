@@ -3,10 +3,16 @@
 namespace ElixirTest\DB;
 
 use Elixir\ClassLoader\Loader;
-use Elixir\DB\SQL\Select;
-use Elixir\DB\SQL\MySQL\Update;
+use Elixir\DB\SQL\Column;
+use Elixir\DB\SQL\ColumnFactory;
+use Elixir\DB\SQL\Constraint;
+use Elixir\DB\SQL\ConstraintFactory;
+use Elixir\DB\SQL\MySQL\Create;
 use Elixir\DB\SQL\MySQL\Delete;
+use Elixir\DB\SQL\MySQL\Drop;
 use Elixir\DB\SQL\MySQL\Insert;
+use Elixir\DB\SQL\MySQL\Update;
+use Elixir\DB\SQL\Select;
 
 class Test extends \PHPUnit_Framework_TestCase
 {
@@ -72,5 +78,44 @@ class Test extends \PHPUnit_Framework_TestCase
         
         $compare = "DELETE FROM `test` WHERE (`test`.`type` = 'my type')";
         $this->assertEquals($compare, preg_replace('/[\n\t\r]/', '', $delete->render()));
+    }
+    
+    public function testCreate()
+    {
+        $create = new Create('test');
+        $create->ifNotExists(true);
+        $create->column(ColumnFactory::int('id', 11, Column::UNSIGNED, true));
+        $create->column(
+            ColumnFactory::varchar('name', 255, true)
+            ->setCollating('utf8_general_ci')
+            ->setComment('Comment')
+        );
+        
+        $create->constraint(ConstraintFactory::unique('name'));
+        $create->constraint(
+            ConstraintFactory::foreign(
+                'id',
+                'test2', 
+                'id', 
+                null, 
+                Constraint::REFERENCE_CASCADE,
+                Constraint::REFERENCE_CASCADE
+            )
+        );
+        
+        $create->option(Create::OPTION_ENGINE, Create::ENGINE_INNODB);
+        $create->option(Create::OPTION_CHARSET, Create::CHARSET_UTF8);
+        
+        $compare = "CREATE TABLE IF NOT EXISTS test (id INT(11) UNSIGNED NOT NULL AUTO_INCREMENT , name VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT 'Comment', UNIQUE KEY name(name), CONSTRAINT test2_id_id FOREIGN KEY (id) REFERENCES test2(id) ON DELETE CASCADE ON UPDATE CASCADE, PRIMARY KEY (id)) ENGINE = 'InnoDB' DEFAULT CHARSET = 'utf8'";
+        $this->assertEquals($compare, preg_replace('/[\n\t\r]/', '', $create));
+    }
+    
+    public function testDrop()
+    {
+        $drop = new Drop('test');
+        $drop->ifExists(true);
+        
+        $compare = "DROP TABLE IF EXISTS test";
+        $this->assertEquals($compare, preg_replace('/[\n\t\r]/', '', $drop->render()));
     }
 }

@@ -137,6 +137,56 @@ abstract class SQLAbstract
     const ORDER_NONE = null;
     
     /**
+     * @var string
+     */
+    const CONSTRAINT_TEMPORARY = 'TEMPORARY';
+    
+    /**
+     * @var string
+     */
+    const CONSTRAINT_IF_NOT_EXISTS = 'IF NOT EXISTS';
+    
+    /**
+     * @var string
+     */
+    const OPTION_ENGINE = 'ENGINE';
+    
+    /**
+     * @var string
+     */
+    const OPTION_AUTO_INCREMENT = 'AUTO_INCREMENT';
+    
+    /**
+     * @var string
+     */
+    const OPTION_COMMENT = 'COMMENT';
+    
+    /**
+     * @var string
+     */
+    const OPTION_CHARSET = 'DEFAULT CHARSET';
+    
+    /**
+     * @var string
+     */
+    const OPTION_WITHOUT_ROWID = 'WITHOUT ROWID';
+    
+    /**
+     * @var string
+     */
+    const ENGINE_INNODB = 'InnoDB';
+    
+    /**
+     * @var string
+     */
+    const ENGINE_MYISAM = 'MyISAM';
+    
+    /**
+     * @var string
+     */
+    const CHARSET_UTF8 = 'utf8';
+    
+    /**
      * @var callable
      */
     protected $_quoteMethod = '\Elixir\DB\SQL\SQLAbstract::protect';

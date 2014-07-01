@@ -16,7 +16,7 @@ class Version
     /**
      * @var string
      */
-    const VERSION = '2.1.0 : 2014-06-30';
+    const VERSION = '2.1.0 : 2014-07-01';
     
     /**
      * @return string 

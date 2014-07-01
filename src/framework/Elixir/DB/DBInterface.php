@@ -3,7 +3,13 @@
 namespace Elixir\DB;
 
 use Elixir\DB\Result\SetAbstract;
+use Elixir\DB\SQL\Create;
+use Elixir\DB\SQL\Delete;
+use Elixir\DB\SQL\Drop;
+use Elixir\DB\SQL\Insert;
+use Elixir\DB\SQL\Select;
 use Elixir\DB\SQL\SQLAbstract;
+use Elixir\DB\SQL\Update;
 use Elixir\Dispatcher\DispatcherInterface;
 
 /**
@@ -39,27 +45,39 @@ interface DBInterface extends DispatcherInterface
     
     /**
      * @param string $pTable
-     * @return SQLAbstract
+     * @return Select
      */
     public function createSelect($pTable = null);
     
     /**
      * @param string $pTable
-     * @return SQLAbstract
+     * @return Insert
      */
     public function createInsert($pTable = null);
             
     /**
      * @param string $pTable
-     * @return SQLAbstract
+     * @return Delete
      */
     public function createDelete($pTable = null);
     
     /**
      * @param string $pTable
-     * @return SQLAbstract
+     * @return Update
      */
     public function createUpdate($pTable = null);
+    
+    /**
+     * @param string $pTable
+     * @return Create
+     */
+    public function createTable($pTable = null);
+    
+    /**
+     * @param string $pTable
+     * @return Drop
+     */
+    public function createDrop($pTable = null);
         
     /**
      * @param mixed $pValue

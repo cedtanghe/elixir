@@ -44,11 +44,13 @@ class Insert extends BaseInsert
      */
     protected function renderIgnore()
     {
+        $sql = '';
+        
         if($this->_ignore)
         {
-            return 'OR IGNORE ' . "\n";
+            $sql = 'OR IGNORE ' . "\n";
         }
         
-        return '';
+        return $sql;
     }
 }
