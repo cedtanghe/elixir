@@ -296,7 +296,7 @@
                     array|mixed
                 </td>
                 <td class="last">
-                    <a href="#method_getValuesByTag">getValuesByTag</a>(string $pTag, mixed $pDefault = null, array $pOptions = array())
+                    <a href="#method_findByTagByTag">findByTagByTag</a>(string $pTag, array $pArguments = null, mixed $pDefault = null)
                     <p>
 </p>
                 </td>
@@ -935,6 +935,16 @@
     </table>
 
             
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/LogicException"><abbr title="LogicException">LogicException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
             
                             <h4>See also</h4>
 
@@ -984,6 +994,16 @@
 
             
             
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/LogicException"><abbr title="LogicException">LogicException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
             
                             <h4>See also</h4>
 
@@ -1316,10 +1336,10 @@
                     </div>
     </div>
 
-                <h3 id="method_getValuesByTag">
-        <div class="location">at line 280</div>
+                <h3 id="method_findByTagByTag">
+        <div class="location">at line 277</div>
         <code>            public            array|mixed
-    <strong>getValuesByTag</strong>(string $pTag, mixed $pDefault = null, array $pOptions = array())</code>
+    <strong>findByTagByTag</strong>(string $pTag, array $pArguments = null, mixed $pDefault = null)</code>
     </h3>
     <div class="details">
         <p>
@@ -1337,14 +1357,14 @@
 </td>
             </tr>
                     <tr>
-                <td>mixed</td>
-                <td>$pDefault</td>
+                <td>array</td>
+                <td>$pArguments</td>
                 <td>
 </td>
             </tr>
                     <tr>
-                <td>array</td>
-                <td>$pOptions</td>
+                <td>mixed</td>
+                <td>$pDefault</td>
                 <td>
 </td>
             </tr>
@@ -1363,11 +1383,20 @@
 
             
             
+                            <h4>See also</h4>
+
+                    <table>
+                    <tr>
+                <td>ContainerInterface::findByTagByTag()</td>
+                <td></td>
+            </tr>
+            </table>
+
                     </div>
     </div>
 
                 <h3 id="method_raw">
-        <div class="location">at line 314</div>
+        <div class="location">at line 313</div>
         <code>            public            mixed
     <strong>raw</strong>(string $pKey, boolean $pWithConfiguration = false)</code>
     </h3>
@@ -1406,6 +1435,16 @@
     </table>
 
             
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
             
                             <h4>See also</h4>
 
@@ -1420,7 +1459,7 @@
     </div>
 
                 <h3 id="method_singleton">
-        <div class="location">at line 353</div>
+        <div class="location">at line 352</div>
         <code>            public            
     <strong>singleton</strong>(string $pKey, mixed $pValue, mixed $pTags = array(), mixed $pAliases = array())</code>
     </h3>
@@ -1476,7 +1515,7 @@
     </div>
 
                 <h3 id="method_protect">
-        <div class="location">at line 408</div>
+        <div class="location">at line 407</div>
         <code>            public            
     <strong>protect</strong>(string $pKey, <abbr title="Elixir\DI\callable">callable</abbr> $pValue, mixed $pTags = array(), mixed $pAliases = array())</code>
     </h3>
@@ -1537,7 +1576,7 @@
     </div>
 
                 <h3 id="method_extend">
-        <div class="location">at line 457</div>
+        <div class="location">at line 456</div>
         <code>            public            
     <strong>extend</strong>(string $pKey, <abbr title="Elixir\DI\callable">callable</abbr> $pValue)</code>
     </h3>
@@ -1566,6 +1605,16 @@
 
             
             
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
             
                             <h4>See also</h4>
 
@@ -1580,7 +1629,7 @@
     </div>
 
                 <h3 id="method_getStorageType">
-        <div class="location">at line 505</div>
+        <div class="location">at line 504</div>
         <code>            public            string
     <strong>getStorageType</strong>(string $pKey)</code>
     </h3>
@@ -1618,7 +1667,7 @@
     </div>
 
                 <h3 id="method_load">
-        <div class="location">at line 514</div>
+        <div class="location">at line 513</div>
         <code>            public            
     <strong>load</strong>(<a href="../../Elixir/DI/ProviderInterface.html"><abbr title="Elixir\DI\ProviderInterface">ProviderInterface</abbr></a> $pProvider)</code>
     </h3>
@@ -1655,7 +1704,7 @@
     </div>
 
                 <h3 id="method_merge">
-        <div class="location">at line 523</div>
+        <div class="location">at line 522</div>
         <code>            public            
     <strong>merge</strong>(array|<a href="../../Elixir/DI/ContainerInterface.html"><abbr title="Elixir\DI\ContainerInterface">ContainerInterface</abbr></a> $pData)</code>
     </h3>
@@ -1678,6 +1727,16 @@
 
             
             
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/LogicException"><abbr title="LogicException">LogicException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
             
                             <h4>See also</h4>
 

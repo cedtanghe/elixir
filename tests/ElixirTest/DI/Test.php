@@ -122,7 +122,7 @@ class Test extends \PHPUnit_Framework_TestCase
         ['type' => ContainerInterface::SINGLETON, 
               'tags' => 'tag']);
         
-        $services = array_values($container->getValuesByTag('tag'));
+        $services = array_values($container->findByTag('tag'));
         $this->assertEquals('This is a service', $services[0]);
     }
 }

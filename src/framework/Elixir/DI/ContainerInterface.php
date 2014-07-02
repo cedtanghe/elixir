@@ -120,6 +120,14 @@ interface ContainerInterface
     public function addTag($pKey, $pTag);
     
     /**
+     * @param string $pTag
+     * @param array $pArguments
+     * @param mixed $pDefault
+     * @return array|mixed
+     */
+    public function findByTagByTag($pTag, array $pArguments = null, $pDefault = null);
+    
+    /**
      * @param string $pKey
      * @param callable $pValue
      */

@@ -272,12 +272,9 @@ class Container extends Dispatcher implements ContainerInterface
     }
 
     /**
-     * @param string $pTag 
-     * @param mixed $pDefault
-     * @param array $pOptions
-     * @return array|mixed 
+     * @see ContainerInterface::findByTagByTag()
      */
-    public function getValuesByTag($pTag, $pDefault = null, array $pOptions = [])
+    public function findByTagByTag($pTag, array $pArguments = null, $pDefault = null)
     {
         $keys = [];
         
@@ -289,14 +286,16 @@ class Container extends Dispatcher implements ContainerInterface
             }
         }
         
-        $raw = isset($pOptions['raw']) && $pOptions['raw'];
-        $withConfiguration = isset($pOptions['withConfiguration']) && $pOptions['withConfiguration'];
-
         $result = [];
         
-        foreach($keys as $value)
+        foreach($keys as $key)
         {
-            $result[$value] = $raw ? $this->raw($value, $withConfiguration) : $this->get($value);
+            $s = $this->get($key, $pArguments, null);
+            
+            if(null !== $s)
+            {
+                $result[$key] = $s;
+            }
         }
         
         if(count($result) == 0)
