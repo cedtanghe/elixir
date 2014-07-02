@@ -6,6 +6,7 @@ use Elixir\DI\ContainerInterface;
 use Elixir\DI\ProviderInterface;
 use Elixir\Module\Console\Command\AssetsExport;
 use Elixir\Module\Console\Command\AssetsImport;
+use Elixir\Module\Console\Command\CacheClear;
 use Elixir\Module\Console\Command\ModelGenerate;
 use Elixir\Module\Console\Command\ModuleCreate;
 use Symfony\Component\Console\Application;
@@ -39,6 +40,9 @@ class Services implements ProviderInterface
             
             // Generate models
             $console->add(new ModelGenerate($application, $pContainer));
+            
+            // Cache clear
+            $console->add(new CacheClear($pContainer));
             
             return $console;
         }, 
