@@ -151,12 +151,12 @@ class Update extends SQLAbstract
      */
     public function render()
     {
-        $sql = 'UPDATE ' . "\n";
-        $sql = $this->_table . ' ' . "\n";
-        $sql .= $this->renderSets();
-        $sql .= $this->renderWheres();
+        $SQL = 'UPDATE ' . "\n";
+        $SQL = $this->_table . ' ' . "\n";
+        $SQL .= $this->renderSets();
+        $SQL .= $this->renderWheres();
 
-        return trim($sql);
+        return trim($SQL);
     }
     
     /**
@@ -164,7 +164,7 @@ class Update extends SQLAbstract
      */
     protected function renderSets()
     {
-        $sql = 'SET ';
+        $SQL = 'SET ';
         $sets = [];
         
         foreach($this->_sets as $key => $value)
@@ -177,8 +177,8 @@ class Update extends SQLAbstract
             $sets[] = $key . ' = ' . $value;
         }
 
-        $sql .= implode(', ', $sets) . ' ' . "\n";
-        return $sql;
+        $SQL .= implode(', ', $sets) . ' ' . "\n";
+        return $SQL;
     }
     
     /**
@@ -186,22 +186,22 @@ class Update extends SQLAbstract
      */
     protected function renderWheres()
     {
-        $sql = '';
+        $SQL = '';
         
         if(count($this->_wheres) > 0)
         {
-            $sql .= 'WHERE ';
+            $SQL .= 'WHERE ';
             $first = true;
             
             foreach($this->_wheres as $where)
             {
-                $sql .= ($first ? '' : $where['type'] . ' ') . (substr(trim($where['query']), 0, 1) != '(' ? '(' . $where['query'] . ')' : $where['query']) . "\n";
+                $SQL .= ($first ? '' : $where['type'] . ' ') . (substr(trim($where['query']), 0, 1) != '(' ? '(' . $where['query'] . ')' : $where['query']) . "\n";
                 $first = false;
             }
             
-            $sql .= ' ';
+            $SQL .= ' ';
         }
         
-        return $sql;
+        return $SQL;
     }
 }

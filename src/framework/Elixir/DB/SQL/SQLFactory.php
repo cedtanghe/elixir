@@ -2,19 +2,22 @@
 
 namespace Elixir\DB\SQL;
 
-use Elixir\DB\SQL\Create;
+use Elixir\DB\SQL\AlterTable;
+use Elixir\DB\SQL\CreateTable;
 use Elixir\DB\SQL\Delete;
-use Elixir\DB\SQL\Drop;
+use Elixir\DB\SQL\DropTable;
 use Elixir\DB\SQL\Insert;
-use Elixir\DB\SQL\MySQL\Create as MySQLCreate;
+use Elixir\DB\SQL\MySQL\AlterTable as MySQLAlterTable;
+use Elixir\DB\SQL\MySQL\CreateTable as MySQLCreateTable;
 use Elixir\DB\SQL\MySQL\Delete as MySQLDelete;
-use Elixir\DB\SQL\MySQL\Drop as MySQLDrop;
+use Elixir\DB\SQL\MySQL\DropTable as MySQLDropTable;
 use Elixir\DB\SQL\MySQL\Insert as MySQLInsert;
 use Elixir\DB\SQL\MySQL\Update as MySQLUpdate;
 use Elixir\DB\SQL\Select;
-use Elixir\DB\SQL\SQLite\Create as SQLiteCreate;
+use Elixir\DB\SQL\SQLite\AlterTable as SQLiteAlterTable;
+use Elixir\DB\SQL\SQLite\CreateTable as SQLiteCreateTable;
 use Elixir\DB\SQL\SQLite\Delete as SQLiteDelete;
-use Elixir\DB\SQL\SQLite\Drop as SQLiteDrop;
+use Elixir\DB\SQL\SQLite\DropTable as SQLiteDropTable;
 use Elixir\DB\SQL\SQLite\Insert as SQLiteInsert;
 use Elixir\DB\SQL\SQLite\Select as SQLiteSelect;
 use Elixir\DB\SQL\SQLite\Update as SQLiteUpdate;
@@ -116,40 +119,60 @@ class SQLFactory
     /**
      * @param string $pTable
      * @param string $pDriver
-     * @return Create
+     * @return CreateTable
      */
-    public static function create($pTable = null, $pDriver = self::DRIVER_MYSQL)
+    public static function createTable($pTable = null, $pDriver = self::DRIVER_MYSQL)
     {
         switch(strtolower($pDriver))
         {
             case self::DRIVER_MYSQL:
-                return new MySQLCreate($pTable);
+                return new MySQLCreateTable($pTable);
             break;
             case self::DRIVER_SQLITE:
-                return new SQLiteCreate($pTable);
+                return new SQLiteCreateTable($pTable);
             break;
         }
         
-        return new Create($pTable);
+        return new CreateTable($pTable);
     }
     
     /**
      * @param string $pTable
      * @param string $pDriver
-     * @return Drop
+     * @return AlterTable
      */
-    public static function drop($pTable = null, $pDriver = self::DRIVER_MYSQL)
+    public static function createAlterTable($pTable = null, $pDriver = self::DRIVER_MYSQL)
     {
         switch(strtolower($pDriver))
         {
             case self::DRIVER_MYSQL:
-                return new MySQLDrop($pTable);
+                return new MySQLAlterTable($pTable);
             break;
             case self::DRIVER_SQLITE:
-                return new SQLiteDrop($pTable);
+                return new SQLiteAlterTable($pTable);
             break;
         }
         
-        return new Drop($pTable);
+        return new AlterTable($pTable);
+    }
+    
+    /**
+     * @param string $pTable
+     * @param string $pDriver
+     * @return DropTable
+     */
+    public static function dropTable($pTable = null, $pDriver = self::DRIVER_MYSQL)
+    {
+        switch(strtolower($pDriver))
+        {
+            case self::DRIVER_MYSQL:
+                return new MySQLDropTable($pTable);
+            break;
+            case self::DRIVER_SQLITE:
+                return new SQLiteDropTable($pTable);
+            break;
+        }
+        
+        return new DropTable($pTable);
     }
 }

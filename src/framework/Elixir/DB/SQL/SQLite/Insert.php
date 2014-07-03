@@ -30,13 +30,13 @@ class Insert extends BaseInsert
      */
     public function render()
     {
-        $sql = 'INSERT ' . "\n";
-        $sql .= $this->renderIgnore();
-        $sql .= 'INTO ' . $this->_table . ' ' . "\n";
-        $sql .= $this->renderColumns();
-        $sql .= $this->renderValues();
+        $SQL = 'INSERT ' . "\n";
+        $SQL .= $this->renderIgnore();
+        $SQL .= 'INTO ' . $this->_table . ' ' . "\n";
+        $SQL .= $this->renderColumns();
+        $SQL .= $this->renderValues();
 
-        return trim($sql);
+        return trim($SQL);
     }
     
     /**
@@ -44,13 +44,13 @@ class Insert extends BaseInsert
      */
     protected function renderIgnore()
     {
-        $sql = '';
+        $SQL = '';
         
         if($this->_ignore)
         {
-            $sql = 'OR IGNORE ' . "\n";
+            $SQL = 'OR IGNORE ' . "\n";
         }
         
-        return $sql;
+        return $SQL;
     }
 }

@@ -87,14 +87,14 @@ class ConstraintFactory
         
         if(empty($pDefinition['type']))
         {
-            throw new \InvalidArgumentException(sprintf('The type of "%s" constraint is not defined.', $constraint->getColumns()[0]));
+            throw new \InvalidArgumentException(sprintf('The type of "%s" constraint is not defined.', current($constraint->getColumns())));
         }
         
         if($pDefinition['type'] == Constraint::FOREIGN_KEY)
         {
             if(empty($pDefinition['referenceTable']) || empty($pDefinition['referenceColumn']))
             {
-                throw new \InvalidArgumentException(sprintf('The reference of "%s" constraint is not defined.', $constraint->getColumns()[0]));
+                throw new \InvalidArgumentException(sprintf('The reference of "%s" constraint is not defined.', current($constraint->getColumns())));
             }
         }
         

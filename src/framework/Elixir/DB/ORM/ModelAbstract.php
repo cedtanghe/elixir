@@ -616,9 +616,6 @@ abstract class ModelAbstract extends Dispatcher implements RepositoryInterface
         return count($this->getModified()) > 0;
     }
 
-    /**
-     * @return array
-     */
     protected function getModified()
     {
         $modified = [];
@@ -626,6 +623,11 @@ abstract class ModelAbstract extends Dispatcher implements RepositoryInterface
         foreach($this->_fillable as $column)
         {
             $value = $this->get($column);
+            
+            if($value instanceof Expr)
+            {
+                $value = $value->getExpr();
+            }
             
             if(!array_key_exists($column, $this->_original) || $this->_original[$column] != $value)
             {
@@ -640,7 +642,14 @@ abstract class ModelAbstract extends Dispatcher implements RepositoryInterface
     {
         foreach($this->_fillable as $column)
         {
-            $this->_original[$column] = $this->get($column);
+            $value = $this->get($column);
+            
+            if($value instanceof Expr)
+            {
+                $value = $value->getExpr();
+            }
+        
+            $this->_original[$column] = $value;
         }
     }
 

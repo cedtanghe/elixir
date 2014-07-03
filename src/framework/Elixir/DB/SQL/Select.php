@@ -265,7 +265,7 @@ class Select extends SQLAbstract
      */
     public function combine(array $pSQLs, $pType = self::COMBINE_UNION)
     {
-        $this->_combines['sqls'] = $pSQLs;
+        $this->_combines['SQLs'] = $pSQLs;
         $this->_combines['type'] = $pType;
         
         return $this;
@@ -319,29 +319,29 @@ class Select extends SQLAbstract
      */
     public function render()
     {
-        $sql = '';
+        $SQL = '';
         
         if(count($this->_combines) > 0)
         {
-            $sql .= '(' . implode(')' . "\n" . $this->_combines['type'] . "\n" . '(', $this->_combines['sqls']) . ') ' . "\n";
-            $sql .= $this->renderOrders();
-            $sql .= $this->renderLimit();
+            $SQL .= '(' . implode(')' . "\n" . $this->_combines['type'] . "\n" . '(', $this->_combines['SQLs']) . ') ' . "\n";
+            $SQL .= $this->renderOrders();
+            $SQL .= $this->renderLimit();
         }
         else
         {
-            $sql .= 'SELECT ' . "\n";
-            $sql .= $this->renderQuantifier();
-            $sql .= $this->renderColumns();
-            $sql .= 'FROM ' . $this->_table . ' ' . "\n";
-            $sql .= $this->renderJoins();
-            $sql .= $this->renderWheres();
-            $sql .= $this->renderGroups();
-            $sql .= $this->renderHavings();
-            $sql .= $this->renderOrders();
-            $sql .= $this->renderLimit();
+            $SQL .= 'SELECT ' . "\n";
+            $SQL .= $this->renderQuantifier();
+            $SQL .= $this->renderColumns();
+            $SQL .= 'FROM ' . $this->_table . ' ' . "\n";
+            $SQL .= $this->renderJoins();
+            $SQL .= $this->renderWheres();
+            $SQL .= $this->renderGroups();
+            $SQL .= $this->renderHavings();
+            $SQL .= $this->renderOrders();
+            $SQL .= $this->renderLimit();
         }
 
-        return trim($sql);
+        return trim($SQL);
     }
     
     /**
@@ -380,7 +380,7 @@ class Select extends SQLAbstract
      */
     protected function renderJoins()
     {
-        $sql = '';
+        $SQL = '';
         
         if(count($this->_joins) > 0)
         {
@@ -395,14 +395,14 @@ class Select extends SQLAbstract
                     $query = 'ON ' . (substr(trim($query), 0, 1) != '(' ? '(' . $query . ')' : $query);
                 }
 
-                $sql .= ($first ? $join['type'] : ' ' . $join['type']) . ' JOIN ' . $join['table'] . ' ' . $query . "\n";
+                $SQL .= ($first ? $join['type'] : ' ' . $join['type']) . ' JOIN ' . $join['table'] . ' ' . $query . "\n";
                 $first = false;
             }
             
-            $sql .= ' ';
+            $SQL .= ' ';
         }
         
-        return $sql;
+        return $SQL;
     }
     
     /**
@@ -410,23 +410,23 @@ class Select extends SQLAbstract
      */
     protected function renderWheres()
     {
-        $sql = '';
+        $SQL = '';
         
         if(count($this->_wheres) > 0)
         {
-            $sql .= 'WHERE ';
+            $SQL .= 'WHERE ';
             $first = true;
             
             foreach($this->_wheres as $where)
             {
-                $sql .= ($first ? '' : $where['type'] . ' ') . (substr(trim($where['query']), 0, 1) != '(' ? '(' . $where['query'] . ')' : $where['query']) . "\n";
+                $SQL .= ($first ? '' : $where['type'] . ' ') . (substr(trim($where['query']), 0, 1) != '(' ? '(' . $where['query'] . ')' : $where['query']) . "\n";
                 $first = false;
             }
             
-            $sql .= ' ';
+            $SQL .= ' ';
         }
         
-        return $sql;
+        return $SQL;
     }
     
     /**
@@ -434,15 +434,15 @@ class Select extends SQLAbstract
      */
     protected function renderGroups()
     {
-        $sql = '';
+        $SQL = '';
         
         if(count($this->_groups) > 0)
         {
-            $sql .= 'GROUP BY ';
-            $sql .= implode(', ', $this->_groups) . ' ' . "\n";
+            $SQL .= 'GROUP BY ';
+            $SQL .= implode(', ', $this->_groups) . ' ' . "\n";
         }
         
-        return $sql;
+        return $SQL;
     }
     
     /**
@@ -450,23 +450,23 @@ class Select extends SQLAbstract
      */
     protected function renderHavings()
     {
-        $sql = '';
+        $SQL = '';
         
         if(count($this->_havings) > 0)
         {
-            $sql .= 'HAVING ';
+            $SQL .= 'HAVING ';
             $first = true;
             
             foreach($this->_havings as $having)
             {
-                $sql .= ($first ? '' : $having['type'] . ' ') . (substr(trim($having['query']), 0, 1) != '(' ? '(' . $having['query'] . ')' : $having['query']) . "\n";
+                $SQL .= ($first ? '' : $having['type'] . ' ') . (substr(trim($having['query']), 0, 1) != '(' ? '(' . $having['query'] . ')' : $having['query']) . "\n";
                 $first = false;
             }
             
-            $sql .= ' ';
+            $SQL .= ' ';
         }
         
-        return $sql;
+        return $SQL;
     }
     
     /**
@@ -474,23 +474,23 @@ class Select extends SQLAbstract
      */
     protected function renderOrders()
     {
-        $sql = '';
+        $SQL = '';
         
         if(count($this->_orders) > 0)
         {
-            $sql .= 'ORDER BY ';
+            $SQL .= 'ORDER BY ';
             $first = true;
             
             foreach($this->_orders as $order)
             {
-                $sql .= ($first ? '' : ', ') . $order['column'] . (self::ORDER_NONE === $order['type'] ? '' : ' ' . $order['type']);
+                $SQL .= ($first ? '' : ', ') . $order['column'] . (self::ORDER_NONE === $order['type'] ? '' : ' ' . $order['type']);
                 $first = false;
             }
             
-            $sql .= ' ' . "\n";
+            $SQL .= ' ' . "\n";
         }
 
-        return $sql;
+        return $SQL;
     }
     
     /**
@@ -498,23 +498,23 @@ class Select extends SQLAbstract
      */
     protected function renderLimit()
     {
-        $sql = '';
+        $SQL = '';
         
         if(null !== $this->_limit)
         {
-            $sql .= 'LIMIT ' . $this->_limit . ' ';
+            $SQL .= 'LIMIT ' . $this->_limit . ' ';
         }
         
         if(null !== $this->_offset)
         {
-            $sql .= 'OFFSET ' . $this->_offset . ' ';
+            $SQL .= 'OFFSET ' . $this->_offset . ' ';
         }
         
-        if(!empty($sql))
+        if(!empty($SQL))
         {
-            $sql .= "\n";
+            $SQL .= "\n";
         }
         
-        return $sql;
+        return $SQL;
     }
 }

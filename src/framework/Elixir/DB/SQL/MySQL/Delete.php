@@ -65,13 +65,13 @@ class Delete extends BaseDelete
      */
     public function render()
     {
-        $sql = 'DELETE FROM ' . "\n";
-        $sql .= $this->_table . ' ' . "\n";
-        $sql .= $this->renderWheres();
-        $sql .= $this->renderOrders();
-        $sql .= $this->renderLimit();
+        $SQL = 'DELETE FROM ' . "\n";
+        $SQL .= $this->_table . ' ' . "\n";
+        $SQL .= $this->renderWheres();
+        $SQL .= $this->renderOrders();
+        $SQL .= $this->renderLimit();
 
-        return trim($sql);
+        return trim($SQL);
     }
     
     /**
@@ -79,23 +79,23 @@ class Delete extends BaseDelete
      */
     protected function renderOrders()
     {
-        $sql = '';
+        $SQL = '';
         
         if(count($this->_orders) > 0)
         {
-            $sql .= 'ORDER BY ';
+            $SQL .= 'ORDER BY ';
             $first = true;
             
             foreach($this->_orders as $order)
             {
-                $sql .= ($first ? '' : ', ') . $order['column'] . (self::ORDER_NONE === $order['type'] ? '' : ' ' . $order['type']);
+                $SQL .= ($first ? '' : ', ') . $order['column'] . (self::ORDER_NONE === $order['type'] ? '' : ' ' . $order['type']);
                 $first = false;
             }
             
-            $sql .= ' ' . "\n";
+            $SQL .= ' ' . "\n";
         }
 
-        return $sql;
+        return $SQL;
     }
     
     /**
@@ -103,23 +103,23 @@ class Delete extends BaseDelete
      */
     protected function renderLimit()
     {
-        $sql = '';
+        $SQL = '';
         
         if(null !== $this->_limit)
         {
-            $sql .= 'LIMIT ' . $this->_limit . ' ';
+            $SQL .= 'LIMIT ' . $this->_limit . ' ';
         }
         
         if(null !== $this->_offset)
         {
-            $sql .= 'OFFSET ' . $this->_offset . ' ';
+            $SQL .= 'OFFSET ' . $this->_offset . ' ';
         }
         
-        if(!empty($sql))
+        if(!empty($SQL))
         {
-            $sql .= "\n";
+            $SQL .= "\n";
         }
         
-        return $sql;
+        return $SQL;
     }
 }

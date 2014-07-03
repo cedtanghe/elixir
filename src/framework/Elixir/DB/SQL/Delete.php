@@ -99,11 +99,11 @@ class Delete extends SQLAbstract
      */
     public function render()
     {
-        $sql = 'DELETE FROM ' . "\n";
-        $sql = $this->_table . ' ' . "\n";
-        $sql .= $this->renderWheres();
+        $SQL = 'DELETE FROM ' . "\n";
+        $SQL = $this->_table . ' ' . "\n";
+        $SQL .= $this->renderWheres();
 
-        return trim($sql);
+        return trim($SQL);
     }
     
     /**
@@ -111,22 +111,22 @@ class Delete extends SQLAbstract
      */
     protected function renderWheres()
     {
-        $sql = '';
+        $SQL = '';
         
         if(count($this->_wheres) > 0)
         {
-            $sql .= 'WHERE ';
+            $SQL .= 'WHERE ';
             $first = true;
             
             foreach($this->_wheres as $where)
             {
-                $sql .= ($first ? '' : $where['type'] . ' ') . (substr(trim($where['query']), 0, 1) != '(' ? '(' . $where['query'] . ')' : $where['query']) . "\n";
+                $SQL .= ($first ? '' : $where['type'] . ' ') . (substr(trim($where['query']), 0, 1) != '(' ? '(' . $where['query'] . ')' : $where['query']) . "\n";
                 $first = false;
             }
             
-            $sql .= ' ';
+            $SQL .= ' ';
         }
         
-        return $sql;
+        return $SQL;
     }
 }

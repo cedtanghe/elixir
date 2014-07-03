@@ -6,7 +6,7 @@ namespace Elixir\DB\SQL;
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
-class Drop extends SQLAbstract
+class DropTable extends SQLAbstract
 {
     /**
      * @var string 
@@ -26,7 +26,7 @@ class Drop extends SQLAbstract
     
     /**
      * @param string $pTable
-     * @return Drop
+     * @return DropTable
      */
     public function table($pTable)
     {

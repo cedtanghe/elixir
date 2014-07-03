@@ -66,17 +66,28 @@ abstract class DBAbstract extends Dispatcher implements DBInterface
      */
     public function createTable($pTable = null)
     {
-        $create = SQLFactory::create($pTable, $this->getDriver());
+        $create = SQLFactory::createTable($pTable, $this->getDriver());
         $create->setQuoteMethod([$this, 'quote']);
         
         return $create;
     }
     
     /**
+     * @see DBInterface::createAlterTable()
+     */
+    public function createAlterTable($pTable = null)
+    {
+        $alter = SQLFactory::createAlterTable($pTable, $this->getDriver());
+        $alter->setQuoteMethod([$this, 'quote']);
+        
+        return $alter;
+    }
+    
+    /**
      * @see DBInterface::createDrop()
      */
-    public function createDrop($pTable = null)
+    public function createDropTable($pTable = null)
     {
-        return SQLFactory::drop($pTable, $this->getDriver());
+        return SQLFactory::dropTable($pTable, $this->getDriver());
     }
 }

@@ -125,7 +125,7 @@ interface ContainerInterface
      * @param mixed $pDefault
      * @return array|mixed
      */
-    public function findByTagByTag($pTag, array $pArguments = null, $pDefault = null);
+    public function findByTag($pTag, array $pArguments = null, $pDefault = null);
     
     /**
      * @param string $pKey

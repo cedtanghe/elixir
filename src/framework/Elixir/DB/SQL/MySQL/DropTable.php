@@ -2,13 +2,13 @@
 
 namespace Elixir\DB\SQL\MySQL;
 
-use Elixir\DB\SQL\Drop as BaseDrop;
+use Elixir\DB\SQL\DropTable as BaseDropTable;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
-class Drop extends BaseDrop
+class DropTable extends BaseDropTable
 {
     /**
      * @var boolean 
@@ -22,7 +22,7 @@ class Drop extends BaseDrop
     
     /**
      * @param boolean $pValue
-     * @return Drop
+     * @return DropTable
      */
     public function temporary($pValue)
     {
@@ -32,7 +32,7 @@ class Drop extends BaseDrop
     
     /**
      * @param boolean $pValue
-     * @return Drop
+     * @return DropTable
      */
     public function ifExists($pValue)
     {
@@ -41,17 +41,17 @@ class Drop extends BaseDrop
     }
     
     /**
-     * @see BaseDrop::render()
+     * @see BaseDropTable::render()
      */
     public function render()
     {
-        $sql = 'DROP ' . "\n";
-        $sql .= $this->renderTemporary();
-        $sql .= 'TABLE ' . "\n";
-        $sql .= $this->renderIfExists();
-        $sql .= $this->_table;
+        $SQL = 'DROP ' . "\n";
+        $SQL .= $this->renderTemporary();
+        $SQL .= 'TABLE ' . "\n";
+        $SQL .= $this->renderIfExists();
+        $SQL .= $this->_table;
 
-        return trim($sql);
+        return trim($SQL);
     }
     
     /**
@@ -59,14 +59,14 @@ class Drop extends BaseDrop
      */
     protected function renderTemporary()
     {
-        $sql = '';
+        $SQL = '';
         
         if($this->_temporary)
         {
-            $sql .= 'TEMPORARY ' . "\n";
+            $SQL .= 'TEMPORARY ' . "\n";
         }
         
-        return $sql;
+        return $SQL;
     }
     
     /**
@@ -74,13 +74,13 @@ class Drop extends BaseDrop
      */
     protected function renderIfExists()
     {
-        $sql = '';
+        $SQL = '';
         
         if($this->_ifExists)
         {
-            $sql .= 'IF EXISTS ' . "\n";
+            $SQL .= 'IF EXISTS ' . "\n";
         }
         
-        return $sql;
+        return $SQL;
     }
 }

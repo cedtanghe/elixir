@@ -219,7 +219,7 @@ class PDO extends DBAbstract
             $pSQL = $pSQL->getQuery();
         }
         
-        $sql = $pSQL;
+        $SQL = $pSQL;
         $values = [];
         
         if(count($pValues) > 0)
@@ -262,22 +262,22 @@ class PDO extends DBAbstract
                     
                     if($isInt)
                     {
-                        $sql = $this->findAndReplace($sql, implode(', ', $keys), $c);
+                        $SQL = $this->findAndReplace($SQL, implode(', ', $keys), $c);
                     }
                     else
                     {
-                        $sql = preg_replace('/' . $key . '/', implode(', ', $keys), $sql, 1);
+                        $SQL = preg_replace('/' . $key . '/', implode(', ', $keys), $SQL, 1);
                     }
                 }
                 else if($value instanceof Expr)
                 {
                     if($isInt)
                     {
-                        $sql = $this->findAndReplace($sql, $value->getExpr(), $c);
+                        $SQL = $this->findAndReplace($SQL, $value->getExpr(), $c);
                     }
                     else
                     {
-                        $sql = preg_replace('/' . $key . '/', $value->getExpr(), $sql, 1);
+                        $SQL = preg_replace('/' . $key . '/', $value->getExpr(), $SQL, 1);
                     }
                 }
                 else
@@ -289,7 +289,7 @@ class PDO extends DBAbstract
             }
         }
         
-        $stmt = $this->_connection->prepare($sql, $pOptions);
+        $stmt = $this->_connection->prepare($SQL, $pOptions);
         
         foreach($values as $key => $value)
         {
@@ -301,10 +301,10 @@ class PDO extends DBAbstract
             $stmt->bindValue($key, $value, $this->getParamType($value));
         }
         
-        $this->dispatch(new DBEvent(DBEvent::PRE_QUERY, $sql, $values));
+        $this->dispatch(new DBEvent(DBEvent::PRE_QUERY, $SQL, $values));
         $time = microtime(true);
         $result = $stmt->execute();
-        $this->dispatch(new DBEvent(DBEvent::QUERY, $sql, $values, microtime(true) - $time));
+        $this->dispatch(new DBEvent(DBEvent::QUERY, $SQL, $values, microtime(true) - $time));
         
         if(!$result)
         {

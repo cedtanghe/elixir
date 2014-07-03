@@ -45,14 +45,14 @@ class Insert extends BaseInsert
      */
     public function render()
     {
-        $sql = 'INSERT ' . "\n";
-        $sql .= $this->renderIgnore();
-        $sql .= 'INTO ' . $this->_table . ' ' . "\n";
-        $sql .= $this->renderColumns();
-        $sql .= $this->renderValues();
-        $sql .= $this->renderDuplicateKeyUpdate();
+        $SQL = 'INSERT ' . "\n";
+        $SQL .= $this->renderIgnore();
+        $SQL .= 'INTO ' . $this->_table . ' ' . "\n";
+        $SQL .= $this->renderColumns();
+        $SQL .= $this->renderValues();
+        $SQL .= $this->renderDuplicateKeyUpdate();
 
-        return trim($sql);
+        return trim($SQL);
     }
     
     /**
@@ -62,7 +62,7 @@ class Insert extends BaseInsert
     {
         if(count($this->_duplicateKeyUpdate) > 0)
         {
-            $sql = 'ON DUPLICATE KEY UPDATE ';
+            $SQL = 'ON DUPLICATE KEY UPDATE ';
             $first = true;
             $me = $this;
 
@@ -73,12 +73,12 @@ class Insert extends BaseInsert
                     $value =  $me->quote($value);
                 }
 
-                $sql .= ($first ? '' : ', ') . $key . ' = ' . $value . "\n";
+                $SQL .= ($first ? '' : ', ') . $key . ' = ' . $value . "\n";
                 $first = false;
             }
             
             
-            return $sql . "\n";
+            return $SQL . "\n";
         }
         
         return '';
@@ -102,14 +102,14 @@ class Insert extends BaseInsert
      */
     protected function renderColumns() 
     {
-        $sql = parent::renderColumns();
+        $SQL = parent::renderColumns();
         
         if(empty($this->_values))
         {
-            $sql = '() ' . "\n";
+            $SQL = '() ' . "\n";
         }
         
-        return $sql;
+        return $SQL;
     }
     
     /**
@@ -117,13 +117,13 @@ class Insert extends BaseInsert
      */
     protected function renderValues() 
     {
-        $sql = parent::renderValues();
+        $SQL = parent::renderValues();
         
         if(empty($this->_values))
         {
-            $sql = 'VALUES () ' . "\n";
+            $SQL = 'VALUES () ' . "\n";
         }
         
-        return $sql;
+        return $SQL;
     }
 }

@@ -65,14 +65,14 @@ class Update extends BaseUpdate
      */
     public function render()
     {
-        $sql = 'UPDATE ' . "\n";
-        $sql .= $this->_table . ' ' . "\n";
-        $sql .= $this->renderSets();
-        $sql .= $this->renderWheres();
-        $sql .= $this->renderOrders();
-        $sql .= $this->renderLimit();
+        $SQL = 'UPDATE ' . "\n";
+        $SQL .= $this->_table . ' ' . "\n";
+        $SQL .= $this->renderSets();
+        $SQL .= $this->renderWheres();
+        $SQL .= $this->renderOrders();
+        $SQL .= $this->renderLimit();
 
-        return trim($sql);
+        return trim($SQL);
     }
     
     /**
@@ -80,23 +80,23 @@ class Update extends BaseUpdate
      */
     protected function renderOrders()
     {
-        $sql = '';
+        $SQL = '';
         
         if(count($this->_orders) > 0)
         {
-            $sql .= 'ORDER BY ';
+            $SQL .= 'ORDER BY ';
             $first = true;
             
             foreach($this->_orders as $order)
             {
-                $sql .= ($first ? '' : ', ') . $order['column'] . (self::ORDER_NONE === $order['type'] ? '' : ' COLLATE NOCASE ' . $order['type']);
+                $SQL .= ($first ? '' : ', ') . $order['column'] . (self::ORDER_NONE === $order['type'] ? '' : ' COLLATE NOCASE ' . $order['type']);
                 $first = false;
             }
             
-            $sql .= ' ' . "\n";
+            $SQL .= ' ' . "\n";
         }
 
-        return $sql;
+        return $SQL;
     }
     
     /**
@@ -104,23 +104,23 @@ class Update extends BaseUpdate
      */
     protected function renderLimit()
     {
-        $sql = '';
+        $SQL = '';
         
         if(null !== $this->_limit)
         {
-            $sql .= 'LIMIT ' . $this->_limit . ' ';
+            $SQL .= 'LIMIT ' . $this->_limit . ' ';
         }
         
         if(null !== $this->_offset)
         {
-            $sql .= 'OFFSET ' . $this->_offset . ' ';
+            $SQL .= 'OFFSET ' . $this->_offset . ' ';
         }
         
-        if(!empty($sql))
+        if(!empty($SQL))
         {
-            $sql .= "\n";
+            $SQL .= "\n";
         }
         
-        return $sql;
+        return $SQL;
     }
 }

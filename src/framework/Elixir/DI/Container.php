@@ -272,9 +272,9 @@ class Container extends Dispatcher implements ContainerInterface
     }
 
     /**
-     * @see ContainerInterface::findByTagByTag()
+     * @see ContainerInterface::findByTag()
      */
-    public function findByTagByTag($pTag, array $pArguments = null, $pDefault = null)
+    public function findByTag($pTag, array $pArguments = null, $pDefault = null)
     {
         $keys = [];
         

@@ -15,22 +15,22 @@ class Select extends BaseSelect
      */
     protected function renderOrders()
     {
-        $sql = '';
+        $SQL = '';
         
         if(count($this->_orders) > 0)
         {
-            $sql .= 'ORDER BY ';
+            $SQL .= 'ORDER BY ';
             $first = true;
             
             foreach($this->_orders as $order)
             {
-                $sql .= ($first ? '' : ', ') . $order['column'] . (self::ORDER_NONE === $order['type'] ? '' : ' COLLATE NOCASE ' . $order['type']);
+                $SQL .= ($first ? '' : ', ') . $order['column'] . (self::ORDER_NONE === $order['type'] ? '' : ' COLLATE NOCASE ' . $order['type']);
                 $first = false;
             }
             
-            $sql .= ' ' . "\n";
+            $SQL .= ' ' . "\n";
         }
 
-        return $sql;
+        return $SQL;
     }
 }

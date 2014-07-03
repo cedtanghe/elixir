@@ -174,12 +174,12 @@ class Insert extends SQLAbstract
      */
     public function render()
     {
-        $sql = 'INSERT ' . "\n";
-        $sql .= 'INTO ' . $this->_table . ' ' . "\n";
-        $sql .= $this->renderColumns();
-        $sql .= $this->renderValues();
+        $SQL = 'INSERT ' . "\n";
+        $SQL .= 'INTO ' . $this->_table . ' ' . "\n";
+        $SQL .= $this->renderColumns();
+        $SQL .= $this->renderValues();
 
-        return trim($sql);
+        return trim($SQL);
     }
     
     /**
@@ -187,18 +187,18 @@ class Insert extends SQLAbstract
      */
     protected function renderColumns()
     {
-        $sql = '';
+        $SQL = '';
         
         if(empty($this->_values))
         {
-            $sql = '';
+            $SQL = '';
         }
         else if(count($this->_columns) > 0)
         {
-            $sql .= '(' . implode(', ' . "\n", $this->_columns) . ') ' . "\n";
+            $SQL .= '(' . implode(', ' . "\n", $this->_columns) . ') ' . "\n";
         }
         
-        return $sql;
+        return $SQL;
     }
     
     /**
@@ -206,19 +206,19 @@ class Insert extends SQLAbstract
      */
     protected function renderValues()
     {
-        $sql = '';
+        $SQL = '';
         
         if(empty($this->_values))
         {
-            $sql .= 'DEFAULT VALUES';
+            $SQL .= 'DEFAULT VALUES';
         }
         if(is_string($this->_values))
         {
-            $sql .= '(' . $this->_values . ') ' . "\n";
+            $SQL .= '(' . $this->_values . ') ' . "\n";
         }
         else
         {
-            $sql .= 'VALUES ';
+            $SQL .= 'VALUES ';
             $first = true;
 
             foreach($this->_values as $values)
@@ -232,11 +232,11 @@ class Insert extends SQLAbstract
                     $values);
                 }
 
-                $sql .= ($first ? '' : ', ') . '(' . implode(', ' . "\n", $values) . ') ' . "\n";
+                $SQL .= ($first ? '' : ', ') . '(' . implode(', ' . "\n", $values) . ') ' . "\n";
                 $first = false;
             }
         }
         
-        return $sql;
+        return $SQL;
     }
 }

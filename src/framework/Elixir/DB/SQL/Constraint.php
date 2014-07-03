@@ -147,7 +147,7 @@ class Constraint
     {
         if(null === $this->_name)
         {
-            $this->_name = $this->_referenceTable . '_' . $this->_referenceColumn . '_' . $this->getColumns()[0];
+            $this->_name = strtolower('fk_' . $this->_referenceTable . '_' . $this->_referenceColumn . '_' . current($this->getColumns()));
         }
         
         return $this->_name;

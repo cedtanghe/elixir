@@ -86,21 +86,21 @@ class WhereClause
      */
     protected function renderWheres()
     {
-        $sql = '';
+        $SQL = '';
         $first = true;
             
         foreach($this->_wheres as $where)
         {
-            $sql .= ($first ? '' : $where['type'] . ' ') . '(' . $where['query'] . ')' . "\n";
+            $SQL .= ($first ? '' : $where['type'] . ' ') . '(' . $where['query'] . ')' . "\n";
             $first = false;
         }
         
         if(count($this->_wheres) > 1)
         {
-            $sql = '(' . $sql . ')';
+            $SQL = '(' . $SQL . ')';
         }
         
-        return $sql;
+        return $SQL;
     }
 
     /**

@@ -114,18 +114,18 @@ class JoinClause
      */
     public function render()
     {
-        $sql = '';
+        $SQL = '';
         
         if(count($this->_usings) > 0)
         {
-            $sql .= $this->renderUsings();
+            $SQL .= $this->renderUsings();
         }
         else
         {
-            $sql .= $this->renderOns();
+            $SQL .= $this->renderOns();
         }
         
-        return $sql;
+        return $SQL;
     }
     
     /**
@@ -141,21 +141,21 @@ class JoinClause
      */
     protected function renderOns()
     {
-        $sql = '';
+        $SQL = '';
         $first = true;
 
         foreach($this->_ons as $on)
         {
-            $sql .= ($first ? '' : $on['type'] . ' ') . '(' . $on['query'] . ')' . "\n";
+            $SQL .= ($first ? '' : $on['type'] . ' ') . '(' . $on['query'] . ')' . "\n";
             $first = false;
         }
         
         if(count($this->_ons) > 1)
         {
-            $sql = '(' . $sql . ')';
+            $SQL = '(' . $SQL . ')';
         }
         
-        return $sql;
+        return $SQL;
     }
 
     /**

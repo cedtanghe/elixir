@@ -9,7 +9,7 @@ use Elixir\DB\SQL\Constraint;
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
-class Create extends SQLAbstract
+class CreateTable extends SQLAbstract
 {
     /**
      * @var string 
@@ -49,7 +49,7 @@ class Create extends SQLAbstract
     
     /**
      * @param string $pTable
-     * @return Create
+     * @return CreateTable
      */
     public function table($pTable)
     {
@@ -59,7 +59,7 @@ class Create extends SQLAbstract
     
     /**
      * @param boolean $pValue
-     * @return Create
+     * @return CreateTable
      */
     public function temporary($pValue)
     {
@@ -69,7 +69,7 @@ class Create extends SQLAbstract
     
     /**
      * @param Column $pColumn
-     * @return Create
+     * @return CreateTable
      */
     public function column(Column $pColumn)
     {
@@ -79,7 +79,7 @@ class Create extends SQLAbstract
     
     /**
      * @param Constraint $pConstraint
-     * @return Create
+     * @return CreateTable
      */
     public function constraint(Constraint $pConstraint)
     {
@@ -101,7 +101,7 @@ class Create extends SQLAbstract
     
     /**
      * @param Column $pColumn
-     * @return Create
+     * @return CreateTable
      */
     public function option($pOption, $pValue = null)
     {
@@ -111,7 +111,7 @@ class Create extends SQLAbstract
     
     /**
      * @param string $pPart
-     * @return Create
+     * @return CreateTable
      */
     public function reset($pPart)
     {
@@ -136,14 +136,14 @@ class Create extends SQLAbstract
      */
     public function render()
     {
-        $sql = 'CREATE ' . "\n";
-        $sql .= $this->renderTemporary();
-        $sql .= 'TABLE ' . "\n";
-        $sql .= $this->_table . ' ' . "\n";
-        $sql .= $this->renderColumns();
-        $sql .= $this->renderOptions();
+        $SQL = 'CREATE ' . "\n";
+        $SQL .= $this->renderTemporary();
+        $SQL .= 'TABLE ' . "\n";
+        $SQL .= $this->_table . ' ' . "\n";
+        $SQL .= $this->renderColumns();
+        $SQL .= $this->renderOptions();
 
-        return trim($sql);
+        return trim($SQL);
     }
     
     /**
@@ -151,14 +151,14 @@ class Create extends SQLAbstract
      */
     protected function renderTemporary()
     {
-        $sql = '';
+        $SQL = '';
         
         if($this->_temporary)
         {
-            $sql .= 'TEMPORARY ' . "\n";
+            $SQL .= 'TEMPORARY ' . "\n";
         }
         
-        return $sql;
+        return $SQL;
     }
     
     /**
@@ -166,7 +166,7 @@ class Create extends SQLAbstract
      */
     protected function renderColumns()
     {
-        $sql = '(';
+        $SQL = '(';
         $columns = [];
         
         foreach($this->_columns as $column)
@@ -185,17 +185,12 @@ class Create extends SQLAbstract
             
             // Attribute
             $attribute = $column->getAttribute();
-            $update = false;
             
             if(null !== $attribute)
             {
                 if(strtoupper($attribute) != Column::UPDATE_CURRENT_TIMESTAMP)
                 {
-                    $col .= ' ' . $attribute;
-                }
-                else
-                {
-                    $update = true;
+                    $SQL .= ' ' . $attribute;
                 }
             }
             
@@ -204,11 +199,20 @@ class Create extends SQLAbstract
             
             if(null !== $collating)
             {
-                $col .= ' ' . sprintf(
-                    'CHARACTER SET %s COLLATE %s', 
-                    substr($collating, 0, strpos($collating, '_')), 
-                    $collating
-                );
+                $pos = strpos($collating, '_');
+                
+                if(false !== $pos)
+                {
+                    $col .= ' ' . sprintf(
+                        'CHARACTER SET %s COLLATE %s', 
+                        substr($collating, 0, strpos($collating, '_')), 
+                        $collating
+                    );
+                }
+                else
+                {
+                    $col .= ' CHARACTER SET ' . $collating;
+                }
             }
             
             // Nullable
@@ -248,11 +252,6 @@ class Create extends SQLAbstract
                 $col .= ' DEFAULT ' . $default;
             }
             
-            if($update)
-            {
-                $col .= ' ' . $attribute;
-            }
-            
             // Comment
             $comment = $column->getComment();
             
@@ -264,35 +263,36 @@ class Create extends SQLAbstract
             $columns[] = $col;
         }
         
-        $sql .= implode(', ' . "\n", $columns);
+        $SQL .= implode(', ' . "\n", $columns);
         
         // Constraints
         foreach($this->_constraints as $constraint)
         {   
+            $columns = $constraint->getColumns();
+            
             if($constraint->getType() == Constraint::PRIMARY)
             {
-                $sql .= ', ' . "\n" . 'PRIMARY KEY (' . implode(', ', $constraint->getColumns()) . ')';
+                $SQL .= ', ' . "\n" . 'PRIMARY KEY (' . implode(', ', $columns) . ')';
             }
             else if($constraint->getType() == Constraint::FOREIGN_KEY)
             {
-                $sql .= ', ' . "\n" . 'CONSTRAINT ' . $constraint->getName() . ' ';
-                $sql .= 'FOREIGN KEY (' . $constraint->getColumns()[0] . ') ';
-                $sql .= 'REFERENCES ' . $constraint->getReferenceTable() . '(' . $constraint->getReferenceColumn() . ') ';
-                $sql .= 'ON DELETE ' . $constraint->getOnDeleteRule() . ' ';
-                $sql .= 'ON UPDATE ' . $constraint->getOnUpdateRule();
+                $SQL .= ', ' . "\n" . 'CONSTRAINT ' . $constraint->getName() . ' ';
+                $SQL .= 'FOREIGN KEY (' . $columns[0] . ') ';
+                $SQL .= 'REFERENCES ' . $constraint->getReferenceTable() . '(' . $constraint->getReferenceColumn() . ') ';
+                $SQL .= 'ON DELETE ' . $constraint->getOnDeleteRule() . ' ';
+                $SQL .= 'ON UPDATE ' . $constraint->getOnUpdateRule();
             }
             else
             {
-                foreach($constraint->getColumns() as $column)
+                foreach($columns as $column)
                 {
-                    $type = $constraint->getType() != Constraint::INDEX ? $constraint->getType() . ' KEY' : 'KEY';
-                    $sql .= ', ' . "\n" . $type . ' ' . $column . '(' . $column . ')';
+                    $SQL .= ', ' . "\n" . $constraint->getType() . ' ' . $column . '(' . $column . ')';
                 }
             }
         }
         
-        $sql .= ') ' . "\n";
-        return $sql;
+        $SQL .= ') ' . "\n";
+        return $SQL;
     }
     
     /**
@@ -300,7 +300,7 @@ class Create extends SQLAbstract
      */
     protected function renderOptions()
     {
-        $sql = '';
+        $SQL = '';
         
         if(count($this->_options) > 0)
         {
@@ -311,9 +311,9 @@ class Create extends SQLAbstract
                 $options[] = $key . ' = ' . $this->quote($value);
             }
             
-            $sql .= implode(' ' . "\n", $options);
+            $SQL .= implode(' ' . "\n", $options);
         }
         
-        return $sql;
+        return $SQL;
     }
 }

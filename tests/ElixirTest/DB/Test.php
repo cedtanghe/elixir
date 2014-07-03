@@ -7,9 +7,10 @@ use Elixir\DB\SQL\Column;
 use Elixir\DB\SQL\ColumnFactory;
 use Elixir\DB\SQL\Constraint;
 use Elixir\DB\SQL\ConstraintFactory;
-use Elixir\DB\SQL\MySQL\Create;
+use Elixir\DB\SQL\MySQL\AlterTable;
+use Elixir\DB\SQL\MySQL\CreateTable;
 use Elixir\DB\SQL\MySQL\Delete;
-use Elixir\DB\SQL\MySQL\Drop;
+use Elixir\DB\SQL\MySQL\DropTable;
 use Elixir\DB\SQL\MySQL\Insert;
 use Elixir\DB\SQL\MySQL\Update;
 use Elixir\DB\SQL\Select;
@@ -80,9 +81,9 @@ class Test extends \PHPUnit_Framework_TestCase
         $this->assertEquals($compare, preg_replace('/[\n\t\r]/', '', $delete->render()));
     }
     
-    public function testCreate()
+    public function testCreateTable()
     {
-        $create = new Create('test');
+        $create = new CreateTable('test');
         $create->ifNotExists(true);
         $create->column(ColumnFactory::int('id', 11, Column::UNSIGNED, true));
         $create->column(
@@ -103,16 +104,78 @@ class Test extends \PHPUnit_Framework_TestCase
             )
         );
         
-        $create->option(Create::OPTION_ENGINE, Create::ENGINE_INNODB);
-        $create->option(Create::OPTION_CHARSET, Create::CHARSET_UTF8);
+        $create->option(CreateTable::OPTION_ENGINE, CreateTable::ENGINE_INNODB);
+        $create->option(CreateTable::OPTION_CHARSET, CreateTable::CHARSET_UTF8);
         
-        $compare = "CREATE TABLE IF NOT EXISTS test (id INT(11) UNSIGNED NOT NULL AUTO_INCREMENT , name VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT 'Comment', UNIQUE KEY name(name), CONSTRAINT test2_id_id FOREIGN KEY (id) REFERENCES test2(id) ON DELETE CASCADE ON UPDATE CASCADE, PRIMARY KEY (id)) ENGINE = 'InnoDB' DEFAULT CHARSET = 'utf8'";
+        $compare = "CREATE TABLE IF NOT EXISTS test (id INT(11) UNSIGNED NOT NULL AUTO_INCREMENT , name VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT 'Comment', UNIQUE name(name), CONSTRAINT fk_test2_id_id FOREIGN KEY (id) REFERENCES test2(id) ON DELETE CASCADE ON UPDATE CASCADE, PRIMARY KEY (id)) ENGINE = 'InnoDB' DEFAULT CHARSET = 'utf8'";
         $this->assertEquals($compare, preg_replace('/[\n\t\r]/', '', $create));
     }
     
-    public function testDrop()
+    public function testAlterTable()
     {
-        $drop = new Drop('test');
+        $alter = new AlterTable('test');
+        $alter->rename('test_rename');
+        
+        $compare = "ALTER TABLE test RENAME TO test_rename";
+        $this->assertEquals($compare, preg_replace('/[\n\t\r]/', '', $alter));
+        
+        $alter = new AlterTable('test');
+        $alter->modifyColumn(ColumnFactory::varchar('name', 100));
+        
+        $compare = "ALTER TABLE test MODIFY name VARCHAR(100) NOT NULL";
+        $this->assertEquals($compare, preg_replace('/[\n\t\r]/', '', $alter));
+        
+        $alter = new AlterTable('test');
+        $alter->renameColumn(ColumnFactory::varchar('name'), 'name_rename');
+        
+        $compare = "ALTER TABLE test CHANGE name name_rename VARCHAR(255)";
+        $this->assertEquals($compare, preg_replace('/[\n\t\r]/', '', $alter));
+        
+        $alter = new AlterTable('test');
+        $alter->dropColumn('description');
+        
+        $compare = "ALTER TABLE test DROP COLUMN description";
+        $this->assertEquals($compare, preg_replace('/[\n\t\r]/', '', $alter));
+        
+        $alter = new AlterTable('test');
+        $alter->addColumnAfter(
+            ColumnFactory::varchar('description', 1000)
+            ->setCollating('utf8_general_ci')
+            ->setComment('Description'),
+            'id'
+        );
+        
+        $compare = "ALTER TABLE test ADD description VARCHAR(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'Description' AFTER id";
+        $this->assertEquals($compare, preg_replace('/[\n\t\r]/', '', $alter));
+        
+        $alter = new AlterTable('test');
+        $alter->addConstraint(ConstraintFactory::index('description'));
+        
+        $compare = "ALTER TABLE test ADD INDEX description(description)";
+        $this->assertEquals($compare, preg_replace('/[\n\t\r]/', '', $alter));
+        
+        $alter = new AlterTable('test');
+        $alter->dropConstraint('description', Constraint::INDEX);
+        
+        $compare = "ALTER TABLE test DROP INDEX description";
+        $this->assertEquals($compare, preg_replace('/[\n\t\r]/', '', $alter));
+        
+        $alter = new AlterTable('test');
+        $alter->dropConstraint(ConstraintFactory::foreign('id', 'test2', 'id'));
+        
+        $compare = "ALTER TABLE test DROP FOREIGN KEY fk_test2_id_id";
+        $this->assertEquals($compare, preg_replace('/[\n\t\r]/', '', $alter));
+        
+        $alter = new AlterTable('test');
+        $alter->addConstraint(ConstraintFactory::foreign('id', 'test2', 'id', null, Constraint::REFERENCE_CASCADE, Constraint::REFERENCE_CASCADE));
+        
+        $compare = "ALTER TABLE test ADD CONSTRAINT fk_test2_id_id FOREIGN KEY (id) REFERENCES test2(id) ON DELETE CASCADE ON UPDATE CASCADE";
+        $this->assertEquals($compare, preg_replace('/[\n\t\r]/', '', $alter));
+    }
+    
+    public function testDropTable()
+    {
+        $drop = new DropTable('test');
         $drop->ifExists(true);
         
         $compare = "DROP TABLE IF EXISTS test";

@@ -50,7 +50,7 @@ class CacheClear extends Command
     protected function execute(InputInterface $pInput, OutputInterface $pOutput)
     {
         $tag = $pInput->getOption('tag');
-        $caches = $this->_container->findByTagByTag($tag);
+        $caches = $this->_container->findByTag($tag);
         
         foreach($caches as $cache)
         {

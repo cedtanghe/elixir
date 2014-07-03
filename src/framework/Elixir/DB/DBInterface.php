@@ -3,9 +3,10 @@
 namespace Elixir\DB;
 
 use Elixir\DB\Result\SetAbstract;
-use Elixir\DB\SQL\Create;
+use Elixir\DB\SQL\AlterTable;
+use Elixir\DB\SQL\CreateTable;
 use Elixir\DB\SQL\Delete;
-use Elixir\DB\SQL\Drop;
+use Elixir\DB\SQL\DropTable;
 use Elixir\DB\SQL\Insert;
 use Elixir\DB\SQL\Select;
 use Elixir\DB\SQL\SQLAbstract;
@@ -69,15 +70,21 @@ interface DBInterface extends DispatcherInterface
     
     /**
      * @param string $pTable
-     * @return Create
+     * @return CreateTable
      */
     public function createTable($pTable = null);
     
     /**
      * @param string $pTable
-     * @return Drop
+     * @return AlterTable
      */
-    public function createDrop($pTable = null);
+    public function createAlterTable($pTable = null);
+    
+    /**
+     * @param string $pTable
+     * @return DropTable
+     */
+    public function createDropTable($pTable = null);
         
     /**
      * @param mixed $pValue
