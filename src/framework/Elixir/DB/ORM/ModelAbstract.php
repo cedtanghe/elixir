@@ -12,6 +12,7 @@ use Elixir\DB\ORM\Relation\Relation;
 use Elixir\DB\ORM\Relation\RelationInterface;
 use Elixir\DB\ORM\RepositoryInterface;
 use Elixir\DB\ORM\Select;
+use Elixir\DB\SQL\Expr;
 use Elixir\DB\SQL\Insert;
 use Elixir\DB\SQL\Update;
 use Elixir\DI\ContainerInterface;

@@ -46,7 +46,7 @@ class Update extends BaseUpdate
      */
     public function limit($pLimit)
     {
-        $this->_limit = (int)$pLimit;
+        $this->_limit = $pLimit;
         return $this;
     }
     
@@ -56,7 +56,7 @@ class Update extends BaseUpdate
      */
     public function offset($pOffset)
     {
-        $this->_offset = (int)$pOffset;
+        $this->_offset = $pOffset;
         return $this;
     }
     
@@ -108,12 +108,12 @@ class Update extends BaseUpdate
         
         if(null !== $this->_limit)
         {
-            $SQL .= 'LIMIT ' . $this->_limit . ' ';
+            $SQL .= 'LIMIT ' . $this->quote($this->_limit) . ' ';
         }
         
         if(null !== $this->_offset)
         {
-            $SQL .= 'OFFSET ' . $this->_offset . ' ';
+            $SQL .= 'OFFSET ' . $this->quote($this->_offset) . ' ';
         }
         
         if(!empty($SQL))
