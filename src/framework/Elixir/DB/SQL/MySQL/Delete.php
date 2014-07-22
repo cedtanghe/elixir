@@ -107,12 +107,12 @@ class Delete extends BaseDelete
         
         if(null !== $this->_limit)
         {
-            $SQL .= 'LIMIT ' . $this->quote($this->_limit) . ' ';
+            $SQL .= $this->assemble('LIMIT ?', $this->_limit) . ' ';
         }
         
         if(null !== $this->_offset)
         {
-            $SQL .= 'OFFSET ' . $this->quote($this->_offset) . ' ';
+            $SQL .= $this->assemble('OFFSET ?', $this->_offset) . ' ';
         }
         
         if(!empty($SQL))
