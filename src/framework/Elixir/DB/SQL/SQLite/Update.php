@@ -108,7 +108,7 @@ class Update extends BaseUpdate
         
         if(null !== $this->_limit)
         {
-            $SQL .= 'LIMIT ' . $this->quote($this->_limit) . ' ';
+            $SQL .= sprintf('LIMIT %d ', $this->quote($this->_limit));
         }
         
         if(null !== $this->_offset)
