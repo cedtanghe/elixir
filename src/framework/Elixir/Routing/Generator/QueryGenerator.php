@@ -192,7 +192,14 @@ class QueryGenerator extends URLGenerator
             }
             else
             {
-                $replace = $pRoute->getOption(Route::SECURE, false) ? $secureSheme : $unSecureSheme;
+                if($pRoute->hasOption(Route::SECURE, false))
+                {
+                    $replace = $pRoute->getOption(Route::SECURE) ? $secureSheme : $unSecureSheme;
+                }
+                else
+                {
+                    $replace = $this->_request->isSecure() ? $secureSheme : $unSecureSheme;
+                }
             }
 
             $url = preg_replace(
