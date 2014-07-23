@@ -152,7 +152,7 @@ class Update extends SQLAbstract
     public function render()
     {
         $SQL = 'UPDATE ' . "\n";
-        $SQL = $this->_table . ' ' . "\n";
+        $SQL .= $this->_table . ' ' . "\n";
         $SQL .= $this->renderSets();
         $SQL .= $this->renderWheres();
 

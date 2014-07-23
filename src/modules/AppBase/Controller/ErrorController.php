@@ -3,6 +3,7 @@
 namespace Elixir\Module\AppBase\Controller;
 
 use Elixir\HTTP\Response;
+use Elixir\HTTP\ResponseFactory;
 use Elixir\HTTP\Sanitizer;
 use Elixir\MVC\Controller\ControllerAbstract;
 
@@ -69,6 +70,11 @@ class ErrorController extends ControllerAbstract
         else
         {
             $data = $pData['message'];
+        }
+        
+        if($this->_request->isAjax())
+        {
+            return ResponseFactory::json(json_encode($data), $pStatusCode);
         }
         
         return $this->helper('helper.render')->renderTextResponse(
