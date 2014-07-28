@@ -106,7 +106,7 @@ class DBSeed extends Command
                     
                     $pOutput->writeln(sprintf('<info>Seeded: %s</info>', $class));
                 } 
-                catch(Exception $e)
+                catch(\Exception $e)
                 {
                     $pOutput->writeln(sprintf('<error>An error occurred while attempting to seed class "%s"</error>', $class));
                 }
