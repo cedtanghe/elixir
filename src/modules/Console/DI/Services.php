@@ -7,6 +7,7 @@ use Elixir\DI\ProviderInterface;
 use Elixir\Module\Console\Command\AssetsExport;
 use Elixir\Module\Console\Command\AssetsImport;
 use Elixir\Module\Console\Command\CacheClear;
+use Elixir\Module\Console\Command\DBSeed;
 use Elixir\Module\Console\Command\ModelGenerate;
 use Elixir\Module\Console\Command\ModuleCreate;
 use Symfony\Component\Console\Application;
@@ -43,6 +44,9 @@ class Services implements ProviderInterface
             
             // Cache clear
             $console->add(new CacheClear($pContainer));
+            
+            // DB seed
+            $console->add(new DBSeed($application));
             
             return $console;
         }, 
