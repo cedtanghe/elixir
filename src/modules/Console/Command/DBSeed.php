@@ -49,13 +49,13 @@ class DBSeed extends Command
                 'module',
                 null,
                 InputOption::VALUE_REQUIRED,
-                'Name of the module containing the seeds classes'
+                'Name of the module containing the seed classes'
              )
              ->addOption(
                 'class',
                 null,
                 InputOption::VALUE_REQUIRED,
-                'Name of the seeds class'
+                'Name of the seed class'
              );
     }
 
@@ -108,7 +108,7 @@ class DBSeed extends Command
                 } 
                 catch(Exception $e)
                 {
-                    $pOutput->writeln(sprintf('<error>An error occurred while attempting to seeds class "%s"</error>', $class));
+                    $pOutput->writeln(sprintf('<error>An error occurred while attempting to seed class "%s"</error>', $class));
                 }
             }
             
@@ -116,7 +116,7 @@ class DBSeed extends Command
         }
         else
         {
-            $pOutput->writeln('<error>No seeds classes found</error>');
+            $pOutput->writeln('<error>No seed classes found</error>');
         }
     }
 }
