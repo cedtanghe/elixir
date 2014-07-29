@@ -502,12 +502,12 @@ class Select extends SQLAbstract
         
         if(null !== $this->_limit)
         {
-            $SQL .= $this->assemble('LIMIT ?', $this->_limit) . ' ';
+            $SQL .= sprintf('LIMIT %d', $this->_limit) . ' ';
         }
         
         if(null !== $this->_offset)
         {
-            $SQL .= $this->assemble('OFFSET ?', $this->_offset) . ' ';
+            $SQL .= sprintf('OFFSET %d', $this->_offset) . ' ';
         }
         
         if(!empty($SQL))
