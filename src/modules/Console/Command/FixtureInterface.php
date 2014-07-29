@@ -8,10 +8,15 @@ use Elixir\DB\DBInterface;
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
-interface SeederInterface
+interface FixtureInterface
 {
     /**
      * @param DBInterface $pDB
      */
-    public function seed(DBInterface $pDB);
+    public function load(DBInterface $pDB);
+    
+    /**
+     * @return integer
+     */
+    public function getOrder();
 }
