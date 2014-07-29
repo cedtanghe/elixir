@@ -46,6 +46,13 @@ class DBSeed extends Command
         $this->setName('db:seed')
              ->setDescription('Seed your database with test data using seed classes.')
              ->addOption(
+                'db',
+                null,
+                InputOption::VALUE_REQUIRED,
+                'Name of service database',
+                'db.default'
+             )
+             ->addOption(
                 'module',
                 null,
                 InputOption::VALUE_REQUIRED,
@@ -65,6 +72,7 @@ class DBSeed extends Command
     protected function execute(InputInterface $pInput, OutputInterface $pOutput)
     {
         $seeds = [];
+        $DBName = $pInput->getOption('db');
         
         $class = $pInput->getOption('class');
         
@@ -97,26 +105,40 @@ class DBSeed extends Command
         
         if(count($seeds) > 0)
         {
+            $DB = $this->_container->get($DBName);
+        
+            if(null === $DB)
+            {
+                $pOutput->writeln(sprintf('<error>DB "%s" is not a valid connection</error>', $DBName));
+                return;
+            }
+            
+            $DB->begin();
+            
             foreach($seeds as $class)
             {
                 try 
                 {
                     $seed = new $class();
-                    $seed->seed($this->_container);
+                    $seed->seed($DB);
                     
                     $pOutput->writeln(sprintf('<info>Seeded: %s</info>', $class));
                 } 
                 catch(\Exception $e)
                 {
+                    $DB->rollback();
                     $pOutput->writeln(sprintf('<error>An error occurred while attempting to seed class "%s"</error>', $class));
+                    
+                    return;
                 }
             }
             
+            $DB->commit();
             $pOutput->writeln('<info>Seeding finished</info>');
         }
         else
         {
-            $pOutput->writeln('<error>No seed classes found</error>');
+            $pOutput->writeln('<info>No seed classes found</info>');
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Elixir\Module\Console\Command;
 
-use Elixir\DI\ContainerInterface;
+use Elixir\DB\DBInterface;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
@@ -11,7 +11,7 @@ use Elixir\DI\ContainerInterface;
 interface SeederInterface
 {
     /**
-     * @param ContainerInterface $pContainer
+     * @param DBInterface $pDB
      */
-    public function seed(ContainerInterface $pContainer);
+    public function seed(DBInterface $pDB);
 }

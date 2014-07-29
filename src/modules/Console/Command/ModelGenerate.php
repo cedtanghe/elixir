@@ -113,7 +113,7 @@ class ModelGenerate extends Command
         
         if(null === $DB)
         {
-            $pOutput->writeln(sprintf('<error>"%s" is not a valid connection</error>', $DBName));
+            $pOutput->writeln(sprintf('<error>DB "%s" is not a valid connection</error>', $DBName));
             return;
         }
         
