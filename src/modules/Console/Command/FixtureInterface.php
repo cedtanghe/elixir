@@ -3,6 +3,7 @@
 namespace Elixir\Module\Console\Command;
 
 use Elixir\DB\DBInterface;
+use Elixir\DI\ContainerInterface;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
@@ -10,6 +11,11 @@ use Elixir\DB\DBInterface;
 
 interface FixtureInterface
 {
+    /**
+     * @param ContainerInterface $pContainer
+     */
+    public function setContainer(ContainerInterface $pContainer);
+    
     /**
      * @param DBInterface $pDB
      */

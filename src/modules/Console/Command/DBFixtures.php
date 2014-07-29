@@ -72,14 +72,14 @@ class DBFixtures extends Command
      */
     protected function execute(InputInterface $pInput, OutputInterface $pOutput)
     {
-        $seeds = [];
+        $fixtures = [];
         $DBName = $pInput->getOption('db');
         
         $class = $pInput->getOption('class');
         
         if(null !== $class)
         {
-            $seeds[] = new $class();
+            $fixtures[$class] = new $class();
         }
         
         $module = $pInput->getOption('module');
@@ -98,15 +98,15 @@ class DBFixtures extends Command
                     
                     if(class_exists($class))
                     {
-                        $seeds[] = new $class();
+                        $fixtures[$class] = new $class();
                     }
                 }
             }
         }
         
-        if(count($seeds) > 0)
+        if(count($fixtures) > 0)
         {
-            usort($seeds, [$this, 'compare']);
+            usort($fixtures, [$this, 'compare']);
             
             $DB = $this->_container->get($DBName);
         
@@ -118,20 +118,12 @@ class DBFixtures extends Command
             
             $DB->begin();
             
-            foreach($seeds as $class)
+            foreach($fixtures as $class => $fixture)
             {
-                try 
-                {
-                    $seed->load($DB);
-                    $pOutput->writeln(sprintf('<info>Loaded: %s</info>', $class));
-                } 
-                catch(\Exception $e)
-                {
-                    $DB->rollback();
-                    $pOutput->writeln(sprintf('<error>An error occurred while attempting to fixtures class "%s"</error>', $class));
-                    
-                    return;
-                }
+                $fixture->setContainer($this->_container);
+                $fixture->load($DB);
+                
+                $pOutput->writeln(sprintf('<info>Loaded: %s</info>', $class));
             }
             
             $DB->commit();
