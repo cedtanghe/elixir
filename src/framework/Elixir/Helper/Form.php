@@ -115,9 +115,9 @@ class Form
      * @param array $pAttributes
      * @return string
      */
-    public function openFormTag(FormInterface $pForm, array $pAttributes = [])
+    public function openFormTag(FormInterface $pForm = null, array $pAttributes = [])
     {
-        $attributes = array_merge($pForm->getAttributes(), $pAttributes);
+        $attributes = array_merge($pForm ? $pForm->getAttributes() : [], $pAttributes);
         
         if(!isset($attributes['name']) && isset($attributes['id']))
         {
@@ -180,7 +180,7 @@ class Form
     /**
      * @param FieldInterface $pField
      * @param boolean $pUseLabel
-     * @param boolean $pUseErr
+     * @param boolean $pUseError
      * @return string
      * @throws \RuntimeException
      */
@@ -238,22 +238,33 @@ class Form
     }
     
     /**
-     * @param FieldInterface $pField
+     * @param FieldInterface|array $pFieldOrErrors
      * @param string $pTag
      * @param array $pAttributes
      * @return string
      */
-    public function fieldErrors(FieldInterface $pField, $pTag = 'ul', array $pAttributes = ['class' => 'form-error'])
+    public function fieldErrors($pFieldOrErrors, $pTag = 'ul', array $pAttributes = ['class' => 'form-error'])
     {
         $result = '';
         
-        if($pField->hasError())
+        if($pFieldOrErrors instanceof FieldInterface)
+        {
+            $errors = (array)$pFieldOrErrors->errors();
+            $hasErrors = $pFieldOrErrors->hasError();
+        }
+        else
+        {
+            $errors = (array)$pFieldOrErrors;
+            $hasErrors = count($errors) > 0;
+        }
+        
+        if($hasErrors)
         {
             if(in_array(strtolower($pTag), ['ul', 'ol']))
             {
                 $result = sprintf('<%s%s>', $pTag, $this->HTMLAtributes($pAttributes));
 
-                foreach((array)$pField->errors() as $error)
+                foreach($errors as $error)
                 {
                     if(empty($error))
                     {
@@ -269,7 +280,7 @@ class Form
             {
                 $result = '';
 
-                foreach((array)$pField->errors() as $error)
+                foreach($errors as $error)
                 {
                     if(empty($error))
                     {
@@ -291,19 +302,36 @@ class Form
     }
     
     /**
-     * @param FieldInterface $pField
+     * @param FieldInterface|mixed $pFieldOrValue
      * @param array $pAttributes
      * @return string
      */
-    public function input(FieldInterface $pField, array $pAttributes = [])
+    public function input($pFieldOrValue = null, array $pAttributes = [])
     {
-        $pField->prepare();
-        $attributes = array_merge($pField->getAttributes(), $pAttributes);
-        
-        if(isset($attributes['value']) && null === $pField->getValue())
+        if($pFieldOrValue instanceof FieldInterface)
         {
-            $pField->setValue($attributes['value'], false);
-            unset($attributes['value']);
+            $pFieldOrValue->prepare();
+            
+            $value = $pFieldOrValue->getValue(false);
+            $attributes = array_merge($pFieldOrValue->getAttributes(), $pAttributes);
+        }
+        else
+        {
+            $value = $pFieldOrValue;
+            $attributes = $pAttributes;
+        }
+        
+        if(isset($attributes['value']) && null === $value)
+        {
+            if($pFieldOrValue instanceof FieldInterface)
+            {
+                $pFieldOrValue->setValue($attributes['value'], false);
+                $value = $pFieldOrValue->getValue(false);
+            }
+            else
+            {
+                $value = $attributes['value'];
+            }
         }
         
         if(!isset($attributes['type']))
@@ -314,87 +342,150 @@ class Form
         return sprintf(
             '<input%s/>', 
             $this->HTMLAtributes(
-                array_merge(
-                    $attributes, 
-                    ['value' => $pField->getValue(false)]
-                )
+                array_merge($attributes, ['value' => $value])
             )
         );
     }
     
     /**
-     * @param FieldInterface $pField
+     * @param FieldInterface|mixed $pFieldOrValue
      * @return string
      */
-    public function CSRF(FieldInterface $pField)
+    public function CSRF($pFieldOrValue, array $pAttributes = [])
     {
-        return $this->input($pField);
+        return $this->input($pFieldOrValue, array_merge($pAttributes, ['type' => 'hidden']));
     }
     
     /**
-     * @param FieldInterface $pField
+     * @param FieldInterface|mixed $pFieldOrValue
      * @param array $pAttributes
      * @return string
      */
-    public function button(FieldInterface $pField, array $pAttributes = [])
+    public function button($pFieldOrValue = null, array $pAttributes = [])
     {
-        $pField->prepare();
-        $attributes = array_merge($pField->getAttributes(), $pAttributes);
-        
-        if(isset($attributes['value']) && null === $pField->getValue())
+        if($pFieldOrValue instanceof FieldInterface)
         {
-            $pField->setValue($attributes['value'], false);
+            $pFieldOrValue->prepare();
+            
+            $value = $pFieldOrValue->getValue(false);
+            $attributes = array_merge($pFieldOrValue->getAttributes(), $pAttributes);
+        }
+        else
+        {
+            $value = $pFieldOrValue;
+            $attributes = $pAttributes;
+        }
+        
+        if(isset($attributes['value']))
+        {
+            if(null === $value)
+            {
+                if($pFieldOrValue instanceof FieldInterface)
+                {
+                    $pFieldOrValue->setValue($attributes['value'], false);
+                    $value = $pFieldOrValue->getValue(false);
+                }
+                else
+                {
+                    $value = $attributes['value'];
+                }
+            }
+            
             unset($attributes['value']);
         }
         
         return sprintf(
             '<button%s>%s</button>', 
             $this->HTMLAtributes($attributes), 
-            $this->HTML($pField->getValue(false))
+            $this->HTML($value)
         );
     }
     
     /**
-     * @param FieldInterface $pField
+     * @param FieldInterface|mixed $pFieldOrValue
      * @param array $pAttributes
      * @return string
      */
-    public function textarea(FieldInterface $pField, array $pAttributes = [])
+    public function textarea($pFieldOrValue = null, array $pAttributes = [])
     {
-        $pField->prepare();
-        $attributes = array_merge($pField->getAttributes(), $pAttributes);
-        
-        if(isset($attributes['value']) && null === $pField->getValue())
+        if($pFieldOrValue instanceof FieldInterface)
         {
-            $pField->setValue($attributes['value'], false);
+            $pFieldOrValue->prepare();
+            
+            $value = $pFieldOrValue->getValue(false);
+            $attributes = array_merge($pFieldOrValue->getAttributes(), $pAttributes);
+        }
+        else
+        {
+            $value = $pFieldOrValue;
+            $attributes = $pAttributes;
+        }
+        
+        if(isset($attributes['value']))
+        {
+            if(null === $value)
+            {
+                if($pFieldOrValue instanceof FieldInterface)
+                {
+                    $pFieldOrValue->setValue($attributes['value'], false);
+                    $value = $pFieldOrValue->getValue(false);
+                }
+                else
+                {
+                    $value = $attributes['value'];
+                }
+            }
+            
             unset($attributes['value']);
         }
         
         return sprintf(
             '<textarea%s>%s</textarea>', 
             $this->HTMLAtributes($attributes), 
-            $this->HTML($pField->getValue(false))
+            $this->HTML($value)
         );
     }
     
     /**
-     * @param FieldInterface $pField
+     * @param FieldInterface|mixed $pFieldOrValue
      * @return string
      */
-    public function select(FieldInterface $pField, array $pAttributes = [], array $pOptions = [])
+    public function select($pFieldOrValue = null, array $pAttributes = [], array $pOptions = [])
     {
-        $pField->prepare();
-        $attributes = array_merge($pField->getAttributes(), $pAttributes);
-        
-        if(isset($attributes['value']) && null === $pField->getValue())
+        if($pFieldOrValue instanceof FieldInterface)
         {
-            $pField->setValue($attributes['value'], false);
+            $pFieldOrValue->prepare();
+            
+            $value = $pFieldOrValue->getValue(false);
+            $attributes = array_merge($pFieldOrValue->getAttributes(), $pAttributes);
+            $options = array_merge($pFieldOrValue->getOptions(), $pOptions);
+        }
+        else
+        {
+            $value = $pFieldOrValue;
+            $attributes = $pAttributes;
+            $options = $pOptions;
+        }
+        
+        if(isset($attributes['value']))
+        {
+            if(null === $value)
+            {
+                if($pFieldOrValue instanceof FieldInterface)
+                {
+                    $pFieldOrValue->setValue($attributes['value'], false);
+                    $value = $pFieldOrValue->getValue(false);
+                }
+                else
+                {
+                    $value = $attributes['value'];
+                }
+            }
+            
             unset($attributes['value']);
         }
         
-        $options = array_merge($pField->getOptions(), $pOptions);
-        
-        $data = $options['data'];
+        $data = (array)$options['data'];
         $dataUseKeys = $options['data-use-keys'];
         
         if(isset($attributes['multiple']) && $attributes['multiple'])
@@ -405,7 +496,7 @@ class Form
             }
         }
         
-        $list = $this->createOptions($pField->getValue(false), $data, $dataUseKeys);
+        $list = $this->createOptions($value, $data, $dataUseKeys);
         
         if(isset($attributes['placeholder']))
         {
@@ -432,7 +523,7 @@ class Form
      * @param boolean $pDataUseKeys
      * @return string
      */
-    protected function createOptions($pValue, $pData, $pDataUseKeys)
+    protected function createOptions($pValue, array $pData, $pDataUseKeys)
     {
         $result = '';
         
@@ -476,23 +567,45 @@ class Form
     }
     
     /**
-     * @param FieldInterface $pField
+     * @param FieldInterface|mixed $pFieldOrValue
      * @param array $pAttributes
      * @param array $pOptions
      * @return string
      */
-    public function checkbox(FieldInterface $pField, array $pAttributes = [], array $pOptions = [])
+    public function checkbox($pFieldOrValue = null, array $pAttributes = [], array $pOptions = [])
     {
-        $pField->prepare();
-        $attributes = array_merge($pField->getAttributes(), $pAttributes);
-        
-        if(isset($attributes['value']) && null === $pField->getValue())
+        if($pFieldOrValue instanceof FieldInterface)
         {
-            $pField->setValue($attributes['value'], false);
-            unset($attributes['value']);
+            $pFieldOrValue->prepare();
+            
+            $value = $pFieldOrValue->getValue(false);
+            $attributes = array_merge($pFieldOrValue->getAttributes(), $pAttributes);
+            $options = array_merge($pFieldOrValue->getOptions(), $pOptions);
+        }
+        else
+        {
+            $value = $pFieldOrValue;
+            $attributes = $pAttributes;
+            $options = $pOptions;
         }
         
-        $options = array_merge($pField->getOptions(), $pOptions);
+       if(isset($attributes['value']))
+        {
+            if(null === $value)
+            {
+                if($pFieldOrValue instanceof FieldInterface)
+                {
+                    $pFieldOrValue->setValue($attributes['value'], false);
+                    $value = $pFieldOrValue->getValue(false);
+                }
+                else
+                {
+                    $value = $attributes['value'];
+                }
+            }
+            
+            unset($attributes['value']);
+        }
         
         $placement = isset($options['placement']) ? $options['placement'] : 'inner';
         if(!in_array($placement, ['inner', 'before', 'after']))
@@ -500,7 +613,7 @@ class Form
             $placement = 'inner';
         }
         
-        $data = $options['data'];
+        $data = (array)$options['data'];
         $dataUseKeys = $options['data-use-keys'];
         $separator = isset($options['separator']) ? $options['separator'] : '';
         
@@ -518,7 +631,7 @@ class Form
         $authorizeBoolean = $count == 1;
         $c = 0;
         
-        foreach($data as $key => $value)
+        foreach($data as $key => $dataValue)
         {
             $a = array_slice($attributes, 0);
             $id = isset($a['id']) ? $a['id'] : $count > 1 ? substr($a['name'], 0, -2) : $a['name'];
@@ -528,9 +641,9 @@ class Form
                 $a['id'] = $id . '-' . ($c + 1);
             }
             
-            $a['value'] = $dataUseKeys ? $key : $value;
+            $a['value'] = $dataUseKeys ? $key : $dataValue;
             
-            foreach((array)$pField->getValue(false) as $v)
+            foreach((array)$value as $v)
             {
                 if($authorizeBoolean)
                 {
@@ -573,14 +686,14 @@ class Form
                             '<label%s>%s%s</label>', 
                             $this->HTMLAtributes($labelAttributes), 
                             $input, 
-                            $value
+                            $dataValue
                         );
                     break;
                     case 'before':
                         $input = sprintf(
                             '<label%s>%s</label>%s', 
                             $this->HTMLAtributes($labelAttributes), 
-                            $value,
+                            $dataValue,
                             $input
                         );
                     break;
@@ -589,7 +702,7 @@ class Form
                             '%s<label%s>%s</label>', 
                             $input,
                             $this->HTMLAtributes($labelAttributes), 
-                            $value
+                            $dataValue
                         );
                     break;
                 }
@@ -610,26 +723,47 @@ class Form
     }
     
     /**
-     * @param FieldInterface $pField
+     * @param FieldInterface|mixed $pFieldOrValue
      * @param array $pAttributes
      * @param array $pOptions
      * @return string
      */
-    public function radio(FieldInterface $pField, array $pAttributes = [], array $pOptions = [])
+    public function radio($pFieldOrValue = null, array $pAttributes = [], array $pOptions = [])
     {
-        $pField->prepare();
-        $attributes = array_merge($pField->getAttributes(), $pAttributes);
-        
-        if(isset($attributes['value']) && null === $pField->getValue())
+        if($pFieldOrValue instanceof FieldInterface)
         {
-            $pField->setValue($attributes['value'], false);
+            $pFieldOrValue->prepare();
+            
+            $value = $pFieldOrValue->getValue(false);
+            $attributes = array_merge($pFieldOrValue->getAttributes(), $pAttributes);
+            $options = array_merge($pFieldOrValue->getOptions(), $pOptions);
+        }
+        else
+        {
+            $value = $pFieldOrValue;
+            $attributes = $pAttributes;
+            $options = $pOptions;
+        }
+        
+        if(isset($attributes['value']))
+        {
+            if(null === $value)
+            {
+                if($pFieldOrValue instanceof FieldInterface)
+                {
+                    $pFieldOrValue->setValue($attributes['value'], false);
+                    $value = $pFieldOrValue->getValue(false);
+                }
+                else
+                {
+                    $value = $attributes['value'];
+                }
+            }
+            
             unset($attributes['value']);
         }
         
-        $options = array_merge($pField->getOptions(), $pOptions);
-        
         $placement = isset($options['placement']) ? $options['placement'] : 'inner';
-        
         if(!in_array($placement, ['inner', 'before', 'after']))
         {
             $placement = 'inner';
@@ -644,7 +778,7 @@ class Form
         $increment = $count > 1;
         $c = 0;
         
-        foreach($data as $key => $value)
+        foreach($data as $key => $dataValue)
         {
             $a = array_slice($attributes, 0);
             $id = isset($a['id']) ? $a['id'] : $a['name'];
@@ -654,9 +788,9 @@ class Form
                 $a['id'] = $id . '-' . ($c + 1);
             }
             
-            $a['value'] = $dataUseKeys ? $key : $value;
+            $a['value'] = $dataUseKeys ? $key : $dataValue;
             
-            if($a['value'] == $pField->getValue(false))
+            if($a['value'] == $value)
             {
                 $a['checked'] = '';
             }
@@ -682,14 +816,14 @@ class Form
                             '<label%s>%s%s</label>', 
                             $this->HTMLAtributes($labelAttributes), 
                             $input, 
-                            $value
+                            $dataValue
                         );
                     break;
                     case 'before':
                         $input = sprintf(
                             '<label%s>%s</label>%s', 
                             $this->HTMLAtributes($labelAttributes), 
-                            $value,
+                            $dataValue,
                             $input
                         );
                     break;
@@ -698,7 +832,7 @@ class Form
                             '%s<label%s>%s</label>', 
                             $input,
                             $this->HTMLAtributes($labelAttributes), 
-                            $value
+                            $dataValue
                         );
                     break;
                 }
@@ -719,23 +853,40 @@ class Form
     }
     
     /**
-     * @param FieldInterface $pField
+     * @param FieldInterface|mixed $pFieldOrValue
      * @param array $pAttributes
      * @param array $pOptions
      * @return string
      */
-    public function file(FieldInterface $pField, array $pAttributes = [], array $pOptions = [])
+    public function file($pFieldOrValue = null, array $pAttributes = [], array $pOptions = [])
     {
-        $pField->prepare();
-        $attributes = array_merge($pField->getAttributes(), $pAttributes);
-        
-        if(isset($attributes['value']) && null === $pField->getValue())
+        if($pFieldOrValue instanceof FieldInterface)
         {
-            $pField->setValue($attributes['value'], false);
-            unset($attributes['value']);
+            $pFieldOrValue->prepare();
+            
+            $value = $pFieldOrValue->getValue(false);
+            $attributes = array_merge($pFieldOrValue->getAttributes(), $pAttributes);
+            $options = array_merge($pFieldOrValue->getOptions(), $pOptions);
+        }
+        else
+        {
+            $value = $pFieldOrValue;
+            $attributes = $pAttributes;
+            $options = $pOptions;
         }
         
-        $options = array_merge($pField->getOptions(), $pOptions);
+        if(isset($attributes['value']))
+        {
+            if(null === $value)
+            {
+                if($pFieldOrValue instanceof FieldInterface)
+                {
+                    $pFieldOrValue->setValue($attributes['value'], false);
+                }
+            }
+            
+            unset($attributes['value']);
+        }
         
         $result = '';
         
