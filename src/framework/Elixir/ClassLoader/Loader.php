@@ -296,7 +296,8 @@ class Loader implements LoaderInterface
      */
     public function addAlias($pAlias, $pClassName)
     {
-        $this->_aliases[$pAlias] = $pClassName;
+        class_alias($pClassName, $pAlias);
+        $this->_aliases[$pAlias] = ltrim($pClassName, '\\');
     }
     
     /**
