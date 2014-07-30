@@ -41,6 +41,11 @@ class Loader implements LoaderInterface
     /**
      * @var array 
      */
+    protected $_aliases = [];
+    
+    /**
+     * @var array 
+     */
     protected $_prefixs = [];
     
     /**
@@ -271,11 +276,53 @@ class Loader implements LoaderInterface
         }
     }
     
+    /**
+     * @param string $pAlias
+     * @return boolean
+     */
+    public function hasAlias($pAlias)
+    {
+        if(isset($this->_aliases[$pAlias]))
+        {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    /**
+     * @param string $pAlias
+     * @param string $pClassName
+     */
+    public function addAlias($pAlias, $pClassName)
+    {
+        $this->_aliases[$pAlias] = $pClassName;
+    }
+    
+    /**
+     * @param string $pAlias
+     * @return string
+     */
+    public function getClassAlias($pAlias)
+    {
+        if(isset($this->_aliases[$pAlias]))
+        {
+            return $this->_aliases[$pAlias];
+        }
+        
+        return $pAlias;
+    }
+    
    /**
     * @see LoaderInterface::loadClass()
     */
     public function loadClass($pClassName) 
     {
+        if($this->hasAlias($pClassName))
+        {
+            $pClassName = $this->getClassAlias($pClassName);
+        }
+        
         if(isset($this->_loaded[$pClassName]))
         {
             return true;
@@ -311,6 +358,11 @@ class Loader implements LoaderInterface
     */
     public function classExist($pClassName)
     {
+        if($this->hasAlias($pClassName))
+        {
+            $pClassName = $this->getClassAlias($pClassName);
+        }
+        
         if(isset($this->_loaded[$pClassName]) || isset($this->_classes[$pClassName]))
         {
             return true;
