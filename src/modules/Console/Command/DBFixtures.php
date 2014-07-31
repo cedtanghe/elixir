@@ -99,15 +99,21 @@ class DBFixtures extends Command
         }
         else
         {
-            $modules = [$module];
+            if(!$this->_application->hasModule($module))
+            {
+                $pOutput->writeln(sprintf('<error>The %s module does not exist</error>', $module));
+                return;
+            }
+            
+            $modules[] = $this->_application->getModule($module);
         }
         
         foreach($modules as $module)
         {
             if($this->_application->hasModule($module))
             {
-                $namespace = $this->_application->getModule($module)->getNamespace();
-                $path = APPLICATION_PATH . '/modules/' . $module . '/database/fixtures/';
+                $namespace = $module->getNamespace();
+                $path = $module->getPath() . '/database/fixtures/';
                 $list = File::filesList($path);
                 
                 foreach($list as $file)
