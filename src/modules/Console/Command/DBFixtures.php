@@ -84,7 +84,25 @@ class DBFixtures extends Command
         
         $module = $pInput->getOption('module');
         
-        if(null !== $module)
+        if(null === $module && null === $class)
+        {
+            $dialog = $this->getHelperSet()->get('dialog');
+
+            if(!$dialog->askConfirmation($pOutput,
+                                         '<question>No modules defined, continue anyway and use all modules ? [y,n]</question>',
+                                         false)) 
+            {
+                return;
+            }
+            
+            $modules = $this->_application->getModules();
+        }
+        else
+        {
+            $modules = [$module];
+        }
+        
+        foreach($modules as $module)
         {
             if($this->_application->hasModule($module))
             {

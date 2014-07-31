@@ -76,7 +76,7 @@ class AssetsImport extends Command
             $dialog = $this->getHelperSet()->get('dialog');
 
             if(!$dialog->askConfirmation($pOutput,
-                                         '<question>No modules defined, continue anyway ? [y,n]</question>',
+                                         '<question>No modules defined, continue anyway and use all modules ? [y,n]</question>',
                                          false)) 
             {
                 return;
