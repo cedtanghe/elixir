@@ -27,7 +27,7 @@ class ServicesHelper implements ProviderInterface
     {
         /************ REQUEST ************/
         
-        $pContainer->set('helper.request', function($pContainer)
+        $pContainer->set('helper.request', function(ContainerInterface $pContainer)
         {
             return $pContainer->get('request');
         }, 
@@ -38,7 +38,7 @@ class ServicesHelper implements ProviderInterface
         
         /************ LOCATOR ************/
         
-        $pContainer->set('helper.locator', function($pContainer)
+        $pContainer->set('helper.locator', function(ContainerInterface $pContainer)
         {
             return new Locator($pContainer->get('application'));
         }, 
@@ -85,7 +85,7 @@ class ServicesHelper implements ProviderInterface
         
         /************ PARTIAL ************/
         
-        $pContainer->set('helper.partial', function($pContainer)
+        $pContainer->set('helper.partial', function(ContainerInterface $pContainer)
         {
             $partial = new Partial();
             $partial->setLocator($pContainer->get('helper.locator'));
@@ -114,7 +114,7 @@ class ServicesHelper implements ProviderInterface
         
         /************ URL ************/
         
-        $pContainer->set('helper.url', function($pContainer)
+        $pContainer->set('helper.url', function(ContainerInterface $pContainer)
         {
             $URL = new URL();
             $URL->setLocator($pContainer->get('helper.locator'));

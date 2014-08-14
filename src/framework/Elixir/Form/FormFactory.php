@@ -98,7 +98,16 @@ class FormFactory
             
             if(method_exists($form, $m))
             {
-                call_user_func_array([$form, $m], !is_array($value) ? [$value] : $value);
+                if(is_array($value) && isset($value['multiple-args']))
+                {
+                    unset($value['multiple-args']);
+                }
+                else
+                {
+                    $value = [$value];
+                }
+
+                call_user_func_array([$form, $m], $value);
             }
         }
         
@@ -220,7 +229,16 @@ class FormFactory
 
                 if(method_exists($item, $m))
                 {
-                    call_user_func_array([$item, $m], !is_array($value) ? [$value] : $value);
+                    if(is_array($value) && isset($value['multiple-args']))
+                    {
+                        unset($value['multiple-args']);
+                    }
+                    else
+                    {
+                        $value = [$value];
+                    }
+
+                    call_user_func_array([$item, $m], $value);
                 }
             }
             

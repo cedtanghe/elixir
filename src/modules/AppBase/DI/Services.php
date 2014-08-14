@@ -45,7 +45,7 @@ class Services implements ProviderInterface
         
         /************ VIEW ************/
         
-        $pContainer->set('view', function($pContainer)
+        $pContainer->set('view', function(ContainerInterface $pContainer)
         {
             $manager = new Manager();
             

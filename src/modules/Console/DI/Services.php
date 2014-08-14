@@ -25,7 +25,7 @@ class Services implements ProviderInterface
     {
         /************ CONSOLE ************/
         
-        $pContainer->set('console', function($pContainer)
+        $pContainer->set('console', function(ContainerInterface $pContainer)
         {
             $application = $pContainer->get('application');
             $console = new Application();
