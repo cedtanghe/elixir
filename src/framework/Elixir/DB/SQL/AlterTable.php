@@ -4,6 +4,7 @@ namespace Elixir\DB\SQL;
 
 use Elixir\DB\SQL\Column;
 use Elixir\DB\SQL\Constraint;
+use Elixir\DB\SQL\SQLAbstract;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
