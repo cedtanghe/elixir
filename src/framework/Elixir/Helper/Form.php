@@ -209,24 +209,24 @@ class Form
         
         $result = '';
         
-        if($pUseLabel && null !== $pField->getLabel())
-        {
-            $attributes = $pField->getAttributes();
-            $labelAttributes = isset($attributes['label']) ? (array)$attributes['label'] : [];
-            
-            $result .= $this->openLabelTag(
-                array_merge(
-                    ['class' => 'form-label', 'for' => $pField->getName()],
-                    $labelAttributes
-                )
-            );
-            
-            $result .= $pField->getLabel();
-            $result .= $this->closeLabelTag();
-        }
-        
         if($render == 'inner')
         {
+            if($pUseLabel && null !== $pField->getLabel())
+            {
+                $attributes = $pField->getAttributes();
+                $labelAttributes = isset($attributes['label']) ? (array)$attributes['label'] : [];
+
+                $result .= $this->openLabelTag(
+                    array_merge(
+                        ['class' => 'form-label', 'for' => $pField->getName()],
+                        $labelAttributes
+                    )
+                );
+
+                $result .= $pField->getLabel();
+                $result .= $this->closeLabelTag();
+            }
+
             $result .= $this->{$pField->getHelper()}($pField);
         }
         else
