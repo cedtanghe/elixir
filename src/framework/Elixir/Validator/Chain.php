@@ -2,6 +2,7 @@
 
 namespace Elixir\Validator;
 
+use Elixir\Facade\Validator;
 use Elixir\Validator\ValidatorAbstract;
 use Elixir\Validator\ValidatorInterface;
 
