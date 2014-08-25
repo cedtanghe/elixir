@@ -2,6 +2,7 @@
 
 namespace Elixir\Filter;
 
+use Elixir\Facade\Filter;
 use Elixir\Filter\FilterAbstract;
 use Elixir\Filter\FilterInterface;
 
@@ -30,10 +31,10 @@ class Chain extends FilterAbstract
     }
 
     /**
-     * @param FilterInterface $pFilter
+     * @param FilterInterface|callable|string $pFilter
      * @param array $pOptions
      */
-    public function addFilter(FilterInterface $pFilter, array $pOptions = [])
+    public function addFilter($pFilter, array $pOptions = [])
     {
         $this->_filters[] = ['filter' => $pFilter, 'options' => $pOptions];
     }
@@ -81,7 +82,19 @@ class Chain extends FilterAbstract
         
         foreach($this->_filters as $data)
         {
-            $pContent = $data['filter']->filter($pContent, $data['options']);
+            if($data['filter'] instanceof FilterInterface)
+            {
+                $pContent = $data['filter']->filter($pContent, $data['options']);
+            }
+            else if(is_callable($data['filter']))
+            {
+                $pContent = call_user_func_array($data['filter'], [$pContent, $data['options']]);
+            }
+            else
+            {
+                $pContent = Filter::filter($data['filter'], $pContent, $data['options']);
+            }
+            
             $this->_steps[] = $pContent;
         }
         

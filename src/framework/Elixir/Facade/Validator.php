@@ -78,18 +78,27 @@ class Validator extends FacadeAbstract
      * @param string $pClassOrKey
      * @param string $pContent
      * @param array $pOptions
-     * @return boolean
+     * @return boolean|array
      */
     public static function valid($pClassOrKey, $pContent, array $pOptions = [])
     {
         $validator = static::resolveInstance($pClassOrKey);
-        return $validator->isValid($pContent, $pOptions);
+        $valid = $validator->isValid($pContent, $pOptions);
+        
+        if(isset($pOptions['with-errors']) && $pOptions['with-errors'])
+        {
+            return ['valid' => $valid, 'errors' => $validator->errors()];
+        }
+        else
+        {
+            return $valid;
+        }
     }
     
     /**
      * @param string $pMethod
      * @param array $pArguments
-     * @return boolean
+     * @return mixed
      * @throws \LogicException
      */
     public static function __callStatic($pMethod, $pArguments)

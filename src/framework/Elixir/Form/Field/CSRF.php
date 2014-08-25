@@ -2,7 +2,7 @@
 
 namespace Elixir\Form\Field;
 
-use Elixir\Filter\FilterInterface;
+use Elixir\Facade\Validator;
 use Elixir\Form\Field\FieldAbstract;
 use Elixir\Form\Field\FieldEvent;
 use Elixir\Validator\CSRF as CSRFValidator;
@@ -20,7 +20,7 @@ class CSRF extends FieldAbstract
     const HIDDEN = 'hidden';
     
     /**
-     * @var CSRFValidator
+     * @var CSRFValidator|callable|string
      */
     protected $_CSRFValidator;
     
@@ -49,10 +49,10 @@ class CSRF extends FieldAbstract
     }
     
     /**
-     * @param CSRFValidator $pValidator
+     * @param CSRFValidator|callable|string $pValidator
      * @param array $pOptions
      */
-    public function setCSRFValidator(CSRFValidator $pValidator, array $pOptions = [])
+    public function setCSRFValidator($pValidator, array $pOptions = [])
     {
         $this->_CSRFValidator = $pValidator;
         
@@ -63,7 +63,7 @@ class CSRF extends FieldAbstract
     }
     
     /**
-     * @return CSRFValidator
+     * @return mixed
      */
     public function getCSRFValidator()
     {
@@ -129,25 +129,18 @@ class CSRF extends FieldAbstract
     
     /**
      * @see FieldAbstract::addValidator()
-     * @throws \LogicException
      */
-    public function addValidator(ValidatorInterface $pValidator, array $pOptions = [])
+    public function addValidator($pValidator, array $pOptions = [])
     {
-        if($pValidator instanceof CSRFValidator)
-        {
-            $this->setCSRFValidator($pValidator);
-            $this->setCSRFValidatorOptions($pOptions);
-            return;
-        }
-        
-        throw new \LogicException('CSRF field accepts only validator type "\Elixir\Validator\CSRF".');
+        $this->setCSRFValidator($pValidator);
+        $this->setCSRFValidatorOptions($pOptions);
     }
     
     /**
      * @see FieldAbstract::addFilter()
      * @throws \LogicException
      */
-    public function addFilter(FilterInterface $pFilter, array $pOptions = [], $pType = self::FILTER_OUT)
+    public function addFilter($pFilter, array $pOptions = [], $pType = self::FILTER_OUT)
     {
         throw new \LogicException('No filter available for CSRF field.');
     }
@@ -187,9 +180,50 @@ class CSRF extends FieldAbstract
         $this->dispatch($event);
         $this->_value = $event->getValue();
         
-        if(!$this->getCSRFValidator()->isValid($this->getName(), $this->getCSRFValidatorOptions()))
+        $validator = $this->getCSRFValidator();
+        $options = $this->getCSRFValidatorOptions();
+        
+        if($validator instanceof ValidatorInterface)
         {
-            $this->_errors = (array)$this->getCSRFValidator()->errors();
+            $valid = $validator->isValid($this->getName(), $options);
+            $errors = $validator->errors();
+        }
+        else if(is_callable($validator))
+        {
+            $result = call_user_func_array(
+                $validator, 
+                [
+                    $this->getName(), 
+                    array_merge($options, ['with-errors' => true])
+                ]
+            );
+
+            if(is_array($result))
+            {
+                $valid = $result['valid'];
+                $errors = $result['errors'];
+            }
+            else
+            {
+                $valid = $result;
+                $errors = $valid ? [] : [isset($data['options']['error']) ? $data['options']['error'] : false];
+            }
+        }
+        else
+        {
+            $result = Validator::valid(
+                $validator, 
+                $this->getName(), 
+                array_merge($options, ['with-errors' => true])
+            );
+
+            $valid = $result['valid'];
+            $errors = $result['errors'];
+        }
+        
+        if(!$valid)
+        {
+            $this->_errors = (array)$errors;
         }
         
         return !$this->hasError();

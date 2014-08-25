@@ -246,7 +246,7 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method_addValidator">addValidator</a>(<a href="../../Elixir/Validator/ValidatorInterface.html"><abbr title="Elixir\Validator\ValidatorInterface">ValidatorInterface</abbr></a> $pValidator, array $pOptions = array())
+                    <a href="#method_addValidator">addValidator</a>(<a href="../../Elixir/Validator/ValidatorInterface.html"><abbr title="Elixir\Validator\ValidatorInterface">ValidatorInterface</abbr></a>|<abbr title="Elixir\HTTP\callable">callable</abbr>|string $pValidator, array $pOptions = array())
                     <p>
 </p>
                 </td>
@@ -279,7 +279,7 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method_addFilter">addFilter</a>(<a href="../../Elixir/Filter/FilterInterface.html"><abbr title="Elixir\Filter\FilterInterface">FilterInterface</abbr></a> $pFilter, array $pOptions = array())
+                    <a href="#method_addFilter">addFilter</a>(<a href="../../Elixir/Filter/FilterInterface.html"><abbr title="Elixir\Filter\FilterInterface">FilterInterface</abbr></a>|<abbr title="Elixir\HTTP\callable">callable</abbr>|string $pFilter, array $pOptions = array())
                     <p>
 </p>
                 </td>
@@ -390,7 +390,7 @@
         <h2>Details</h2>
 
                         <h3 id="method___construct">
-        <div class="location">at line 92</div>
+        <div class="location">at line 94</div>
         <code>            public            
     <strong>__construct</strong>(string $pName = null)</code>
     </h3>
@@ -418,7 +418,7 @@
     </div>
 
                 <h3 id="method_setName">
-        <div class="location">at line 103</div>
+        <div class="location">at line 105</div>
         <code>            public            
     <strong>setName</strong>(string $pValue)</code>
     </h3>
@@ -446,7 +446,7 @@
     </div>
 
                 <h3 id="method_getName">
-        <div class="location">at line 112</div>
+        <div class="location">at line 114</div>
         <code>            public            string
     <strong>getName</strong>()</code>
     </h3>
@@ -473,7 +473,7 @@
     </div>
 
                 <h3 id="method_getFileName">
-        <div class="location">at line 120</div>
+        <div class="location">at line 122</div>
         <code>            public            string|array
     <strong>getFileName</strong>()</code>
     </h3>
@@ -500,7 +500,7 @@
     </div>
 
                 <h3 id="method_getTempName">
-        <div class="location">at line 146</div>
+        <div class="location">at line 148</div>
         <code>            public            string|array
     <strong>getTempName</strong>()</code>
     </h3>
@@ -527,7 +527,7 @@
     </div>
 
                 <h3 id="method_hasMultipleFiles">
-        <div class="location">at line 167</div>
+        <div class="location">at line 169</div>
         <code>            public            boolean
     <strong>hasMultipleFiles</strong>()</code>
     </h3>
@@ -554,7 +554,7 @@
     </div>
 
                 <h3 id="method_setErrorMessage">
-        <div class="location">at line 175</div>
+        <div class="location">at line 177</div>
         <code>            public            
     <strong>setErrorMessage</strong>(string $pValue)</code>
     </h3>
@@ -582,7 +582,7 @@
     </div>
 
                 <h3 id="method_getErrorMessage">
-        <div class="location">at line 183</div>
+        <div class="location">at line 185</div>
         <code>            public            string
     <strong>getErrorMessage</strong>()</code>
     </h3>
@@ -609,7 +609,7 @@
     </div>
 
                 <h3 id="method_setErrorMessageTemplate">
-        <div class="location">at line 192</div>
+        <div class="location">at line 194</div>
         <code>            public            
     <strong>setErrorMessageTemplate</strong>(string $pKey, string $pValue)</code>
     </h3>
@@ -643,7 +643,7 @@
     </div>
 
                 <h3 id="method_getErrorMessageTemplate">
-        <div class="location">at line 202</div>
+        <div class="location">at line 204</div>
         <code>            public            mixed
     <strong>getErrorMessageTemplate</strong>(string $pKey, mixed $pDefault = null)</code>
     </h3>
@@ -687,7 +687,7 @@
     </div>
 
                 <h3 id="method_getErrorMessageTemplates">
-        <div class="location">at line 215</div>
+        <div class="location">at line 217</div>
         <code>            public            array
     <strong>getErrorMessageTemplates</strong>()</code>
     </h3>
@@ -714,7 +714,7 @@
     </div>
 
                 <h3 id="method_setErrorMessageTemplates">
-        <div class="location">at line 223</div>
+        <div class="location">at line 225</div>
         <code>            public            
     <strong>setErrorMessageTemplates</strong>(array $pData)</code>
     </h3>
@@ -742,7 +742,7 @@
     </div>
 
                 <h3 id="method_setErrorBreak">
-        <div class="location">at line 236</div>
+        <div class="location">at line 238</div>
         <code>            public            
     <strong>setErrorBreak</strong>(boolean $pValue)</code>
     </h3>
@@ -770,7 +770,7 @@
     </div>
 
                 <h3 id="method_isErrorBreak">
-        <div class="location">at line 244</div>
+        <div class="location">at line 246</div>
         <code>            public            boolean
     <strong>isErrorBreak</strong>()</code>
     </h3>
@@ -797,9 +797,9 @@
     </div>
 
                 <h3 id="method_addValidator">
-        <div class="location">at line 253</div>
+        <div class="location">at line 255</div>
         <code>            public            
-    <strong>addValidator</strong>(<a href="../../Elixir/Validator/ValidatorInterface.html"><abbr title="Elixir\Validator\ValidatorInterface">ValidatorInterface</abbr></a> $pValidator, array $pOptions = array())</code>
+    <strong>addValidator</strong>(<a href="../../Elixir/Validator/ValidatorInterface.html"><abbr title="Elixir\Validator\ValidatorInterface">ValidatorInterface</abbr></a>|<abbr title="Elixir\HTTP\callable">callable</abbr>|string $pValidator, array $pOptions = array())</code>
     </h3>
     <div class="details">
         <p>
@@ -811,7 +811,7 @@
 
                     <table>
                     <tr>
-                <td><a href="../../Elixir/Validator/ValidatorInterface.html"><abbr title="Elixir\Validator\ValidatorInterface">ValidatorInterface</abbr></a></td>
+                <td><a href="../../Elixir/Validator/ValidatorInterface.html"><abbr title="Elixir\Validator\ValidatorInterface">ValidatorInterface</abbr></a>|<abbr title="Elixir\HTTP\callable">callable</abbr>|string</td>
                 <td>$pValidator</td>
                 <td>
 </td>
@@ -831,7 +831,7 @@
     </div>
 
                 <h3 id="method_getValidators">
-        <div class="location">at line 261</div>
+        <div class="location">at line 263</div>
         <code>            public            array
     <strong>getValidators</strong>()</code>
     </h3>
@@ -858,7 +858,7 @@
     </div>
 
                 <h3 id="method_setValidators">
-        <div class="location">at line 269</div>
+        <div class="location">at line 271</div>
         <code>            public            
     <strong>setValidators</strong>(array $pData)</code>
     </h3>
@@ -886,9 +886,9 @@
     </div>
 
                 <h3 id="method_addFilter">
-        <div class="location">at line 296</div>
+        <div class="location">at line 298</div>
         <code>            public            
-    <strong>addFilter</strong>(<a href="../../Elixir/Filter/FilterInterface.html"><abbr title="Elixir\Filter\FilterInterface">FilterInterface</abbr></a> $pFilter, array $pOptions = array())</code>
+    <strong>addFilter</strong>(<a href="../../Elixir/Filter/FilterInterface.html"><abbr title="Elixir\Filter\FilterInterface">FilterInterface</abbr></a>|<abbr title="Elixir\HTTP\callable">callable</abbr>|string $pFilter, array $pOptions = array())</code>
     </h3>
     <div class="details">
         <p>
@@ -900,7 +900,7 @@
 
                     <table>
                     <tr>
-                <td><a href="../../Elixir/Filter/FilterInterface.html"><abbr title="Elixir\Filter\FilterInterface">FilterInterface</abbr></a></td>
+                <td><a href="../../Elixir/Filter/FilterInterface.html"><abbr title="Elixir\Filter\FilterInterface">FilterInterface</abbr></a>|<abbr title="Elixir\HTTP\callable">callable</abbr>|string</td>
                 <td>$pFilter</td>
                 <td>
 </td>
@@ -920,7 +920,7 @@
     </div>
 
                 <h3 id="method_getFilters">
-        <div class="location">at line 304</div>
+        <div class="location">at line 306</div>
         <code>            public            array
     <strong>getFilters</strong>()</code>
     </h3>
@@ -947,7 +947,7 @@
     </div>
 
                 <h3 id="method_setFilters">
-        <div class="location">at line 312</div>
+        <div class="location">at line 314</div>
         <code>            public            
     <strong>setFilters</strong>(array $pData)</code>
     </h3>
@@ -975,7 +975,7 @@
     </div>
 
                 <h3 id="method_getFileInfo">
-        <div class="location">at line 339</div>
+        <div class="location">at line 341</div>
         <code>            public            array
     <strong>getFileInfo</strong>()</code>
     </h3>
@@ -1002,7 +1002,7 @@
     </div>
 
                 <h3 id="method_isUploaded">
-        <div class="location">at line 365</div>
+        <div class="location">at line 367</div>
         <code>            public            boolean
     <strong>isUploaded</strong>()</code>
     </h3>
@@ -1029,7 +1029,7 @@
     </div>
 
                 <h3 id="method_isValid">
-        <div class="location">at line 388</div>
+        <div class="location">at line 390</div>
         <code>            public            boolean
     <strong>isValid</strong>()</code>
     </h3>
@@ -1056,7 +1056,7 @@
     </div>
 
                 <h3 id="method_receive">
-        <div class="location">at line 452</div>
+        <div class="location">at line 492</div>
         <code>            public            boolean
     <strong>receive</strong>()</code>
     </h3>
@@ -1083,7 +1083,7 @@
     </div>
 
                 <h3 id="method_hasError">
-        <div class="location">at line 499</div>
+        <div class="location">at line 550</div>
         <code>            public            boolean
     <strong>hasError</strong>()</code>
     </h3>
@@ -1110,7 +1110,7 @@
     </div>
 
                 <h3 id="method_errors">
-        <div class="location">at line 507</div>
+        <div class="location">at line 558</div>
         <code>            public            string|array
     <strong>errors</strong>()</code>
     </h3>
@@ -1137,7 +1137,7 @@
     </div>
 
                 <h3 id="method_reset">
-        <div class="location">at line 522</div>
+        <div class="location">at line 573</div>
         <code>            public            
     <strong>reset</strong>()</code>
     </h3>

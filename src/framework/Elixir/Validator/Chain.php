@@ -17,10 +17,10 @@ class Chain extends ValidatorAbstract
     protected $_validators = [];
     
     /**
-     * @param ValidatorInterface $pValidator
+     * @param ValidatorInterface|callable|string $pValidator
      * @param array $pOptions
      */
-    public function addValidator(ValidatorInterface $pValidator, array $pOptions = [])
+    public function addValidator($pValidator, array $pOptions = [])
     {
         $this->_validators[] = ['validator' => $pValidator, 'options' => $pOptions];
     }
@@ -69,9 +69,47 @@ class Chain extends ValidatorAbstract
         
         foreach($this->_validators as $data)
         {
-            if(!$data['validator']->isValid($pContent, $data['options']))
+            if($data['validator'] instanceof ValidatorInterface)
             {
-                $this->_errors = array_merge($this->_errors, (array)$data['validator']->errors());
+                $valid = $data['validator']->isValid($pContent, $data['options']);
+                $errors = $data['validator']->errors();
+            }
+            else if(is_callable($data['validator']))
+            {
+                $result = call_user_func_array(
+                    $data['validator'], 
+                    [
+                        $pContent, 
+                        array_merge($data['options'], ['with-errors' => true])
+                    ]
+                );
+
+                if(is_array($result))
+                {
+                    $valid = $result['valid'];
+                    $errors = $result['errors'];
+                }
+                else
+                {
+                    $valid = $result;
+                    $errors = $valid ? [] : [isset($data['options']['error']) ? $data['options']['error'] : false];
+                }
+            }
+            else
+            {
+                $result = Validator::valid(
+                    $data['validator'], 
+                    $pContent, 
+                    array_merge($data['options'], ['with-errors' => true])
+                );
+
+                $valid = $result['valid'];
+                $errors = $result['errors'];
+            }
+            
+            if(!$valid)
+            {
+                $this->_errors = array_merge($this->_errors, (array)$errors);
             }
         }
         

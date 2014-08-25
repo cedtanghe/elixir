@@ -2,6 +2,8 @@
 
 namespace Elixir\HTTP;
 
+use Elixir\Facade\Filter;
+use Elixir\Facade\Validator;
 use Elixir\Filter\FilterInterface;
 use Elixir\Validator\ValidatorInterface;
 
@@ -247,10 +249,10 @@ class Uploader
     }
     
     /**
-     * @param ValidatorInterface $pValidator
+     * @param ValidatorInterface|callable|string $pValidator
      * @param array $pOptions
      */
-    public function addValidator(ValidatorInterface $pValidator, array $pOptions = [])
+    public function addValidator($pValidator, array $pOptions = [])
     {
         $this->_validators[] = ['validator' => $pValidator, 'options' => $pOptions];
     }
@@ -290,10 +292,10 @@ class Uploader
     }
     
     /**
-     * @param FilterInterface $pFilter
+     * @param FilterInterface|callable|string $pFilter
      * @param array $pOptions
      */
-    public function addFilter(FilterInterface $pFilter, array $pOptions = [])
+    public function addFilter($pFilter, array $pOptions = [])
     {
         $this->_filters[] = ['filter' => $pFilter, 'options' => $pOptions];
     }
@@ -400,11 +402,49 @@ class Uploader
                     case UPLOAD_ERR_OK:
                         if(is_uploaded_file($file['tmp_name']))
                         {
-                            foreach($this->_validators as $validator)
+                            foreach($this->_validators as $data)
                             {
-                                if(!$validator['validator']->isValid($file, $validator['options']))
+                                if($data['validator'] instanceof ValidatorInterface)
                                 {
-                                    $this->_errors = array_merge($this->_errors, (array)$validator['validator']->errors());
+                                    $valid = $data['validator']->isValid($file, $data['options']);
+                                    $errors = $data['validator']->errors();
+                                }
+                                else if(is_callable($data['validator']))
+                                {
+                                    $result = call_user_func_array(
+                                        $data['validator'], 
+                                        [
+                                            $file, 
+                                            array_merge($data['options'], ['with-errors' => true])
+                                        ]
+                                    );
+
+                                    if(is_array($result))
+                                    {
+                                        $valid = $result['valid'];
+                                        $errors = $result['errors'];
+                                    }
+                                    else
+                                    {
+                                        $valid = $result;
+                                        $errors = $valid ? [] : [isset($data['options']['error']) ? $data['options']['error'] : false];
+                                    }
+                                }
+                                else
+                                {
+                                    $result = Validator::valid(
+                                        $data['validator'], 
+                                        $file, 
+                                        array_merge($data['options'], ['with-errors' => true])
+                                    );
+
+                                    $valid = $result['valid'];
+                                    $errors = $result['errors'];
+                                }
+                                
+                                if(!$valid)
+                                {
+                                    $this->_errors = array_merge($this->_errors, (array)$errors);
                                 
                                     if($this->_errorBreak)
                                     {
@@ -464,9 +504,20 @@ class Uploader
             
             foreach($filesInfos as $file)
             {
-                foreach($this->_filters as $filter)
+                foreach($this->_filters as $data)
                 {
-                    $file = $filter['filter']->filter($file, $filter['options']);
+                    if($data['filter'] instanceof FilterInterface)
+                    {
+                        $file = $data['filter']->filter($file, $data['options']);
+                    }
+                    else if(is_callable($data['filter']))
+                    {
+                        $file = call_user_func_array($data['filter'], [$file, $data['options']]);
+                    }
+                    else
+                    {
+                        $file = Filter::filter($data['filter'], $file, $data['options']);
+                    }
                 }
                 
                 if(move_uploaded_file($file['tmp_name'], $file['name']))

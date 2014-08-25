@@ -3,6 +3,8 @@
 namespace Elixir\Form\Field;
 
 use Elixir\Dispatcher\Dispatcher;
+use Elixir\Facade\Filter;
+use Elixir\Facade\Validator;
 use Elixir\Filter\FilterInterface;
 use Elixir\Form\Field\FieldEvent;
 use Elixir\Form\Field\FieldInterface;
@@ -359,10 +361,10 @@ abstract class FieldAbstract extends Dispatcher implements FieldInterface
     }
 
     /**
-     * @param ValidatorInterface $pValidator
+     * @param ValidatorInterface|callable|string $pValidator
      * @param array $pOptions
      */
-    public function addValidator(ValidatorInterface $pValidator, array $pOptions = [])
+    public function addValidator($pValidator, array $pOptions = [])
     {
         $this->_validators[] = ['validator' => $pValidator, 'options' => $pOptions];
     }
@@ -402,11 +404,11 @@ abstract class FieldAbstract extends Dispatcher implements FieldInterface
     }
 
     /**
-     * @param FilterInterface $pFilter
+     * @param FilterInterface|callable|string $pFilter
      * @param array $pOptions
      * @param integer $pType
      */
-    public function addFilter(FilterInterface $pFilter, array $pOptions = [], $pType = self::FILTER_OUT)
+    public function addFilter($pFilter, array $pOptions = [], $pType = self::FILTER_OUT)
     {
         $this->_filters[] = ['filter' => $pFilter, 'options' => $pOptions, 'type' => $pType];
     }
@@ -462,7 +464,18 @@ abstract class FieldAbstract extends Dispatcher implements FieldInterface
             {
                 if(($data['type'] & self::FILTER_IN) == self::FILTER_IN)
                 {
-                    $pValue = $data['filter']->filter($pValue, $data['options']);
+                    if($data['filter'] instanceof FilterInterface)
+                    {
+                        $pValue = $data['filter']->filter($pValue, $data['options']);
+                    }
+                    else if(is_callable($data['filter']))
+                    {
+                        $pValue = call_user_func_array($data['filter'], [$pValue, $data['options']]);
+                    }
+                    else
+                    {
+                        $pValue = Filter::filter($data['filter'], $pValue, $data['options']);
+                    }
                 }
             }
         }
@@ -483,7 +496,18 @@ abstract class FieldAbstract extends Dispatcher implements FieldInterface
             {
                 if(($data['type'] & self::FILTER_OUT) == self::FILTER_OUT)
                 {
-                    $value = $data['filter']->filter($value, $data['options']);
+                    if($data['filter'] instanceof FilterInterface)
+                    {
+                        $value = $data['filter']->filter($value, $data['options']);
+                    }
+                    else if(is_callable($data['filter']))
+                    {
+                        $value = call_user_func_array($data['filter'], [$value, $data['options']]);
+                    }
+                    else
+                    {
+                        $value = $data['filter']->filter($value, $data['options']);
+                    }
                 }
             }
         }
@@ -556,9 +580,47 @@ abstract class FieldAbstract extends Dispatcher implements FieldInterface
         {
             foreach($this->_validators as $data)
             {
-                if(!$data['validator']->isValid($this->_value, $data['options']))
+                if($data['validator'] instanceof ValidatorInterface)
                 {
-                    $this->_errors = array_unique(array_merge($this->_errors, (array)$data['validator']->errors()));
+                    $valid = $data['validator']->isValid($this->_value, $data['options']);
+                    $errors = $data['validator']->errors();
+                }
+                else if(is_callable($data['validator']))
+                {
+                    $result = call_user_func_array(
+                        $data['validator'], 
+                        [
+                            $this->_value, 
+                            array_merge($data['options'], ['with-errors' => true])
+                        ]
+                    );
+                    
+                    if(is_array($result))
+                    {
+                        $valid = $result['valid'];
+                        $errors = $result['errors'];
+                    }
+                    else
+                    {
+                        $valid = $result;
+                        $errors = $valid ? [] : [isset($data['options']['error']) ? $data['options']['error'] : false];
+                    }
+                }
+                else
+                {
+                    $result = Validator::valid(
+                        $data['validator'], 
+                        $this->_value, 
+                        array_merge($data['options'], ['with-errors' => true])
+                    );
+                    
+                    $valid = $result['valid'];
+                    $errors = $result['errors'];
+                }
+                
+                if(!$valid)
+                {
+                    $this->_errors = array_unique(array_merge($this->_errors, (array)$errors));
                     
                     if($this->_errorBreak)
                     {
