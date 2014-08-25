@@ -24,7 +24,7 @@ class Button extends FieldAbstract
      * @var string
      */
     const BUTTON = 'button';
-    
+
     /**
      * @see FieldAbstract::__construct()
      */
@@ -48,5 +48,19 @@ class Button extends FieldAbstract
     public function getType()
     {
         return $this->getAttribute('type');
+    }
+    
+    /**
+     * @see FieldAbstract::setValue()
+     */
+    public function setValue($pValue, $pFiltered = true)
+    {
+        $old = $this->_value;
+        parent::setValue($pValue, $pFiltered);
+        
+        if(empty($this->_value))
+        {
+            $this->_value = $old;
+        }
     }
 }

@@ -180,4 +180,21 @@ class Input extends FieldAbstract
         
         parent::setAttribute($pKey, $pValue);
     }
+    
+    /**
+     * @see FieldAbstract::setValue()
+     */
+    public function setValue($pValue, $pFiltered = true)
+    {
+        $old = $this->_value;
+        parent::setValue($pValue, $pFiltered);
+        
+        if(in_array($this->getType(), [self::BUTTON, self::SUBMIT, self::RESET]))
+        {
+            if(empty($this->_value))
+            {
+                $this->_value = $old;
+            }
+        }
+    }
 }

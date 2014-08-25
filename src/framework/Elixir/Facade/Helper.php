@@ -44,11 +44,13 @@ class Helper extends FacadeAbstract
         {
             if(strpos($key, '\\'))
             {
-                $key = end(explode('\\', $key));
+                $key = explode('\\', $key);
+                $key = end($key);
             }
             else if(strpos($key, '_'))
             {
-                $key = end(explode('_', $key));
+                $key = explode('_', $key);
+                $key = end($key);
             }
             
             $key = 'helper.' . strtolower($key);

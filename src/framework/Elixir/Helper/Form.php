@@ -80,7 +80,7 @@ class Form
             $result .= $this->field($field, $pUseLabel, $pUseError) . $pSeparator;
         }
         
-        if(null !== $pForm->getParent())
+        if(null === $pForm->getParent())
         {
             return $this->openFormTag($pForm) . $result . $this->closeFormTag();
         }
