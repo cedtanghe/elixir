@@ -73,6 +73,11 @@ class Form
     {
         $pForm->prepare();
         
+        if(is_callable($pForm->getHelper()))
+        {
+            return call_user_func_array($pForm->getHelper(), [$pForm]);
+        }
+        
         $result = '';
         
         foreach($pForm->gets() as $field)
