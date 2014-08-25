@@ -75,7 +75,7 @@ class Form
         
         if(is_callable($pForm->getHelper()))
         {
-            return call_user_func_array($pForm->getHelper(), [$pForm]);
+            return call_user_func_array($pForm->getHelper(), [$pForm, $this]);
         }
         
         $result = '';
