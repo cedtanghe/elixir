@@ -402,15 +402,9 @@ class Container extends Dispatcher implements ContainerInterface
      * @param mixed $pTags
      * @param mixed $pAliases
      * @throws \LogicException
-     * @throws \InvalidArgumentException
      */
-    public function protect($pKey, $pValue, $pTags = [], $pAliases = [])
+    public function protect($pKey, callable $pValue, $pTags = [], $pAliases = [])
     {
-        if(!is_callable($pValue))
-        {
-            throw new \InvalidArgumentException('Value argument must be a callable.');
-        }
-        
         switch($this->_lockMode)
         {
             case self::READ_ONLY:
@@ -451,18 +445,12 @@ class Container extends Dispatcher implements ContainerInterface
     
     /**
      * @see ContainerInterface::extend()
-     * @throws \InvalidArgumentException
      */
-    public function extend($pKey, $pValue)
+    public function extend($pKey, callable $pValue)
     {
         if(!$this->has($pKey))
         {
             throw new \InvalidArgumentException(sprintf('Key "%s" is not defined.', $pKey));
-        }
-        
-        if(!is_callable($pValue))
-        {
-            throw new \InvalidArgumentException('Value argument must be a callable.');
         }
         
         if(isset($this->_aliases[$pKey]))

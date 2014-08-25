@@ -18,15 +18,9 @@ class Helper extends FacadeAbstract
     /**
      * @param string $pMethod
      * @param callable $pMacro
-     * @throws \InvalidArgumentException
      */
-    public static function macro($pMethod, $pMacro)
+    public static function macro($pMethod, callable $pMacro)
     {
-        if(!is_callable($pMacro))
-        {
-            throw new \InvalidArgumentException('Macro argument must be a callable.');
-        }
-        
         static::$_macros[$pMethod] = $pMacro;
     }
     

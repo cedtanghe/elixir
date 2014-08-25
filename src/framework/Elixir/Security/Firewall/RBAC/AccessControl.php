@@ -156,15 +156,9 @@ class AccessControl extends AccessControlAbstract
     
     /**
      * @param callable $pValue
-     * @throws \InvalidArgumentException
      */
-    public function setAssert($pValue)
+    public function setAssert(callable $pValue)
     {
-        if(!is_callable($pValue))
-        {
-            throw new \InvalidArgumentException(sprintf('Assert method for "%s" must be a callable.', $this->_pattern));
-        }
-            
         $this->_options['assert'] = $pValue;
     }
     

@@ -20,7 +20,7 @@ interface DispatcherInterface
      * @param callable $pCallback
      * @param integer $pPriority 
      */
-    public function addListener($pType, $pCallback, $pPriority = 0);
+    public function addListener($pType, callable $pCallback, $pPriority = 0);
     
     /**
      * @return array
@@ -31,7 +31,7 @@ interface DispatcherInterface
      * @param string $pType
      * @param callable $pCallback 
      */
-    public function removeListener($pType, $pCallback);
+    public function removeListener($pType, callable $pCallback);
     
     public function removeListeners();
     

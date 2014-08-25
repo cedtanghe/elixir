@@ -198,15 +198,9 @@ abstract class SQLAbstract
     
     /**
      * @param callable $pValue
-     * @throws \InvalidArgumentException
      */
-    public function setQuoteMethod($pValue)
+    public function setQuoteMethod(callable $pValue)
     {
-        if(!is_callable($pValue))
-        {
-            throw new \InvalidArgumentException('The "quote" method must be a callable.');
-        }
-        
         $this->_quoteMethod = $pValue;
     }
     

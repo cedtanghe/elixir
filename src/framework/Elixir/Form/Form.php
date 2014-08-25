@@ -17,6 +17,11 @@ use Elixir\Form\FormInterface;
 class Form extends Dispatcher implements FormInterface
 {
     /**
+     * @var callable|null
+     */
+    protected $_helper;
+    
+    /**
      * @var boolean
      */
     protected $_submit = false;
@@ -144,6 +149,22 @@ class Form extends Dispatcher implements FormInterface
     public function getAction()
     {
         return $this->getAttribute('action');
+    }
+    
+    /**
+     * @see FormInterface::setHelper()
+     */
+    public function setHelper(callable $pValue)
+    {
+        $this->_helper = $pValue;
+    }
+    
+    /**
+     * @see FormInterface::getHelper()
+     */
+    public function getHelper()
+    {
+        return $this->_helper;
     }
     
     /**

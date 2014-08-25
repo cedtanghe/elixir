@@ -25,5 +25,5 @@ interface RBACInterface
      * @param callable $pAssert
      * @return boolean
      */
-    public function isGranted($pRole, $pPermission = null, $pAssert = null);
+    public function isGranted($pRole, $pPermission = null, callable $pAssert = null);
 }

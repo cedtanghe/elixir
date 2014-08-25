@@ -46,15 +46,9 @@ class Plural
     /**
      * @param string $pLocale
      * @param callable $pRule
-     * @throws \InvalidArgumentException
      */
-    public function addRule($pLocale, $pRule)
+    public function addRule($pLocale, callable $pRule)
     {
-        if(!is_callable($pRule))
-        {
-            throw new \InvalidArgumentException('Rule argument must be a callable.');
-        }
-        
         $this->_rules[$pLocale] = $pRule;
     }
     

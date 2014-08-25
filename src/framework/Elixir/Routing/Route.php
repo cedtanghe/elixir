@@ -394,15 +394,9 @@ class Route
     
     /**
      * @param callable $pValue
-     * @throws \InvalidArgumentException
      */
-    public function setAssert($pValue)
+    public function setAssert(callable $pValue)
     {
-        if(!is_callable($pValue))
-        {
-            throw new \InvalidArgumentException('Assert method must be a callable.');
-        }
-        
         $this->_options[self::ASSERT] = $pValue;
     }
     
@@ -416,15 +410,9 @@ class Route
     
     /**
      * @param callable $pValue
-     * @throws \InvalidArgumentException
      */
-    public function setGenerateFilter($pValue)
+    public function setGenerateFilter(callable $pValue)
     {
-        if(!is_callable($pValue))
-        {
-            throw new \InvalidArgumentException('Generate filter method must be a callable.');
-        }
-        
         $this->_options[self::GENERATE_FILTER] = $pValue;
     }
     
@@ -438,15 +426,9 @@ class Route
     
     /**
      * @param callable $pValue
-     * @throws \InvalidArgumentException
      */
-    public function setMatchedFilter($pValue)
+    public function setMatchedFilter(callable $pValue)
     {
-        if(!is_callable($pValue))
-        {
-            throw new \InvalidArgumentException('Matched filter method must be a callable.');
-        }
-        
         $this->_options[self::MATCHED_FILTER] = $pValue;
     }
     

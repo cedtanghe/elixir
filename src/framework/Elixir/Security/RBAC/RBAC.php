@@ -157,9 +157,8 @@ class RBAC implements RBACInterface
     
     /**
      * @see RBACInterface::isGranted()
-     * @throws \InvalidArgumentException
      */
-    public function isGranted($pRole, $pPermission = null, $pAssert = null)
+    public function isGranted($pRole, $pPermission = null, callable $pAssert = null)
     {
         if($this->hasRole($pRole))
         {
@@ -182,11 +181,6 @@ class RBAC implements RBACInterface
         
         if(null !== $pAssert)
         {
-            if(!is_callable($pAssert))
-            {
-                throw new \InvalidArgumentException('Assert method must be a callable.');
-            }
-
             if(true === call_user_func_array($pAssert, [$hasRole, $hasPermission, $this]))
             {
                 return true;

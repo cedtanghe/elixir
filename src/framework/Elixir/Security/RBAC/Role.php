@@ -133,17 +133,11 @@ class Role
     /**
      * @param string|integer $pName
      * @param callable $pAssert
-     * @throws \InvalidArgumentException
      */
-    public function addPermission($pName, $pAssert = null)
+    public function addPermission($pName, callable $pAssert = null)
     {
         if(null !== $pAssert)
         {
-            if(!is_callable($pAssert))
-            {
-                throw new \InvalidArgumentException(sprintf('Assert method for "%s" must be a callable.', $pName));
-            }
-
             $this->_permissions[$pName] = $pAssert;
         }
         else

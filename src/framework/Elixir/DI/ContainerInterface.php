@@ -131,7 +131,7 @@ interface ContainerInterface
      * @param string $pKey
      * @param callable $pValue
      */
-    public function extend($pKey, $pValue);
+    public function extend($pKey, callable $pValue);
     
     /**
      * @param string $pKey

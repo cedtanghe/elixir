@@ -29,15 +29,9 @@ class Relation implements RelationInterface
     
     /**
      * @param callable $pCallable
-     * @throws \InvalidArgumentException
      */
-    public function __construct($pCallback)
+    public function __construct(callable $pCallback)
     {
-        if(!is_callable($pCallback))
-        {
-            throw new \InvalidArgumentException('Callback argument must be a callable.');
-        }
-        
         $this->_callback = $pCallback;
     }
     

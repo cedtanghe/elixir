@@ -54,6 +54,13 @@ class FormFactory
             unset($pData['options']);
         }
         
+        // Helper
+        if(isset($pData['helper']))
+        {
+            $form->setHelper($pData['helper']);
+            unset($pData['helper']);
+        }
+        
         // Events
         if(isset($pData['events']))
         {

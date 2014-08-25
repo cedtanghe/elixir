@@ -66,15 +66,9 @@ class Dispatcher implements DispatcherInterface
     
     /**
      * @see DispatcherInterface::addListener()
-     * @throws \InvalidArgumentException
      */
-    public function addListener($pType, $pCallback, $pPriority = 0)
+    public function addListener($pType, callable $pCallback, $pPriority = 0)
     {
-        if(!is_callable($pCallback))
-        {
-            throw new \InvalidArgumentException(sprintf('The callback method to the listener "%s" must be a callable.', $pType));
-        }
-        
         if($this->hasListener($pType))
         {
             foreach($this->_listeners[$pType] as $listener)
@@ -110,7 +104,7 @@ class Dispatcher implements DispatcherInterface
     /**
      * @see DispatcherInterface::removeListener()
      */
-    public function removeListener($pType, $pCallback)
+    public function removeListener($pType, callable $pCallback)
     {
         if($this->hasListener($pType))
         {
