@@ -117,4 +117,3 @@ abstract class ValidatorAbstract implements ValidatorInterface
         return count($this->_errors) == 1 ? $this->_errors[0] : $this->_errors;
     }
 }
-

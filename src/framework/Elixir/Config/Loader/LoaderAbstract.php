@@ -49,3 +49,4 @@ abstract class LoaderAbstract implements LoaderInterface
      */
     abstract protected function parse($pData, $pRecursive = false, $pDirname = '');
 }
+

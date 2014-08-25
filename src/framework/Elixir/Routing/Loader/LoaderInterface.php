@@ -22,3 +22,4 @@ interface LoaderInterface
      */
     public function load($pConfig, Collection $pCollection = null);
 }
+

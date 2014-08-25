@@ -57,3 +57,4 @@ class Filter extends ProcessorAbstract
         return $pValue;
     }
 }
+

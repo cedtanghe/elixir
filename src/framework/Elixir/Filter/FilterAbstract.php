@@ -31,4 +31,3 @@ abstract class FilterAbstract implements FilterInterface
         return $this->_options;
     }
 }
-

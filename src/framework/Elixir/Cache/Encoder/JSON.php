@@ -26,3 +26,4 @@ class JSON implements EncoderInterface
         return json_decode($pValue, true);
     }
 }
+

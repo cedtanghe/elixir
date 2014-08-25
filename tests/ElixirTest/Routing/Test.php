@@ -112,7 +112,7 @@ class Test extends \PHPUnit_Framework_TestCase
         
         $this->assertEquals('index/user/other/new%2F8', $routing->generate('root', 
                                                                            ['name' => 'user',
-                                                                                 'other' => 'new/8'],
+                                                                            'other' => 'new/8'],
                                                                            QueryGenerator::URL_RELATIVE));
         
         $routing->setURLGenerator(new QueryGenerator());
@@ -123,13 +123,13 @@ class Test extends \PHPUnit_Framework_TestCase
         
         $this->assertEquals('?p1=v1&p2=v2&r=index/user', $routing->generate('root', 
                                                                             ['name' => 'user',
-                                                                                  Route::QUERY => ['p1' => 'v1',
-                                                                                                                'p2' => 'v2']],
+                                                                             Route::QUERY => ['p1' => 'v1',
+                                                                                              'p2' => 'v2']],
                                                                             QueryGenerator::URL_RELATIVE));
 
         $this->assertEquals('//www.test.fr?r=index/user/other/new%2F8', $routing->generate('root', 
                                                                                            ['name' => 'user',
-                                                                                                 'other' => 'new/8'],
+                                                                                            'other' => 'new/8'],
                                                                                            QueryGenerator::SHEMA_RELATIVE));
     }
 }

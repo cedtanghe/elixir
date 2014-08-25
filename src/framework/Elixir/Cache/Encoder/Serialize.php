@@ -26,3 +26,4 @@ class Serialize implements EncoderInterface
         return unserialize($pValue);
     }
 }
+
