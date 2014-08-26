@@ -256,7 +256,6 @@ class Form extends Dispatcher implements FormInterface
     /**
      * @param string $pKey
      * @param string $pValue
-     * @throws \LogicException
      */
     public function setAttribute($pKey, $pValue)
     {
@@ -296,12 +295,6 @@ class Form extends Dispatcher implements FormInterface
                 {
                     $this->dispatch(new FormEvent(FormEvent::RENAME));
                 }
-                
-                /*if(null !== $this->getParent())
-                {
-                    $this->dispatch(new FormEvent(FormEvent::RENAME));
-                    throw new \LogicException('You can not redefine the form name if it already has a parent.');
-                }*/
             }
         }
         else

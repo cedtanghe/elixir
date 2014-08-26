@@ -24,7 +24,15 @@ class FormFactory
     public static function createForm(array $pData)
     {
         $class = isset($pData['type']) ? $pData['type'] : self::DEFAULT_FORM;
-        $form = new $class();
+        
+        if(is_string($class))
+        {
+            $form = new $class();
+        }
+        else
+        {
+            $form = $class;
+        }
         
         // Name
         if(isset($pData['name']))
@@ -133,7 +141,11 @@ class FormFactory
             throw new \LogicException('A form item require a name.');
         }
         
-        if(isset($pData['type']))
+        if(isset($pData['items']))
+        {
+            return static::createForm($pData);
+        }
+        else if(isset($pData['type']))
         {
             if('\\' . ltrim($pData['type'], '\\') == self::DEFAULT_FORM)
             {
@@ -141,6 +153,13 @@ class FormFactory
             }
             
             $item = new $pData['type']();
+            
+            if($item instanceof FormInterface)
+            {
+                $pData['type'] = $item;
+                return static::createForm($pData);
+            }
+            
             unset($pData['type']);
             
             // Name
@@ -249,10 +268,6 @@ class FormFactory
             }
             
             return $item;
-        }
-        else if(isset($pData['items']))
-        {
-            return static::createForm($pData);
         }
         
         throw new \InvalidArgumentException('Unable to determine the type of item associated with this form.');

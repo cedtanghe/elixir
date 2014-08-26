@@ -212,7 +212,6 @@ abstract class FieldAbstract extends Dispatcher implements FieldInterface
     /**
      * @param string $pKey
      * @param string $pValue
-     * @throws \LogicException
      */
     public function setAttribute($pKey, $pValue)
     {
@@ -233,11 +232,6 @@ abstract class FieldAbstract extends Dispatcher implements FieldInterface
                 {
                     $this->dispatch(new FormEvent(FormEvent::RENAME));
                 }
-                
-                /*if(null !== $this->getParent())
-                {
-                    throw new \LogicException('You can not redefine the name of the form field if it already has a parent.');
-                }*/
             }
         }
         else

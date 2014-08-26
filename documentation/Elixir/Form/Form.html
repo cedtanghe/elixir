@@ -502,6 +502,17 @@
             </tr>
                     <tr>
                 <td class="type">
+                    
+                </td>
+                <td class="last">
+                    <a href="#method_onRenameItem">onRenameItem</a>(<a href="../../Elixir/Form/FormEvent.html"><abbr title="Elixir\Form\FormEvent">FormEvent</abbr></a> $e)
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
                     mixed
                 </td>
                 <td class="last">
@@ -997,7 +1008,7 @@
     </div>
 
                 <h3 id="method_dispatch">
-        <div class="location">at line 803</div>
+        <div class="location">at line 859</div>
         <code>            public            
     <strong>dispatch</strong>(<a href="../../Elixir/Dispatcher/Event.html"><abbr title="Elixir\Dispatcher\Event">Event</abbr></a> $pEvent)</code>
     </h3>
@@ -1654,7 +1665,7 @@
     </div>
 
                 <h3 id="method_setAttribute">
-        <div class="location">at line 261</div>
+        <div class="location">at line 260</div>
         <code>            public            
     <strong>setAttribute</strong>(string $pKey, string $pValue)</code>
     </h3>
@@ -1683,22 +1694,12 @@
 
             
             
-                            <h4>Exceptions</h4>
-
-                    <table>
-                    <tr>
-                <td><a href="http://php.net/LogicException"><abbr title="LogicException">LogicException</abbr></a></td>
-                <td>
-</td>
-            </tr>
-            </table>
-
             
                     </div>
     </div>
 
                 <h3 id="method_removeAttribute">
-        <div class="location">at line 304</div>
+        <div class="location">at line 310</div>
         <code>            public            
     <strong>removeAttribute</strong>(string $pKey)</code>
     </h3>
@@ -1721,12 +1722,22 @@
 
             
             
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/LogicException"><abbr title="LogicException">LogicException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
             
                     </div>
     </div>
 
                 <h3 id="method_getAttributes">
-        <div class="location">at line 317</div>
+        <div class="location">at line 327</div>
         <code>            public            array
     <strong>getAttributes</strong>()</code>
     </h3>
@@ -1762,7 +1773,7 @@
     </div>
 
                 <h3 id="method_setAttributes">
-        <div class="location">at line 325</div>
+        <div class="location">at line 335</div>
         <code>            public            
     <strong>setAttributes</strong>(array $pData)</code>
     </h3>
@@ -1799,7 +1810,7 @@
     </div>
 
                 <h3 id="method_hasOption">
-        <div class="location">at line 350</div>
+        <div class="location">at line 360</div>
         <code>            public            boolean
     <strong>hasOption</strong>(string $pKey)</code>
     </h3>
@@ -1837,7 +1848,7 @@
     </div>
 
                 <h3 id="method_getOption">
-        <div class="location">at line 360</div>
+        <div class="location">at line 370</div>
         <code>            public            mixed
     <strong>getOption</strong>(string $pKey, mixed $pDefault = null)</code>
     </h3>
@@ -1881,7 +1892,7 @@
     </div>
 
                 <h3 id="method_setOption">
-        <div class="location">at line 374</div>
+        <div class="location">at line 384</div>
         <code>            public            
     <strong>setOption</strong>(string $pKey, string $pValue)</code>
     </h3>
@@ -1915,7 +1926,7 @@
     </div>
 
                 <h3 id="method_removeOption">
-        <div class="location">at line 382</div>
+        <div class="location">at line 392</div>
         <code>            public            
     <strong>removeOption</strong>(string $pKey)</code>
     </h3>
@@ -1943,7 +1954,7 @@
     </div>
 
                 <h3 id="method_getOptions">
-        <div class="location">at line 390</div>
+        <div class="location">at line 400</div>
         <code>            public            array
     <strong>getOptions</strong>()</code>
     </h3>
@@ -1979,7 +1990,7 @@
     </div>
 
                 <h3 id="method_setOptions">
-        <div class="location">at line 398</div>
+        <div class="location">at line 408</div>
         <code>            public            
     <strong>setOptions</strong>(array $pData)</code>
     </h3>
@@ -2016,7 +2027,7 @@
     </div>
 
                 <h3 id="method_has">
-        <div class="location">at line 413</div>
+        <div class="location">at line 423</div>
         <code>            public            boolean
     <strong>has</strong>(string $pName, boolean $pUseSubForms = false)</code>
     </h3>
@@ -2060,7 +2071,7 @@
     </div>
 
                 <h3 id="method_add">
-        <div class="location">at line 438</div>
+        <div class="location">at line 448</div>
         <code>            public            
     <strong>add</strong>(<a href="../../Elixir/Form/Field/FieldInterface.html"><abbr title="Elixir\Form\Field\FieldInterface">FieldInterface</abbr></a>|<a href="../../Elixir/Form/FormInterface.html"><abbr title="Elixir\Form\FormInterface">FormInterface</abbr></a> $pItem)</code>
     </h3>
@@ -2106,8 +2117,46 @@
                     </div>
     </div>
 
+                <h3 id="method_onRenameItem">
+        <div class="location">at line 477</div>
+        <code>            public            
+    <strong>onRenameItem</strong>(<a href="../../Elixir/Form/FormEvent.html"><abbr title="Elixir\Form\FormEvent">FormEvent</abbr></a> $e)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="../../Elixir/Form/FormEvent.html"><abbr title="Elixir\Form\FormEvent">FormEvent</abbr></a></td>
+                <td>$e</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/LogicException"><abbr title="LogicException">LogicException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
                 <h3 id="method_get">
-        <div class="location">at line 467</div>
+        <div class="location">at line 515</div>
         <code>            public            mixed
     <strong>get</strong>(string $pName, boolean $pUseSubForms = true, mixed $pDefault = null)</code>
     </h3>
@@ -2157,7 +2206,7 @@
     </div>
 
                 <h3 id="method_remove">
-        <div class="location">at line 498</div>
+        <div class="location">at line 546</div>
         <code>            public            
     <strong>remove</strong>(string $pName, boolean $pUseSubForms = false)</code>
     </h3>
@@ -2200,7 +2249,7 @@
     </div>
 
                 <h3 id="method_gets">
-        <div class="location">at line 525</div>
+        <div class="location">at line 581</div>
         <code>            public            array
     <strong>gets</strong>(integer $pMask = self::ALL_FIELDS)</code>
     </h3>
@@ -2247,7 +2296,7 @@
     </div>
 
                 <h3 id="method_sets">
-        <div class="location">at line 566</div>
+        <div class="location">at line 622</div>
         <code>            public            
     <strong>sets</strong>(array $pData)</code>
     </h3>
@@ -2284,7 +2333,7 @@
     </div>
 
                 <h3 id="method_bind">
-        <div class="location">at line 581</div>
+        <div class="location">at line 637</div>
         <code>            public            
     <strong>bind</strong>(array $pData, boolean $pFiltered = true)</code>
     </h3>
@@ -2327,7 +2376,7 @@
     </div>
 
                 <h3 id="method_isEmpty">
-        <div class="location">at line 616</div>
+        <div class="location">at line 672</div>
         <code>            public            boolean
     <strong>isEmpty</strong>()</code>
     </h3>
@@ -2363,7 +2412,7 @@
     </div>
 
                 <h3 id="method_isSubmited">
-        <div class="location">at line 632</div>
+        <div class="location">at line 688</div>
         <code>            public            boolean
     <strong>isSubmited</strong>()</code>
     </h3>
@@ -2390,7 +2439,7 @@
     </div>
 
                 <h3 id="method_submit">
-        <div class="location">at line 640</div>
+        <div class="location">at line 696</div>
         <code>            public            boolean
     <strong>submit</strong>(array $pData = null)</code>
     </h3>
@@ -2437,7 +2486,7 @@
     </div>
 
                 <h3 id="method_required">
-        <div class="location">at line 689</div>
+        <div class="location">at line 745</div>
         <code>            public            boolean
     <strong>required</strong>(array $pMembers = array(), array $pOmitMembers = array(), array $pData = null)</code>
     </h3>
@@ -2487,7 +2536,7 @@
     </div>
 
                 <h3 id="method_values">
-        <div class="location">at line 719</div>
+        <div class="location">at line 775</div>
         <code>            public            array
     <strong>values</strong>(boolean $pFiltered = true)</code>
     </h3>
@@ -2534,7 +2583,7 @@
     </div>
 
                 <h3 id="method_hasError">
-        <div class="location">at line 750</div>
+        <div class="location">at line 806</div>
         <code>            public            boolean
     <strong>hasError</strong>()</code>
     </h3>
@@ -2570,7 +2619,7 @@
     </div>
 
                 <h3 id="method_errors">
-        <div class="location">at line 758</div>
+        <div class="location">at line 814</div>
         <code>            public            string|array
     <strong>errors</strong>()</code>
     </h3>
@@ -2606,7 +2655,7 @@
     </div>
 
                 <h3 id="method_reset">
-        <div class="location">at line 784</div>
+        <div class="location">at line 840</div>
         <code>            public            
     <strong>reset</strong>(array $pOmit = array())</code>
     </h3>
