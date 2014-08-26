@@ -8,6 +8,7 @@ use Elixir\Facade\Validator;
 use Elixir\Filter\FilterInterface;
 use Elixir\Form\Field\FieldEvent;
 use Elixir\Form\Field\FieldInterface;
+use Elixir\Form\FormEvent;
 use Elixir\Form\FormInterface;
 use Elixir\Validator\ValidatorInterface;
 
@@ -244,7 +245,8 @@ abstract class FieldAbstract extends Dispatcher implements FieldInterface
     {
         if($pKey == 'name')
         {
-            throw new \LogicException('You can not delete the name of an field.');
+            $this->dispatch(new FormEvent(FormEvent::RENAME));
+            //throw new \LogicException('You can not delete the name of an field.');
         }
         else if($pKey == 'required')
         {
