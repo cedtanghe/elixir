@@ -303,12 +303,17 @@ class Form extends Dispatcher implements FormInterface
     
     /**
      * @param string $pKey
+     * @throws \LogicException
      */
     public function removeAttribute($pKey)
     {
         if($pKey == 'method')
         {
             $this->remove(self::METHOD_FIELD);
+        }
+        else if($pKey == 'name' && null !== $this->getParent())
+        {
+            throw new \LogicException('You can not delete the name of an form if it already is a form child.');
         }
         
         unset($this->_attributes[$pKey]);

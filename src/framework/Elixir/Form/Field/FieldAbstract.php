@@ -227,10 +227,11 @@ abstract class FieldAbstract extends Dispatcher implements FieldInterface
             
             if($pValue != $name)
             {
-                if(null !== $this->getParent())
+                $this->dispatch(new FormEvent(FormEvent::RENAME));
+                /*if(null !== $this->getParent())
                 {
                     throw new \LogicException('You can not redefine the name of the form field if it already has a parent.');
-                }
+                }*/
             }
         }
         
@@ -245,8 +246,7 @@ abstract class FieldAbstract extends Dispatcher implements FieldInterface
     {
         if($pKey == 'name')
         {
-            $this->dispatch(new FormEvent(FormEvent::RENAME));
-            //throw new \LogicException('You can not delete the name of an field.');
+            throw new \LogicException('You can not delete the name of an field.');
         }
         else if($pKey == 'required')
         {
