@@ -249,34 +249,34 @@ class Form
         
         $result = '';
         
-        if($pUseLabel && null !== $pField->getLabel() && $render == 'inner')
-        {
-            $attributes = $pField->getAttributes();
-            $labelAttributes = isset($attributes['label']) ? (array)$attributes['label'] : [];
-
-            $result .= $this->openLabelTag(
-                array_merge(
-                    ['class' => 'form-label', 'for' => $pField->getName()],
-                    $labelAttributes
-                )
-            );
-
-            $result .= $pField->getLabel();
-            $result .= $this->closeLabelTag();
-        }
-        
         if($render == 'inner')
         {
+            if($pUseLabel && null !== $pField->getLabel())
+            {
+                $attributes = $pField->getAttributes();
+                $labelAttributes = isset($attributes['label']) ? (array)$attributes['label'] : [];
+
+                $result .= $this->openLabelTag(
+                    array_merge(
+                        ['class' => 'form-label', 'for' => $pField->getName()],
+                        $labelAttributes
+                    )
+                );
+
+                $result .= $pField->getLabel();
+                $result .= $this->closeLabelTag();
+            }
+            
             $result .= $this->{$pField->getHelper()}($pField);
+            
+            if($pUseError && $pField->hasError())
+            {
+                $result .= $this->fieldErrors($pField);
+            }
         }
         else
         {
             $result .= call_user_func_array($pField->getHelper(), [$pField, $pUseLabel, $pUseError, $this]);
-        }
-        
-        if($pUseError && $pField->hasError() && $render == 'inner')
-        {
-            $result .= $this->fieldErrors($pField);
         }
         
         return $result;
