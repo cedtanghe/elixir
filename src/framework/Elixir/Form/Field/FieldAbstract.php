@@ -225,7 +225,7 @@ abstract class FieldAbstract extends Dispatcher implements FieldInterface
         {
             $name = $this->getAttribute('name');
             
-            if($pValue != $name)
+            if($pValue != $name && null !== $name)
             {
                 $this->dispatch(new FormEvent(FormEvent::RENAME));
                 /*if(null !== $this->getParent())

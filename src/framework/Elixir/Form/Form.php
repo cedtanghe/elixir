@@ -286,7 +286,7 @@ class Form extends Dispatcher implements FormInterface
         {
             $name = $this->getAttribute('name');
             
-            if($pValue != $name)
+            if($pValue != $name && null !== $name)
             {
                 $this->dispatch(new FormEvent(FormEvent::RENAME));
                 
