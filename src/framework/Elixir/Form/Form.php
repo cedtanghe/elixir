@@ -281,14 +281,21 @@ class Form extends Dispatcher implements FormInterface
             {
                 $this->remove(self::METHOD_FIELD);
             }
+            
+            $this->_attributes[$pKey] = $pValue;
         }
         else if($pKey == 'name')
         {
             $name = $this->getAttribute('name');
             
-            if($pValue != $name && null !== $name)
+            if($pValue != $name)
             {
-                $this->dispatch(new FormEvent(FormEvent::RENAME));
+                $this->_attributes[$pKey] = $pValue;
+                
+                if(null !== $name)
+                {
+                    $this->dispatch(new FormEvent(FormEvent::RENAME));
+                }
                 
                 /*if(null !== $this->getParent())
                 {
@@ -297,8 +304,10 @@ class Form extends Dispatcher implements FormInterface
                 }*/
             }
         }
-        
-        $this->_attributes[$pKey] = $pValue;
+        else
+        {
+            $this->_attributes[$pKey] = $pValue;
+        }
     }
     
     /**

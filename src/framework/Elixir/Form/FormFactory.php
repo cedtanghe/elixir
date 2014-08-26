@@ -73,7 +73,7 @@ class FormFactory
         // Items
         if(isset($pData['items']))
         {
-            foreach($pData['items'] as $key => $value)
+            foreach($pData['items'] as $value)
             {
                 if($value instanceof FieldInterface || $value instanceof FormInterface)
                 {
@@ -81,7 +81,6 @@ class FormFactory
                 }
                 else
                 {
-                    $value['name'] = $key;
                     $item = static::createField($value);
                 }
                 

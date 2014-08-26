@@ -225,17 +225,25 @@ abstract class FieldAbstract extends Dispatcher implements FieldInterface
         {
             $name = $this->getAttribute('name');
             
-            if($pValue != $name && null !== $name)
+            if($pValue != $name)
             {
-                $this->dispatch(new FormEvent(FormEvent::RENAME));
+                $this->_attributes[$pKey] = $pValue;
+                
+                if(null !== $name)
+                {
+                    $this->dispatch(new FormEvent(FormEvent::RENAME));
+                }
+                
                 /*if(null !== $this->getParent())
                 {
                     throw new \LogicException('You can not redefine the name of the form field if it already has a parent.');
                 }*/
             }
         }
-        
-        $this->_attributes[$pKey] = $pValue;
+        else
+        {
+            $this->_attributes[$pKey] = $pValue;
+        }
     }
     
     /**
