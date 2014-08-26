@@ -51,6 +51,11 @@ class FormEvent extends Event
     const VALUES = 'values';
     
     /**
+     * @var string
+     */
+    const RENAME = 'rename';
+    
+    /**
      * @var array
      */
     protected $_data;

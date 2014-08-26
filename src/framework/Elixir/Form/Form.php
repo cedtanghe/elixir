@@ -288,10 +288,13 @@ class Form extends Dispatcher implements FormInterface
             
             if($pValue != $name)
             {
-                if(null !== $this->getParent())
+                $this->dispatch(new FormEvent(FormEvent::RENAME));
+                
+                /*if(null !== $this->getParent())
                 {
+                    $this->dispatch(new FormEvent(FormEvent::RENAME));
                     throw new \LogicException('You can not redefine the form name if it already has a parent.');
-                }
+                }*/
             }
         }
         
@@ -456,6 +459,44 @@ class Form extends Dispatcher implements FormInterface
         }
         
         $pItem->setParent($this);
+        $pItem->addListener(FormEvent::RENAME, [$this, 'onRenameItem']);
+    }
+    
+    /**
+     * @internal
+     * @param FormEvent $e
+     * @throws \LogicException
+     */
+    public function onRenameItem(FormEvent $e)
+    {
+        $items = array_merge($this->_fields, $this->_forms);
+        
+        foreach($items as $key => $value)
+        {
+            if($e->getTarget() === $value)
+            {
+                $name = $value->getName();
+                
+                if(isset($items[$name]))
+                {
+                    throw new \LogicException(sprintf('An item that already has the name "%s" already exists.', $name));
+                }
+                
+                $pos = array_search($key, $this->_keys);
+                array_splice($this->_keys, $pos, 1, $name);
+                
+                if($value instanceof FormInterface)
+                {
+                    unset($this->_forms[$key]);
+                    $this->_forms[$name] = $value;
+                }
+                else
+                {
+                    unset($this->_fields[$key]);
+                    $this->_fields[$name] = $value;
+                }
+            }
+        }
     }
 
     /**
@@ -503,8 +544,16 @@ class Form extends Dispatcher implements FormInterface
         {
             array_splice($this->_keys, $pos, 1);
             
-            unset($this->_fields[$pName]);
-            unset($this->_forms[$pName]);
+            if(isset($this->_fields[$pName]))
+            {
+                $this->_fields[$pName]->removeListener(FormEvent::RENAME, [$this, 'onRenameItem']);
+                unset($this->_fields[$pName]);
+            }
+            else if(isset($this->_forms[$pName]))
+            {
+                $this->_forms[$pName]->removeListener(FormEvent::RENAME, [$this, 'onRenameItem']);
+                unset($this->_forms[$pName]);
+            }
         }
         else if($pUseSubForms)
         {
