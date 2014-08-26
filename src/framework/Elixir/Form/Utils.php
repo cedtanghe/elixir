@@ -2,6 +2,8 @@
 
 namespace Elixir\Form;
 
+use Elixir\Form\FormInterface;
+
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
@@ -18,7 +20,7 @@ class Utils
     * @param string $pValue
     * @return string
     */
-    public function prefix($pPrefix, $pValue)
+    public static function prefix($pPrefix, $pValue)
     {
         return $pPrefix . self::PREFIX_SEPARATOR . $pValue;
     }
@@ -104,6 +106,26 @@ class Utils
         }
         
         return $process($pData);
+    }
+    
+    /**
+     * @param FormInterface $pForm
+     * @param string $pPrefix
+     */
+    public static function prefixForm(FormInterface $pForm, $pPrefix = null)
+    {
+        foreach($pForm->gets(FormInterface::ALL_ITEMS) as $item)
+        {
+            if(null !== $pPrefix)
+            {
+                $item->setName(static::prefix($pPrefix, $item->getName()));
+            }
+            
+            if($item instanceof FormInterface)
+            {
+                static::prefixForm($item, $item->getName());
+            }
+        }
     }
     
     /**

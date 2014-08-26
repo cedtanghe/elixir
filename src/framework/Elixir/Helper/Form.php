@@ -75,14 +75,54 @@ class Form
         
         if(is_callable($pForm->getHelper()))
         {
-            return call_user_func_array($pForm->getHelper(), [$pForm, $this]);
+            return call_user_func_array($pForm->getHelper(), [$pForm, $pUseLabel, $pUseError, $pSeparator, $this]);
         }
         
         $result = '';
         
-        foreach($pForm->gets() as $field)
+        foreach($pForm->gets(FormInterface::ALL_ITEMS) as $item)
         {
-            $result .= $this->field($field, $pUseLabel, $pUseError) . $pSeparator;
+            if($item instanceof FormInterface)
+            {
+                $options = $pForm->getOptions();
+                $fieldset = ['legend' => null, 'attributes' => []];
+                
+                if(isset($options['fieldset']))
+                {
+                    if(false === $options['fieldset'])
+                    {
+                        $fieldset = false;
+                    }
+                    else
+                    {
+                        if(isset($options['fieldset']['legend']))
+                        {
+                            $fieldset['legend'] = $options['fieldset']['legend'];
+                        }
+                        
+                        if(isset($options['fieldset']['attributes']))
+                        {
+                            $fieldset['attributes'] = $options['fieldset']['attributes'];
+                        }
+                    }
+                }
+                
+                if($fieldset)
+                {
+                    $result .= $this->openFieldsetTag($fieldset['legend'], $fieldset['attributes']);
+                }
+                
+                $result .= $this->form($item, $pUseLabel, $pUseError, $pSeparator);
+                
+                if($fieldset)
+                {
+                    $result .= $this->closeFieldsetTag();
+                }
+            }
+            else
+            {
+                $result .= $this->field($item, $pUseLabel, $pUseError) . $pSeparator;
+            }
         }
         
         if(null === $pForm->getParent())
@@ -104,9 +144,9 @@ class Form
     {
         $result = '';
         
-        foreach($pForm->gets() as $item)
+        foreach($pForm->gets(FormInterface::ALL_FIELDS) as $field)
         {
-            if(!$item->isPrepared())
+            if(!$field->isPrepared())
             {
                 $result .= $this->field($item, $pUseLabel, $pUseError) . $pSeparator;
             }
@@ -209,32 +249,32 @@ class Form
         
         $result = '';
         
+        if($pUseLabel && null !== $pField->getLabel() && $render == 'inner')
+        {
+            $attributes = $pField->getAttributes();
+            $labelAttributes = isset($attributes['label']) ? (array)$attributes['label'] : [];
+
+            $result .= $this->openLabelTag(
+                array_merge(
+                    ['class' => 'form-label', 'for' => $pField->getName()],
+                    $labelAttributes
+                )
+            );
+
+            $result .= $pField->getLabel();
+            $result .= $this->closeLabelTag();
+        }
+        
         if($render == 'inner')
         {
-            if($pUseLabel && null !== $pField->getLabel())
-            {
-                $attributes = $pField->getAttributes();
-                $labelAttributes = isset($attributes['label']) ? (array)$attributes['label'] : [];
-
-                $result .= $this->openLabelTag(
-                    array_merge(
-                        ['class' => 'form-label', 'for' => $pField->getName()],
-                        $labelAttributes
-                    )
-                );
-
-                $result .= $pField->getLabel();
-                $result .= $this->closeLabelTag();
-            }
-
             $result .= $this->{$pField->getHelper()}($pField);
         }
         else
         {
-            $result .= call_user_func_array($pField->getHelper(), [$pField]);
+            $result .= call_user_func_array($pField->getHelper(), [$pField, $pUseLabel, $pUseError, $this]);
         }
         
-        if($pUseError && $pField->hasError())
+        if($pUseError && $pField->hasError() && $render == 'inner')
         {
             $result .= $this->fieldErrors($pField);
         }
