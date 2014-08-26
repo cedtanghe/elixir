@@ -152,7 +152,14 @@ class FormFactory
                 return static::createForm($pData);
             }
             
-            $item = new $pData['type']();
+            if(is_string($pData['type']))
+            {
+                $item = new $pData['type']();
+            }
+            else
+            {
+                $item = $pData['type'];
+            }
             
             if($item instanceof FormInterface)
             {
