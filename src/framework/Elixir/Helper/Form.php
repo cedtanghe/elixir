@@ -84,7 +84,7 @@ class Form
         {
             if($item instanceof FormInterface)
             {
-                $options = $pForm->getOptions();
+                $options = $item->getOptions();
                 $fieldset = ['legend' => null, 'attributes' => []];
                 
                 if(isset($options['fieldset']))
@@ -127,7 +127,45 @@ class Form
         
         if(null === $pForm->getParent())
         {
-            return $this->openFormTag($pForm) . $result . $this->closeFormTag();
+            $options = $pForm->getOptions();
+            $fieldset = ['legend' => null, 'attributes' => []];
+
+            if(isset($options['fieldset']))
+            {
+                if(false === $options['fieldset'])
+                {
+                    $fieldset = false;
+                }
+                else
+                {
+                    if(isset($options['fieldset']['legend']))
+                    {
+                        $fieldset['legend'] = $options['fieldset']['legend'];
+                    }
+
+                    if(isset($options['fieldset']['attributes']))
+                    {
+                        $fieldset['attributes'] = $options['fieldset']['attributes'];
+                    }
+                }
+            }
+            
+            $form = $result;
+            $result = $this->openFormTag($pForm);
+            
+            if($fieldset)
+            {
+                $result .= $this->openFieldsetTag($fieldset['legend'], $fieldset['attributes']);
+            }
+
+            $result .= $form;
+
+            if($fieldset)
+            {
+                $result .= $this->closeFieldsetTag();
+            }
+            
+            $result .= $this->closeFormTag();
         }
         
         return $result;
@@ -591,12 +629,12 @@ class Form
             {
                 $a['value'] = $key;
                 
-                if($key == $pValue)
+                if(in_array($key, (array)$pValue))
                 {
                     $a['selected'] = '';
                 }
             }
-            else if($value == $pValue)
+            else if(in_array($value, (array)$pValue))
             {
                 $a['selected'] = '';
             }
