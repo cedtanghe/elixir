@@ -410,11 +410,11 @@ abstract class FieldAbstract extends Dispatcher implements FieldInterface
     /**
      * @param FilterInterface|callable|string $pFilter
      * @param array $pOptions
-     * @param integer $pType
+     * @param integer|null $pType
      */
-    public function addFilter($pFilter, array $pOptions = [], $pType = self::FILTER_OUT)
+    public function addFilter($pFilter, array $pOptions = [], $pType = null)
     {
-        $this->_filters[] = ['filter' => $pFilter, 'options' => $pOptions, 'type' => $pType];
+        $this->_filters[] = ['filter' => $pFilter, 'options' => $pOptions, 'type' => $pType ?: self::FILTER_OUT];
     }
     
     /**
@@ -436,7 +436,7 @@ abstract class FieldAbstract extends Dispatcher implements FieldInterface
         {
             $filter = $data;
             $options = [];
-            $type = self::FILTER_OUT;
+            $type = null;
             
             if(is_array($data))
             {
@@ -510,7 +510,7 @@ abstract class FieldAbstract extends Dispatcher implements FieldInterface
                     }
                     else
                     {
-                        $value = $data['filter']->filter($value, $data['options']);
+                        $pValue = Filter::filter($data['filter'], $value, $data['options']);
                     }
                 }
             }

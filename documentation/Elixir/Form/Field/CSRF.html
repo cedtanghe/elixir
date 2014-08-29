@@ -89,7 +89,7 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method_setHelper">setHelper</a>(string|<abbr title="Elixir\Form\Field\callable">callable</abbr> $pValue)
+                    <a href="#method_setHelper">setHelper</a>(mixed $pValue)
                     <p>
 </p>
                 </td>
@@ -97,7 +97,7 @@
             </tr>
                     <tr>
                 <td class="type">
-                    string|<abbr title="Elixir\Form\Field\callable">callable</abbr>
+                    mixed
                 </td>
                 <td class="last">
                     <a href="#method_getHelper">getHelper</a>()
@@ -386,7 +386,7 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method_addFilter">addFilter</a>(<a href="../../../Elixir/Filter/FilterInterface.html"><abbr title="Elixir\Filter\FilterInterface">FilterInterface</abbr></a>|<abbr title="Elixir\Form\Field\callable">callable</abbr>|string $pFilter, array $pOptions = array(), integer $pType = self::FILTER_OUT)
+                    <a href="#method_addFilter">addFilter</a>(<a href="../../../Elixir/Filter/FilterInterface.html"><abbr title="Elixir\Filter\FilterInterface">FilterInterface</abbr></a>|<abbr title="Elixir\Form\Field\callable">callable</abbr>|string $pFilter, array $pOptions = array(), integer|null $pType = null)
                     <p>
 </p>
                 </td>
@@ -686,7 +686,7 @@
                 <h3 id="method_setHelper">
         <div class="location">in <a href="../../../Elixir/Form/Field/FieldAbstract.html#method_setHelper"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a> at line 111</div>
         <code>            public            
-    <strong>setHelper</strong>(string|<abbr title="Elixir\Form\Field\callable">callable</abbr> $pValue)</code>
+    <strong>setHelper</strong>(mixed $pValue)</code>
     </h3>
     <div class="details">
         <p>
@@ -698,7 +698,7 @@
 
                     <table>
                     <tr>
-                <td>string|<abbr title="Elixir\Form\Field\callable">callable</abbr></td>
+                <td>mixed</td>
                 <td>$pValue</td>
                 <td>
 </td>
@@ -722,7 +722,7 @@
 
                 <h3 id="method_getHelper">
         <div class="location">in <a href="../../../Elixir/Form/Field/FieldAbstract.html#method_getHelper"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a> at line 119</div>
-        <code>            public            string|<abbr title="Elixir\Form\Field\callable">callable</abbr>
+        <code>            public            mixed
     <strong>getHelper</strong>()</code>
     </h3>
     <div class="details">
@@ -736,7 +736,7 @@
 
                     <table>
         <tr>
-            <td>string|<abbr title="Elixir\Form\Field\callable">callable</abbr></td>
+            <td>mixed</td>
             <td>
 </td>
         </tr>
@@ -1692,7 +1692,7 @@
                 <h3 id="method_addFilter">
         <div class="location">at line 143</div>
         <code>            public            
-    <strong>addFilter</strong>(<a href="../../../Elixir/Filter/FilterInterface.html"><abbr title="Elixir\Filter\FilterInterface">FilterInterface</abbr></a>|<abbr title="Elixir\Form\Field\callable">callable</abbr>|string $pFilter, array $pOptions = array(), integer $pType = self::FILTER_OUT)</code>
+    <strong>addFilter</strong>(<a href="../../../Elixir/Filter/FilterInterface.html"><abbr title="Elixir\Filter\FilterInterface">FilterInterface</abbr></a>|<abbr title="Elixir\Form\Field\callable">callable</abbr>|string $pFilter, array $pOptions = array(), integer|null $pType = null)</code>
     </h3>
     <div class="details">
         <p>
@@ -1716,7 +1716,7 @@
 </td>
             </tr>
                     <tr>
-                <td>integer</td>
+                <td>integer|null</td>
                 <td>$pType</td>
                 <td>
 </td>
@@ -1725,6 +1725,16 @@
 
             
             
+                            <h4>Exceptions</h4>
+
+                    <table>
+                    <tr>
+                <td><a href="http://php.net/LogicException"><abbr title="LogicException">LogicException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
             
                             <h4>See also</h4>
 

@@ -140,7 +140,7 @@ class CSRF extends FieldAbstract
      * @see FieldAbstract::addFilter()
      * @throws \LogicException
      */
-    public function addFilter($pFilter, array $pOptions = [], $pType = self::FILTER_OUT)
+    public function addFilter($pFilter, array $pOptions = [], $pType = null)
     {
         throw new \LogicException('No filter available for CSRF field.');
     }

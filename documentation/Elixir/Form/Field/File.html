@@ -33,6 +33,20 @@
         <a href="../../../Elixir/Form/Field/FileInterface.html"><abbr title="Elixir\Form\Field\FileInterface">FileInterface</abbr></a></p>
 
     
+            <h2>Constants</h2>
+
+            <table>
+                    <tr>
+                <td>FILTER_UPLOAD</td>
+                <td class="last">
+                    <p><em>
+</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+            </table>
+
     
     
             <h2>Methods</h2>
@@ -76,7 +90,7 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method_setHelper">setHelper</a>(string|<abbr title="Elixir\Form\Field\callable">callable</abbr> $pValue)
+                    <a href="#method_setHelper">setHelper</a>(mixed $pValue)
                     <p>
 </p>
                 </td>
@@ -84,7 +98,7 @@
             </tr>
                     <tr>
                 <td class="type">
-                    string|<abbr title="Elixir\Form\Field\callable">callable</abbr>
+                    mixed
                 </td>
                 <td class="last">
                     <a href="#method_getHelper">getHelper</a>()
@@ -373,11 +387,11 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method_addFilter">addFilter</a>(<a href="../../../Elixir/Filter/FilterInterface.html"><abbr title="Elixir\Filter\FilterInterface">FilterInterface</abbr></a>|<abbr title="Elixir\Form\Field\callable">callable</abbr>|string $pFilter, array $pOptions = array(), integer $pType = self::FILTER_OUT)
+                    <a href="#method_addFilter">addFilter</a>(<a href="../../../Elixir/Filter/FilterInterface.html"><abbr title="Elixir\Filter\FilterInterface">FilterInterface</abbr></a>|<abbr title="Elixir\Form\Field\callable">callable</abbr>|string $pFilter, array $pOptions = array(), integer|null $pType = null)
                     <p>
 </p>
                 </td>
-                <td><small>from&nbsp;<a href="../../../Elixir/Form/Field/FieldAbstract.html#method_addFilter"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a></small></td>
+                <td></td>
             </tr>
                     <tr>
                 <td class="type">
@@ -410,7 +424,7 @@
                     <p>
 </p>
                 </td>
-                <td></td>
+                <td><small>from&nbsp;<a href="../../../Elixir/Form/Field/FieldAbstract.html#method_setValue"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a></small></td>
             </tr>
                     <tr>
                 <td class="type">
@@ -421,7 +435,7 @@
                     <p>
 </p>
                 </td>
-                <td></td>
+                <td><small>from&nbsp;<a href="../../../Elixir/Form/Field/FieldAbstract.html#method_getValue"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a></small></td>
             </tr>
                     <tr>
                 <td class="type">
@@ -627,7 +641,7 @@
         <h2>Details</h2>
 
                         <h3 id="method___construct">
-        <div class="location">at line 25</div>
+        <div class="location">at line 30</div>
         <code>            public            
     <strong>__construct</strong>(string $pName = null)</code>
     </h3>
@@ -739,7 +753,7 @@
                 <h3 id="method_setHelper">
         <div class="location">in <a href="../../../Elixir/Form/Field/FieldAbstract.html#method_setHelper"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a> at line 111</div>
         <code>            public            
-    <strong>setHelper</strong>(string|<abbr title="Elixir\Form\Field\callable">callable</abbr> $pValue)</code>
+    <strong>setHelper</strong>(mixed $pValue)</code>
     </h3>
     <div class="details">
         <p>
@@ -751,7 +765,7 @@
 
                     <table>
                     <tr>
-                <td>string|<abbr title="Elixir\Form\Field\callable">callable</abbr></td>
+                <td>mixed</td>
                 <td>$pValue</td>
                 <td>
 </td>
@@ -775,7 +789,7 @@
 
                 <h3 id="method_getHelper">
         <div class="location">in <a href="../../../Elixir/Form/Field/FieldAbstract.html#method_getHelper"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a> at line 119</div>
-        <code>            public            string|<abbr title="Elixir\Form\Field\callable">callable</abbr>
+        <code>            public            mixed
     <strong>getHelper</strong>()</code>
     </h3>
     <div class="details">
@@ -789,7 +803,7 @@
 
                     <table>
         <tr>
-            <td>string|<abbr title="Elixir\Form\Field\callable">callable</abbr></td>
+            <td>mixed</td>
             <td>
 </td>
         </tr>
@@ -810,7 +824,7 @@
     </div>
 
                 <h3 id="method_setParent">
-        <div class="location">at line 36</div>
+        <div class="location">at line 41</div>
         <code>            public            
     <strong>setParent</strong>(<a href="../../../Elixir/Form/FormInterface.html"><abbr title="Elixir\Form\FormInterface">FormInterface</abbr></a> $pValue)</code>
     </h3>
@@ -1174,7 +1188,7 @@
     </div>
 
                 <h3 id="method_setAttribute">
-        <div class="location">at line 112</div>
+        <div class="location">at line 120</div>
         <code>            public            
     <strong>setAttribute</strong>(string $pKey, string $pValue)</code>
     </h3>
@@ -1217,7 +1231,7 @@
     </div>
 
                 <h3 id="method_removeAttribute">
-        <div class="location">at line 126</div>
+        <div class="location">at line 134</div>
         <code>            public            
     <strong>removeAttribute</strong>(string $pKey)</code>
     </h3>
@@ -1300,7 +1314,7 @@
     </div>
 
                 <h3 id="method_setAttributes">
-        <div class="location">at line 139</div>
+        <div class="location">at line 147</div>
         <code>            public            
     <strong>setAttributes</strong>(array $pData)</code>
     </h3>
@@ -1554,7 +1568,7 @@
     </div>
 
                 <h3 id="method_setErrorBreak">
-        <div class="location">at line 47</div>
+        <div class="location">at line 55</div>
         <code>            public            
     <strong>setErrorBreak</strong>(boolean $pValue)</code>
     </h3>
@@ -1734,9 +1748,9 @@
     </div>
 
                 <h3 id="method_addFilter">
-        <div class="location">in <a href="../../../Elixir/Form/Field/FieldAbstract.html#method_addFilter"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a> at line 415</div>
+        <div class="location">at line 181</div>
         <code>            public            
-    <strong>addFilter</strong>(<a href="../../../Elixir/Filter/FilterInterface.html"><abbr title="Elixir\Filter\FilterInterface">FilterInterface</abbr></a>|<abbr title="Elixir\Form\Field\callable">callable</abbr>|string $pFilter, array $pOptions = array(), integer $pType = self::FILTER_OUT)</code>
+    <strong>addFilter</strong>(<a href="../../../Elixir/Filter/FilterInterface.html"><abbr title="Elixir\Filter\FilterInterface">FilterInterface</abbr></a>|<abbr title="Elixir\Form\Field\callable">callable</abbr>|string $pFilter, array $pOptions = array(), integer|null $pType = null)</code>
     </h3>
     <div class="details">
         <p>
@@ -1760,7 +1774,7 @@
 </td>
             </tr>
                     <tr>
-                <td>integer</td>
+                <td>integer|null</td>
                 <td>$pType</td>
                 <td>
 </td>
@@ -1770,6 +1784,15 @@
             
             
             
+                            <h4>See also</h4>
+
+                    <table>
+                    <tr>
+                <td>FieldAbstract::addFilter()</td>
+                <td></td>
+            </tr>
+            </table>
+
                     </div>
     </div>
 
@@ -1847,7 +1870,7 @@
     </div>
 
                 <h3 id="method_setValue">
-        <div class="location">at line 148</div>
+        <div class="location">in <a href="../../../Elixir/Form/Field/FieldAbstract.html#method_setValue"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a> at line 463</div>
         <code>            public            
     <strong>setValue</strong>(mixed $pValue, boolean $pFiltered = true)</code>
     </h3>
@@ -1881,7 +1904,7 @@
 
                     <table>
                     <tr>
-                <td>FieldAbstract::setValue()</td>
+                <td>FieldInterface::setValue()</td>
                 <td></td>
             </tr>
             </table>
@@ -1890,7 +1913,7 @@
     </div>
 
                 <h3 id="method_getValue">
-        <div class="location">at line 156</div>
+        <div class="location">in <a href="../../../Elixir/Form/Field/FieldAbstract.html#method_getValue"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a> at line 493</div>
         <code>            public            mixed
     <strong>getValue</strong>(boolean $pFiltered = true)</code>
     </h3>
@@ -1928,7 +1951,7 @@
 
                     <table>
                     <tr>
-                <td>FieldAbstract::getValue()</td>
+                <td>FieldInterface::getValue()</td>
                 <td></td>
             </tr>
             </table>
@@ -1973,7 +1996,7 @@
     </div>
 
                 <h3 id="method_isEmpty">
-        <div class="location">at line 180</div>
+        <div class="location">at line 197</div>
         <code>            public            boolean
     <strong>isEmpty</strong>()</code>
     </h3>
@@ -2061,7 +2084,7 @@
     </div>
 
                 <h3 id="method_isValid">
-        <div class="location">at line 188</div>
+        <div class="location">at line 205</div>
         <code>            public            boolean
     <strong>isValid</strong>(mixed $pValue = null)</code>
     </h3>
@@ -2180,7 +2203,7 @@
     </div>
 
                 <h3 id="method_reset">
-        <div class="location">at line 243</div>
+        <div class="location">at line 268</div>
         <code>            public            
     <strong>reset</strong>()</code>
     </h3>
@@ -2206,7 +2229,7 @@
     </div>
 
                 <h3 id="method_getUploader">
-        <div class="location">at line 56</div>
+        <div class="location">at line 64</div>
         <code>            public            <a href="../../../Elixir/HTTP/Uploader.html"><abbr title="Elixir\HTTP\Uploader">Uploader</abbr></a>
     <strong>getUploader</strong>()</code>
     </h3>
@@ -2233,7 +2256,7 @@
     </div>
 
                 <h3 id="method_setUploader">
-        <div class="location">at line 70</div>
+        <div class="location">at line 78</div>
         <code>            public            
     <strong>setUploader</strong>(<a href="../../../Elixir/HTTP/Uploader.html"><abbr title="Elixir\HTTP\Uploader">Uploader</abbr></a> $pValue)</code>
     </h3>
@@ -2261,7 +2284,7 @@
     </div>
 
                 <h3 id="method_setAPCUploadProgressData">
-        <div class="location">at line 80</div>
+        <div class="location">at line 88</div>
         <code>            public            
     <strong>setAPCUploadProgressData</strong>(string $pId, string $pValue = null)</code>
     </h3>
@@ -2295,7 +2318,7 @@
     </div>
 
                 <h3 id="method_getAPCUploadProgressData">
-        <div class="location">at line 88</div>
+        <div class="location">at line 96</div>
         <code>            public            array|null
     <strong>getAPCUploadProgressData</strong>()</code>
     </h3>
@@ -2322,7 +2345,7 @@
     </div>
 
                 <h3 id="method_setMaxFileSize">
-        <div class="location">at line 96</div>
+        <div class="location">at line 104</div>
         <code>            public            
     <strong>setMaxFileSize</strong>(integer $pValue)</code>
     </h3>
@@ -2350,7 +2373,7 @@
     </div>
 
                 <h3 id="method_getMaxFileSize">
-        <div class="location">at line 104</div>
+        <div class="location">at line 112</div>
         <code>            public            integer|null
     <strong>getMaxFileSize</strong>()</code>
     </h3>
@@ -2377,7 +2400,7 @@
     </div>
 
                 <h3 id="method_getFileName">
-        <div class="location">at line 164</div>
+        <div class="location">at line 156</div>
         <code>            public            string|array
     <strong>getFileName</strong>()</code>
     </h3>
@@ -2413,7 +2436,7 @@
     </div>
 
                 <h3 id="method_isUploaded">
-        <div class="location">at line 172</div>
+        <div class="location">at line 189</div>
         <code>            public            boolean
     <strong>isUploaded</strong>()</code>
     </h3>
@@ -2449,7 +2472,7 @@
     </div>
 
                 <h3 id="method_hasMultipleFiles">
-        <div class="location">at line 212</div>
+        <div class="location">at line 229</div>
         <code>            public            boolean
     <strong>hasMultipleFiles</strong>()</code>
     </h3>
@@ -2485,7 +2508,7 @@
     </div>
 
                 <h3 id="method_receive">
-        <div class="location">at line 220</div>
+        <div class="location">at line 237</div>
         <code>            public            boolean
     <strong>receive</strong>()</code>
     </h3>

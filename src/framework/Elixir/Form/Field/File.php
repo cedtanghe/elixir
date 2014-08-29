@@ -15,6 +15,11 @@ use Elixir\HTTP\Uploader;
 class File extends FieldAbstract implements FileInterface
 {
     /**
+     * @var integer
+     */
+    const FILTER_UPLOAD = 4;
+    
+    /**
      * @var Uploader 
      */
     protected $_uploader;
@@ -37,8 +42,11 @@ class File extends FieldAbstract implements FileInterface
     {
         parent::setParent($pValue);
         
-        $this->_parent->setAttributes(array_merge($this->_parent->getAttributes(),
-                                                  ['enctype' => FormInterface::ENCTYPE_MULTIPART]));
+        $this->_parent->setAttributes(
+            array_merge(
+                $this->_parent->getAttributes(),
+                ['enctype' => FormInterface::ENCTYPE_MULTIPART])
+        );
     }
     
     /**
@@ -143,28 +151,12 @@ class File extends FieldAbstract implements FileInterface
     }
     
     /**
-     * @see FieldAbstract::setValue()
-     */
-    public function setValue($pValue, $pFiltered = true)
-    {
-        $this->_value = $pValue;
-    }
-    
-    /**
-     * @see FieldAbstract::getValue()
-     */
-    public function getValue($pFiltered = true)
-    {
-        return $this->_value;
-    }
-    
-    /**
      * @see FileInterface::getFileName()
      */
     public function getFileName()
     {
-        $fileName = $this->getUploader()->getFileName();
-
+        $fileName = $this->getValue(false);
+        
         if(is_array($fileName))
         {
             foreach($fileName as &$fn)
@@ -179,8 +171,16 @@ class File extends FieldAbstract implements FileInterface
         {
             $fileName = pathinfo($fileName, PATHINFO_BASENAME);
         }
-
+        
         return $fileName;
+    }
+    
+    /**
+     * @see FieldAbstract::addFilter()
+     */
+    public function addFilter($pFilter, array $pOptions = [], $pType = null)
+    {
+        parent::addFilter($pFilter, $pOptions, $pType ?: self::FILTER_UPLOAD);
     }
     
     /**
@@ -188,7 +188,7 @@ class File extends FieldAbstract implements FileInterface
      */
     public function isUploaded()
     {
-        return $this->isEmpty();
+        return $this->getUploader()->isUploaded();
     }
     
     /**
@@ -196,7 +196,7 @@ class File extends FieldAbstract implements FileInterface
      */
     public function isEmpty()
     {
-        return !$this->getUploader()->isUploaded();
+        return !$this->isUploaded();
     }
     
     /**
@@ -236,19 +236,27 @@ class File extends FieldAbstract implements FileInterface
      */
     public function receive()
     {
-        $filters = [];
+        $receive = true;
         
-        foreach($this->_filters as $data)
+        if($this->isUploaded())
         {
-            $filters[] = $data;
-        }
+            $filters = [];
         
-        $this->getUploader()->setFilters($filters);
-        $receive = $this->getUploader()->receive();
-        
-        if($receive)
-        {
-            $this->_value = $this->getUploader()->getFileName();
+            foreach($this->_filters as $data)
+            {
+                if($data['type'] == self::FILTER_UPLOAD)
+                {
+                    $filters[] = $data;
+                }
+            }
+
+            $this->getUploader()->setFilters($filters);
+            $receive = $this->getUploader()->receive();
+
+            if($receive)
+            {
+                $this->_value = $this->getUploader()->getFileName();
+            }
         }
         
         return $receive;

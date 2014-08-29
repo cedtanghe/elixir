@@ -94,6 +94,15 @@ class Form extends Dispatcher implements FormInterface
     public function setParent(FormInterface $pValue)
     {
         $this->_parent = $pValue;
+        
+        if($this->getAttribute('enctype') == FormInterface::ENCTYPE_MULTIPART)
+        {
+            $this->_parent->setAttributes(
+                array_merge(
+                    $this->_parent->getAttributes(),
+                    ['enctype' => FormInterface::ENCTYPE_MULTIPART])
+            );
+        }
     }
     
     /**
@@ -296,6 +305,19 @@ class Form extends Dispatcher implements FormInterface
                 {
                     $this->dispatch(new FormEvent(FormEvent::RENAME));
                 }
+            }
+        }
+        else if($pKey == 'enctype')
+        {
+            $this->_attributes[$pKey] = $pValue;
+            
+            if(null !== $this->_parent && $pValue == FormInterface::ENCTYPE_MULTIPART)
+            {
+                $this->_parent->setAttributes(
+                    array_merge(
+                        $this->_parent->getAttributes(),
+                        ['enctype' => $pValue])
+                );
             }
         }
         else
