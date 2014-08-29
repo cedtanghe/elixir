@@ -163,7 +163,24 @@ class File extends FieldAbstract implements FileInterface
      */
     public function getFileName()
     {
-        return $this->getUploader()->getFileName();
+        $fileName = $this->getUploader()->getFileName();
+
+        if(is_array($fileName))
+        {
+            foreach($fileName as &$fn)
+            {
+                if(!empty($fn))
+                {
+                    $fn = pathinfo($fn, PATHINFO_BASENAME);
+                }
+            }
+        }
+        else if(!empty($fileName))
+        {
+            $fileName = pathinfo($fileName, PATHINFO_BASENAME);
+        }
+
+        return $fileName;
     }
     
     /**
