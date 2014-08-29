@@ -37,12 +37,12 @@ interface FieldInterface extends DispatcherInterface
     public function getName();
     
     /**
-     * @param string|callable $pValue
+     * @param mixed $pValue
      */
     public function setHelper($pValue);
     
     /**
-     * @return string|callable
+     * @return mixed
      */
     public function getHelper();
     

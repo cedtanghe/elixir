@@ -6,6 +6,7 @@ use Elixir\Dispatcher\Dispatcher;
 use Elixir\Dispatcher\Event;
 use Elixir\Form\Extension\ExtensionInterface;
 use Elixir\Form\Field\FieldInterface;
+use Elixir\Form\Field\FileInterface;
 use Elixir\Form\Field\Input;
 use Elixir\Form\FormEvent;
 use Elixir\Form\FormInterface;
@@ -154,7 +155,7 @@ class Form extends Dispatcher implements FormInterface
     /**
      * @see FormInterface::setHelper()
      */
-    public function setHelper(callable $pValue)
+    public function setHelper($pValue)
     {
         $this->_helper = $pValue;
     }
@@ -714,6 +715,8 @@ class Form extends Dispatcher implements FormInterface
             $this->_submit = false;
         }
         
+        $this->dispatch(new FormEvent(FormEvent::PRE_SUBMIT_VALIDATION));
+        
         foreach($this->_fields as $field)
         {
             if(!$field->isValid())
@@ -734,6 +737,27 @@ class Form extends Dispatcher implements FormInterface
         
         $this->dispatch(new FormEvent(FormEvent::SUBMIT));
         return !$this->hasError();
+    }
+    
+    /**
+     * @return boolean
+     */
+    public function receive()
+    {
+        $receive = true;
+        
+        foreach($this->gets(self::ALL_FIELDS) as $field)
+        {
+            if($field instanceof FileInterface)
+            {
+                if(!$field->receive())
+                {
+                    $receive = false;
+                }
+            }
+        }
+        
+        return $receive;
     }
     
     /**

@@ -186,7 +186,7 @@ class Form
         {
             if(!$field->isPrepared())
             {
-                $result .= $this->field($item, $pUseLabel, $pUseError) . $pSeparator;
+                $result .= $this->field($field, $pUseLabel, $pUseError) . $pSeparator;
             }
         }
         

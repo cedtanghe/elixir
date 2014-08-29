@@ -33,6 +33,11 @@ class FormEvent extends Event
     /**
      * @var string
      */
+    const PRE_SUBMIT_VALIDATION = 'pre_submit_validation';
+    
+    /**
+     * @var string
+     */
     const SUBMIT = 'submit';
     
     /**

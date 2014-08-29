@@ -93,12 +93,12 @@ interface FormInterface extends DispatcherInterface
     public function getName();
     
     /**
-     * @param callable $pValue
+     * @param mixed $pValue
      */
-    public function setHelper(callable $pValue);
+    public function setHelper($pValue);
     
     /**
-     * @return callable
+     * @return mixed
      */
     public function getHelper();
     

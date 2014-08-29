@@ -4,6 +4,7 @@ namespace Elixir\Form\Field;
 
 use Elixir\Form\Field\FieldAbstract;
 use Elixir\Form\Field\FieldEvent;
+use Elixir\Form\Field\FileInterface;
 use Elixir\Form\FormInterface;
 use Elixir\HTTP\Uploader;
 
@@ -11,13 +12,8 @@ use Elixir\HTTP\Uploader;
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
-class File extends FieldAbstract
+class File extends FieldAbstract implements FileInterface
 {
-    /**
-     * @var string
-     */
-    const RECEIVE = 'receive';
-    
     /**
      * @var Uploader 
      */
@@ -163,6 +159,22 @@ class File extends FieldAbstract
     }
     
     /**
+     * @see FileInterface::getFileName()
+     */
+    public function getFileName()
+    {
+        return $this->getUploader()->getFileName();
+    }
+    
+    /**
+     * @see FileInterface::isUploaded()
+     */
+    public function isUploaded()
+    {
+        return $this->isEmpty();
+    }
+    
+    /**
      * @see FieldAbstract::isEmpty()
      */
     public function isEmpty()
@@ -195,7 +207,7 @@ class File extends FieldAbstract
     }
     
     /**
-     * @return boolean
+     * @see FileInterface::hasMultipleFiles()
      */
     public function hasMultipleFiles()
     {
@@ -203,7 +215,7 @@ class File extends FieldAbstract
     }
     
     /**
-     * @return boolean
+     * @see FileInterface::receive()
      */
     public function receive()
     {
@@ -225,10 +237,12 @@ class File extends FieldAbstract
         return $receive;
     }
 
+    /**
+     * @see FieldAbstract::reset()
+     */
     public function reset()
     {
         $this->getUploader()->reset();
-        $this->_errors = [];
-        $this->_value = null;
+        parent::reset();
     }
 }

@@ -29,23 +29,10 @@
     <h1><a href="../../../Elixir/Form/Field.html">Elixir\Form\Field</a>\File</h1>
     </div>
         <div class="content">
-                <p>class    <strong>File</strong>        extends <a href="../../../Elixir/Form/Field/FieldAbstract.html"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a></p>
+                <p>class    <strong>File</strong>        extends <a href="../../../Elixir/Form/Field/FieldAbstract.html"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a>        implements
+        <a href="../../../Elixir/Form/Field/FileInterface.html"><abbr title="Elixir\Form\Field\FileInterface">FileInterface</abbr></a></p>
 
     
-            <h2>Constants</h2>
-
-            <table>
-                    <tr>
-                <td>RECEIVE</td>
-                <td class="last">
-                    <p><em>
-</em></p>
-                    <p>
-</p>
-                </td>
-            </tr>
-            </table>
-
     
     
             <h2>Methods</h2>
@@ -592,6 +579,28 @@
             </tr>
                     <tr>
                 <td class="type">
+                    string|array
+                </td>
+                <td class="last">
+                    <a href="#method_getFileName">getFileName</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
+                    boolean
+                </td>
+                <td class="last">
+                    <a href="#method_isUploaded">isUploaded</a>()
+                    <p>
+</p>
+                </td>
+                <td></td>
+            </tr>
+                    <tr>
+                <td class="type">
                     boolean
                 </td>
                 <td class="last">
@@ -618,7 +627,7 @@
         <h2>Details</h2>
 
                         <h3 id="method___construct">
-        <div class="location">at line 29</div>
+        <div class="location">at line 25</div>
         <code>            public            
     <strong>__construct</strong>(string $pName = null)</code>
     </h3>
@@ -801,7 +810,7 @@
     </div>
 
                 <h3 id="method_setParent">
-        <div class="location">at line 40</div>
+        <div class="location">at line 36</div>
         <code>            public            
     <strong>setParent</strong>(<a href="../../../Elixir/Form/FormInterface.html"><abbr title="Elixir\Form\FormInterface">FormInterface</abbr></a> $pValue)</code>
     </h3>
@@ -1165,7 +1174,7 @@
     </div>
 
                 <h3 id="method_setAttribute">
-        <div class="location">at line 116</div>
+        <div class="location">at line 112</div>
         <code>            public            
     <strong>setAttribute</strong>(string $pKey, string $pValue)</code>
     </h3>
@@ -1208,7 +1217,7 @@
     </div>
 
                 <h3 id="method_removeAttribute">
-        <div class="location">at line 130</div>
+        <div class="location">at line 126</div>
         <code>            public            
     <strong>removeAttribute</strong>(string $pKey)</code>
     </h3>
@@ -1291,7 +1300,7 @@
     </div>
 
                 <h3 id="method_setAttributes">
-        <div class="location">at line 143</div>
+        <div class="location">at line 139</div>
         <code>            public            
     <strong>setAttributes</strong>(array $pData)</code>
     </h3>
@@ -1545,7 +1554,7 @@
     </div>
 
                 <h3 id="method_setErrorBreak">
-        <div class="location">at line 51</div>
+        <div class="location">at line 47</div>
         <code>            public            
     <strong>setErrorBreak</strong>(boolean $pValue)</code>
     </h3>
@@ -1838,7 +1847,7 @@
     </div>
 
                 <h3 id="method_setValue">
-        <div class="location">at line 152</div>
+        <div class="location">at line 148</div>
         <code>            public            
     <strong>setValue</strong>(mixed $pValue, boolean $pFiltered = true)</code>
     </h3>
@@ -1881,7 +1890,7 @@
     </div>
 
                 <h3 id="method_getValue">
-        <div class="location">at line 160</div>
+        <div class="location">at line 156</div>
         <code>            public            mixed
     <strong>getValue</strong>(boolean $pFiltered = true)</code>
     </h3>
@@ -1964,7 +1973,7 @@
     </div>
 
                 <h3 id="method_isEmpty">
-        <div class="location">at line 168</div>
+        <div class="location">at line 180</div>
         <code>            public            boolean
     <strong>isEmpty</strong>()</code>
     </h3>
@@ -2052,7 +2061,7 @@
     </div>
 
                 <h3 id="method_isValid">
-        <div class="location">at line 176</div>
+        <div class="location">at line 188</div>
         <code>            public            boolean
     <strong>isValid</strong>(mixed $pValue = null)</code>
     </h3>
@@ -2171,7 +2180,7 @@
     </div>
 
                 <h3 id="method_reset">
-        <div class="location">at line 228</div>
+        <div class="location">at line 243</div>
         <code>            public            
     <strong>reset</strong>()</code>
     </h3>
@@ -2184,11 +2193,20 @@
             
             
             
+                            <h4>See also</h4>
+
+                    <table>
+                    <tr>
+                <td>FieldAbstract::reset()</td>
+                <td></td>
+            </tr>
+            </table>
+
                     </div>
     </div>
 
                 <h3 id="method_getUploader">
-        <div class="location">at line 60</div>
+        <div class="location">at line 56</div>
         <code>            public            <a href="../../../Elixir/HTTP/Uploader.html"><abbr title="Elixir\HTTP\Uploader">Uploader</abbr></a>
     <strong>getUploader</strong>()</code>
     </h3>
@@ -2215,7 +2233,7 @@
     </div>
 
                 <h3 id="method_setUploader">
-        <div class="location">at line 74</div>
+        <div class="location">at line 70</div>
         <code>            public            
     <strong>setUploader</strong>(<a href="../../../Elixir/HTTP/Uploader.html"><abbr title="Elixir\HTTP\Uploader">Uploader</abbr></a> $pValue)</code>
     </h3>
@@ -2243,7 +2261,7 @@
     </div>
 
                 <h3 id="method_setAPCUploadProgressData">
-        <div class="location">at line 84</div>
+        <div class="location">at line 80</div>
         <code>            public            
     <strong>setAPCUploadProgressData</strong>(string $pId, string $pValue = null)</code>
     </h3>
@@ -2277,7 +2295,7 @@
     </div>
 
                 <h3 id="method_getAPCUploadProgressData">
-        <div class="location">at line 92</div>
+        <div class="location">at line 88</div>
         <code>            public            array|null
     <strong>getAPCUploadProgressData</strong>()</code>
     </h3>
@@ -2304,7 +2322,7 @@
     </div>
 
                 <h3 id="method_setMaxFileSize">
-        <div class="location">at line 100</div>
+        <div class="location">at line 96</div>
         <code>            public            
     <strong>setMaxFileSize</strong>(integer $pValue)</code>
     </h3>
@@ -2332,7 +2350,7 @@
     </div>
 
                 <h3 id="method_getMaxFileSize">
-        <div class="location">at line 108</div>
+        <div class="location">at line 104</div>
         <code>            public            integer|null
     <strong>getMaxFileSize</strong>()</code>
     </h3>
@@ -2358,8 +2376,80 @@
                     </div>
     </div>
 
+                <h3 id="method_getFileName">
+        <div class="location">at line 164</div>
+        <code>            public            string|array
+    <strong>getFileName</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>string|array</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table>
+                    <tr>
+                <td>FileInterface::getFileName()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+                <h3 id="method_isUploaded">
+        <div class="location">at line 172</div>
+        <code>            public            boolean
+    <strong>isUploaded</strong>()</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table>
+                    <tr>
+                <td>FileInterface::isUploaded()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
                 <h3 id="method_hasMultipleFiles">
-        <div class="location">at line 200</div>
+        <div class="location">at line 212</div>
         <code>            public            boolean
     <strong>hasMultipleFiles</strong>()</code>
     </h3>
@@ -2382,11 +2472,20 @@
 
             
             
+                            <h4>See also</h4>
+
+                    <table>
+                    <tr>
+                <td>FileInterface::hasMultipleFiles()</td>
+                <td></td>
+            </tr>
+            </table>
+
                     </div>
     </div>
 
                 <h3 id="method_receive">
-        <div class="location">at line 208</div>
+        <div class="location">at line 220</div>
         <code>            public            boolean
     <strong>receive</strong>()</code>
     </h3>
@@ -2409,6 +2508,15 @@
 
             
             
+                            <h4>See also</h4>
+
+                    <table>
+                    <tr>
+                <td>FileInterface::receive()</td>
+                <td></td>
+            </tr>
+            </table>
+
                     </div>
     </div>
 
