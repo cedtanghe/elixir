@@ -40,71 +40,147 @@ class ControllerResolver implements ControllerResolverInterface
         $controller = $pRequest->getController() ?: self::DEFAULT_CONTROLLER;
         $action = $pRequest->getAction() ?: self::DEFAULT_ACTION;
         
-        if(preg_match('/^\(@[^\)]+\)$/', $module))
+        if(is_callable($controller))
         {
-            $namespace = $module;
+            return $controller;
         }
         else
         {
-            $m = $pApplication->getModule(ucfirst(Str::camelize($module)));
-            
-            if(null === $m)
+            if(preg_match('/^\(@[^\)]+\)$/', $module))
             {
-                 throw new NotFoundException(sprintf('The module "%s" was not detected.', $module));
+                $namespace = $module;
             }
-            
-            $namespace = $m->getNamespace();
-        }
-        
-        $controller = implode(
-            '\\', 
-            array_map(
-                function($pPart)
-                {
-                    return Str::camelize($pPart);
-                }, 
-                explode('\\', $controller)
-            )
-        );
-        
-        $class = $pApplication->locateClass($namespace . '\Controller\\' . $controller . 'Controller');
-        
-        if(null === $class)
-        {
-            throw new NotFoundException(sprintf('The controller "%s" was not detected.', $controller));
-        }
+            else
+            {
+                $m = $pApplication->getModule(ucfirst(Str::camelize($module)));
 
-        $controller = $pApplication->getContainer()->get(
-            $class, 
-            null, 
-            function() use ($class)
-            {
-                return new $class();
+                if(null === $m)
+                {
+                     throw new NotFoundException(sprintf('The module "%s" was not detected.', $module));
+                }
+
+                $namespace = $m->getNamespace();
             }
-        );
-        
-        if(!method_exists($controller, lcfirst(Str::camelize($action)) . 'Action') && !method_exists($controller, '__call'))
-        {
-            throw new NotFoundException(sprintf('The action "%s" was not detected.', $action));
-        }
-        
-        if($controller instanceof ControllerInterface)
-        {
-            $controller->initialize(
-                $pRequest,
-                $pApplication,
-                $pApplication->getContainer()
+
+            $controller = implode(
+                '\\', 
+                array_map(
+                    function($pPart)
+                    {
+                        return Str::camelize($pPart);
+                    }, 
+                    explode('\\', $controller)
+                )
             );
+
+            $class = $pApplication->locateClass($namespace . '\Controller\\' . $controller . 'Controller');
+
+            if(null === $class)
+            {
+                throw new NotFoundException(sprintf('The controller "%s" was not detected.', $controller));
+            }
+
+            $controller = $pApplication->getContainer()->get(
+                $class, 
+                null, 
+                function() use ($class)
+                {
+                    return new $class();
+                }
+            );
+
+            if(!method_exists($controller, lcfirst(Str::camelize($action)) . 'Action') && !method_exists($controller, '__call'))
+            {
+                throw new NotFoundException(sprintf('The action "%s" was not detected.', $action));
+            }
+
+            if($controller instanceof ControllerInterface)
+            {
+                $controller->initialize(
+                    $pRequest,
+                    $pApplication,
+                    $pApplication->getContainer()
+                );
+            }
+
+            return [$controller, lcfirst(Str::camelize($action)) . 'Action'];
         }
-        
-        return [$controller, lcfirst(Str::camelize($action)) . 'Action'];
     }
     
     /**
-     * @see ApplicationInterface:getArguments()
+     * @see ControllerResolverInterface:getArguments()
+     * @throws \BadMethodCallException
+     * @throws \BadFunctionCallException
      */
     public function getArguments(Request $pRequest, $pController)
     {
-        return [];
+        if(is_array($pController)) 
+        {
+            $reflection = new \ReflectionMethod($pController[0], $pController[1]);
+            $type = 'method';
+        } 
+        else 
+        {
+            $reflection = new \ReflectionFunction($pController);
+            $type = 'function';
+        }
+        
+        $arguments = [];
+        
+        foreach($reflection->getParameters() as $parameter)
+        {
+            if(null !== ($value = $pRequest->getAttributes($this->parseParameter($parameter->getName()), null, false)))
+            {
+                $arguments[] = $value;
+            }
+            else if(null !== $parameter->getClass() && $parameter->getClass()->isInstance($pRequest))
+            {
+                $arguments[] = $pRequest;
+            }
+            else if($parameter->isDefaultValueAvailable())
+            {
+                $arguments[] = $parameter->getDefaultValue();
+            }
+            else
+            {
+                $exception = sprintf(
+                    'The "%s" argument for the controller "%s" is invalid.', 
+                    $parameter->getName(), 
+                    $reflection->getName()
+                );
+                
+                if($type == 'method')
+                {
+                    throw new \BadMethodCallException($exception);
+                }
+                else
+                {
+                    throw new \BadFunctionCallException($exception);
+                }
+            }
+        }
+        
+        return $arguments;
+    }
+    
+    /**
+     * @param string $pParameter
+     * @return string
+     */
+    protected function parseParameter($pParameter)
+    {
+        $parameter = $pParameter;
+        
+        if(preg_match('/^p[A-Z]/', $parameter))
+        {
+            $parameter = substr($pParameter, 1);
+            
+            if(!preg_match('/^[A-Z][A-Z]/', $pParameter))
+            {
+                $parameter = lcfirst($pParameter);
+            }
+        }
+        
+        return $parameter;
     }
 }

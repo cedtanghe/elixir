@@ -192,9 +192,9 @@ class Request
      * @param array $pProviders
      * @return mixed
      */
-    public function get($pKey, $pDefault = null, $pSanitize = null, $pProviders = [self::QUERY,
-                                                                                   self::POST,
-                                                                                   self::ATTRIBUTES])
+    public function get($pKey, $pDefault = null, $pSanitize = null, $pProviders = [self::ATTRIBUTES,
+                                                                                   self::QUERY,
+                                                                                   self::POST])
     {
         foreach($pProviders as $provider)
         {

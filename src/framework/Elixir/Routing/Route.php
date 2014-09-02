@@ -139,21 +139,30 @@ class Route
     }
     
     /**
-     * @param string $pValue
+     * @param string|callable $pValue
      * @throws \InvalidArgumentException
      */
     public function mvc($pValue)
     {
-        $mvc = explode('::', $pValue);
-                
-        if(count($mvc) != 3)
+        if(is_callable($pValue))
         {
-            throw new \InvalidArgumentException(sprintf('Parameter "%s" is not valid.', self::MVC));
+            $this->setModule(null);
+            $this->setController($pValue);
+            $this->setAction(null);
         }
+        else
+        {
+            $mvc = explode('::', $pValue);
 
-        $this->setModule($mvc[0]);
-        $this->setController($mvc[1]);
-        $this->setAction($mvc[2]);
+            if(count($mvc) != 3)
+            {
+                throw new \InvalidArgumentException(sprintf('Parameter "%s" is not valid.', self::MVC));
+            }
+
+            $this->setModule($mvc[0]);
+            $this->setController($mvc[1]);
+            $this->setAction($mvc[2]);
+        }
     }
     
     /**
@@ -173,7 +182,7 @@ class Route
     }
 
     /**
-     * @param string $pValue
+     * @param string|callable $pValue
      */
     public function setController($pValue)
     {
@@ -181,7 +190,7 @@ class Route
     }
     
     /**
-     * @return string
+     * @return string|callable
      */
     public function getController()
     {

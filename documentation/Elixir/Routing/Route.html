@@ -240,7 +240,7 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method_mvc">mvc</a>(string $pValue)
+                    <a href="#method_mvc">mvc</a>(string|<abbr title="Elixir\Routing\callable">callable</abbr> $pValue)
                     <p>
 </p>
                 </td>
@@ -273,7 +273,7 @@
                     
                 </td>
                 <td class="last">
-                    <a href="#method_setController">setController</a>(string $pValue)
+                    <a href="#method_setController">setController</a>(string|<abbr title="Elixir\Routing\callable">callable</abbr> $pValue)
                     <p>
 </p>
                 </td>
@@ -281,7 +281,7 @@
             </tr>
                     <tr>
                 <td class="type">
-                    string
+                    string|<abbr title="Elixir\Routing\callable">callable</abbr>
                 </td>
                 <td class="last">
                     <a href="#method_getController">getController</a>()
@@ -695,7 +695,7 @@
                 <h3 id="method_mvc">
         <div class="location">at line 145</div>
         <code>            public            
-    <strong>mvc</strong>(string $pValue)</code>
+    <strong>mvc</strong>(string|<abbr title="Elixir\Routing\callable">callable</abbr> $pValue)</code>
     </h3>
     <div class="details">
         <p>
@@ -707,7 +707,7 @@
 
                     <table>
                     <tr>
-                <td>string</td>
+                <td>string|<abbr title="Elixir\Routing\callable">callable</abbr></td>
                 <td>$pValue</td>
                 <td>
 </td>
@@ -731,7 +731,7 @@
     </div>
 
                 <h3 id="method_setModule">
-        <div class="location">at line 162</div>
+        <div class="location">at line 171</div>
         <code>            public            
     <strong>setModule</strong>(string $pValue)</code>
     </h3>
@@ -759,7 +759,7 @@
     </div>
 
                 <h3 id="method_getModule">
-        <div class="location">at line 170</div>
+        <div class="location">at line 179</div>
         <code>            public            string
     <strong>getModule</strong>()</code>
     </h3>
@@ -786,9 +786,9 @@
     </div>
 
                 <h3 id="method_setController">
-        <div class="location">at line 178</div>
+        <div class="location">at line 187</div>
         <code>            public            
-    <strong>setController</strong>(string $pValue)</code>
+    <strong>setController</strong>(string|<abbr title="Elixir\Routing\callable">callable</abbr> $pValue)</code>
     </h3>
     <div class="details">
         <p>
@@ -800,7 +800,7 @@
 
                     <table>
                     <tr>
-                <td>string</td>
+                <td>string|<abbr title="Elixir\Routing\callable">callable</abbr></td>
                 <td>$pValue</td>
                 <td>
 </td>
@@ -814,8 +814,8 @@
     </div>
 
                 <h3 id="method_getController">
-        <div class="location">at line 186</div>
-        <code>            public            string
+        <div class="location">at line 195</div>
+        <code>            public            string|<abbr title="Elixir\Routing\callable">callable</abbr>
     <strong>getController</strong>()</code>
     </h3>
     <div class="details">
@@ -829,7 +829,7 @@
 
                     <table>
         <tr>
-            <td>string</td>
+            <td>string|<abbr title="Elixir\Routing\callable">callable</abbr></td>
             <td>
 </td>
         </tr>
@@ -841,7 +841,7 @@
     </div>
 
                 <h3 id="method_setAction">
-        <div class="location">at line 194</div>
+        <div class="location">at line 203</div>
         <code>            public            
     <strong>setAction</strong>(string $pValue)</code>
     </h3>
@@ -869,7 +869,7 @@
     </div>
 
                 <h3 id="method_getAction">
-        <div class="location">at line 202</div>
+        <div class="location">at line 211</div>
         <code>            public            string
     <strong>getAction</strong>()</code>
     </h3>
@@ -896,7 +896,7 @@
     </div>
 
                 <h3 id="method_hasParameter">
-        <div class="location">at line 211</div>
+        <div class="location">at line 220</div>
         <code>            public            boolean
     <strong>hasParameter</strong>(string $pKey)</code>
     </h3>
@@ -934,7 +934,7 @@
     </div>
 
                 <h3 id="method_getParameter">
-        <div class="location">at line 221</div>
+        <div class="location">at line 230</div>
         <code>            public            mixed
     <strong>getParameter</strong>(string $pKey, mixed $pDefault = null)</code>
     </h3>
@@ -978,7 +978,7 @@
     </div>
 
                 <h3 id="method_setParameter">
-        <div class="location">at line 235</div>
+        <div class="location">at line 244</div>
         <code>            public            
     <strong>setParameter</strong>(string $pKey, mixed $pValue)</code>
     </h3>
@@ -1012,7 +1012,7 @@
     </div>
 
                 <h3 id="method_removeParameter">
-        <div class="location">at line 261</div>
+        <div class="location">at line 270</div>
         <code>            public            
     <strong>removeParameter</strong>(string $pKey)</code>
     </h3>
@@ -1040,7 +1040,7 @@
     </div>
 
                 <h3 id="method_getParameters">
-        <div class="location">at line 269</div>
+        <div class="location">at line 278</div>
         <code>            public            array
     <strong>getParameters</strong>()</code>
     </h3>
@@ -1067,7 +1067,7 @@
     </div>
 
                 <h3 id="method_setParameters">
-        <div class="location">at line 277</div>
+        <div class="location">at line 286</div>
         <code>            public            
     <strong>setParameters</strong>(array $pData)</code>
     </h3>
@@ -1095,7 +1095,7 @@
     </div>
 
                 <h3 id="method_prefix">
-        <div class="location">at line 290</div>
+        <div class="location">at line 299</div>
         <code>            public            
     <strong>prefix</strong>(string $pValue)</code>
     </h3>
@@ -1123,7 +1123,7 @@
     </div>
 
                 <h3 id="method_suffix">
-        <div class="location">at line 302</div>
+        <div class="location">at line 311</div>
         <code>            public            
     <strong>suffix</strong>(string $pValue)</code>
     </h3>
@@ -1151,7 +1151,7 @@
     </div>
 
                 <h3 id="method_setSecure">
-        <div class="location">at line 314</div>
+        <div class="location">at line 323</div>
         <code>            public            
     <strong>setSecure</strong>(boolean $pValue)</code>
     </h3>
@@ -1179,7 +1179,7 @@
     </div>
 
                 <h3 id="method_isSecure">
-        <div class="location">at line 322</div>
+        <div class="location">at line 331</div>
         <code>            public            boolean
     <strong>isSecure</strong>()</code>
     </h3>
@@ -1206,7 +1206,7 @@
     </div>
 
                 <h3 id="method_getMethods">
-        <div class="location">at line 330</div>
+        <div class="location">at line 339</div>
         <code>            public            array
     <strong>getMethods</strong>()</code>
     </h3>
@@ -1233,7 +1233,7 @@
     </div>
 
                 <h3 id="method_setMethods">
-        <div class="location">at line 339</div>
+        <div class="location">at line 348</div>
         <code>            public            
     <strong>setMethods</strong>(array $pData)</code>
     </h3>
@@ -1271,7 +1271,7 @@
     </div>
 
                 <h3 id="method_setUseAttributes">
-        <div class="location">at line 359</div>
+        <div class="location">at line 368</div>
         <code>            public            
     <strong>setUseAttributes</strong>(boolean $pValue)</code>
     </h3>
@@ -1299,7 +1299,7 @@
     </div>
 
                 <h3 id="method_isUseAttributes">
-        <div class="location">at line 374</div>
+        <div class="location">at line 383</div>
         <code>            public            boolean
     <strong>isUseAttributes</strong>()</code>
     </h3>
@@ -1326,7 +1326,7 @@
     </div>
 
                 <h3 id="method_getReplacements">
-        <div class="location">at line 382</div>
+        <div class="location">at line 391</div>
         <code>            public            array
     <strong>getReplacements</strong>()</code>
     </h3>
@@ -1353,7 +1353,7 @@
     </div>
 
                 <h3 id="method_setReplacements">
-        <div class="location">at line 390</div>
+        <div class="location">at line 399</div>
         <code>            public            
     <strong>setReplacements</strong>(array $pData)</code>
     </h3>
@@ -1381,7 +1381,7 @@
     </div>
 
                 <h3 id="method_setAssert">
-        <div class="location">at line 398</div>
+        <div class="location">at line 407</div>
         <code>            public            
     <strong>setAssert</strong>(<abbr title="Elixir\Routing\callable">callable</abbr> $pValue)</code>
     </h3>
@@ -1409,7 +1409,7 @@
     </div>
 
                 <h3 id="method_getAssert">
-        <div class="location">at line 406</div>
+        <div class="location">at line 415</div>
         <code>            public            <abbr title="Elixir\Routing\callable">callable</abbr>
     <strong>getAssert</strong>()</code>
     </h3>
@@ -1436,7 +1436,7 @@
     </div>
 
                 <h3 id="method_setGenerateFilter">
-        <div class="location">at line 414</div>
+        <div class="location">at line 423</div>
         <code>            public            
     <strong>setGenerateFilter</strong>(<abbr title="Elixir\Routing\callable">callable</abbr> $pValue)</code>
     </h3>
@@ -1464,7 +1464,7 @@
     </div>
 
                 <h3 id="method_getGenerateFilter">
-        <div class="location">at line 422</div>
+        <div class="location">at line 431</div>
         <code>            public            <abbr title="Elixir\Routing\callable">callable</abbr>
     <strong>getGenerateFilter</strong>()</code>
     </h3>
@@ -1491,7 +1491,7 @@
     </div>
 
                 <h3 id="method_setMatchedFilter">
-        <div class="location">at line 430</div>
+        <div class="location">at line 439</div>
         <code>            public            
     <strong>setMatchedFilter</strong>(<abbr title="Elixir\Routing\callable">callable</abbr> $pValue)</code>
     </h3>
@@ -1519,7 +1519,7 @@
     </div>
 
                 <h3 id="method_getMatchedFilter">
-        <div class="location">at line 438</div>
+        <div class="location">at line 447</div>
         <code>            public            <abbr title="Elixir\Routing\callable">callable</abbr>
     <strong>getMatchedFilter</strong>()</code>
     </h3>
@@ -1546,7 +1546,7 @@
     </div>
 
                 <h3 id="method_hasOption">
-        <div class="location">at line 447</div>
+        <div class="location">at line 456</div>
         <code>            public            boolean
     <strong>hasOption</strong>(string $pKey)</code>
     </h3>
@@ -1584,7 +1584,7 @@
     </div>
 
                 <h3 id="method_getOption">
-        <div class="location">at line 457</div>
+        <div class="location">at line 466</div>
         <code>            public            mixed
     <strong>getOption</strong>(string $pKey, mixed $pDefault = null)</code>
     </h3>
@@ -1628,7 +1628,7 @@
     </div>
 
                 <h3 id="method_setOption">
-        <div class="location">at line 471</div>
+        <div class="location">at line 480</div>
         <code>            public            
     <strong>setOption</strong>(string $pKey, mixed $pValue)</code>
     </h3>
@@ -1662,7 +1662,7 @@
     </div>
 
                 <h3 id="method_removeOption">
-        <div class="location">at line 513</div>
+        <div class="location">at line 522</div>
         <code>            public            
     <strong>removeOption</strong>(string $pKey)</code>
     </h3>
@@ -1690,7 +1690,7 @@
     </div>
 
                 <h3 id="method_getOptions">
-        <div class="location">at line 521</div>
+        <div class="location">at line 530</div>
         <code>            public            array
     <strong>getOptions</strong>()</code>
     </h3>
@@ -1717,7 +1717,7 @@
     </div>
 
                 <h3 id="method_setOptions">
-        <div class="location">at line 529</div>
+        <div class="location">at line 538</div>
         <code>            public            
     <strong>setOptions</strong>(array $pData)</code>
     </h3>
