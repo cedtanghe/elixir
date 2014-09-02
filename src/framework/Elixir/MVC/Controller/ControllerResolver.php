@@ -175,9 +175,9 @@ class ControllerResolver implements ControllerResolverInterface
         {
             $parameter = substr($pParameter, 1);
             
-            if(!preg_match('/^[A-Z][A-Z]/', $pParameter))
+            if(!preg_match('/^[A-Z][A-Z]/', $parameter))
             {
-                $parameter = lcfirst($pParameter);
+                $parameter = lcfirst($parameter);
             }
         }
         
