@@ -18,7 +18,7 @@ class Utils
     {
         $module = $pRequest->getModule();
         
-        if(preg_match('/\(@([^\)]+)\)/', $module, $matches))
+        if(false !== strpos($module, '(@') && preg_match('/\(@([^\)]+)\)/', $module, $matches))
         {
             $module = $matches[1];
         }

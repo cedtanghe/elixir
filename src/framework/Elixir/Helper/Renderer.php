@@ -67,7 +67,7 @@ class Renderer implements ContextInterface, HelperInterface
             $module = $this->_context->getRequest()->getModule();
             $module = ucfirst(Str::camelize($module));
             
-            if(!preg_match('/\(@([^\)]+)\)/', $module))
+            if(false === strpos($module, '(@'))
             {
                 $module = '(@' . $module . ')';
             }

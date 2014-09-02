@@ -98,7 +98,7 @@ class File
             
             if(!file_exists(dirname($pDstPath)))
             {
-                @mkdir(dirname($pDstPath), 0777, true);
+                mkdir(dirname($pDstPath), 0777, true);
             }
             
             $src = fopen($pSrcPath, 'r');
@@ -119,7 +119,7 @@ class File
         {
             if(!file_exists($pDstPath))
             {
-                @mkdir($pDstPath, 0777, true);
+                mkdir($pDstPath, 0777, true);
             }
 		
             $pSrcPath = realpath($pSrcPath);
@@ -131,8 +131,8 @@ class File
             foreach($iterator as $fileinfo)
             {
                 if(!static::copy($fileinfo->getPathname(),
-                            str_replace($pSrcPath, $pDstPath, $fileinfo->getPathname()),
-                            $pOverride))
+                                 str_replace($pSrcPath, $pDstPath, $fileinfo->getPathname()),
+                                 $pOverride))
                 {
                         return false;
                 }
@@ -184,7 +184,7 @@ class File
             {
                 if($fileinfo->isFile() || $fileinfo->isLink()) 
                 {
-                    @unlink($fileinfo->getPathName());
+                    unlink($fileinfo->getPathName());
                 } 
                 else if($fileinfo->isDir()) 
                 {
@@ -192,11 +192,11 @@ class File
                 }
             }
             
-            return @rmdir($pPath);
+            return rmdir($pPath);
         }
         else
         {
-            return @unlink($pPath);
+            return unlink($pPath);
         }
     }
     
@@ -216,7 +216,7 @@ class File
         {
             if(!file_exists($pNewName))
             {
-                @mkdir(dirname($pNewName), 0777, true);
+                mkdir(dirname($pNewName), 0777, true);
             }
 
             return rename($pOldName, $pNewName);

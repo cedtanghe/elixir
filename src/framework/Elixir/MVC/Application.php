@@ -356,7 +356,7 @@ class Application extends Dispatcher implements ApplicationInterface
             throw new \LogicException('The application must first be booted.');
         }
         
-        if(preg_match('/^\(@([^\)]+)\)$/', $pModule, $matches))
+        if(false !== strpos($pModule, '(@') && preg_match('/^\(@([^\)]+)\)$/', $pModule, $matches))
         {
             $pModule = $matches[1];
         }
@@ -386,7 +386,7 @@ class Application extends Dispatcher implements ApplicationInterface
         
         $search = [];
         
-        if(preg_match('/^\(@([^\)]+)\)/', $pClassName, $matches))
+        if(false !== strpos($pClassName, '(@') && preg_match('/^\(@([^\)]+)\)/', $pClassName, $matches))
         {
             if($this->hasModule($matches[1]))
             {
@@ -426,7 +426,7 @@ class Application extends Dispatcher implements ApplicationInterface
         
         $search = [];
 
-        if(preg_match('/\(@([^\)]+)\)/', $pFilePath, $matches))
+        if(false !== strpos($pFilePath, '(@') && preg_match('/\(@([^\)]+)\)/', $pFilePath, $matches))
         {
             if($this->hasModule($matches[1]))
             { 

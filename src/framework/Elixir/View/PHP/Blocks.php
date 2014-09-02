@@ -140,11 +140,14 @@ class Blocks extends Dispatcher
                 $replace = $content;
             }
             
-            if(preg_match_all('/{BLOCK : (.+)}/', $content, $matches))
+            if(false !== strpos($content, '{BLOCK :'))
             {
-                foreach($matches[1] as $block)
+                if(preg_match_all('/{BLOCK : (.+)}/', $content, $matches))
                 {
-                    $content = str_replace($this->mask($block), $this->get($block, ''), $content);
+                    foreach($matches[1] as $block)
+                    {
+                        $content = str_replace($this->mask($block), $this->get($block, ''), $content);
+                    }
                 }
             }
            

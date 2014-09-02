@@ -46,7 +46,7 @@ class ControllerResolver implements ControllerResolverInterface
         }
         else
         {
-            if(preg_match('/^\(@[^\)]+\)$/', $module))
+            if(false !== strpos($module, '(@'))
             {
                 $namespace = $module;
             }
@@ -56,7 +56,7 @@ class ControllerResolver implements ControllerResolverInterface
 
                 if(null === $m)
                 {
-                     throw new NotFoundException(sprintf('The module "%s" was not detected.', $module));
+                    throw new NotFoundException(sprintf('The module "%s" was not detected.', $module));
                 }
 
                 $namespace = $m->getNamespace();
