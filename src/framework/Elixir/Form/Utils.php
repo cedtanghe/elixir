@@ -73,14 +73,7 @@ class Utils
             {
                 if($pName != $pPrefix)
                 {
-                    $pPrefix .= self::PREFIX_SEPARATOR;
-                    
-                    $pos = strpos($pName, $pPrefix);
-
-                    if(false !== $pos)
-                    {
-                        $pName = substr($pName, $pos + strlen($pPrefix));
-                    }
+                    $pName = preg_replace('/^' . preg_quote($pPrefix . self::PREFIX_SEPARATOR, '/') . '/', '', $pName);
                 }
             }
             else
