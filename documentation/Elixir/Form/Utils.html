@@ -67,7 +67,7 @@
                     static&nbsp;array
                 </td>
                 <td class="last">
-                    <a href="#method_getDataByPrefix">getDataByPrefix</a>(array $pData, string $pPrefix, boolean $pRemovePrefix = true)
+                    <a href="#method_getDataByPrefix">getDataByPrefix</a>(array $pData, string $pPrefix)
                     <p>
 </p>
                 </td>
@@ -78,7 +78,7 @@
                     static&nbsp;mixed
                 </td>
                 <td class="last">
-                    <a href="#method_removePrefix">removePrefix</a>(mixed $pData)
+                    <a href="#method_removePrefix">removePrefix</a>(mixed $pData, string $pPrefix = null)
                     <p>
 </p>
                 </td>
@@ -156,9 +156,9 @@
     </div>
 
                 <h3 id="method_getDataByPrefix">
-        <div class="location">at line 34</div>
+        <div class="location">at line 33</div>
         <code>        static    public            array
-    <strong>getDataByPrefix</strong>(array $pData, string $pPrefix, boolean $pRemovePrefix = true)</code>
+    <strong>getDataByPrefix</strong>(array $pData, string $pPrefix)</code>
     </h3>
     <div class="details">
         <p>
@@ -181,12 +181,6 @@
                 <td>
 </td>
             </tr>
-                    <tr>
-                <td>boolean</td>
-                <td>$pRemovePrefix</td>
-                <td>
-</td>
-            </tr>
             </table>
 
             
@@ -206,9 +200,9 @@
     </div>
 
                 <h3 id="method_removePrefix">
-        <div class="location">at line 62</div>
+        <div class="location">at line 68</div>
         <code>        static    public            mixed
-    <strong>removePrefix</strong>(mixed $pData)</code>
+    <strong>removePrefix</strong>(mixed $pData, string $pPrefix = null)</code>
     </h3>
     <div class="details">
         <p>
@@ -222,6 +216,12 @@
                     <tr>
                 <td>mixed</td>
                 <td>$pData</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$pPrefix</td>
                 <td>
 </td>
             </tr>
@@ -244,7 +244,7 @@
     </div>
 
                 <h3 id="method_prefixForm">
-        <div class="location">at line 115</div>
+        <div class="location">at line 127</div>
         <code>        static    public            
     <strong>prefixForm</strong>(<a href="../../Elixir/Form/FormInterface.html"><abbr title="Elixir\Form\FormInterface">FormInterface</abbr></a> $pForm, string $pPrefix = null)</code>
     </h3>
@@ -278,7 +278,7 @@
     </div>
 
                 <h3 id="method_createOptions">
-        <div class="location">at line 138</div>
+        <div class="location">at line 150</div>
         <code>        static    public            array
     <strong>createOptions</strong>(array $pData, string $pIdentifier, string|array $pWording = null, string $pMask = &#039;%s&#039;)</code>
     </h3>

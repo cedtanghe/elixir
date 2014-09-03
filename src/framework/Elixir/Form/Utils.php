@@ -28,10 +28,9 @@ class Utils
     /**
      * @param array $pData
      * @param string $pPrefix
-     * @param boolean $pRemovePrefix
      * @return array
      */
-    public static function getDataByPrefix(array $pData, $pPrefix, $pRemovePrefix = true)
+    public static function getDataByPrefix(array $pData, $pPrefix)
     {
         $result = [];
         
@@ -39,7 +38,13 @@ class Utils
         {
             if(is_array($value))
             {
-                $result = array_merge($result, static::getDataByPrefix($pPrefix, $value, false));
+                $result = array_merge(
+                    $result, 
+                    static::getDataByPrefix(
+                        $pPrefix, 
+                        $value, 
+                        false
+                    ));
             }
             else
             {
@@ -52,33 +57,40 @@ class Utils
             }
         }
         
-        return $pRemovePrefix ? static::removePrefix($result) : $result;
+        return $result;
     }
     
     /**
      * @param mixed $pData
+     * @param string $pPrefix
      * @return mixed
      */
-    public static function removePrefix($pData)
+    public static function removePrefix($pData, $pPrefix = null)
     {
-        $process = function($pName)
+        $process = function($pName, $pPrefix)
         {
-            $i = 0;
-
-            do
+            if(null !== $pPrefix)
             {
-                $pos = strpos($pName, self::PREFIX_SEPARATOR, $i);
+                if($pName != $pPrefix)
+                {
+                    $pPrefix .= self::PREFIX_SEPARATOR;
+                    
+                    $pos = strpos($pName, $pPrefix);
+
+                    if(false !== $pos)
+                    {
+                        $pName = substr($pName, $pos + strlen($pPrefix));
+                    }
+                }
+            }
+            else
+            {
+                $pos = strrpos($pName, $pPrefix);
 
                 if(false !== $pos)
                 {
-                    $i = $pos;
+                    $pName = substr($pName, 0, $pos + strlen($pPrefix));
                 }
-            }
-            while(false !== $pos);
-
-            if($i > 0)
-            {
-                $pName = substr($pName, 0, $i);
             }
             
             return $pName;
@@ -91,21 +103,21 @@ class Utils
 
             foreach($keys as &$key)
             {
-                $key = $process($key);
+                $key = $process($key, $pPrefix);
             }
             
             foreach($values as &$value)
             {
                 if(is_array($value))
                 {
-                    $value = static::removePrefix($value);
+                    $value = static::removePrefix($value, $pPrefix);
                 }
             }
 
             return array_combine($keys, $values);
         }
         
-        return $process($pData);
+        return $process($pData, $pPrefix);
     }
     
     /**
