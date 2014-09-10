@@ -510,7 +510,7 @@ abstract class FieldAbstract extends Dispatcher implements FieldInterface
                     }
                     else
                     {
-                        $pValue = Filter::filter($data['filter'], $value, $data['options']);
+                        $value = Filter::filter($data['filter'], $value, $data['options']);
                     }
                 }
             }
