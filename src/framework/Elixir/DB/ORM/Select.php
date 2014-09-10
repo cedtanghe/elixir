@@ -6,7 +6,7 @@ use Elixir\DB\DBInterface;
 use Elixir\DB\ORM\RepositoryInterface;
 use Elixir\DB\Result\SetAbstract;
 use Elixir\DB\SQL\Select as SQLSelect;
-use Elixir\DB\SQL\SQLAbstract;
+use Elixir\DB\SQL\SQLInterface;
 use Elixir\Util\Str;
 
 /**
@@ -59,7 +59,7 @@ class Select
      * @param string $pType
      * @return Select
      */
-    public function combine(array $pSQLs, $pType = SQLAbstract::COMBINE_UNION)
+    public function combine(array $pSQLs, $pType = SQLInterface::COMBINE_UNION)
     {
         $this->_SQL->table(null);
         $this->_SQL->combine($pSQLs, $pType);

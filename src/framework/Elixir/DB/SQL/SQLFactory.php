@@ -175,4 +175,21 @@ class SQLFactory
         
         return new DropTable($pTable);
     }
+    
+    /**
+     * @param string $pTable
+     * @param string $pDriver
+     * @return TruncateTable
+     */
+    public static function truncateTable($pTable = null, $pDriver = self::DRIVER_MYSQL)
+    {
+        switch(strtolower($pDriver))
+        {
+            case self::DRIVER_SQLITE:
+                throw new \RuntimeException('TRUNCATE TABLE command for SQLite does not exist.');
+            break;
+        }
+        
+        return new TruncateTable($pTable);
+    }
 }

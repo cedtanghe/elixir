@@ -2,7 +2,7 @@
 
 namespace Elixir\DB\SQL;
 
-use Elixir\DB\SQL\SQLAbstract;
+use Elixir\DB\SQL\SQLInterface;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
@@ -11,7 +11,7 @@ use Elixir\DB\SQL\SQLAbstract;
 class WhereClause
 {
     /**
-     * @var SQLAbstract
+     * @var SQLInterface
      */
     protected $_SQL;
     
@@ -21,9 +21,9 @@ class WhereClause
     protected $_wheres = [];
     
     /**
-     * @param SQLAbstract $pSQL
+     * @param SQLInterface $pSQL
      */
-    public function __construct(SQLAbstract $pSQL) 
+    public function __construct(SQLInterface $pSQL) 
     {
         $this->_SQL = $pSQL;
     }

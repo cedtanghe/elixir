@@ -3,6 +3,7 @@
 namespace Elixir\HTTP\Session\Handler;
 
 use Elixir\DB\DBInterface;
+use Elixir\DB\QueryBuilderInterface;
 use Elixir\DB\Result\SetAbstract;
 use Elixir\DB\SQL\Insert;
 use Elixir\DB\SQL\Update;
@@ -14,7 +15,7 @@ use Elixir\DB\SQL\Update;
 class DB implements \SessionHandlerInterface
 {
     /**
-     * @var DBInterface 
+     * @var mixed
      */
     protected $_DB;
     
@@ -24,11 +25,20 @@ class DB implements \SessionHandlerInterface
     protected $_lifeTime;
     
     /**
-     * @param DBInterface $pDB
+     * @param mixed $pDB
      * @param integer $pLifeTime
+     * @throws \InvalidArgumentException
      */
-    public function __construct(DBInterface $pDB, $pLifeTime = -1) 
+    public function __construct($pDB, $pLifeTime = -1) 
     {
+        if(!$pDB instanceof DBInterface || !$pDB instanceof QueryBuilderInterface)
+        {
+            throw new \InvalidArgumentException(
+                'Database object must implement the "\Elixir\DB\DBInterface" and 
+                 "\Elixir\DB\QueryBuilderInterface" interfaces.'
+            );
+        }
+        
         $this->_DB = $pDB;
         
         if($pLifeTime != -1)

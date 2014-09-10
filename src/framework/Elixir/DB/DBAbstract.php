@@ -3,6 +3,7 @@
 namespace Elixir\DB;
 
 use Elixir\DB\DBInterface;
+use Elixir\DB\QueryBuilderInterface;
 use Elixir\DB\SQL\SQLFactory;
 use Elixir\Dispatcher\Dispatcher;
 
@@ -10,7 +11,7 @@ use Elixir\Dispatcher\Dispatcher;
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
-abstract class DBAbstract extends Dispatcher implements DBInterface
+abstract class DBAbstract extends Dispatcher implements DBInterface, QueryBuilderInterface
 {
     /**
      * @return string
@@ -18,7 +19,7 @@ abstract class DBAbstract extends Dispatcher implements DBInterface
     abstract public function getDriver();
 
     /**
-     * @see DBInterface::createSelect()
+     * @see QueryBuilderInterface::createSelect()
      */
     public function createSelect($pTable = null)
     {
@@ -29,7 +30,7 @@ abstract class DBAbstract extends Dispatcher implements DBInterface
     }
     
     /**
-     * @see DBInterface::createInsert()
+     * @see QueryBuilderInterface::createInsert()
      */
     public function createInsert($pTable = null)
     {
@@ -40,7 +41,7 @@ abstract class DBAbstract extends Dispatcher implements DBInterface
     }
     
     /**
-     * @see DBInterface::createDelete()
+     * @see QueryBuilderInterface::createDelete()
      */
     public function createDelete($pTable = null)
     {
@@ -51,7 +52,7 @@ abstract class DBAbstract extends Dispatcher implements DBInterface
     }
     
     /**
-     * @see DBInterface::createUpdate()
+     * @see QueryBuilderInterface::createUpdate()
      */
     public function createUpdate($pTable = null)
     {
@@ -62,7 +63,7 @@ abstract class DBAbstract extends Dispatcher implements DBInterface
     }
     
     /**
-     * @see DBInterface::createTable()
+     * @see QueryBuilderInterface::createTable()
      */
     public function createTable($pTable = null)
     {
@@ -73,7 +74,7 @@ abstract class DBAbstract extends Dispatcher implements DBInterface
     }
     
     /**
-     * @see DBInterface::createAlterTable()
+     * @see QueryBuilderInterface::createAlterTable()
      */
     public function createAlterTable($pTable = null)
     {
@@ -84,10 +85,18 @@ abstract class DBAbstract extends Dispatcher implements DBInterface
     }
     
     /**
-     * @see DBInterface::createDrop()
+     * @see QueryBuilderInterface::createDropTable()
      */
     public function createDropTable($pTable = null)
     {
         return SQLFactory::dropTable($pTable, $this->getDriver());
+    }
+    
+     /**
+     * @see QueryBuilderInterface::createTruncateTable()
+     */
+    public function createTruncateTable($pTable = null)
+    {
+        return SQLFactory::truncateTable($pTable, $this->getDriver());
     }
 }

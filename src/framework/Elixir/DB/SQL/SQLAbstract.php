@@ -3,12 +3,13 @@
 namespace Elixir\DB\SQL;
 
 use Elixir\DB\SQL\Expr;
+use Elixir\DB\SQL\SQLInterface;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
-abstract class SQLAbstract
+abstract class SQLAbstract implements SQLInterface
 {
     /**
      * @param mixed $pParameter
@@ -57,136 +58,6 @@ abstract class SQLAbstract
     }
     
     /**
-     * @var string
-     */
-    const STAR = '*';
-    
-    /**
-     * @var string
-     */
-    const QUANTIFIER_ALL = 'ALL';
-    
-    /**
-     * @var string
-     */
-    const QUANTIFIER_DISTINCT = 'DISTINCT';
-    
-    /**
-     * @var string
-     */
-    const COMBINE_UNION = 'UNION';
-    
-    /**
-     * @var string
-     */
-    const COMBINE_UNION_ALL = 'UNION_ALL';
-    
-    /**
-     * @var string
-     */
-    const COMBINE_EXPECT = 'EXPECT';
-    
-    /**
-     * @var string
-     */
-    const COMBINE_INTERSECT = 'INTERSECT';
-    
-    /**
-     * @var string
-     */
-    const JOIN_CROSS = 'CROSS';
-    
-    /**
-     * @var string
-     */
-    const JOIN_INNER = 'INNER';
-    
-    /**
-     * @var string
-     */
-    const JOIN_OUTER = 'OUTER';
-    
-    /**
-     * @var string
-     */
-    const JOIN_LEFT = 'LEFT';
-    
-    /**
-     * @var string
-     */
-    const JOIN_RIGHT = 'RIGHT';
-    
-    /**
-     * @var string
-     */
-    const JOIN_NATURAL = 'NATURAL';
-    
-    /**
-     * @var string
-     */
-    const ORDER_ASCENDING = 'ASC';
-    
-    /**
-     * @var string
-     */
-    const ORDER_DESCENDING = 'DESC';
-    
-    /**
-     * @var string
-     */
-    const ORDER_NONE = null;
-    
-    /**
-     * @var string
-     */
-    const CONSTRAINT_TEMPORARY = 'TEMPORARY';
-    
-    /**
-     * @var string
-     */
-    const CONSTRAINT_IF_NOT_EXISTS = 'IF NOT EXISTS';
-    
-    /**
-     * @var string
-     */
-    const OPTION_ENGINE = 'ENGINE';
-    
-    /**
-     * @var string
-     */
-    const OPTION_AUTO_INCREMENT = 'AUTO_INCREMENT';
-    
-    /**
-     * @var string
-     */
-    const OPTION_COMMENT = 'COMMENT';
-    
-    /**
-     * @var string
-     */
-    const OPTION_CHARSET = 'DEFAULT CHARSET';
-    
-    /**
-     * @var string
-     */
-    const OPTION_WITHOUT_ROWID = 'WITHOUT ROWID';
-    
-    /**
-     * @var string
-     */
-    const ENGINE_INNODB = 'InnoDB';
-    
-    /**
-     * @var string
-     */
-    const ENGINE_MYISAM = 'MyISAM';
-    
-    /**
-     * @var string
-     */
-    const CHARSET_UTF8 = 'utf8';
-    
-    /**
      * @var callable
      */
     protected $_quoteMethod = '\Elixir\DB\SQL\SQLAbstract::protect';
@@ -197,7 +68,7 @@ abstract class SQLAbstract
     protected $_bindValues = [];
     
     /**
-     * @param callable $pValue
+     * @see SQLInterface::setQuoteMethod()
      */
     public function setQuoteMethod(callable $pValue)
     {
@@ -205,7 +76,7 @@ abstract class SQLAbstract
     }
     
     /**
-     * @return callable
+     * @see SQLInterface::getQuoteMethod()
      */
     public function getQuoteMethod()
     {
@@ -213,8 +84,7 @@ abstract class SQLAbstract
     }
     
     /**
-     * @param mixed $pParameter
-     * @return mixed
+     * @see SQLInterface::quote()
      */
     public function quote($pParameter)
     {
@@ -222,18 +92,15 @@ abstract class SQLAbstract
     }
     
     /**
-     * @param string $pKey
-     * @param mixed $pValue
-     * @return SQLAbstract
+     * @see SQLInterface::bindValue()
      */
     public function bindValue($pKey, $pValue)
     {
         $this->_bindValues[$pKey] = $pValue;
-        return $this;
     }
     
     /**
-     * @return array
+     * @see SQLInterface::getBindValues()
      */
     public function getBindValues()
     {
@@ -241,9 +108,7 @@ abstract class SQLAbstract
     }
     
     /**
-     * @param string $pSQL
-     * @param mixed $pValues
-     * @return string
+     * @see SQLInterface::assemble()
      */
     public function assemble($pSQL, $pValues = null)
     {
@@ -307,17 +172,12 @@ abstract class SQLAbstract
     }
     
     /**
-     * @see SQLAbstract::render()
+     * @see SQLInterface::getQuery()
      */
     public function getQuery() 
     {
         return $this->render();
     }
-
-    /**
-     * @return string
-     */
-    abstract public function render();
     
     /**
      * @see SQLAbstract::getQuery()

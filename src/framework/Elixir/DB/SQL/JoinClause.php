@@ -11,7 +11,7 @@ use Elixir\DB\SQL\Select;
 class JoinClause
 {
     /**
-     * @var SQLAbstract
+     * @var Select
      */
     protected $_SQL;
     

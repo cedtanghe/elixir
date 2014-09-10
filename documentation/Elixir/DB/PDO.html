@@ -127,6 +127,17 @@
             </tr>
                     <tr>
                 <td class="type">
+                    <a href="../../Elixir/DB/SQL/TruncateTable.html"><abbr title="Elixir\DB\SQL\TruncateTable">TruncateTable</abbr></a>
+                </td>
+                <td class="last">
+                    <a href="#method_createTruncateTable">createTruncateTable</a>(string $pTable = null)
+                    <p>
+</p>
+                </td>
+                <td><small>from&nbsp;<a href="../../Elixir/DB/DBAbstract.html#method_createTruncateTable"><abbr title="Elixir\DB\DBAbstract">DBAbstract</abbr></a></small></td>
+            </tr>
+                    <tr>
+                <td class="type">
                     
                 </td>
                 <td class="last">
@@ -229,7 +240,7 @@
                     integer
                 </td>
                 <td class="last">
-                    <a href="#method_exec">exec</a>(<a href="../../Elixir/DB/SQL/SQLAbstract.html"><abbr title="Elixir\DB\SQL\SQLAbstract">SQLAbstract</abbr></a>|string $pSQL)
+                    <a href="#method_exec">exec</a>(<a href="../../Elixir/DB/SQL/SQLInterface.html"><abbr title="Elixir\DB\SQL\SQLInterface">SQLInterface</abbr></a>|string $pSQL)
                     <p>
 </p>
                 </td>
@@ -240,7 +251,7 @@
                     <a href="../../Elixir/DB/Result/SetAbstract.html"><abbr title="Elixir\DB\Result\SetAbstract">SetAbstract</abbr></a>|boolean
                 </td>
                 <td class="last">
-                    <a href="#method_query">query</a>(<a href="../../Elixir/DB/SQL/SQLAbstract.html"><abbr title="Elixir\DB\SQL\SQLAbstract">SQLAbstract</abbr></a>|string $pSQL, array $pValues = array(), array $pOptions = array())
+                    <a href="#method_query">query</a>(<a href="../../Elixir/DB/SQL/SQLInterface.html"><abbr title="Elixir\DB\SQL\SQLInterface">SQLInterface</abbr></a>|string $pSQL, array $pValues = array(), array $pOptions = array())
                     <p>
 </p>
                 </td>
@@ -310,7 +321,7 @@
     </div>
 
                 <h3 id="method_createSelect">
-        <div class="location">in <a href="../../Elixir/DB/DBAbstract.html#method_createSelect"><abbr title="Elixir\DB\DBAbstract">DBAbstract</abbr></a> at line 23</div>
+        <div class="location">in <a href="../../Elixir/DB/DBAbstract.html#method_createSelect"><abbr title="Elixir\DB\DBAbstract">DBAbstract</abbr></a> at line 24</div>
         <code>            public            <a href="../../Elixir/DB/SQL/Select.html"><abbr title="Elixir\DB\SQL\Select">Select</abbr></a>
     <strong>createSelect</strong>(string $pTable = null)</code>
     </h3>
@@ -348,7 +359,7 @@
 
                     <table>
                     <tr>
-                <td>DBInterface::createSelect()</td>
+                <td>QueryBuilderInterface::createSelect()</td>
                 <td></td>
             </tr>
             </table>
@@ -357,7 +368,7 @@
     </div>
 
                 <h3 id="method_createInsert">
-        <div class="location">in <a href="../../Elixir/DB/DBAbstract.html#method_createInsert"><abbr title="Elixir\DB\DBAbstract">DBAbstract</abbr></a> at line 34</div>
+        <div class="location">in <a href="../../Elixir/DB/DBAbstract.html#method_createInsert"><abbr title="Elixir\DB\DBAbstract">DBAbstract</abbr></a> at line 35</div>
         <code>            public            <a href="../../Elixir/DB/SQL/Insert.html"><abbr title="Elixir\DB\SQL\Insert">Insert</abbr></a>
     <strong>createInsert</strong>(string $pTable = null)</code>
     </h3>
@@ -395,7 +406,7 @@
 
                     <table>
                     <tr>
-                <td>DBInterface::createInsert()</td>
+                <td>QueryBuilderInterface::createInsert()</td>
                 <td></td>
             </tr>
             </table>
@@ -404,7 +415,7 @@
     </div>
 
                 <h3 id="method_createDelete">
-        <div class="location">in <a href="../../Elixir/DB/DBAbstract.html#method_createDelete"><abbr title="Elixir\DB\DBAbstract">DBAbstract</abbr></a> at line 45</div>
+        <div class="location">in <a href="../../Elixir/DB/DBAbstract.html#method_createDelete"><abbr title="Elixir\DB\DBAbstract">DBAbstract</abbr></a> at line 46</div>
         <code>            public            <a href="../../Elixir/DB/SQL/Delete.html"><abbr title="Elixir\DB\SQL\Delete">Delete</abbr></a>
     <strong>createDelete</strong>(string $pTable = null)</code>
     </h3>
@@ -442,7 +453,7 @@
 
                     <table>
                     <tr>
-                <td>DBInterface::createDelete()</td>
+                <td>QueryBuilderInterface::createDelete()</td>
                 <td></td>
             </tr>
             </table>
@@ -451,7 +462,7 @@
     </div>
 
                 <h3 id="method_createUpdate">
-        <div class="location">in <a href="../../Elixir/DB/DBAbstract.html#method_createUpdate"><abbr title="Elixir\DB\DBAbstract">DBAbstract</abbr></a> at line 56</div>
+        <div class="location">in <a href="../../Elixir/DB/DBAbstract.html#method_createUpdate"><abbr title="Elixir\DB\DBAbstract">DBAbstract</abbr></a> at line 57</div>
         <code>            public            <a href="../../Elixir/DB/SQL/Update.html"><abbr title="Elixir\DB\SQL\Update">Update</abbr></a>
     <strong>createUpdate</strong>(string $pTable = null)</code>
     </h3>
@@ -489,7 +500,7 @@
 
                     <table>
                     <tr>
-                <td>DBInterface::createUpdate()</td>
+                <td>QueryBuilderInterface::createUpdate()</td>
                 <td></td>
             </tr>
             </table>
@@ -498,7 +509,7 @@
     </div>
 
                 <h3 id="method_createTable">
-        <div class="location">in <a href="../../Elixir/DB/DBAbstract.html#method_createTable"><abbr title="Elixir\DB\DBAbstract">DBAbstract</abbr></a> at line 67</div>
+        <div class="location">in <a href="../../Elixir/DB/DBAbstract.html#method_createTable"><abbr title="Elixir\DB\DBAbstract">DBAbstract</abbr></a> at line 68</div>
         <code>            public            <a href="../../Elixir/DB/SQL/CreateTable.html"><abbr title="Elixir\DB\SQL\CreateTable">CreateTable</abbr></a>
     <strong>createTable</strong>(string $pTable = null)</code>
     </h3>
@@ -536,7 +547,7 @@
 
                     <table>
                     <tr>
-                <td>DBInterface::createTable()</td>
+                <td>QueryBuilderInterface::createTable()</td>
                 <td></td>
             </tr>
             </table>
@@ -545,7 +556,7 @@
     </div>
 
                 <h3 id="method_createAlterTable">
-        <div class="location">in <a href="../../Elixir/DB/DBAbstract.html#method_createAlterTable"><abbr title="Elixir\DB\DBAbstract">DBAbstract</abbr></a> at line 78</div>
+        <div class="location">in <a href="../../Elixir/DB/DBAbstract.html#method_createAlterTable"><abbr title="Elixir\DB\DBAbstract">DBAbstract</abbr></a> at line 79</div>
         <code>            public            <a href="../../Elixir/DB/SQL/AlterTable.html"><abbr title="Elixir\DB\SQL\AlterTable">AlterTable</abbr></a>
     <strong>createAlterTable</strong>(string $pTable = null)</code>
     </h3>
@@ -583,7 +594,7 @@
 
                     <table>
                     <tr>
-                <td>DBInterface::createAlterTable()</td>
+                <td>QueryBuilderInterface::createAlterTable()</td>
                 <td></td>
             </tr>
             </table>
@@ -592,7 +603,7 @@
     </div>
 
                 <h3 id="method_createDropTable">
-        <div class="location">in <a href="../../Elixir/DB/DBAbstract.html#method_createDropTable"><abbr title="Elixir\DB\DBAbstract">DBAbstract</abbr></a> at line 89</div>
+        <div class="location">in <a href="../../Elixir/DB/DBAbstract.html#method_createDropTable"><abbr title="Elixir\DB\DBAbstract">DBAbstract</abbr></a> at line 90</div>
         <code>            public            <a href="../../Elixir/DB/SQL/DropTable.html"><abbr title="Elixir\DB\SQL\DropTable">DropTable</abbr></a>
     <strong>createDropTable</strong>(string $pTable = null)</code>
     </h3>
@@ -630,7 +641,54 @@
 
                     <table>
                     <tr>
-                <td>DBInterface::createDrop()</td>
+                <td>QueryBuilderInterface::createDropTable()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+                <h3 id="method_createTruncateTable">
+        <div class="location">in <a href="../../Elixir/DB/DBAbstract.html#method_createTruncateTable"><abbr title="Elixir\DB\DBAbstract">DBAbstract</abbr></a> at line 98</div>
+        <code>            public            <a href="../../Elixir/DB/SQL/TruncateTable.html"><abbr title="Elixir\DB\SQL\TruncateTable">TruncateTable</abbr></a>
+    <strong>createTruncateTable</strong>(string $pTable = null)</code>
+    </h3>
+    <div class="details">
+        <p>
+</p>
+        <p>
+</p>
+        <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table>
+                    <tr>
+                <td>string</td>
+                <td>$pTable</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table>
+        <tr>
+            <td><a href="../../Elixir/DB/SQL/TruncateTable.html"><abbr title="Elixir\DB\SQL\TruncateTable">TruncateTable</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table>
+                    <tr>
+                <td>QueryBuilderInterface::createTruncateTable()</td>
                 <td></td>
             </tr>
             </table>
@@ -956,7 +1014,7 @@
                 <h3 id="method_exec">
         <div class="location">at line 196</div>
         <code>            public            integer
-    <strong>exec</strong>(<a href="../../Elixir/DB/SQL/SQLAbstract.html"><abbr title="Elixir\DB\SQL\SQLAbstract">SQLAbstract</abbr></a>|string $pSQL)</code>
+    <strong>exec</strong>(<a href="../../Elixir/DB/SQL/SQLInterface.html"><abbr title="Elixir\DB\SQL\SQLInterface">SQLInterface</abbr></a>|string $pSQL)</code>
     </h3>
     <div class="details">
         <p>
@@ -968,7 +1026,7 @@
 
                     <table>
                     <tr>
-                <td><a href="../../Elixir/DB/SQL/SQLAbstract.html"><abbr title="Elixir\DB\SQL\SQLAbstract">SQLAbstract</abbr></a>|string</td>
+                <td><a href="../../Elixir/DB/SQL/SQLInterface.html"><abbr title="Elixir\DB\SQL\SQLInterface">SQLInterface</abbr></a>|string</td>
                 <td>$pSQL</td>
                 <td>
 </td>
@@ -994,7 +1052,7 @@
                 <h3 id="method_query">
         <div class="location">at line 214</div>
         <code>            public            <a href="../../Elixir/DB/Result/SetAbstract.html"><abbr title="Elixir\DB\Result\SetAbstract">SetAbstract</abbr></a>|boolean
-    <strong>query</strong>(<a href="../../Elixir/DB/SQL/SQLAbstract.html"><abbr title="Elixir\DB\SQL\SQLAbstract">SQLAbstract</abbr></a>|string $pSQL, array $pValues = array(), array $pOptions = array())</code>
+    <strong>query</strong>(<a href="../../Elixir/DB/SQL/SQLInterface.html"><abbr title="Elixir\DB\SQL\SQLInterface">SQLInterface</abbr></a>|string $pSQL, array $pValues = array(), array $pOptions = array())</code>
     </h3>
     <div class="details">
         <p>
@@ -1006,7 +1064,7 @@
 
                     <table>
                     <tr>
-                <td><a href="../../Elixir/DB/SQL/SQLAbstract.html"><abbr title="Elixir\DB\SQL\SQLAbstract">SQLAbstract</abbr></a>|string</td>
+                <td><a href="../../Elixir/DB/SQL/SQLInterface.html"><abbr title="Elixir\DB\SQL\SQLInterface">SQLInterface</abbr></a>|string</td>
                 <td>$pSQL</td>
                 <td>
 </td>

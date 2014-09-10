@@ -83,7 +83,7 @@ class Insert extends SQLAbstract
     }
     
     /**
-     * @param Select|string|array $pValues
+     * @param Select|array $pValues
      * @param string $pType
      * @return Insert
      */
@@ -92,10 +92,6 @@ class Insert extends SQLAbstract
         if($pValues instanceof Select)
         {
             $this->_values = $pValues->getQuery();
-        }
-        else if(is_string($pValues))
-        {
-            $this->_values = $pValues;
         }
         else
         {
@@ -106,7 +102,7 @@ class Insert extends SQLAbstract
             
             $columns = false;
             
-            foreach($pValues as $key => $value)
+            foreach((array)$pValues as $key => $value)
             {
                 if(!$columns)
                 {

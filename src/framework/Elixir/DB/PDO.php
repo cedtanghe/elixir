@@ -6,7 +6,7 @@ use Elixir\DB\DBAbstract;
 use Elixir\DB\DBEvent;
 use Elixir\DB\Result\PDO as ResultSet;
 use Elixir\DB\SQL\Expr;
-use Elixir\DB\SQL\SQLAbstract;
+use Elixir\DB\SQL\SQLInterface;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
@@ -190,12 +190,12 @@ class PDO extends DBAbstract
     }
     
     /**
-     * @param SQLAbstract|string $pSQL
+     * @param SQLInterface|string $pSQL
      * @return integer
      */
     public function exec($pSQL)
     {
-        if($pSQL instanceof SQLAbstract)
+        if($pSQL instanceof SQLInterface)
         {
             $pSQL = $pSQL->getQuery();
         }
@@ -213,7 +213,7 @@ class PDO extends DBAbstract
      */
     public function query($pSQL, array $pValues = [], array $pOptions = [])
     {
-        if($pSQL instanceof SQLAbstract)
+        if($pSQL instanceof SQLInterface)
         {
             $pValues = array_merge($pValues, $pSQL->getBindValues());
             $pSQL = $pSQL->getQuery();
