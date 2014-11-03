@@ -13,5 +13,4 @@
 - Add More Field type, themes, etc. in a "Form" module.
 - Create "Admin" module.
 - Add "@include" logic in "I18N", "Routing", "Security" components.
-- Create "ValidatorGroup" and "FilterGroup" classes.
 - Global refactorisation.

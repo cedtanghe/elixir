@@ -3,6 +3,16 @@
 namespace Elixir\Module\AppBase;
 
 use Elixir\DI\ContainerInterface;
+use Elixir\Facade\App;
+use Elixir\Facade\Cache;
+use Elixir\Facade\Config;
+use Elixir\Facade\DB;
+use Elixir\Facade\DI;
+use Elixir\Facade\Filter;
+use Elixir\Facade\Log;
+use Elixir\Facade\Request;
+use Elixir\Facade\Validator;
+use Elixir\Facade\View;
 use Elixir\MVC\Module\ModuleAbstract;
 
 /**
@@ -30,6 +40,19 @@ class Bootstrap extends ModuleAbstract
         $this->_container->load(new $servicesFilter());
         $this->_container->load(new $servicesHelper());
         $this->_container->load(new $servicesValidator());
+        
+        /************ FACADES ************/
+        
+        App::setContainer($this->_container);
+        Cache::setContainer($this->_container);
+        Config::setContainer($this->_container);
+        DB::setContainer($this->_container);
+        DI::setContainer($this->_container);
+        Filter::setContainer($this->_container);
+        Log::setContainer($this->_container);
+        Request::setContainer($this->_container);
+        Validator::setContainer($this->_container);
+        View::setContainer($this->_container);
         
         /************ LISTENERS ************/
         
