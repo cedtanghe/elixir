@@ -45,8 +45,7 @@ abstract class LoaderAbstract implements LoaderInterface
     /**
      * @param mixed $pData
      * @param boolean $pRecursive
-     * @param string $pDirname
      */
-    abstract protected function parse($pData, $pRecursive = false, $pDirname = '');
+    abstract protected function parse($pData, $pRecursive = false);
 }
 

@@ -12,5 +12,4 @@
 - Add "menu" helper ("Tree" component).
 - Add More Field type, themes, etc. in a "Form" module.
 - Create "Admin" module.
-- Add "@include" logic in "I18N", "Routing", "Security" components.
 - Global refactorisation.

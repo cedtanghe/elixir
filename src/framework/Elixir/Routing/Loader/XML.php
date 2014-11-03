@@ -137,9 +137,13 @@ class XML implements LoaderInterface
                                     $replacements[$k] = (string)$v;
                                 }
 
-                                $route->setOption(Route::REPLACEMENTS, 
-                                                  array_merge($replacements,
-                                                              $route->getOption(Route::REPLACEMENTS, [])));
+                                $route->setOption(
+                                    Route::REPLACEMENTS, 
+                                    array_merge(
+                                        $replacements,
+                                        $route->getOption(Route::REPLACEMENTS, [])
+                                    )
+                                );
                             break;
                             default:
                                 if(!$route->hasOption($key))

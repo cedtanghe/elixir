@@ -4,7 +4,6 @@
         "key-7":"value-7"
     },
     "test:unit":{
-        "key-6":"new value-6",
-        "@include":"include.json"
+        "key-6":"new value-6"
     }
 }

@@ -12,6 +12,5 @@
     
     <test extends="unit">
         <key-3>new value-3</key-3>
-        <include href="include.xml"/>
     </test>
 </root>

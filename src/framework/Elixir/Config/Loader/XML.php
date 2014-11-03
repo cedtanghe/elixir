@@ -3,7 +3,7 @@
 namespace Elixir\Config\Loader;
 
 use Elixir\Config\Loader\LoaderAbstract;
-use Elixir\Config\Loader\LoaderFactory;
+use Elixir\Config\Loader\LoaderInterface;
 use Elixir\Util\Arr as ArrayUtils;
 
 /**
@@ -14,15 +14,11 @@ class XML extends LoaderAbstract
 {
     /**
      * @see LoaderInterface::load()
-     * @throws \LogicException
      */
     public function load($pConfig, $pRecursive = false)
     {
-        $dirname = '';
-        
         if(is_file($pConfig))
         {
-            $dirname = dirname($pConfig);
             $pConfig = simplexml_load_file($pConfig);
         }
         
@@ -33,11 +29,6 @@ class XML extends LoaderAbstract
         
         if(null !== $m)
         {
-            if(isset($pConfig->include) && isset($pConfig->include['href']))
-            {
-                throw new \LogicException('Include a first level is prohibited if an environment is defined.');
-            }
-            
             if(!$this->_strict && !isset($pConfig->{$m}))
             {
                 $supers[] = $pConfig;
@@ -68,7 +59,7 @@ class XML extends LoaderAbstract
         
         foreach(array_reverse($supers) as $item)
         {
-            $data = (array)$this->parse($item, $pRecursive, $dirname);
+            $data = (array)$this->parse($item, $pRecursive);
             $result = $pRecursive ? ArrayUtils::merge($result, $data) : array_merge($result, $data);
         }
         
@@ -77,55 +68,28 @@ class XML extends LoaderAbstract
     
     /**
      * @see LoaderAbstract::parse();
-     * @throws \LogicException
      */
-    protected function parse($pData, $pRecursive = false, $pDirname = '')
+    protected function parse($pData, $pRecursive = false)
     {
-        $data = $pData;
-        
-        if(is_file($data))
+        if(count($pData->children()) == 0)
         {
-            $pDirname = dirname($data);
-            $data = simplexml_load_file($data);
-        }
-        
-        if(count($data->children()) == 0)
-        {
-            return (string)$data;
+            return (string)$pData;
         }
         else
         {
-            $includes = [];
             $r = [];
             
-            foreach($data->children() as $key => $value)
+            foreach($pData->children() as $key => $value)
             {
-                if($key === 'include' && isset($data->{$key}['href']))
-                {
-                    $file = $pDirname . '/' . $data->{$key}['href'];
-                    $loader = LoaderFactory::create($file, ['environment' => $this->_environment, 'strict' => $this->_strict]);
-                
-                    if(!$loader instanceof LoaderAbstract)
-                    {
-                        throw new \LogicException('Loader must be "Elixir\Config\Loader\LoaderAbstract" type to load external resources');
-                    }
-
-                    $includes[] = $loader->load($file, $pRecursive);
-                }
-                else if(isset($r[$key]))
+                if(isset($r[$key]))
                 {
                     $r[$key] = (array)$r[$key];
-                    $r[$key][] = $this->parse($value, $pRecursive, $pDirname);
+                    $r[$key][] = $this->parse($value, $pRecursive);
                 }
                 else 
                 {
-                    $r[$key] = $this->parse($value, $pRecursive, $pDirname);
+                    $r[$key] = $this->parse($value, $pRecursive);
                 }
-            }
-            
-            foreach($includes as $config)
-            {
-                $r = $pRecursive ? ArrayUtils::merge($r, $config) : array_merge($r, $config);
             }
             
             return $r;

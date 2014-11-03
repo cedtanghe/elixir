@@ -75,12 +75,12 @@ class XML implements LoaderInterface
             {
                 if(isset($r[$key]))
                 {
-                     $r[$key] = (array)$r[$key];
-                     $r[$key][] = $this->parse($value);
+                    $r[$key] = (array)$r[$key];
+                    $r[$key][] = $this->parse($value);
                 }
                 else 
                 {
-                     $r[$key] = $this->parse($value);
+                    $r[$key] = $this->parse($value);
                 }
             }
             

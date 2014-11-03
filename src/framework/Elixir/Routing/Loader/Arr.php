@@ -17,7 +17,7 @@ class Arr implements LoaderInterface
      */
     public function load($pConfig, Collection $pCollection = null)
     {
-        if(is_file($pConfig))
+        if(!is_array($pConfig))
         {
             $pConfig = include $pConfig;
         }
@@ -74,9 +74,13 @@ class Arr implements LoaderInterface
                                 $replacements[$k] = $v;
                             }
                             
-                            $route->setOption(Route::REPLACEMENTS, 
-                                              array_merge($replacements,
-                                                          $route->getOption(Route::REPLACEMENTS, [])));
+                            $route->setOption(
+                                Route::REPLACEMENTS, 
+                                array_merge(
+                                    $replacements,
+                                    $route->getOption(Route::REPLACEMENTS, [])
+                                )
+                            );
                         }
                         else if(!$route->hasOption($key))
                         {
