@@ -89,7 +89,7 @@ class CSRF
         $error = false;
         $token = $this->_request->getPost($pName, null);
         
-        if(null == $token)
+        if(null === $token)
         {
             $error = true;
         }

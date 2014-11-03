@@ -93,8 +93,10 @@ class Container
             }
             else
             {
-                $options = ['type' => ContainerInterface::SINGLETON,
-                                 'tags' => self::HELPER_TAG_KEY];
+                $options = [
+                    'type' => ContainerInterface::SINGLETON,
+                    'tags' => self::HELPER_TAG_KEY
+                ];
                 
                 if(is_array($value))
                 {

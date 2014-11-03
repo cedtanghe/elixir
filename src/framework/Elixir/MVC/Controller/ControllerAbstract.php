@@ -8,7 +8,6 @@ use Elixir\Helper\HelperInterface;
 use Elixir\HTTP\Request;
 use Elixir\MVC\Controller\ControllerInterface;
 use Elixir\MVC\Controller\Helper\Container;
-use Elixir\MVC\Exception\NotFoundException;
 use Elixir\View\GlobalInterface;
 use Elixir\View\HelperInterface as ViewHelperInterface;
 
@@ -155,11 +154,6 @@ abstract class ControllerAbstract implements ControllerInterface
      */
     public function __call($pMethod, $pArguments)
     {
-        if(substr($pMethod, -6) == 'Action')
-        {
-            throw new NotFoundException(sprintf('The action "%s" was not detected.', substr($pMethod, 0, -6)));
-        }
-        
         $helper = $this->helper('helper.' . $pMethod);
         
         if(is_callable($helper))

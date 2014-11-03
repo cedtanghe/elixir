@@ -46,13 +46,22 @@ class Test extends \PHPUnit_Framework_TestCase
     
     public function testFormWithFactory()
     {
-        $form = FormFactory::createForm(['name' => 'my-form',
-                                              'attributes' => ['id' => 'my-id'],
-                                              'options' => ['test' => 'value'],
-                                              'errorMessage' => 'An error has been detected',
-                                              'items' => ['item-input' => ['type' => 'Elixir\Form\Field\Input',
-                                                                                     'required' => false,
-                                                                                     'validators' => [new NotEmpty()]]]]);
+        $form = FormFactory::createForm(
+            [
+                'name' => 'my-form',
+                'attributes' => ['id' => 'my-id'],
+                'options' => ['test' => 'value'],
+                'errorMessage' => 'An error has been detected',
+                'items' => [
+                    [
+                        'name' => 'item-input',
+                        'type' => 'Elixir\Form\Field\Input',
+                        'required' => false,
+                        'validators' => [new NotEmpty()]
+                    ]
+                ]
+            ]
+        );
         
         $this->assertEquals('my-form', $form->getName());
         $this->assertTrue($form->submit(['iten-not-exist' => 'ok']));

@@ -84,7 +84,7 @@ class Image
             }
             else
             {
-                $imgSize = @getimagesize($pImageOrResource);  
+                $imgSize = getimagesize($pImageOrResource);  
                 $wSrc = $imgSize[0];
                 $hSrc = $imgSize[1];
             }

@@ -6,6 +6,7 @@ use Elixir\HTTP\Request;
 use Elixir\MVC\ApplicationInterface;
 use Elixir\MVC\Controller\ControllerInterface;
 use Elixir\MVC\Controller\ControllerResolverInterface;
+use Elixir\MVC\Controller\RESTfulControllerInterface;
 use Elixir\MVC\Exception\NotFoundException;
 use Elixir\Util\Str;
 
@@ -72,9 +73,9 @@ class ControllerResolver implements ControllerResolverInterface
                     explode('\\', $controller)
                 )
             );
-
+            
             $class = $pApplication->locateClass($namespace . '\Controller\\' . $controller . 'Controller');
-
+            
             if(null === $class)
             {
                 throw new NotFoundException(sprintf('The controller "%s" was not detected.', $controller));
@@ -88,12 +89,19 @@ class ControllerResolver implements ControllerResolverInterface
                     return new $class();
                 }
             );
-
-            if(!method_exists($controller, lcfirst(Str::camelize($action)) . 'Action') && !method_exists($controller, '__call'))
+            
+            $method = lcfirst(Str::camelize($action)) . 'Action';
+            
+            if($controller instanceof RESTfulControllerInterface)
+            {
+                $method = $controller->getRestFulMethodName($method, $pRequest);
+            }
+            
+            if(!method_exists($controller, $method))
             {
                 throw new NotFoundException(sprintf('The action "%s" was not detected.', $action));
             }
-
+            
             if($controller instanceof ControllerInterface)
             {
                 $controller->initialize(
@@ -102,8 +110,8 @@ class ControllerResolver implements ControllerResolverInterface
                     $pApplication->getContainer()
                 );
             }
-
-            return [$controller, lcfirst(Str::camelize($action)) . 'Action'];
+            
+            return [$controller, $method];
         }
     }
     

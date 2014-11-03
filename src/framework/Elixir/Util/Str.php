@@ -16,7 +16,7 @@ class Str
     {
         try 
         {
-            return  null !== $pObject && null !== @json_decode($pObject);
+            return  null !== $pObject && null !== json_decode($pObject);
         } 
         catch(\Exception $e) 
         {

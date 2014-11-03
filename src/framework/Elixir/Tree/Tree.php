@@ -84,9 +84,11 @@ class Tree implements TreeInterface
     public function addChild(TreeInterface $pTree, $pPriority = 0)
     {
         $this->_sorted = false;
-        $this->_trees[] = ['tree' => $pTree,
-                                'priority' =>$pPriority, 
-                                'serial' => $this->_serial++];
+        $this->_trees[] = [
+            'tree' => $pTree,
+            'priority' =>$pPriority, 
+            'serial' => $this->_serial++
+        ];
     }
     
     /**
