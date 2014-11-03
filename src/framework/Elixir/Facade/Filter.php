@@ -88,7 +88,7 @@ class Filter extends FacadeAbstract
      * @param string $pMethod
      * @param array $pArguments
      * @return mixed
-     * @throws LogicException
+     * @throws \LogicException
      */
     public static function __callStatic($pMethod, $pArguments)
     {
@@ -97,7 +97,7 @@ class Filter extends FacadeAbstract
             return call_user_func_array(static::$_macros[$pMethod], $pArguments);
         }
         
-        throw new LogicException('No filter instance in dependency injection container.');
+        throw new \LogicException('No filter instance in dependency injection container.');
     }
     
     public static function register() 
