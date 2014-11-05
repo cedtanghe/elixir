@@ -162,7 +162,7 @@ class Select
             
             if(!isset($this->_with[$member]))
             {
-                $this->_with[$pMember] = [
+                $this->_with[$member] = [
                     'with' => [],
                     'eagerLoad' => null
                 ];
@@ -172,7 +172,7 @@ class Select
         }
         else
         {
-            if(!isset($this->_with[$member]))
+            if(!isset($this->_with[$pMember]))
             {
                 $this->_with[$pMember] = [
                     'with' => [],
