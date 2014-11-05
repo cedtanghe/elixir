@@ -153,14 +153,36 @@ class EagerLoad
             {
                 $loaded = $select->all();
                 $key = $this->_pivot ? self::REFERENCE_KEY : $this->_foreignKey;
+                $repartions = [];
                 
                 foreach($loaded as $r)
                 {
                     foreach($pRepositories as $repository)
                     {
-                        if($r->get($key) == $repository->get($this->_otherKey))
+                        $compare = $repository->get($this->_otherKey);
+                        
+                        if($r->get($key) == $compare)
                         {
-                            $repository->{$pMember} = $r;
+                            if(isset($repartions[$compare]))
+                            {
+                                $repartions[$compare] = (array)$repartions[$compare];
+                                $repartions[$compare][] = $r;
+                            }
+                            else
+                            {
+                                $repartions[$compare] = $r;
+                            }
+                        }
+                    }
+                }
+                
+                foreach($repartions as $compare => $value)
+                {
+                    foreach($pRepositories as $repository)
+                    {
+                        if($repository->get($this->_otherKey) == $compare)
+                        {
+                            $repository->$pMember = $value;
                         }
                     }
                 }
