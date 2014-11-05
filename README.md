@@ -6,7 +6,7 @@
 
 ### TODO LIST ###
 
-- Add method "with" to model.
+- Test method "with" to model.
 - Add methods "save", "add", "remove", etc. to collection relation in model.
 - Create "migration" command.
 - Add "menu" helper ("Tree" component).

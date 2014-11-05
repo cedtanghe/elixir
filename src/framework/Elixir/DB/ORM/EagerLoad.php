@@ -1,10 +1,8 @@
 <?php
 
-namespace Elixir\DB\ORM\Relation;
+namespace Elixir\DB\ORM;
 
-use Elixir\DB\ORM\Collection;
 use Elixir\DB\ORM\Relation\Pivot;
-use Elixir\DB\ORM\Relation\RelationInterface;
 use Elixir\DB\ORM\RepositoryInterface;
 use Elixir\DB\ORM\Select;
 use Elixir\DB\SQL\JoinClause;
@@ -13,30 +11,35 @@ use Elixir\DB\SQL\JoinClause;
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
-class BelongsTo implements RelationInterface
+class EagerLoad
 {
     /**
-     * @var RepositoryInterface 
+     * @var string
      */
-    protected $_repository;
+    const REFERENCE_KEY = '_pivot';
     
     /**
      * @var string|RepositoryInterface 
      */
     protected $_target;
+    
+    /**
+     * @var string
+     */
+    protected $_type;
 
     /**
      * @var string 
      */
     protected $_foreignKey;
-
+    
     /**
      * @var string 
      */
     protected $_otherKey;
     
     /**
-     * @var Pivot
+     * @var Pivot 
      */
     protected $_pivot;
     
@@ -46,49 +49,20 @@ class BelongsTo implements RelationInterface
     protected $_criterions = [];
     
     /**
-     * @var RepositoryInterface|Collection
-     */
-    protected $_related;
-    
-    /**
-     * @var boolean
-     */
-    protected $_filled = false;
-    
-    /**
-     * @param RepositoryInterface $pRepository
      * @param string|RepositoryInterface $pTarget
      * @param string $pForeignKey
      * @param string $pOtherKey
      * @param Pivot $pPivot
      */
-    public function __construct(RepositoryInterface $pRepository, 
-                                $pTarget, 
+    public function __construct($pTarget, 
                                 $pForeignKey, 
-                                $pOtherKey = null, 
+                                $pOtherKey = null,
                                 Pivot $pPivot = null) 
     {
-        $this->_repository = $pRepository;
         $this->_target = $pTarget;
         $this->_foreignKey = $pForeignKey;
         $this->_otherKey = $pOtherKey;
         $this->_pivot = $pPivot;
-    }
-    
-    /**
-     * @see RelationInterface::getType()
-     */
-    public function getType()
-    {
-        return self::BELONGS_TO;
-    }
-    
-    /**
-     * @return RepositoryInterface
-     */
-    public function getRepository()
-    {
-        return $this->_repository;
     }
     
     /**
@@ -117,7 +91,7 @@ class BelongsTo implements RelationInterface
     
     /**
      * @param Pivot $pPivot
-     * @return BelongsTo
+     * @return EagerLoad
      */
     public function withPivot(Pivot $pPivot)
     {
@@ -135,13 +109,11 @@ class BelongsTo implements RelationInterface
     
     /**
      * @param callable $pCriterion
-     * @return BelongsTo
+     * @return EagerLoad
      */
     public function addCriterion(callable $pCriterion)
     {
         $this->_criterions[] = $pCriterion;
-        $this->setFilled(false);
-        
         return $this;
     }
 
@@ -152,104 +124,96 @@ class BelongsTo implements RelationInterface
     {
         return $this->_criterions;
     }
-    
+
     /**
-     * @see RelationInterface::setRelated()
+     * @param string $pMember
+     * @param array $pRepositories
+     * @param array $pWith
      */
-    public function setRelated($pValue, $pFilled = true)
+    public function sync($pMember, array $pRepositories, array $pWith = array())
     {
-        if(is_array($pValue))
-        {
-            $pValue = new Collection($pValue, true);
-        }
+        $this->_otherKey = $this->_otherKey ?: $pRepositories[0]->getPrimaryKey();
         
-        $this->_related = $pValue;
-        $this->_filled = $pFilled;
-    }
-    
-    /**
-     * @see RelationInterface::getRelated()
-     */
-    public function getRelated()
-    {
-        return $this->_related;
-    }
-    
-    /**
-     * @see RelationInterface::setFilled()
-     */
-    public function setFilled($pValue)
-    {
-        $this->_filled = $pValue;
-    }
-    
-    /**
-     * @see RelationInterface::isFilled()
-     */
-    public function isFilled()
-    {
-        return $this->_filled;
-    }
-    
-    /**
-     * @see RelationInterface::load()
-     */
-    public function load()
-    {
         if(!$this->_target instanceof RepositoryInterface)
         {
             $this->_target = new $this->_target();
-            $this->_target->setConnectionManager($this->_repository->getConnectionManager());
+            $this->_target->setConnectionManager($pRepositories[0]->getConnectionManager());
         }
         
-        $this->_otherKey = $this->_otherKey ?: $this->_target->getPrimaryKey();
         $select = $this->_target->select();
+        
+        foreach($pWith as $member => $eagerLoad)
+        {
+            $select->with($member, $eagerLoad);
+        }
         
         if(false !== $this->performConstraints($select))
         {
             if(false !== $this->performCriterions($select))
             {
-                $this->setRelated($select->one(), true);
+                $loaded = $select->all();
+                $key = $this->_pivot ? self::REFERENCE_KEY : $this->_foreignKey;
+                
+                foreach($loaded as $r)
+                {
+                    foreach($pRepositories as $repository)
+                    {
+                        if($r->get($key) == $repository->get($this->_otherKey))
+                        {
+                            $repository->{$pMember} = $r;
+                        }
+                    }
+                }
             }
-            else
-            {
-                $this->setRelated(null, true);
-            }
-        }
-        else
-        {
-            $this->setRelated(null, true);
         }
     }
     
     /**
      * @param Select $pSelect
+     * @param array $pRepositories
      * @return boolean
      */
-    protected function performConstraints(Select $pSelect)
+    protected function performConstraints(Select $pSelect, array $pRepositories)
     {
+        $values = [];
+        
+        foreach($pRepositories as $repository)
+        {
+            $value = $repository->get($this->_otherKey);
+            
+            if(null !== $value)
+            {
+                $values[] = $value;
+            }
+        }
+        
+        if(count($values) == 0)
+        {
+            return false;
+        }
+        
         if(null !== $this->_pivot)
         {
             $pSelect->join(
                 $this->_pivot->getPivot(),
-                function(JoinClause $pSQL)
+                function(JoinClause $pSQL) use($values)
                 {
                     $pSQL->on(
                         sprintf(
-                            '`%s`.`%s` = ?', 
+                            '`%s`.`%s` IN(?)', 
                             $this->_pivot->getPivot(),
-                            $this->_pivot->getForeignKey()
+                            $this->_pivot->getOtherKey()
                         ),
-                        $this->_repository->get($this->_foreignKey)
+                        $values
                     );
 
                     $pSQL->on(
                         sprintf(
                             '`%s`.`%s` = `%s`.`%s`', 
                             $this->_pivot->getPivot(),
-                            $this->_pivot->getOtherKey(),
+                            $this->_pivot->getForeignKey(),
                             $this->_target->getTable(),
-                            $this->_otherKey
+                            $this->_foreignKey
                         )
                     );
 
@@ -257,25 +221,25 @@ class BelongsTo implements RelationInterface
                     {
                         $criterion($pSQL);
                     }
-                }
+                },
+                null,
+                sprintf(
+                    '`%s`.`%s` as `%s`',
+                    $this->_pivot->getPivot(),
+                    $this->_pivot->getForeignKey(),
+                    self::REFERENCE_KEY
+                )
             );
         }
         else
         {
-            $value = $this->_repository->get($this->_foreignKey);
-
-            if(null === $value)
-            {
-                return false;
-            }
-
             $pSelect->where(
                 sprintf(
-                    '`%s`.`%s` = ?', 
+                    '`%s`.`%s` IN(?)', 
                     $this->_target->getTable(),
-                    $this->_otherKey
+                    $this->_foreignKey
                 ),
-                $value
+                $values
             );
         }
         

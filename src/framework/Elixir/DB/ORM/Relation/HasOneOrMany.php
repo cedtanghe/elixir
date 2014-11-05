@@ -7,6 +7,7 @@ use Elixir\DB\ORM\Relation\Pivot;
 use Elixir\DB\ORM\Relation\RelationInterface;
 use Elixir\DB\ORM\RepositoryInterface;
 use Elixir\DB\ORM\Select;
+use Elixir\DB\SQL\JoinClause;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
@@ -209,11 +210,12 @@ class HasOneOrMany implements RelationInterface
             $this->_target->setConnectionManager($this->_repository->getConnectionManager());
         }
         
+        $this->_otherKey = $this->_otherKey ?: $this->_target->getPrimaryKey();
         $select = $this->_target->select();
         
-        if(false !== $this->eagerConstraints($select))
+        if(false !== $this->performConstraints($select))
         {
-            if(false !== $this->eagerCriterions($select))
+            if(false !== $this->performCriterions($select))
             {
                 $this->setRelated($this->match($select), true);
             }
@@ -238,15 +240,43 @@ class HasOneOrMany implements RelationInterface
      * @param Select $pSelect
      * @return boolean
      */
-    protected function eagerConstraints(Select $pSelect)
+    protected function performConstraints(Select $pSelect)
     {
         if(null !== $this->_pivot)
         {
-            $this->_pivot->join($this, $pSelect);
+            $pSelect->join(
+                $this->_pivot->getPivot(),
+                function(JoinClause $pSQL)
+                {
+                    $pSQL->on(
+                        sprintf(
+                            '`%s`.`%s` = ?', 
+                            $this->_pivot->getPivot(),
+                            $this->_pivot->getForeignKey()
+                        ),
+                        $this->_repository->get($this->_foreignKey)
+                    );
+
+                    $pSQL->on(
+                        sprintf(
+                            '`%s`.`%s` = `%s`.`%s`', 
+                            $this->_pivot->getPivot(),
+                            $this->_pivot->getOtherKey(),
+                            $this->_target->getTable(),
+                            $this->_otherKey
+                        )
+                    );
+
+                    foreach($this->_pivot->getCriterions() as $criterion)
+                    {
+                        $criterion($pSQL);
+                    }
+                }
+            );
         }
         else
         {
-            $value = $this->_repository->get($this->_otherKey ?: $this->_repository->getPrimaryKey());
+            $value = $this->_repository->get($this->_otherKey);
 
             if(null === $value)
             {
@@ -270,11 +300,11 @@ class HasOneOrMany implements RelationInterface
      * @param Select $pSelect
      * @return boolean
      */
-    protected function eagerCriterions(Select $pSelect)
+    protected function performCriterions(Select $pSelect)
     {
         foreach($this->_criterions as $criterion)
         {
-            if(false === $criterion($pSelect))
+            if(false === $criterion($pSelect, $this))
             {
                 return false;
             }

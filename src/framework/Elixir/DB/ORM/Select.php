@@ -3,6 +3,7 @@
 namespace Elixir\DB\ORM;
 
 use Elixir\DB\DBInterface;
+use Elixir\DB\ORM\EagerLoad;
 use Elixir\DB\ORM\RepositoryInterface;
 use Elixir\DB\Result\SetAbstract;
 use Elixir\DB\SQL\Select as SQLSelect;
@@ -19,6 +20,11 @@ class Select
      * @var array 
      */
     protected $_loads = [];
+    
+    /**
+     * @var array 
+     */
+    protected $_with = [];
     
     /**
      * @var RepositoryInterface
@@ -143,6 +149,46 @@ class Select
     }
     
     /**
+     * @param string $pMember
+     * @param EagerLoad $pEagerLoad
+     * @return Select
+     */
+    public function with($pMember, EagerLoad $pEagerLoad)
+    {
+        if(false !== strpos($pMember, '.'))
+        {
+            $members = explode('.', $pMember);
+            $member = array_shift($members);
+            
+            if(!isset($this->_with[$member]))
+            {
+                $this->_with[$pMember] = [
+                    'with' => [],
+                    'eagerLoad' => null
+                ];
+            }
+            
+            $this->_with[$member]['with'][implode('.', $members)] = $pEagerLoad;
+        }
+        else
+        {
+            if(!isset($this->_with[$member]))
+            {
+                $this->_with[$pMember] = [
+                    'with' => [],
+                    'eagerLoad' => $pEagerLoad
+                ];
+            }
+            else
+            {
+                $this->_with[$pMember]['eagerLoad'] = $pEagerLoad;
+            }
+        }
+        
+        return $this;
+    }
+
+    /**
      * @see SQLSelect::reset()
      * @return Select
      */
@@ -152,6 +198,9 @@ class Select
         {
             case 'loads':
                 $this->_loads = [];
+            break;
+            case 'with':
+                $this->_with = [];
             break;
         }
         
@@ -211,6 +260,7 @@ class Select
     
     /**
      * @return array
+     * @throws \LogicException
      */
     public function all()
     {
@@ -223,32 +273,43 @@ class Select
             $repository = new $class($this->_repository->getConnectionManager());
             $repository->hydrate($row, ['raw' => true, 'sync' => true]);
             
-            $this->extend($repository);
+            foreach($this->_loads as $member => $arguments)
+            {
+                $method = 'load' . Str::camelize($member);
+
+                if(method_exists($repository, $method))
+                {
+                    call_user_func_array([$repository, $method], $arguments);
+                }
+                else
+                {
+                    // Use lazy loading
+                    $repository->$member;
+                }
+            }
+            
             $repositories[] = $repository;
         }
         
-        return $repositories;
-    }
-    
-    /**
-     * @param RepositoryInterface $pRepository
-     */
-    protected function extend(RepositoryInterface $pRepository)
-    {
-        foreach($this->_loads as $key => $value)
+        if(count($repositories) > 0)
         {
-            $method = 'load' . Str::camelize($key);
-            
-            if(method_exists($pRepository, $method))
+            foreach($this->_with as $member => $data)
             {
-                call_user_func_array([$pRepository, $method], $value);
-            }
-            else
-            {
-                // Use lazy loading
-                $pRepository->$key;
+                if(null === $data['eagerLoad'])
+                {
+                    throw new \LogicException(
+                        sprintf(
+                            'Inconsistency in declaration of eager loading ("%s" must be declared).',
+                            $member
+                        )
+                    );
+                }
+                
+                $data['eagerLoad']->sync($member, $pRepositories, $data['with']);
             }
         }
+        
+        return $repositories;
     }
     
     /**
