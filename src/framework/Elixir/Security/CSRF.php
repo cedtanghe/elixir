@@ -82,12 +82,13 @@ class CSRF
     /**
      * @param string $pName
      * @param string $pReferer
+     * @param string $pToken
      * @return boolean
      */
-    public function isValid($pName, $pReferer = null)
+    public function isValid($pName, $pReferer = null, $pToken = null)
     {
         $error = false;
-        $token = $this->_request->getPost($pName, null);
+        $token = $pToken ?: $this->_request->getPost($pName, null);
         
         if(null === $token)
         {

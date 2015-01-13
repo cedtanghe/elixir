@@ -202,8 +202,12 @@ abstract class ModelAbstract extends Dispatcher implements RepositoryInterface
         
         $this->_state = self::FILLABLE;
         $this->defineColumns();
+        $this->dispatch(new ModelEvent(ModelEvent::DEFINE_COLUMNS));
+        
         $this->_state = self::GUARDED;
         $this->defineGuarded();
+        $this->dispatch(new ModelEvent(ModelEvent::DEFINE_GUARDED));
+        
         $this->unfilledIfIsIgnoreValue();
         
         if(null === $this->_table)

@@ -56,7 +56,7 @@
                     static&nbsp;array
                 </td>
                 <td class="last">
-                    <a href="#method_CSVToArray">CSVToArray</a>(string $pCsv, string $pDelimiter = &#039;;&#039;, string $pEnclosure = &#039;&quot;&#039;, boolean $pAssociate = false)
+                    <a href="#method_CSVToArray">CSVToArray</a>(string $pCsv, boolean $pWithHeaders = false, string $pDelimiter = &#039;;&#039;, string $pEnclosure = &#039;&quot;&#039;)
                     <p>
 </p>
                 </td>
@@ -67,7 +67,7 @@
                     static&nbsp;string
                 </td>
                 <td class="last">
-                    <a href="#method_arrayToCSV">arrayToCSV</a>(array $pData, string $pDelimiter = &#039;;&#039;, string $pEnclosure = &#039;&quot;&#039;, boolean $pAssociate = false)
+                    <a href="#method_arrayToCSV">arrayToCSV</a>(array $pData, boolean $pWithHeaders = false, string $pDelimiter = &#039;;&#039;, string $pEnclosure = &#039;&quot;&#039;)
                     <p>
 </p>
                 </td>
@@ -81,7 +81,7 @@
                         <h3 id="method_CSVToArray">
         <div class="location">at line 23</div>
         <code>        static    public            array
-    <strong>CSVToArray</strong>(string $pCsv, string $pDelimiter = &#039;;&#039;, string $pEnclosure = &#039;&quot;&#039;, boolean $pAssociate = false)</code>
+    <strong>CSVToArray</strong>(string $pCsv, boolean $pWithHeaders = false, string $pDelimiter = &#039;;&#039;, string $pEnclosure = &#039;&quot;&#039;)</code>
     </h3>
     <div class="details">
         <p>
@@ -99,6 +99,12 @@
 </td>
             </tr>
                     <tr>
+                <td>boolean</td>
+                <td>$pWithHeaders</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
                 <td>string</td>
                 <td>$pDelimiter</td>
                 <td>
@@ -107,12 +113,6 @@
                     <tr>
                 <td>string</td>
                 <td>$pEnclosure</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
-                <td>boolean</td>
-                <td>$pAssociate</td>
                 <td>
 </td>
             </tr>
@@ -135,9 +135,9 @@
     </div>
 
                 <h3 id="method_arrayToCSV">
-        <div class="location">at line 93</div>
+        <div class="location">at line 94</div>
         <code>        static    public            string
-    <strong>arrayToCSV</strong>(array $pData, string $pDelimiter = &#039;;&#039;, string $pEnclosure = &#039;&quot;&#039;, boolean $pAssociate = false)</code>
+    <strong>arrayToCSV</strong>(array $pData, boolean $pWithHeaders = false, string $pDelimiter = &#039;;&#039;, string $pEnclosure = &#039;&quot;&#039;)</code>
     </h3>
     <div class="details">
         <p>
@@ -155,6 +155,12 @@
 </td>
             </tr>
                     <tr>
+                <td>boolean</td>
+                <td>$pWithHeaders</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
                 <td>string</td>
                 <td>$pDelimiter</td>
                 <td>
@@ -163,12 +169,6 @@
                     <tr>
                 <td>string</td>
                 <td>$pEnclosure</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
-                <td>boolean</td>
-                <td>$pAssociate</td>
                 <td>
 </td>
             </tr>

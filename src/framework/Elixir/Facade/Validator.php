@@ -154,7 +154,7 @@ class Validator extends FacadeAbstract
             {
                 foreach($pValidators as $key => $validators)
                 {
-                    if(isset($pProvider[$key]))
+                    if(!isset($pProvider[$key]))
                     {
                         return false;
                     }

@@ -46,7 +46,7 @@ class Loader implements LoaderInterface
     /**
      * @var array 
      */
-    protected $_prefixs = [];
+    protected $_prefixes = [];
     
     /**
      * @var array 
@@ -60,11 +60,11 @@ class Loader implements LoaderInterface
     
     public function __construct() 
     {
-        $basePath = __DIR__ . '/../../../';
+        $basePath = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR;
         
         $this->addIncludePath($basePath);
-        $this->addNamespace('Elixir', $basePath . 'framework/Elixir/');
-        $this->addNamespace('Elixir\Module', $basePath . 'modules/');
+        $this->addNamespace('Elixir', $basePath . 'framework' . DIRECTORY_SEPARATOR . 'Elixir');
+        $this->addNamespace('Elixir\Module', $basePath . 'modules');
     }
     
     /**
@@ -141,7 +141,7 @@ class Loader implements LoaderInterface
         
         if(!in_array($pPath, $paths))
         {
-            $paths[] = $pPath;
+            $paths[] = rtrim($pPath, DIRECTORY_SEPARATOR);
         }
         
         set_include_path(implode(PATH_SEPARATOR, $paths));
@@ -167,7 +167,7 @@ class Loader implements LoaderInterface
             $this->_classMap[$pClassName] = [];
         }
         
-        $this->_classMap[$pClassName][] = $pPath;
+        $this->_classMap[$pClassName][] = rtrim($pPath, DIRECTORY_SEPARATOR);
     }
     
     /**
@@ -203,28 +203,28 @@ class Loader implements LoaderInterface
     {
         $pPrefix = rtrim($pPrefix, '_');
         
-        if($pOverride || !isset($this->_prefixs[$pPrefix]))
+        if($pOverride || !isset($this->_prefixes[$pPrefix]))
         {
-            $this->_prefixs[$pPrefix] = [];
+            $this->_prefixes[$pPrefix] = [];
         }
         
-        $this->_prefixs[$pPrefix][] = $pPath;
+        $this->_prefixes[$pPrefix][] = rtrim($pPath, DIRECTORY_SEPARATOR);
     }
     
     /**
      * @return array
      */
-    public function getPrefixs()
+    public function getPrefixes()
     {
-        return $this->_prefixs;
+        return $this->_prefixes;
     }
     
     /**
      * @param array $pData
      */
-    public function setPrefixs(array $pData)
+    public function setPrefixes(array $pData)
     {
-        $this->_prefixs = [];
+        $this->_prefixes = [];
         
         foreach($pData as $prefix => $paths)
         {
@@ -249,7 +249,7 @@ class Loader implements LoaderInterface
             $this->_namespaces[$pNamespace] = [];
         }
         
-        $this->_namespaces[$pNamespace][] = $pPath;
+        $this->_namespaces[$pNamespace][] = rtrim($pPath, DIRECTORY_SEPARATOR);
     }
     
     /**
@@ -297,7 +297,7 @@ class Loader implements LoaderInterface
     public function addAlias($pAlias, $pClassName)
     {
         class_alias($pClassName, $pAlias);
-        $this->_aliases[$pAlias] = ltrim($pClassName, '\\');
+        $this->_aliases[$pAlias] = ltrim($pClassName, '_\\');
     }
     
     /**
@@ -396,7 +396,7 @@ class Loader implements LoaderInterface
         
         foreach($this->getIncludePaths() as $path)
         {
-            if(file_exists($path . '/' . $pFile)) 
+            if(file_exists(rtrim($path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $pFile)) 
             {
                 return true;
             }
@@ -429,7 +429,7 @@ class Loader implements LoaderInterface
         }
         
         $last = '';
-        $search = $type == self::NAMESPACE_SEPARATOR ? $this->_namespaces : $this->_prefixs;
+        $search = $type == self::NAMESPACE_SEPARATOR ? $this->_namespaces : $this->_prefixes;
         
         foreach($search as $key => $value)
         {
@@ -449,7 +449,7 @@ class Loader implements LoaderInterface
         
         foreach($paths as $path)
         {
-            $result[] =  $path . str_replace($type , '/', $className) . '.php';
+            $result[] =  $path . DIRECTORY_SEPARATOR . str_replace($type , DIRECTORY_SEPARATOR, $className) . '.php';
         }
         
         return $result;

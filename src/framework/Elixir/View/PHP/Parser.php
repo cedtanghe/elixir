@@ -120,9 +120,15 @@ class Parser
                                'parent', 
                                'end', 
                                'block', 
+                               'blocks', 
                                'escape', 
                                'raw']))
         {
+            if($pMethod == 'blocks')
+            {
+                $pMethod = 'getBlocks';
+            }
+            
             return call_user_func_array([$this->__view, $pMethod], $pArguments);
         }
         

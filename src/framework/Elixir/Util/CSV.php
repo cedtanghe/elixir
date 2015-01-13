@@ -15,48 +15,49 @@ class CSV
     
     /**
      * @param string $pCsv
+     * @param boolean $pWithHeaders
      * @param string $pDelimiter
      * @param string $pEnclosure
-     * @param boolean $pAssociate
      * @return array
      */
-    public static function CSVToArray($pCsv, $pDelimiter = ';', $pEnclosure = '"', $pAssociate = false)
+    public static function CSVToArray($pCsv, $pWithHeaders = false, $pDelimiter = ';', $pEnclosure = '"')
     {
         $return = [];
-        $datas = [];
-        
-        if(is_file($pCsv))
+        $data = [];
+
+        if(is_file($csv))
         {
-            if (($handle = fopen($pCsv, 'r')) !== false) 
+            if(($handle = fopen($csv, 'r')) !== false) 
             {
-                while (($data = fgetcsv($handle, 4096, $pDelimiter, $pEnclosure)) !== false) 
+                while(($d = fgetcsv($handle, 4096, $delimiter, $enclosure)) !== false) 
                 {
-                    $datas[] = $data;
+                    $data[] = $d;
                 }
-                
+
                 fclose($handle);
             }
         }
         else
         {
-            $datas = str_getcsv($pCsv, $pDelimiter, $pEnclosure);
+            $data = str_getcsv($csv, $delimiter, $enclosure);
         }
-        
+
         $i = 0;
-        $len = count($datas);
-            
+        $len = count($data);
+        $names = [];
+
         for($i = 0; $i < $len; ++$i)
         {
-            $data = $datas[$i];
-            $len2 = count($data);
+            $d = $data[$i];
+            $len2 = count($d);
 
             for($j = 0; $j < $len2; ++$j)
             {
-                if($pAssociate)
+                if($pWithHeaders)
                 {
                     if($i === 0)
                     {
-                        $associate[] = $data[$j];
+                        $names[] = $d[$j];
                     }
                     else
                     {
@@ -64,8 +65,8 @@ class CSV
                         {
                             $return[$i] = [];
                         }
-                        
-                        $return[$i][$associate[$j]] = $data[$j];
+
+                        $return[$i][$names[$j]] = $d[$j];
                     }
                 }
                 else
@@ -74,29 +75,29 @@ class CSV
                     {
                         $return[$i] = [];
                     }
-                    
-                    $return[$i][] = $data[$j];
+
+                    $return[$i][] = $d[$j];
                 }
             }
         }
-        
+
         return $return;
     }
     
     /**
      * @param array $pData
+     * @param boolean $pWithHeaders
      * @param string $pDelimiter
      * @param string $pEnclosure
-     * @param boolean $pAssociate
      * @return string
      */
-    public static function arrayToCSV(array $pData, $pDelimiter = ';', $pEnclosure = '"', $pAssociate = false) 
+    public static function arrayToCSV(array $pData, $pWithHeaders = false, $pDelimiter = ';', $pEnclosure = '"') 
     { 
         $return = '';
         
         if(count($pData) > 0)
         {
-            if($pAssociate)
+            if($pWithHeaders)
             {
                 $columns = [];
                 $work = [];
