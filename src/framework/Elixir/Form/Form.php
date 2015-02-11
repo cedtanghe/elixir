@@ -78,6 +78,11 @@ class Form extends Dispatcher implements FormInterface
     protected $_prepare = false;
     
     /**
+     * @var boolean
+     */
+    protected $_required = true;
+    
+    /**
      * @param string $pName
      */
     public function __construct($pName = null) 
@@ -111,6 +116,22 @@ class Form extends Dispatcher implements FormInterface
     public function getParent()
     {
         return $this->_parent;
+    }
+    
+    /**
+     * @see FormInterface::setRequired()
+     */
+    public function setRequired($pValue)
+    {
+        $this->_required = $pValue;
+    }
+    
+    /**
+     * @see FormInterface::isRequired()
+     */
+    public function isRequired()
+    {
+        return $this->_required;
     }
     
     /**
@@ -690,19 +711,27 @@ class Form extends Dispatcher implements FormInterface
     }
 
     /**
+     * @see FormInterface::isEligible()
+     */
+    public function isEligible()
+    {
+        return $this->_required || !$this->isEmpty();
+    }
+    
+    /**
      * @see FormInterface::isEmpty()
      */
     public function isEmpty()
     {
         foreach(array_merge($this->_fields, $this->_forms) as $item)
         {
-            if($item->isEmpty())
+            if(!$item->isEmpty())
             {
-                return true;
+                return false;
             }
         }
         
-        return false;
+        return true;
     }
     
     /**
@@ -739,19 +768,22 @@ class Form extends Dispatcher implements FormInterface
         
         $this->dispatch(new FormEvent(FormEvent::PRE_SUBMIT_VALIDATION));
         
-        foreach($this->_fields as $field)
+        if($this->isEligible())
         {
-            if(!$field->isValid())
+            foreach($this->_fields as $field)
             {
-                $this->_errors[$field->getName()] = $field->errors();
+                if(!$field->isValid())
+                {
+                    $this->_errors[$field->getName()] = $field->errors();
+                }
             }
-        }
-        
-        foreach($this->_forms as $form)
-        {
-            if(!$form->submit())
+
+            foreach($this->_forms as $form)
             {
-                $this->_errors[$form->getName()] = $form->errors();
+                if(!$form->submit())
+                {
+                    $this->_errors[$form->getName()] = $form->errors();
+                }
             }
         }
         
@@ -830,7 +862,7 @@ class Form extends Dispatcher implements FormInterface
         
         foreach($this->_forms as $form)
         {
-            $values = array_merge($values, $form->values($pFiltered));
+            $values = array_merge_recursive($values, $form->values($pFiltered));
         }
         
         $e = new FormEvent(FormEvent::VALUES, $values);

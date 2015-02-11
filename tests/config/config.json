@@ -3,7 +3,7 @@
         "key-6":"value-6",
         "key-7":"value-7"
     },
-    "test:unit":{
+    "test > unit":{
         "key-6":"new value-6"
     }
 }

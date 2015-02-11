@@ -279,7 +279,7 @@ class Session extends Dispatcher implements SessionInterface, \ArrayAccess, \Ite
      */
     public function rewind() 
     {
-        $this->_parameters->rewind();
+        return $this->_parameters->rewind();
     }
     
     /**
@@ -303,7 +303,7 @@ class Session extends Dispatcher implements SessionInterface, \ArrayAccess, \Ite
      */
     public function next() 
     {
-        $this->_parameters->next();
+        return $this->_parameters->next();
     }
     
     /**

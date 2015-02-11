@@ -4,7 +4,7 @@ namespace ElixirTest\Tree;
 
 use Elixir\Tree\Tree as Item;
 use Elixir\Tree\Collection;
-use Elixir\ClassLoader\Loader;
+use Elixir\ClassLoader\PSR4;
 
 class Test extends \PHPUnit_Framework_TestCase
 {
@@ -12,9 +12,9 @@ class Test extends \PHPUnit_Framework_TestCase
     
     public function __construct()
     {
-        require_once __DIR__ . '/../../../src/framework/Elixir/ClassLoader/Loader.php';
+        require_once __DIR__ . '/../../../src/framework/Elixir/ClassLoader/PSR4.php';
         
-        $this->_loader = new Loader();
+        $this->_loader = new PSR4();
         $this->_loader->register();
     }
     

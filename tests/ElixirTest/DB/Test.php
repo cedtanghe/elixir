@@ -2,7 +2,7 @@
 
 namespace ElixirTest\DB;
 
-use Elixir\ClassLoader\Loader;
+use Elixir\ClassLoader\PSR4;
 use Elixir\DB\SQL\Column;
 use Elixir\DB\SQL\ColumnFactory;
 use Elixir\DB\SQL\Constraint;
@@ -21,9 +21,9 @@ class Test extends \PHPUnit_Framework_TestCase
 
     public function __construct()
     {
-        require_once __DIR__ . '/../../../src/framework/Elixir/ClassLoader/Loader.php';
+        require_once __DIR__ . '/../../../src/framework/Elixir/ClassLoader/PSR4.php';
         
-        $this->_loader = new Loader();
+        $this->_loader = new PSR4();
         $this->_loader->addNamespace('ElixirTest', __DIR__ . './../');
         $this->_loader->register();
     }

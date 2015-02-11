@@ -29,7 +29,7 @@ class Partial implements ContextInterface, HelperInterface
      */
     public function setView(ViewInterface $pValue)
     {
-        $this->_context = $pValue;
+        $this->_context = clone $pValue;
     }
     
     /**
@@ -64,7 +64,7 @@ class Partial implements ContextInterface, HelperInterface
             }
         }
         
-        $view = clone $this->_context;
+        $view = $this->_context;
         $content = '';
         $c = 0;
         $total = count($pParams);

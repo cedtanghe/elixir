@@ -5,46 +5,46 @@ namespace Elixir\Config;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
 interface ConfigInterface 
 {
+
     /**
-     * @param mixed $pKey
+     * @param mixed $key
      * @return boolean
      */
-    public function has($pKey);
-    
+    public function has($key);
+
     /**
-     * @param mixed $pKey
-     * @param mixed $pDefault
+     * @param mixed $key
+     * @param mixed $default
      * @return mixed
      */
-    public function get($pKey, $pDefault = null);
-    
+    public function get($key, $default = null);
+
     /**
-     * @param mixed $pKey
-     * @param mixed $pValue
+     * @param mixed $key
+     * @param mixed $value
      */
-    public function set($pKey, $pValue);
-    
+    public function set($key, $value);
+
     /**
-     * @param mixed $pKey
+     * @param mixed $key
      */
-    public function remove($pKey);
-    
+    public function remove($key);
+
     /**
      * @return array
      */
     public function gets();
-    
+
     /**
-     * @param array $pData
+     * @param array $data
      */
-    public function sets(array $pData);
-    
+    public function sets(array $data);
+
     /**
      * @param ConfigInterface|array
-     * @param boolean $pRecursive
+     * @param boolean $recursive
      */
-    public function merge($pData, $pRecursive = false);
+    public function merge($data, $recursive = false);
 }

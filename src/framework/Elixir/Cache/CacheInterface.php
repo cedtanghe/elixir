@@ -9,29 +9,29 @@ namespace Elixir\Cache;
 interface CacheInterface
 {
     /**
-     * @param string $pKey 
+     * @param string $key 
      * @return boolean
      */
-    public function has($pKey);
+    public function has($key);
     
     /**
-     * @param string $pKey
-     * @param mixed $pDefault 
+     * @param string $key
+     * @param mixed $default 
      * @return mixed
      */
-    public function get($pKey, $pDefault = null);
+    public function get($key, $default = null);
     
     /**
-     * @param string $pKey
-     * @param mixed $pValue
-     * @param integer|string|\DateTime $pTTL 
+     * @param string $key
+     * @param mixed $value
+     * @param integer|string|\DateTime $TTL 
      */
-    public function set($pKey, $pValue, $pTTL = 0);
+    public function set($key, $value, $TTL = 0);
 
     /**
-     * @param string $pKey 
+     * @param string $key 
      */
-    public function remove($pKey);
+    public function remove($key);
     
     public function clear();
 }

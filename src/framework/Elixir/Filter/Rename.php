@@ -49,27 +49,33 @@ class Rename extends FilterAbstract
         }
         
         $folder = rtrim(isset($pOptions['folder']) ? $pOptions['folder'] : File::dirname($file), '/');
+        $filename = File::filename($file);
         
         if(isset($pOptions['name']))
         {
+            if(is_callable($pOptions['name']))
+            {
+                $name = call_user_func_array($pOptions['name'], [$filename]);
+            }
+            else
+            {
+                $name = $pOptions['name'];
+            }
+            
             $mode = isset($pOptions['mode']) ? $pOptions['mode'] : self::SET;
             
             switch($mode)
             {
                 case self::APPEND:
-                    $fileName = File::filename($file) . $pOptions['name'];
+                    $fileName = $filename . $name;
                 break;
                 case self::PREPEND:
-                    $fileName = $pOptions['name'] . File::filename($file);
+                    $fileName = $name . $filename;
                 break;
                 default:
-                    $fileName = $pOptions['name'];
+                    $fileName = $name;
                 break;
             }
-        }
-        else
-        {
-            $fileName = File::filename($file);
         }
         
         if(isset($pOptions['protect']) && $pOptions['protect'])

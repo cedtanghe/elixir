@@ -13,111 +13,111 @@ class Memcached extends CacheAbstract
     /**
      * @var \Memcached
      */
-    protected $_memcached;
+    protected $engine;
 
     /**
      * @see CacheAbstract::__construct()
      * @throws \RuntimeException
      */
-    public function __construct($pIdentifier) 
+    public function __construct($identifier) 
     {
-        if(!class_exists('\Memcached'))
+        if (!class_exists('\Memcached')) 
         {
             throw new \RuntimeException('Memcached is not available.');
         }
-        
-        parent::__construct($pIdentifier);
-        $this->_memcached = new \Memcached($this->_identifier);
+
+        parent::__construct($identifier);
+        $this->engine = new \Memcached($this->identifier);
     }
-    
+
     public function __destruct() 
     {
-        $this->_memcached = null;
+        $this->engine = null;
     }
 
     /**
-     * @see CacheInterface::has()
+     * @see CacheAbstract::has()
      */
-    public function has($pKey)
+    public function has($key) 
     {
-        if(!$this->_memcached->get($pKey))
+        if (!$this->engine->get($key)) 
         {
-            return $this->_memcached->getResultCode() == \Memcached::RES_NOTFOUND;
+            return $this->engine->getResultCode() == \Memcached::RES_NOTFOUND;
         }
-        
+
         return true;
     }
-    
+
     /**
-     * @see CacheInterface::get()
+     * @see CacheAbstract::get()
      */
-    public function get($pKey, $pDefault = null)
+    public function get($key, $default = null) 
     {
-        return $this->_memcached->get($pKey, $pDefault);
-    }
-    
-    /**
-     * @see CacheInterface::set()
-     */
-    public function set($pKey, $pValue, $pTTL = 0)
-    {
-        if($pTTL != 0)
-        {
-            $pTTL = time() + $this->convertTTL($pTTL);
-        }
-        
-        if(null !== $this->_encoder)
-        {
-            $pValue = $this->getEncoder()->encode($pValue);
-        }
-        
-        $this->_memcached->set($pKey, $pValue, $pTTL);
-    }
-    
-    /**
-     * @param string $pKey
-     * @param integer $pStep
-     * @return integer|null
-     */
-    public function incremente($pKey, $pStep = 1)
-    {
-        $this->_memcached->increment($pKey, $pStep);
-        return $this->get($pKey);
-    }
-    
-    /**
-     * @param string $pKey
-     * @param integer $pStep
-     * @return integer|null
-     */
-    public function decremente($pKey, $pStep = 1)
-    {
-        $this->_memcached->decrement($pKey, $pStep);
-        return $this->get($pKey);
+        return $this->engine->get($key, $default);
     }
 
     /**
-     * @see CacheInterface::remove()
+     * @see CacheAbstract::set()
      */
-    public function remove($pKey)
+    public function set($key, $value, $TTL = 0)
     {
-        $this->_memcached->delete($key);
+        if ($TTL != 0) 
+        {
+            $TTL = time() + $this->convertTTL($TTL);
+        }
+
+        if (null !== $this->encoder)
+        {
+            $value = $this->getEncoder()->encode($value);
+        }
+
+        $this->engine->set($key, $value, $TTL);
     }
-    
+
     /**
-     * @see CacheInterface::has()
+     * @param string $key
+     * @param integer $step
+     * @return integer|null
+     */
+    public function incremente($key, $step = 1) 
+    {
+        $this->engine->increment($key, $step);
+        return $this->get($key);
+    }
+
+    /**
+     * @param string $key
+     * @param integer $step
+     * @return integer|null
+     */
+    public function decremente($key, $step = 1) 
+    {
+        $this->engine->decrement($key, $step);
+        return $this->get($key);
+    }
+
+    /**
+     * @see CacheAbstract::remove()
+     */
+    public function remove($key) 
+    {
+        $this->engine->delete($key);
+    }
+
+    /**
+     * @see CacheAbstract::has()
      */
     public function clear()
     {
-        $this->_memcached->flush();
+        $this->engine->flush();
     }
-    
+
     /**
-     * @param string $pMethod
-     * @param array $pArguments
+     * @param string $method
+     * @param array $arguments
      */
-    public function __call($pMethod, $pArguments) 
+    public function __call($method, $arguments) 
     {
-        return call_user_func_array([$this->_memcached, $pMethod], $pArguments);
+        return call_user_func_array([$this->engine, $method], $arguments);
     }
 }

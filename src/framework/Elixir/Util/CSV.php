@@ -14,13 +14,13 @@ class CSV
     const FORCE_UTF8 = "\xEF\xBB\xBF";
     
     /**
-     * @param string $pCsv
-     * @param boolean $pWithHeaders
-     * @param string $pDelimiter
-     * @param string $pEnclosure
+     * @param string $csv
+     * @param boolean $withHeaders
+     * @param string $delimiter
+     * @param string $enclosure
      * @return array
      */
-    public static function CSVToArray($pCsv, $pWithHeaders = false, $pDelimiter = ';', $pEnclosure = '"')
+    public static function CSVToArray($csv, $withHeaders = false, $delimiter = ';', $enclosure = '"')
     {
         $return = [];
         $data = [];
@@ -53,7 +53,7 @@ class CSV
 
             for($j = 0; $j < $len2; ++$j)
             {
-                if($pWithHeaders)
+                if($withHeaders)
                 {
                     if($i === 0)
                     {
@@ -85,24 +85,24 @@ class CSV
     }
     
     /**
-     * @param array $pData
-     * @param boolean $pWithHeaders
-     * @param string $pDelimiter
-     * @param string $pEnclosure
+     * @param array $data
+     * @param boolean $withHeaders
+     * @param string $delimiter
+     * @param string $enclosure
      * @return string
      */
-    public static function arrayToCSV(array $pData, $pWithHeaders = false, $pDelimiter = ';', $pEnclosure = '"') 
+    public static function arrayToCSV(array $data, $withHeaders = false, $delimiter = ';', $enclosure = '"') 
     { 
         $return = '';
         
-        if(count($pData) > 0)
+        if(count($data) > 0)
         {
-            if($pWithHeaders)
+            if($withHeaders)
             {
                 $columns = [];
                 $work = [];
 
-                foreach ($pData[0] as $key => $value)
+                foreach($data[0] as $key => $value)
                 {
                     $columns[] = $key; 
                 }
@@ -110,7 +110,7 @@ class CSV
                 $work[0] = $columns;
                 $i = 1;
                 
-                foreach($pData as $data)
+                foreach($data as $data)
                 {
                     foreach($columns as $column)
                     {
@@ -129,14 +129,14 @@ class CSV
             }
             else
             {
-                $work = $pData;
+                $work = $data;
             }
             
             $fd = tmpfile();
             
             foreach($work as $value)
             {
-                fputcsv($fd, $value, $pDelimiter, $pEnclosure);
+                fputcsv($fd, $value, $delimiter, $enclosure);
             }
             
             rewind($fd);

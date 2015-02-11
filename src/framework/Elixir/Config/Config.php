@@ -4,302 +4,255 @@ namespace Elixir\Config;
 
 use Elixir\Config\ConfigInterface;
 use Elixir\Config\Loader\LoaderFactory;
-use Elixir\Config\Processor\ProcessorInterface;
+use Elixir\Config\Processor\ProcessorTrait;
 use Elixir\Config\Writer\WriterInterface;
 use Elixir\Util\Arr;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
-class Config implements ConfigInterface, \ArrayAccess, \Iterator, \Countable
+class Config implements ConfigInterface, \ArrayAccess, \Iterator, \Countable 
 {
+    use ProcessorTrait;
+    
     /**
      * @var string 
      */
-    protected $_environment;
-    
+    protected $environment;
+
     /**
      * @var array 
      */
-    protected $_parameters;
+    protected $data = [];
     
     /**
-     * @var array
+     * @param string $environment
+     * @param array $data
      */
-    protected $_processors = [];
-    
-    /**
-     * @param string $pEnvironment
-     */
-    public function __construct($pEnvironment = null, array $pParameters = []) 
+    public function __construct($environment = null, array $data = []) 
     {
-        $this->_environment = $pEnvironment;
-        $this->sets($pParameters);
+        $this->environment = $environment;
+        $this->data = $data;
     }
     
     /**
-     * @param mixed $pConfig
-     * @param array $pOptions
+     * @param mixed $config
+     * @param array $options
      */
-    public function load($pConfig, array $pOptions = [])
+    public function load($config, array $options = [])
     {
-        $recursive = isset($pOptions['recursive']) ? $pOptions['recursive'] : false;
-        
-        if($pConfig instanceof self)
+        $recursive = isset($options['recursive']) ? $options['recursive'] : false;
+
+        if ($config instanceof self)
         {
-            $this->merge($pConfig, $recursive);
-        }
-        else
+            $this->merge($config, $recursive);
+        } 
+        else 
         {
-            $pOptions['environment'] = isset($pOptions['environment']) ? $pOptions['environment'] : $this->_environment;
-            $pOptions['strict'] = isset($pOptions['strict']) ? $pOptions['strict'] : false;
+            $options['environment'] = $this->environment;
             
-            foreach((array)$pConfig as $config)
+            foreach ((array)$config as $config) 
             {
-                $loader = LoaderFactory::create($config, $pOptions);
+                $loader = LoaderFactory::create($config, $options);
                 $data = $loader->load($config, $recursive);
                 
                 $this->merge($data, $recursive);
             }
         }
     }
-    
+
     /**
-     * @param WriterInterface $pWriter
-     * @param string $pFile
+     * @param WriterInterface $writer
+     * @param string $file
      * @return boolean
      */
-    public function export(WriterInterface $pWriter, $pFile)
+    public function export(WriterInterface $writer, $file)
     {
-        $pWriter->setConfig($this);
-        return $pWriter->export($pFile);
+        $writer->setConfig($this);
+        return $writer->export($file);
+    }
+    
+    /**
+     * @see ConfigInterface::has()
+     */
+    public function has($key)
+    {
+        return Arr::has($key, $this->data);
     }
 
     /**
-     * @param ProcessorInterface $pProcessor
+     * @see ConfigInterface::get()
      */
-    public function addProcessor(ProcessorInterface $pProcessor)
+    public function get($key, $default = null) 
     {
-        $this->_processors[] = $pProcessor;
+        return $this->process(Arr::get($key, $this->data, $default));
     }
-    
+
     /**
-     * @return array
+     * @see ConfigInterface::set()
      */
-    public function getProcessors()
+    public function set($key, $value) 
     {
-        return $this->_processors;
+        Arr::set($key, $value, $this->data);
     }
-    
+
     /**
-     * @param array $pData
+     * @see ConfigInterface::remove()
      */
-    public function setProcessors(array $pData)
+    public function remove($key) {
+        Arr::remove($key, $this->data);
+    }
+
+    /**
+     * @see ConfigInterface::gets()
+     */
+    public function gets() 
     {
-        $this->_processors = [];
-        
-        foreach($pData as $processor)
+        return $this->process($this->data);
+    }
+
+    /**
+     * @see ConfigInterface::sets()
+     */
+    public function sets(array $data) 
+    {
+        $this->data = $data;
+    }
+
+    /**
+     * @see \ArrayAccess::offsetExists()
+     */
+    public function offsetExists($key)
+    {
+        return $this->has($key);
+    }
+
+    /**
+     * @see \ArrayAccess::offsetSet()
+     */
+    public function offsetSet($key, $value) 
+    {
+        if (null === $key)
         {
-            $this->addProcessor($processor);
+            throw new \InvalidArgumentException('The key can not be undefined.');
         }
-    }
-    
-    /**
-     * @param mixed $pValue
-     * @return $mixed;
-     */
-    protected function processValue($pValue)
-    {
-        $value = $pValue;
-        
-        foreach($this->_processors as $processor)
-        {
-            $value = $processor->process($value);
-        }
-        
-        return $value;
+
+        $this->set($key, $value);
     }
 
     /**
-     * @param mixed $pKey
+     * @see \ArrayAccess::offsetGet()
      */
-    public function has($pKey)
+    public function offsetGet($key) 
     {
-        return Arr::has($pKey, $this->_parameters);
+        return $this->get($key);
     }
-    
-    /**
-     * @param mixed $pKey
-     * @param mixed $pDefault
-     * @return mixed
-     */
-    public function get($pKey, $pDefault = null)
-    {
-        return $this->processValue(Arr::get($pKey, $this->_parameters, $pDefault));
-    }
-    
-    /**
-     * @param mixed $pKey
-     * @param mixed $pValue
-     */
-    public function set($pKey, $pValue)
-    {
-        Arr::set($pKey, $pValue, $this->_parameters);
-    }
-    
-    /**
-     * @param mixed $pKey
-     */
-    public function remove($pKey)
-    {
-        Arr::remove($pKey, $this->_data);
-    }
-    
-    /**
-     * @return array
-     */
-    public function gets()
-    {
-        return $this->processValue($this->_parameters);
-    }
-    
-    /**
-     * @param array $pData
-     */
-    public function sets(array $pData)
-    {
-        $this->_parameters = $pData;
-    }
-    
-    /**
-     * @see Config::has()
-     */
-    public function offsetExists($pKey) 
-    { 
-        return $this->has($pKey);
-    } 
 
     /**
-     * @see Config::set()
+     * @see \ArrayAccess::offsetUnset()
      */
-    public function offsetSet($pKey, $pValue) 
-    { 
-        if(null === $pKey)
-        {
-            throw new \InvalidArgumentException('Key parameter cannot be undefined.');
-        }
-        
-        $this->set($pKey, $pValue);
-    } 
+    public function offsetUnset($key)
+    {
+        $this->remove($key);
+    }
 
     /**
-     * @see Config::get()
+     * @see \Iterator::rewind() 
      */
-    public function offsetGet($pKey) 
-    { 
-        return $this->get($pKey);
-    } 
-
-    /**
-     * @see Config::remove()
-     */
-    public function offsetUnset($pKey) 
-    { 
-        $this->remove($pKey);
-    } 
-    
     public function rewind() 
     {
-        reset($this->_parameters);
+        return reset($this->data);
     }
-    
+
     /**
-     * @return mixed
+     * @see \Iterator::current() 
      */
     public function current() 
     {
-        return $this->get(key($this->_parameters));
+        return $this->get(key($this->data));
     }
-    
+
     /**
-     * @return string|integer
+     * @see \Iterator::key() 
      */
     public function key() 
     {
-        return key($this->_parameters);
+        return key($this->data);
     }
-    
-    public function next() 
-    {
-        next($this->_parameters);
-    }
-    
+
     /**
-     * @return boolean
+     * @see \Iterator::next() 
+     */
+    public function next()
+    {
+        return next($this->data);
+    }
+
+    /**
+     * @see \Iterator::valid() 
      */
     public function valid() 
     {
-        return null !== key($this->_parameters);
+        return null !== key($this->data);
     }
-    
+
     /**
-     * @return integer
+     * @see \Countable::count()
      */
     public function count()
     {
-        return count($this->_parameters);
+        return count($this->data);
     }
-    
+
     /**
      * @see Config::has();
      */
-    public function __issset($pKey)
+    public function __issset($key) 
     {
-        return $this->has($pKey);
+        return $this->has($key);
     }
-    
+
     /**
      * @see Config::get();
      */
-    public function __get($pKey)
+    public function __get($key) 
     {
-        return $this->get($pKey);
+        return $this->get($key);
     }
-    
+
     /**
      * @see Config::set();
      */
-    public function __set($pKey, $pValue)
+    public function __set($key, $value)
     {
-        $this->set($pKey, $pValue);
+        $this->set($key, $value);
     }
-    
+
     /**
      * @see Config::remove();
      */
-    public function __unset($pKey)
+    public function __unset($key) 
     {
-        $this->remove($pKey);
+        $this->remove($key);
     }
-    
+
     /**
-     * @see Config::merge();
+     * @see ConfigInterface::merge();
      */
-    public function merge($pData, $pRecursive = false)
+    public function merge($data, $recursive = false) 
     {
-        if($pData instanceof self)
+        if ($data instanceof self) 
         {
-            $pData = $pData->gets();
+            $data = $data->gets();
         }
-        
-        if($pRecursive)
+
+        if ($recursive) 
         {
-            $this->_parameters = Arr::merge($this->_parameters, $pData);
-        }
+            $this->data = array_merge_recursive($this->data, $data);
+        } 
         else
         {
-            $this->_parameters = array_merge($this->_parameters, $pData);
+            $this->data = array_merge($this->data, $data);
         }
     }
 }

@@ -251,7 +251,7 @@ class Parameters implements ParametersInterface, \ArrayAccess, \Iterator, \Count
     
     public function rewind() 
     {
-        reset($this->_data);
+        return reset($this->_data);
     }
     
     /**
@@ -272,7 +272,7 @@ class Parameters implements ParametersInterface, \ArrayAccess, \Iterator, \Count
     
     public function next() 
     {
-        next($this->_data);
+        return next($this->_data);
     }
     
     /**

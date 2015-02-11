@@ -340,25 +340,36 @@ class Uploader
      */
     public function getFileInfo()
     {
-        if(isset($_FILES[$this->_name]))
+        if(null === $this->_fileInfos)
         {
-            $this->_fileInfos = [];
-            
-            $file = $_FILES[$this->_name];
-            $len = count((array)$file['name']);
-            $keys = array_keys($file);
-            
-            for($i = 0; $i < $len ; ++$i)
+            if(isset($_FILES[$this->_name]))
             {
-                foreach($keys as $key) 
+                $this->_fileInfos = [];
+
+                $file = $_FILES[$this->_name];
+                $len = count((array)$file['name']);
+                $keys = array_keys($file);
+
+                for($i = 0; $i < $len ; ++$i)
                 {
-                    $d = (array)$file[$key];
-                    $this->_fileInfos[$i][$key] = $d[$i];
+                    foreach($keys as $key) 
+                    {
+                        $d = (array)$file[$key];
+                        $this->_fileInfos[$i][$key] = $d[$i];
+                    }
                 }
             }
         }
         
         return $this->_fileInfos;
+    }
+    
+    /**
+     * @param array $pValue
+     */
+    public function setFileInfo(array $pValue = null)
+    {
+        $this->_fileInfos = $pValue;
     }
     
     /**

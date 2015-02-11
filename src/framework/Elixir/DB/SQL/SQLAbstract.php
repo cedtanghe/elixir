@@ -41,7 +41,7 @@ abstract class SQLAbstract implements SQLInterface
         
         if (is_int($pParameter))
         {
-            return $pParameter;
+            return (int)$pParameter;
         } 
         
         if(is_float($pParameter)) 

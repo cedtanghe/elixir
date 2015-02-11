@@ -145,4 +145,14 @@ class Manager extends DataAbstract
         
         return $view->render($pTemplate);
     }
+    
+    public function __clone() 
+    {
+        parent::__clone();
+        
+        foreach($this->_engines as $key => &$value)
+        {
+            $value['view'] = clone $value['view'];
+        }
+    }
 }

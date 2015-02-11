@@ -196,8 +196,7 @@ class File extends FieldAbstract implements FileInterface
      */
     public function isEmpty()
     {
-        $fileInfos = $this->getUploader()->getFileInfo();
-        return null === $fileInfos || count($fileInfos) == 0;
+        return !$this->isUploaded();
     }
     
     /**

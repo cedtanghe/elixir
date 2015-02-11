@@ -93,6 +93,16 @@ interface FormInterface extends DispatcherInterface
     public function getName();
     
     /**
+     * @param boolean $pValue
+     */
+    public function setRequired($pValue);
+    
+    /***
+     * @return boolean
+     */
+    public function isRequired();
+    
+    /**
      * @param mixed $pValue
      */
     public function setHelper($pValue);
@@ -161,6 +171,11 @@ interface FormInterface extends DispatcherInterface
      * @return boolean
      */
     public function isPrepared();
+    
+    /**
+     * @return boolean
+     */
+    public function isEligible();
     
     /**
      * @return boolean

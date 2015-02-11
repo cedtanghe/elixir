@@ -13,17 +13,16 @@ class JSON implements EncoderInterface
     /**
      * @see EncoderInterface::encode()
      */
-    public function encode($pValue)
+    public function encode($value)
     {
-        return json_encode($pValue);
+        return json_encode($value);
     }
     
     /**
      * @see EncoderInterface::decode()
      */
-    public function decode($pValue)
+    public function decode($value)
     {
-        return json_decode($pValue, true);
+        return json_decode($value, true);
     }
 }
-

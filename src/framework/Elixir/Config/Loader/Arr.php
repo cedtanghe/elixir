@@ -4,88 +4,86 @@ namespace Elixir\Config\Loader;
 
 use Elixir\Config\Loader\LoaderAbstract;
 use Elixir\Config\Loader\LoaderInterface;
-use Elixir\Util\Arr as ArrayUtils;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
-class Arr extends LoaderAbstract
+class Arr extends LoaderAbstract 
 {
     /**
      * @see LoaderInterface::load()
      */
-    public function load($pConfig, $pRecursive = false)
+    public function load($config, $recursive = false) 
     {
-        if(!is_array($pConfig))
+        if (!is_array($config)) 
         {
-            $pConfig = include $pConfig;
+            $config = include $config;
         }
-        
+
         $result = [];
         $supers = [];
-        
-        $m = $this->_environment;
-        
-        if(null !== $m)
+
+        $m = $this->environment;
+
+        if (null !== $m) 
         {
             $found = false;
-            
-            do
-            {
-                foreach($pConfig as $key => $value)
-                {
-                    $k = explode(':', $key);
 
-                    if(trim($k[0]) === $m)
+            do 
+            {
+                foreach ($config as $key => $value)
+                {
+                    $k = explode('>', $key);
+
+                    if (trim($k[0]) === $m) 
                     {
                         $found = true;
                         $supers[] = $value;
 
-                        if(isset($k[1]))
+                        if (isset($k[1])) 
                         {
                             $m = trim($k[1]);
                             continue 2;
                         }
                     }
                 }
-                
+
                 $m = null;
-            }
-            while(null !== $m);
-            
-            if(!$found && !$this->_strict)
+            } 
+            while (null !== $m);
+
+            if (!$found && !$this->strict) 
             {
-                $supers[] = $pConfig;
+                $supers[] = $config;
             }
-        }
-        else
+        } 
+        else 
         {
-            $supers[] = $pConfig;
+            $supers[] = $config;
         }
-        
-        foreach(array_reverse($supers) as $data)
+
+        foreach (array_reverse($supers) as $data)
         {
-            $data = $this->parse($data, $pRecursive);
-            $result = $pRecursive ? ArrayUtils::merge($result, $data) : array_merge($result, $data);
+            $data = $this->parse($data, $recursive);
+            $result = $recursive ? array_merge_recursive($result, $data) : array_merge($result, $data);
         }
-        
+
         return $result;
     }
-    
+
     /**
      * @see LoaderAbstract::parse();
      */
-    protected function parse($pData, $pRecursive = false)
+    protected function parse($data, $recursive)
     {
-        foreach($pData as $key => &$value)
-        {  
-            if(is_array($value))
+        foreach ($data as $key => &$value)
+        {
+            if (is_array($value)) 
             {
-                $value = $this->parse($value, $pRecursive);
+                $value = $this->parse($value, $recursive);
             }
         }
-        
-        return $pData;
+
+        return $data;
     }
 }

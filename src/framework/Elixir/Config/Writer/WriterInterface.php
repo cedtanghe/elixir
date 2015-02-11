@@ -7,22 +7,21 @@ use Elixir\Config\ConfigInterface;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
-interface WriterInterface 
+interface WriterInterface
 {
     /**
-     * @param ConfigInterface $pValue
+     * @param ConfigInterface $value
      */
-    public function setConfig(ConfigInterface $pValue);
+    public function setConfig(ConfigInterface $value);
 
     /**
      * @return mixed
      */
     public function write();
-    
+
     /**
-     * @param string $pFile
+     * @param string $file
      * @return boolean
      */
-    public function export($pFile);  
+    public function export($file);
 }

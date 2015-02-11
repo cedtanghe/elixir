@@ -7,14 +7,14 @@ use Elixir\Config\Writer\WriterAbstract;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-class Arr extends WriterAbstract 
+class JSON extends WriterAbstract 
 {
     /**
      * @see WriterAbstract::write()
      */
     public function write() 
     {
-        return $this->config->gets();
+        return json_encode($this->config->gets());
     }
 
     /**
@@ -22,12 +22,12 @@ class Arr extends WriterAbstract
      */
     public function export($file)
     {
-        if(substr($file, -4) != '.php')
+        if(substr($file, -5) != '.json')
         {
-            $file .= '.php';
+            $file .= '.json';
         }
         
-        file_put_contents($file, '<?php return ' . var_export($this->write(), true));
+        file_put_contents($file, $this->write());
         return file_exists($file);
     }
 }

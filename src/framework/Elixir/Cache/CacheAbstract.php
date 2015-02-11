@@ -15,19 +15,23 @@ abstract class CacheAbstract implements CacheInterface
     /**
      * @var EncoderInterface 
      */
-    protected $_encoder;
+    protected $encoder;
     
     /**
      * @var string 
      */
-    protected $_identifier;
+    protected $identifier;
 
     /**
-     * @param string $pIdentifier
+     * @param string $identifier
      */
-    public function __construct($pIdentifier)
+    public function __construct($identifier)
     {
-        $this->_identifier = preg_replace('/[^a-z0-9\-]+/i', '-', strtolower(Str::removeAccents($pIdentifier)));
+        $this->identifier = preg_replace(
+            '/[^a-z0-9\-]+/i', 
+            '-', 
+            strtolower(Str::removeAccents($identifier))
+        );
     }
     
     /**
@@ -35,7 +39,7 @@ abstract class CacheAbstract implements CacheInterface
      */
     public function getIdentifier()
     {
-        return $this->_identifier;
+        return $this->identifier;
     }
     
     /**
@@ -43,7 +47,7 @@ abstract class CacheAbstract implements CacheInterface
      */
     public function setEncoder(EncoderInterface $pValue)
     {
-        $this->_encoder = $pValue;
+        $this->encoder = $pValue;
     }
     
     /**
@@ -51,40 +55,39 @@ abstract class CacheAbstract implements CacheInterface
      */
     public function getEncoder()
     {
-        return $this->_encoder;
+        return $this->encoder;
     }
 
     /**
-     * @param integer|string|\DateTime $pTTL
-     * @param integer $pDefault
+     * @param integer|string|\DateTime $TTL
+     * @param integer $default
      * @return integer
      */
-    public function convertTTL($pTTL, $pDefault = 31556926)
+    public function convertTTL($TTL, $default = 31556926)
     {
-        if(0 == $pTTL)
+        if (0 == $TTL)
         {
-            return $pDefault;
+            return $default;
         }
         
-        if($pTTL instanceof \DateTime)
+        if ($TTL instanceof \DateTime)
         {
-            $now = new \DateTime(null, $pTTL->getTimezone());
-            $pTTL = $pTTL->getTimestamp() - $now->getTimestamp();
+            $now = new \DateTime(null, $TTL->getTimezone());
+            $TTL = $TTL->getTimestamp() - $now->getTimestamp();
         }
-        else if(!is_numeric($pTTL))
+        else if (!is_numeric($TTL))
         {
-            $time = strtotime($pTTL);
+            $time = strtotime($TTL);
             
-            if(false === $time)
+            if (false === $time)
             {
-                return $pDefault;
+                return $default;
             }
             
             $now = new \DateTime();
-            $pTTL = $time - $now->getTimestamp();
+            $TTL = $time - $now->getTimestamp();
         }
         
-        return $pTTL;
+        return $TTL;
     }
 }
-
