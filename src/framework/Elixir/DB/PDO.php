@@ -2,18 +2,24 @@
 
 namespace Elixir\DB;
 
-use Elixir\DB\DBAbstract;
 use Elixir\DB\DBEvent;
+use Elixir\DB\DBInterface;
+use Elixir\DB\Query\QueryBuilderInterface;
+use Elixir\DB\Query\QueryBuilderTrait;
 use Elixir\DB\Result\PDO as ResultSet;
 use Elixir\DB\SQL\Expr;
 use Elixir\DB\SQL\SQLInterface;
+use Elixir\Dispatcher\DispatcherTrait;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
-class PDO extends DBAbstract
+class PDO implements DBInterface, QueryBuilderInterface
 {
+    use DispatcherTrait;
+    use QueryBuilderTrait;
+    
     /**
      * @var boolean
      */
@@ -82,7 +88,7 @@ class PDO extends DBAbstract
     }
     
     /**
-     * @see DBAbstract::getDriver()
+     * @see QueryBuilderInterface::getDriver()
      */
     public function getDriver() 
     {
@@ -90,7 +96,7 @@ class PDO extends DBAbstract
     }
     
     /**
-     * @see DBAbstract::begin()
+     * @see DBInterface::begin()
      */
     public function begin() 
     {
@@ -109,7 +115,7 @@ class PDO extends DBAbstract
     }
     
     /**
-     * @see DBAbstract::rollBack()
+     * @see DBInterface::rollBack()
      */
     public function rollBack()
     {
@@ -128,7 +134,7 @@ class PDO extends DBAbstract
     }
 
     /**
-     * @see DBAbstract::commit()
+     * @see DBInterface::commit()
      */
     public function commit()
     {
@@ -147,7 +153,7 @@ class PDO extends DBAbstract
     }
     
     /**
-     * @see DBAbstract::inTransaction()
+     * @see DBInterface::inTransaction()
      */
     public function inTransaction()
     {
@@ -155,7 +161,7 @@ class PDO extends DBAbstract
     }
     
     /**
-     * @see DBAbstract::quote()
+     * @see DBInterface::quote()
      */
     public function quote($pValue, $pType = null)
     {
@@ -209,7 +215,7 @@ class PDO extends DBAbstract
     }
 
     /**
-     * @see DBAbstract::query()
+     * @see DBInterface::query()
      */
     public function query($pSQL, array $pValues = [], array $pOptions = [])
     {
@@ -315,7 +321,7 @@ class PDO extends DBAbstract
     }
     
     /**
-     * @see DBAbstract::lastInsertId()
+     * @see DBInterface::lastInsertId()
      */
     public function lastInsertId() 
     {

@@ -248,7 +248,7 @@ class BelongsTo implements RelationInterface
                             '`%s`.`%s` = `%s`.`%s`', 
                             $this->_pivot->getPivot(),
                             $this->_pivot->getOtherKey(),
-                            $this->_target->getTable(),
+                            $this->target->getTable(),
                             $this->_otherKey
                         )
                     );

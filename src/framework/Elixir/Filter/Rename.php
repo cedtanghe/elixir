@@ -83,7 +83,7 @@ class Rename extends FilterAbstract
             $fileName = preg_replace('/[^a-z0-9\._\-\(\)]+/i', '', Str::removeAccents($fileName));
         }
         
-        $extension = isset($pOptions['extension']) ? $pOptions['extension'] : File::extension($file);
+        $extension = strtolower(isset($pOptions['extension']) ? $pOptions['extension'] : File::extension($file));
         $file = $folder . '/' . $fileName;
         
         if(!empty($extension))

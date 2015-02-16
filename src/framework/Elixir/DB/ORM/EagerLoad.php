@@ -234,7 +234,7 @@ class EagerLoad
                             '`%s`.`%s` = `%s`.`%s`', 
                             $this->_pivot->getPivot(),
                             $this->_pivot->getForeignKey(),
-                            $this->_target->getTable(),
+                            $this->target->getTable(),
                             $this->_foreignKey
                         )
                     );
