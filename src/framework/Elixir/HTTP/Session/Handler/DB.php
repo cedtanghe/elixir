@@ -4,7 +4,7 @@ namespace Elixir\HTTP\Session\Handler;
 
 use Elixir\DB\DBInterface;
 use Elixir\DB\QueryBuilderInterface;
-use Elixir\DB\Result\SetAbstract;
+use Elixir\DB\ResultSet\SetAbstract;
 use Elixir\DB\SQL\Insert;
 use Elixir\DB\SQL\Update;
 

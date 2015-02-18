@@ -5,7 +5,7 @@ namespace Elixir\DB\ORM;
 use Elixir\DB\DBInterface;
 use Elixir\DB\ORM\EagerLoad;
 use Elixir\DB\ORM\RepositoryInterface;
-use Elixir\DB\Result\SetAbstract;
+use Elixir\DB\ResultSet\SetAbstract;
 use Elixir\DB\SQL\Select as SQLSelect;
 use Elixir\DB\SQL\SQLInterface;
 use Elixir\Util\Str;

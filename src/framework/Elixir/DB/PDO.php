@@ -6,7 +6,7 @@ use Elixir\DB\DBEvent;
 use Elixir\DB\DBInterface;
 use Elixir\DB\Query\QueryBuilderInterface;
 use Elixir\DB\Query\QueryBuilderTrait;
-use Elixir\DB\Result\PDO as ResultSet;
+use Elixir\DB\ResultSet\PDO as ResultSet;
 use Elixir\DB\SQL\Expr;
 use Elixir\DB\SQL\SQLInterface;
 use Elixir\Dispatcher\DispatcherTrait;
@@ -14,383 +14,378 @@ use Elixir\Dispatcher\DispatcherTrait;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
-class PDO implements DBInterface, QueryBuilderInterface
+class PDO implements DBInterface, QueryBuilderInterface 
 {
     use DispatcherTrait;
     use QueryBuilderTrait;
-    
-    /**
-     * @var boolean
-     */
-    protected $_authorizeMultipleTransactions = true;
-    
-    /**
-     * @var boolean
-     */
-    protected $_hasTransaction = false;
-    
-    /**
-     * @var integer
-     */
-    protected $_countTransaction = 0;
-    
+
     /**
      * @var \PDO 
      */
-    protected $_connection;
-    
+    protected $connection;
+
     /**
-     * @param string $pDNS
-     * @param string $pUsername
-     * @param string $pPassword
-     * @param array $pOptions
+     * @var boolean
      */
-    public function __construct($pDNS, $pUsername = null, $pPassword = null, array $pOptions = []) 
+    protected $autoDestruct;
+
+    /**
+     * @var boolean
+     */
+    protected $hasTransaction = false;
+
+    /**
+     * @var integer
+     */
+    protected $countTransaction = 0;
+
+    /**
+     * @param \PDO $connection
+     * @param boolean $autoDestruct
+     */
+    public function __construct(\PDO $connection, $autoDestruct = true)
     {
-        if(!isset($pOptions[\PDO::MYSQL_ATTR_INIT_COMMAND]))
+        $this->connection = $connection;
+        $this->autoDestruct = $autoDestruct;
+
+        if (method_exists($this->connection, 'inTransaction') && $this->connection->inTransaction()) 
         {
-            $pOptions[\PDO::MYSQL_ATTR_INIT_COMMAND] = 'SET NAMES \'UTF8\'';
+            $this->hasTransaction = true;
+            $this->countTransaction = 1;
         }
-        
-        if(!isset($pOptions[\PDO::ATTR_PERSISTENT]))
-        {
-            $pOptions[\PDO::ATTR_PERSISTENT] = false;
-        }
-        
-        if(!isset($pOptions[\PDO::ATTR_ERRMODE]))
-        {
-            $pOptions[\PDO::ATTR_ERRMODE] = \PDO::ERRMODE_EXCEPTION;
-        }
-        
-        $this->_connection = new \PDO($pDNS, $pUsername, $pPassword, $pOptions);
     }
-    
+
     public function __destruct() 
     {
-        $this->_connection = null;
+        if ($this->autoDestruct) 
+        {
+            $this->connection = null;
+        }
     }
-    
-    /**
-     * @param boolean $pValue
-     */
-    public function useAuthorizeMultipleTransactions($pValue)
-    {
-        $this->_authorizeMultipleTransactions = $pValue;
-    }
-    
-    /**
-     * @return boolean
-     */
-    public function isAuthorizeMultipleTransactions()
-    {
-        return $this->_authorizeMultipleTransactions;
-    }
-    
+
     /**
      * @see QueryBuilderInterface::getDriver()
      */
-    public function getDriver() 
+    public function getDriver()
     {
-        return $this->_connection->getAttribute(\PDO::ATTR_DRIVER_NAME);
+        return $this->connection->getAttribute(\PDO::ATTR_DRIVER_NAME);
     }
-    
+
     /**
      * @see DBInterface::begin()
      */
     public function begin() 
     {
-        if($this->_authorizeMultipleTransactions)
+        $this->countTransaction++;
+
+        if ($this->hasTransaction) 
         {
-            $this->_countTransaction++;
-            
-            if($this->_hasTransaction)
-            {
-                return false;
-            }
+            return false;
         }
-        
-        $this->_hasTransaction = $this->_connection->beginTransaction();
-        return $this->_hasTransaction;
+
+        $this->hasTransaction = $this->connection->beginTransaction();
+        return $this->hasTransaction;
     }
-    
+
     /**
      * @see DBInterface::rollBack()
      */
-    public function rollBack()
+    public function rollBack() 
     {
-        if($this->_authorizeMultipleTransactions)
+        $this->countTransaction--;
+
+        if ($this->countTransaction > 0) 
         {
-            $this->_countTransaction--;
-            
-            if($this->_countTransaction > 0)
-            {
-                return false;
-            }
+            return false;
         }
-        
-        $this->_hasTransaction = !$this->_connection->rollBack();
-        return !$this->_hasTransaction;
+
+        $this->hasTransaction = !$this->connection->rollBack();
+        return !$this->hasTransaction;
     }
 
     /**
      * @see DBInterface::commit()
      */
-    public function commit()
+    public function commit() 
     {
-        if($this->_authorizeMultipleTransactions)
+        $this->countTransaction--;
+
+        if ($this->countTransaction > 0) 
         {
-            $this->_countTransaction--;
-            
-            if($this->_countTransaction > 0)
-            {
-                return false;
-            }
+            return false;
         }
-        
-        $this->_hasTransaction = !$this->_connection->commit();
-        return !$this->_hasTransaction;
+
+        $this->hasTransaction = !$this->connection->commit();
+        return !$this->hasTransaction;
     }
-    
+
     /**
      * @see DBInterface::inTransaction()
      */
-    public function inTransaction()
+    public function inTransaction() 
     {
-        return $this->_hasTransaction;
+        return $this->hasTransaction;
     }
     
+    /**
+     * @param mixed $value
+     * @return integer
+     */
+    protected function getParamType($value) 
+    {
+        if (is_int($value) || is_float($value)) 
+        {
+            return \PDO::PARAM_INT;
+        } 
+        else if (is_bool($value)) 
+        {
+            return \PDO::PARAM_BOOL;
+        } 
+        else if (is_null($value)) 
+        {
+            return \PDO::PARAM_NULL;
+        }
+
+        return \PDO::PARAM_STR;
+    }
+
     /**
      * @see DBInterface::quote()
      */
-    public function quote($pValue, $pType = null)
+    public function quote($value, $type = null) 
     {
-        if($pValue instanceof Expr)
+        if ($value instanceof Expr) 
         {
-            $pValue = $pValue->getExpr();
-            
-            if(null === $pValue)
+            $value = $value->getExpr();
+
+            if (null === $value) 
             {
                 return 'NULL';
             }
-            
-            return $pValue;
+
+            return $value;
         }
-        
-        if(null === $pValue || 'NULL' === $pValue)
+
+        if (null === $value || 'NULL' === $value) 
         {
             return 'NULL';
         }
-        
-        if(is_array($pValue))
+
+        if (is_array($value)) 
         {
-            foreach($pValue as &$value)
+            foreach ($value as &$v) 
             {
-                $value = $this->quote($value, (null === $pType ? $this->getParamType($value) : $pType));
+                $v = $this->quote($v, (null === $type ? $this->getParamType($v) : $type));
             }
-            
-            return implode(', ', $pValue);
+
+            return implode(', ', $value);
         }
-        
-        return $this->_connection->quote($pValue, (null === $pType ? $this->getParamType($pValue): $pType));
+
+        return $this->connection->quote($value, (null === $type ? $this->getParamType($value) : $type));
     }
-    
+
     /**
-     * @param SQLInterface|string $pSQL
+     * @param SQLInterface|string $SQL
      * @return integer
      */
-    public function exec($pSQL)
+    public function exec($SQL) 
     {
-        if($pSQL instanceof SQLInterface)
+        if ($SQL instanceof SQLInterface) 
         {
-            $pSQL = $pSQL->getQuery();
+            $SQL = $SQL->getQuery();
         }
+
+        $e = new DBEvent(
+            DBEvent::PRE_QUERY, 
+            ['SQL' => $SQL]
+        );
         
-        $this->dispatch(new DBEvent(DBEvent::PRE_QUERY, $pSQL));
+        $this->dispatch($e);
+        $SQL = $e->getSQL();
+                
         $time = microtime(true);
-        $result = $this->_connection->exec($pSQL);
-        $this->dispatch(new DBEvent(DBEvent::QUERY, $pSQL, [], microtime(true) - $time));
+        $result = $this->connection->exec($SQL);
         
+        $this->dispatch(
+            new DBEvent(
+                DBEvent::QUERY, 
+                [
+                    'SQL' => $SQL,
+                    'time' => microtime(true) - $time
+                ]
+            )
+        );
+
         return $result;
     }
 
     /**
      * @see DBInterface::query()
      */
-    public function query($pSQL, array $pValues = [], array $pOptions = [])
+    public function query($SQL, array $values = [], array $options = []) 
     {
-        if($pSQL instanceof SQLInterface)
+        $findAndReplace = function($SQL, $value, $nth) 
         {
-            $pValues = array_merge($pValues, $pSQL->getBindValues());
-            $pSQL = $pSQL->getQuery();
+            if (preg_match_all('/\?/', $SQL, $matches, PREG_OFFSET_CAPTURE)) 
+            {
+                if (array_key_exists($nth, $matches[0]))
+                {
+                    $SQL = substr($SQL, 0, $matches[0][$nth][1]) . $value . substr($SQL, $matches[0][$nth][1] + strlen($matches[0][$nth][0]));
+                }
+            }
+
+            return $SQL;
+        };
+        
+        if ($SQL instanceof SQLInterface) 
+        {
+            $values = array_merge($values, $SQL->getBindValues());
+            $SQL = $SQL->getQuery();
         }
         
-        $SQL = $pSQL;
-        $values = [];
-        
-        if(count($pValues) > 0)
+        $parsedValues = [];
+
+        if (count($values) > 0) 
         {
             $c = 0;
-            
-            foreach($pValues as $key => $value)
+
+            foreach ($values as $key => $value) 
             {
                 $isInt = is_int($key);
-                
-                if(!$isInt && substr($key, 0, 1) != ':')
+
+                if (!$isInt && substr($key, 0, 1) != ':')
                 {
                     $key = ':' . $key;
                 }
-                
-                if(is_array($value))
+
+                if (is_array($value)) 
                 {
                     $keys = [];
                     $pos = 0;
-                    
-                    foreach($value as $v)
+
+                    foreach ($value as $v) 
                     {
-                        if(!$isInt)
+                        if (!$isInt)
                         {
-                            do
+                            do 
                             {
                                 $k = $key . '_' . ++$pos;
-                            }
-                            while(array_key_exists($k, $pValues));
+                            } 
+                            while (array_key_exists($k, $values));
 
-                            $values[$k] = $v;
+                            $parsedValues[$k] = $v;
                             $keys[] = $k;
-                        }
-                        else
+                        } 
+                        else 
                         {
-                            array_splice($values, ($c + (++$pos)), 0, $v);
+                            array_splice($parsedValues, ($c + (++$pos)), 0, $v);
                             $keys[] = '?';
                         }
                     }
-                    
-                    if($isInt)
+
+                    if ($isInt) 
                     {
-                        $SQL = $this->findAndReplace($SQL, implode(', ', $keys), $c);
-                    }
-                    else
+                        $SQL = $findAndReplace($SQL, implode(', ', $keys), $c);
+                    } 
+                    else 
                     {
                         $SQL = preg_replace('/' . $key . '/', implode(', ', $keys), $SQL, 1);
                     }
-                }
-                else if($value instanceof Expr)
+                } 
+                else if ($value instanceof Expr) 
                 {
-                    if($isInt)
+                    if ($isInt) 
                     {
-                        $SQL = $this->findAndReplace($SQL, $value->getExpr(), $c);
-                    }
+                        $SQL = $findAndReplace($SQL, $value->getExpr(), $c);
+                    } 
                     else
                     {
                         $SQL = preg_replace('/' . $key . '/', $value->getExpr(), $SQL, 1);
                     }
-                }
-                else
+                } 
+                else 
                 {
-                    $values[$key] = $value;
+                    $parsedValues[$key] = $value;
                 }
                 
                 $c++;
             }
         }
         
-        $stmt = $this->_connection->prepare($SQL, $pOptions);
+        $e = new DBEvent(
+            DBEvent::PRE_QUERY, 
+            [
+                'SQL' => $SQL, 
+                'values' => $parsedValues
+            ]
+        );
         
-        foreach($values as $key => $value)
+        $this->dispatch($e);
+        $SQL = $e->getSQL();
+        $parsedValues = $e->getValues();
+
+        $stmt = $this->connection->prepare($SQL, $options);
+
+        foreach ($parsedValues as $key => $value) 
         {
-            if($isInt)
+            if ($isInt)
             {
                 $key = $key + 1;
             }
-            
+
             $stmt->bindValue($key, $value, $this->getParamType($value));
         }
         
-        $this->dispatch(new DBEvent(DBEvent::PRE_QUERY, $SQL, $values));
         $time = microtime(true);
         $result = $stmt->execute();
-        $this->dispatch(new DBEvent(DBEvent::QUERY, $SQL, $values, microtime(true) - $time));
         
-        if(!$result)
+        $this->dispatch(
+            new DBEvent(
+                DBEvent::PRE_QUERY, 
+                [
+                    'SQL' => $SQL, 
+                    'values' => $parsedValues,
+                    'time' => microtime(true) - $time
+                ]
+            )
+        );
+        
+        if (!$result) 
         {
             return false;
         }
-        
+
         return new ResultSet($stmt);
     }
-    
+
     /**
      * @see DBInterface::lastInsertId()
      */
     public function lastInsertId() 
     {
         $name = null;
-            
-        if(func_num_args() > 0)
+
+        if (func_num_args() > 0) 
         {
             $name = func_get_arg(0);
         }
-        
-        return $this->_connection->lastInsertId($name);
+
+        return $this->connection->lastInsertId($name);
     }
     
     /**
-     * @param string $pSQL
-     * @param string $pValue
-     * @param integer $pNth
-     * @return string
+     * @ignore
      */
-    protected function findAndReplace($pSQL, $pValue, $pNth) 
-    { 
-        if(preg_match_all('/\?/', $pSQL, $matches, PREG_OFFSET_CAPTURE))
-        {
-            if(array_key_exists($pNth, $matches[0]))
-            { 
-                $pSQL = substr($pSQL, 0, $matches[0][$pNth][1]). $pValue . substr($pSQL, $matches[0][$pNth][1] + strlen($matches[0][$pNth][0])); 
-            }   
-        }
-        
-        return $pSQL;
-    } 
-    
-    /**
-     * @param mixed $pValue
-     * @return integer
-     */
-    protected function getParamType($pValue)
+    public function __call($method, $arguments)
     {
-        if(is_int($pValue) || is_float($pValue))
-        {
-            return \PDO::PARAM_INT;
-        }
-        else if(is_bool($pValue))
-        {
-           return \PDO::PARAM_BOOL;
-        }
-        else if(is_null($pValue))
-        {
-            return \PDO::PARAM_NULL;
-        }
-        
-        return \PDO::PARAM_STR;
-    }
-    
-    /**
-     * @param string $pMethod
-     * @param array $pArguments
-     * @return mixed
-     */
-    public function __call($pMethod, $pArguments)
-    {
-        $context = $this->_connection;
-        
-        if($pMethod == 'beginTransaction')
+        $context = $this->connection;
+
+        if ($method == 'beginTransaction') 
         {
             $context = $this;
-            $pMethod = 'begin';
+            $method = 'begin';
         }
-        
-        return call_user_func_array([$context, $pMethod], $pArguments);
+
+        return call_user_func_array([$context, $method], $arguments);
     }
 }

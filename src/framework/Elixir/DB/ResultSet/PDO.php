@@ -1,8 +1,8 @@
 <?php
 
-namespace Elixir\DB\Result;
+namespace Elixir\DB\ResultSet;
 
-use Elixir\DB\Result\SetAbstract;
+use Elixir\DB\ResultSet\SetAbstract;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

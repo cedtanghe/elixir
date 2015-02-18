@@ -1,6 +1,6 @@
 <?php
 
-namespace Elixir\DB\Result;
+namespace Elixir\DB\ResultSet;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
