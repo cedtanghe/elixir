@@ -7,8 +7,8 @@ use Elixir\DB\DBInterface;
 use Elixir\DB\Query\QueryBuilderInterface;
 use Elixir\DB\Query\QueryBuilderTrait;
 use Elixir\DB\ResultSet\PDO as ResultSet;
-use Elixir\DB\SQL\Expr;
-use Elixir\DB\SQL\SQLInterface;
+use Elixir\DB\Query\SQL\Expr;
+use Elixir\DB\Query\SQL\SQLInterface;
 use Elixir\Dispatcher\DispatcherTrait;
 
 /**
@@ -190,11 +190,6 @@ class PDO implements DBInterface, QueryBuilderInterface
      */
     public function exec($SQL) 
     {
-        if ($SQL instanceof SQLInterface) 
-        {
-            $SQL = $SQL->getQuery();
-        }
-
         $e = new DBEvent(
             DBEvent::PRE_QUERY, 
             ['SQL' => $SQL]
@@ -202,6 +197,11 @@ class PDO implements DBInterface, QueryBuilderInterface
         
         $this->dispatch($e);
         $SQL = $e->getSQL();
+        
+        if ($SQL instanceof SQLInterface) 
+        {
+            $SQL = $SQL->getQuery();
+        }
                 
         $time = microtime(true);
         $result = $this->connection->exec($SQL);
@@ -237,6 +237,18 @@ class PDO implements DBInterface, QueryBuilderInterface
             return $SQL;
         };
         
+        $e = new DBEvent(
+            DBEvent::PRE_QUERY, 
+            [
+                'SQL' => $SQL, 
+                'values' => $values
+            ]
+        );
+        
+        $this->dispatch($e);
+        $SQL = $e->getSQL();
+        $values = $e->getValues();
+        
         if ($SQL instanceof SQLInterface) 
         {
             $values = array_merge($values, $SQL->getBindValues());
@@ -244,7 +256,7 @@ class PDO implements DBInterface, QueryBuilderInterface
         }
         
         $parsedValues = [];
-
+        
         if (count($values) > 0) 
         {
             $c = 0;
@@ -311,18 +323,6 @@ class PDO implements DBInterface, QueryBuilderInterface
                 $c++;
             }
         }
-        
-        $e = new DBEvent(
-            DBEvent::PRE_QUERY, 
-            [
-                'SQL' => $SQL, 
-                'values' => $parsedValues
-            ]
-        );
-        
-        $this->dispatch($e);
-        $SQL = $e->getSQL();
-        $parsedValues = $e->getValues();
 
         $stmt = $this->connection->prepare($SQL, $options);
 
@@ -341,7 +341,7 @@ class PDO implements DBInterface, QueryBuilderInterface
         
         $this->dispatch(
             new DBEvent(
-                DBEvent::PRE_QUERY, 
+                DBEvent::QUERY, 
                 [
                     'SQL' => $SQL, 
                     'values' => $parsedValues,

@@ -570,6 +570,7 @@ class Form
         
         $data = (array)$options['data'];
         $dataUseKeys = $options['data-use-keys'];
+        $dataAttributes = isset($options['data-attributes']) ? (array)$options['data-attributes'] : [];
         
         if(isset($attributes['multiple']) && $attributes['multiple'])
         {
@@ -579,7 +580,7 @@ class Form
             }
         }
         
-        $list = $this->createOptions($value, $data, $dataUseKeys);
+        $list = $this->createOptions($value, $data, $dataUseKeys, $dataAttributes);
         
         if(isset($attributes['placeholder']))
         {
@@ -604,9 +605,10 @@ class Form
      * @param mixed $pValue
      * @param array $pData
      * @param boolean $pDataUseKeys
+     * @param array $pDataAttributes
      * @return string
      */
-    protected function createOptions($pValue, array $pData, $pDataUseKeys)
+    protected function createOptions($pValue, array $pData, $pDataUseKeys, array $pDataAttributes)
     {
         $result = '';
         
@@ -617,7 +619,7 @@ class Form
                 $result .= sprintf(
                     '<optgroup%s>%s</optgroup>',
                     $this->HTMLAtributes(['label' => $key]),
-                    $this->createOptions($pValue, $value, $pDataUseKeys)
+                    $this->createOptions($pValue, $value, $pDataUseKeys, $pDataAttributes)
                 );
                 
                 continue;
@@ -637,6 +639,15 @@ class Form
             else if(in_array($value, (array)$pValue))
             {
                 $a['selected'] = '';
+            }
+            
+            foreach($pDataAttributes as $v => $attrs)
+            {
+                if($value === $v)
+                {
+                    $a = array_merge($a, $attrs);
+                    break;
+                }
             }
             
             $result .= sprintf(

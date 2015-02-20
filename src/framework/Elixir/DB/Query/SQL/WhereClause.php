@@ -1,112 +1,131 @@
 <?php
 
-namespace Elixir\DB\SQL;
+namespace Elixir\DB\Query\SQL;
 
-use Elixir\DB\SQL\SQLInterface;
+use Elixir\DB\Query\SQL\SQLInterface;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
-class WhereClause
+class WhereClause 
 {
     /**
      * @var SQLInterface
      */
-    protected $_SQL;
-    
+    protected $SQL;
+
     /**
      * @var array 
      */
-    protected $_wheres = [];
-    
+    protected $wheres = [];
+
     /**
-     * @param SQLInterface $pSQL
+     * @param SQLInterface $SQL
      */
-    public function __construct(SQLInterface $pSQL) 
+    public function __construct(SQLInterface $SQL) 
     {
-        $this->_SQL = $pSQL;
+        $this->SQL = $SQL;
     }
-    
+
     /**
-     * @param mixed $pCond
-     * @param mixed $pValue
+     * @param string|callable $condition
+     * @param mixed $value
      * @return WhereClause
      */
-    public function where($pCond, $pValue = null)
+    public function where($condition, $value = null)
     {
-        if(is_callable($pCond))
+        if (is_callable($condition)) 
         {
-            $where = new static($this->_SQL);
-            $pCond($where);
-            $pCond = $where->render();
+            $where = new static($this->SQL);
+            call_user_func_array($condition, [$where]);
+                    
+            $condition = $where->render();
         }
-        
-        $this->_wheres[] = ['query' => $this->_SQL->assemble($pCond, $pValue), 'type' => 'AND'];
+
+        $this->wheres[] = ['query' => $this->SQL->assemble($condition, $value), 'type' => 'AND'];
         return $this;
     }
-    
+
     /**
-     * @param mixed $pCond
-     * @param mixed $pValue
+     * @param string|callable $condition
+     * @param mixed $value
      * @return WhereClause
      */
-    public function orWhere($pCond, $pValue = null)
+    public function orWhere($condition, $value = null) 
     {
-        if(is_callable($pCond))
+        if (is_callable($condition))
         {
-            $where = new static($this->_SQL);
-            $pCond($where);
-            $pCond = $where->render();
+            $where = new static($this->SQL);
+            call_user_func_array($condition, [$where]);
+                    
+            $condition = $where->render();
         }
-        
-        $this->_wheres[] = ['query' => $this->_SQL->assemble($pCond, $pValue), 'type' => 'OR'];
+
+        $this->wheres[] = ['query' => $this->SQL->assemble($condition, $value), 'type' => 'OR'];
+        return $this;
+    }
+
+    /**
+     * @return WhereClause
+     */
+    public function reset() 
+    {
+        $this->wheres = [];
         return $this;
     }
     
     /**
-     * @return WhereClause
+     * @return array
      */
-    public function reset()
+    public function get() 
     {
-        $this->_wheres = [];
-        return $this;
+        return $this->wheres;
     }
     
+    /**
+     * @param array $data
+     * @return WhereClause
+     */
+    public function merge(array $data) 
+    {
+        $this->wheres = array_merge($this->wheres, $data);
+        return $this;
+    }
+
     /**
      * @return string
      */
-    public function render()
+    public function render() 
     {
         return $this->renderWheres();
     }
-    
+
     /**
      * @return string
      */
-    protected function renderWheres()
+    protected function renderWheres() 
     {
         $SQL = '';
         $first = true;
-            
-        foreach($this->_wheres as $where)
+
+        foreach ($this->wheres as $where) 
         {
             $SQL .= ($first ? '' : $where['type'] . ' ') . '(' . $where['query'] . ')' . "\n";
             $first = false;
         }
-        
-        if(count($this->_wheres) > 1)
+
+        if (count($this->wheres) > 1) 
         {
             $SQL = '(' . $SQL . ')';
         }
-        
+
         return $SQL;
     }
 
     /**
-     * @see WhereClause::render()
+     * @ignore
      */
-    public function __toString()
+    public function __toString() 
     {
         return $this->render();
     }

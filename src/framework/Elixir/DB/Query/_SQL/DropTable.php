@@ -1,14 +1,14 @@
 <?php
 
-namespace Elixir\DB\SQL;
+namespace Elixir\DB\Query\SQL;
 
-use Elixir\DB\SQL\SQLAbstract;
+use Elixir\DB\Query\SQL\SQLAbstract;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
-class TruncateTable extends SQLAbstract
+class DropTable extends SQLAbstract
 {
     /**
      * @var string 
@@ -28,7 +28,7 @@ class TruncateTable extends SQLAbstract
     
     /**
      * @param string $pTable
-     * @return TruncateTable
+     * @return DropTable
      */
     public function table($pTable)
     {
@@ -41,6 +41,6 @@ class TruncateTable extends SQLAbstract
      */
     public function render()
     {
-        return 'TRUNCATE TABLE ' . $this->_table;
+        return 'DROP TABLE ' . $this->_table;
     }
 }

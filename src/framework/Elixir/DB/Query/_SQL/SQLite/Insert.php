@@ -1,8 +1,8 @@
 <?php
 
-namespace Elixir\DB\SQL\SQLite;
+namespace Elixir\DB\Query\SQL\SQLite;
 
-use Elixir\DB\SQL\Insert as BaseInsert;
+use Elixir\DB\Query\SQL\Insert as BaseInsert;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

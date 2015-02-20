@@ -1,8 +1,8 @@
 <?php
 
-namespace Elixir\DB\SQL\MySQL;
+namespace Elixir\DB\Query\SQL\SQLite;
 
-use Elixir\DB\SQL\Update as BaseUpdate;
+use Elixir\DB\Query\SQL\Update as BaseUpdate;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
@@ -71,7 +71,7 @@ class Update extends BaseUpdate
         $SQL .= $this->renderWheres();
         $SQL .= $this->renderOrders();
         $SQL .= $this->renderLimit();
-        
+
         return trim($SQL);
     }
     
@@ -89,7 +89,7 @@ class Update extends BaseUpdate
             
             foreach($this->_orders as $order)
             {
-                $SQL .= ($first ? '' : ', ') . $order['column'] . (self::ORDER_NONE === $order['type'] ? '' : ' ' . $order['type']);
+                $SQL .= ($first ? '' : ', ') . $order['column'] . (self::ORDER_NONE === $order['type'] ? '' : ' COLLATE NOCASE ' . $order['type']);
                 $first = false;
             }
             

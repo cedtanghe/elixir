@@ -1,9 +1,9 @@
 <?php
 
-namespace Elixir\DB\SQL\MySQL;
+namespace Elixir\DB\Query\SQL\MySQL;
 
-use Elixir\DB\SQL\AlterTable as BaseAlterTable;
-use Elixir\DB\SQL\Column;
+use Elixir\DB\Query\SQL\AlterTable as BaseAlterTable;
+use Elixir\DB\Query\SQL\Column;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

@@ -1,8 +1,8 @@
 <?php
 
-namespace Elixir\DB\SQL\MySQL;
+namespace Elixir\DB\Query\SQL\MySQL;
 
-use Elixir\DB\SQL\DropTable as BaseDropTable;
+use Elixir\DB\Query\SQL\DropTable as BaseDropTable;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

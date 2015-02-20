@@ -7,108 +7,100 @@ use Elixir\DB\ResultSet\SetAbstract;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
 class PDO extends SetAbstract
 {
     /**
-     * @param string|integer $pFetchStyle
-     * @return string|integer
+     * @param integer $fetchStyle
+     * @return integer
      */
-    protected function convert($pFetchStyle)
+    protected function convert($fetchStyle)
     {
-        switch($pFetchStyle)
+        switch ($fetchStyle) 
         {
             case self::FETCH_ASSOC:
                 return \PDO::FETCH_ASSOC;
-            break;
             case self::FETCH_OBJ:
                 return \PDO::FETCH_OBJ;
-            break;
             case self::FETCH_NUM:
                 return \PDO::FETCH_NUM;
-            break;
             case self::FETCH_BOTH:
                 return \PDO::FETCH_BOTH;
-            break;
             case self::FETCH_DEFAULT:
                 return \PDO::ATTR_DEFAULT_FETCH_MODE;
-            break;
         }
-        
-        return $pFetchStyle;
+
+        return $fetchStyle;
     }
-    
+
     /**
      * @see SetAbstract::fetch()
      */
-    public function fetch($pFetchStyle = self::FETCH_DEFAULT)
+    public function fetch($fetchStyle = self::FETCH_DEFAULT) 
     {
-        if(func_num_args() <= 1)
+        if (func_num_args() <= 1)
         {
-            return $this->_resource->fetch($this->convert($pFetchStyle));
+            return $this->resource->fetch($this->convert($fetchStyle));
         }
-        
+
         $args = func_get_args();
         $args[0] = $this->convert($args[0]);
-        
-        return call_user_func_array([$this->_resource, 'fetch'], $args);
+
+        return call_user_func_array([$this->resource, 'fetch'], $args);
     }
-    
+
     /**
      * @see SetAbstract::fetchAll()
      */
-    public function fetchAll($pFetchStyle = self::FETCH_ASSOC)
+    public function fetchAll($fetchStyle = self::FETCH_ASSOC) 
     {
-        if(func_num_args() <= 1)
+        if (func_num_args() <= 1) 
         {
-            return $this->_resource->fetchAll($this->convert($pFetchStyle));
+            return $this->resource->fetchAll($this->convert($fetchStyle));
         }
-        
+
         $args = func_get_args();
         $args[0] = $this->convert($args[0]);
-        
-        return call_user_func_array([$this->_resource, 'fetchAll'], $args);
+
+        return call_user_func_array([$this->resource, 'fetchAll'], $args);
     }
-    
+
     /**
      * @see SetAbstract::fetchColumn()
      */
-    public function fetchColumn($pColumn = 0)
+    public function fetchColumn($column = 0) 
     {
-        return $this->_resource->fetchColumn($pColumn);
+        return $this->resource->fetchColumn($column);
     }
-    
+
     /**
      * @see SetAbstract::fetchObject()
      */
-    public function fetchObject($pClassName = 'stdClass', array $pArgs = [])
+    public function fetchObject($className = 'stdClass', array $args = [])
     {
-        return $this->_resource->fetchObject($pClassName, $pArgs);
+        return $this->resource->fetchObject($className, $args);
     }
-    
+
     /**
      * @see SetAbstract::fetchAssoc()
      */
-    public function fetchAssoc()
+    public function fetchAssoc() 
     {
         return $this->fetch(self::FETCH_ASSOC);
     }
-    
+
     /**
      * @see SetAbstract::rowCount()
      */
-    public function rowCount()
+    public function rowCount() 
     {
-        return $this->_resource->rowCount();
+        return $this->resource->rowCount();
     }
-    
+
     /**
-     * @param string $pMethod
-     * @param array $pArguments
-     * @return mixed
+     * @ignore
      */
-    public function __call($pMethod, $pArguments)
+    public function __call($method, $arguments) 
     {
-        return call_user_func_array([$this->_resource, $pMethod], $pArguments);
+        return call_user_func_array([$this->resource, $method], $arguments);
     }
 }

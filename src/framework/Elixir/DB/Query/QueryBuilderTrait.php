@@ -3,11 +3,12 @@
 namespace Elixir\DB\Query;
 
 use Elixir\DB\Query\QueryBuilderInterface;
+use Elixir\DB\Query\SQL\SQLFactory;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-trait QueryBuilderTrait 
+trait QueryBuilderTrait
 {
     /**
      * @return string
@@ -17,11 +18,11 @@ trait QueryBuilderTrait
     /**
      * @see QueryBuilderInterface::createSelect()
      */
-    public function createSelect($pTable = null)
+    public function createSelect($table = null) 
     {
-        $select = SQLFactory::select($pTable, $this->getDriver());
+        $select = SQLFactory::select($table, $this->getDriver());
 
-        if (method_exists($this, 'quote'))
+        if (method_exists($this, 'quote')) 
         {
             $select->setQuoteMethod([$this, 'quote']);
         }
@@ -32,13 +33,13 @@ trait QueryBuilderTrait
     /**
      * @see QueryBuilderInterface::createInsert()
      */
-    public function createInsert($pTable = null)
+    public function createInsert($table = null)
     {
-        $insert = SQLFactory::insert($pTable, $this->getDriver());
-        
-        if (method_exists($this, 'quote'))
+        $insert = SQLFactory::insert($table, $this->getDriver());
+
+        if (method_exists($this, 'quote')) 
         {
-            $select->setQuoteMethod([$this, 'quote']);
+            $insert->setQuoteMethod([$this, 'quote']);
         }
 
         return $insert;
@@ -47,13 +48,13 @@ trait QueryBuilderTrait
     /**
      * @see QueryBuilderInterface::createDelete()
      */
-    public function createDelete($pTable = null) 
+    public function createDelete($table = null) 
     {
-        $delete = SQLFactory::delete($pTable, $this->getDriver());
-        
-        if (method_exists($this, 'quote'))
+        $delete = SQLFactory::delete($table, $this->getDriver());
+
+        if (method_exists($this, 'quote')) 
         {
-            $select->setQuoteMethod([$this, 'quote']);
+            $delete->setQuoteMethod([$this, 'quote']);
         }
 
         return $delete;
@@ -62,10 +63,10 @@ trait QueryBuilderTrait
     /**
      * @see QueryBuilderInterface::createUpdate()
      */
-    public function createUpdate($pTable = null)
+    public function createUpdate($table = null)
     {
         $update = SQLFactory::update($pTable, $this->getDriver());
-        
+
         if (method_exists($this, 'quote'))
         {
             $update->setQuoteMethod([$this, 'quote']);
@@ -77,11 +78,11 @@ trait QueryBuilderTrait
     /**
      * @see QueryBuilderInterface::createTable()
      */
-    public function createTable($pTable = null) 
+    public function createTable($table = null) 
     {
-        $create = SQLFactory::createTable($pTable, $this->getDriver());
-        
-        if (method_exists($this, 'quote'))
+        $create = SQLFactory::createTable($table, $this->getDriver());
+
+        if (method_exists($this, 'quote')) 
         {
             $create->setQuoteMethod([$this, 'quote']);
         }
@@ -92,10 +93,10 @@ trait QueryBuilderTrait
     /**
      * @see QueryBuilderInterface::createAlterTable()
      */
-    public function createAlterTable($pTable = null)
+    public function createAlterTable($table = null) 
     {
-        $alter = SQLFactory::createAlterTable($pTable, $this->getDriver());
-        
+        $alter = SQLFactory::createAlterTable($table, $this->getDriver());
+
         if (method_exists($this, 'quote'))
         {
             $alter->setQuoteMethod([$this, 'quote']);
@@ -107,16 +108,16 @@ trait QueryBuilderTrait
     /**
      * @see QueryBuilderInterface::createDropTable()
      */
-    public function createDropTable($pTable = null) 
+    public function createDropTable($table = null) 
     {
-        return SQLFactory::dropTable($pTable, $this->getDriver());
+        return SQLFactory::dropTable($table, $this->getDriver());
     }
 
     /**
      * @see QueryBuilderInterface::createTruncateTable()
      */
-    public function createTruncateTable($pTable = null) 
+    public function createTruncateTable($table = null) 
     {
-        return SQLFactory::truncateTable($pTable, $this->getDriver());
+        return SQLFactory::truncateTable($table, $this->getDriver());
     }
 }

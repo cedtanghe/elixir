@@ -1,14 +1,14 @@
 <?php
 
-namespace Elixir\DB\SQL\MySQL;
+namespace Elixir\DB\Query\SQL\MySQL;
 
-use Elixir\DB\SQL\Delete as BaseDelete;
+use Elixir\DB\Query\SQL\Update as BaseUpdate;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
-class Delete extends BaseDelete
+class Update extends BaseUpdate
 {
     /**
      * @var array 
@@ -28,7 +28,7 @@ class Delete extends BaseDelete
     /**
      * @param array|string $pOrder
      * @param string $pType
-     * @return Delete
+     * @return Update
      */
     public function orderBy($pOrder, $pType = self::ORDER_ASCENDING)
     {
@@ -42,7 +42,7 @@ class Delete extends BaseDelete
     
     /**
      * @param integer $pLimit
-     * @return Delete
+     * @return Update
      */
     public function limit($pLimit)
     {
@@ -52,7 +52,7 @@ class Delete extends BaseDelete
     
     /**
      * @param integer $pOffset
-     * @return Delete
+     * @return Update
      */
     public function offset($pOffset)
     {
@@ -61,16 +61,17 @@ class Delete extends BaseDelete
     }
     
     /**
-     * @see BaseDelete::render()
+     * @see BaseUpdate::render()
      */
     public function render()
     {
-        $SQL = 'DELETE FROM ' . "\n";
+        $SQL = 'UPDATE ' . "\n";
         $SQL .= $this->_table . ' ' . "\n";
+        $SQL .= $this->renderSets();
         $SQL .= $this->renderWheres();
         $SQL .= $this->renderOrders();
         $SQL .= $this->renderLimit();
-
+        
         return trim($SQL);
     }
     

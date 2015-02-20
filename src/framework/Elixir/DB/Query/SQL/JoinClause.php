@@ -1,167 +1,208 @@
 <?php
 
-namespace Elixir\DB\SQL;
+namespace Elixir\DB\Query\SQL;
 
-use Elixir\DB\SQL\Select;
+use Elixir\DB\Query\SQL\SQLInterface;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
-class JoinClause
+class JoinClause 
 {
     /**
-     * @var Select
+     * @var SQLInterface
      */
-    protected $_SQL;
-    
+    protected $SQL;
+
     /**
      * @var array 
      */
-    protected $_ons = [];
-    
+    protected $on = [];
+
     /**
      * @var array 
      */
-    protected $_usings = [];
-    
+    protected $using = [];
+
     /**
-     * @param Select $pSQL
+     * @param SQLInterface $SQL
      */
-    public function __construct(Select $pSQL) 
+    public function __construct(SQLInterface $pSQL) 
     {
-        $this->_SQL = $pSQL;
+        $this->SQL = $SQL;
     }
-    
+
     /**
-     * @param mixed $pCond
-     * @param mixed $pValue
+     * @param string|callable $condition
+     * @param mixed $value
      * @return JoinClause
      */
-    public function on($pCond, $pValue = null)
+    public function on($condition, $value = null)
     {
-        if(is_callable($pCond))
+        if (is_callable($condition)) 
         {
-            $join = new static($this->_SQL);
-            $pCond($join);
-            $pCond = $join->render();
+            $on = new static($this->SQL);
+            call_user_func_array($condition, [$on]);
+                    
+            $condition = $on->render();
+        }
+
+        $this->on[] = ['query' => $this->SQL->assemble($condition, $value), 'type' => 'AND'];
+        return $this;
+    }
+
+    /**
+     * @param string|callable $condition
+     * @param mixed $value
+     * @return JoinClause
+     */
+    public function orOn($condition, $value = null) 
+    {
+        if (is_callable($condition)) 
+        {
+            $on = new static($this->SQL);
+            call_user_func_array($condition, [$on]);
+                    
+            $condition = $on->render();
+        }
+
+        $this->on[] = ['query' => $this->SQL->assemble($condition, $value), 'type' => 'OR'];
+        return $this;
+    }
+
+    /**
+     * @param array|string $using
+     * @return JoinClause
+     */
+    public function using($using) 
+    {
+        $this->using = array_merge($this->using, (array)$using);
+        return $this;
+    }
+
+    /**
+     * @param array|string $column
+     * @param boolean $reset
+     * @return JoinClause
+     * @throws \BadMethodCallException
+     */
+    public function column($column = SQLInterface::STAR, $reset = false)
+    {
+        if(!method_exists($this->SQL, 'column'))
+        {
+            throw new \BadMethodCallException('SQL does not have any method "column".');
         }
         
-        $this->_ons[] = ['query' => $this->_SQL->assemble($pCond, $pValue), 'type' => 'AND'];
+        $this->SQL->column($column, $reset);
         return $this;
     }
-    
+
     /**
-     * @param mixed $pCond
-     * @param mixed $pValue
+     * @param string $part
      * @return JoinClause
      */
-    public function orOn($pCond, $pValue = null)
+    public function reset($part)
     {
-        if(is_callable($pCond))
-        {
-            $join = new static($this->_SQL);
-            $pCond($join);
-            $pCond = $join->render();
-        }
-        
-        $this->_ons[] = ['query' => $this->_SQL->assemble($pCond, $pValue), 'type' => 'OR'];
-        return $this;
-    }
-    
-    /**
-     * @param array|string $pUsing
-     * @return JoinClause
-     */
-    public function using($pUsing)
-    {
-        $this->_usings = array_merge($this->_usings, (array)$pUsing);
-        return $this;
-    }
-    
-    /**
-     * @param array|string $pColumns
-     * @param boolean $pReset
-     * @return JoinClause
-     */
-    public function columns($pColumns = self::STAR, $pReset = false)
-    {
-        $this->_SQL->columns($pColumns, $pReset);
-        return $this;
-    }
-    
-    /**
-     * @param string $pPart
-     * @return JoinClause
-     */
-    public function reset($pPart)
-    {
-        switch($pPart)
+        switch ($part) 
         {
             case 'on':
-                $this->_ons = [];
-            break;
+                $this->on = [];
+                break;
             case 'using':
-                $this->_usings = [];
-            break;
+                $this->using = [];
+                break;
         }
-        
+
         return $this;
     }
-    
+
     /**
-     * @return string
+     * @return array
      */
-    public function render()
+    public function get($pPart) 
     {
-        $SQL = '';
-        
-        if(count($this->_usings) > 0)
+        switch ($pPart) 
         {
-            $SQL .= $this->renderUsings();
+            case 'on':
+                return $this->on;
+            case 'using':
+                return $this->using;
         }
-        else
-        {
-            $SQL .= $this->renderOns();
-        }
-        
-        return $SQL;
     }
-    
+
     /**
-     * @return string
+     * @param array $data
+     * @param string $part
+     * @return JoinClause
      */
-    protected function renderUsings()
+    public function merge(array $data, $part) 
     {
-        return 'USING (' . implode(', ', $this->_usings) . ')';
+        switch ($part) 
+        {
+            case 'on':
+                $this->on = array_merge($this->on, $data);
+                break;
+            case 'using':
+                $this->using($data);
+                break;
+        }
+
+        return $this;
     }
 
     /**
      * @return string
      */
-    protected function renderOns()
+    public function render() 
+    {
+        $SQL = '';
+
+        if (count($this->using) > 0) 
+        {
+            $SQL .= $this->renderUsing();
+        } 
+        else 
+        {
+            $SQL .= $this->renderOn();
+        }
+
+        return $SQL;
+    }
+
+    /**
+     * @return string
+     */
+    protected function renderUsing() 
+    {
+        return 'USING (' . implode(', ', $this->using) . ')';
+    }
+    
+    /**
+     * @return string
+     */
+    protected function renderOn()
     {
         $SQL = '';
         $first = true;
 
-        foreach($this->_ons as $on)
+        foreach ($this->on as $on)
         {
             $SQL .= ($first ? '' : $on['type'] . ' ') . '(' . $on['query'] . ')' . "\n";
             $first = false;
         }
-        
-        if(count($this->_ons) > 1)
+
+        if (count($this->on) > 1)
         {
             $SQL = '(' . $SQL . ')';
         }
-        
+
         return $SQL;
     }
 
     /**
-     * @see JoinClause::render()
+     * @ignore
      */
-    public function __toString()
+    public function __toString() 
     {
         return $this->render();
     }

@@ -3,17 +3,17 @@
 namespace ElixirTest\DB;
 
 use Elixir\ClassLoader\PSR4;
-use Elixir\DB\SQL\Column;
-use Elixir\DB\SQL\ColumnFactory;
-use Elixir\DB\SQL\Constraint;
-use Elixir\DB\SQL\ConstraintFactory;
-use Elixir\DB\SQL\MySQL\AlterTable;
-use Elixir\DB\SQL\MySQL\CreateTable;
-use Elixir\DB\SQL\MySQL\Delete;
-use Elixir\DB\SQL\MySQL\DropTable;
-use Elixir\DB\SQL\MySQL\Insert;
-use Elixir\DB\SQL\MySQL\Update;
-use Elixir\DB\SQL\Select;
+use Elixir\DB\Query\SQL\Column;
+use Elixir\DB\Query\SQL\ColumnFactory;
+use Elixir\DB\Query\SQL\Constraint;
+use Elixir\DB\Query\SQL\ConstraintFactory;
+use Elixir\DB\Query\SQL\MySQL\AlterTable;
+use Elixir\DB\Query\SQL\MySQL\CreateTable;
+use Elixir\DB\Query\SQL\MySQL\Delete;
+use Elixir\DB\Query\SQL\MySQL\DropTable;
+use Elixir\DB\Query\SQL\MySQL\Insert;
+use Elixir\DB\Query\SQL\MySQL\Update;
+use Elixir\DB\Query\SQL\Select;
 
 class Test extends \PHPUnit_Framework_TestCase
 {

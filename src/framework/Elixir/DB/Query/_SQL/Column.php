@@ -1,6 +1,6 @@
 <?php
 
-namespace Elixir\DB\SQL;
+namespace Elixir\DB\Query\SQL;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

@@ -5,7 +5,7 @@ namespace Elixir\DB\ORM;
 use Elixir\DB\ORM\Relation\Pivot;
 use Elixir\DB\ORM\RepositoryInterface;
 use Elixir\DB\ORM\Select;
-use Elixir\DB\SQL\JoinClause;
+use Elixir\DB\Query\SQL\JoinClause;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

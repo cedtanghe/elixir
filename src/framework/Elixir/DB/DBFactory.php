@@ -53,10 +53,10 @@ class DBFactory
                             {
                                 $DNS .= ';port=' . $config['port'];
                             }
-                        break;
+                            break;
                         case self::PDO_SQLITE:
                             $DNS = 'sqlite:' . (isset($config['dbname']) ? $config['dbname'] : ':memory:');
-                        break;
+                            break;
                         default:
                             throw new \RuntimeException(sprintf('Driver %s is not implemented.', $config['type']));
                     }

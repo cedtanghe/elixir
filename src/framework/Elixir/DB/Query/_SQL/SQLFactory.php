@@ -1,33 +1,33 @@
 <?php
 
-namespace Elixir\DB\SQL;
+namespace Elixir\DB\Query\SQL;
 
-use Elixir\DB\SQL\AlterTable;
-use Elixir\DB\SQL\CreateTable;
-use Elixir\DB\SQL\Delete;
-use Elixir\DB\SQL\DropTable;
-use Elixir\DB\SQL\Insert;
-use Elixir\DB\SQL\MySQL\AlterTable as MySQLAlterTable;
-use Elixir\DB\SQL\MySQL\CreateTable as MySQLCreateTable;
-use Elixir\DB\SQL\MySQL\Delete as MySQLDelete;
-use Elixir\DB\SQL\MySQL\DropTable as MySQLDropTable;
-use Elixir\DB\SQL\MySQL\Insert as MySQLInsert;
-use Elixir\DB\SQL\MySQL\Update as MySQLUpdate;
-use Elixir\DB\SQL\Select;
-use Elixir\DB\SQL\SQLite\AlterTable as SQLiteAlterTable;
-use Elixir\DB\SQL\SQLite\CreateTable as SQLiteCreateTable;
-use Elixir\DB\SQL\SQLite\Delete as SQLiteDelete;
-use Elixir\DB\SQL\SQLite\DropTable as SQLiteDropTable;
-use Elixir\DB\SQL\SQLite\Insert as SQLiteInsert;
-use Elixir\DB\SQL\SQLite\Select as SQLiteSelect;
-use Elixir\DB\SQL\SQLite\Update as SQLiteUpdate;
-use Elixir\DB\SQL\Update;
+use Elixir\DB\Query\SQL\AlterTable;
+use Elixir\DB\Query\SQL\CreateTable;
+use Elixir\DB\Query\SQL\Delete;
+use Elixir\DB\Query\SQL\DropTable;
+use Elixir\DB\Query\SQL\Insert;
+use Elixir\DB\Query\SQL\MySQL\AlterTable as MySQLAlterTable;
+use Elixir\DB\Query\SQL\MySQL\CreateTable as MySQLCreateTable;
+use Elixir\DB\Query\SQL\MySQL\Delete as MySQLDelete;
+use Elixir\DB\Query\SQL\MySQL\DropTable as MySQLDropTable;
+use Elixir\DB\Query\SQL\MySQL\Insert as MySQLInsert;
+use Elixir\DB\Query\SQL\MySQL\Update as MySQLUpdate;
+use Elixir\DB\Query\SQL\Select;
+use Elixir\DB\Query\SQL\SQLite\AlterTable as SQLiteAlterTable;
+use Elixir\DB\Query\SQL\SQLite\CreateTable as SQLiteCreateTable;
+use Elixir\DB\Query\SQL\SQLite\Delete as SQLiteDelete;
+use Elixir\DB\Query\SQL\SQLite\DropTable as SQLiteDropTable;
+use Elixir\DB\Query\SQL\SQLite\Insert as SQLiteInsert;
+use Elixir\DB\Query\SQL\SQLite\Select as SQLiteSelect;
+use Elixir\DB\Query\SQL\SQLite\Update as SQLiteUpdate;
+use Elixir\DB\Query\SQL\Update;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
-class SQLFactory
+class QueryBuilderFactory
 {
     /**
      * @var string

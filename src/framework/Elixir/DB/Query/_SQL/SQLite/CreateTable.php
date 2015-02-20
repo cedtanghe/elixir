@@ -1,10 +1,10 @@
 <?php
 
-namespace Elixir\DB\SQL\MySQL;
+namespace Elixir\DB\Query\SQL\SQLite;
 
-use Elixir\DB\SQL\Column;
-use Elixir\DB\SQL\Constraint;
-use Elixir\DB\SQL\CreateTable as BaseCreateTable;
+use Elixir\DB\Query\SQL\Column;
+use Elixir\DB\Query\SQL\Constraint;
+use Elixir\DB\Query\SQL\CreateTable as BaseCreateTable;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
@@ -82,39 +82,10 @@ class CreateTable extends BaseCreateTable
             
             // Attribute
             $attribute = $column->getAttribute();
-            $update = false;
             
             if(null !== $attribute)
             {
-                if(strtoupper($attribute) != Column::UPDATE_CURRENT_TIMESTAMP)
-                {
-                    $col .= ' ' . $attribute;
-                }
-                else
-                {
-                    $update = true;
-                }
-            }
-            
-            // Collating
-            $collating = $column->getCollating();
-            
-            if(null !== $collating)
-            {
-                $pos = strpos($collating, '_');
-                
-                if(false !== $pos)
-                {
-                    $col .= ' ' . sprintf(
-                        'CHARACTER SET %s COLLATE %s', 
-                        substr($collating, 0, strpos($collating, '_')), 
-                        $collating
-                    );
-                }
-                else
-                {
-                    $col .= ' CHARACTER SET ' . $collating;
-                }
+                $col .= ' ' . $attribute;
             }
             
             // Nullable
@@ -152,19 +123,6 @@ class CreateTable extends BaseCreateTable
                 }
                 
                 $col .= ' DEFAULT ' . $default;
-            }
-            
-            if($update)
-            {
-                $col .= ' ' . $attribute;
-            }
-            
-            // Comment
-            $comment = $column->getComment();
-            
-            if(null !== $comment)
-            {
-                $col .= ' COMMENT ' . $this->quote($comment);
             }
             
             $columns[] = $col;

@@ -1,176 +1,173 @@
 <?php
 
-namespace Elixir\DB\SQL;
+namespace Elixir\DB\Query\SQL;
 
-use Elixir\DB\SQL\Expr;
-use Elixir\DB\SQL\SQLInterface;
+use Elixir\DB\Query\SQL\Expr;
+use Elixir\DB\Query\SQL\SQLInterface;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
 abstract class SQLAbstract implements SQLInterface
 {
     /**
-     * @param mixed $pParameter
+     * @param mixed $param
      * @return mixed
      */
-    public static function protect($pParameter)
+    public static function protect($param)
     {
-        if($pParameter instanceof Expr)
+        if ($param instanceof Expr) 
         {
-            $pParameter = $pParameter->getExpr();
-            
-            if(null === $pParameter)
+            $param = $param->getExpr();
+
+            if (null === $param)
             {
                 return 'NULL';
             }
-            
-            return $pParameter;
+
+            return $param;
         }
-        
-        if(is_array($pParameter))
+
+        if (is_array($param)) 
         {
-            foreach($pParameter as &$value)
+            foreach ($param as &$value) 
             {
                 $value = static::protect($value);
             }
-            
-            return implode(', ', $pParameter);
+
+            return implode(', ', $param);
         }
-        
-        if (is_int($pParameter))
+
+        if (is_int($param)) 
         {
-            return (int)$pParameter;
-        } 
-        
-        if(is_float($pParameter)) 
-        {
-            return sprintf('%F', $pParameter);
+            return (int) $param;
         }
-        
-        if(null === $pParameter)
+
+        if (is_float($param)) 
+        {
+            return sprintf('%F', $param);
+        }
+
+        if (null === $param)
         {
             return 'NULL';
         }
-        
-        return '\'' . addcslashes($pParameter, "\000\n\r\\'\"\032") . '\'';
+
+        return '\'' . addcslashes($param, "\000\n\r\\'\"\032") . '\'';
     }
-    
+
     /**
      * @var callable
      */
-    protected $_quoteMethod = '\Elixir\DB\SQL\SQLAbstract::protect';
-    
+    protected $quoteMethod = '\Elixir\DB\Query\SQL\SQLAbstract::protect';
+
     /**
      * @var array
      */
-    protected $_bindValues = [];
-    
+    protected $bindValues = [];
+
     /**
      * @see SQLInterface::setQuoteMethod()
      */
-    public function setQuoteMethod(callable $pValue)
+    public function setQuoteMethod(callable $value) 
     {
-        $this->_quoteMethod = $pValue;
+        $this->quoteMethod = $value;
     }
-    
+
     /**
      * @see SQLInterface::getQuoteMethod()
      */
-    public function getQuoteMethod()
+    public function getQuoteMethod() 
     {
-        return $this->_quoteMethod;
+        return $this->quoteMethod;
     }
-    
+
     /**
      * @see SQLInterface::quote()
      */
-    public function quote($pParameter)
+    public function quote($param) 
     {
-        return call_user_func_array($this->_quoteMethod, [$pParameter]);
+        return call_user_func_array($this->quoteMethod, [$param]);
     }
-    
+
     /**
      * @see SQLInterface::bindValue()
      */
-    public function bindValue($pKey, $pValue)
+    public function bindValue($key, $value) 
     {
-        $this->_bindValues[$pKey] = $pValue;
+        $this->bindValues[$key] = $value;
     }
-    
+
     /**
      * @see SQLInterface::getBindValues()
      */
-    public function getBindValues()
+    public function getBindValues() 
     {
-        return $this->_bindValues;
+        return $this->bindValues;
     }
-    
+
     /**
      * @see SQLInterface::assemble()
      */
-    public function assemble($pSQL, $pValues = null)
+    public function assemble($SQL, $param = null)
     {
-        if(null !== $pValues)
+        if (null !== $param)
         {
-            $pValues = (array)$pValues;
-            
-            if(1 == substr_count($pSQL, '?'))
+            if (1 == substr_count($SQL, '?'))
             {
                 $isUniqArrayParameter = true;
 
-                foreach($pValues as $key => $value)
+                foreach ((array)$param as $key => $value) 
                 {
-                    if(!is_int($key) || $value instanceof Expr)
+                    if (!is_int($key) || $value instanceof Expr) 
                     {
                         $isUniqArrayParameter = false;
                         break;
                     }
                 }
 
-                if($isUniqArrayParameter)
+                if ($isUniqArrayParameter) 
                 {
-                    $pValues = [$pValues];
+                    $param = [$param];
                 }
             }
-            
+
             $keys = [];
             $values = [];
             $limit = -1;
 
-            foreach($pValues as $key => $value)
+            foreach ($param as $key => $value)
             {
-                if (is_string($key))
+                if (is_string($key)) 
                 {
-                    if(substr($key, 0, 1) != ':')
+                    if (substr($key, 0, 1) != ':') 
                     {
                         $key = ':' . $key;
                     }
-                    
+
                     $keys[] = '/' . $key . '/';
-                }
+                } 
                 else
                 {
                     $limit = 1;
                     $keys[] = '/[?]/';
                 }
 
-                if(!$value instanceof Expr)
+                if (!$value instanceof Expr) 
                 {
                     $value = $this->quote($value);
                 }
 
                 $values[] = $value;
             }
-            
-            $query = preg_replace($keys, $values, $pSQL, $limit); 
+
+            $query = preg_replace($keys, $values, $SQL, $limit);
             return $query;
         }
-        
-        return $pSQL;
+
+        return $SQL;
     }
-    
+
     /**
      * @see SQLInterface::getQuery()
      */
@@ -178,9 +175,9 @@ abstract class SQLAbstract implements SQLInterface
     {
         return $this->render();
     }
-    
+
     /**
-     * @see SQLAbstract::getQuery()
+     * @ignore
      */
     public function __toString() 
     {

@@ -1,14 +1,14 @@
 <?php
 
-namespace Elixir\DB\SQL\SQLite;
+namespace Elixir\DB\Query\SQL\MySQL;
 
-use Elixir\DB\SQL\Update as BaseUpdate;
+use Elixir\DB\Query\SQL\Delete as BaseDelete;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
-class Update extends BaseUpdate
+class Delete extends BaseDelete
 {
     /**
      * @var array 
@@ -28,7 +28,7 @@ class Update extends BaseUpdate
     /**
      * @param array|string $pOrder
      * @param string $pType
-     * @return Update
+     * @return Delete
      */
     public function orderBy($pOrder, $pType = self::ORDER_ASCENDING)
     {
@@ -42,7 +42,7 @@ class Update extends BaseUpdate
     
     /**
      * @param integer $pLimit
-     * @return Update
+     * @return Delete
      */
     public function limit($pLimit)
     {
@@ -52,7 +52,7 @@ class Update extends BaseUpdate
     
     /**
      * @param integer $pOffset
-     * @return Update
+     * @return Delete
      */
     public function offset($pOffset)
     {
@@ -61,13 +61,12 @@ class Update extends BaseUpdate
     }
     
     /**
-     * @see BaseUpdate::render()
+     * @see BaseDelete::render()
      */
     public function render()
     {
-        $SQL = 'UPDATE ' . "\n";
+        $SQL = 'DELETE FROM ' . "\n";
         $SQL .= $this->_table . ' ' . "\n";
-        $SQL .= $this->renderSets();
         $SQL .= $this->renderWheres();
         $SQL .= $this->renderOrders();
         $SQL .= $this->renderLimit();
@@ -89,7 +88,7 @@ class Update extends BaseUpdate
             
             foreach($this->_orders as $order)
             {
-                $SQL .= ($first ? '' : ', ') . $order['column'] . (self::ORDER_NONE === $order['type'] ? '' : ' COLLATE NOCASE ' . $order['type']);
+                $SQL .= ($first ? '' : ', ') . $order['column'] . (self::ORDER_NONE === $order['type'] ? '' : ' ' . $order['type']);
                 $first = false;
             }
             

@@ -5,8 +5,8 @@ namespace Elixir\HTTP\Session\Handler;
 use Elixir\DB\DBInterface;
 use Elixir\DB\QueryBuilderInterface;
 use Elixir\DB\ResultSet\SetAbstract;
-use Elixir\DB\SQL\Insert;
-use Elixir\DB\SQL\Update;
+use Elixir\DB\Query\SQL\Insert;
+use Elixir\DB\Query\SQL\Update;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
@@ -91,7 +91,7 @@ class DB implements \SessionHandlerInterface
     public function read($pId)
     {
         $select = $this->_DB->createSelect('`sessions`')
-                  ->columns('`data`')
+                  ->column('`data`')
                   ->where('`id` = ?', $pId)
                   ->where('`expires` > ?', time());
         
@@ -114,7 +114,7 @@ class DB implements \SessionHandlerInterface
         $life = time() + $this->_lifeTime;
         
         $select = $this->_DB->createSelect('`sessions`')
-                  ->columns('COUNT(*)')
+                  ->column('COUNT(*)')
                   ->where('`id` = ?', $pId);
         
         $result = $this->_DB->query($select);

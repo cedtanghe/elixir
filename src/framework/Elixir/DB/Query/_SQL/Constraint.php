@@ -1,8 +1,8 @@
 <?php
 
-namespace Elixir\DB\SQL;
+namespace Elixir\DB\Query\SQL;
 
-use Elixir\DB\SQL\Column;
+use Elixir\DB\Query\SQL\Column;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

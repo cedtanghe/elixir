@@ -22,7 +22,7 @@ class Test extends \PHPUnit_Framework_TestCase
         $this->_loader->addNamespace('ElixirTest', __DIR__ . './../');
         $this->_loader->register();
         
-        LoaderFactory::$loaders['YAML'] = function($config, $options)
+        LoaderFactory::$factories['YAML'] = function($config, $options)
         {
             if (substr($config, -4) == '.yml')
             {

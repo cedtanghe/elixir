@@ -1,8 +1,8 @@
 <?php
 
-namespace Elixir\DB\SQL;
+namespace Elixir\DB\Query\SQL;
 
-use Elixir\DB\SQL\Constraint;
+use Elixir\DB\Query\SQL\Constraint;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

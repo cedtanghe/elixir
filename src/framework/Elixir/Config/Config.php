@@ -120,7 +120,7 @@ class Config implements ConfigInterface, \ArrayAccess, \Iterator, \Countable
     }
 
     /**
-     * @see \ArrayAccess::offsetExists()
+     * @ignore
      */
     public function offsetExists($key)
     {
@@ -128,7 +128,7 @@ class Config implements ConfigInterface, \ArrayAccess, \Iterator, \Countable
     }
 
     /**
-     * @see \ArrayAccess::offsetSet()
+     * @ignore
      */
     public function offsetSet($key, $value) 
     {
@@ -141,7 +141,7 @@ class Config implements ConfigInterface, \ArrayAccess, \Iterator, \Countable
     }
 
     /**
-     * @see \ArrayAccess::offsetGet()
+     * @ignore
      */
     public function offsetGet($key) 
     {
@@ -149,7 +149,7 @@ class Config implements ConfigInterface, \ArrayAccess, \Iterator, \Countable
     }
 
     /**
-     * @see \ArrayAccess::offsetUnset()
+     * @ignore
      */
     public function offsetUnset($key)
     {
@@ -157,7 +157,7 @@ class Config implements ConfigInterface, \ArrayAccess, \Iterator, \Countable
     }
 
     /**
-     * @see \Iterator::rewind() 
+     * @ignore
      */
     public function rewind() 
     {
@@ -165,7 +165,7 @@ class Config implements ConfigInterface, \ArrayAccess, \Iterator, \Countable
     }
 
     /**
-     * @see \Iterator::current() 
+     * @ignore
      */
     public function current() 
     {
@@ -173,7 +173,7 @@ class Config implements ConfigInterface, \ArrayAccess, \Iterator, \Countable
     }
 
     /**
-     * @see \Iterator::key() 
+     * @ignore
      */
     public function key() 
     {
@@ -181,7 +181,7 @@ class Config implements ConfigInterface, \ArrayAccess, \Iterator, \Countable
     }
 
     /**
-     * @see \Iterator::next() 
+     * @ignore
      */
     public function next()
     {
@@ -189,7 +189,7 @@ class Config implements ConfigInterface, \ArrayAccess, \Iterator, \Countable
     }
 
     /**
-     * @see \Iterator::valid() 
+     * @ignore
      */
     public function valid() 
     {
@@ -197,7 +197,7 @@ class Config implements ConfigInterface, \ArrayAccess, \Iterator, \Countable
     }
 
     /**
-     * @see \Countable::count()
+     * @ignore
      */
     public function count()
     {
@@ -205,7 +205,7 @@ class Config implements ConfigInterface, \ArrayAccess, \Iterator, \Countable
     }
 
     /**
-     * @see Config::has();
+     * @ignore
      */
     public function __issset($key) 
     {
@@ -213,7 +213,7 @@ class Config implements ConfigInterface, \ArrayAccess, \Iterator, \Countable
     }
 
     /**
-     * @see Config::get();
+     * @ignore
      */
     public function __get($key) 
     {
@@ -221,7 +221,7 @@ class Config implements ConfigInterface, \ArrayAccess, \Iterator, \Countable
     }
 
     /**
-     * @see Config::set();
+     * @ignore
      */
     public function __set($key, $value)
     {
@@ -229,7 +229,7 @@ class Config implements ConfigInterface, \ArrayAccess, \Iterator, \Countable
     }
 
     /**
-     * @see Config::remove();
+     * @ignore
      */
     public function __unset($key) 
     {

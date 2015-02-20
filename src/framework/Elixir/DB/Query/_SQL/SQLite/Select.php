@@ -1,8 +1,8 @@
 <?php
 
-namespace Elixir\DB\SQL\SQLite;
+namespace Elixir\DB\Query\SQL\SQLite;
 
-use Elixir\DB\SQL\Select as BaseSelect;
+use Elixir\DB\Query\SQL\Select as BaseSelect;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

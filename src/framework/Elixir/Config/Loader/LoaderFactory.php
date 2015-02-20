@@ -15,7 +15,7 @@ class LoaderFactory
     /**
      * @var array 
      */
-    public static $loaders = [];
+    public static $factories = [];
 
     /**
      * @param mixed $config
@@ -25,9 +25,9 @@ class LoaderFactory
      */
     public static function create($config, array $options = []) 
     {
-        if(!isset(static::$loaders['Arr']))
+        if(!isset(static::$factories['Arr']))
         {
-            static::$loaders['Arr'] = function($config, $options)
+            static::$factories['Arr'] = function($config, $options)
             {
                 if (is_array($config) || strstr($config, '.php'))
                 {
@@ -38,9 +38,9 @@ class LoaderFactory
             };
         }
         
-        if(!isset(static::$loaders['JSON']))
+        if(!isset(static::$factories['JSON']))
         {
-            static::$loaders['JSON'] = function($config, $options)
+            static::$factories['JSON'] = function($config, $options)
             {
                 if (substr($config, -5) == '.json')
                 {
@@ -51,9 +51,9 @@ class LoaderFactory
             };
         }
         
-        if(!isset(static::$loaders['YAML']))
+        if(!isset(static::$factories['YAML']))
         {
-            static::$loaders['YAML'] = function($config, $options)
+            static::$factories['YAML'] = function($config, $options)
             {
                 if (substr($config, -4) == '.yml')
                 {
@@ -67,7 +67,7 @@ class LoaderFactory
         $options['environment'] = isset($options['environment']) ? $options['environment'] : null;
         $options['strict'] = isset($options['strict']) ? $options['strict'] : false;
         
-        foreach(static::$loaders as $loader)
+        foreach(static::$factories as $loader)
         {
             $result = $loader($config, $options);
             

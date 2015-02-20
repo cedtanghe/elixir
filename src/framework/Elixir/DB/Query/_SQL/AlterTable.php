@@ -1,10 +1,10 @@
 <?php
 
-namespace Elixir\DB\SQL;
+namespace Elixir\DB\Query\SQL;
 
-use Elixir\DB\SQL\Column;
-use Elixir\DB\SQL\Constraint;
-use Elixir\DB\SQL\SQLAbstract;
+use Elixir\DB\Query\SQL\Column;
+use Elixir\DB\Query\SQL\Constraint;
+use Elixir\DB\Query\SQL\SQLAbstract;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

@@ -1,45 +1,44 @@
 <?php
 
-namespace Elixir\DB\SQL;
+namespace Elixir\DB\Query\SQL;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
-class Expr
+class Expr 
 {
     /**
-     * @param string $pExpr
+     * @param string $expr
      * @return Expr
      */
-    public static function protect($pExpr)
+    public static function protect($expr)
     {
-        return new static($pExpr);
+        return new static($expr);
     }
 
     /**
      * @var string 
      */
-    protected $_expr;
+    protected $expr;
 
     /**
-     * @param string $pExpr
+     * @param string $expr
      */
-    public function __construct($pExpr) 
+    public function __construct($expr) 
     {
-        $this->_expr  = $pExpr;
+        $this->expr = $expr;
     }
-    
+
     /**
      * @return string
      */
-    public function getExpr()
+    public function getExpr() 
     {
-        return $this->_expr;
+        return $this->expr;
     }
 
     /**
-     * @see Expr::getExpr()
+     * @ignore
      */
     public function __toString()
     {

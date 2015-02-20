@@ -6,8 +6,8 @@ use Elixir\DB\DBInterface;
 use Elixir\DB\ORM\EagerLoad;
 use Elixir\DB\ORM\RepositoryInterface;
 use Elixir\DB\ResultSet\SetAbstract;
-use Elixir\DB\SQL\Select as SQLSelect;
-use Elixir\DB\SQL\SQLInterface;
+use Elixir\DB\Query\SQL\Select as SQLSelect;
+use Elixir\DB\Query\SQL\SQLInterface;
 use Elixir\Util\Str;
 
 /**
@@ -225,7 +225,7 @@ class Select
         
         if(false === strpos($SQL->render(), 'COUNT('))
         {
-            $SQL->columns('COUNT(*)', true);
+            $SQL->column('COUNT(*)', true);
         }
         
         if(false === strpos($SQL->render(), 'GROUP BY'))

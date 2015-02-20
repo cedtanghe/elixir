@@ -3,7 +3,7 @@
 namespace Elixir\DB;
 
 use Elixir\DB\ResultSet\SetAbstract;
-use Elixir\DB\SQL\SQLInterface;
+use Elixir\DB\Query\SQL\SQLInterface;
 use Elixir\Dispatcher\DispatcherInterface;
 
 /**

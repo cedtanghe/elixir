@@ -1,9 +1,9 @@
 <?php
 
-namespace Elixir\DB\SQL;
+namespace Elixir\DB\Query\SQL;
 
-use Elixir\DB\SQL\Select;
-use Elixir\DB\SQL\SQLAbstract;
+use Elixir\DB\Query\SQL\Select;
+use Elixir\DB\Query\SQL\SQLAbstract;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

@@ -1,10 +1,10 @@
 <?php
 
-namespace Elixir\DB\SQL\SQLite;
+namespace Elixir\DB\Query\SQL\SQLite;
 
-use Elixir\DB\SQL\AlterTable as BaseAlterTable;
-use Elixir\DB\SQL\Column;
-use Elixir\DB\SQL\Constraint;
+use Elixir\DB\Query\SQL\AlterTable as BaseAlterTable;
+use Elixir\DB\Query\SQL\Column;
+use Elixir\DB\Query\SQL\Constraint;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

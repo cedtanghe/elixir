@@ -2,14 +2,14 @@
 
 namespace Elixir\DB\Query;
 
-use Elixir\DB\SQL\AlterTable;
-use Elixir\DB\SQL\CreateTable;
-use Elixir\DB\SQL\Delete;
-use Elixir\DB\SQL\DropTable;
-use Elixir\DB\SQL\Insert;
-use Elixir\DB\SQL\Select;
-use Elixir\DB\SQL\TruncateTable;
-use Elixir\DB\SQL\Update;
+use Elixir\DB\Query\SQL\AlterTable;
+use Elixir\DB\Query\SQL\CreateTable;
+use Elixir\DB\Query\SQL\Delete;
+use Elixir\DB\Query\SQL\DropTable;
+use Elixir\DB\Query\SQL\Insert;
+use Elixir\DB\Query\SQL\Select;
+use Elixir\DB\Query\SQL\TruncateTable;
+use Elixir\DB\Query\SQL\Update;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

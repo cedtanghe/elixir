@@ -5,87 +5,86 @@ namespace Elixir\DB\ResultSet;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
-abstract class SetAbstract
+abstract class SetAbstract 
 {
     /**
-     * @var string
+     * @var integer
      */
-    const FETCH_ASSOC = 'fetch_assoc';
+    const FETCH_ASSOC = 2;
     
     /**
-     * @var string
+     * @var integer
      */
-    const FETCH_OBJ = 'fetch_obj';
+    const FETCH_NUM = 3;
+
+    /**
+     * @var integer
+     */
+    const FETCH_BOTH = 4;
     
     /**
-     * @var string
+     * @var integer
      */
-    const FETCH_NUM = 'fetch_num';
-    
+    const FETCH_OBJ = 5;
+
     /**
-     * @var string
+     * @var integer
      */
-    const FETCH_BOTH = 'fetch_both';
-    
-    /**
-     * @var string
-     */
-    const FETCH_DEFAULT = 'fetch_default';
-  
+    const FETCH_DEFAULT = 19;
+
     /**
      * @var mixed
      */
-    protected $_resource;
-    
+    protected $resource;
+
     /**
-     * @param mixed $pResource
+     * @param mixed $resource
      */
-    public function __construct($pResource)
+    public function __construct($resource)
     {
-        $this->_resource = $pResource;
+        $this->resource = $resource;
     }
-    
+
     /**
      * @return mixed
      */
     public function getResource()
     {
-        return $this->_resource;
+        return $this->resource;
     }
-    
+
     /**
-     * @param string $pFetchStyle
+     * @param string $fetchStyle
      * @return mixed;
      */
-    abstract public function fetch($pFetchStyle = self::FETCH_DEFAULT);
-    
+    abstract public function fetch($fetchStyle = self::FETCH_DEFAULT);
+
     /**
-     * @param string $pFetchStyle
+     * @param string $fetchStyle
      * @return array;
      */
-    abstract public function fetchAll($pFetchStyle = self::FETCH_ASSOC);
-    
+    abstract public function fetchAll($fetchStyle = self::FETCH_ASSOC);
+
     /**
-     * @param integer $pColumn
+     * @param integer $column
      * @return mixed;
      */
-    abstract public function fetchColumn($pColumn = 0);
-    
+    abstract public function fetchColumn($column = 0);
+
     /**
-     * @param string $pClassName
-     * @param array $pArgs
+     * @param string $className
+     * @param array $args
      * @return mixed;
      */
-    abstract public function fetchObject($pClassName = 'stdClass', array $pArgs = []);
-    
+    abstract public function fetchObject($className = 'stdClass', array $args = []);
+
     /**
      * @param string $pClassName
      * @param array $pArgs
      * @return mixed;
      */
     abstract public function fetchAssoc();
-    
+
     /**
      * @return integer
      */

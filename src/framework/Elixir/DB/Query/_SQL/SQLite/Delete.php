@@ -1,8 +1,8 @@
 <?php
 
-namespace Elixir\DB\SQL\SQLite;
+namespace Elixir\DB\Query\SQL\SQLite;
 
-use Elixir\DB\SQL\Delete as BaseDelete;
+use Elixir\DB\Query\SQL\Delete as BaseDelete;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
