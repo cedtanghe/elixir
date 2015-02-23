@@ -15,6 +15,16 @@ class ApplicationEvent extends Event
     /**
      * @var string
      */
+    const START = 'start';
+    
+    /**
+     * @var string
+     */
+    const COMPLETE = 'complete';
+    
+    /**
+     * @var string
+     */
     const MODULES_BOOTED = 'modules_booted';
     
     /**

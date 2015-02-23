@@ -141,6 +141,21 @@ interface SQLInterface
      * @var string
      */
     const CHARSET_UTF8 = 'utf8';
+    
+    /**
+     * @var string 
+     */
+    const VALUES_SET = 'set';
+    
+    /**
+     * @var string 
+     */
+    const VALUES_ADD = 'add';
+    
+    /**
+     * @var string 
+     */
+    const VALUES_MERGE = 'merge';
 
     /**
      * @param callable $value

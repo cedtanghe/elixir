@@ -67,7 +67,7 @@ class Update extends BaseUpdate
     {
         $SQL = 'UPDATE ' . "\n";
         $SQL .= $this->_table . ' ' . "\n";
-        $SQL .= $this->renderSets();
+        $SQL .= $this->renderSet();
         $SQL .= $this->renderWheres();
         $SQL .= $this->renderOrders();
         $SQL .= $this->renderLimit();

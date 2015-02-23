@@ -10,46 +10,6 @@ class Event
     /**
      * @var string
      */
-    const START = 'start';
-
-    /**
-     * @var string
-     */
-    const CHANGE = 'change';
-
-    /**
-     * @var string
-     */
-    const COMPLETE = 'complete';
-
-    /**
-     * @var string
-     */
-    const CLOSE = 'close';
-
-    /**
-     * @var string
-     */
-    const ERROR = 'error';
-
-    /**
-     * @var string
-     */
-    const UPDATE = 'update';
-
-    /**
-     * @var string
-     */
-    const CANCEL = 'cancel';
-
-    /**
-     * @var string
-     */
-    const DESTROY = 'destroy';
-
-    /**
-     * @var string
-     */
     protected $type;
 
     /**

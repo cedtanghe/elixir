@@ -13,6 +13,11 @@ class ModelEvent extends Event
     /**
      * @var string
      */
+    const UPDATE = 'update';
+    
+    /**
+     * @var string
+     */
     const PRE_UPDATE = 'pre_update';
     
     /**
@@ -23,12 +28,12 @@ class ModelEvent extends Event
     /**
      * @var string
      */
-    const PRE_DELETE = 'pre_delete';
+    const INSERT = 'insert';
     
     /**
      * @var string
      */
-    const INSERT = 'insert';
+    const PRE_DELETE = 'pre_delete';
     
     /**
      * @var string

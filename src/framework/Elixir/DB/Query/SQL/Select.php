@@ -166,6 +166,88 @@ class Select extends SQLAbstract
 
         return $this;
     }
+    
+    /**
+     * @param string $part
+     * @return mixed
+     */
+    public function get($part) 
+    {
+        switch ($part) 
+        {
+            case 'table':
+                return $this->table;
+            case 'columns':
+                return $this->columns;
+            case 'quantifier':
+                return $this->quantifier;
+            case 'join':
+                return $this->join;
+            case 'where':
+                return $this->where;
+            case 'group':
+                return $this->group;
+            case 'having':
+                return $this->having;
+            case 'order':
+                return $this->order = [];
+            case 'limit':
+                return $this->limit;
+            case 'offset':
+                return $this->offset;
+            case 'combine':
+                return $this->combine;
+        }
+        
+        return null;
+    }
+    
+    /**
+     * @param mixed $data
+     * @param string $part
+     * @return Select
+     */
+    public function merge($data, $part) 
+    {
+        switch ($part) 
+        {
+            case 'table':
+                $this->table($data);
+                break;
+            case 'columns':
+                $this->columns($data, false);
+                break;
+            case 'quantifier':
+                $this->quantifier($data);
+                break;
+            case 'join':
+                $this->join = array_merge($this->join, $data);
+                break;
+            case 'where':
+                $this->where = array_merge($this->where, $data);
+                break;
+            case 'group':
+                $this->group = array_merge($this->group, $data);
+                break;
+            case 'having':
+                $this->having = array_merge($this->having, $data);
+                break;
+            case 'order':
+                $this->order = array_merge($this->order, $data);
+                break;
+            case 'limit':
+                $this->limit($data);
+                break;
+            case 'offset':
+                $this->offset($data);
+                break;
+            case 'combine':
+                $this->combine = array_merge($this->combine, $data);
+                break;
+        }
+        
+        return $this;
+    }
 
     /**
      * @see SQLInterface::render()
@@ -184,7 +266,7 @@ class Select extends SQLAbstract
         {
             $SQL .= 'SELECT ' . "\n";
             $SQL .= $this->renderQuantifier();
-            $SQL .= $this->renderColumn();
+            $SQL .= $this->renderColumns();
             $SQL .= 'FROM ' . $this->table . ' ' . "\n";
             $SQL .= $this->renderJoin();
             $SQL .= $this->renderWhere();
@@ -213,7 +295,7 @@ class Select extends SQLAbstract
     /**
      * @return string
      */
-    protected function renderColumn() 
+    protected function renderColumns() 
     {
         if (count($this->columns) > 0) 
         {
