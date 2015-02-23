@@ -65,6 +65,32 @@ abstract class SQLAbstract implements SQLInterface
      * @var array
      */
     protected $bindValues = [];
+    
+    /**
+     * @var string 
+     */
+    protected $table;
+    
+    /**
+     * @param string $table
+     */
+    public function __construct($table = null)
+    {
+        if (null !== $table) 
+        {
+            $this->table($table);
+        }
+    }
+    
+    /**
+     * @param string $table
+     * @return SQLInterface
+     */
+    public function table($table) 
+    {
+        $this->table = $table;
+        return $this;
+    }
 
     /**
      * @see SQLInterface::setQuoteMethod()

@@ -66,12 +66,17 @@ interface SQLInterface
      * @var string
      */
     const JOIN_RIGHT = 'RIGHT';
+    
+    /**
+     * @var string
+     */
+    const JOIN_FULL = 'FULL';
 
     /**
      * @var string
      */
     const JOIN_NATURAL = 'NATURAL';
-
+    
     /**
      * @var string
      */

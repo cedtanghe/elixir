@@ -17,7 +17,7 @@ class WhereClause
     /**
      * @var array 
      */
-    protected $wheres = [];
+    protected $where = [];
 
     /**
      * @param SQLInterface $SQL
@@ -42,7 +42,7 @@ class WhereClause
             $condition = $where->render();
         }
 
-        $this->wheres[] = ['query' => $this->SQL->assemble($condition, $value), 'type' => 'AND'];
+        $this->where[] = ['query' => $this->SQL->assemble($condition, $value), 'type' => 'AND'];
         return $this;
     }
 
@@ -61,7 +61,7 @@ class WhereClause
             $condition = $where->render();
         }
 
-        $this->wheres[] = ['query' => $this->SQL->assemble($condition, $value), 'type' => 'OR'];
+        $this->where[] = ['query' => $this->SQL->assemble($condition, $value), 'type' => 'OR'];
         return $this;
     }
 
@@ -70,7 +70,7 @@ class WhereClause
      */
     public function reset() 
     {
-        $this->wheres = [];
+        $this->where = [];
         return $this;
     }
     
@@ -79,7 +79,7 @@ class WhereClause
      */
     public function get() 
     {
-        return $this->wheres;
+        return $this->where;
     }
     
     /**
@@ -88,7 +88,7 @@ class WhereClause
      */
     public function merge(array $data) 
     {
-        $this->wheres = array_merge($this->wheres, $data);
+        $this->where = array_merge($this->where, $data);
         return $this;
     }
 
@@ -97,24 +97,24 @@ class WhereClause
      */
     public function render() 
     {
-        return $this->renderWheres();
+        return $this->renderWhere();
     }
 
     /**
      * @return string
      */
-    protected function renderWheres() 
+    protected function renderWhere() 
     {
         $SQL = '';
         $first = true;
 
-        foreach ($this->wheres as $where) 
+        foreach ($this->where as $where) 
         {
             $SQL .= ($first ? '' : $where['type'] . ' ') . '(' . $where['query'] . ')' . "\n";
             $first = false;
         }
 
-        if (count($this->wheres) > 1) 
+        if (count($this->where) > 1) 
         {
             $SQL = '(' . $SQL . ')';
         }
