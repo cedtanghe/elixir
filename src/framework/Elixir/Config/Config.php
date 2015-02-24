@@ -4,6 +4,7 @@ namespace Elixir\Config;
 
 use Elixir\Config\ConfigInterface;
 use Elixir\Config\Loader\LoaderFactory;
+use Elixir\Config\Processor\ProcessorInterface;
 use Elixir\Config\Processor\ProcessorTrait;
 use Elixir\Config\Writer\WriterInterface;
 use Elixir\Util\Arr;
@@ -19,6 +20,11 @@ class Config implements ConfigInterface, \ArrayAccess, \Iterator, \Countable
      * @var string 
      */
     protected $environment;
+    
+    /**
+     * @var ProcessorInterface 
+     */
+    protected $processor;
 
     /**
      * @var array 
@@ -35,6 +41,22 @@ class Config implements ConfigInterface, \ArrayAccess, \Iterator, \Countable
         $this->data = $data;
     }
     
+    /**
+     * @param ProcessorInterface $value
+     */
+    public function setProcessor(ProcessorInterface $value)
+    {
+        $this->processor = $value;
+    }
+    
+    /**
+     * @return ProcessorInterface
+     */
+    public function getProcessor()
+    {
+        return $this->processor;
+    }
+
     /**
      * @param mixed $config
      * @param array $options
@@ -85,7 +107,14 @@ class Config implements ConfigInterface, \ArrayAccess, \Iterator, \Countable
      */
     public function get($key, $default = null) 
     {
-        return $this->process(Arr::get($key, $this->data, $default));
+        $data = Arr::get($key, $this->data, $default);
+        
+        if(null !== $this->processor)
+        {
+            $data = $this->processor->process($data);
+        }
+        
+        return $data;
     }
 
     /**
@@ -108,7 +137,14 @@ class Config implements ConfigInterface, \ArrayAccess, \Iterator, \Countable
      */
     public function gets() 
     {
-        return $this->process($this->data);
+        $data = $this->data;
+        
+        if(null !== $this->processor)
+        {
+            $data = $this->processor->process($data);
+        }
+        
+        return $data;
     }
 
     /**

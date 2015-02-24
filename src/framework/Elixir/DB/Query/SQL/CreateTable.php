@@ -9,159 +9,191 @@ use Elixir\DB\Query\SQL\SQLAbstract;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
-class CreateTable extends SQLAbstract
+class CreateTable extends SQLAbstract 
 {
-    /**
-     * @var string 
-     */
-    protected $_table;
-    
     /**
      * @var boolean 
      */
-    protected $_temporary = false;
-    
+    protected $temporary = false;
+
     /**
      * @var array 
      */
-    protected $_columns = [];
-    
+    protected $columns = [];
+
     /**
      * @var array 
      */
-    protected $_constraints = [];
-    
+    protected $constraints = [];
+
     /**
      * @var array 
      */
-    protected $_options = [];
-    
+    protected $options = [];
+
     /**
-     * @param string $pTable
+     * @param boolean $value
+     * @return CreateTable
      */
-    public function __construct($pTable = null) 
+    public function temporary($value)
     {
-        if(null !== $pTable)
+        $this->temporary = (bool)$value;
+        return $this;
+    }
+
+    /**
+     * @param Column $column
+     * @return CreateTable
+     */
+    public function column(Column $column)
+    {
+        $this->columns[] = $column;
+        return $this;
+    }
+
+    /**
+     * @param Constraint $constraint
+     * @return CreateTable
+     */
+    public function constraint(Constraint $constraint)
+    {
+        if ($constraint->getType() == Constraint::PRIMARY) 
         {
-            $this->table($pTable);
-        }
-    }
-    
-    /**
-     * @param string $pTable
-     * @return CreateTable
-     */
-    public function table($pTable)
-    {
-        $this->_table = $pTable;
-        return $this;
-    }
-    
-    /**
-     * @param boolean $pValue
-     * @return CreateTable
-     */
-    public function temporary($pValue)
-    {
-        $this->_temporary = (bool)$pValue;
-        return $this;
-    }
-    
-    /**
-     * @param Column $pColumn
-     * @return CreateTable
-     */
-    public function column(Column $pColumn)
-    {
-        $this->_columns[] = $pColumn;
-        return $this;
-    }
-    
-    /**
-     * @param Constraint $pConstraint
-     * @return CreateTable
-     */
-    public function constraint(Constraint $pConstraint)
-    {
-        if($pConstraint->getType() == Constraint::PRIMARY)
-        {
-            foreach($this->_constraints as $constraint)
+            foreach ($this->constraints as $constraint)
             {
-                if($constraint->getType() == Constraint::PRIMARY)
+                if ($constraint->getType() == Constraint::PRIMARY)
                 {
-                    $constraint->addColumn($pConstraint->getName());
+                    $constraint->addColumn($constraint->getName());
                     return;
                 }
             }
         }
-        
-        $this->_constraints[] = $pConstraint;
+
+        $this->constraints[] = $constraint;
+        return $this;
+    }
+
+    /**
+     * @param string $option
+     * @param mixed $value
+     * @return CreateTable
+     */
+    public function option($option, $value = null)
+    {
+        $this->options[$option] = $value;
         return $this;
     }
     
     /**
-     * @param Column $pColumn
+     * @param string $part
      * @return CreateTable
      */
-    public function option($pOption, $pValue = null)
+    public function reset($part) 
     {
-        $this->_options[$pOption] = $pValue;
-        return $this;
-    }
-    
-    /**
-     * @param string $pPart
-     * @return CreateTable
-     */
-    public function reset($pPart)
-    {
-        switch($pPart)
+        switch ($part) 
         {
+            case 'table':
+                $this->table = null;
+                break;
+            case 'temporary':
+                $this->temporary = false;
+                break;
             case 'columns':
-                $this->_columns = [];
-            break;
+                $this->columns = [];
+                break;
             case 'constraints':
-                $this->_constraints = [];
-            break;
+                $this->constraints = [];
+                break;
             case 'options':
-                $this->_options = [];
-            break;
+                $this->options = [];
+                break;
+        }
+
+        return $this;
+    }
+    
+    /**
+     * @param string $part
+     * @return mixed
+     */
+    public function get($part) 
+    {
+        switch ($part) 
+        {
+            case 'table':
+                return $this->table;
+            case 'temporary':
+                return $this->temporary;
+            case 'columns':
+                return $this->columns;
+            case 'constraints':
+                return $this->constraints;
+            case 'options':
+                return $this->options;
+        }
+        
+        return null;
+    }
+    
+    /**
+     * @param mixed $data
+     * @param string $part
+     * @return CreateTable
+     */
+    public function merge($data, $part) 
+    {
+        switch ($part) 
+        {
+            case 'table':
+                $this->table($data);
+                break;
+            case 'temporary':
+                $this->temporary($data);
+                break;
+            case 'columns':
+                $this->columns = array_merge($this->columns, $data);
+                break;
+            case 'constraints':
+                $this->constraints = array_merge($this->constraints, $data);
+                break;
+            case 'options':
+                $this->options = array_merge($this->options, $data);
+                break;
         }
         
         return $this;
     }
-    
+
     /**
-     * @see SQLAbstract::render()
+     * @see SQLInterface::render()
      */
     public function render()
     {
         $SQL = 'CREATE ' . "\n";
         $SQL .= $this->renderTemporary();
         $SQL .= 'TABLE ' . "\n";
-        $SQL .= $this->_table . ' ' . "\n";
+        $SQL .= $this->table . ' ' . "\n";
         $SQL .= $this->renderColumns();
         $SQL .= $this->renderOptions();
 
         return trim($SQL);
     }
-    
+
     /**
      * @return string
      */
     protected function renderTemporary()
     {
         $SQL = '';
-        
-        if($this->_temporary)
+
+        if ($this->temporary)
         {
             $SQL .= 'TEMPORARY ' . "\n";
         }
-        
+
         return $SQL;
     }
-    
+
     /**
      * @return string
      */
@@ -169,152 +201,150 @@ class CreateTable extends SQLAbstract
     {
         $SQL = '(';
         $columns = [];
-        
-        foreach($this->_columns as $column)
+
+        foreach ($this->columns as $column) 
         {
             // Name
             $col = $column->getName();
-            
+
             // Type
             $col .= ' ' . $column->getType();
             $value = $column->getValue();
-            
-            if(null !== $value)
+
+            if (null !== $value)
             {
                 $col .= '(' . $this->quote($value) . ')';
             }
-            
+
             // Attribute
             $attribute = $column->getAttribute();
-            
-            if(null !== $attribute)
+
+            if (null !== $attribute) 
             {
-                if(strtoupper($attribute) != Column::UPDATE_CURRENT_TIMESTAMP)
+                if (strtoupper($attribute) != Column::UPDATE_CURRENT_TIMESTAMP)
                 {
                     $SQL .= ' ' . $attribute;
                 }
             }
-            
+
             // Collating
             $collating = $column->getCollating();
-            
-            if(null !== $collating)
+
+            if (null !== $collating) 
             {
                 $pos = strpos($collating, '_');
-                
-                if(false !== $pos)
+
+                if (false !== $pos) 
                 {
                     $col .= ' ' . sprintf(
-                        'CHARACTER SET %s COLLATE %s', 
-                        substr($collating, 0, strpos($collating, '_')), 
-                        $collating
+                        'CHARACTER SET %s COLLATE %s', substr($collating, 0, strpos($collating, '_')), $collating
                     );
                 }
-                else
+                else 
                 {
                     $col .= ' CHARACTER SET ' . $collating;
                 }
             }
-            
+
             // Nullable
             $col .= ' ' . ($column->isNullable() ? 'NULL' : 'NOT NULL');
-            
-            // AutoIncrement
-            if($column->isAutoIncrement())
+
+            // Auto-increment
+            if ($column->isAutoIncrement())
             {
                 $col .= ' AUTO_INCREMENT ';
                 $found = false;
-                
-                foreach($this->_constraints as $constraint)
+
+                foreach ($this->constraints as $constraint) 
                 {
-                    if($constraint->getType() == Constraint::PRIMARY)
+                    if ($constraint->getType() == Constraint::PRIMARY) 
                     {
                         $found = true;
                         break;
                     }
                 }
-                
-                if(!$found)
+
+                if (!$found) 
                 {
                     $this->constraint(new Constraint($column->getName(), Constraint::PRIMARY));
                 }
             }
-            
+
             // Default
             $default = $column->getDefault();
-            
-            if(null !== $default)
+
+            if (null !== $default) 
             {
-                if($default != Column::CURRENT_TIMESTAMP)
+                if ($default != Column::CURRENT_TIMESTAMP)
                 {
                     $default = $this->quote($default);
                 }
-                
+
                 $col .= ' DEFAULT ' . $default;
             }
-            
+
             // Comment
             $comment = $column->getComment();
-            
-            if(null !== $comment)
+
+            if (null !== $comment) 
             {
                 $col .= ' COMMENT ' . $this->quote($comment);
             }
-            
+
             $columns[] = $col;
         }
-        
+
         $SQL .= implode(', ' . "\n", $columns);
-        
+
         // Constraints
-        foreach($this->_constraints as $constraint)
-        {   
+        foreach ($this->constraints as $constraint) 
+        {
             $columns = $constraint->getColumns();
-            
-            if($constraint->getType() == Constraint::PRIMARY)
+
+            if ($constraint->getType() == Constraint::PRIMARY)
             {
                 $SQL .= ', ' . "\n" . 'PRIMARY KEY (' . implode(', ', $columns) . ')';
-            }
-            else if($constraint->getType() == Constraint::FOREIGN_KEY)
+            } 
+            else if ($constraint->getType() == Constraint::FOREIGN_KEY) 
             {
                 $SQL .= ', ' . "\n" . 'CONSTRAINT ' . $constraint->getName() . ' ';
                 $SQL .= 'FOREIGN KEY (' . $columns[0] . ') ';
                 $SQL .= 'REFERENCES ' . $constraint->getReferenceTable() . '(' . $constraint->getReferenceColumn() . ') ';
                 $SQL .= 'ON DELETE ' . $constraint->getOnDeleteRule() . ' ';
                 $SQL .= 'ON UPDATE ' . $constraint->getOnUpdateRule();
-            }
+            } 
             else
             {
-                foreach($columns as $column)
+                foreach ($columns as $column) 
                 {
                     $SQL .= ', ' . "\n" . $constraint->getType() . ' ' . $column . '(' . $column . ')';
                 }
             }
         }
-        
+
         $SQL .= ') ' . "\n";
         return $SQL;
     }
-    
+
     /**
      * @return string
      */
-    protected function renderOptions()
+    protected function renderOptions() 
     {
         $SQL = '';
-        
-        if(count($this->_options) > 0)
+
+        if (count($this->options) > 0)
         {
             $options = [];
 
-            foreach($this->_options as $key => $value)
+            foreach ($this->options as $key => $value)
             {
                 $options[] = $key . ' = ' . $this->quote($value);
             }
-            
+
             $SQL .= implode(' ' . "\n", $options);
         }
-        
+
         return $SQL;
     }
 }

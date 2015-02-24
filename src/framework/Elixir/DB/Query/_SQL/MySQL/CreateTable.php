@@ -66,7 +66,7 @@ class CreateTable extends BaseCreateTable
         $SQL = '(';
         $columns = [];
         
-        foreach($this->_columns as $column)
+        foreach($this->columns as $column)
         {
             // Name
             $col = $column->getName();
@@ -126,7 +126,7 @@ class CreateTable extends BaseCreateTable
                 $col .= ' AUTO_INCREMENT ';
                 $found = false;
                 
-                foreach($this->_constraints as $constraint)
+                foreach($this->constraints as $constraint)
                 {
                     if($constraint->getType() == Constraint::PRIMARY)
                     {
@@ -173,7 +173,7 @@ class CreateTable extends BaseCreateTable
         $SQL .= implode(', ' . "\n", $columns);
         
         // Constraints
-        foreach($this->_constraints as $constraint)
+        foreach($this->constraints as $constraint)
         {   
             $columns = $constraint->getColumns();
             

@@ -4,7 +4,7 @@ namespace Elixir\Config\Processor;
 
 use Elixir\Config\Processor\ProcessorInterface;
 
-trait ProcessorTrait 
+class Processor
 {
     /**
      * @var array
@@ -31,7 +31,7 @@ trait ProcessorTrait
      * @param mixed $value
      * @return mixed;
      */
-    protected function process($value) 
+    public function process($value) 
     {
         foreach ($this->processors as $processor) 
         {

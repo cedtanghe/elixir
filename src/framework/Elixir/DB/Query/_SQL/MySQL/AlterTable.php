@@ -37,7 +37,7 @@ class AlterTable extends BaseAlterTable
             throw new \InvalidArgumentException('Mysql requires the definition of the column to rename it.');
         }
         
-        $this->_SQLs[] = [
+        $this->SQL[] = [
             'specification' => self::RENAME_COLUMN,
             'oldColumn' => $pOldColumn,
             'newColumn' => $pNewColumn
@@ -52,7 +52,7 @@ class AlterTable extends BaseAlterTable
      */
     public function addColumnAfter(Column $pColumn, $pPrevious)
     {
-        $this->_SQLs[] = [
+        $this->SQL[] = [
             'specification' => self::ADD_COLUMN,
             'column' => $pColumn,
             'previous' => $pPrevious instanceof Column ? $pPrevious->getName() : $pPrevious,
@@ -67,7 +67,7 @@ class AlterTable extends BaseAlterTable
      */
     public function addColumnFirst(Column $pColumn)
     {
-        $this->_SQLs[] = [
+        $this->SQL[] = [
             'specification' => self::ADD_COLUMN,
             'column' => $pColumn,
             'position' => self::FIRST
@@ -82,7 +82,7 @@ class AlterTable extends BaseAlterTable
      */
     public function collating($pCollating)
     {
-        $this->_SQLs[] = [
+        $this->SQL[] = [
             'specification' => self::COLLATING,
             'collating' => $pCollating
         ];
@@ -100,11 +100,11 @@ class AlterTable extends BaseAlterTable
         
         if($pPart == 'collating')
         {
-            $i = count($this->_SQLs);
+            $i = count($this->SQL);
 
             while($i--)
             {
-                $SQL = $this->_SQLs[$i];
+                $SQL = $this->SQL[$i];
 
                 if($SQL['specification'] == self::COLLATING)
                 {
@@ -123,7 +123,7 @@ class AlterTable extends BaseAlterTable
     {
         $SQLs = [];
         
-        foreach($this->_SQLs as $SQL)
+        foreach($this->SQL as $SQL)
         {
             switch($SQL['specification'])
             {
@@ -151,7 +151,7 @@ class AlterTable extends BaseAlterTable
             }
         }
         
-        if(null !== $this->_rename)
+        if(null !== $this->rename)
         {
             $SQLs[] = $this->renderRename();
         }

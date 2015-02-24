@@ -54,6 +54,7 @@ trait JoinTrait
      * @param array|string $column
      * @param string $type
      * @return SQLInterface
+     * @throws \RuntimeException
      */
     public function join($table, $condition, $value = null, $column = null, $type = self::JOIN_INNER) 
     {
@@ -69,6 +70,11 @@ trait JoinTrait
 
         if (null !== $column) 
         {
+            if(!method_exists($this, 'column'))
+            {
+                throw new \RuntimeException('SQL does not have any method "column".');
+            }
+            
             $this->column($column, false);
         }
 

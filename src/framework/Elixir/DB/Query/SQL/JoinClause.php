@@ -27,7 +27,7 @@ class JoinClause
     /**
      * @param SQLInterface $SQL
      */
-    public function __construct(SQLInterface $pSQL) 
+    public function __construct(SQLInterface $SQL) 
     {
         $this->SQL = $SQL;
     }

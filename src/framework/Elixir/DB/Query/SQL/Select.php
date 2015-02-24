@@ -215,7 +215,7 @@ class Select extends SQLAbstract
                 $this->table($data);
                 break;
             case 'columns':
-                $this->columns($data, false);
+                $this->column($data, false);
                 break;
             case 'quantifier':
                 $this->quantifier($data);
