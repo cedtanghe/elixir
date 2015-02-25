@@ -1,41 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="robots" content="index, follow, all" />
-        <title>Elixir\HTTP\Session\Session | Elixir</title>
-                    <script type="text/javascript" src="../../../js/jquery-1.3.2.min.js"></script>
-			
-			<link rel="stylesheet" type="text/css" href="../../../stylesheet.css">
-			<link rel="stylesheet" type="text/css" href="../../../styles.css">
-			
-            <link rel="stylesheet" type="text/css" href="../../../prismjs/prism.css">
-            <script type="text/javascript" src="../../../prismjs/prism.js" data-manual></script>
-            
-                            </head>
-        <body id="class">
-            <div class="header">
-        <ul>
-            <li><a href="../../../classes.html">Classes</a></li>
-                            <li><a href="../../../namespaces.html">Namespaces</a></li>
-                        <li><a href="../../../interfaces.html">Interfaces</a></li>
-            <li><a href="../../../doc-index.html">Index</a></li>
-            
-        </ul>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow, all" />
+    <title>Elixir\HTTP\Session\Session | Elixir</title>
 
-        <div id="title">Elixir</div>
+            <link rel="stylesheet" type="text/css" href="../../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../css/sami.css">
+        <script src="../../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../../js/bootstrap.min.js"></script>
+        <script src="../../../js/typeahead.min.js"></script>
+        <script src="../../../sami.js"></script>
+    
+    
+    </head>
 
-            <div class="type">Class</div>
-    <h1><a href="../../../Elixir/HTTP/Session.html">Elixir\HTTP\Session</a>\Session</h1>
+    <body id="class" data-name="class:Elixir_HTTP_Session_Session" data-root-path="../../../">
+            <div id="content">
+        <div id="left-column">
+                <div id="control-panel">
+                <form id="search-form" action="../../../search.html" method="GET">
+            <span class="glyphicon glyphicon-search"></span>
+            <input name="search"
+                   class="typeahead form-control"
+                   type="search"
+                   placeholder="Search">
+        </form>
     </div>
-        <div class="content">
-                <p>class    <strong>Session</strong>        extends <a href="../../../Elixir/Dispatcher/Dispatcher.html"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a>        implements
+
+                <div id="api-tree"></div>
+
+        </div>
+        <div id="right-column">
+                <nav id="site-nav" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-elements">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../../../index.html">Elixir</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-elements">
+                <ul class="nav navbar-nav">
+                    <li><a href="../../../classes.html">Classes</a></li>
+                                            <li><a href="../../../namespaces.html">Namespaces</a></li>
+                                        <li><a href="../../../interfaces.html">Interfaces</a></li>
+                    <li><a href="../../../traits.html">Traits</a></li>
+                    <li><a href="../../../doc-index.html">Index</a></li>
+                    <li><a href="../../../search.html">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+                        <div class="namespace-breadcrumbs">
+            <ol class="breadcrumb">
+                <li><span class="label label-default">class</span></li>
+                                                            <li><a href="../../../Elixir.html">Elixir</a></li>
+                                        <li><a href="../../../Elixir/HTTP.html">HTTP</a></li>
+                                        <li><a href="../../../Elixir/HTTP/Session.html">Session</a></li>
+    
+                <li>Session</li>
+            </ol>
+        </div>
+                <div id="page-content">
+                
+    <div class="page-header">
+        <h1>Session</h1>
+    </div>
+
+    <p>    class
+    <strong>Session</strong>        extends <a href="../../../Elixir/Dispatcher/Dispatcher.html"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a>        implements
         <a href="../../../Elixir/HTTP/Session/SessionInterface.html"><abbr title="Elixir\HTTP\Session\SessionInterface">SessionInterface</abbr></a>, <a href="http://php.net/ArrayAccess"><abbr title="ArrayAccess">ArrayAccess</abbr></a>, <a href="http://php.net/Iterator"><abbr title="Iterator">Iterator</abbr></a>, <a href="http://php.net/Countable"><abbr title="Countable">Countable</abbr></a></p>
 
     
+            <h2>Traits</h2>
+
+        <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-6">
+                                            <a href="../../../Elixir/Dispatcher/DispatcherTrait.html"><abbr title="Elixir\Dispatcher\DispatcherTrait">Elixir\Dispatcher\DispatcherTrait</abbr></a>
+                                    </div>
+                <div class="col-md-6">
+                    
+
+                </div>
+            </div>
+            </div>
+    
             <h2>Constants</h2>
 
-            <table>
+            <table class="table table-condensed">
                     <tr>
                 <td>FLASH_KEY</td>
                 <td class="last">
@@ -51,528 +110,475 @@
     
             <h2>Methods</h2>
 
-            <table>
-                    <tr>
-                <td class="type">
-                    
-                </td>
-                <td class="last">
-                    <a href="#method___construct">__construct</a>()
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+            <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-2 type">
                     mixed
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_getTarget">getTarget</a>()
-                    <p>
-</p>
-                </td>
-                <td><small>from&nbsp;<a href="../../../Elixir/Dispatcher/Dispatcher.html#method_getTarget"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a></small></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_getTarget"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
-                    <a href="#method_setTarget">setTarget</a>(mixed $pValue)
-                    <p>
-</p>
-                </td>
-                <td><small>from&nbsp;<a href="../../../Elixir/Dispatcher/Dispatcher.html#method_setTarget"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a></small></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setTarget">setTarget</a>(mixed $value)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_setTarget"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
-                    <a href="#method_hasListener">hasListener</a>(string $pType)
-                    <p>
-</p>
-                </td>
-                <td><small>from&nbsp;<a href="../../../Elixir/Dispatcher/Dispatcher.html#method_hasListener"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a></small></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_addSubscriber">addSubscriber</a>(<a href="../../../Elixir/Dispatcher/SubscriberInterface.html"><abbr title="Elixir\Dispatcher\SubscriberInterface">SubscriberInterface</abbr></a> $subscriber)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_addSubscriber"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
-                    <a href="#method_addListener">addListener</a>(string $pType, <abbr title="Elixir\Dispatcher\callable">callable</abbr> $pCallback, integer $pPriority)
-                    <p>
-</p>
-                </td>
-                <td><small>from&nbsp;<a href="../../../Elixir/Dispatcher/Dispatcher.html#method_addListener"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a></small></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_removeSubscriber">removeSubscriber</a>(<a href="../../../Elixir/Dispatcher/SubscriberInterface.html"><abbr title="Elixir\Dispatcher\SubscriberInterface">SubscriberInterface</abbr></a> $subscriber)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_removeSubscriber"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
-                    <a href="#method_removeListener">removeListener</a>(string $pType, <abbr title="Elixir\Dispatcher\callable">callable</abbr> $pCallback)
-                    <p>
-</p>
-                </td>
-                <td><small>from&nbsp;<a href="../../../Elixir/Dispatcher/Dispatcher.html#method_removeListener"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a></small></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    array
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_hasListener">hasListener</a>($type)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_hasListener"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_addListener">addListener</a>($type, callable $callback, $priority)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_addListener"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_removeListener">removeListener</a>($type, callable $callback = null)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_removeListener"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_hasListeners">hasListeners</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_hasListeners"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_getListeners">getListeners</a>()
-                    <p>
-</p>
-                </td>
-                <td><small>from&nbsp;<a href="../../../Elixir/Dispatcher/Dispatcher.html#method_getListeners"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a></small></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_getListeners"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_removeListeners">removeListeners</a>()
-                    <p>
-</p>
-                </td>
-                <td><small>from&nbsp;<a href="../../../Elixir/Dispatcher/Dispatcher.html#method_removeListeners"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a></small></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_removeListeners"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
-                    <a href="#method_addSubscriber">addSubscriber</a>(<a href="../../../Elixir/Dispatcher/SubscriberInterface.html"><abbr title="Elixir\Dispatcher\SubscriberInterface">SubscriberInterface</abbr></a> $pSubscriber)
-                    <p>
-</p>
-                </td>
-                <td><small>from&nbsp;<a href="../../../Elixir/Dispatcher/Dispatcher.html#method_addSubscriber"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a></small></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_dispatch">dispatch</a>(<a href="../../../Elixir/Dispatcher/Event.html"><abbr title="Elixir\Dispatcher\Event">Event</abbr></a> $event)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_dispatch"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
-                    <a href="#method_removeSubscriber">removeSubscriber</a>(<a href="../../../Elixir/Dispatcher/SubscriberInterface.html"><abbr title="Elixir\Dispatcher\SubscriberInterface">SubscriberInterface</abbr></a> $pSubscriber)
-                    <p>
-</p>
-                </td>
-                <td><small>from&nbsp;<a href="../../../Elixir/Dispatcher/Dispatcher.html#method_removeSubscriber"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a></small></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    
-                </td>
-                <td class="last">
-                    <a href="#method_dispatch">dispatch</a>(<a href="../../../Elixir/Dispatcher/Event.html"><abbr title="Elixir\Dispatcher\Event">Event</abbr></a> $pEvent)
-                    <p>
-</p>
-                </td>
-                <td><small>from&nbsp;<a href="../../../Elixir/Dispatcher/Dispatcher.html#method_dispatch"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a></small></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___construct">__construct</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     static&nbsp;<a href="../../../Elixir/HTTP/Session/Session.html"><abbr title="Elixir\HTTP\Session\Session">Session</abbr></a>|null
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_instance">instance</a>()
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_setHandler">setHandler</a>(<abbr title="Elixir\HTTP\Session\SessionHandlerInterface">SessionHandlerInterface</abbr> $pValue)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     <a href="http://php.net/SessionHandlerInterface"><abbr title="SessionHandlerInterface">SessionHandlerInterface</abbr></a>
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_geHandler">geHandler</a>()
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     boolean
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_exist">exist</a>()
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_setId">setId</a>(string $pValue)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     string
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_getId">getId</a>()
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_setName">setName</a>(string $pValue)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     string
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_getName">getName</a>()
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_regenerate">regenerate</a>(boolean $pDeleteOldSession = true)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_start">start</a>()
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     boolean
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_has">has</a>(mixed $pKey)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     mixed
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_get">get</a>(mixed $pKey, mixed $pDefault = null)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_set">set</a>(mixed $pKey, mixed $pValue)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_remove">remove</a>(mixed $pKey)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     array
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_gets">gets</a>()
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_sets">sets</a>(array $pData)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_offsetExists">offsetExists</a>($pKey)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_offsetSet">offsetSet</a>($pKey, $pValue)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_offsetGet">offsetGet</a>($pKey)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_offsetUnset">offsetUnset</a>($pKey)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_rewind">rewind</a>()
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_current">current</a>()
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_key">key</a>()
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_next">next</a>()
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_valid">valid</a>()
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_count">count</a>()
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method___issset">__issset</a>($pKey)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method___get">__get</a>($pKey)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method___set">__set</a>($pKey, $pValue)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method___unset">__unset</a>($pKey)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     mixed|void
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_flash">flash</a>(mixed $pKey = null, mixed $pValue = null)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_clear">clear</a>()
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_destroy">destroy</a>()
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-            </table>
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+            </div>
 
 
         <h2>Details</h2>
 
-                        <h3 id="method___construct">
-        <div class="location">at line 39</div>
-        <code>            public            
-    <strong>__construct</strong>()</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-            
-            
-            
-                    </div>
-    </div>
-
-                <h3 id="method_getTarget">
-        <div class="location">in <a href="../../../Elixir/Dispatcher/Dispatcher.html#method_getTarget"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a> at line 41</div>
-        <code>            public            mixed
+            <div id="method-details">
+                    <div class="method-item">
+                    <h3 id="method_getTarget">
+        <div class="location">in <a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_getTarget"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a> at line 32</div>
+        <code>                    mixed
     <strong>getTarget</strong>()</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td>mixed</td>
             <td>
@@ -585,23 +591,21 @@
                     </div>
     </div>
 
-                <h3 id="method_setTarget">
-        <div class="location">in <a href="../../../Elixir/Dispatcher/Dispatcher.html#method_setTarget"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a> at line 54</div>
-        <code>            public            
-    <strong>setTarget</strong>(mixed $pValue)</code>
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setTarget">
+        <div class="location">in <a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_setTarget"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a> at line 45</div>
+        <code>                    
+    <strong>setTarget</strong>(mixed $value)</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>mixed</td>
-                <td>$pValue</td>
+                <td>$value</td>
                 <td>
 </td>
             </tr>
@@ -613,214 +617,21 @@
                     </div>
     </div>
 
-                <h3 id="method_hasListener">
-        <div class="location">in <a href="../../../Elixir/Dispatcher/Dispatcher.html#method_hasListener"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a> at line 62</div>
-        <code>            public            
-    <strong>hasListener</strong>(string $pType)</code>
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_addSubscriber">
+        <div class="location">in <a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_addSubscriber"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a> at line 53</div>
+        <code>                    
+    <strong>addSubscriber</strong>(<a href="../../../Elixir/Dispatcher/SubscriberInterface.html"><abbr title="Elixir\Dispatcher\SubscriberInterface">SubscriberInterface</abbr></a> $subscriber)</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
-                    <tr>
-                <td>string</td>
-                <td>$pType</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-            
-            
-                            <h4>See also</h4>
-
-                    <table>
-                    <tr>
-                <td>DispatcherInterface::hasListener()</td>
-                <td></td>
-            </tr>
-            </table>
-
-                    </div>
-    </div>
-
-                <h3 id="method_addListener">
-        <div class="location">in <a href="../../../Elixir/Dispatcher/Dispatcher.html#method_addListener"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a> at line 70</div>
-        <code>            public            
-    <strong>addListener</strong>(string $pType, <abbr title="Elixir\Dispatcher\callable">callable</abbr> $pCallback, integer $pPriority)</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table>
-                    <tr>
-                <td>string</td>
-                <td>$pType</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
-                <td><abbr title="Elixir\Dispatcher\callable">callable</abbr></td>
-                <td>$pCallback</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
-                <td>integer</td>
-                <td>$pPriority</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-            
-            
-                            <h4>See also</h4>
-
-                    <table>
-                    <tr>
-                <td>DispatcherInterface::addListener()</td>
-                <td></td>
-            </tr>
-            </table>
-
-                    </div>
-    </div>
-
-                <h3 id="method_removeListener">
-        <div class="location">in <a href="../../../Elixir/Dispatcher/Dispatcher.html#method_removeListener"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a> at line 107</div>
-        <code>            public            
-    <strong>removeListener</strong>(string $pType, <abbr title="Elixir\Dispatcher\callable">callable</abbr> $pCallback)</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table>
-                    <tr>
-                <td>string</td>
-                <td>$pType</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
-                <td><abbr title="Elixir\Dispatcher\callable">callable</abbr></td>
-                <td>$pCallback</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-            
-            
-                            <h4>See also</h4>
-
-                    <table>
-                    <tr>
-                <td>DispatcherInterface::removeListener()</td>
-                <td></td>
-            </tr>
-            </table>
-
-                    </div>
-    </div>
-
-                <h3 id="method_getListeners">
-        <div class="location">in <a href="../../../Elixir/Dispatcher/Dispatcher.html#method_getListeners"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a> at line 134</div>
-        <code>            public            array
-    <strong>getListeners</strong>()</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-            
-                            <h4>Return Value</h4>
-
-                    <table>
-        <tr>
-            <td>array</td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                            <h4>See also</h4>
-
-                    <table>
-                    <tr>
-                <td>DispatcherInterface::getListeners()</td>
-                <td></td>
-            </tr>
-            </table>
-
-                    </div>
-    </div>
-
-                <h3 id="method_removeListeners">
-        <div class="location">in <a href="../../../Elixir/Dispatcher/Dispatcher.html#method_removeListeners"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a> at line 142</div>
-        <code>            public            
-    <strong>removeListeners</strong>()</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-            
-            
-            
-                            <h4>See also</h4>
-
-                    <table>
-                    <tr>
-                <td>DispatcherInterface::removeListeners()</td>
-                <td></td>
-            </tr>
-            </table>
-
-                    </div>
-    </div>
-
-                <h3 id="method_addSubscriber">
-        <div class="location">in <a href="../../../Elixir/Dispatcher/Dispatcher.html#method_addSubscriber"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a> at line 151</div>
-        <code>            public            
-    <strong>addSubscriber</strong>(<a href="../../../Elixir/Dispatcher/SubscriberInterface.html"><abbr title="Elixir\Dispatcher\SubscriberInterface">SubscriberInterface</abbr></a> $pSubscriber)</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td><a href="../../../Elixir/Dispatcher/SubscriberInterface.html"><abbr title="Elixir\Dispatcher\SubscriberInterface">SubscriberInterface</abbr></a></td>
-                <td>$pSubscriber</td>
+                <td>$subscriber</td>
                 <td>
 </td>
             </tr>
@@ -831,7 +642,7 @@
             
                             <h4>See also</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>DispatcherInterface::addSubscriber()</td>
                 <td></td>
@@ -841,23 +652,21 @@
                     </div>
     </div>
 
-                <h3 id="method_removeSubscriber">
-        <div class="location">in <a href="../../../Elixir/Dispatcher/Dispatcher.html#method_removeSubscriber"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a> at line 159</div>
-        <code>            public            
-    <strong>removeSubscriber</strong>(<a href="../../../Elixir/Dispatcher/SubscriberInterface.html"><abbr title="Elixir\Dispatcher\SubscriberInterface">SubscriberInterface</abbr></a> $pSubscriber)</code>
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_removeSubscriber">
+        <div class="location">in <a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_removeSubscriber"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a> at line 61</div>
+        <code>                    
+    <strong>removeSubscriber</strong>(<a href="../../../Elixir/Dispatcher/SubscriberInterface.html"><abbr title="Elixir\Dispatcher\SubscriberInterface">SubscriberInterface</abbr></a> $subscriber)</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td><a href="../../../Elixir/Dispatcher/SubscriberInterface.html"><abbr title="Elixir\Dispatcher\SubscriberInterface">SubscriberInterface</abbr></a></td>
-                <td>$pSubscriber</td>
+                <td>$subscriber</td>
                 <td>
 </td>
             </tr>
@@ -868,7 +677,7 @@
             
                             <h4>See also</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>DispatcherInterface::removeSubscriber()</td>
                 <td></td>
@@ -878,23 +687,21 @@
                     </div>
     </div>
 
-                <h3 id="method_dispatch">
-        <div class="location">in <a href="../../../Elixir/Dispatcher/Dispatcher.html#method_dispatch"><abbr title="Elixir\Dispatcher\Dispatcher">Dispatcher</abbr></a> at line 182</div>
-        <code>            public            
-    <strong>dispatch</strong>(<a href="../../../Elixir/Dispatcher/Event.html"><abbr title="Elixir\Dispatcher\Event">Event</abbr></a> $pEvent)</code>
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_hasListener">
+        <div class="location">in <a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_hasListener"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a> at line 69</div>
+        <code>                    
+    <strong>hasListener</strong>($type)</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
-                <td><a href="../../../Elixir/Dispatcher/Event.html"><abbr title="Elixir\Dispatcher\Event">Event</abbr></a></td>
-                <td>$pEvent</td>
+                <td></td>
+                <td>$type</td>
                 <td>
 </td>
             </tr>
@@ -905,7 +712,202 @@
             
                             <h4>See also</h4>
 
-                    <table>
+                    <table class="table table-condensed">
+                    <tr>
+                <td>DispatcherInterface::hasListener()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_addListener">
+        <div class="location">in <a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_addListener"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a> at line 77</div>
+        <code>                    
+    <strong>addListener</strong>($type, callable $callback, $priority)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$type</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>callable</td>
+                <td>$callback</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$priority</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>DispatcherInterface::addListener()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_removeListener">
+        <div class="location">in <a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_removeListener"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a> at line 114</div>
+        <code>                    
+    <strong>removeListener</strong>($type, callable $callback = null)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$type</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>callable</td>
+                <td>$callback</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>DispatcherInterface::removeListener()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_hasListeners">
+        <div class="location">in <a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_hasListeners"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a> at line 145</div>
+        <code>                    
+    <strong>hasListeners</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>DispatcherInterface::hasListeners()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getListeners">
+        <div class="location">in <a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_getListeners"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a> at line 153</div>
+        <code>                    
+    <strong>getListeners</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>DispatcherInterface::getListeners()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_removeListeners">
+        <div class="location">in <a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_removeListeners"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a> at line 161</div>
+        <code>                    
+    <strong>removeListeners</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>DispatcherInterface::removeListeners()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_dispatch">
+        <div class="location">in <a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_dispatch"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a> at line 170</div>
+        <code>                    
+    <strong>dispatch</strong>(<a href="../../../Elixir/Dispatcher/Event.html"><abbr title="Elixir\Dispatcher\Event">Event</abbr></a> $event)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../Elixir/Dispatcher/Event.html"><abbr title="Elixir\Dispatcher\Event">Event</abbr></a></td>
+                <td>$event</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
                     <tr>
                 <td>DispatcherInterface::dispatch()</td>
                 <td></td>
@@ -915,21 +917,44 @@
                     </div>
     </div>
 
-                <h3 id="method_instance">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method___construct">
+        <div class="location">at line 39</div>
+        <code>                    
+    <strong>__construct</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="http://php.net/LogicException"><abbr title="LogicException">LogicException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_instance">
         <div class="location">at line 52</div>
-        <code>        static    public            <a href="../../../Elixir/HTTP/Session/Session.html"><abbr title="Elixir\HTTP\Session\Session">Session</abbr></a>|null
+        <code>        static            <a href="../../../Elixir/HTTP/Session/Session.html"><abbr title="Elixir\HTTP\Session\Session">Session</abbr></a>|null
     <strong>instance</strong>()</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td><a href="../../../Elixir/HTTP/Session/Session.html"><abbr title="Elixir\HTTP\Session\Session">Session</abbr></a>|null</td>
             <td>
@@ -942,20 +967,18 @@
                     </div>
     </div>
 
-                <h3 id="method_setHandler">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setHandler">
         <div class="location">at line 61</div>
-        <code>            public            
+        <code>                    
     <strong>setHandler</strong>(<abbr title="Elixir\HTTP\Session\SessionHandlerInterface">SessionHandlerInterface</abbr> $pValue)</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td><abbr title="Elixir\HTTP\Session\SessionHandlerInterface">SessionHandlerInterface</abbr></td>
                 <td>$pValue</td>
@@ -966,10 +989,20 @@
 
             
             
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="http://php.net/LogicException"><abbr title="LogicException">LogicException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
             
                             <h4>See also</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>SessionInterface::setHandler()</td>
                 <td></td>
@@ -979,21 +1012,19 @@
                     </div>
     </div>
 
-                <h3 id="method_geHandler">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_geHandler">
         <div class="location">at line 74</div>
-        <code>            public            <a href="http://php.net/SessionHandlerInterface"><abbr title="SessionHandlerInterface">SessionHandlerInterface</abbr></a>
+        <code>                    <a href="http://php.net/SessionHandlerInterface"><abbr title="SessionHandlerInterface">SessionHandlerInterface</abbr></a>
     <strong>geHandler</strong>()</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td><a href="http://php.net/SessionHandlerInterface"><abbr title="SessionHandlerInterface">SessionHandlerInterface</abbr></a></td>
             <td>
@@ -1005,7 +1036,7 @@
             
                             <h4>See also</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>SessionInterface::getHandler()</td>
                 <td></td>
@@ -1015,21 +1046,19 @@
                     </div>
     </div>
 
-                <h3 id="method_exist">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_exist">
         <div class="location">at line 82</div>
-        <code>            public            boolean
+        <code>                    boolean
     <strong>exist</strong>()</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td>boolean</td>
             <td>
@@ -1041,7 +1070,7 @@
             
                             <h4>See also</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>SessionInterface::exist()</td>
                 <td></td>
@@ -1051,20 +1080,18 @@
                     </div>
     </div>
 
-                <h3 id="method_setId">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setId">
         <div class="location">at line 103</div>
-        <code>            public            
+        <code>                    
     <strong>setId</strong>(string $pValue)</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>string</td>
                 <td>$pValue</td>
@@ -1075,10 +1102,20 @@
 
             
             
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="http://php.net/LogicException"><abbr title="LogicException">LogicException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
             
                             <h4>See also</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>SessionInterface::setId()</td>
                 <td></td>
@@ -1088,21 +1125,19 @@
                     </div>
     </div>
 
-                <h3 id="method_getId">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getId">
         <div class="location">at line 116</div>
-        <code>            public            string
+        <code>                    string
     <strong>getId</strong>()</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td>string</td>
             <td>
@@ -1114,7 +1149,7 @@
             
                             <h4>See also</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>SessionInterface::getId()</td>
                 <td></td>
@@ -1124,20 +1159,18 @@
                     </div>
     </div>
 
-                <h3 id="method_setName">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setName">
         <div class="location">at line 126</div>
-        <code>            public            
+        <code>                    
     <strong>setName</strong>(string $pValue)</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>string</td>
                 <td>$pValue</td>
@@ -1148,10 +1181,25 @@
 
             
             
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="http://php.net/LogicException"><abbr title="LogicException">LogicException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
             
                             <h4>See also</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>SessionInterface::setName()</td>
                 <td></td>
@@ -1161,21 +1209,19 @@
                     </div>
     </div>
 
-                <h3 id="method_getName">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getName">
         <div class="location">at line 144</div>
-        <code>            public            string
+        <code>                    string
     <strong>getName</strong>()</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td>string</td>
             <td>
@@ -1187,7 +1233,7 @@
             
                             <h4>See also</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>SessionInterface::getName()</td>
                 <td></td>
@@ -1197,20 +1243,18 @@
                     </div>
     </div>
 
-                <h3 id="method_regenerate">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_regenerate">
         <div class="location">at line 152</div>
-        <code>            public            
+        <code>                    
     <strong>regenerate</strong>(boolean $pDeleteOldSession = true)</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>boolean</td>
                 <td>$pDeleteOldSession</td>
@@ -1224,7 +1268,7 @@
             
                             <h4>See also</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>SessionInterface::regenerate()</td>
                 <td></td>
@@ -1234,23 +1278,21 @@
                     </div>
     </div>
 
-                <h3 id="method_start">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_start">
         <div class="location">at line 160</div>
-        <code>            public            
+        <code>                    
     <strong>start</strong>()</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
             
             
             
                             <h4>See also</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>SessionInterface::start()</td>
                 <td></td>
@@ -1260,20 +1302,18 @@
                     </div>
     </div>
 
-                <h3 id="method_has">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_has">
         <div class="location">at line 184</div>
-        <code>            public            boolean
+        <code>                    boolean
     <strong>has</strong>(mixed $pKey)</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>mixed</td>
                 <td>$pKey</td>
@@ -1285,7 +1325,7 @@
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td>boolean</td>
             <td>
@@ -1297,7 +1337,7 @@
             
                             <h4>See also</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>SessionInterface::has()</td>
                 <td></td>
@@ -1307,20 +1347,18 @@
                     </div>
     </div>
 
-                <h3 id="method_get">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_get">
         <div class="location">at line 192</div>
-        <code>            public            mixed
+        <code>                    mixed
     <strong>get</strong>(mixed $pKey, mixed $pDefault = null)</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>mixed</td>
                 <td>$pKey</td>
@@ -1338,7 +1376,7 @@
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td>mixed</td>
             <td>
@@ -1350,7 +1388,7 @@
             
                             <h4>See also</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>SessionInterface::get()</td>
                 <td></td>
@@ -1360,20 +1398,18 @@
                     </div>
     </div>
 
-                <h3 id="method_set">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_set">
         <div class="location">at line 200</div>
-        <code>            public            
+        <code>                    
     <strong>set</strong>(mixed $pKey, mixed $pValue)</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>mixed</td>
                 <td>$pKey</td>
@@ -1393,7 +1429,7 @@
             
                             <h4>See also</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>SessionInterface::set()</td>
                 <td></td>
@@ -1403,20 +1439,18 @@
                     </div>
     </div>
 
-                <h3 id="method_remove">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_remove">
         <div class="location">at line 208</div>
-        <code>            public            
+        <code>                    
     <strong>remove</strong>(mixed $pKey)</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>mixed</td>
                 <td>$pKey</td>
@@ -1430,7 +1464,7 @@
             
                             <h4>See also</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>SessionInterface::remove()</td>
                 <td></td>
@@ -1440,21 +1474,19 @@
                     </div>
     </div>
 
-                <h3 id="method_gets">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_gets">
         <div class="location">at line 221</div>
-        <code>            public            array
+        <code>                    array
     <strong>gets</strong>()</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td>array</td>
             <td>
@@ -1466,7 +1498,7 @@
             
                             <h4>See also</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>SessionInterface::gets()</td>
                 <td></td>
@@ -1476,20 +1508,18 @@
                     </div>
     </div>
 
-                <h3 id="method_sets">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_sets">
         <div class="location">at line 229</div>
-        <code>            public            
+        <code>                    
     <strong>sets</strong>(array $pData)</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>array</td>
                 <td>$pData</td>
@@ -1503,7 +1533,7 @@
             
                             <h4>See also</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>SessionInterface::sets()</td>
                 <td></td>
@@ -1513,20 +1543,18 @@
                     </div>
     </div>
 
-                <h3 id="method_offsetExists">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_offsetExists">
         <div class="location">at line 242</div>
-        <code>            public            
+        <code>                    
     <strong>offsetExists</strong>($pKey)</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td></td>
                 <td>$pKey</td>
@@ -1540,7 +1568,7 @@
             
                             <h4>See also</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>Session::has()</td>
                 <td></td>
@@ -1550,20 +1578,18 @@
                     </div>
     </div>
 
-                <h3 id="method_offsetSet">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_offsetSet">
         <div class="location">at line 251</div>
-        <code>            public            
+        <code>                    
     <strong>offsetSet</strong>($pKey, $pValue)</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td></td>
                 <td>$pKey</td>
@@ -1582,7 +1608,7 @@
             
                             <h4>Exceptions</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
                 <td>
@@ -1593,7 +1619,7 @@
             
                             <h4>See also</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>Session::set()</td>
                 <td></td>
@@ -1603,20 +1629,18 @@
                     </div>
     </div>
 
-                <h3 id="method_offsetGet">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_offsetGet">
         <div class="location">at line 264</div>
-        <code>            public            
+        <code>                    
     <strong>offsetGet</strong>($pKey)</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td></td>
                 <td>$pKey</td>
@@ -1630,7 +1654,7 @@
             
                             <h4>See also</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>Session::get()</td>
                 <td></td>
@@ -1640,20 +1664,18 @@
                     </div>
     </div>
 
-                <h3 id="method_offsetUnset">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_offsetUnset">
         <div class="location">at line 272</div>
-        <code>            public            
+        <code>                    
     <strong>offsetUnset</strong>($pKey)</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td></td>
                 <td>$pKey</td>
@@ -1667,7 +1689,7 @@
             
                             <h4>See also</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>Session::remove()</td>
                 <td></td>
@@ -1677,23 +1699,21 @@
                     </div>
     </div>
 
-                <h3 id="method_rewind">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_rewind">
         <div class="location">at line 280</div>
-        <code>            public            
+        <code>                    
     <strong>rewind</strong>()</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
             
             
             
                             <h4>See also</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>Parameters::rewind()</td>
                 <td></td>
@@ -1703,23 +1723,21 @@
                     </div>
     </div>
 
-                <h3 id="method_current">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_current">
         <div class="location">at line 288</div>
-        <code>            public            
+        <code>                    
     <strong>current</strong>()</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
             
             
             
                             <h4>See also</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>Parameters::current()</td>
                 <td></td>
@@ -1729,23 +1747,21 @@
                     </div>
     </div>
 
-                <h3 id="method_key">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_key">
         <div class="location">at line 296</div>
-        <code>            public            
+        <code>                    
     <strong>key</strong>()</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
             
             
             
                             <h4>See also</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>Parameters::key()</td>
                 <td></td>
@@ -1755,23 +1771,21 @@
                     </div>
     </div>
 
-                <h3 id="method_next">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_next">
         <div class="location">at line 304</div>
-        <code>            public            
+        <code>                    
     <strong>next</strong>()</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
             
             
             
                             <h4>See also</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>Parameters::next()</td>
                 <td></td>
@@ -1781,23 +1795,21 @@
                     </div>
     </div>
 
-                <h3 id="method_valid">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_valid">
         <div class="location">at line 312</div>
-        <code>            public            
+        <code>                    
     <strong>valid</strong>()</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
             
             
             
                             <h4>See also</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>Parameters::valid()</td>
                 <td></td>
@@ -1807,23 +1819,21 @@
                     </div>
     </div>
 
-                <h3 id="method_count">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_count">
         <div class="location">at line 320</div>
-        <code>            public            
+        <code>                    
     <strong>count</strong>()</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
             
             
             
                             <h4>See also</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>Parameters::count()</td>
                 <td></td>
@@ -1833,20 +1843,18 @@
                     </div>
     </div>
 
-                <h3 id="method___issset">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method___issset">
         <div class="location">at line 328</div>
-        <code>            public            
+        <code>                    
     <strong>__issset</strong>($pKey)</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td></td>
                 <td>$pKey</td>
@@ -1860,7 +1868,7 @@
             
                             <h4>See also</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>Session::has()</td>
                 <td></td>
@@ -1870,20 +1878,18 @@
                     </div>
     </div>
 
-                <h3 id="method___get">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method___get">
         <div class="location">at line 336</div>
-        <code>            public            
+        <code>                    
     <strong>__get</strong>($pKey)</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td></td>
                 <td>$pKey</td>
@@ -1897,7 +1903,7 @@
             
                             <h4>See also</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>Session::get()</td>
                 <td></td>
@@ -1907,20 +1913,18 @@
                     </div>
     </div>
 
-                <h3 id="method___set">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method___set">
         <div class="location">at line 344</div>
-        <code>            public            
+        <code>                    
     <strong>__set</strong>($pKey, $pValue)</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td></td>
                 <td>$pKey</td>
@@ -1940,7 +1944,7 @@
             
                             <h4>See also</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>Session::set()</td>
                 <td></td>
@@ -1950,20 +1954,18 @@
                     </div>
     </div>
 
-                <h3 id="method___unset">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method___unset">
         <div class="location">at line 352</div>
-        <code>            public            
+        <code>                    
     <strong>__unset</strong>($pKey)</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td></td>
                 <td>$pKey</td>
@@ -1977,7 +1979,7 @@
             
                             <h4>See also</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>Session::remove()</td>
                 <td></td>
@@ -1987,20 +1989,18 @@
                     </div>
     </div>
 
-                <h3 id="method_flash">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_flash">
         <div class="location">at line 360</div>
-        <code>            public            mixed|void
+        <code>                    mixed|void
     <strong>flash</strong>(mixed $pKey = null, mixed $pValue = null)</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>mixed</td>
                 <td>$pKey</td>
@@ -2018,7 +2018,7 @@
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td>mixed|void</td>
             <td>
@@ -2030,7 +2030,7 @@
             
                             <h4>See also</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>SessionInterface::flash()</td>
                 <td></td>
@@ -2040,23 +2040,21 @@
                     </div>
     </div>
 
-                <h3 id="method_clear">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_clear">
         <div class="location">at line 398</div>
-        <code>            public            
+        <code>                    
     <strong>clear</strong>()</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
             
             
             
                             <h4>See also</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>SessionInterface::clear()</td>
                 <td></td>
@@ -2066,23 +2064,21 @@
                     </div>
     </div>
 
-                <h3 id="method_destroy">
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_destroy">
         <div class="location">at line 407</div>
-        <code>            public            
+        <code>                    
     <strong>destroy</strong>()</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
             
             
             
                             <h4>See also</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>SessionInterface::destroy()</td>
                 <td></td>
@@ -2092,24 +2088,17 @@
                     </div>
     </div>
 
+            </div>
+            </div>
+
     
             </div>
-            <div id="footer">
-        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+                <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/">Sami, the API Documentation Generator</a>.
     </div>
-		<script type="text/javascript">
-			$('.description code').addClass('language-php');
-			Prism.highlightAll();
-			
-			$('.description p').each(function(e)
-			{
-				if($(this).text().substr(-1) == ':')
-				{
-					$(this).css({"font-weight": "bold"});
-				}
-			});
-			
-			$('.description p:empty').remove();
-		</script>
+
+        </div>
+    </div>
     </body>
+
 </html>

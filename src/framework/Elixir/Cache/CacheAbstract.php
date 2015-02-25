@@ -43,11 +43,11 @@ abstract class CacheAbstract implements CacheInterface
     }
     
     /**
-     * @param EncoderInterface $pValue
+     * @param EncoderInterface $value
      */
-    public function setEncoder(EncoderInterface $pValue)
+    public function setEncoder(EncoderInterface $value)
     {
-        $this->encoder = $pValue;
+        $this->encoder = $value;
     }
     
     /**
