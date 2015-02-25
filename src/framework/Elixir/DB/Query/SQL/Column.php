@@ -5,429 +5,428 @@ namespace Elixir\DB\Query\SQL;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
-class Column
+class Column 
 {
     /**
      * @var string
      */
     const TINYINT = 'TINYINT';
-    
+
     /**
      * @var string
      */
     const SMALLINT = 'SMALLINT';
-    
+
     /**
      * @var string
      */
     const MEDIUMINT = 'MEDIUMINT';
-    
+
     /**
      * @var string
      */
     const INT = 'INT';
-    
+
     /**
      * @var string
      */
     const INTEGER = 'INTEGER';
-    
+
     /**
      * @var string
      */
     const BIGINT = 'BIGINT';
-    
+
     /**
      * @var string
      */
     const REAL = 'REAL';
-    
+
     /**
      * @var string
      */
     const DOUBLE = 'DOUBLE';
-    
+
     /**
      * @var string
      */
     const FLOAT = 'FLOAT';
-    
+
     /**
      * @var string
      */
     const DECIMAL = 'DECIMAL';
-    
+
     /**
      * @var string
      */
     const NUMERIC = 'NUMERIC';
-    
+
     /**
      * @var string
      */
     const DATE = 'DATE';
-    
+
     /**
      * @var string
      */
     const TIME = 'TIME';
-    
+
     /**
      * @var string
      */
     const TIMESTAMP = 'TIMESTAMP';
-    
+
     /**
      * @var string
      */
     const DATETIME = 'DATETIME';
-    
+
     /**
      * @var string
      */
     const CHAR = 'CHAR';
-    
+
     /**
      * @var string
      */
     const VARCHAR = 'VARCHAR';
-    
+
     /**
      * @var string
      */
     const TINYBLOB = 'TINYBLOB';
-    
+
     /**
      * @var string
      */
     const BLOB = 'BLOB';
-    
+
     /**
      * @var string
      */
     const MEDIUMBLOB = 'MEDIUMBLOB';
-    
+
     /**
      * @var string
      */
     const LONGBLOB = 'LONGBLOB';
-    
+
     /**
      * @var string
      */
     const TINYTEXT = 'TINYTEXT';
-    
+
     /**
      * @var string
      */
     const TEXT = 'TEXT';
-    
+
     /**
      * @var string
      */
     const MEDIUMTEXT = 'MEDIUMTEXT';
-    
+
     /**
      * @var string
      */
     const LONGTEXT = 'LONGTEXT';
-    
+
     /**
      * @var string
      */
     const ENUM = 'ENUM';
-    
+
     /**
      * @var string
      */
     const SET = 'SET';
-    
+
     /**
      * @var string
      */
     const GEOMETRY = 'GEOMETRY';
-    
+
     /**
      * @var string
      */
     const POINT = 'POINT';
-    
+
     /**
      * @var string
      */
     const LINESTRING = 'LINESTRING';
-    
+
     /**
      * @var string
      */
     const POLYGON = 'POLYGON';
-    
+
     /**
      * @var string
      */
     const MULTIPOINT = 'MULTIPOINT';
-    
+
     /**
      * @var string
      */
     const MULTILINESTRING = 'MULTILINESTRING';
-    
+
     /**
      * @var string
      */
     const MULTIPOLYGON = 'MULTIPOLYGON';
-    
+
     /**
      * @var string
      */
     const GEOMETRYCOLLECTION = 'GEOMETRYCOLLECTION';
-    
+
     /**
      * @var string
      */
     const CURRENT_TIMESTAMP = 'CURRENT_TIMESTAMP';
-    
+
     /**
      * @var string
      */
     const BINARY = 'BINARY';
-    
+
     /**
      * @var string
      */
     const UNSIGNED = 'UNSIGNED';
-    
+
     /**
      * @var string
      */
     const UNSIGNED_ZEROFILL = 'UNSIGNED_ZEROFILL';
-    
+
     /**
      * @var string
      */
     const UPDATE_CURRENT_TIMESTAMP = 'ON UPDATE CURRENT_TIMESTAMP';
-    
+
     /**
      * @var string
      */
-    protected $_name;
-    
+    protected $name;
+
     /**
      * @var string
      */
-    protected $_type;
-    
+    protected $type;
+
     /**
      * @var mixed
      */
-    protected $_value;
-    
+    protected $value;
+
     /**
      * @var mixed
      */
-    protected $_default;
-    
+    protected $default;
+
     /**
      * @var string
      */
-    protected $_collation = null;
-    
+    protected $collation = null;
+
     /**
      * @var string
      */
-    protected $_attribute;
+    protected $attribute;
 
     /**
      * @var boolean
      */
-    protected $_nullable = false;
-    
+    protected $nullable = false;
+
     /**
      * @var boolean 
      */
-    protected $_autoIncrement = false;
-    
+    protected $autoIncrement = false;
+
     /**
      * @var string
      */
-    protected $_comment;
+    protected $comment;
 
     /**
-     * @param string $pName
-     * @param string $pType
+     * @param string $name
+     * @param string $type
      */
-    public function __construct($pName = null, $pType = null)
+    public function __construct($name = null, $type = null)
     {
-        if(null !== $pName)
+        if (null !== $name) 
         {
-            $this->setName($pName);
+            $this->setName($name);
         }
-        
-        if(null !== $pType)
+
+        if (null !== $type) 
         {
-            $this->setType($pType);
+            $this->setType($type);
         }
     }
-    
+
     /**
-     * @param string $pValue
+     * @param string $value
      * @return Column
      */
-    public function setName($pValue)
+    public function setName($value)
     {
-        $this->_name = $pValue;
+        $this->name = $value;
     }
-    
+
     /**
      * @return string
      */
     public function getName()
     {
-        return $this->_name;
+        return $this->name;
     }
-    
+
     /**
-     * @param string $pValue
+     * @param string $value
      * @return Column
      */
-    public function setType($pValue)
+    public function setType($value) 
     {
-        $this->_type = $pValue;
+        $this->type = $value;
         return $this;
     }
-    
+
     /**
      * @return string
      */
-    public function getType()
+    public function getType() 
     {
-        return $this->_type;
+        return $this->type;
     }
-    
+
     /**
-     * @param mixed $pValue
+     * @param mixed $value
      * @return Column
      */
-    public function setValue($pValue)
+    public function setValue($value)
     {
-        $this->_value = $pValue;
+        $this->value = $value;
         return $this;
     }
-    
+
     /**
      * @return mixed
      */
-    public function getValue()
+    public function getValue() 
     {
-        return $this->_value;
+        return $this->value;
     }
-    
+
     /**
-     * @param mixed $pValue
+     * @param mixed $value
      * @return Column
      */
-    public function setDefault($pValue)
+    public function setDefault($value) 
     {
-        $this->_default = $pValue;
+        $this->default = $value;
         return $this;
     }
-    
+
     /**
      * @return mixed
      */
-    public function getDefault()
+    public function getDefault() 
     {
-        return $this->_default;
+        return $this->default;
     }
-    
+
     /**
-     * @param string $pValue
+     * @param string $value
      * @return Column
      */
-    public function setCollating($pValue)
+    public function setCollating($value) 
     {
-        $this->_collation = $pValue;
+        $this->collation = $value;
         return $this;
     }
-    
+
     /**
      * @return string
      */
-    public function getCollating()
+    public function getCollating() 
     {
-        return $this->_collation;
+        return $this->collation;
     }
-    
+
     /**
-     * @param string $pValue
+     * @param string $value
      * @return Column
      */
-    public function setAttribute($pValue)
+    public function setAttribute($value) 
     {
-        $this->_attribute = $pValue;
+        $this->attribute = $value;
         return $this;
     }
-    
+
     /**
      * @return string
      */
-    public function getAttribute()
+    public function getAttribute() 
     {
-        return $this->_attribute;
+        return $this->attribute;
     }
-    
+
     /**
-     * @param boolean $pValue
+     * @param boolean $value
      * @return Column
      */
-    public function setNullable($pValue)
+    public function setNullable($value) 
     {
-        $this->_nullable = $pValue;
+        $this->nullable = $value;
         return $this;
     }
-    
+
     /**
      * @return boolean
      */
     public function isNullable()
     {
-        return $this->_nullable;
+        return $this->nullable;
     }
-    
+
     /**
-     * @param boolean $pValue
+     * @param boolean $value
      * @return Column
      */
-    public function setAutoIncrement($pValue)
+    public function setAutoIncrement($value)
     {
-        $this->_autoIncrement = $pValue;
+        $this->autoIncrement = $value;
         return $this;
     }
-    
+
     /**
      * @return boolean
      */
     public function isAutoIncrement()
     {
-        return $this->_autoIncrement;
+        return $this->autoIncrement;
     }
-    
+
     /**
-     * @param string $pValue
+     * @param string $value
      * @return Column
      */
-    public function setComment($pValue)
+    public function setComment($value) 
     {
-        $this->_comment = $pValue;
+        $this->comment = $value;
         return $this;
     }
-    
+
     /**
      * @return string
      */
-    public function getComment()
+    public function getComment() 
     {
-        return $this->_comment;
+        return $this->comment;
     }
 }

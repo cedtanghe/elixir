@@ -223,7 +223,7 @@ class CreateTable extends SQLAbstract
             {
                 if (strtoupper($attribute) != Column::UPDATE_CURRENT_TIMESTAMP)
                 {
-                    $SQL .= ' ' . $attribute;
+                    $col .= ' ' . $attribute;
                 }
             }
 
@@ -237,7 +237,9 @@ class CreateTable extends SQLAbstract
                 if (false !== $pos) 
                 {
                     $col .= ' ' . sprintf(
-                        'CHARACTER SET %s COLLATE %s', substr($collating, 0, strpos($collating, '_')), $collating
+                        'CHARACTER SET %s COLLATE %s', 
+                        substr($collating, 0, strpos($collating, '_')), 
+                        $collating
                     );
                 }
                 else 
