@@ -30,7 +30,7 @@ class Parameters implements ParametersInterface, \ArrayAccess, \Iterator, \Count
     /**
      * @param array|\ArrayAccess $pData
      */
-    public function __construct(&$pData = [])
+    public function __construct(&$pData)
     {
         $this->_data = &$pData;
     }

@@ -60,11 +60,12 @@ abstract class CacheAbstract implements CacheInterface
 
     /**
      * @param integer|string|\DateTime $TTL
-     * @param integer $default
      * @return integer
      */
-    public function convertTTL($TTL, $default = 31556926)
+    public function convertTTL($TTL)
     {
+        $default = 31556926;
+        
         if (0 == $TTL)
         {
             return $default;

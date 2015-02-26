@@ -91,17 +91,7 @@ interface SQLInterface
      * @var string
      */
     const ORDER_NONE = null;
-
-    /**
-     * @var string
-     */
-    const CONSTRAINT_TEMPORARY = 'TEMPORARY';
-
-    /**
-     * @var string
-     */
-    const CONSTRAINT_IF_NOT_EXISTS = 'IF NOT EXISTS';
-
+    
     /**
      * @var string
      */

@@ -102,7 +102,7 @@ class File extends CacheAbstract
                 fclose($handle);
                 unlink($file);
 
-                return is_callable($default) ? $default() : $default;
+                return is_callable($default) ? call_user_func($default) : $default;
             }
 
             $data = '';

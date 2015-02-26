@@ -7,27 +7,26 @@ use Elixir\DB\Query\SQL\Select as BaseSelect;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
 class Select extends BaseSelect
 {
     /**
-     * @see BaseSelect::renderOrders()
+     * @see OrderTrait::renderOrder()
      */
-    protected function renderOrders()
+    protected function renderOrder()
     {
         $SQL = '';
-        
-        if(count($this->order) > 0)
+
+        if (count($this->order) > 0) 
         {
             $SQL .= 'ORDER BY ';
             $first = true;
-            
-            foreach($this->order as $order)
+
+            foreach ($this->order as $order) 
             {
                 $SQL .= ($first ? '' : ', ') . $order['column'] . (self::ORDER_NONE === $order['type'] ? '' : ' COLLATE NOCASE ' . $order['type']);
                 $first = false;
             }
-            
+
             $SQL .= ' ' . "\n";
         }
 
