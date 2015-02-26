@@ -3,7 +3,7 @@
 namespace Elixir\Cache;
 
 use Elixir\Cache\CacheAbstract;
-use Elixir\Util\Arr as ArrUtil;
+use Elixir\Util\Arr as ArrUtils;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
@@ -31,7 +31,7 @@ class Arr extends CacheAbstract
      */
     public function has($key)
     {
-        return ArrUtil::has([$this->identifier, $key], $this->provider);
+        return ArrUtils::has([$this->identifier, $key], $this->provider);
     }
     
     /**
@@ -39,7 +39,7 @@ class Arr extends CacheAbstract
      */
     public function get($key, $default = null)
     {
-        $value = ArrUtil::get([$this->identifier, $key], $this->provider, null);
+        $value = ArrUtils::get([$this->identifier, $key], $this->provider, null);
 
         if (null !== $value)
         {
@@ -54,7 +54,7 @@ class Arr extends CacheAbstract
      */
     public function set($key, $value, $TTL = 0)
     {
-        ArrUtil::set(
+        ArrUtils::set(
             [$this->identifier, $key], 
             $this->getEncoder()->encode($value),
             $this->provider
@@ -66,7 +66,7 @@ class Arr extends CacheAbstract
      */
     public function remove($key)
     {
-        ArrUtil::remove([$this->identifier, $key], $this->provider);
+        ArrUtils::remove([$this->identifier, $key], $this->provider);
     }
     
     /**
@@ -74,6 +74,6 @@ class Arr extends CacheAbstract
      */
     public function clear()
     {
-        ArrUtil::remove($this->identifier, $this->provider);
+        ArrUtils::remove($this->identifier, $this->provider);
     }
 }
