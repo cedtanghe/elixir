@@ -57,7 +57,31 @@ abstract class CacheAbstract implements CacheInterface
     {
         return $this->encoder;
     }
+    
+    /**
+     * @see CacheInterface::findOrStore()
+     */
+    public function findOrStore($key, $value, $TTL = 0)
+    {
+        $get = $this->get($key, null);
 
+        if (null === $get)
+        {
+            if (is_callable($value))
+            {
+                $get = call_user_func($value);
+            } 
+            else 
+            {
+                $get = $value;
+            }
+            
+            $this->set($key, $get, $TTL);
+        }
+
+        return $get;
+    }
+    
     /**
      * @param integer|string|\DateTime $TTL
      * @return integer

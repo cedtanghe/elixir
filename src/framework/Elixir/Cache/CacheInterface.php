@@ -33,5 +33,13 @@ interface CacheInterface
      */
     public function remove($key);
     
+    /**
+     * @param string $key
+     * @param mixed $value
+     * @param integer|string|\DateTime $TTL
+     * @return mixed
+     */
+    public function findOrStore($key, $value, $TTL = 0);
+    
     public function clear();
 }

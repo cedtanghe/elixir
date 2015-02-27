@@ -9,62 +9,61 @@ use Elixir\DB\Query\SQL\Constraint;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
-class AlterTable extends BaseAlterTable
+class AlterTable extends BaseAlterTable 
 {
     /**
      * @see BaseAlterTable::modifyColumn()
      * @throws \LogicException
      */
-    public function modifyColumn(Column $pColumn)
+    public function modifyColumn(Column $column) 
     {
         throw new \LogicException('Not implemented in sqlite.');
     }
-    
+
     /**
      * @see BaseAlterTable::renameColumn()
      * @throws \LogicException
      */
-    public function renameColumn($pOldColumn, $pNewColumn)
+    public function renameColumn($oldColumn, $newColumn) 
     {
         throw new \LogicException('Not implemented in sqlite.');
     }
-    
+
     /**
      * @see BaseAlterTable::dropColumn()
      * @throws \LogicException
      */
-    public function dropColumn($pColumn)
+    public function dropColumn($column)
     {
         throw new \LogicException('Not implemented in sqlite.');
     }
-    
+
     /**
      * @see BaseAlterTable::addConstraint()
      * @throws \LogicException
      */
-    public function addConstraint(Constraint $pConstraint)
+    public function addConstraint(Constraint $constraint)
     {
         throw new \LogicException('Not implemented in sqlite.');
     }
-    
+
     /**
      * @see BaseAlterTable::dropConstraint()
      * @throws \LogicException
      */
-    public function dropConstraint($pConstraint = null, $pType = null)
+    public function dropConstraint($constraint = null, $type = null) 
     {
         throw new \LogicException('Not implemented in sqlite.');
     }
-    
+
     /**
      * @see BaseAlterTable::renderAddColumn()
      */
-    protected function renderAddColumn($pSQL)
+    protected function renderAddColumn($data) 
     {
-        $column = $pSQL['column'];
+        $column = $data['column'];
         $SQL = 'ALTER TABLE ' . $this->_table . ' ADD COLUMN ';
-        
+
         // Name
         $SQL .= $column->getName();
 
@@ -72,7 +71,7 @@ class AlterTable extends BaseAlterTable
         $SQL .= ' ' . $column->getType();
         $value = $column->getValue();
 
-        if(null !== $value)
+        if (null !== $value)
         {
             $SQL .= '(' . $this->quote($value) . ')';
         }
@@ -80,7 +79,7 @@ class AlterTable extends BaseAlterTable
         // Attribute
         $attribute = $column->getAttribute();
 
-        if(null !== $attribute)
+        if (null !== $attribute) 
         {
             $SQL .= ' ' . $attribute;
         }
@@ -89,7 +88,7 @@ class AlterTable extends BaseAlterTable
         $SQL .= ' ' . ($column->isNullable() ? 'NULL' : 'NOT NULL');
 
         // AutoIncrement
-        if($column->isAutoIncrement())
+        if ($column->isAutoIncrement()) 
         {
             $SQL .= ' AUTO_INCREMENT PRIMARY KEY';
         }
@@ -97,16 +96,16 @@ class AlterTable extends BaseAlterTable
         // Default
         $default = $column->getDefault();
 
-        if(null !== $default)
+        if (null !== $default) 
         {
-            if($default != Column::CURRENT_TIMESTAMP)
+            if ($default != Column::CURRENT_TIMESTAMP)
             {
                 $default = $this->quote($default);
             }
 
             $SQL .= ' DEFAULT ' . $default;
         }
-        
+
         return $SQL;
     }
 }

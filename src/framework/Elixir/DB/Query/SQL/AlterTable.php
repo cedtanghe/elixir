@@ -360,7 +360,9 @@ class AlterTable extends SQLAbstract
             if (false !== $pos) 
             {
                 $SQL .= ' ' . sprintf(
-                    'CHARACTER SET %s COLLATE %s', substr($collating, 0, strpos($collating, '_')), $collating
+                    'CHARACTER SET %s COLLATE %s', 
+                    substr($collating, 0, strpos($collating, '_')),
+                    $collating
                 );
             } 
             else 
@@ -444,7 +446,9 @@ class AlterTable extends SQLAbstract
             if (false !== $pos)
             {
                 $SQL .= ' ' . sprintf(
-                    'CHARACTER SET %s COLLATE %s', substr($collating, 0, strpos($collating, '_')), $collating
+                    'CHARACTER SET %s COLLATE %s',
+                    substr($collating, 0, strpos($collating, '_')),
+                    $collating
                 );
             } 
             else 
