@@ -3,29 +3,32 @@
 namespace Elixir\DB\ORM;
 
 use Elixir\DB\DBInterface;
+use Elixir\DB\ORM\EntityInterface;
+use Elixir\DB\Query\SQL\SQLite\Select;
 use Elixir\DI\ContainerInterface;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-interface RepositoryInterface
+
+interface RepositoryInterface extends EntityInterface
 {
     /**
-     * @param ContainerInterface $value
+     * @param ContainerInterface $pValue
      */
-    public function setConnectionManager(ContainerInterface $value);
-
+    public function setConnectionManager(ContainerInterface $pValue);
+    
     /**
      * @return ContainerInterface
      */
     public function getConnectionManager();
-
+    
     /**
-     * @param string $key
+     * @param string $pKey
      * @return DBInterface
      */
-    public function getConnection($key = null);
-
+    public function getConnection($pKey = null);
+    
     /**
      * @return string
      */
@@ -35,29 +38,35 @@ interface RepositoryInterface
      * @return mixed
      */
     public function getPrimaryKey();
-
+    
     /**
      * @return mixed
      */
     public function getPrimaryValue();
-
+    
+    /**
+     * @param string $pAlias
+     * @return Select
+     */
+    public function select($pAlias = null);
+    
     /**
      * @return boolean
      */
     public function save();
-
+    
     /**
      * @return boolean
      */
     public function insert();
-
+    
     /**
-     * @param array $members
-     * @param array $omitMembers
+     * @param array $pMembers
+     * @param array $pOmitMembers
      * @return boolean
      */
-    public function update(array $members = [], array $omitMembers = []);
-
+    public function update(array $pMembers = [], array $pOmitMembers = []);
+    
     /**
      * @return boolean
      */

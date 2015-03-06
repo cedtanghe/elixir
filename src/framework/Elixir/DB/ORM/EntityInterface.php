@@ -5,39 +5,120 @@ namespace Elixir\DB\ORM;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
 interface EntityInterface
 {
     /**
-     * @param array $pData
-     * @param array $pOptions
+     * @var string
      */
-    public function hydrate(array $pData, array $pOptions = ['raw' => true]);
+    const READ_ONLY = 'read_only';
+
+    /**
+     * @var string
+     */
+    const FILLABLE = 'fillable';
+
+    /**
+     * @var string
+     */
+    const GUARDED = 'guarded';
     
     /**
-     * @param array $pMembers
-     * @param array $pOmitMembers
-     * @param boolean $pRaw
-     * @return array
+     * @var string
      */
-    public function export(array $pMembers = [], array $pOmitMembers = [], $pRaw = false);
+    const SYNC_FILLABLE = 'sync_fillable';
+
+    /**
+     * @var string
+     */
+    const SYNC_GUARDED = 'sync_guarded';
     
     /**
-     * @param string $pKey
-     * @return boolean
+     * @var string
      */
-    public function has($pKey);
+    const SYNC_ALL = 'sync_all';
     
     /**
-     * @param string $pKey
-     * @param mixed $pValue
-     * @param boolean $pFilled
+     * @var null
      */
-    public function set($pKey, $pValue, $pFilled = true);
+    const IGNORE_VALUE = null;
     
     /**
-     * @param string $pKey
+     * @var string
+     */
+    const FORMAT_PHP = 'php';
+    
+    /**
+     * @var string
+     */
+    const FORMAT_JSON = 'json';
+    
+    /**
+     * @var string
+     */
+    const ENTITY_SEPARATOR = '::';
+    
+    /**
+     * @param string $value
+     */
+    public function setState($value);
+
+    /**
+     * @return string
+     */
+    public function getState();
+    
+    /**
      * @return mixed
      */
-    public function get($pKey);
+    public function getIgnoreValue();
+    
+    /**
+     * @param string $state
+     * @return boolean
+     */
+    public function isModified($state = self::SYNC_ALL);
+    
+    /**
+     * @param string $state
+     * @return array
+     */
+    public function getModified($state = self::SYNC_ALL);
+    
+    /**
+     * @param string $state
+     */
+    public function sync($state = self::SYNC_ALL);
+    
+    /**
+     * @param array $data
+     * @param array $options
+     */
+    public function hydrate(array $data, array $options = []);
+
+    /**
+     * @param array $members
+     * @param array $omitMembers
+     * @param array $options
+     * @return array|string
+     */
+    public function export(array $members = [], array $omitMembers = [], array $options = []);
+
+    /**
+     * @param string $key
+     * @return boolean
+     */
+    public function has($key);
+
+    /**
+     * @param string $key
+     * @param mixed $value
+     */
+    public function set($key, $value);
+
+    /**
+     * @param string $key
+     * @param mixed $default
+     * @return mixed
+     */
+    public function get($key, $default = null);
 }

@@ -291,4 +291,15 @@ class Config implements ConfigInterface, \ArrayAccess, \Iterator, \Countable
             $this->data = array_merge($this->data, $data);
         }
     }
+    
+    /**
+     * @ignore
+     */
+    public function __debugInfo()
+    {
+        return [
+            'environment' => $this->environment,
+            'data' => $this->data
+        ];
+    }
 }
