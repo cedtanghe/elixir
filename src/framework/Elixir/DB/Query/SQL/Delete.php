@@ -23,6 +23,9 @@ class Delete extends SQLAbstract
             case 'table':
                 $this->table = null;
                 break;
+            case 'alias':
+                $this->alias(null);
+                break;
             case 'where':
                 $this->where = [];
                 break;
@@ -41,6 +44,8 @@ class Delete extends SQLAbstract
         {
             case 'table':
                 return $this->table;
+            case 'alias':
+                return $this->alias;
             case 'where':
                 return $this->where;
         }
@@ -60,6 +65,9 @@ class Delete extends SQLAbstract
             case 'table':
                 $this->table($data);
                 break;
+            case 'alias':
+                $this->alias($data);
+                break;
             case 'where':
                 $this->where = array_merge($this->where, $data);
                 break;
@@ -77,6 +85,6 @@ class Delete extends SQLAbstract
         $SQL .= $this->table . ' ' . "\n";
         $SQL .= $this->renderWhere();
 
-        return trim($SQL);
+        return trim($this->parseAlias($SQL));
     }
 }

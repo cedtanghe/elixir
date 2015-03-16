@@ -13,6 +13,16 @@ class EntityEvent extends Event
     /**
      * @var string
      */
+    const DEFINE_COLUMNS = 'define_columns';
+    
+    /**
+     * @var string
+     */
+    const DEFINE_GUARDED = 'define_guarded';
+    
+    /**
+     * @var string
+     */
     const CREATE_ENTITY = 'create_entity';
     
     /**

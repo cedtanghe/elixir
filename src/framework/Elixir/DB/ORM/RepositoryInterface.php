@@ -3,12 +3,13 @@
 namespace Elixir\DB\ORM;
 
 use Elixir\DB\DBInterface;
+use Elixir\DB\ORM\EntityInterface;
 use Elixir\DI\ContainerInterface;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-interface RepositoryInterface
+interface RepositoryInterface extends EntityInterface
 {
     /**
      * @param ContainerInterface $value

@@ -132,6 +132,9 @@ class Select extends SQLAbstract
             case 'table':
                 $this->table = null;
                 break;
+            case 'alias':
+                $this->alias(null);
+                break;
             case 'columns':
                 $this->columns = [];
                 break;
@@ -177,6 +180,8 @@ class Select extends SQLAbstract
         {
             case 'table':
                 return $this->table;
+            case 'alias':
+                return $this->alias;
             case 'columns':
                 return $this->columns;
             case 'quantifier':
@@ -213,6 +218,9 @@ class Select extends SQLAbstract
         {
             case 'table':
                 $this->table($data);
+                break;
+            case 'alias':
+                $this->alias($data);
                 break;
             case 'columns':
                 $this->column($data, false);
@@ -276,7 +284,7 @@ class Select extends SQLAbstract
             $SQL .= $this->renderLimit();
         }
 
-        return trim($SQL);
+        return trim($this->parseAlias($SQL));
     }
 
     /**

@@ -2,14 +2,7 @@
 
 namespace Elixir\DB\Query;
 
-use Elixir\DB\Query\SQL\AlterTable;
-use Elixir\DB\Query\SQL\CreateTable;
-use Elixir\DB\Query\SQL\Delete;
-use Elixir\DB\Query\SQL\DropTable;
-use Elixir\DB\Query\SQL\Insert;
-use Elixir\DB\Query\SQL\Select;
-use Elixir\DB\Query\SQL\TruncateTable;
-use Elixir\DB\Query\SQL\Update;
+use Elixir\DB\Query\QueryInterface;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
@@ -18,49 +11,49 @@ interface QueryBuilderInterface
 {
     /**
      * @param string $table
-     * @return Select
+     * @return QueryInterface
      */
     public function createSelect($table = null);
 
     /**
      * @param string $table
-     * @return Insert
+     * @return QueryInterface
      */
     public function createInsert($table = null);
 
     /**
      * @param string $table
-     * @return Delete
+     * @return QueryInterface
      */
     public function createDelete($table = null);
 
     /**
      * @param string $table
-     * @return Update
+     * @return QueryInterface
      */
     public function createUpdate($table = null);
 
     /**
      * @param string $table
-     * @return CreateTable
+     * @return QueryInterface
      */
     public function createTable($table = null);
 
     /**
      * @param string $table
-     * @return AlterTable
+     * @return QueryInterface
      */
     public function createAlterTable($table = null);
 
     /**
      * @param string $table
-     * @return DropTable
+     * @return QueryInterface
      */
     public function createDropTable($table = null);
 
     /**
      * @param string $table
-     * @return TruncateTable
+     * @return QueryInterface
      */
     public function createTruncateTable($table = null);
 }

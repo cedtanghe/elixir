@@ -90,7 +90,7 @@ class Update extends BaseUpdate
         $SQL .= $this->renderOrder();
         $SQL .= $this->renderLimit();
 
-        return trim($SQL);
+        return trim($this->parseAlias($SQL));
     }
     
     /**

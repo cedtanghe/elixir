@@ -102,6 +102,6 @@ class Delete extends BaseDelete
         $SQL .= $this->renderOrder();
         $SQL .= $this->renderLimit();
 
-        return trim($SQL);
+        return trim($this->parseAlias($SQL));
     }
 }

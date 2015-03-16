@@ -1,7 +1,8 @@
 <?php
 
-namespace Elixir\DB\Query\SQL;
+namespace Elixir\DB\Query;
 
+use Elixir\DB\Query\QueryInterface;
 use Elixir\DB\Query\SQL\AlterTable;
 use Elixir\DB\Query\SQL\CreateTable;
 use Elixir\DB\Query\SQL\Delete;
@@ -21,6 +22,7 @@ use Elixir\DB\Query\SQL\SQLite\DropTable as SQLiteDropTable;
 use Elixir\DB\Query\SQL\SQLite\Insert as SQLiteInsert;
 use Elixir\DB\Query\SQL\SQLite\Select as SQLiteSelect;
 use Elixir\DB\Query\SQL\SQLite\Update as SQLiteUpdate;
+use Elixir\DB\Query\SQL\TruncateTable;
 use Elixir\DB\Query\SQL\Update;
 
 /**
@@ -41,7 +43,7 @@ class QueryBuilderFactory
     /**
      * @param string $table
      * @param string $driver
-     * @return Select
+     * @return QueryInterface
      */
     public static function select($table = null, $driver = self::DRIVER_MYSQL) 
     {
@@ -57,7 +59,7 @@ class QueryBuilderFactory
     /**
      * @param string $table
      * @param string $driver
-     * @return Insert
+     * @return QueryInterface
      */
     public static function insert($table = null, $driver = self::DRIVER_MYSQL) 
     {
@@ -75,7 +77,7 @@ class QueryBuilderFactory
     /**
      * @param string $table
      * @param string $driver
-     * @return Update
+     * @return QueryInterface
      */
     public static function update($table = null, $driver = self::DRIVER_MYSQL) 
     {
@@ -93,7 +95,7 @@ class QueryBuilderFactory
     /**
      * @param string $table
      * @param string $driver
-     * @return Delete
+     * @return QueryInterface
      */
     public static function delete($table = null, $driver = self::DRIVER_MYSQL) 
     {
@@ -111,7 +113,7 @@ class QueryBuilderFactory
     /**
      * @param string $table
      * @param string $driver
-     * @return CreateTable
+     * @return QueryInterface
      */
     public static function createTable($table = null, $driver = self::DRIVER_MYSQL) 
     {
@@ -129,7 +131,7 @@ class QueryBuilderFactory
     /**
      * @param string $table
      * @param string $driver
-     * @return AlterTable
+     * @return QueryInterface
      */
     public static function createAlterTable($table = null, $driver = self::DRIVER_MYSQL)
     {
@@ -147,7 +149,7 @@ class QueryBuilderFactory
     /**
      * @param string $table
      * @param string $driver
-     * @return DropTable
+     * @return QueryInterface
      */
     public static function dropTable($table = null, $driver = self::DRIVER_MYSQL) 
     {
@@ -165,7 +167,7 @@ class QueryBuilderFactory
     /**
      * @param string $table
      * @param string $driver
-     * @return TruncateTable
+     * @return QueryInterface
      * @throws \RuntimeException
      */
     public static function truncateTable($table = null, $driver = self::DRIVER_MYSQL)

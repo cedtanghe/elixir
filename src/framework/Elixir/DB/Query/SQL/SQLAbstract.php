@@ -72,6 +72,11 @@ abstract class SQLAbstract implements SQLInterface
     protected $table;
     
     /**
+     * @var array 
+     */
+    protected $alias;
+    
+    /**
      * @param string $table
      */
     public function __construct($table = null)
@@ -89,9 +94,36 @@ abstract class SQLAbstract implements SQLInterface
     public function table($table) 
     {
         $this->table = $table;
+        
+        if (false !== ($pos = strpos(strtoupper($this->table), ' AS '))) 
+        {
+            $this->alias(trim(substr($this->table, $pos)));
+        }
+        
         return $this;
     }
-
+    
+    /**
+     * @param string $alias
+     * @return SQLInterface
+     */
+    public function alias($alias) 
+    {
+        if (false !== ($pos = strpos(strtoupper($this->table), ' AS '))) 
+        {
+            $this->table = substr($this->table, 0, $pos);
+        }
+        
+        $this->alias = $alias;
+        
+        if(null !== $alias)
+        {
+            $this->table .= ' AS ' . $this->alias;
+        }
+        
+        return $this;
+    }
+    
     /**
      * @see SQLInterface::setQuoteMethod()
      */
@@ -193,7 +225,28 @@ abstract class SQLAbstract implements SQLInterface
 
         return $SQL;
     }
-
+    
+    /**
+     * @param string $str
+     * @return string
+     */
+    protected function parseAlias($str)
+    {
+        if(null === $this->alias)
+        {
+            return $str;
+        }
+        
+        return preg_replace_callback(
+            '/[^a-z0-9]*(' . preg_quote($this->table, '/') . ')[^a-z0-9]*\./',
+            function($matches)
+            {
+                return str_replace($this->table, $this->alias, $matches[0]);
+            },
+            $str
+        );
+    }
+    
     /**
      * @see SQLInterface::getQuery()
      */

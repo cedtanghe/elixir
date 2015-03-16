@@ -2,10 +2,12 @@
 
 namespace Elixir\DB\Query\SQL;
 
+use Elixir\DB\Query\SQL\QueryInterface;
+
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-interface SQLInterface 
+interface SQLInterface extends QueryInterface
 {
     /**
      * @var string
@@ -180,14 +182,4 @@ interface SQLInterface
      * @return string
      */
     public function assemble($SQL, $param = null);
-
-    /**
-     * @see SQLInterface::render()
-     */
-    public function getQuery();
-
-    /**
-     * @return string
-     */
-    public function render();
 }

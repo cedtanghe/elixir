@@ -62,6 +62,9 @@ class Update extends SQLAbstract
             case 'table':
                 $this->table = null;
                 break;
+            case 'alias':
+                $this->alias(null);
+                break;
             case 'raw':
                 $this->raw = false;
                 break;
@@ -86,6 +89,8 @@ class Update extends SQLAbstract
         {
             case 'table':
                 return $this->table;
+            case 'alias':
+                return $this->alias;
             case 'raw':
                 return $this->raw;
             case 'where':
@@ -108,6 +113,9 @@ class Update extends SQLAbstract
         {
             case 'table':
                 $this->table($data);
+                break;
+            case 'alias':
+                $this->alias($data);
                 break;
             case 'raw':
                 $this->raw($data);
@@ -133,7 +141,7 @@ class Update extends SQLAbstract
         $SQL .= $this->renderSet();
         $SQL .= $this->renderWhere();
 
-        return trim($SQL);
+        return trim($this->parseAlias($SQL));
     }
 
     /**

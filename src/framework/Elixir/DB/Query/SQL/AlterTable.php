@@ -167,6 +167,9 @@ class AlterTable extends SQLAbstract
             case 'table':
                 $this->table = null;
                 break;
+            case 'alias':
+                $this->alias(null);
+                break;
             case 'rename':
                 $this->rename = null;
                 break;
@@ -217,6 +220,8 @@ class AlterTable extends SQLAbstract
         {
             case 'table':
                 return $this->table;
+            case 'alias':
+                return $this->alias;
             case 'rename':
                 return $this->rename;
             case 'data':
@@ -264,6 +269,9 @@ class AlterTable extends SQLAbstract
         {
             case 'table':
                 $this->table($data);
+                break;
+            case 'alias':
+                $this->alias($data);
                 break;
             case 'rename':
                 $this->rename($data);

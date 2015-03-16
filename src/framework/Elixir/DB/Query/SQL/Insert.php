@@ -121,6 +121,9 @@ class Insert extends SQLAbstract
             case 'table':
                 $this->table = null;
                 break;
+            case 'alias':
+                $this->alias(null);
+                break;
             case 'columns':
                 $this->columns = [];
                 break;
@@ -146,6 +149,8 @@ class Insert extends SQLAbstract
         {
             case 'table':
                 return $this->table;
+            case 'alias':
+                return $this->alias;
             case 'columns':
                 return $this->columns;
             case 'values':
@@ -166,6 +171,9 @@ class Insert extends SQLAbstract
         {
             case 'table':
                 $this->table($data);
+                break;
+            case 'alias':
+                $this->alias($data);
                 break;
             case 'columns':
                 $this->columns($data);

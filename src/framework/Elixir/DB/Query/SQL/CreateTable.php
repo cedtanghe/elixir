@@ -95,6 +95,9 @@ class CreateTable extends SQLAbstract
             case 'table':
                 $this->table = null;
                 break;
+            case 'alias':
+                $this->alias(null);
+                break;
             case 'temporary':
                 $this->temporary = false;
                 break;
@@ -122,6 +125,8 @@ class CreateTable extends SQLAbstract
         {
             case 'table':
                 return $this->table;
+            case 'alias':
+                return $this->alias;
             case 'temporary':
                 return $this->temporary;
             case 'columns':
@@ -146,6 +151,9 @@ class CreateTable extends SQLAbstract
         {
             case 'table':
                 $this->table($data);
+                break;
+            case 'alias':
+                $this->alias($data);
                 break;
             case 'temporary':
                 $this->temporary($data);

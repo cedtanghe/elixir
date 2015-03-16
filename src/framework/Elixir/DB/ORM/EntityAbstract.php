@@ -11,7 +11,7 @@ use Elixir\Util\Str;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-class Entity extends Dispatcher implements EntityInterface
+abstract class EntityAbstract extends Dispatcher implements EntityInterface
 {
     /**
      * @var array
@@ -22,11 +22,6 @@ class Entity extends Dispatcher implements EntityInterface
      * @var array
      */
     protected static $mutatorsSet = [];
-
-    /**
-     * @var string
-     */
-    protected $name;
     
     /**
      * @var string
@@ -69,21 +64,37 @@ class Entity extends Dispatcher implements EntityInterface
     protected $state = self::FILLABLE;
     
     /**
-     * @param string $name
+     * @param array $data
      */
-    public function __construct($name = null)
+    public function __construct(array $data = null)
     {
         $this->className = get_class($this);
-        $this->name = $name ?: lcfirst(pathinfo($this->className, PATHINFO_BASENAME));
+        
+        // Fill columns
+        $this->state = self::FILLABLE;
+        $this->defineColumns();
+        $this->dispatch(new EntityEvent(EntityEvent::DEFINE_COLUMNS));
+
+        // Fill guarded
+        $this->state = self::GUARDED;
+        $this->defineGuarded();
+        $this->dispatch(new EntityEvent(EntityEvent::DEFINE_GUARDED));
+
+        if (!empty($data)) 
+        {
+            $this->hydrate($data, ['raw' => true, 'sync' => true]);
+        }
     }
     
     /**
-     * @return string
+     * Declares columns
      */
-    public function getName()
-    {
-        return $this->name;
-    }
+    abstract protected function defineColumns();
+    
+    /**
+     * Declares relations and others
+     */
+    protected function defineGuarded(){}
     
     /**
      * @return string

@@ -9,13 +9,5 @@ use Elixir\Dispatcher\Event;
  */
 class ModelEvent extends Event
 {
-    /**
-     * @var string
-     */
-    const DEFINE_COLUMNS = 'define_columns';
     
-    /**
-     * @var string
-     */
-    const DEFINE_GUARDED = 'define_guarded';
 }
