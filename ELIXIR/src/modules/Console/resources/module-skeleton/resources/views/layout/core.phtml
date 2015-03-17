@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- TITLE -->
+        <?php $this->start('title'); ?><?php $this->end(); ?>
+        <title><?php echo $this->block('title'); ?></title>
+        
+        <!-- META -->
+        <?php $this->start('meta-description'); ?><?php $this->end(); ?>
+        <?php $this->start('meta-keywords'); ?><?php $this->end(); ?>
+        
+        <?php $this->start('metas'); ?>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="<?php echo $this->block('meta-description'); ?>">
+        <meta name="keywords" content="<?php echo $this->block('meta-keywords'); ?>">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <link rel="shortcut icon" href="<?php echo $this->helper('helper.url')->baseURL('medias/{MODULE}/images/favicon.ico'); ?>">
+        <?php $this->end(); ?>
+        <?php echo $this->block('metas'); ?>
+
+        <!-- STYLES -->
+        <?php $this->start('styles'); ?><?php $this->end(); ?>
+        <?php echo $this->block('styles'); ?>
+            
+        <!-- SCRIPTS -->
+        <?php $this->start('head-scripts'); ?>
+        <script>
+            var BASE_URL = '<?php echo $this->helper('helper.url')->baseURL(''); ?>';
+            var APPLICATION_ENV = '<?php echo APPLICATION_ENV; ?>';
+            var APPLICATION_PATH = BASE_URL + 'application';
+            var PUBLIC_PATH = BASE_URL;
+        </script>
+        <?php $this->end(); ?>
+        <?php echo $this->block('head-scripts'); ?>
+    </head>
+    <body>
+        <?php echo $this->_content; ?>
+        
+        <!-- SCRIPTS -->
+        <?php $this->start('body-scripts'); ?><?php $this->end(); ?>
+        <?php echo $this->block('body-scripts'); ?>
+    </body>
+</html>
