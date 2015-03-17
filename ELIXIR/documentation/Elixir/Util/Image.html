@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow, all" />
+    <title>Elixir\Util\Image | Elixir</title>
+
+            <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../../css/sami.css">
+        <script src="../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../js/bootstrap.min.js"></script>
+        <script src="../../js/typeahead.min.js"></script>
+        <script src="../../sami.js"></script>
+    
+    
+    </head>
+
+    <body id="class" data-name="class:Elixir_Util_Image" data-root-path="../../">
+            <div id="content">
+        <div id="left-column">
+                <div id="control-panel">
+                <form id="search-form" action="../../search.html" method="GET">
+            <span class="glyphicon glyphicon-search"></span>
+            <input name="search"
+                   class="typeahead form-control"
+                   type="search"
+                   placeholder="Search">
+        </form>
+    </div>
+
+                <div id="api-tree"></div>
+
+        </div>
+        <div id="right-column">
+                <nav id="site-nav" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-elements">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../../index.html">Elixir</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-elements">
+                <ul class="nav navbar-nav">
+                    <li><a href="../../classes.html">Classes</a></li>
+                                            <li><a href="../../namespaces.html">Namespaces</a></li>
+                                        <li><a href="../../interfaces.html">Interfaces</a></li>
+                    <li><a href="../../traits.html">Traits</a></li>
+                    <li><a href="../../doc-index.html">Index</a></li>
+                    <li><a href="../../search.html">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+                        <div class="namespace-breadcrumbs">
+            <ol class="breadcrumb">
+                <li><span class="label label-default">class</span></li>
+                                                            <li><a href="../../Elixir.html">Elixir</a></li>
+                                        <li><a href="../../Elixir/Util.html">Util</a></li>
+    
+                <li>Image</li>
+            </ol>
+        </div>
+                <div id="page-content">
+                
+    <div class="page-header">
+        <h1>Image</h1>
+    </div>
+
+    <p>    class
+    <strong>Image</strong></p>
+
+    
+    
+            <h2>Constants</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td>DEFAULT_QUALITY</td>
+                <td class="last">
+                    <p><em>
+</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+                    <tr>
+                <td>TOP</td>
+                <td class="last">
+                    <p><em>
+</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+                    <tr>
+                <td>BOTTOM</td>
+                <td class="last">
+                    <p><em>
+</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+                    <tr>
+                <td>CENTER</td>
+                <td class="last">
+                    <p><em>
+</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+                    <tr>
+                <td>LEFT</td>
+                <td class="last">
+                    <p><em>
+</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+                    <tr>
+                <td>RIGHT</td>
+                <td class="last">
+                    <p><em>
+</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+                    <tr>
+                <td>TYPE_MIME_JPG</td>
+                <td class="last">
+                    <p><em>
+</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+                    <tr>
+                <td>TYPE_MIME_PNG</td>
+                <td class="last">
+                    <p><em>
+</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+                    <tr>
+                <td>TYPE_MIME_GIF</td>
+                <td class="last">
+                    <p><em>
+</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+                    <tr>
+                <td>RESIZE</td>
+                <td class="last">
+                    <p><em>
+</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+                    <tr>
+                <td>ENLARGE</td>
+                <td class="last">
+                    <p><em>
+</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+            </table>
+
+    
+    
+            <h2>Methods</h2>
+
+            <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;array
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getSizingInfo">getSizingInfo</a>(string|resource $pImageOrResource, integer $pWidth, integer $pHeight, boolean $pRatio = true, string $pMode = self::RESIZE)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;boolean
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_isGD">isGD</a>(resource $pResource)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;<a href="../../Elixir/Util/Image.html"><abbr title="Elixir\Util\Image">Image</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_createFromResource">createFromResource</a>(resource $pResource, string $pTypeMime)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;<a href="../../Elixir/Util/Image.html"><abbr title="Elixir\Util\Image">Image</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_createFromImage">createFromImage</a>(string $pImage)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    static&nbsp;resource
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_createResource">createResource</a>(string $pImagePath)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___construct">__construct</a>(string|resource $pImageOrResource, string $pTypeMime = null)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___destruct">__destruct</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getOriginalImagePath">getOriginalImagePath</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getMimeType">getMimeType</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    integer
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getWidth">getWidth</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    integer
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getHeight">getHeight</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    resource
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getResource">getResource</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    boolean
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_resize">resize</a>(integer $pWMax, integer $pHMax, boolean $pRatio = true)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    boolean
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_enlarge">enlarge</a>(integer $pWMin, integer $pHMin, boolean $pRatio = true)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    boolean
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_crop">crop</a>(integer $pWEnd, integer $pHEnd)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    boolean
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_merge">merge</a>(resource|<a href="../../Elixir/Util/Image.html"><abbr title="Elixir\Util\Image">Image</abbr></a> $pResource, integer $pOpacity = 100, string $pHPos = self::TOP, string $pWPos = self::LEFT, array $pOptions = array())
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    boolean
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_filter">filter</a>(integer $pFiltertype, integer $pArg1 = null, integer $pArg2 = null, integer $pArg3 = null, integer $pArg4 = null)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    boolean
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_save">save</a>(string $pImagePath = null, integer $pQuality = self::DEFAULT_QUALITY)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+            </div>
+
+
+        <h2>Details</h2>
+
+            <div id="method-details">
+                    <div class="method-item">
+                    <h3 id="method_getSizingInfo">
+        <div class="location">at line 76</div>
+        <code>        static            array
+    <strong>getSizingInfo</strong>(string|resource $pImageOrResource, integer $pWidth, integer $pHeight, boolean $pRatio = true, string $pMode = self::RESIZE)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string|resource</td>
+                <td>$pImageOrResource</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>integer</td>
+                <td>$pWidth</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>integer</td>
+                <td>$pHeight</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>boolean</td>
+                <td>$pRatio</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$pMode</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>array</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isGD">
+        <div class="location">at line 157</div>
+        <code>        static            boolean
+    <strong>isGD</strong>(resource $pResource)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>resource</td>
+                <td>$pResource</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_createFromResource">
+        <div class="location">at line 172</div>
+        <code>        static            <a href="../../Elixir/Util/Image.html"><abbr title="Elixir\Util\Image">Image</abbr></a>
+    <strong>createFromResource</strong>(resource $pResource, string $pTypeMime)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>resource</td>
+                <td>$pResource</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$pTypeMime</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../Elixir/Util/Image.html"><abbr title="Elixir\Util\Image">Image</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_createFromImage">
+        <div class="location">at line 181</div>
+        <code>        static            <a href="../../Elixir/Util/Image.html"><abbr title="Elixir\Util\Image">Image</abbr></a>
+    <strong>createFromImage</strong>(string $pImage)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$pImage</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../Elixir/Util/Image.html"><abbr title="Elixir\Util\Image">Image</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_createResource">
+        <div class="location">at line 191</div>
+        <code>        static            resource
+    <strong>createResource</strong>(string $pImagePath)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$pImagePath</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>resource</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method___construct">
+        <div class="location">at line 232</div>
+        <code>                    
+    <strong>__construct</strong>(string|resource $pImageOrResource, string $pTypeMime = null)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string|resource</td>
+                <td>$pImageOrResource</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$pTypeMime</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method___destruct">
+        <div class="location">at line 273</div>
+        <code>                    
+    <strong>__destruct</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getOriginalImagePath">
+        <div class="location">at line 281</div>
+        <code>                    string
+    <strong>getOriginalImagePath</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getMimeType">
+        <div class="location">at line 289</div>
+        <code>                    string
+    <strong>getMimeType</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getWidth">
+        <div class="location">at line 297</div>
+        <code>                    integer
+    <strong>getWidth</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>integer</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getHeight">
+        <div class="location">at line 305</div>
+        <code>                    integer
+    <strong>getHeight</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>integer</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getResource">
+        <div class="location">at line 313</div>
+        <code>                    resource
+    <strong>getResource</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>resource</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_resize">
+        <div class="location">at line 324</div>
+        <code>                    boolean
+    <strong>resize</strong>(integer $pWMax, integer $pHMax, boolean $pRatio = true)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>integer</td>
+                <td>$pWMax</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>integer</td>
+                <td>$pHMax</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>boolean</td>
+                <td>$pRatio</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_enlarge">
+        <div class="location">at line 368</div>
+        <code>                    boolean
+    <strong>enlarge</strong>(integer $pWMin, integer $pHMin, boolean $pRatio = true)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>integer</td>
+                <td>$pWMin</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>integer</td>
+                <td>$pHMin</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>boolean</td>
+                <td>$pRatio</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_crop">
+        <div class="location">at line 411</div>
+        <code>                    boolean
+    <strong>crop</strong>(integer $pWEnd, integer $pHEnd)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>integer</td>
+                <td>$pWEnd</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>integer</td>
+                <td>$pHEnd</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_merge">
+        <div class="location">at line 484</div>
+        <code>                    boolean
+    <strong>merge</strong>(resource|<a href="../../Elixir/Util/Image.html"><abbr title="Elixir\Util\Image">Image</abbr></a> $pResource, integer $pOpacity = 100, string $pHPos = self::TOP, string $pWPos = self::LEFT, array $pOptions = array())</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>resource|<a href="../../Elixir/Util/Image.html"><abbr title="Elixir\Util\Image">Image</abbr></a></td>
+                <td>$pResource</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>integer</td>
+                <td>$pOpacity</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$pHPos</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$pWPos</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$pOptions</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_filter">
+        <div class="location">at line 554</div>
+        <code>                    boolean
+    <strong>filter</strong>(integer $pFiltertype, integer $pArg1 = null, integer $pArg2 = null, integer $pArg3 = null, integer $pArg4 = null)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>integer</td>
+                <td>$pFiltertype</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>integer</td>
+                <td>$pArg1</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>integer</td>
+                <td>$pArg2</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>integer</td>
+                <td>$pArg3</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>integer</td>
+                <td>$pArg4</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_save">
+        <div class="location">at line 571</div>
+        <code>                    boolean
+    <strong>save</strong>(string $pImagePath = null, integer $pQuality = self::DEFAULT_QUALITY)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$pImagePath</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>integer</td>
+                <td>$pQuality</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+            </div>
+
+    
+            </div>
+                <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/">Sami, the API Documentation Generator</a>.
+    </div>
+
+        </div>
+    </div>
+    </body>
+
+</html>

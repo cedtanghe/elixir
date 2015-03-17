@@ -1,0 +1,2920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow, all" />
+    <title>Elixir\Form\Field\File | Elixir</title>
+
+            <link rel="stylesheet" type="text/css" href="../../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../css/sami.css">
+        <script src="../../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../../js/bootstrap.min.js"></script>
+        <script src="../../../js/typeahead.min.js"></script>
+        <script src="../../../sami.js"></script>
+    
+    
+    </head>
+
+    <body id="class" data-name="class:Elixir_Form_Field_File" data-root-path="../../../">
+            <div id="content">
+        <div id="left-column">
+                <div id="control-panel">
+                <form id="search-form" action="../../../search.html" method="GET">
+            <span class="glyphicon glyphicon-search"></span>
+            <input name="search"
+                   class="typeahead form-control"
+                   type="search"
+                   placeholder="Search">
+        </form>
+    </div>
+
+                <div id="api-tree"></div>
+
+        </div>
+        <div id="right-column">
+                <nav id="site-nav" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-elements">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../../../index.html">Elixir</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-elements">
+                <ul class="nav navbar-nav">
+                    <li><a href="../../../classes.html">Classes</a></li>
+                                            <li><a href="../../../namespaces.html">Namespaces</a></li>
+                                        <li><a href="../../../interfaces.html">Interfaces</a></li>
+                    <li><a href="../../../traits.html">Traits</a></li>
+                    <li><a href="../../../doc-index.html">Index</a></li>
+                    <li><a href="../../../search.html">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+                        <div class="namespace-breadcrumbs">
+            <ol class="breadcrumb">
+                <li><span class="label label-default">class</span></li>
+                                                            <li><a href="../../../Elixir.html">Elixir</a></li>
+                                        <li><a href="../../../Elixir/Form.html">Form</a></li>
+                                        <li><a href="../../../Elixir/Form/Field.html">Field</a></li>
+    
+                <li>File</li>
+            </ol>
+        </div>
+                <div id="page-content">
+                
+    <div class="page-header">
+        <h1>File</h1>
+    </div>
+
+    <p>    class
+    <strong>File</strong>        extends <a href="../../../Elixir/Form/Field/FieldAbstract.html"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a>        implements
+        <a href="../../../Elixir/Form/Field/FileInterface.html"><abbr title="Elixir\Form\Field\FileInterface">FileInterface</abbr></a></p>
+
+    
+            <h2>Traits</h2>
+
+        <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-6">
+                                            <a href="../../../Elixir/Dispatcher/DispatcherTrait.html"><abbr title="Elixir\Dispatcher\DispatcherTrait">Elixir\Dispatcher\DispatcherTrait</abbr></a>
+                                    </div>
+                <div class="col-md-6">
+                    
+
+                </div>
+            </div>
+            </div>
+    
+            <h2>Constants</h2>
+
+            <table class="table table-condensed">
+                    <tr>
+                <td>FILTER_UPLOAD</td>
+                <td class="last">
+                    <p><em>
+</em></p>
+                    <p>
+</p>
+                </td>
+            </tr>
+            </table>
+
+    
+    
+            <h2>Methods</h2>
+
+            <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-2 type">
+                    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getTarget">getTarget</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_getTarget"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setTarget">setTarget</a>(mixed $value)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_setTarget"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_addSubscriber">addSubscriber</a>(<a href="../../../Elixir/Dispatcher/SubscriberInterface.html"><abbr title="Elixir\Dispatcher\SubscriberInterface">SubscriberInterface</abbr></a> $subscriber)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_addSubscriber"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_removeSubscriber">removeSubscriber</a>(<a href="../../../Elixir/Dispatcher/SubscriberInterface.html"><abbr title="Elixir\Dispatcher\SubscriberInterface">SubscriberInterface</abbr></a> $subscriber)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_removeSubscriber"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_hasListener">hasListener</a>($type)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_hasListener"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_addListener">addListener</a>($type, callable $callback, $priority)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_addListener"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_removeListener">removeListener</a>($type, callable $callback = null)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_removeListener"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_hasListeners">hasListeners</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_hasListeners"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getListeners">getListeners</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_getListeners"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_removeListeners">removeListeners</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_removeListeners"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_dispatch">dispatch</a>(<a href="../../../Elixir/Dispatcher/Event.html"><abbr title="Elixir\Dispatcher\Event">Event</abbr></a> $event)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_dispatch"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___construct">__construct</a>(string $pName = null)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setName">setName</a>(string $pValue)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Form/Field/FieldAbstract.html#method_setName"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getName">getName</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Form/Field/FieldAbstract.html#method_getName"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setHelper">setHelper</a>(mixed $pValue)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Form/Field/FieldAbstract.html#method_setHelper"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getHelper">getHelper</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Form/Field/FieldAbstract.html#method_getHelper"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setParent">setParent</a>(<a href="../../../Elixir/Form/FormInterface.html"><abbr title="Elixir\Form\FormInterface">FormInterface</abbr></a> $pValue)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../Elixir/Form/FormInterface.html"><abbr title="Elixir\Form\FormInterface">FormInterface</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getParent">getParent</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Form/Field/FieldAbstract.html#method_getParent"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setLabel">setLabel</a>(string $pValue)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Form/Field/FieldAbstract.html#method_setLabel"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getLabel">getLabel</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Form/Field/FieldAbstract.html#method_getLabel"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setErrorMessage">setErrorMessage</a>(string $pValue)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Form/Field/FieldAbstract.html#method_setErrorMessage"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getErrorMessage">getErrorMessage</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Form/Field/FieldAbstract.html#method_getErrorMessage"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setRequired">setRequired</a>(boolean $pValue)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Form/Field/FieldAbstract.html#method_setRequired"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_isRequired">isRequired</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Form/Field/FieldAbstract.html#method_isRequired"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    boolean
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_hasAttribute">hasAttribute</a>(string $pKey)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Form/Field/FieldAbstract.html#method_hasAttribute"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getAttribute">getAttribute</a>(string $pKey, mixed $pDefault = null)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Form/Field/FieldAbstract.html#method_getAttribute"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setAttribute">setAttribute</a>(string $pKey, string $pValue)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_removeAttribute">removeAttribute</a>(string $pKey)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    array
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getAttributes">getAttributes</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Form/Field/FieldAbstract.html#method_getAttributes"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setAttributes">setAttributes</a>(array $pData)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    boolean
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_hasOption">hasOption</a>(string $pKey)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Form/Field/FieldAbstract.html#method_hasOption"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getOption">getOption</a>(string $pKey, mixed $pDefault = null)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Form/Field/FieldAbstract.html#method_getOption"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setOption">setOption</a>(string $pKey, string $pValue)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Form/Field/FieldAbstract.html#method_setOption"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_removeOption">removeOption</a>(string $pKey)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Form/Field/FieldAbstract.html#method_removeOption"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    array
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getOptions">getOptions</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Form/Field/FieldAbstract.html#method_getOptions"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setOptions">setOptions</a>(array $pData)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Form/Field/FieldAbstract.html#method_setOptions"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setErrorBreak">setErrorBreak</a>(boolean $pValue)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    boolean
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_isErrorBreak">isErrorBreak</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Form/Field/FieldAbstract.html#method_isErrorBreak"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_addValidator">addValidator</a>(<a href="../../../Elixir/Validator/ValidatorInterface.html"><abbr title="Elixir\Validator\ValidatorInterface">ValidatorInterface</abbr></a>|callable|string $pValidator, array $pOptions = array())
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Form/Field/FieldAbstract.html#method_addValidator"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    array
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getValidators">getValidators</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Form/Field/FieldAbstract.html#method_getValidators"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setValidators">setValidators</a>(array $pData)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Form/Field/FieldAbstract.html#method_setValidators"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_addFilter">addFilter</a>(<a href="../../../Elixir/Filter/FilterInterface.html"><abbr title="Elixir\Filter\FilterInterface">FilterInterface</abbr></a>|callable|string $pFilter, array $pOptions = array(), integer|null $pType = null)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    array
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getFilters">getFilters</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Form/Field/FieldAbstract.html#method_getFilters"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setFilters">setFilters</a>(array $pData)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Form/Field/FieldAbstract.html#method_setFilters"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setValue">setValue</a>(mixed $pValue, boolean $pFiltered = true)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Form/Field/FieldAbstract.html#method_setValue"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getValue">getValue</a>(boolean $pFiltered = true)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Form/Field/FieldAbstract.html#method_getValue"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    boolean
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_isEligible">isEligible</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Form/Field/FieldAbstract.html#method_isEligible"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    boolean
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_isEmpty">isEmpty</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_prepare">prepare</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Form/Field/FieldAbstract.html#method_prepare"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_isPrepared">isPrepared</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Form/Field/FieldAbstract.html#method_isPrepared"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    boolean
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_isValid">isValid</a>(mixed $pValue = null)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    boolean
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_hasError">hasError</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Form/Field/FieldAbstract.html#method_hasError"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string|array
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_errors">errors</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/Form/Field/FieldAbstract.html#method_errors"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_reset">reset</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../Elixir/HTTP/Uploader.html"><abbr title="Elixir\HTTP\Uploader">Uploader</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getUploader">getUploader</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setUploader">setUploader</a>(<a href="../../../Elixir/HTTP/Uploader.html"><abbr title="Elixir\HTTP\Uploader">Uploader</abbr></a> $pValue)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setAPCUploadProgressData">setAPCUploadProgressData</a>(string $pId, string $pValue = null)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    array|null
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getAPCUploadProgressData">getAPCUploadProgressData</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setMaxFileSize">setMaxFileSize</a>(integer $pValue)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    integer|null
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getMaxFileSize">getMaxFileSize</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string|array
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getFileName">getFileName</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    boolean
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_isUploaded">isUploaded</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    boolean
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_hasMultipleFiles">hasMultipleFiles</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    boolean
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_receive">receive</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+            </div>
+
+
+        <h2>Details</h2>
+
+            <div id="method-details">
+                    <div class="method-item">
+                    <h3 id="method_getTarget">
+        <div class="location">in <a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_getTarget"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a> at line 32</div>
+        <code>                    mixed
+    <strong>getTarget</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>mixed</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setTarget">
+        <div class="location">in <a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_setTarget"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a> at line 45</div>
+        <code>                    
+    <strong>setTarget</strong>(mixed $value)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>mixed</td>
+                <td>$value</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_addSubscriber">
+        <div class="location">in <a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_addSubscriber"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a> at line 53</div>
+        <code>                    
+    <strong>addSubscriber</strong>(<a href="../../../Elixir/Dispatcher/SubscriberInterface.html"><abbr title="Elixir\Dispatcher\SubscriberInterface">SubscriberInterface</abbr></a> $subscriber)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../Elixir/Dispatcher/SubscriberInterface.html"><abbr title="Elixir\Dispatcher\SubscriberInterface">SubscriberInterface</abbr></a></td>
+                <td>$subscriber</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>DispatcherInterface::addSubscriber()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_removeSubscriber">
+        <div class="location">in <a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_removeSubscriber"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a> at line 61</div>
+        <code>                    
+    <strong>removeSubscriber</strong>(<a href="../../../Elixir/Dispatcher/SubscriberInterface.html"><abbr title="Elixir\Dispatcher\SubscriberInterface">SubscriberInterface</abbr></a> $subscriber)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../Elixir/Dispatcher/SubscriberInterface.html"><abbr title="Elixir\Dispatcher\SubscriberInterface">SubscriberInterface</abbr></a></td>
+                <td>$subscriber</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>DispatcherInterface::removeSubscriber()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_hasListener">
+        <div class="location">in <a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_hasListener"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a> at line 69</div>
+        <code>                    
+    <strong>hasListener</strong>($type)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$type</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>DispatcherInterface::hasListener()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_addListener">
+        <div class="location">in <a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_addListener"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a> at line 77</div>
+        <code>                    
+    <strong>addListener</strong>($type, callable $callback, $priority)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$type</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>callable</td>
+                <td>$callback</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$priority</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>DispatcherInterface::addListener()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_removeListener">
+        <div class="location">in <a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_removeListener"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a> at line 114</div>
+        <code>                    
+    <strong>removeListener</strong>($type, callable $callback = null)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$type</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>callable</td>
+                <td>$callback</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>DispatcherInterface::removeListener()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_hasListeners">
+        <div class="location">in <a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_hasListeners"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a> at line 145</div>
+        <code>                    
+    <strong>hasListeners</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>DispatcherInterface::hasListeners()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getListeners">
+        <div class="location">in <a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_getListeners"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a> at line 153</div>
+        <code>                    
+    <strong>getListeners</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>DispatcherInterface::getListeners()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_removeListeners">
+        <div class="location">in <a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_removeListeners"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a> at line 161</div>
+        <code>                    
+    <strong>removeListeners</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>DispatcherInterface::removeListeners()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_dispatch">
+        <div class="location">in <a href="../../../Elixir/Dispatcher/DispatcherTrait.html#method_dispatch"><abbr title="Elixir\Dispatcher\DispatcherTrait">DispatcherTrait</abbr></a> at line 170</div>
+        <code>                    
+    <strong>dispatch</strong>(<a href="../../../Elixir/Dispatcher/Event.html"><abbr title="Elixir\Dispatcher\Event">Event</abbr></a> $event)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../Elixir/Dispatcher/Event.html"><abbr title="Elixir\Dispatcher\Event">Event</abbr></a></td>
+                <td>$event</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>DispatcherInterface::dispatch()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method___construct">
+        <div class="location">at line 30</div>
+        <code>                    
+    <strong>__construct</strong>(string $pName = null)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$pName</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FieldAbstract::__construct()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setName">
+        <div class="location">in <a href="../../../Elixir/Form/Field/FieldAbstract.html#method_setName"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a> at line 95</div>
+        <code>                    
+    <strong>setName</strong>(string $pValue)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$pValue</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FieldInterface::getName()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getName">
+        <div class="location">in <a href="../../../Elixir/Form/Field/FieldAbstract.html#method_getName"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a> at line 103</div>
+        <code>                    string
+    <strong>getName</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FieldInterface::getName()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setHelper">
+        <div class="location">in <a href="../../../Elixir/Form/Field/FieldAbstract.html#method_setHelper"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a> at line 111</div>
+        <code>                    
+    <strong>setHelper</strong>(mixed $pValue)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>mixed</td>
+                <td>$pValue</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FieldInterface::setHelper()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getHelper">
+        <div class="location">in <a href="../../../Elixir/Form/Field/FieldAbstract.html#method_getHelper"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a> at line 119</div>
+        <code>                    mixed
+    <strong>getHelper</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>mixed</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FieldInterface::getHelper()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setParent">
+        <div class="location">at line 41</div>
+        <code>                    
+    <strong>setParent</strong>(<a href="../../../Elixir/Form/FormInterface.html"><abbr title="Elixir\Form\FormInterface">FormInterface</abbr></a> $pValue)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../Elixir/Form/FormInterface.html"><abbr title="Elixir\Form\FormInterface">FormInterface</abbr></a></td>
+                <td>$pValue</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FieldAbstract::setParent()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getParent">
+        <div class="location">in <a href="../../../Elixir/Form/Field/FieldAbstract.html#method_getParent"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a> at line 135</div>
+        <code>                    <a href="../../../Elixir/Form/FormInterface.html"><abbr title="Elixir\Form\FormInterface">FormInterface</abbr></a>
+    <strong>getParent</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../Elixir/Form/FormInterface.html"><abbr title="Elixir\Form\FormInterface">FormInterface</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FieldInterface::getParent()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setLabel">
+        <div class="location">in <a href="../../../Elixir/Form/Field/FieldAbstract.html#method_setLabel"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a> at line 143</div>
+        <code>                    
+    <strong>setLabel</strong>(string $pValue)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$pValue</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FieldInterface::setLabel()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getLabel">
+        <div class="location">in <a href="../../../Elixir/Form/Field/FieldAbstract.html#method_getLabel"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a> at line 151</div>
+        <code>                    string
+    <strong>getLabel</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FieldInterface::getLabel()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setErrorMessage">
+        <div class="location">in <a href="../../../Elixir/Form/Field/FieldAbstract.html#method_setErrorMessage"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a> at line 159</div>
+        <code>                    
+    <strong>setErrorMessage</strong>(string $pValue)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$pValue</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FieldInterface::setErrorMessage()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getErrorMessage">
+        <div class="location">in <a href="../../../Elixir/Form/Field/FieldAbstract.html#method_getErrorMessage"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a> at line 167</div>
+        <code>                    string
+    <strong>getErrorMessage</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FieldInterface::getErrorMessage()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setRequired">
+        <div class="location">in <a href="../../../Elixir/Form/Field/FieldAbstract.html#method_setRequired"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a> at line 175</div>
+        <code>                    
+    <strong>setRequired</strong>(boolean $pValue)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>boolean</td>
+                <td>$pValue</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FieldInterface::setRequired()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isRequired">
+        <div class="location">in <a href="../../../Elixir/Form/Field/FieldAbstract.html#method_isRequired"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a> at line 183</div>
+        <code>                    
+    <strong>isRequired</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FieldInterface::isRequired()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_hasAttribute">
+        <div class="location">in <a href="../../../Elixir/Form/Field/FieldAbstract.html#method_hasAttribute"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a> at line 192</div>
+        <code>                    boolean
+    <strong>hasAttribute</strong>(string $pKey)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$pKey</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getAttribute">
+        <div class="location">in <a href="../../../Elixir/Form/Field/FieldAbstract.html#method_getAttribute"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a> at line 202</div>
+        <code>                    mixed
+    <strong>getAttribute</strong>(string $pKey, mixed $pDefault = null)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$pKey</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$pDefault</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>mixed</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setAttribute">
+        <div class="location">at line 120</div>
+        <code>                    
+    <strong>setAttribute</strong>(string $pKey, string $pValue)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$pKey</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$pValue</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FieldAbstract::setAttribute()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_removeAttribute">
+        <div class="location">at line 134</div>
+        <code>                    
+    <strong>removeAttribute</strong>(string $pKey)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$pKey</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="http://php.net/LogicException"><abbr title="LogicException">LogicException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FieldAbstract::removeAttribute()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getAttributes">
+        <div class="location">in <a href="../../../Elixir/Form/Field/FieldAbstract.html#method_getAttributes"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a> at line 264</div>
+        <code>                    array
+    <strong>getAttributes</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>array</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FieldInterface::getAttributes()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setAttributes">
+        <div class="location">at line 147</div>
+        <code>                    
+    <strong>setAttributes</strong>(array $pData)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$pData</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FieldAbstract::setAttributes()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_hasOption">
+        <div class="location">in <a href="../../../Elixir/Form/Field/FieldAbstract.html#method_hasOption"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a> at line 287</div>
+        <code>                    boolean
+    <strong>hasOption</strong>(string $pKey)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$pKey</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getOption">
+        <div class="location">in <a href="../../../Elixir/Form/Field/FieldAbstract.html#method_getOption"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a> at line 297</div>
+        <code>                    mixed
+    <strong>getOption</strong>(string $pKey, mixed $pDefault = null)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$pKey</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$pDefault</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>mixed</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setOption">
+        <div class="location">in <a href="../../../Elixir/Form/Field/FieldAbstract.html#method_setOption"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a> at line 311</div>
+        <code>                    
+    <strong>setOption</strong>(string $pKey, string $pValue)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$pKey</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$pValue</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_removeOption">
+        <div class="location">in <a href="../../../Elixir/Form/Field/FieldAbstract.html#method_removeOption"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a> at line 319</div>
+        <code>                    
+    <strong>removeOption</strong>(string $pKey)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$pKey</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getOptions">
+        <div class="location">in <a href="../../../Elixir/Form/Field/FieldAbstract.html#method_getOptions"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a> at line 327</div>
+        <code>                    array
+    <strong>getOptions</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>array</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FieldInterface::getOptions()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setOptions">
+        <div class="location">in <a href="../../../Elixir/Form/Field/FieldAbstract.html#method_setOptions"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a> at line 335</div>
+        <code>                    
+    <strong>setOptions</strong>(array $pData)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$pData</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FieldInterface::setOptions()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setErrorBreak">
+        <div class="location">at line 55</div>
+        <code>                    
+    <strong>setErrorBreak</strong>(boolean $pValue)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>boolean</td>
+                <td>$pValue</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FieldAbstract::setErrorBreak()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isErrorBreak">
+        <div class="location">in <a href="../../../Elixir/Form/Field/FieldAbstract.html#method_isErrorBreak"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a> at line 362</div>
+        <code>                    boolean
+    <strong>isErrorBreak</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FieldInterface::isErrorBreak()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_addValidator">
+        <div class="location">in <a href="../../../Elixir/Form/Field/FieldAbstract.html#method_addValidator"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a> at line 371</div>
+        <code>                    
+    <strong>addValidator</strong>(<a href="../../../Elixir/Validator/ValidatorInterface.html"><abbr title="Elixir\Validator\ValidatorInterface">ValidatorInterface</abbr></a>|callable|string $pValidator, array $pOptions = array())</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../Elixir/Validator/ValidatorInterface.html"><abbr title="Elixir\Validator\ValidatorInterface">ValidatorInterface</abbr></a>|callable|string</td>
+                <td>$pValidator</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$pOptions</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getValidators">
+        <div class="location">in <a href="../../../Elixir/Form/Field/FieldAbstract.html#method_getValidators"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a> at line 379</div>
+        <code>                    array
+    <strong>getValidators</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>array</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FieldInterface::getValidators()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setValidators">
+        <div class="location">in <a href="../../../Elixir/Form/Field/FieldAbstract.html#method_setValidators"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a> at line 387</div>
+        <code>                    
+    <strong>setValidators</strong>(array $pData)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$pData</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FieldInterface::setValidators()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_addFilter">
+        <div class="location">at line 181</div>
+        <code>                    
+    <strong>addFilter</strong>(<a href="../../../Elixir/Filter/FilterInterface.html"><abbr title="Elixir\Filter\FilterInterface">FilterInterface</abbr></a>|callable|string $pFilter, array $pOptions = array(), integer|null $pType = null)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../Elixir/Filter/FilterInterface.html"><abbr title="Elixir\Filter\FilterInterface">FilterInterface</abbr></a>|callable|string</td>
+                <td>$pFilter</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$pOptions</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>integer|null</td>
+                <td>$pType</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FieldAbstract::addFilter()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getFilters">
+        <div class="location">in <a href="../../../Elixir/Form/Field/FieldAbstract.html#method_getFilters"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a> at line 423</div>
+        <code>                    array
+    <strong>getFilters</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>array</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FieldInterface::getFilters()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setFilters">
+        <div class="location">in <a href="../../../Elixir/Form/Field/FieldAbstract.html#method_setFilters"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a> at line 431</div>
+        <code>                    
+    <strong>setFilters</strong>(array $pData)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>array</td>
+                <td>$pData</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FieldInterface::setFilters()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setValue">
+        <div class="location">in <a href="../../../Elixir/Form/Field/FieldAbstract.html#method_setValue"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a> at line 463</div>
+        <code>                    
+    <strong>setValue</strong>(mixed $pValue, boolean $pFiltered = true)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>mixed</td>
+                <td>$pValue</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>boolean</td>
+                <td>$pFiltered</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FieldInterface::setValue()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getValue">
+        <div class="location">in <a href="../../../Elixir/Form/Field/FieldAbstract.html#method_getValue"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a> at line 493</div>
+        <code>                    mixed
+    <strong>getValue</strong>(boolean $pFiltered = true)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>boolean</td>
+                <td>$pFiltered</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>mixed</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FieldInterface::getValue()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isEligible">
+        <div class="location">in <a href="../../../Elixir/Form/Field/FieldAbstract.html#method_isEligible"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a> at line 525</div>
+        <code>                    boolean
+    <strong>isEligible</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FieldInterface::isEligible()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isEmpty">
+        <div class="location">at line 197</div>
+        <code>                    boolean
+    <strong>isEmpty</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FieldAbstract::isEmpty()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_prepare">
+        <div class="location">in <a href="../../../Elixir/Form/Field/FieldAbstract.html#method_prepare"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a> at line 549</div>
+        <code>                    
+    <strong>prepare</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FieldInterface::prepare()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isPrepared">
+        <div class="location">in <a href="../../../Elixir/Form/Field/FieldAbstract.html#method_isPrepared"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a> at line 562</div>
+        <code>                    
+    <strong>isPrepared</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FieldInterface::isPrepared()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isValid">
+        <div class="location">at line 205</div>
+        <code>                    boolean
+    <strong>isValid</strong>(mixed $pValue = null)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>mixed</td>
+                <td>$pValue</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FieldAbstract::isValid()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_hasError">
+        <div class="location">in <a href="../../../Elixir/Form/Field/FieldAbstract.html#method_hasError"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a> at line 643</div>
+        <code>                    boolean
+    <strong>hasError</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FieldInterface::hasError()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_errors">
+        <div class="location">in <a href="../../../Elixir/Form/Field/FieldAbstract.html#method_errors"><abbr title="Elixir\Form\Field\FieldAbstract">FieldAbstract</abbr></a> at line 651</div>
+        <code>                    string|array
+    <strong>errors</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string|array</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FieldInterface::errors()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_reset">
+        <div class="location">at line 268</div>
+        <code>                    
+    <strong>reset</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FieldAbstract::reset()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getUploader">
+        <div class="location">at line 64</div>
+        <code>                    <a href="../../../Elixir/HTTP/Uploader.html"><abbr title="Elixir\HTTP\Uploader">Uploader</abbr></a>
+    <strong>getUploader</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../Elixir/HTTP/Uploader.html"><abbr title="Elixir\HTTP\Uploader">Uploader</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setUploader">
+        <div class="location">at line 78</div>
+        <code>                    
+    <strong>setUploader</strong>(<a href="../../../Elixir/HTTP/Uploader.html"><abbr title="Elixir\HTTP\Uploader">Uploader</abbr></a> $pValue)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../Elixir/HTTP/Uploader.html"><abbr title="Elixir\HTTP\Uploader">Uploader</abbr></a></td>
+                <td>$pValue</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setAPCUploadProgressData">
+        <div class="location">at line 88</div>
+        <code>                    
+    <strong>setAPCUploadProgressData</strong>(string $pId, string $pValue = null)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$pId</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$pValue</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getAPCUploadProgressData">
+        <div class="location">at line 96</div>
+        <code>                    array|null
+    <strong>getAPCUploadProgressData</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>array|null</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setMaxFileSize">
+        <div class="location">at line 104</div>
+        <code>                    
+    <strong>setMaxFileSize</strong>(integer $pValue)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>integer</td>
+                <td>$pValue</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getMaxFileSize">
+        <div class="location">at line 112</div>
+        <code>                    integer|null
+    <strong>getMaxFileSize</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>integer|null</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getFileName">
+        <div class="location">at line 156</div>
+        <code>                    string|array
+    <strong>getFileName</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string|array</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FileInterface::getFileName()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isUploaded">
+        <div class="location">at line 189</div>
+        <code>                    boolean
+    <strong>isUploaded</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FileInterface::isUploaded()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_hasMultipleFiles">
+        <div class="location">at line 229</div>
+        <code>                    boolean
+    <strong>hasMultipleFiles</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FileInterface::hasMultipleFiles()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_receive">
+        <div class="location">at line 237</div>
+        <code>                    boolean
+    <strong>receive</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FileInterface::receive()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+            </div>
+
+    
+            </div>
+                <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/">Sami, the API Documentation Generator</a>.
+    </div>
+
+        </div>
+    </div>
+    </body>
+
+</html>

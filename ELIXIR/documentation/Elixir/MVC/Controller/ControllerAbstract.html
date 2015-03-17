@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow, all" />
+    <title>Elixir\MVC\Controller\ControllerAbstract | Elixir</title>
+
+            <link rel="stylesheet" type="text/css" href="../../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../css/sami.css">
+        <script src="../../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../../js/bootstrap.min.js"></script>
+        <script src="../../../js/typeahead.min.js"></script>
+        <script src="../../../sami.js"></script>
+    
+    
+    </head>
+
+    <body id="class" data-name="class:Elixir_MVC_Controller_ControllerAbstract" data-root-path="../../../">
+            <div id="content">
+        <div id="left-column">
+                <div id="control-panel">
+                <form id="search-form" action="../../../search.html" method="GET">
+            <span class="glyphicon glyphicon-search"></span>
+            <input name="search"
+                   class="typeahead form-control"
+                   type="search"
+                   placeholder="Search">
+        </form>
+    </div>
+
+                <div id="api-tree"></div>
+
+        </div>
+        <div id="right-column">
+                <nav id="site-nav" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-elements">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../../../index.html">Elixir</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-elements">
+                <ul class="nav navbar-nav">
+                    <li><a href="../../../classes.html">Classes</a></li>
+                                            <li><a href="../../../namespaces.html">Namespaces</a></li>
+                                        <li><a href="../../../interfaces.html">Interfaces</a></li>
+                    <li><a href="../../../traits.html">Traits</a></li>
+                    <li><a href="../../../doc-index.html">Index</a></li>
+                    <li><a href="../../../search.html">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+                        <div class="namespace-breadcrumbs">
+            <ol class="breadcrumb">
+                <li><span class="label label-default">class</span></li>
+                                                            <li><a href="../../../Elixir.html">Elixir</a></li>
+                                        <li><a href="../../../Elixir/MVC.html">MVC</a></li>
+                                        <li><a href="../../../Elixir/MVC/Controller.html">Controller</a></li>
+    
+                <li>ControllerAbstract</li>
+            </ol>
+        </div>
+                <div id="page-content">
+                
+    <div class="page-header">
+        <h1>ControllerAbstract</h1>
+    </div>
+
+    <p>abstract     class
+    <strong>ControllerAbstract</strong>        implements
+        <a href="../../../Elixir/MVC/Controller/ControllerInterface.html"><abbr title="Elixir\MVC\Controller\ControllerInterface">ControllerInterface</abbr></a></p>
+
+    
+    
+    
+    
+            <h2>Methods</h2>
+
+            <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_initialize">initialize</a>(<a href="../../../Elixir/HTTP/Request.html"><abbr title="Elixir\HTTP\Request">Request</abbr></a> $pRequest, <a href="../../../Elixir/Dispatcher/DispatcherInterface.html"><abbr title="Elixir\Dispatcher\DispatcherInterface">DispatcherInterface</abbr></a> $pDispatcher, <a href="../../../Elixir/DI/ContainerInterface.html"><abbr title="Elixir\DI\ContainerInterface">ContainerInterface</abbr></a> $pContainer)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../Elixir/Dispatcher/DispatcherInterface.html"><abbr title="Elixir\Dispatcher\DispatcherInterface">DispatcherInterface</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getDispatcher">getDispatcher</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../Elixir/HTTP/Request.html"><abbr title="Elixir\HTTP\Request">Request</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getRequest">getRequest</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../Elixir/DI/ContainerInterface.html"><abbr title="Elixir\DI\ContainerInterface">ContainerInterface</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getContainer">getContainer</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setHelperContainer">setHelperContainer</a>(<a href="../../../Elixir/MVC/Controller/Helper/Container.html"><abbr title="Elixir\MVC\Controller\Helper\Container">Container</abbr></a>|<a href="../../../Elixir/DI/ContainerInterface.html"><abbr title="Elixir\DI\ContainerInterface">ContainerInterface</abbr></a> $pValue)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../Elixir/MVC/Controller/Helper/Container.html"><abbr title="Elixir\MVC\Controller\Helper\Container">Container</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getHelperContainer">getHelperContainer</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_helper">helper</a>(string $pKey)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <abbr title="Elixir\MVC\Controller\mixed;">mixed;</abbr>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___call">__call</a>(string $pMethod, array $pArguments)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+            </div>
+
+
+        <h2>Details</h2>
+
+            <div id="method-details">
+                    <div class="method-item">
+                    <h3 id="method_initialize">
+        <div class="location">at line 59</div>
+        <code>                    
+    <strong>initialize</strong>(<a href="../../../Elixir/HTTP/Request.html"><abbr title="Elixir\HTTP\Request">Request</abbr></a> $pRequest, <a href="../../../Elixir/Dispatcher/DispatcherInterface.html"><abbr title="Elixir\Dispatcher\DispatcherInterface">DispatcherInterface</abbr></a> $pDispatcher, <a href="../../../Elixir/DI/ContainerInterface.html"><abbr title="Elixir\DI\ContainerInterface">ContainerInterface</abbr></a> $pContainer)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../Elixir/HTTP/Request.html"><abbr title="Elixir\HTTP\Request">Request</abbr></a></td>
+                <td>$pRequest</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../Elixir/Dispatcher/DispatcherInterface.html"><abbr title="Elixir\Dispatcher\DispatcherInterface">DispatcherInterface</abbr></a></td>
+                <td>$pDispatcher</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../Elixir/DI/ContainerInterface.html"><abbr title="Elixir\DI\ContainerInterface">ContainerInterface</abbr></a></td>
+                <td>$pContainer</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>ControllerInterface::initialize()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getDispatcher">
+        <div class="location">at line 102</div>
+        <code>                    <a href="../../../Elixir/Dispatcher/DispatcherInterface.html"><abbr title="Elixir\Dispatcher\DispatcherInterface">DispatcherInterface</abbr></a>
+    <strong>getDispatcher</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../Elixir/Dispatcher/DispatcherInterface.html"><abbr title="Elixir\Dispatcher\DispatcherInterface">DispatcherInterface</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>ControllerInterface::getDispatcher()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getRequest">
+        <div class="location">at line 110</div>
+        <code>                    <a href="../../../Elixir/HTTP/Request.html"><abbr title="Elixir\HTTP\Request">Request</abbr></a>
+    <strong>getRequest</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../Elixir/HTTP/Request.html"><abbr title="Elixir\HTTP\Request">Request</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>ControllerInterface::getRequest()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getContainer">
+        <div class="location">at line 118</div>
+        <code>                    <a href="../../../Elixir/DI/ContainerInterface.html"><abbr title="Elixir\DI\ContainerInterface">ContainerInterface</abbr></a>
+    <strong>getContainer</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../Elixir/DI/ContainerInterface.html"><abbr title="Elixir\DI\ContainerInterface">ContainerInterface</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>ControllerInterface::getContainer()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setHelperContainer">
+        <div class="location">at line 126</div>
+        <code>                    
+    <strong>setHelperContainer</strong>(<a href="../../../Elixir/MVC/Controller/Helper/Container.html"><abbr title="Elixir\MVC\Controller\Helper\Container">Container</abbr></a>|<a href="../../../Elixir/DI/ContainerInterface.html"><abbr title="Elixir\DI\ContainerInterface">ContainerInterface</abbr></a> $pValue)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../Elixir/MVC/Controller/Helper/Container.html"><abbr title="Elixir\MVC\Controller\Helper\Container">Container</abbr></a>|<a href="../../../Elixir/DI/ContainerInterface.html"><abbr title="Elixir\DI\ContainerInterface">ContainerInterface</abbr></a></td>
+                <td>$pValue</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getHelperContainer">
+        <div class="location">at line 135</div>
+        <code>                    <a href="../../../Elixir/MVC/Controller/Helper/Container.html"><abbr title="Elixir\MVC\Controller\Helper\Container">Container</abbr></a>
+    <strong>getHelperContainer</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../Elixir/MVC/Controller/Helper/Container.html"><abbr title="Elixir\MVC\Controller\Helper\Container">Container</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_helper">
+        <div class="location">at line 143</div>
+        <code>                    mixed
+    <strong>helper</strong>(string $pKey)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$pKey</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>mixed</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>ControllerInterface::helper()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method___call">
+        <div class="location">at line 155</div>
+        <code>                    <abbr title="Elixir\MVC\Controller\mixed;">mixed;</abbr>
+    <strong>__call</strong>(string $pMethod, array $pArguments)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$pMethod</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$pArguments</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><abbr title="Elixir\MVC\Controller\mixed;">mixed;</abbr></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><abbr title="NotFoundException">NotFoundException</abbr></td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="http://php.net/BadMethodCallException"><abbr title="BadMethodCallException">BadMethodCallException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+            </div>
+
+    
+            </div>
+                <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/">Sami, the API Documentation Generator</a>.
+    </div>
+
+        </div>
+    </div>
+    </body>
+
+</html>
