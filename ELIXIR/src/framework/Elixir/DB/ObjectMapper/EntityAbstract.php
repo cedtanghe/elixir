@@ -1,10 +1,10 @@
 <?php
 
-namespace Elixir\DB\ORM;
+namespace Elixir\DB\ObjectMapper;
 
-use Elixir\DB\ORM\Collection;
-use Elixir\DB\ORM\EntityEvent;
-use Elixir\DB\ORM\Relation\RelationInterface;
+use Elixir\DB\ObjectMapper\Collection;
+use Elixir\DB\ObjectMapper\EntityEvent;
+use Elixir\DB\ObjectMapper\Relation\RelationInterface;
 use Elixir\Dispatcher\Dispatcher;
 use Elixir\Util\Str;
 

@@ -2,8 +2,8 @@
 
 namespace Elixir\DB;
 
+use Elixir\DB\Query\QueryInterface;
 use Elixir\DB\ResultSet\SetAbstract;
-use Elixir\DB\Query\SQL\SQLInterface;
 use Elixir\Dispatcher\DispatcherInterface;
 
 /**
@@ -44,16 +44,16 @@ interface DBInterface extends DispatcherInterface
     public function quote($value, $type = null);
 
     /**
-     * @param SQLInterface|string $SQL
+     * @param QueryInterface|string $query
      * @return integer
      */
-    public function exec($SQL);
+    public function exec($query);
 
     /**
-     * @param SQLInterface|string $SQL
+     * @param QueryInterface|string $query
      * @param array $values
      * @param array $options
      * @return SetAbstract|boolean
      */
-    public function query($SQL, array $values = [], array $options = []);
+    public function query($query, array $values = [], array $options = []);
 }

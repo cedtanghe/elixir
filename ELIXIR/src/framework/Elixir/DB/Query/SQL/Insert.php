@@ -2,7 +2,6 @@
 
 namespace Elixir\DB\Query\SQL;
 
-use Elixir\DB\Query\SQL\Select;
 use Elixir\DB\Query\SQL\SQLAbstract;
 
 /**
@@ -46,17 +45,17 @@ class Insert extends SQLAbstract
     }
     
     /**
-     * @param Select|string|array $values
+     * @param SQLInterface|string|array $values
      * @param string $type
      * @return Insert
      */
     public function values($values, $type = self::VALUES_SET) 
     {
-        if ((is_string($values) && false !== strpos(strtoupper($values), 'SELECT')) || $values instanceof Select) 
+        if ((is_string($values) && false !== strpos(strtoupper($values), 'SELECT')) || $values instanceof SQLInterface) 
         {
             $this->values = $values;
 
-            if ($values instanceof Select) 
+            if ($values instanceof SQLInterface) 
             {
                 $this->values = $this->values->getQuery();
             }

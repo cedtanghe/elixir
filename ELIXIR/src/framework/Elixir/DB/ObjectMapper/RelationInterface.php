@@ -1,6 +1,6 @@
 <?php
 
-namespace Elixir\DB\ORM;
+namespace Elixir\DB\ObjectMapper;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

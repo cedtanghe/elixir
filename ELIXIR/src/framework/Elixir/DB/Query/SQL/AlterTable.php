@@ -134,7 +134,7 @@ class AlterTable extends SQLAbstract
     }
 
     /**
-     * @param Constraint $constraint
+     * @param string|Constraint $constraint
      * @param string $type
      * @return AlterTable
      * @throws \InvalidArgumentException

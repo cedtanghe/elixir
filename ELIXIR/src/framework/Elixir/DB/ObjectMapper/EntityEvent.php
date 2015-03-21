@@ -1,8 +1,8 @@
 <?php
 
-namespace Elixir\DB\ORM;
+namespace Elixir\DB\ObjectMapper;
 
-use Elixir\DB\ORM\EntityInterface;
+use Elixir\DB\ObjectMapper\EntityInterface;
 use Elixir\Dispatcher\Event;
 
 /**
