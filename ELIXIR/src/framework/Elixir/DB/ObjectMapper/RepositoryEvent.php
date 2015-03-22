@@ -72,12 +72,7 @@ class RepositoryEvent extends Event
     const FIND = 'find';
     
     /**
-     * @var FindableInterface 
-     */
-    protected $findable;
-    
-    /**
-     * @var QueryInterface 
+     * @var QueryInterface|FindableInterface
      */
     protected $query;
     
@@ -90,19 +85,15 @@ class RepositoryEvent extends Event
         parent::__construct($type);
 
         $params = array_merge(
-            [
-                'query' => null,
-                'findable' => null
-            ], 
+            ['query' => null], 
             $params
         );
         
         $this->query = $params['query'];
-        $this->findable = $params['findable'];
     }
     
     /**
-     * @return QueryInterface
+     * @return QueryInterface|FindableInterface
      */
     public function getQuery()
     {
@@ -110,18 +101,10 @@ class RepositoryEvent extends Event
     }
     
     /**
-     * @param QueryInterface $value
+     * @param QueryInterface|FindableInterface $value
      */
-    public function setQuery(QueryInterface $value) 
+    public function setQuery($value) 
     {
         $this->query = $value;
-    }
-    
-    /**
-     * @return FindableInterface
-     */
-    public function getFindable()
-    {
-        return $this->findable;
     }
 }

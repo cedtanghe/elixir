@@ -2,6 +2,7 @@
 
 namespace Elixir\DB\ObjectMapper\SQL;
 
+use Elixir\DB\ObjectMapper\FindableExtensionInterface;
 use Elixir\DB\ObjectMapper\FindableInterface;
 use Elixir\DB\ObjectMapper\RepositoryInterface;
 
@@ -10,7 +11,11 @@ use Elixir\DB\ObjectMapper\RepositoryInterface;
  */
 class Findable implements FindableInterface 
 {
-    public function __construct(RepositoryInterface $repository)
+    /**
+     * @param RepositoryInterface $repository
+     * @param mixed $options
+     */
+    public function __construct(RepositoryInterface $repository, $options = null)
     {
         // Todo
     }
@@ -18,7 +23,7 @@ class Findable implements FindableInterface
     /**
      * @see FindableInterface::extend()
      */
-    public function extend(callable $extension)
+    public function extend(FindableExtensionInterface $extension)
     {
         // Todo
     }

@@ -18,6 +18,11 @@ abstract class RepositoryAbstract extends EntityAbstract implements RepositoryIn
      * @var string
      */
     const DEFAULT_CONNECTION_KEY = 'db.default';
+    
+    /**
+     * @var ContainerInterface
+     */
+    public static $defaultConnectionManager;
 
     /**
      * @var ContainerInterface
@@ -67,6 +72,11 @@ abstract class RepositoryAbstract extends EntityAbstract implements RepositoryIn
     public function setConnectionManager(ContainerInterface $value) 
     {
         $this->connectionManager = $value;
+        
+        if (null === self::$defaultConnectionManager) 
+        {
+            self::$defaultConnectionManager = $this->connectionManager;
+        }
     }
 
     /**
@@ -74,9 +84,9 @@ abstract class RepositoryAbstract extends EntityAbstract implements RepositoryIn
      */
     public function getConnectionManager() 
     {
-        return $this->connectionManager;
+        return $this->connectionManager ?: self::$defaultConnectionManager;
     }
-
+    
     /**
      * @see RepositoryInterface::getConnection()
      */
@@ -139,8 +149,7 @@ abstract class RepositoryAbstract extends EntityAbstract implements RepositoryIn
      */
     public function find($options = null)
     {
-        $findable = new Findable($this);
-        return $findable;
+        return new Findable($this, $options);
     }
     
     /**
@@ -360,5 +369,21 @@ abstract class RepositoryAbstract extends EntityAbstract implements RepositoryIn
 
         $this->sync(self::SYNC_FILLABLE);
         return $result;
+    }
+    
+    /**
+     * @ignore
+     */
+    public function __callStatic($name, $arguments) 
+    {
+        $self = new static();
+        
+        if ($name == 'withConnectionManager')
+        {
+            $self->setConnectionManager($arguments[0]);
+            return $self->find();
+        }
+
+        return call_user_func_array([$self->find(), $name], $arguments);
     }
 }

@@ -2,15 +2,18 @@
 
 namespace Elixir\DB\ObjectMapper;
 
+use Elixir\DB\ObjectMapper\FindableExtensionInterface;
+use Elixir\DB\ORM\RepositoryInterface;
+
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 interface FindableInterface
 {
     /**
-     * @param callable $extension
+     * @param FindableExtensionInterface $extension
      */
-    public function extend(callable $extension);
+    public function extend(FindableExtensionInterface $extension);
 
     /**
      * @return boolean
