@@ -1,0 +1,11 @@
+{
+    "json-route-4":{
+        "regex":"value-4",
+        "parameters":{
+            "_mvc":"default::index::index"
+        },
+        "options":{
+            "*":true
+        }
+    }
+}
