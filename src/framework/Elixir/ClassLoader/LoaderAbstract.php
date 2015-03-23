@@ -159,6 +159,38 @@ abstract class LoaderAbstract implements LoaderInterface
     }
     
     /**
+     * @param string $className
+     * @return string
+     */
+    public function findClass($className)
+    {
+        $className = ltrim($className, '\\');
+        
+        if (isset($this->aliases[$className])) 
+        {
+            $className = $this->aliases[$className];
+        }
+        
+        if (isset($this->classes[$className]))
+        {
+            return $this->classes[$className];
+        }
+
+        $paths = $this->paths($className);
+        
+        foreach ($paths as $path)
+        {
+            if ($this->find($path)) 
+            {
+                $this->classes[$className] = $path;
+                return $path;
+            }
+        }
+
+        return null;
+    }
+
+        /**
      * @see LoaderInterface::loadClass()
      */
     public function loadClass($className) 
