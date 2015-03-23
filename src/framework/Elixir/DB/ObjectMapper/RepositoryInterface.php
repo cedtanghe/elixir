@@ -1,9 +1,10 @@
 <?php
 
-namespace Elixir\DB\ORM;
+namespace Elixir\DB\ObjectMapper;
 
 use Elixir\DB\DBInterface;
-use Elixir\DB\ORM\EntityInterface;
+use Elixir\DB\ObjectMapper\EntityInterface;
+use Elixir\DB\ObjectMapper\FindableInterface;
 use Elixir\DI\ContainerInterface;
 
 /**
@@ -25,12 +26,12 @@ interface RepositoryInterface extends EntityInterface
      * @param string $key
      * @return DBInterface
      */
-    public function getConnection($key = null);
+    public function getConnection($key);
 
     /**
      * @return string
      */
-    public function getTable();
+    public function getStockageName();
     
     /**
      * @return mixed
@@ -42,6 +43,12 @@ interface RepositoryInterface extends EntityInterface
      */
     public function getPrimaryValue();
 
+    /**
+     * @param mixed $options
+     * @return FindableInterface
+     */
+    public function find($options = null);
+    
     /**
      * @return boolean
      */

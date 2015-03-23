@@ -2,6 +2,7 @@
 
 namespace Elixir\DB;
 
+use Elixir\DB\Query\QueryInterface;
 use Elixir\Dispatcher\Event;
 
 /**
@@ -20,9 +21,9 @@ class DBEvent extends Event
     const QUERY = 'query';
 
     /**
-     * @var string 
+     * @var QueryInterface|string 
      */
-    protected $SQL;
+    protected $query;
 
     /**
      * @var array 
@@ -44,32 +45,32 @@ class DBEvent extends Event
 
         $params = array_merge(
             [
-                'SQL' => null,
+                'query' => null,
                 'values' => [],
                 'time' => 0
             ], 
             $params
         );
         
-        $this->SQL = $params['SQL'];
+        $this->query = $params['query'];
         $this->values = $params['values'];
         $this->time = $params['time'];
     }
     
     /**
-     * @return string
+     * @return QueryInterface|string
      */
-    public function getSQL() 
+    public function getQuery() 
     {
-        return $this->SQL;
+        return $this->query;
     }
     
     /**
-     * @param string $value
+     * @param QueryInterface|string $value
      */
-    public function setSQL($value) 
+    public function setQuery($value) 
     {
-        $this->SQL = $value;
+        $this->query = $value;
     }
 
     /**

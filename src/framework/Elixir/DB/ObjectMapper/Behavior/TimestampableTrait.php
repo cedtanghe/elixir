@@ -1,8 +1,9 @@
 <?php
 
-namespace Elixir\DB\ORM\Model;
+namespace Elixir\DB\ObjectMapper\Model\Behavior;
 
-use Elixir\DB\ORM\EntityEvent;
+use Elixir\DB\ObjectMapper\EntityEvent;
+use Elixir\DB\ObjectMapper\RepositoryEvent;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
@@ -22,14 +23,14 @@ trait TimestampableTrait
             $this->update_at = $this->getIgnoreValue();
         });
 
-        $this->addListener(EntityEvent::PRE_INSERT, function(EntityEvent $e) 
+        $this->addListener(RepositoryEvent::PRE_INSERT, function(RepositoryEvent $e) 
         {
-            $this->touch();
+            $this->touch(false);
         });
 
-        $this->addListener(EntityEvent::PRE_UPDATE, function(EntityEvent $e) 
+        $this->addListener(RepositoryEvent::PRE_UPDATE, function(RepositoryEvent $e) 
         {
-            $this->touch();
+            $this->touch(false);
         });
     }
 
@@ -50,10 +51,10 @@ trait TimestampableTrait
     }
 
     /**
-     * @param boolean $update
+     * @param boolean $save
      * @return boolean
      */
-    public function touch($update = true) 
+    public function touch($save = false) 
     {
         if ($this->create_at === $this->getIgnoreValue()) 
         {
@@ -65,9 +66,9 @@ trait TimestampableTrait
             $this->update_at = date($this->getDateFormat());
         }
 
-        if ($update) 
+        if ($save) 
         {
-            return $this->update();
+            return $this->save();
         }
 
         return true;

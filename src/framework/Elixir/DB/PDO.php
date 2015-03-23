@@ -6,9 +6,9 @@ use Elixir\DB\DBEvent;
 use Elixir\DB\DBInterface;
 use Elixir\DB\Query\QueryBuilderInterface;
 use Elixir\DB\Query\QueryBuilderTrait;
-use Elixir\DB\ResultSet\PDO as ResultSet;
 use Elixir\DB\Query\SQL\Expr;
 use Elixir\DB\Query\SQL\SQLInterface;
+use Elixir\DB\ResultSet\PDO as ResultSet;
 use Elixir\Dispatcher\DispatcherTrait;
 
 /**
@@ -185,32 +185,31 @@ class PDO implements DBInterface, QueryBuilderInterface
     }
 
     /**
-     * @param SQLInterface|string $SQL
-     * @return integer
+     * @see DBInterface::exec()
      */
-    public function exec($SQL) 
+    public function exec($query) 
     {
-        $e = new DBEvent(
+        $event = new DBEvent(
             DBEvent::PRE_QUERY, 
-            ['SQL' => $SQL]
+            ['query' => $query]
         );
         
-        $this->dispatch($e);
-        $SQL = $e->getSQL();
+        $this->dispatch($event);
+        $query = $event->getQuery();
         
-        if ($SQL instanceof SQLInterface) 
+        if ($query instanceof SQLInterface) 
         {
-            $SQL = $SQL->getQuery();
+            $query = $query->getQuery();
         }
                 
         $time = microtime(true);
-        $result = $this->connection->exec($SQL);
+        $result = $this->connection->exec($query);
         
         $this->dispatch(
             new DBEvent(
                 DBEvent::QUERY, 
                 [
-                    'SQL' => $SQL,
+                    'query' => $query,
                     'time' => microtime(true) - $time
                 ]
             )
@@ -222,37 +221,37 @@ class PDO implements DBInterface, QueryBuilderInterface
     /**
      * @see DBInterface::query()
      */
-    public function query($SQL, array $values = [], array $options = []) 
+    public function query($query, array $values = [], array $options = []) 
     {
-        $findAndReplace = function($SQL, $value, $nth) 
+        $findAndReplace = function($query, $value, $nth) 
         {
-            if (preg_match_all('/\?/', $SQL, $matches, PREG_OFFSET_CAPTURE)) 
+            if (preg_match_all('/\?/', $query, $matches, PREG_OFFSET_CAPTURE)) 
             {
                 if (array_key_exists($nth, $matches[0]))
                 {
-                    $SQL = substr($SQL, 0, $matches[0][$nth][1]) . $value . substr($SQL, $matches[0][$nth][1] + strlen($matches[0][$nth][0]));
+                    $query = substr($query, 0, $matches[0][$nth][1]) . $value . substr($query, $matches[0][$nth][1] + strlen($matches[0][$nth][0]));
                 }
             }
 
-            return $SQL;
+            return $query;
         };
         
-        $e = new DBEvent(
+        $event = new DBEvent(
             DBEvent::PRE_QUERY, 
             [
-                'SQL' => $SQL, 
+                'query' => $query, 
                 'values' => $values
             ]
         );
         
-        $this->dispatch($e);
-        $SQL = $e->getSQL();
-        $values = $e->getValues();
+        $this->dispatch($event);
+        $query = $event->getQuery();
+        $values = $event->getValues();
         
-        if ($SQL instanceof SQLInterface) 
+        if ($query instanceof SQLInterface) 
         {
-            $values = array_merge($values, $SQL->getBindValues());
-            $SQL = $SQL->getQuery();
+            $values = array_merge($values, $query->getBindValues());
+            $query = $query->getQuery();
         }
         
         $parsedValues = [];
@@ -297,22 +296,22 @@ class PDO implements DBInterface, QueryBuilderInterface
 
                     if ($isInt) 
                     {
-                        $SQL = $findAndReplace($SQL, implode(', ', $keys), $c);
+                        $query = $findAndReplace($query, implode(', ', $keys), $c);
                     } 
                     else 
                     {
-                        $SQL = preg_replace('/' . $key . '/', implode(', ', $keys), $SQL, 1);
+                        $query = preg_replace('/' . $key . '/', implode(', ', $keys), $query, 1);
                     }
                 } 
                 else if ($value instanceof Expr) 
                 {
                     if ($isInt) 
                     {
-                        $SQL = $findAndReplace($SQL, $value->getExpr(), $c);
+                        $query = $findAndReplace($query, $value->getExpr(), $c);
                     } 
                     else
                     {
-                        $SQL = preg_replace('/' . $key . '/', $value->getExpr(), $SQL, 1);
+                        $query = preg_replace('/' . $key . '/', $value->getExpr(), $query, 1);
                     }
                 } 
                 else 
@@ -324,7 +323,7 @@ class PDO implements DBInterface, QueryBuilderInterface
             }
         }
 
-        $stmt = $this->connection->prepare($SQL, $options);
+        $stmt = $this->connection->prepare($query, $options);
 
         foreach ($parsedValues as $key => $value) 
         {
@@ -343,7 +342,7 @@ class PDO implements DBInterface, QueryBuilderInterface
             new DBEvent(
                 DBEvent::QUERY, 
                 [
-                    'SQL' => $SQL, 
+                    'query' => $query, 
                     'values' => $parsedValues,
                     'time' => microtime(true) - $time
                 ]
