@@ -256,4 +256,12 @@ class Collection extends Dispatcher implements \Iterator, \Countable
             $this->append($value);
         }
     }
+    
+    /**
+     * @ignore
+     */
+    public function __debugInfo()
+    {
+        return $this->data;
+    }
 }
