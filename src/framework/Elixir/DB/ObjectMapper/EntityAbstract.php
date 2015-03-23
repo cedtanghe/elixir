@@ -70,12 +70,9 @@ abstract class EntityAbstract extends Dispatcher implements EntityInterface
     {
         $this->className = get_class($this);
         
-        // Fill columns
         $this->state = self::FILLABLE;
-        $this->defineColumns();
-        $this->dispatch(new EntityEvent(EntityEvent::DEFINE_COLUMNS));
-
-        // Fill guarded
+        $this->defineFillable();
+        $this->dispatch(new EntityEvent(EntityEvent::DEFINE_FILLABLE));
         $this->state = self::GUARDED;
         $this->defineGuarded();
         $this->dispatch(new EntityEvent(EntityEvent::DEFINE_GUARDED));
@@ -89,7 +86,7 @@ abstract class EntityAbstract extends Dispatcher implements EntityInterface
     /**
      * Declares columns
      */
-    abstract protected function defineColumns();
+    abstract protected function defineFillable();
     
     /**
      * Declares relations and others
@@ -139,7 +136,7 @@ abstract class EntityAbstract extends Dispatcher implements EntityInterface
     /**
      * @return array
      */
-    public function getColumnKeys() 
+    public function getFillableKeys() 
     {
         return $this->fillable;
     }

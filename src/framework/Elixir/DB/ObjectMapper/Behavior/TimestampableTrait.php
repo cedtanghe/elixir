@@ -17,7 +17,7 @@ trait TimestampableTrait
 
     public function timestampable()
     {
-        $this->addListener(EntityEvent::DEFINE_COLUMNS, function(EntityEvent $e)
+        $this->addListener(EntityEvent::DEFINE_FILLABLE, function(EntityEvent $e)
         {
             $this->create_at = $this->getIgnoreValue();
             $this->update_at = $this->getIgnoreValue();

@@ -13,7 +13,7 @@ class EntityEvent extends Event
     /**
      * @var string
      */
-    const DEFINE_COLUMNS = 'define_columns';
+    const DEFINE_FILLABLE = 'define_fillable';
     
     /**
      * @var string
