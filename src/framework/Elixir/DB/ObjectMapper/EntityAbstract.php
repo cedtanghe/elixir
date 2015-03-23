@@ -292,9 +292,13 @@ abstract class EntityAbstract extends Dispatcher implements EntityInterface
 
         if (is_array($value)) 
         {
-            $value = new Collection($value, true);
+            $value = new Collection($value, false);
         }
-
+        else if ($value instanceof \ArrayObject)
+        {
+            $value = new Collection($value->getArrayCopy(), false);
+        }
+        
         if ($this->isFillable()) 
         {
             if (!in_array($key, $this->fillable))
@@ -396,7 +400,7 @@ abstract class EntityAbstract extends Dispatcher implements EntityInterface
                 }
             }
 
-            if (Collection::isCollection($value) || is_array($value))
+            if ($value instanceof Collection || is_array($value))
             {
                 $value = $this->hydrateCollection($value, $options);
             }
@@ -445,7 +449,7 @@ abstract class EntityAbstract extends Dispatcher implements EntityInterface
     }
     
     /**
-     * @param array|\ArrayObject $data
+     * @param array|Collection $data
      * @param array $options
      * @return mixed
      */
@@ -470,7 +474,7 @@ abstract class EntityAbstract extends Dispatcher implements EntityInterface
         {
             foreach ($data as $key => &$value)
             {
-                if (Collection::isCollection($value) || is_array($value))
+                if ($value instanceof Collection || is_array($value))
                 {
                     $value = $this->hydrateCollection($value, $options);
                 }
@@ -517,7 +521,7 @@ abstract class EntityAbstract extends Dispatcher implements EntityInterface
                 {
                     $v = $v->export([], [], $options);
                 } 
-                else if (Collection::isCollection($v))
+                else if ($v instanceof Collection)
                 {
                     $v = $this->exportCollection($v, $options);
                 }
@@ -536,17 +540,15 @@ abstract class EntityAbstract extends Dispatcher implements EntityInterface
     }
 
     /**
-     * @param \ArrayObject $data
+     * @param Collection $data
      * @param array $options
      * @return array
      */
-    protected function exportCollection(\ArrayObject $data, $options) 
+    protected function exportCollection(Collection $data, $options) 
     {
-        $data = $data->getArrayCopy();
-        
         foreach ($data as $key => &$value) 
         {
-            if (Collection::isCollection($value)) 
+            if ($value instanceof Collection) 
             {
                 $value = $this->exportCollection($value, $options);
             } 

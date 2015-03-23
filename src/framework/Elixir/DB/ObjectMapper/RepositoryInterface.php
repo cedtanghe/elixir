@@ -6,11 +6,12 @@ use Elixir\DB\DBInterface;
 use Elixir\DB\ObjectMapper\EntityInterface;
 use Elixir\DB\ObjectMapper\FindableInterface;
 use Elixir\DI\ContainerInterface;
+use Elixir\Dispatcher\DispatcherInterface;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-interface RepositoryInterface extends EntityInterface
+interface RepositoryInterface extends EntityInterface, DispatcherInterface
 {
     /**
      * @param ContainerInterface $value

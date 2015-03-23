@@ -2,19 +2,18 @@
 
 namespace Elixir\DB\ObjectMapper;
 
+use Elixir\DB\ObjectMapper\CollectionEvent;
+use Elixir\Dispatcher\Dispatcher;
+
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-class Collection extends \ArrayObject 
+class Collection extends Dispatcher implements \Iterator, \Countable 
 {
     /**
-     * @param mixed $value
-     * @return boolean
+     * @var array
      */
-    public static function isCollection($value)
-    {
-        return $value instanceof \ArrayObject;
-    }
+    protected $data = [];
 
     /**
      * @var boolean
@@ -25,16 +24,16 @@ class Collection extends \ArrayObject
      * @param array $data
      * @param boolean $useEvents
      */
-    public function __construct(array $data = [], $useEvents = false)
+    public function __construct(array $data = [], $useEvents = false) 
     {
-        parent::__construct($data, \ArrayObject::STD_PROP_LIST);
+        $this->data = $data;
         $this->setUseEvents($useEvents);
     }
-    
+
     /**
      * @param boolean $value
      */
-    public function setUseEvents($value)
+    public function setUseEvents($value) 
     {
         $this->useEvents = $value;
     }
@@ -42,7 +41,7 @@ class Collection extends \ArrayObject
     /**
      * @return boolean
      */
-    public function isUseEvents()
+    public function isUseEvents() 
     {
         return $this->useEvents;
     }
@@ -50,12 +49,27 @@ class Collection extends \ArrayObject
     /**
      * @param mixed $value
      */
+    public function append($value)
+    {
+        array_push($this->data, $value);
+        
+        if($this->useEvents)
+        {
+            $this->dispatch(new CollectionEvent(CollectionEvent::VALUE_ADDED, ['object' => $value]));
+        }
+    }
+
+    /**
+     * @param mixed $value
+     */
     public function prepend($value) 
     {
-        $data = $this->getArrayCopy();
-        array_unshift($data, $value);
-
-        $this->exchangeArray($data);
+        array_unshift($this->data, $value);
+        
+        if($this->useEvents)
+        {
+            $this->dispatch(new CollectionEvent(CollectionEvent::VALUE_ADDED, ['object' => $value]));
+        }
     }
 
     /**
@@ -68,16 +82,21 @@ class Collection extends \ArrayObject
         if (false !== $pos) 
         {
             $this->splice($pos, 1);
+            
+            if($this->useEvents)
+            {
+                $this->dispatch(new CollectionEvent(CollectionEvent::VALUE_REMOVED, ['object' => $value]));
+            }
         }
     }
-
+    
     /**
      * @param mixed $needle
      * @return boolean
      */
     public function in($needle) 
     {
-        return in_array($needle, $this->getArrayCopy(), true);
+        return in_array($needle, $this->data, true);
     }
 
     /**
@@ -86,52 +105,63 @@ class Collection extends \ArrayObject
      */
     public function search($value)
     {
-        return array_search($value, $this->getArrayCopy());
+        return array_search($value, $this->data);
     }
 
     /**
      * @param integer $offset
      * @param integer $length
      * @param array $replacement
+     * @return array
      */
     public function splice($offset, $length, $replacement = [])
     {
-        $data = $this->getArrayCopy();
-        array_splice($data, $offset, $length, $replacement);
-
-        $this->exchangeArray($data);
+        $values = array_splice($this->data, $offset, $length, $replacement);
+        
+        if ($this->useEvents)
+        {
+            foreach ($values as $value)
+            {
+                $this->dispatch(new CollectionEvent(CollectionEvent::VALUE_REMOVED, ['object' => $value]));
+            }
+        }
+        
+        return $values;
     }
     
     /**
-     * @return boolean
+     * @param integer $offset
+     * @param integer $length
+     * @param boolean $preserveKeys
+     * @return array
      */
+    public function slice($offset, $length, $preserveKeys = false)
+    {
+        return array_slice($this->data, $offset, $length, $preserveKeys);
+    }
+    
     public function shuffle() 
     {
-        $data = $this->getArrayCopy();
-        $result = shuffle($data);
-
-        if ($result)
-        {
-            $this->exchangeArray($data);
-        }
-        
-        return $result;
+        shuffle($this->data);
     }
-
-    public function reverse()
+    
+    public function reverse() 
     {
-        $this->exchangeArray(array_reverse($this->getArrayCopy()));
+        array_reverse($this->data);
     }
-
+    
     /**
      * @return mixed
      */
     public function shift() 
     {
-        $data = $this->getArrayCopy();
-        $value = array_shift($data);
-
-        $this->exchangeArray($data);
+        $value = array_shift($this->data);
+        
+        if($this->useEvents)
+        {
+            $this->dispatch(new CollectionEvent(CollectionEvent::VALUE_REMOVED, ['object' => $value]));
+        }
+        
         return $value;
     }
 
@@ -140,65 +170,90 @@ class Collection extends \ArrayObject
      */
     public function pop()
     {
-        $data = $this->getArrayCopy();
-        $value = array_pop($data);
-
-        $this->exchangeArray($data);
+        $value = array_pop($this->data);
+        
+        if($this->useEvents)
+        {
+            $this->dispatch(new CollectionEvent(CollectionEvent::VALUE_REMOVED, ['object' => $value]));
+        }
+        
         return $value;
     }
     
     /**
-     * @param array|\ArrayObject $data
-     * @throws \InvalidArgumentException
+     * @param string $method
+     * @param array $arguments
+     * @return boolean
      */
-    public function merge($data)
+    public function sort($method = 'sort', $arguments = []) 
     {
-        if (static::isCollection($data))
-        {
-            $data = $data->getArrayCopy();
-        } 
-        else if (!is_array($data))
-        {
-            throw new \InvalidArgumentException('Data must be of type array or \ArrayObject.');
-        }
-
-        $this->exchangeArray(array_merge($this->getArrayCopy(), $data));
+        return call_user_func_array($method, array_merge($this->data, $arguments));
+    }
+    
+    /**
+     * @ignore
+     */
+    public function rewind() 
+    {
+        return reset($this->data);
     }
 
     /**
+     * @ignore
+     */
+    public function current() 
+    {
+        return current($this->data);
+    }
+
+    /**
+     * @ignore
+     */
+    public function key()
+    {
+        return key($this->data);
+    }
+
+    /**
+     * @ignore
+     */
+    public function next() 
+    {
+        return next($this->data);
+    }
+
+    /**
+     * @ignore
+     */
+    public function valid()
+    {
+        return null !== key($this->data);
+    }
+
+    /**
+     * @ignore
+     */
+    public function count() 
+    {
+        return count($this->data);
+    }
+    
+    /**
      * @return array
      */
-    public function export() 
+    public function getArrayCopy() 
     {
-        $data = [];
-
-        foreach ($this->getArrayCopy() as $key => $value)
+        return array_slice($this->data, 0);
+    }
+    
+    /**
+     * @param array|Collection $data
+     */
+    public function merge($data) 
+    {
+        foreach ($data as $value)
         {
-            if ($value instanceof self)
-            {
-                $data[$key] = $value->export();
-            } 
-            else if (is_array($value))
-            {
-                $data[$key] = static::create($value)->export();
-            } 
-            else if (is_object($value)) 
-            {
-                if (method_exists($value, 'export')) 
-                {
-                    $data[$key] = $value->export();
-                } 
-                else 
-                {
-                    $data[$key] = static::create(get_object_vars($value))->export();
-                }
-            } 
-            else
-            {
-                $data[$key] = $value;
-            }
+            $this->append($value);
         }
-
-        return $data;
     }
 }
