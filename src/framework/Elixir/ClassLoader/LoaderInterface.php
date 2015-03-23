@@ -22,6 +22,12 @@ interface LoaderInterface
     
     /**
      * @param string $className
+     * @return string|null
+     */
+    public function findClass($className);
+    
+    /**
+     * @param string $className
      * @return boolean
      */
     public function loadClass($className);

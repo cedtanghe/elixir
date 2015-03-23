@@ -159,8 +159,7 @@ abstract class LoaderAbstract implements LoaderInterface
     }
     
     /**
-     * @param string $className
-     * @return string
+     * @see LoaderInterface::findClass()
      */
     public function findClass($className)
     {
@@ -190,7 +189,7 @@ abstract class LoaderAbstract implements LoaderInterface
         return null;
     }
 
-        /**
+    /**
      * @see LoaderInterface::loadClass()
      */
     public function loadClass($className) 
