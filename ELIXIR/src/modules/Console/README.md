@@ -1,2 +1,0 @@
-Require "symfony/console"
-
