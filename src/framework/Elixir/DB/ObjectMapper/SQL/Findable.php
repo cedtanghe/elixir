@@ -2,10 +2,13 @@
 
 namespace Elixir\DB\ObjectMapper\SQL;
 
+use Elixir\DB\DBInterface;
 use Elixir\DB\ObjectMapper\FindableExtensionInterface;
 use Elixir\DB\ObjectMapper\FindableInterface;
 use Elixir\DB\ObjectMapper\RepositoryEvent;
 use Elixir\DB\ObjectMapper\RepositoryInterface;
+use Elixir\DB\Query\QueryBuilderInterface;
+use Elixir\DB\Query\SQL\SQLInterface;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
@@ -16,6 +19,17 @@ class Findable implements FindableInterface
      * @var RepositoryInterface 
      */
     protected $repository;
+    
+    /**
+     * @var DBInterface
+     * @var QueryBuilderInterface
+     */
+    protected $DB;
+    
+    /**
+     * @var SQLInterface
+     */
+    protected $SQL;
     
     /**
      * @param RepositoryInterface $repository
@@ -30,6 +44,9 @@ class Findable implements FindableInterface
                 ['query' => $this]
             )
         );
+        
+        $this->DB = $this->repository->getConnection('db.read');
+        $this->SQL = $this->DB->createSelect('`' . $this->repository->getStockageName() . '`');
     }
     
     /**
@@ -80,7 +97,9 @@ class Findable implements FindableInterface
      */
     public function one() 
     {
+        $this->SQL->limit(1);
         $repositories = $this->all();
+        
         return count($repositories) > 0 ? $repositories[0] : null;
     }
     
@@ -91,5 +110,13 @@ class Findable implements FindableInterface
     {
         // Todo
         $this->repository->dispatch(new RepositoryEvent(RepositoryEvent::FIND));
+    }
+    
+    /**
+     * @return string
+     */
+    public function __toString() 
+    {
+        return $this->SQL->render();
     }
 }

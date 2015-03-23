@@ -6,6 +6,7 @@ use Elixir\DB\ObjectMapper\EntityAbstract;
 use Elixir\DB\ObjectMapper\EntityEvent;
 use Elixir\DB\ObjectMapper\RepositoryEvent;
 use Elixir\DB\ObjectMapper\SQL\RepositoryInterface;
+use Elixir\DB\Query\QueryBuilderInterface;
 use Elixir\DB\Query\SQL\SQLInterface;
 use Elixir\DI\ContainerInterface;
 
@@ -89,6 +90,7 @@ abstract class RepositoryAbstract extends EntityAbstract implements RepositoryIn
     
     /**
      * @see RepositoryInterface::getConnection()
+     * @return QueryBuilderInterface
      */
     public function getConnection($key) 
     {
