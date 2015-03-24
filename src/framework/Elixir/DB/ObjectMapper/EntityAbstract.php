@@ -5,14 +5,16 @@ namespace Elixir\DB\ObjectMapper;
 use Elixir\DB\ObjectMapper\Collection;
 use Elixir\DB\ObjectMapper\EntityEvent;
 use Elixir\DB\ObjectMapper\Relation\RelationInterface;
-use Elixir\Dispatcher\Dispatcher;
+use Elixir\Dispatcher\DispatcherTrait;
 use Elixir\Util\Str;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-abstract class EntityAbstract extends Dispatcher implements EntityInterface
+abstract class EntityAbstract implements EntityInterface
 {
+    use DispatcherTrait;
+    
     /**
      * @var array
      */
