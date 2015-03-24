@@ -3,7 +3,7 @@
 namespace Elixir\DB;
 
 use Elixir\DB\Query\QueryInterface;
-use Elixir\DB\ResultSet\SetAbstract;
+use Elixir\DB\ResultSet\ResultSetAbstract;
 use Elixir\Dispatcher\DispatcherInterface;
 
 /**
@@ -53,7 +53,7 @@ interface DBInterface extends DispatcherInterface
      * @param QueryInterface|string $query
      * @param array $values
      * @param array $options
-     * @return SetAbstract|boolean
+     * @return ResultSetAbstract|boolean
      */
     public function query($query, array $values = [], array $options = []);
 }

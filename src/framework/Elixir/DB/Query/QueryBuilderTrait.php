@@ -29,7 +29,7 @@ trait QueryBuilderTrait
 
         return $select;
     }
-
+    
     /**
      * @see QueryBuilderInterface::createInsert()
      */

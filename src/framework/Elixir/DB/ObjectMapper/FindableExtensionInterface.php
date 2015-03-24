@@ -13,4 +13,9 @@ interface FindableExtensionInterface
      * @param FindableInterface $findable
      */
     public function setFindable(FindableInterface $findable);
+    
+    /**
+     * @return array
+     */
+    public function getRegisteredMethods();
 }

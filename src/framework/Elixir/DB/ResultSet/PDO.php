@@ -2,100 +2,98 @@
 
 namespace Elixir\DB\ResultSet;
 
-use Elixir\DB\ResultSet\SetAbstract;
+use Elixir\DB\ResultSet\ResultSetAbstract;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-class PDO extends SetAbstract
+class PDO extends ResultSetAbstract 
 {
     /**
-     * @param integer $fetchStyle
-     * @return integer
+     * @var integer
      */
-    protected function convert($fetchStyle)
-    {
-        switch ($fetchStyle) 
-        {
-            case self::FETCH_ASSOC:
-                return \PDO::FETCH_ASSOC;
-            case self::FETCH_OBJ:
-                return \PDO::FETCH_OBJ;
-            case self::FETCH_NUM:
-                return \PDO::FETCH_NUM;
-            case self::FETCH_BOTH:
-                return \PDO::FETCH_BOTH;
-            case self::FETCH_DEFAULT:
-                return \PDO::ATTR_DEFAULT_FETCH_MODE;
-        }
+    protected $position = 0;
 
-        return $fetchStyle;
+    /**
+     * @ignore
+     */
+    public function rewind()
+    {
+        $this->position = 0;
+        return $this->resource->fetch(\PDO::FETCH_ASSOC, \PDO::FETCH_ORI_FIRST);
     }
 
     /**
-     * @see SetAbstract::fetch()
+     * @ignore
      */
-    public function fetch($fetchStyle = self::FETCH_DEFAULT) 
+    public function current()
     {
-        if (func_num_args() <= 1)
-        {
-            return $this->resource->fetch($this->convert($fetchStyle));
-        }
-
-        $args = func_get_args();
-        $args[0] = $this->convert($args[0]);
-
-        return call_user_func_array([$this->resource, 'fetch'], $args);
+        return $this->resource->fetch(\PDO::FETCH_ASSOC, \PDO::FETCH_ORI_REL);
     }
 
     /**
-     * @see SetAbstract::fetchAll()
+     * @ignore
      */
-    public function fetchAll($fetchStyle = self::FETCH_ASSOC) 
+    public function key() 
     {
-        if (func_num_args() <= 1) 
-        {
-            return $this->resource->fetchAll($this->convert($fetchStyle));
-        }
-
-        $args = func_get_args();
-        $args[0] = $this->convert($args[0]);
-
-        return call_user_func_array([$this->resource, 'fetchAll'], $args);
+        return $this->position;
     }
 
     /**
-     * @see SetAbstract::fetchColumn()
+     * @ignore
      */
-    public function fetchColumn($column = 0) 
+    public function next()
     {
-        return $this->resource->fetchColumn($column);
+        return $this->fetch(); 
     }
 
     /**
-     * @see SetAbstract::fetchObject()
+     * @ignore
      */
-    public function fetchObject($className = 'stdClass', array $args = [])
+    public function valid() 
     {
-        return $this->resource->fetchObject($className, $args);
+        return $this->position <= $this->count();
     }
 
     /**
-     * @see SetAbstract::fetchAssoc()
+     * @ignore
      */
-    public function fetchAssoc() 
-    {
-        return $this->fetch(self::FETCH_ASSOC);
-    }
-
-    /**
-     * @see SetAbstract::rowCount()
-     */
-    public function rowCount() 
+    public function count()
     {
         return $this->resource->rowCount();
     }
-
+    
+    /**
+     * @see ResultSetAbstract::one()
+     */
+    public function one()
+    {
+        return $this->next();
+    }
+    
+    /**
+     * @see ResultSetAbstract::all()
+     */
+    public function all()
+    {
+        return $this->resource->fetchAll(\PDO::FETCH_ASSOC);
+    }
+    
+    /**
+     * @ignore
+     */
+    public function fetch($fetchStyle = \PDO::FETCH_ASSOC)
+    {
+        $r = $this->resource->fetch($fetchStyle);
+        
+        if(false !== $r)
+        {
+            $this->position++;
+        }
+        
+        return $r; 
+    }
+    
     /**
      * @ignore
      */

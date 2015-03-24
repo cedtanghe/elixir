@@ -55,8 +55,12 @@ abstract class RepositoryAbstract extends EntityAbstract implements RepositoryIn
 
         $this->addListener(EntityEvent::CREATE_ENTITY, function(EntityEvent $e) 
         {
-            $entity = $e->getEntity();
-            $e->setEntity(new $entity($this->connectionManager));
+            $class = $e->getEntity();
+            
+            $entity = new $class();
+            $entity->setConnectionManager($this->connectionManager);
+            
+            $e->setEntity($entity);
         });
 
         if (null === $this->table) 

@@ -12,6 +12,7 @@ interface FindableInterface
 {
     /**
      * @param FindableExtensionInterface $extension
+     * @return FindableInterface
      */
     public function extend(FindableExtensionInterface $extension);
 

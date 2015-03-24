@@ -569,7 +569,7 @@ abstract class EntityAbstract extends Dispatcher implements EntityInterface
     /**
      * @ignore
      */
-    public function __get($key) 
+    public function &__get($key) 
     {
         if (isset(static::$mutatorsGet[$this->className][$key]))
         {
