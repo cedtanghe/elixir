@@ -33,7 +33,7 @@ class DropTable extends BaseDropTable
         
         switch ($part) 
         {
-            case 'if-exists':
+            case 'if_exists':
                 $this->ifExists(false);
                 break;
         }
@@ -48,7 +48,7 @@ class DropTable extends BaseDropTable
     {
         switch ($part) 
         {
-            case 'if-exists':
+            case 'if_exists':
                 return $this->ifExists;
         }
         
@@ -64,7 +64,7 @@ class DropTable extends BaseDropTable
         
         switch ($part) 
         {
-            case 'if-exists':
+            case 'if_exists':
                 $this->ifExists($data);
                 break;
         }

@@ -2,8 +2,9 @@
 
 namespace Elixir\DB\ObjectMapper;
 
+use Elixir\DB\ObjectMapper\Collection;
 use Elixir\DB\ObjectMapper\FindableExtensionInterface;
-use Elixir\DB\ORM\RepositoryInterface;
+use Elixir\DB\ObjectMapper\RepositoryInterface;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

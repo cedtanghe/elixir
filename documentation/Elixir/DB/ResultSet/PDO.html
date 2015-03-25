@@ -74,60 +74,10 @@
     </div>
 
     <p>    class
-    <strong>PDO</strong>        extends <a href="../../../Elixir/DB/ResultSet/SetAbstract.html"><abbr title="Elixir\DB\ResultSet\SetAbstract">SetAbstract</abbr></a></p>
+    <strong>PDO</strong>        extends <a href="../../../Elixir/DB/ResultSet/ResultSetAbstract.html"><abbr title="Elixir\DB\ResultSet\ResultSetAbstract">ResultSetAbstract</abbr></a></p>
 
     
     
-            <h2>Constants</h2>
-
-            <table class="table table-condensed">
-                    <tr>
-                <td>FETCH_ASSOC</td>
-                <td class="last">
-                    <p><em>
-</em></p>
-                    <p>
-</p>
-                </td>
-            </tr>
-                    <tr>
-                <td>FETCH_NUM</td>
-                <td class="last">
-                    <p><em>
-</em></p>
-                    <p>
-</p>
-                </td>
-            </tr>
-                    <tr>
-                <td>FETCH_BOTH</td>
-                <td class="last">
-                    <p><em>
-</em></p>
-                    <p>
-</p>
-                </td>
-            </tr>
-                    <tr>
-                <td>FETCH_OBJ</td>
-                <td class="last">
-                    <p><em>
-</em></p>
-                    <p>
-</p>
-                </td>
-            </tr>
-                    <tr>
-                <td>FETCH_DEFAULT</td>
-                <td class="last">
-                    <p><em>
-</em></p>
-                    <p>
-</p>
-                </td>
-            </tr>
-            </table>
-
     
     
             <h2>Methods</h2>
@@ -141,7 +91,7 @@
                     <a href="#method___construct">__construct</a>(mixed $resource)
                                             <p class="no-description">No description</p>
                                     </div>
-                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/DB/ResultSet/SetAbstract.html#method___construct"><abbr title="Elixir\DB\ResultSet\SetAbstract">SetAbstract</abbr></a></small></div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/DB/ResultSet/ResultSetAbstract.html#method___construct"><abbr title="Elixir\DB\ResultSet\ResultSetAbstract">ResultSetAbstract</abbr></a></small></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
@@ -151,64 +101,94 @@
                     <a href="#method_getResource">getResource</a>()
                                             <p class="no-description">No description</p>
                                     </div>
-                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/DB/ResultSet/SetAbstract.html#method_getResource"><abbr title="Elixir\DB\ResultSet\SetAbstract">SetAbstract</abbr></a></small></div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../Elixir/DB/ResultSet/ResultSetAbstract.html#method_getResource"><abbr title="Elixir\DB\ResultSet\ResultSetAbstract">ResultSetAbstract</abbr></a></small></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    <abbr title="Elixir\DB\ResultSet\mixed;">mixed;</abbr>
+                    mixed
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_fetch">fetch</a>(string $fetchStyle = self::FETCH_DEFAULT)
+                    <a href="#method_one">one</a>()
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    <abbr title="Elixir\DB\ResultSet\array;">array;</abbr>
+                    array
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_fetchAll">fetchAll</a>(string $fetchStyle = self::FETCH_ASSOC)
+                    <a href="#method_all">all</a>()
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    <abbr title="Elixir\DB\ResultSet\mixed;">mixed;</abbr>
+                    
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_fetchColumn">fetchColumn</a>(integer $column)
+                    <a href="#method_rewind">rewind</a>()
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    <abbr title="Elixir\DB\ResultSet\mixed;">mixed;</abbr>
+                    
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_fetchObject">fetchObject</a>(string $className = &#039;stdClass&#039;, array $args = array())
+                    <a href="#method_current">current</a>()
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    <abbr title="Elixir\DB\ResultSet\mixed;">mixed;</abbr>
+                    
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_fetchAssoc">fetchAssoc</a>()
+                    <a href="#method_key">key</a>()
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    integer
+                    
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_rowCount">rowCount</a>()
+                    <a href="#method_next">next</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_valid">valid</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_count">count</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_fetch">fetch</a>($fetchStyle = \PDO::FETCH_ASSOC)
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -231,7 +211,7 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method___construct">
-        <div class="location">in <a href="../../../Elixir/DB/ResultSet/SetAbstract.html#method___construct"><abbr title="Elixir\DB\ResultSet\SetAbstract">SetAbstract</abbr></a> at line 43</div>
+        <div class="location">in <a href="../../../Elixir/DB/ResultSet/ResultSetAbstract.html#method___construct"><abbr title="Elixir\DB\ResultSet\ResultSetAbstract">ResultSetAbstract</abbr></a> at line 18</div>
         <code>                    
     <strong>__construct</strong>(mixed $resource)</code>
     </h3>
@@ -257,7 +237,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getResource">
-        <div class="location">in <a href="../../../Elixir/DB/ResultSet/SetAbstract.html#method_getResource"><abbr title="Elixir\DB\ResultSet\SetAbstract">SetAbstract</abbr></a> at line 51</div>
+        <div class="location">in <a href="../../../Elixir/DB/ResultSet/ResultSetAbstract.html#method_getResource"><abbr title="Elixir\DB\ResultSet\ResultSetAbstract">ResultSetAbstract</abbr></a> at line 26</div>
         <code>                    mixed
     <strong>getResource</strong>()</code>
     </h3>
@@ -281,10 +261,168 @@
 
             </div>
                     <div class="method-item">
+                    <h3 id="method_one">
+        <div class="location">at line 69</div>
+        <code>                    mixed
+    <strong>one</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>mixed</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>ResultSetAbstract::one()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_all">
+        <div class="location">at line 77</div>
+        <code>                    array
+    <strong>all</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>array</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>ResultSetAbstract::all()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_rewind">
+        <div class="location">at line 20</div>
+        <code>                    
+    <strong>rewind</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_current">
+        <div class="location">at line 29</div>
+        <code>                    
+    <strong>current</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_key">
+        <div class="location">at line 37</div>
+        <code>                    
+    <strong>key</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_next">
+        <div class="location">at line 45</div>
+        <code>                    
+    <strong>next</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_valid">
+        <div class="location">at line 53</div>
+        <code>                    
+    <strong>valid</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_count">
+        <div class="location">at line 61</div>
+        <code>                    
+    <strong>count</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
                     <h3 id="method_fetch">
-        <div class="location">at line 38</div>
-        <code>                    <abbr title="Elixir\DB\ResultSet\mixed;">mixed;</abbr>
-    <strong>fetch</strong>(string $fetchStyle = self::FETCH_DEFAULT)</code>
+        <div class="location">at line 85</div>
+        <code>                    
+    <strong>fetch</strong>($fetchStyle = \PDO::FETCH_ASSOC)</code>
     </h3>
     <div class="details">
                 <div class="tags">
@@ -292,7 +430,7 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td>string</td>
+                <td></td>
                 <td>$fetchStyle</td>
                 <td>
 </td>
@@ -300,243 +438,15 @@
             </table>
 
             
-                            <h4>Return Value</h4>
-
-                    <table class="table table-condensed">
-        <tr>
-            <td><abbr title="Elixir\DB\ResultSet\mixed;">mixed;</abbr></td>
-            <td>
-</td>
-        </tr>
-    </table>
-
             
             
-                            <h4>See also</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td>SetAbstract::fetch()</td>
-                <td></td>
-            </tr>
-            </table>
-
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_fetchAll">
-        <div class="location">at line 54</div>
-        <code>                    <abbr title="Elixir\DB\ResultSet\array;">array;</abbr>
-    <strong>fetchAll</strong>(string $fetchStyle = self::FETCH_ASSOC)</code>
-    </h3>
-    <div class="details">
-                <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td>string</td>
-                <td>$fetchStyle</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-                            <h4>Return Value</h4>
-
-                    <table class="table table-condensed">
-        <tr>
-            <td><abbr title="Elixir\DB\ResultSet\array;">array;</abbr></td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                            <h4>See also</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td>SetAbstract::fetchAll()</td>
-                <td></td>
-            </tr>
-            </table>
-
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_fetchColumn">
-        <div class="location">at line 70</div>
-        <code>                    <abbr title="Elixir\DB\ResultSet\mixed;">mixed;</abbr>
-    <strong>fetchColumn</strong>(integer $column)</code>
-    </h3>
-    <div class="details">
-                <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td>integer</td>
-                <td>$column</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-                            <h4>Return Value</h4>
-
-                    <table class="table table-condensed">
-        <tr>
-            <td><abbr title="Elixir\DB\ResultSet\mixed;">mixed;</abbr></td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                            <h4>See also</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td>SetAbstract::fetchColumn()</td>
-                <td></td>
-            </tr>
-            </table>
-
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_fetchObject">
-        <div class="location">at line 78</div>
-        <code>                    <abbr title="Elixir\DB\ResultSet\mixed;">mixed;</abbr>
-    <strong>fetchObject</strong>(string $className = &#039;stdClass&#039;, array $args = array())</code>
-    </h3>
-    <div class="details">
-                <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td>string</td>
-                <td>$className</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
-                <td>array</td>
-                <td>$args</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-                            <h4>Return Value</h4>
-
-                    <table class="table table-condensed">
-        <tr>
-            <td><abbr title="Elixir\DB\ResultSet\mixed;">mixed;</abbr></td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                            <h4>See also</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td>SetAbstract::fetchObject()</td>
-                <td></td>
-            </tr>
-            </table>
-
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_fetchAssoc">
-        <div class="location">at line 86</div>
-        <code>                    <abbr title="Elixir\DB\ResultSet\mixed;">mixed;</abbr>
-    <strong>fetchAssoc</strong>()</code>
-    </h3>
-    <div class="details">
-                <div class="tags">
-            
-                            <h4>Return Value</h4>
-
-                    <table class="table table-condensed">
-        <tr>
-            <td><abbr title="Elixir\DB\ResultSet\mixed;">mixed;</abbr></td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                            <h4>See also</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td>SetAbstract::fetchAssoc()</td>
-                <td></td>
-            </tr>
-            </table>
-
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_rowCount">
-        <div class="location">at line 94</div>
-        <code>                    integer
-    <strong>rowCount</strong>()</code>
-    </h3>
-    <div class="details">
-                <div class="tags">
-            
-                            <h4>Return Value</h4>
-
-                    <table class="table table-condensed">
-        <tr>
-            <td>integer</td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                            <h4>See also</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td>SetAbstract::rowCount()</td>
-                <td></td>
-            </tr>
-            </table>
-
                     </div>
     </div>
 
             </div>
                     <div class="method-item">
                     <h3 id="method___call">
-        <div class="location">at line 102</div>
+        <div class="location">at line 100</div>
         <code>                    
     <strong>__call</strong>($method, $arguments)</code>
     </h3>

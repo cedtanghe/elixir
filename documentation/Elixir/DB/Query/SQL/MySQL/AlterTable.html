@@ -203,6 +203,16 @@
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
+                    <a href="../../../../../Elixir/DB/Query/SQL/SQLInterface.html"><abbr title="Elixir\DB\Query\SQL\SQLInterface">SQLInterface</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_alias">alias</a>(string $alias)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method_alias"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
                 </div>
                 <div class="col-md-8 type">
@@ -316,7 +326,7 @@
                     <a href="../../../../../Elixir/DB/Query/SQL/AlterTable.html"><abbr title="Elixir\DB\Query\SQL\AlterTable">AlterTable</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_renameColumn">renameColumn</a>($pOldColumn, $pNewColumn)
+                    <a href="#method_renameColumn">renameColumn</a>(<a href="../../../../../Elixir/DB/Query/SQL/Column.html"><abbr title="Elixir\DB\Query\SQL\Column">Column</abbr></a>|string $oldColumn, <a href="../../../../../Elixir/DB/Query/SQL/Column.html"><abbr title="Elixir\DB\Query\SQL\Column">Column</abbr></a>|string $newColumn)
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -346,7 +356,7 @@
                     <a href="../../../../../Elixir/DB/Query/SQL/AlterTable.html"><abbr title="Elixir\DB\Query\SQL\AlterTable">AlterTable</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_dropConstraint">dropConstraint</a>(<a href="../../../../../Elixir/DB/Query/SQL/Constraint.html"><abbr title="Elixir\DB\Query\SQL\Constraint">Constraint</abbr></a> $constraint = null, string $type = null)
+                    <a href="#method_dropConstraint">dropConstraint</a>(string|<a href="../../../../../Elixir/DB/Query/SQL/Constraint.html"><abbr title="Elixir\DB\Query\SQL\Constraint">Constraint</abbr></a> $constraint = null, string $type = null)
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../../../../Elixir/DB/Query/SQL/AlterTable.html#method_dropConstraint"><abbr title="Elixir\DB\Query\SQL\AlterTable">AlterTable</abbr></a></small></div>
@@ -356,7 +366,7 @@
                     <a href="../../../../../Elixir/DB/Query/SQL/MySQL/AlterTable.html"><abbr title="Elixir\DB\Query\SQL\MySQL\AlterTable">AlterTable</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_reset">reset</a>(string $pPart)
+                    <a href="#method_reset">reset</a>(string $part)
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -369,7 +379,7 @@
                     <a href="#method_get">get</a>(string $part)
                                             <p class="no-description">No description</p>
                                     </div>
-                <div class="col-md-2"><small>from&nbsp;<a href="../../../../../Elixir/DB/Query/SQL/AlterTable.html#method_get"><abbr title="Elixir\DB\Query\SQL\AlterTable">AlterTable</abbr></a></small></div>
+                <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
@@ -379,11 +389,11 @@
                     <a href="#method_merge">merge</a>(mixed $data, string $part)
                                             <p class="no-description">No description</p>
                                     </div>
-                <div class="col-md-2"><small>from&nbsp;<a href="../../../../../Elixir/DB/Query/SQL/AlterTable.html#method_merge"><abbr title="Elixir\DB\Query\SQL\AlterTable">AlterTable</abbr></a></small></div>
+                <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    string
+                    
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_render">render</a>()
@@ -396,7 +406,7 @@
                     
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_addColumnAfter">addColumnAfter</a>(<a href="../../../../../Elixir/DB/Query/SQL/Column.html"><abbr title="Elixir\DB\Query\SQL\Column">Column</abbr></a> $pColumn, $pPrevious)
+                    <a href="#method_addColumnAfter">addColumnAfter</a>(<a href="../../../../../Elixir/DB/Query/SQL/Column.html"><abbr title="Elixir\DB\Query\SQL\Column">Column</abbr></a> $column, $previous)
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -406,7 +416,7 @@
                     
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_addColumnFirst">addColumnFirst</a>(<a href="../../../../../Elixir/DB/Query/SQL/Column.html"><abbr title="Elixir\DB\Query\SQL\Column">Column</abbr></a> $pColumn)
+                    <a href="#method_addColumnFirst">addColumnFirst</a>(<a href="../../../../../Elixir/DB/Query/SQL/Column.html"><abbr title="Elixir\DB\Query\SQL\Column">Column</abbr></a> $column)
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -416,7 +426,7 @@
                     <a href="../../../../../Elixir/DB/Query/SQL/MySQL/AlterTable.html"><abbr title="Elixir\DB\Query\SQL\MySQL\AlterTable">AlterTable</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_collating">collating</a>(string $pCollating)
+                    <a href="#method_collating">collating</a>(string $collating)
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -465,7 +475,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method___construct">
-        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method___construct"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 77</div>
+        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method___construct"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 82</div>
         <code>                    
     <strong>__construct</strong>(string $table = null)</code>
     </h3>
@@ -491,7 +501,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_table">
-        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method_table"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 89</div>
+        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method_table"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 94</div>
         <code>                    <a href="../../../../../Elixir/DB/Query/SQL/SQLInterface.html"><abbr title="Elixir\DB\Query\SQL\SQLInterface">SQLInterface</abbr></a>
     <strong>table</strong>(string $table)</code>
     </h3>
@@ -526,8 +536,44 @@
 
             </div>
                     <div class="method-item">
+                    <h3 id="method_alias">
+        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method_alias"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 110</div>
+        <code>                    <a href="../../../../../Elixir/DB/Query/SQL/SQLInterface.html"><abbr title="Elixir\DB\Query\SQL\SQLInterface">SQLInterface</abbr></a>
+    <strong>alias</strong>(string $alias)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$alias</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../../../Elixir/DB/Query/SQL/SQLInterface.html"><abbr title="Elixir\DB\Query\SQL\SQLInterface">SQLInterface</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
                     <h3 id="method_setQuoteMethod">
-        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method_setQuoteMethod"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 98</div>
+        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method_setQuoteMethod"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 130</div>
         <code>                    
     <strong>setQuoteMethod</strong>(callable $value)</code>
     </h3>
@@ -562,7 +608,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getQuoteMethod">
-        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method_getQuoteMethod"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 106</div>
+        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method_getQuoteMethod"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 138</div>
         <code>                    callable
     <strong>getQuoteMethod</strong>()</code>
     </h3>
@@ -596,7 +642,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_quote">
-        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method_quote"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 114</div>
+        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method_quote"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 146</div>
         <code>                    mixed
     <strong>quote</strong>($param)</code>
     </h3>
@@ -641,7 +687,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_bindValue">
-        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method_bindValue"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 122</div>
+        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method_bindValue"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 154</div>
         <code>                    
     <strong>bindValue</strong>(string $key, mixed $value)</code>
     </h3>
@@ -682,7 +728,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getBindValues">
-        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method_getBindValues"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 130</div>
+        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method_getBindValues"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 162</div>
         <code>                    array
     <strong>getBindValues</strong>()</code>
     </h3>
@@ -716,7 +762,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_assemble">
-        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method_assemble"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 138</div>
+        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method_assemble"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 170</div>
         <code>                    string
     <strong>assemble</strong>(string $SQL, mixed $param = null)</code>
     </h3>
@@ -767,7 +813,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getQuery">
-        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method_getQuery"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 200</div>
+        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method_getQuery"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 253</div>
         <code>                    
     <strong>getQuery</strong>()</code>
     </h3>
@@ -791,7 +837,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method___toString">
-        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method___toString"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 208</div>
+        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method___toString"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 261</div>
         <code>                    
     <strong>__toString</strong>()</code>
     </h3>
@@ -914,9 +960,9 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_renameColumn">
-        <div class="location">at line 33</div>
+        <div class="location">at line 32</div>
         <code>                    <a href="../../../../../Elixir/DB/Query/SQL/AlterTable.html"><abbr title="Elixir\DB\Query\SQL\AlterTable">AlterTable</abbr></a>
-    <strong>renameColumn</strong>($pOldColumn, $pNewColumn)</code>
+    <strong>renameColumn</strong>(<a href="../../../../../Elixir/DB/Query/SQL/Column.html"><abbr title="Elixir\DB\Query\SQL\Column">Column</abbr></a>|string $oldColumn, <a href="../../../../../Elixir/DB/Query/SQL/Column.html"><abbr title="Elixir\DB\Query\SQL\Column">Column</abbr></a>|string $newColumn)</code>
     </h3>
     <div class="details">
                 <div class="tags">
@@ -924,14 +970,14 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td></td>
-                <td>$pOldColumn</td>
+                <td><a href="../../../../../Elixir/DB/Query/SQL/Column.html"><abbr title="Elixir\DB\Query\SQL\Column">Column</abbr></a>|string</td>
+                <td>$oldColumn</td>
                 <td>
 </td>
             </tr>
                     <tr>
-                <td></td>
-                <td>$pNewColumn</td>
+                <td><a href="../../../../../Elixir/DB/Query/SQL/Column.html"><abbr title="Elixir\DB\Query\SQL\Column">Column</abbr></a>|string</td>
+                <td>$newColumn</td>
                 <td>
 </td>
             </tr>
@@ -949,16 +995,6 @@
     </table>
 
             
-                            <h4>Exceptions</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td><a href="http://php.net/InvalidArgumentException"><abbr title="InvalidArgumentException">InvalidArgumentException</abbr></a></td>
-                <td>
-</td>
-            </tr>
-            </table>
-
             
                             <h4>See also</h4>
 
@@ -1049,7 +1085,7 @@
                     <h3 id="method_dropConstraint">
         <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/AlterTable.html#method_dropConstraint"><abbr title="Elixir\DB\Query\SQL\AlterTable">AlterTable</abbr></a> at line 142</div>
         <code>                    <a href="../../../../../Elixir/DB/Query/SQL/AlterTable.html"><abbr title="Elixir\DB\Query\SQL\AlterTable">AlterTable</abbr></a>
-    <strong>dropConstraint</strong>(<a href="../../../../../Elixir/DB/Query/SQL/Constraint.html"><abbr title="Elixir\DB\Query\SQL\Constraint">Constraint</abbr></a> $constraint = null, string $type = null)</code>
+    <strong>dropConstraint</strong>(string|<a href="../../../../../Elixir/DB/Query/SQL/Constraint.html"><abbr title="Elixir\DB\Query\SQL\Constraint">Constraint</abbr></a> $constraint = null, string $type = null)</code>
     </h3>
     <div class="details">
                 <div class="tags">
@@ -1057,7 +1093,7 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><a href="../../../../../Elixir/DB/Query/SQL/Constraint.html"><abbr title="Elixir\DB\Query\SQL\Constraint">Constraint</abbr></a></td>
+                <td>string|<a href="../../../../../Elixir/DB/Query/SQL/Constraint.html"><abbr title="Elixir\DB\Query\SQL\Constraint">Constraint</abbr></a></td>
                 <td>$constraint</td>
                 <td>
 </td>
@@ -1099,9 +1135,9 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_reset">
-        <div class="location">at line 97</div>
+        <div class="location">at line 96</div>
         <code>                    <a href="../../../../../Elixir/DB/Query/SQL/MySQL/AlterTable.html"><abbr title="Elixir\DB\Query\SQL\MySQL\AlterTable">AlterTable</abbr></a>
-    <strong>reset</strong>(string $pPart)</code>
+    <strong>reset</strong>(string $part)</code>
     </h3>
     <div class="details">
                 <div class="tags">
@@ -1110,7 +1146,7 @@
                     <table class="table table-condensed">
                     <tr>
                 <td>string</td>
-                <td>$pPart</td>
+                <td>$part</td>
                 <td>
 </td>
             </tr>
@@ -1135,7 +1171,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_get">
-        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/AlterTable.html#method_get"><abbr title="Elixir\DB\Query\SQL\AlterTable">AlterTable</abbr></a> at line 214</div>
+        <div class="location">at line 123</div>
         <code>                    mixed
     <strong>get</strong>(string $part)</code>
     </h3>
@@ -1165,13 +1201,22 @@
 
             
             
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>BaseAlterTable::get()</td>
+                <td></td>
+            </tr>
+            </table>
+
                     </div>
     </div>
 
             </div>
                     <div class="method-item">
                     <h3 id="method_merge">
-        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/AlterTable.html#method_merge"><abbr title="Elixir\DB\Query\SQL\AlterTable">AlterTable</abbr></a> at line 261</div>
+        <div class="location">at line 147</div>
         <code>                    <a href="../../../../../Elixir/DB/Query/SQL/AlterTable.html"><abbr title="Elixir\DB\Query\SQL\AlterTable">AlterTable</abbr></a>
     <strong>merge</strong>(mixed $data, string $part)</code>
     </h3>
@@ -1207,36 +1252,35 @@
 
             
             
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>BaseAlterTable::merge()</td>
+                <td></td>
+            </tr>
+            </table>
+
                     </div>
     </div>
 
             </div>
                     <div class="method-item">
                     <h3 id="method_render">
-        <div class="location">at line 122</div>
-        <code>                    string
+        <div class="location">at line 164</div>
+        <code>                    
     <strong>render</strong>()</code>
     </h3>
     <div class="details">
                 <div class="tags">
             
-                            <h4>Return Value</h4>
-
-                    <table class="table table-condensed">
-        <tr>
-            <td>string</td>
-            <td>
-</td>
-        </tr>
-    </table>
-
             
             
                             <h4>See also</h4>
 
                     <table class="table table-condensed">
                     <tr>
-                <td>AlterTable::render()</td>
+                <td>BaseAlterTable::render()</td>
                 <td></td>
             </tr>
             </table>
@@ -1247,9 +1291,9 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_addColumnAfter">
-        <div class="location">at line 53</div>
+        <div class="location">at line 52</div>
         <code>                    
-    <strong>addColumnAfter</strong>(<a href="../../../../../Elixir/DB/Query/SQL/Column.html"><abbr title="Elixir\DB\Query\SQL\Column">Column</abbr></a> $pColumn, $pPrevious)</code>
+    <strong>addColumnAfter</strong>(<a href="../../../../../Elixir/DB/Query/SQL/Column.html"><abbr title="Elixir\DB\Query\SQL\Column">Column</abbr></a> $column, $previous)</code>
     </h3>
     <div class="details">
                 <div class="tags">
@@ -1258,13 +1302,13 @@
                     <table class="table table-condensed">
                     <tr>
                 <td><a href="../../../../../Elixir/DB/Query/SQL/Column.html"><abbr title="Elixir\DB\Query\SQL\Column">Column</abbr></a></td>
-                <td>$pColumn</td>
+                <td>$column</td>
                 <td>
 </td>
             </tr>
                     <tr>
                 <td></td>
-                <td>$pPrevious</td>
+                <td>$previous</td>
                 <td>
 </td>
             </tr>
@@ -1288,9 +1332,9 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_addColumnFirst">
-        <div class="location">at line 68</div>
+        <div class="location">at line 67</div>
         <code>                    
-    <strong>addColumnFirst</strong>(<a href="../../../../../Elixir/DB/Query/SQL/Column.html"><abbr title="Elixir\DB\Query\SQL\Column">Column</abbr></a> $pColumn)</code>
+    <strong>addColumnFirst</strong>(<a href="../../../../../Elixir/DB/Query/SQL/Column.html"><abbr title="Elixir\DB\Query\SQL\Column">Column</abbr></a> $column)</code>
     </h3>
     <div class="details">
                 <div class="tags">
@@ -1299,7 +1343,7 @@
                     <table class="table table-condensed">
                     <tr>
                 <td><a href="../../../../../Elixir/DB/Query/SQL/Column.html"><abbr title="Elixir\DB\Query\SQL\Column">Column</abbr></a></td>
-                <td>$pColumn</td>
+                <td>$column</td>
                 <td>
 </td>
             </tr>
@@ -1323,9 +1367,9 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_collating">
-        <div class="location">at line 83</div>
+        <div class="location">at line 82</div>
         <code>                    <a href="../../../../../Elixir/DB/Query/SQL/MySQL/AlterTable.html"><abbr title="Elixir\DB\Query\SQL\MySQL\AlterTable">AlterTable</abbr></a>
-    <strong>collating</strong>(string $pCollating)</code>
+    <strong>collating</strong>(string $collating)</code>
     </h3>
     <div class="details">
                 <div class="tags">
@@ -1334,7 +1378,7 @@
                     <table class="table table-condensed">
                     <tr>
                 <td>string</td>
-                <td>$pCollating</td>
+                <td>$collating</td>
                 <td>
 </td>
             </tr>

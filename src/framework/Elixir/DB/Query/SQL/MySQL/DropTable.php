@@ -51,7 +51,7 @@ class DropTable extends BaseDropTable
             case 'temporary':
                 $this->temporary(false);
                 break;
-            case 'if-exists':
+            case 'if_exists':
                 $this->ifExists(false);
                 break;
         }
@@ -68,7 +68,7 @@ class DropTable extends BaseDropTable
         {
             case 'temporary':
                 return $this->temporary;
-            case 'if-exists':
+            case 'if_exists':
                 return $this->ifExists;
         }
         
@@ -87,7 +87,7 @@ class DropTable extends BaseDropTable
             case 'temporary':
                 $this->temporary($data);
                 break;
-            case 'if-exists':
+            case 'if_exists':
                 $this->ifExists($data);
                 break;
         }

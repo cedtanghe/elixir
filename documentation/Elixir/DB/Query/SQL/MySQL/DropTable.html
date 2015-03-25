@@ -117,6 +117,16 @@
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
+                    <a href="../../../../../Elixir/DB/Query/SQL/SQLInterface.html"><abbr title="Elixir\DB\Query\SQL\SQLInterface">SQLInterface</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_alias">alias</a>(string $alias)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method_alias"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
                 </div>
                 <div class="col-md-8 type">
@@ -197,7 +207,7 @@
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    string
+                    
                 </div>
                 <div class="col-md-8 type">
                     <a href="#method_render">render</a>()
@@ -210,7 +220,7 @@
                     <a href="../../../../../Elixir/DB/Query/SQL/MySQL/DropTable.html"><abbr title="Elixir\DB\Query\SQL\MySQL\DropTable">DropTable</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_temporary">temporary</a>(boolean $pValue)
+                    <a href="#method_temporary">temporary</a>(boolean $value)
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -220,7 +230,37 @@
                     <a href="../../../../../Elixir/DB/Query/SQL/MySQL/DropTable.html"><abbr title="Elixir\DB\Query\SQL\MySQL\DropTable">DropTable</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_ifExists">ifExists</a>(boolean $pValue)
+                    <a href="#method_ifExists">ifExists</a>(boolean $value)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_reset">reset</a>($part)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_get">get</a>($part)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_merge">merge</a>($data, $part)
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -269,7 +309,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method___construct">
-        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method___construct"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 77</div>
+        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method___construct"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 82</div>
         <code>                    
     <strong>__construct</strong>(string $table = null)</code>
     </h3>
@@ -295,7 +335,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_table">
-        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method_table"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 89</div>
+        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method_table"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 94</div>
         <code>                    <a href="../../../../../Elixir/DB/Query/SQL/SQLInterface.html"><abbr title="Elixir\DB\Query\SQL\SQLInterface">SQLInterface</abbr></a>
     <strong>table</strong>(string $table)</code>
     </h3>
@@ -330,8 +370,44 @@
 
             </div>
                     <div class="method-item">
+                    <h3 id="method_alias">
+        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method_alias"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 110</div>
+        <code>                    <a href="../../../../../Elixir/DB/Query/SQL/SQLInterface.html"><abbr title="Elixir\DB\Query\SQL\SQLInterface">SQLInterface</abbr></a>
+    <strong>alias</strong>(string $alias)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$alias</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../../../Elixir/DB/Query/SQL/SQLInterface.html"><abbr title="Elixir\DB\Query\SQL\SQLInterface">SQLInterface</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
                     <h3 id="method_setQuoteMethod">
-        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method_setQuoteMethod"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 98</div>
+        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method_setQuoteMethod"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 130</div>
         <code>                    
     <strong>setQuoteMethod</strong>(callable $value)</code>
     </h3>
@@ -366,7 +442,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getQuoteMethod">
-        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method_getQuoteMethod"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 106</div>
+        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method_getQuoteMethod"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 138</div>
         <code>                    callable
     <strong>getQuoteMethod</strong>()</code>
     </h3>
@@ -400,7 +476,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_quote">
-        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method_quote"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 114</div>
+        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method_quote"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 146</div>
         <code>                    mixed
     <strong>quote</strong>($param)</code>
     </h3>
@@ -445,7 +521,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_bindValue">
-        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method_bindValue"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 122</div>
+        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method_bindValue"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 154</div>
         <code>                    
     <strong>bindValue</strong>(string $key, mixed $value)</code>
     </h3>
@@ -486,7 +562,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getBindValues">
-        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method_getBindValues"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 130</div>
+        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method_getBindValues"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 162</div>
         <code>                    array
     <strong>getBindValues</strong>()</code>
     </h3>
@@ -520,7 +596,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_assemble">
-        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method_assemble"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 138</div>
+        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method_assemble"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 170</div>
         <code>                    string
     <strong>assemble</strong>(string $SQL, mixed $param = null)</code>
     </h3>
@@ -571,7 +647,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getQuery">
-        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method_getQuery"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 200</div>
+        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method_getQuery"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 253</div>
         <code>                    
     <strong>getQuery</strong>()</code>
     </h3>
@@ -595,7 +671,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method___toString">
-        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method___toString"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 208</div>
+        <div class="location">in <a href="../../../../../Elixir/DB/Query/SQL/SQLAbstract.html#method___toString"><abbr title="Elixir\DB\Query\SQL\SQLAbstract">SQLAbstract</abbr></a> at line 261</div>
         <code>                    
     <strong>__toString</strong>()</code>
     </h3>
@@ -610,23 +686,13 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_render">
-        <div class="location">at line 46</div>
-        <code>                    string
+        <div class="location">at line 101</div>
+        <code>                    
     <strong>render</strong>()</code>
     </h3>
     <div class="details">
                 <div class="tags">
             
-                            <h4>Return Value</h4>
-
-                    <table class="table table-condensed">
-        <tr>
-            <td>string</td>
-            <td>
-</td>
-        </tr>
-    </table>
-
             
             
                             <h4>See also</h4>
@@ -644,9 +710,9 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_temporary">
-        <div class="location">at line 27</div>
+        <div class="location">at line 26</div>
         <code>                    <a href="../../../../../Elixir/DB/Query/SQL/MySQL/DropTable.html"><abbr title="Elixir\DB\Query\SQL\MySQL\DropTable">DropTable</abbr></a>
-    <strong>temporary</strong>(boolean $pValue)</code>
+    <strong>temporary</strong>(boolean $value)</code>
     </h3>
     <div class="details">
                 <div class="tags">
@@ -655,7 +721,7 @@
                     <table class="table table-condensed">
                     <tr>
                 <td>boolean</td>
-                <td>$pValue</td>
+                <td>$value</td>
                 <td>
 </td>
             </tr>
@@ -680,9 +746,9 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_ifExists">
-        <div class="location">at line 37</div>
+        <div class="location">at line 36</div>
         <code>                    <a href="../../../../../Elixir/DB/Query/SQL/MySQL/DropTable.html"><abbr title="Elixir\DB\Query\SQL\MySQL\DropTable">DropTable</abbr></a>
-    <strong>ifExists</strong>(boolean $pValue)</code>
+    <strong>ifExists</strong>(boolean $value)</code>
     </h3>
     <div class="details">
                 <div class="tags">
@@ -691,7 +757,7 @@
                     <table class="table table-condensed">
                     <tr>
                 <td>boolean</td>
-                <td>$pValue</td>
+                <td>$value</td>
                 <td>
 </td>
             </tr>
@@ -710,6 +776,117 @@
 
             
             
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_reset">
+        <div class="location">at line 45</div>
+        <code>                    
+    <strong>reset</strong>($part)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$part</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>BaseDropTable::reset()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_get">
+        <div class="location">at line 65</div>
+        <code>                    
+    <strong>get</strong>($part)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$part</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>BaseDropTable::get()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_merge">
+        <div class="location">at line 81</div>
+        <code>                    
+    <strong>merge</strong>($data, $part)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$data</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$part</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>BaseDropTable::merge()</td>
+                <td></td>
+            </tr>
+            </table>
+
                     </div>
     </div>
 

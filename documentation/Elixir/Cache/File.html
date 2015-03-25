@@ -121,7 +121,7 @@
                     
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_setEncoder">setEncoder</a>(<a href="../../Elixir/Cache/Encoder/EncoderInterface.html"><abbr title="Elixir\Cache\Encoder\EncoderInterface">EncoderInterface</abbr></a> $pValue)
+                    <a href="#method_setEncoder">setEncoder</a>(<a href="../../Elixir/Cache/Encoder/EncoderInterface.html"><abbr title="Elixir\Cache\Encoder\EncoderInterface">EncoderInterface</abbr></a> $value)
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../Elixir/Cache/CacheAbstract.html#method_setEncoder"><abbr title="Elixir\Cache\CacheAbstract">CacheAbstract</abbr></a></small></div>
@@ -138,10 +138,20 @@
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
+                    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_findOrStore">findOrStore</a>(string $key, mixed $value, integer|string|<a href="http://php.net/DateTime"><abbr title="DateTime">DateTime</abbr></a> $TTL)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Elixir/Cache/CacheAbstract.html#method_findOrStore"><abbr title="Elixir\Cache\CacheAbstract">CacheAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     integer
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_convertTTL">convertTTL</a>(integer|string|<a href="http://php.net/DateTime"><abbr title="DateTime">DateTime</abbr></a> $TTL, integer $default = 31556926)
+                    <a href="#method_convertTTL">convertTTL</a>(integer|string|<a href="http://php.net/DateTime"><abbr title="DateTime">DateTime</abbr></a> $TTL)
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"><small>from&nbsp;<a href="../../Elixir/Cache/CacheAbstract.html#method_convertTTL"><abbr title="Elixir\Cache\CacheAbstract">CacheAbstract</abbr></a></small></div>
@@ -272,7 +282,7 @@
                     <h3 id="method_setEncoder">
         <div class="location">in <a href="../../Elixir/Cache/CacheAbstract.html#method_setEncoder"><abbr title="Elixir\Cache\CacheAbstract">CacheAbstract</abbr></a> at line 48</div>
         <code>                    
-    <strong>setEncoder</strong>(<a href="../../Elixir/Cache/Encoder/EncoderInterface.html"><abbr title="Elixir\Cache\Encoder\EncoderInterface">EncoderInterface</abbr></a> $pValue)</code>
+    <strong>setEncoder</strong>(<a href="../../Elixir/Cache/Encoder/EncoderInterface.html"><abbr title="Elixir\Cache\Encoder\EncoderInterface">EncoderInterface</abbr></a> $value)</code>
     </h3>
     <div class="details">
                 <div class="tags">
@@ -281,7 +291,7 @@
                     <table class="table table-condensed">
                     <tr>
                 <td><a href="../../Elixir/Cache/Encoder/EncoderInterface.html"><abbr title="Elixir\Cache\Encoder\EncoderInterface">EncoderInterface</abbr></a></td>
-                <td>$pValue</td>
+                <td>$value</td>
                 <td>
 </td>
             </tr>
@@ -329,10 +339,67 @@
 
             </div>
                     <div class="method-item">
+                    <h3 id="method_findOrStore">
+        <div class="location">in <a href="../../Elixir/Cache/CacheAbstract.html#method_findOrStore"><abbr title="Elixir\Cache\CacheAbstract">CacheAbstract</abbr></a> at line 64</div>
+        <code>                    mixed
+    <strong>findOrStore</strong>(string $key, mixed $value, integer|string|<a href="http://php.net/DateTime"><abbr title="DateTime">DateTime</abbr></a> $TTL)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$key</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$value</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>integer|string|<a href="http://php.net/DateTime"><abbr title="DateTime">DateTime</abbr></a></td>
+                <td>$TTL</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>mixed</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>CacheInterface::findOrStore()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
                     <h3 id="method_convertTTL">
-        <div class="location">in <a href="../../Elixir/Cache/CacheAbstract.html#method_convertTTL"><abbr title="Elixir\Cache\CacheAbstract">CacheAbstract</abbr></a> at line 66</div>
+        <div class="location">in <a href="../../Elixir/Cache/CacheAbstract.html#method_convertTTL"><abbr title="Elixir\Cache\CacheAbstract">CacheAbstract</abbr></a> at line 89</div>
         <code>                    integer
-    <strong>convertTTL</strong>(integer|string|<a href="http://php.net/DateTime"><abbr title="DateTime">DateTime</abbr></a> $TTL, integer $default = 31556926)</code>
+    <strong>convertTTL</strong>(integer|string|<a href="http://php.net/DateTime"><abbr title="DateTime">DateTime</abbr></a> $TTL)</code>
     </h3>
     <div class="details">
                 <div class="tags">
@@ -342,12 +409,6 @@
                     <tr>
                 <td>integer|string|<a href="http://php.net/DateTime"><abbr title="DateTime">DateTime</abbr></a></td>
                 <td>$TTL</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
-                <td>integer</td>
-                <td>$default</td>
                 <td>
 </td>
             </tr>

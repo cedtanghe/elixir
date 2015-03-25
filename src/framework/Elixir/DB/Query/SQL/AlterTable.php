@@ -98,8 +98,8 @@ class AlterTable extends SQLAbstract
     {
         $this->SQL[] = [
             'specification' => self::RENAME_COLUMN,
-            'old-name' => $oldColumn instanceof Column ? $oldColumn->getName() : $oldColumn,
-            'new-name' => $newColumn instanceof Column ? $newColumn->getName() : $newColumn
+            'old_name' => $oldColumn instanceof Column ? $oldColumn->getName() : $oldColumn,
+            'new_name' => $newColumn instanceof Column ? $newColumn->getName() : $newColumn
         ];
 
         return $this;
@@ -504,7 +504,7 @@ class AlterTable extends SQLAbstract
      */
     protected function renderRenameColumn($data) 
     {
-        return 'ALTER TABLE ' . $this->table . ' RENAME COLUMN ' . $data['old-name'] . ' TO ' . $data['new-name'];
+        return 'ALTER TABLE ' . $this->table . ' RENAME COLUMN ' . $data['old_name'] . ' TO ' . $data['new_name'];
     }
     
     /**

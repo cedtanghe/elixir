@@ -38,8 +38,8 @@ class AlterTable extends BaseAlterTable
 
         $this->SQL[] = [
             'specification' => self::RENAME_COLUMN,
-            'old-column' => $oldColumn,
-            'new-column' => $newColumn
+            'old_column' => $oldColumn,
+            'new_column' => $newColumn
         ];
 
         return $this;
@@ -411,28 +411,28 @@ class AlterTable extends BaseAlterTable
     {
         $column = null;
 
-        if ($data['new-column'] instanceof Column) 
+        if ($data['new_column'] instanceof Column) 
         {
-            $newName = $data['new-column']->getName();
-            $column = $data['new-column'];
+            $newName = $data['new_column']->getName();
+            $column = $data['new_column'];
         } 
         else 
         {
-            $newName = $data['new-column'];
+            $newName = $data['new_column'];
         }
 
-        if ($data['old-column'] instanceof Column) 
+        if ($data['old_column'] instanceof Column) 
         {
-            $oldName = $data['old-column']->getName();
+            $oldName = $data['old_column']->getName();
 
             if (null === $column) 
             {
-                $column = $data['old-column'];
+                $column = $data['old_column'];
             }
         } 
         else
         {
-            $oldName = $data['old-column'];
+            $oldName = $data['old_column'];
         }
 
         $SQL = 'ALTER TABLE ' . $this->table . ' CHANGE ' . $oldName . ' ' . $newName;

@@ -75,7 +75,8 @@
     </div>
 
     <p>    interface
-    <strong>SQLInterface</strong></p>
+    <strong>SQLInterface</strong>        implements
+        <abbr title="Elixir\DB\Query\SQL\QueryInterface">QueryInterface</abbr></p>
 
     
     
@@ -228,24 +229,6 @@
             </tr>
                     <tr>
                 <td>ORDER_NONE</td>
-                <td class="last">
-                    <p><em>
-</em></p>
-                    <p>
-</p>
-                </td>
-            </tr>
-                    <tr>
-                <td>CONSTRAINT_TEMPORARY</td>
-                <td class="last">
-                    <p><em>
-</em></p>
-                    <p>
-</p>
-                </td>
-            </tr>
-                    <tr>
-                <td>CONSTRAINT_IF_NOT_EXISTS</td>
                 <td class="last">
                     <p><em>
 </em></p>
@@ -419,26 +402,6 @@
                                     </div>
                 <div class="col-md-2"></div>
             </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_getQuery">getQuery</a>()
-                                            <p class="no-description">No description</p>
-                                    </div>
-                <div class="col-md-2"></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    string
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_render">render</a>()
-                                            <p class="no-description">No description</p>
-                                    </div>
-                <div class="col-md-2"></div>
-            </div>
             </div>
 
 
@@ -447,7 +410,7 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_setQuoteMethod">
-        <div class="location">at line 163</div>
+        <div class="location">at line 155</div>
         <code>                    
     <strong>setQuoteMethod</strong>(callable $value)</code>
     </h3>
@@ -473,7 +436,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getQuoteMethod">
-        <div class="location">at line 168</div>
+        <div class="location">at line 160</div>
         <code>                    callable
     <strong>getQuoteMethod</strong>()</code>
     </h3>
@@ -498,7 +461,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_quote">
-        <div class="location">at line 174</div>
+        <div class="location">at line 166</div>
         <code>                    mixed
     <strong>quote</strong>(mixed $parameter)</code>
     </h3>
@@ -534,7 +497,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_bindValue">
-        <div class="location">at line 180</div>
+        <div class="location">at line 172</div>
         <code>                    
     <strong>bindValue</strong>(string $key, mixed $value)</code>
     </h3>
@@ -566,7 +529,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getBindValues">
-        <div class="location">at line 185</div>
+        <div class="location">at line 177</div>
         <code>                    array
     <strong>getBindValues</strong>()</code>
     </h3>
@@ -591,7 +554,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_assemble">
-        <div class="location">at line 192</div>
+        <div class="location">at line 184</div>
         <code>                    string
     <strong>assemble</strong>(string $SQL, mixed $param = null)</code>
     </h3>
@@ -614,55 +577,6 @@
             </tr>
             </table>
 
-            
-                            <h4>Return Value</h4>
-
-                    <table class="table table-condensed">
-        <tr>
-            <td>string</td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_getQuery">
-        <div class="location">at line 197</div>
-        <code>                    
-    <strong>getQuery</strong>()</code>
-    </h3>
-    <div class="details">
-                <div class="tags">
-            
-            
-            
-                            <h4>See also</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td>SQLInterface::render()</td>
-                <td></td>
-            </tr>
-            </table>
-
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_render">
-        <div class="location">at line 202</div>
-        <code>                    string
-    <strong>render</strong>()</code>
-    </h3>
-    <div class="details">
-                <div class="tags">
             
                             <h4>Return Value</h4>
 

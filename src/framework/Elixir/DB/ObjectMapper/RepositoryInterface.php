@@ -14,6 +14,11 @@ use Elixir\Dispatcher\DispatcherInterface;
 interface RepositoryInterface extends EntityInterface, DispatcherInterface
 {
     /**
+     * @return RepositoryInterface
+     */
+    public static function factory(array $config = null);
+    
+    /**
      * @param ContainerInterface $value
      */
     public function setConnectionManager(ContainerInterface $value);

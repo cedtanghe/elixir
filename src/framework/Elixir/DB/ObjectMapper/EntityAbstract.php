@@ -16,6 +16,14 @@ abstract class EntityAbstract implements EntityInterface
     use DispatcherTrait;
     
     /**
+     * @see EntityInterface::factory()
+     */
+    public static function factory(array $config = null)
+    {
+        return new static($config);
+    }
+    
+    /**
      * @var array
      */
     protected static $mutatorsGet = [];
@@ -66,9 +74,9 @@ abstract class EntityAbstract implements EntityInterface
     protected $state = self::FILLABLE;
     
     /**
-     * @param array $data
+     * @param array $config
      */
-    public function __construct(array $data = null)
+    public function __construct(array $config = null)
     {
         $this->className = get_class($this);
         
@@ -79,9 +87,15 @@ abstract class EntityAbstract implements EntityInterface
         $this->defineGuarded();
         $this->dispatch(new EntityEvent(EntityEvent::DEFINE_GUARDED));
 
-        if (!empty($data)) 
+        if (!empty($config)) 
         {
-            $this->hydrate($data, ['raw' => true, 'sync' => true]);
+            $this->hydrate(
+                isset($config['hydrate']) ? $config['hydrate'] : $config,
+                [
+                    'raw' => true, 
+                    'sync' => true
+                ]
+            );
         }
     }
     
@@ -136,7 +150,7 @@ abstract class EntityAbstract implements EntityInterface
     }
     
     /**
-     * @return array
+     * @see EntityInterface::getFillableKeys()
      */
     public function getFillableKeys() 
     {
@@ -144,7 +158,7 @@ abstract class EntityAbstract implements EntityInterface
     }
 
     /**
-     * @return array
+     * @see EntityInterface::getGuardedKeys()
      */
     public function getGuardedKeys()
     {
@@ -418,16 +432,8 @@ abstract class EntityAbstract implements EntityInterface
         {
             foreach ($entities as $key => $value) 
             {
-                $event = new EntityEvent(EntityEvent::CREATE_ENTITY, ['entity' => $value['class']]);
-                $this->dispatch($event);
-                
-                $entity = $event->getEntity();
-                
-                if(!$entity instanceof EntityInterface)
-                {
-                    $entity = new $entity();
-                }
-                
+                $class = $value['class'];
+                $entity = $this->createInstance($class);
                 $entity->hydrate($value['value'], $options);
 
                 if ($options['raw']) 
@@ -456,17 +462,10 @@ abstract class EntityAbstract implements EntityInterface
     {
         if (isset($data['_class']))
         {   
-            $event = new EntityEvent(EntityEvent::CREATE_ENTITY, ['entity' => $data['_class']]);
-            $this->dispatch($event);
-
-            $entity = $event->getEntity();
-
-            if(!$entity instanceof EntityInterface)
-            {
-                $entity = new $entity();
-            }
-            
+            $class = $data['_class'];
+            $entity = $this->createInstance($class);
             $entity->hydrate($data, $options);
+            
             $data = $entity;
         } 
         else
@@ -558,6 +557,16 @@ abstract class EntityAbstract implements EntityInterface
         }
 
         return $data;
+    }
+    
+    /**
+     * @param string $class
+     * @param array $config
+     * @return EntityInterface
+     */
+    protected function createInstance($class, array $config = null)
+    {
+        return $class::factory($config);
     }
 
     /**

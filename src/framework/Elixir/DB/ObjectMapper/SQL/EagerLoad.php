@@ -7,12 +7,16 @@ namespace Elixir\DB\ObjectMapper\SQL;
  */
 class EagerLoad 
 {
-    public function __construct($target, 
-                                $foreignKey, 
-                                $otherKey = null,
-                                Pivot $pivot = null) 
+    public function __construct($target, array $config = []) 
     {
-        // Todo
+        $config = array_merge(
+            [
+                'foreign_key' => null,
+                'other_key' => null,
+                'pivot' => null,
+            ],
+            $config
+        );
     }
     
     public function sync($member, array $repositories, array $with = [])

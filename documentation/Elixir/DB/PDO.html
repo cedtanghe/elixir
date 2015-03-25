@@ -380,17 +380,17 @@
                     integer
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_exec">exec</a>(<a href="../../Elixir/DB/Query/SQL/SQLInterface.html"><abbr title="Elixir\DB\Query\SQL\SQLInterface">SQLInterface</abbr></a>|string $SQL)
+                    <a href="#method_exec">exec</a>(<a href="../../Elixir/DB/Query/QueryInterface.html"><abbr title="Elixir\DB\Query\QueryInterface">QueryInterface</abbr></a>|string $query)
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    <a href="../../Elixir/DB/ResultSet/SetAbstract.html"><abbr title="Elixir\DB\ResultSet\SetAbstract">SetAbstract</abbr></a>|boolean
+                    <a href="../../Elixir/DB/ResultSet/ResultSetAbstract.html"><abbr title="Elixir\DB\ResultSet\ResultSetAbstract">ResultSetAbstract</abbr></a>|boolean
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_query">query</a>(<a href="../../Elixir/DB/Query/SQL/SQLInterface.html"><abbr title="Elixir\DB\Query\SQL\SQLInterface">SQLInterface</abbr></a>|string $SQL, array $values = array(), array $options = array())
+                    <a href="#method_query">query</a>(<a href="../../Elixir/DB/Query/QueryInterface.html"><abbr title="Elixir\DB\Query\QueryInterface">QueryInterface</abbr></a>|string $query, array $values = array(), array $options = array())
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -1312,9 +1312,9 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_exec">
-        <div class="location">at line 191</div>
+        <div class="location">at line 190</div>
         <code>                    integer
-    <strong>exec</strong>(<a href="../../Elixir/DB/Query/SQL/SQLInterface.html"><abbr title="Elixir\DB\Query\SQL\SQLInterface">SQLInterface</abbr></a>|string $SQL)</code>
+    <strong>exec</strong>(<a href="../../Elixir/DB/Query/QueryInterface.html"><abbr title="Elixir\DB\Query\QueryInterface">QueryInterface</abbr></a>|string $query)</code>
     </h3>
     <div class="details">
                 <div class="tags">
@@ -1322,8 +1322,8 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><a href="../../Elixir/DB/Query/SQL/SQLInterface.html"><abbr title="Elixir\DB\Query\SQL\SQLInterface">SQLInterface</abbr></a>|string</td>
-                <td>$SQL</td>
+                <td><a href="../../Elixir/DB/Query/QueryInterface.html"><abbr title="Elixir\DB\Query\QueryInterface">QueryInterface</abbr></a>|string</td>
+                <td>$query</td>
                 <td>
 </td>
             </tr>
@@ -1342,15 +1342,24 @@
 
             
             
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>DBInterface::exec()</td>
+                <td></td>
+            </tr>
+            </table>
+
                     </div>
     </div>
 
             </div>
                     <div class="method-item">
                     <h3 id="method_query">
-        <div class="location">at line 225</div>
-        <code>                    <a href="../../Elixir/DB/ResultSet/SetAbstract.html"><abbr title="Elixir\DB\ResultSet\SetAbstract">SetAbstract</abbr></a>|boolean
-    <strong>query</strong>(<a href="../../Elixir/DB/Query/SQL/SQLInterface.html"><abbr title="Elixir\DB\Query\SQL\SQLInterface">SQLInterface</abbr></a>|string $SQL, array $values = array(), array $options = array())</code>
+        <div class="location">at line 224</div>
+        <code>                    <a href="../../Elixir/DB/ResultSet/ResultSetAbstract.html"><abbr title="Elixir\DB\ResultSet\ResultSetAbstract">ResultSetAbstract</abbr></a>|boolean
+    <strong>query</strong>(<a href="../../Elixir/DB/Query/QueryInterface.html"><abbr title="Elixir\DB\Query\QueryInterface">QueryInterface</abbr></a>|string $query, array $values = array(), array $options = array())</code>
     </h3>
     <div class="details">
                 <div class="tags">
@@ -1358,8 +1367,8 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><a href="../../Elixir/DB/Query/SQL/SQLInterface.html"><abbr title="Elixir\DB\Query\SQL\SQLInterface">SQLInterface</abbr></a>|string</td>
-                <td>$SQL</td>
+                <td><a href="../../Elixir/DB/Query/QueryInterface.html"><abbr title="Elixir\DB\Query\QueryInterface">QueryInterface</abbr></a>|string</td>
+                <td>$query</td>
                 <td>
 </td>
             </tr>
@@ -1382,7 +1391,7 @@
 
                     <table class="table table-condensed">
         <tr>
-            <td><a href="../../Elixir/DB/ResultSet/SetAbstract.html"><abbr title="Elixir\DB\ResultSet\SetAbstract">SetAbstract</abbr></a>|boolean</td>
+            <td><a href="../../Elixir/DB/ResultSet/ResultSetAbstract.html"><abbr title="Elixir\DB\ResultSet\ResultSetAbstract">ResultSetAbstract</abbr></a>|boolean</td>
             <td>
 </td>
         </tr>
@@ -1405,7 +1414,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_lastInsertId">
-        <div class="location">at line 364</div>
+        <div class="location">at line 363</div>
         <code>                    integer
     <strong>lastInsertId</strong>()</code>
     </h3>
@@ -1439,7 +1448,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method___call">
-        <div class="location">at line 379</div>
+        <div class="location">at line 378</div>
         <code>                    
     <strong>__call</strong>($method, $arguments)</code>
     </h3>

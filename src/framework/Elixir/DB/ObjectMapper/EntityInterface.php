@@ -58,6 +58,16 @@ interface EntityInterface
     const ENTITY_SEPARATOR = '::';
     
     /**
+     * @return EntityInterface
+     */
+    public static function factory(array $config = null);
+
+    /**
+     * @return mixed
+     */
+    public function getIgnoreValue();
+    
+    /**
      * @param string $value
      */
     public function setState($value);
@@ -68,9 +78,14 @@ interface EntityInterface
     public function getState();
     
     /**
-     * @return mixed
+     * @return array
      */
-    public function getIgnoreValue();
+    public function getFillableKeys();
+    
+    /**
+     * @return array
+     */
+    public function getGuardedKeys();
     
     /**
      * @param string $state
