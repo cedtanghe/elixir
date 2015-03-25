@@ -45,11 +45,6 @@ interface RepositoryInterface extends EntityInterface, DispatcherInterface
     public function getPrimaryKey();
 
     /**
-     * @return mixed
-     */
-    public function getPrimaryValue();
-
-    /**
      * @param mixed $options
      * @return FindableInterface
      */

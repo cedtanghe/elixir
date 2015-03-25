@@ -237,23 +237,23 @@ class BelongsTo implements RelationInterface
                     $pSQL->on(
                         sprintf(
                             '`%s`.`%s` = ?', 
-                            $this->_pivot->getPivot(),
-                            $this->_pivot->getForeignKey()
+                            $this->pivot->getPivot(),
+                            $this->pivot->getForeignKey()
                         ),
-                        $this->_repository->get($this->_foreignKey)
+                        $this->repository->get($this->foreignKey)
                     );
 
                     $pSQL->on(
                         sprintf(
                             '`%s`.`%s` = `%s`.`%s`', 
-                            $this->_pivot->getPivot(),
-                            $this->_pivot->getOtherKey(),
+                            $this->pivot->getPivot(),
+                            $this->pivot->getOtherKey(),
                             $this->target->getTable(),
-                            $this->_otherKey
+                            $this->otherKey
                         )
                     );
 
-                    foreach($this->_pivot->getCriterions() as $criterion)
+                    foreach($this->pivot->getCriterias() as $criterion)
                     {
                         $criterion($pSQL);
                     }

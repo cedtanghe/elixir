@@ -307,10 +307,6 @@ abstract class EntityAbstract implements EntityInterface
         {
             $value = new Collection($value, false);
         }
-        else if ($value instanceof \ArrayObject)
-        {
-            $value = new Collection($value->getArrayCopy(), false);
-        }
         
         if ($this->isFillable()) 
         {

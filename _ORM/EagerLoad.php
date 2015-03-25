@@ -223,8 +223,8 @@ class EagerLoad
                     $pSQL->on(
                         sprintf(
                             '`%s`.`%s` IN(?)', 
-                            $this->_pivot->getPivot(),
-                            $this->_pivot->getOtherKey()
+                            $this->pivot->getPivot(),
+                            $this->pivot->getOtherKey()
                         ),
                         $values
                     );
@@ -232,14 +232,14 @@ class EagerLoad
                     $pSQL->on(
                         sprintf(
                             '`%s`.`%s` = `%s`.`%s`', 
-                            $this->_pivot->getPivot(),
-                            $this->_pivot->getForeignKey(),
+                            $this->pivot->getPivot(),
+                            $this->pivot->getForeignKey(),
                             $this->target->getTable(),
-                            $this->_foreignKey
+                            $this->foreignKey
                         )
                     );
 
-                    foreach($this->_pivot->getCriterions() as $criterion)
+                    foreach($this->pivot->getCriterias() as $criterion)
                     {
                         $criterion($pSQL);
                     }

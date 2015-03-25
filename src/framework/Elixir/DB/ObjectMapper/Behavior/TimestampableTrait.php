@@ -14,8 +14,8 @@ trait TimestampableTrait
      * @var string 
      */
     protected $dateFormat = 'Y-m-d H:i:s';
-
-    public function timestampable()
+    
+    protected function timestampable()
     {
         $this->addListener(EntityEvent::DEFINE_FILLABLE, function(EntityEvent $e)
         {

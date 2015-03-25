@@ -44,11 +44,6 @@ interface RelationInterface
     public function getRelated();
 
     /**
-     * @param boolean $value
-     */
-    public function setFilled($value);
-
-    /**
      * @return boolean
      */
     public function isFilled();

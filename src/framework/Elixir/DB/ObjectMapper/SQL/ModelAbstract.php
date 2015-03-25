@@ -124,26 +124,6 @@ abstract class ModelAbstract extends EntityAbstract implements RepositoryInterfa
     {
         return $this->primaryKey;
     }
-
-    /**
-     * @see RepositoryInterface::getPrimaryValue()
-     */
-    public function getPrimaryValue() 
-    {
-        if (null === $this->primaryKey) 
-        {
-            return null;
-        }
-
-        $result = [];
-
-        foreach ((array)$this->primaryKey as $key)
-        {
-            $result[] = $this->$key;
-        }
-
-        return count($result) == 1 ? $result[0] : $result;
-    }
     
     /**
      * @see RepositoryInterface::find()

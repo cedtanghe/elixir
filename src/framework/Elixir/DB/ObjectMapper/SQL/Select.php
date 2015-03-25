@@ -234,9 +234,12 @@ class Select implements FindableInterface
     {
         if (null === $eagerLoad)
         {
+            $m = explode('.', $member);
+            $m = array_pop($m);
+            
             try
             {
-                $m = $this->repository->get($member);
+                $m = $this->repository->get($m);
 
                 if($m instanceof RelationInterface)
                 {
@@ -260,7 +263,7 @@ class Select implements FindableInterface
                 $parts = explode('\\', get_class($this->repository));
                 array_pop($parts);
                 
-                $class = '\\' . ltrim(implode('\\', $parts) . '\\' . ucfirst($member), '\\');
+                $class = '\\' . ltrim(implode('\\', $parts) . '\\' . ucfirst($m), '\\');
                 $eagerLoad = new EagerLoad($class);
             }
         }
@@ -320,11 +323,7 @@ class Select implements FindableInterface
      */
     public function current()
     {
-        $keys = (array)$this->repository->getPrimaryKey();
-        $values = (array)$this->repository->getPrimaryValue();
-        $c = 0;
-
-        foreach ($keys as $key)
+        foreach ((array)$this->repository->getPrimaryKey() as $key)
         {
             $this->SQL->where(
                 sprintf(
@@ -332,7 +331,7 @@ class Select implements FindableInterface
                     $this->repository->getStockageName(), 
                     $key
                 ), 
-                $values[$c++]
+                $this->repository->get($key)
             );
         }
         
