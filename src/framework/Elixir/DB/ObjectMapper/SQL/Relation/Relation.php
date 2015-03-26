@@ -3,6 +3,7 @@
 namespace Elixir\DB\ObjectMapper\SQL\Relation;
 
 use Elixir\DB\ObjectMapper\Collection;
+use Elixir\DB\ObjectMapper\RelationInterface;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>

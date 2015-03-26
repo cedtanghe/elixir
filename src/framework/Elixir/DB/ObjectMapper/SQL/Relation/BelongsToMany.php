@@ -4,14 +4,13 @@ namespace Elixir\DB\ObjectMapper\SQL\Relation;
 
 use Elixir\DB\ObjectMapper\CollectionEvent;
 use Elixir\DB\ObjectMapper\FindableInterface;
-use Elixir\DB\ObjectMapper\RelationAbstract;
 use Elixir\DB\ObjectMapper\RepositoryInterface;
 use Elixir\DB\ObjectMapper\SQL\Relation\Pivot;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-class BelongsTo extends RelationAbstract
+class BelongsToMany extends RelationAbstract
 {
     /**
      * @param RepositoryInterface $repository
@@ -20,7 +19,7 @@ class BelongsTo extends RelationAbstract
      */
     public function __construct(RepositoryInterface $repository, $target, array $config = [])
     {
-        $this->type = self::BELONGS_TO;
+        $this->type = self::BELONGS_TO_MANY;
         $this->repository = $repository;
         $this->target = $target;
         
@@ -66,31 +65,17 @@ class BelongsTo extends RelationAbstract
     }
     
     /**
-     * @param FindableInterface $findable
-     * @return boolean
+     * @see RelationAbstract::prepareQuery();
      */
-    protected function parseQuery(FindableInterface $findable) 
+    protected function prepareQuery(FindableInterface $findable) 
     {
-        $this->foreignKey = $this->foreignKey ?: $this->repository->getPrimaryKey();
-        $this->localKey = $this->localKey ?: $this->repository->getStockageName() . '_id';
-
-        $value = $this->repository->get($this->localKey);
-
-        if (null === $value)
+        if(null === $this->pivot)
         {
-            return false;
+            $table = $this->target->getStockageName() . '_' . $this->repository->getStockageName();
+            $this->pivot = new Pivot($table);
         }
-
-        $findable->where(
-            sprintf(
-                '`%s`.`%s` = ?', 
-                $this->target->getStockageName(), 
-                $this->foreignKey
-            ),
-            $value
-        );
-
-        return true;
+        
+        return $this->parsePivot($findable);
     }
     
     /**

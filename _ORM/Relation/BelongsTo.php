@@ -249,7 +249,7 @@ class BelongsTo implements RelationInterface
                             $this->pivot->getPivot(),
                             $this->pivot->getOtherKey(),
                             $this->target->getTable(),
-                            $this->otherKey
+                            $this->localKey
                         )
                     );
 

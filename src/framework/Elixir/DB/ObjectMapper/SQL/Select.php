@@ -247,7 +247,7 @@ class Select implements FindableInterface
                         $m->getTarget(),
                         [
                             'foreign_key' => $m->getForeignKey(),
-                            'other_key' => $m->getOtherKey(),
+                            'other_key' => $m->getLocalKey(),
                             'pivot' => $m->getPivot()
                         ]
                     );

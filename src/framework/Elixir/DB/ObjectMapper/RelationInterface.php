@@ -21,6 +21,11 @@ interface RelationInterface
      * @var string
      */
     const BELONGS_TO = 'belongs_to';
+    
+    /**
+     * @var string
+     */
+    const BELONGS_TO_MANY = 'belongs_to_many';
 
     /**
      * @var string

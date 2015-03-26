@@ -13,13 +13,13 @@ use Elixir\DB\Query\SQL\JoinClause;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-trait HasOneOrManyTrait 
+abstract class RelationAbstract implements RelationInterface
 {
     /**
      * @var string
      */
     protected $type;
-
+    
     /**
      * @var RepositoryInterface 
      */
@@ -38,7 +38,7 @@ trait HasOneOrManyTrait
     /**
      * @var string 
      */
-    protected $otherKey;
+    protected $localKey;
 
     /**
      * @var Pivot 
@@ -59,7 +59,7 @@ trait HasOneOrManyTrait
      * @var boolean
      */
     protected $filled = false;
-
+    
     /**
      * @see RelationInterface::getType()
      */
@@ -67,25 +67,93 @@ trait HasOneOrManyTrait
     {
         return $this->type;
     }
-
+    
+    /**
+     * @return RepositoryInterface
+     */
+    public function getRepository() 
+    {
+        return $this->repository;
+    }
+    
+    /**
+     * @return RepositoryInterface|string
+     */
+    public function getTarget() 
+    {
+        return $this->target;
+    }
+    
+    /**
+     * @param string $value
+     * @return RelationAbstract
+     */
+    public function setForeignKey($value) 
+    {
+        $this->foreignKey = $value;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getForeignKey() 
+    {
+        return $this->foreignKey;
+    }
+    
+    /**
+     * @param string $value
+     * @return RelationAbstract
+     */
+    public function setLocalKey($value) 
+    {
+        $this->localKey = $value;
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getLocalKey() 
+    {
+        return $this->localKey;
+    }
+    
     /**
      * @param Pivot $pivot
-     * @return RelationInterface
+     * @return RelationAbstract
      */
     public function withPivot(Pivot $pivot)
     {
         $this->pivot = $pPivot;
         return $this;
     }
+    
+    /**
+     * @return Pivot
+     */
+    public function getPivot() 
+    {
+        return $this->pivot;
+    }
 
     /**
      * @param callable $criteria
-     * @return RelationInterface
+     * @return RelationAbstract
      */
     public function addCriteria(callable $criteria)
     {
         $this->criterias[] = $criteria;
         return $this;
+    }
+    
+    /**
+     * @return array
+     */
+    public function getCriterias() 
+    {
+        return $this->criterias;
     }
 
     /**
@@ -99,7 +167,7 @@ trait HasOneOrManyTrait
             $this->related->removeListener(CollectionEvent::VALUE_REMOVED, [$this, 'onValueRemoved']);
             $this->related = null;
         }
-
+        
         if (is_array($value)) 
         {
             $value = new Collection($value, true);
@@ -116,23 +184,17 @@ trait HasOneOrManyTrait
 
         $this->filled = $filled;
     }
+    
+    /**
+     * @param CollectionEvent $e
+     */
+    abstract public function onValueAdded(CollectionEvent $e);
 
     /**
      * @param CollectionEvent $e
      */
-    public function onValueAdded(CollectionEvent $e)
-    {
-        // Todo
-    }
-
-    /**
-     * @param CollectionEvent $e
-     */
-    public function onValueRemoved(CollectionEvent $e) 
-    {
-        // Todo
-    }
-
+    abstract public function onValueRemoved(CollectionEvent $e);
+    
     /**
      * @see RelationInterface::getRelated()
      */
@@ -171,82 +233,105 @@ trait HasOneOrManyTrait
                 return;
             }
         }
-
-        $this->setRelated(
-            $this->type === self::HAS_ONE ? null : new Collection([], true), 
-            true
-        );
+        
+        switch ($this->type)
+        {
+            case self::HAS_ONE:
+            case self::BELONGS_TO:
+                $this->setRelated(null, true);
+                break;
+            case self::HAS_MANY:
+            case self::BELONGS_TO_MANY:
+                $this->setRelated(new Collection([], true), true);
+                break;
+        }
     }
-
+    
     /**
      * @param FindableInterface $findable
      * @return boolean
      */
     protected function prepareQuery(FindableInterface $findable) 
     {
-        if (null !== $this->pivot) 
-        {
-            if (null === $this->pivot->getForeignKey()) 
-            {
-                $this->pivot->setForeignKey($this->target->getStockageName() . '_id');
-            }
-
-            if (null === $this->pivot->getOtherKey()) 
-            {
-                $this->pivot->setOtherKey($this->repository->getStockageName() . '_id');
-            }
-
-            $findable->innerJoin(
-                $this->pivot->getPivot(), 
-                function(JoinClause $join) 
-                {
-                    $join->on(
-                        sprintf(
-                            '`%s`.`%s` = ?', 
-                            $this->pivot->getPivot(), 
-                            $this->pivot->getOtherKey()
-                        ), 
-                        $this->repository->get($this->repository->getPrimaryKey())
-                    );
-                    
-                    $join->on(
-                        sprintf(
-                            '`%s`.`%s` = `%s`.`%s`', 
-                            $this->pivot->getPivot(), 
-                            $this->pivot->getForeignKey(), 
-                            $this->target->getStockageName(), 
-                            $this->target->getPrimaryKey()
-                        )
-                    );
-
-                    foreach ($this->pivot->getCriterias() as $criteria) 
-                    {
-                        call_user_func_array($criteria, [$join]);
-                    }
-                }
-            );
-        } 
-        else 
-        {
-            $this->foreignKey = $this->foreignKey ?: $this->target->getStockageName() . '_id';
-            $this->otherKey = $this->otherKey ?: $this->repository->getPrimaryKey();
+        return null !== $this->pivot ? $this->parsePivot($findable) : $this->parseQuery($findable);
+    }
+    
+    /**
+     * @param FindableInterface $findable
+     * @return boolean
+     */
+    protected function parsePivot(FindableInterface $findable) 
+    {
+        $this->foreignKey = $this->foreignKey ?: $this->target->getPrimaryKey();
+        $this->localKey = $this->localKey ?: $this->repository->getPrimaryKey();
         
-            $value = $this->repository->get($this->otherKey);
-
-            if (null === $value)
-            {
-                return false;
-            }
-            
-            $findable->where(
-                sprintf(
-                    '`%s`.`%s` = ?', 
-                    $this->target->getStockageName(), 
-                    $this->foreignKey
-                ),
-                $value
-            );
+        if (null === $this->pivot->getForeignKey()) 
+        {
+            $this->pivot->setForeignKey($this->target->getStockageName() . '_id');
         }
+
+        if (null === $this->pivot->getOtherKey()) 
+        {
+            $this->pivot->setOtherKey($this->repository->getStockageName() . '_id');
+        }
+
+        $findable->innerJoin(
+            $this->pivot->getPivot(), 
+            function(JoinClause $join) 
+            {
+                $join->on(
+                    sprintf(
+                        '`%s`.`%s` = ?', 
+                        $this->pivot->getPivot(), 
+                        $this->pivot->getOtherKey()
+                    ), 
+                    $this->repository->get($this->localKey)
+                );
+
+                $join->on(
+                    sprintf(
+                        '`%s`.`%s` = `%s`.`%s`', 
+                        $this->pivot->getPivot(), 
+                        $this->pivot->getForeignKey(), 
+                        $this->target->getStockageName(), 
+                        $this->foreignKey
+                    )
+                );
+
+                foreach ($this->pivot->getCriterias() as $criteria) 
+                {
+                    call_user_func_array($criteria, [$join]);
+                }
+            }
+        );
+        
+        return true;
+    }
+    
+    /**
+     * @param FindableInterface $findable
+     * @return boolean
+     */
+    protected function parseQuery(FindableInterface $findable) 
+    {
+        $this->foreignKey = $this->foreignKey ?: $this->target->getStockageName() . '_id';
+        $this->localKey = $this->localKey ?: $this->repository->getPrimaryKey();
+
+        $value = $this->repository->get($this->localKey);
+
+        if (null === $value)
+        {
+            return false;
+        }
+
+        $findable->where(
+            sprintf(
+                '`%s`.`%s` = ?', 
+                $this->target->getStockageName(), 
+                $this->foreignKey
+            ),
+            $value
+        );
 
         return true;
     }
@@ -277,8 +362,10 @@ trait HasOneOrManyTrait
         switch ($this->type)
         {
             case self::HAS_ONE:
+            case self::BELONGS_TO:
                 return $findable->one();
             case self::HAS_MANY:
+            case self::BELONGS_TO_MANY:
                 return new Collection($findable->all(), true);
         }
 

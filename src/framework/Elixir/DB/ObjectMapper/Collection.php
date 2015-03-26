@@ -191,6 +191,29 @@ class Collection extends Dispatcher implements \Iterator, \Countable
     }
     
     /**
+     * @param \Closure $callback
+     */
+    public function map(\Closure $callback) 
+    {
+        array_map($callback, $this->data);
+    }
+    
+    /**
+     * @param \Closure $callback
+     */
+    public function filter(\Closure $callback = null) 
+    {
+        if(null === $callback)
+        {
+            array_filter($this->data);
+        }
+        else
+        {
+            array_filter($this->data, $callback, ARRAY_FILTER_USE_BOTH);
+        }
+    }
+    
+    /**
      * @ignore
      */
     public function rewind() 

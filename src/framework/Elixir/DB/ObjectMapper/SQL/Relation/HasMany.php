@@ -2,18 +2,16 @@
 
 namespace Elixir\DB\ObjectMapper\SQL\Relation;
 
-use Elixir\DB\ObjectMapper\RelationInterface;
+use Elixir\DB\ObjectMapper\CollectionEvent;
+use Elixir\DB\ObjectMapper\RelationAbstract;
 use Elixir\DB\ObjectMapper\RepositoryInterface;
-use Elixir\DB\ObjectMapper\SQL\Relation\HasOneOrManyTrait;
 use Elixir\DB\ObjectMapper\SQL\Relation\Pivot;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-class HasMany implements RelationInterface
+class HasMany extends RelationAbstract
 {
-    use HasOneOrManyTrait;
-    
     /**
      * @param RepositoryInterface $repository
      * @param string|RepositoryInterface $target
@@ -28,7 +26,7 @@ class HasMany implements RelationInterface
         $config = array_merge(
             [
                'foreign_key' => null, 
-               'other_key' => null,
+               'local_key' => null,
                'pivot' => null,
                'criterias' => [] 
             ],
@@ -36,11 +34,23 @@ class HasMany implements RelationInterface
         );
         
         $this->foreignKey = $config['foreign_key'];
-        $this->otherKey = $config['other_key'];
+        $this->localKey = $config['local_key'];
         
-        if (null !== $config['pivot'])
+        if (null !== $config['pivot'] && false !== $config['pivot'])
         {
-            if(!$config['pivot'] instanceof Pivot)
+            if(true === $config['pivot'])
+            {
+                if (!$this->target instanceof RepositoryInterface) 
+                {
+                    $class = $this->target;
+                    $this->target = $class::factory();
+                    $this->target->setConnectionManager($this->repository->getConnectionManager());
+                }
+                
+                $table = $this->repository->getStockageName() . '_' . $this->target->getStockageName();
+                $config['pivot'] = new Pivot($table);
+            }
+            else if(!$config['pivot'] instanceof Pivot)
             {
                 $config['pivot'] = new Pivot($config['pivot']);
             }
@@ -53,4 +63,14 @@ class HasMany implements RelationInterface
             $this->addCriteria($criteria);
         }
     }
+    
+    /**
+     * @see RelationAbstract::onValueAdded();
+     */
+    public function onValueAdded(CollectionEvent $e){}
+
+    /**
+     * @see RelationAbstract::onValueRemoved();
+     */
+    public function onValueRemoved(CollectionEvent $e){}
 }
