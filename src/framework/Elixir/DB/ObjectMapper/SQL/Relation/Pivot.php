@@ -34,19 +34,19 @@ class Pivot
     public function __construct($pivot, array $config = [])
     {
         $this->pivot = $pivot;
-        
+
         $config = array_merge(
             [
-               'foreign_key' => null, 
-               'other_key' => null,
-               'criterias' => [] 
-            ],
+                'foreign_key' => null,
+                'other_key' => null,
+                'criterias' => []
+            ], 
             $config
         );
-        
+
         $this->foreignKey = $config['foreign_key'];
         $this->otherKey = $config['other_key'];
-        
+
         foreach ($config['criterias'] as $criteria)
         {
             $this->addCriteria($criteria);
@@ -60,25 +60,25 @@ class Pivot
     {
         return $this->pivot;
     }
-    
+
     /**
      * @param string $value
      * @return Pivot
      */
-    public function setForeignKey($value)
+    public function setForeignKey($value) 
     {
         $this->foreignKey = $value;
         return $this;
     }
-    
+
     /**
      * @return string
      */
-    public function getForeignKey()
+    public function getForeignKey() 
     {
         return $this->foreignKey;
     }
-    
+
     /**
      * @param string $value
      * @return Pivot
@@ -88,11 +88,11 @@ class Pivot
         $this->otherKey = $value;
         return $this;
     }
-    
+
     /**
      * @return string
      */
-    public function getOtherKey()
+    public function getOtherKey() 
     {
         return $this->otherKey;
     }

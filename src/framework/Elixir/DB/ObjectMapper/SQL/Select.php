@@ -5,7 +5,7 @@ namespace Elixir\DB\ObjectMapper\SQL;
 use Elixir\DB\DBInterface;
 use Elixir\DB\ObjectMapper\FindableExtensionInterface;
 use Elixir\DB\ObjectMapper\FindableInterface;
-use Elixir\DB\ObjectMapper\RelationInterface;
+use Elixir\DB\ObjectMapper\RelationInterfaceMetas;
 use Elixir\DB\ObjectMapper\RepositoryEvent;
 use Elixir\DB\ObjectMapper\RepositoryInterface;
 use Elixir\DB\ObjectMapper\SQL\EagerLoad;
@@ -235,36 +235,30 @@ class Select implements FindableInterface
         if (null === $eagerLoad)
         {
             $m = explode('.', $member);
-            $m = array_pop($m);
+            $m = $this->repository->get(array_pop($m));
             
-            try
+            if($m instanceof RelationInterfaceMetas)
             {
-                $m = $this->repository->get($m);
-
-                if($m instanceof RelationInterface)
-                {
-                    $eagerLoad = new EagerLoad(
-                        $m->getTarget(),
-                        [
-                            'foreign_key' => $m->getForeignKey(),
-                            'other_key' => $m->getLocalKey(),
-                            'pivot' => $m->getPivot()
-                        ]
-                    );
-                }
-            } 
-            catch (\Exception $exception) 
-            {
-                $eagerLoad = null;
+                $eagerLoad = new EagerLoad(
+                    $m->getTarget(),
+                    [
+                        'foreign_key' => $m->getForeignKey(),
+                        'local_key' => $m->getLocalKey(),
+                        'pivot' => $m->getPivot(),
+                        'criterias' => $m->getCriterias()
+                    ]
+                );
             }
-            
-            if(null === $eagerLoad)
+            else
             {
                 $parts = explode('\\', get_class($this->repository));
                 array_pop($parts);
                 
                 $class = '\\' . ltrim(implode('\\', $parts) . '\\' . ucfirst($m), '\\');
-                $eagerLoad = new EagerLoad($class);
+                $eagerLoad = new EagerLoad(
+                    $class, 
+                    ['local_key' => $this->repository->getPrimaryKey()]
+                );
             }
         }
         

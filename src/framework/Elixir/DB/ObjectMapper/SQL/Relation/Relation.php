@@ -8,7 +8,7 @@ use Elixir\DB\ObjectMapper\RelationInterface;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-class Relation implements RelationInterface 
+class Relation implements RelationInterface
 {
     /**
      * @var mixed
@@ -44,7 +44,7 @@ class Relation implements RelationInterface
     /**
      * @see RelationInterface::setRelated()
      */
-    public function setRelated($value, $filled = true)
+    public function setRelated($value, $filled = true) 
     {
         if (is_array($value))
         {
@@ -54,11 +54,11 @@ class Relation implements RelationInterface
         $this->related = $value;
         $this->filled = $filled;
     }
-    
+
     /**
      * @see RelationInterface::getRelated()
      */
-    public function getRelated() 
+    public function getRelated()
     {
         return $this->related;
     }
@@ -74,7 +74,7 @@ class Relation implements RelationInterface
     /**
      * @see RelationInterface::isFilled()
      */
-    public function load() 
+    public function load()
     {
         $this->setRelated(call_user_func($this->callback), true);
     }

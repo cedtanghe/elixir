@@ -6,6 +6,7 @@ use Elixir\DB\ObjectMapper\Collection;
 use Elixir\DB\ObjectMapper\CollectionEvent;
 use Elixir\DB\ObjectMapper\FindableInterface;
 use Elixir\DB\ObjectMapper\RelationInterface;
+use Elixir\DB\ObjectMapper\RelationInterfaceMetas;
 use Elixir\DB\ObjectMapper\RepositoryInterface;
 use Elixir\DB\ObjectMapper\SQL\Relation\Pivot;
 use Elixir\DB\Query\SQL\JoinClause;
@@ -13,13 +14,13 @@ use Elixir\DB\Query\SQL\JoinClause;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-abstract class RelationAbstract implements RelationInterface
+abstract class BaseAbstract implements RelationInterfaceMetas
 {
     /**
      * @var string
      */
     protected $type;
-    
+
     /**
      * @var RepositoryInterface 
      */
@@ -59,7 +60,7 @@ abstract class RelationAbstract implements RelationInterface
      * @var boolean
      */
     protected $filled = false;
-    
+
     /**
      * @see RelationInterface::getType()
      */
@@ -67,91 +68,134 @@ abstract class RelationAbstract implements RelationInterface
     {
         return $this->type;
     }
-    
+
     /**
      * @return RepositoryInterface
      */
-    public function getRepository() 
+    public function getRepository()
     {
         return $this->repository;
     }
-    
+
     /**
-     * @return RepositoryInterface|string
+     * @return RepositoryInterface
      */
     public function getTarget() 
     {
+        if (!$this->target instanceof RepositoryInterface) 
+        {
+            $class = $this->target;
+            $this->target = $class::factory();
+            $this->target->setConnectionManager($this->repository->getConnectionManager());
+        }
+
         return $this->target;
     }
-    
+
     /**
      * @param string $value
-     * @return RelationAbstract
+     * @return BaseAbstract
      */
-    public function setForeignKey($value) 
+    public function setForeignKey($value)
     {
         $this->foreignKey = $value;
         return $this;
     }
-    
+
     /**
      * @return string
      */
-    public function getForeignKey() 
+    public function getForeignKey()
     {
+        if (null === $this->foreignKey) 
+        {
+            // Define target
+            $this->getTarget();
+
+            if ($this->pivot) 
+            {
+                $this->foreignKey = $this->target->getPrimaryKey();
+            } 
+            else 
+            {
+                $this->foreignKey = $this->target->getStockageName() . '_id';
+            }
+        }
+
         return $this->foreignKey;
     }
-    
+
     /**
      * @param string $value
-     * @return RelationAbstract
+     * @return BaseAbstract
      */
-    public function setLocalKey($value) 
+    public function setLocalKey($value)
     {
         $this->localKey = $value;
         return $this;
     }
-    
+
     /**
      * @return string
      */
     public function getLocalKey() 
     {
+        if (null === $this->localKey)
+        {
+            $this->localKey = $this->repository->getPrimaryKey();
+        }
+
         return $this->localKey;
     }
-    
+
     /**
      * @param Pivot $pivot
-     * @return RelationAbstract
+     * @return BaseAbstract
      */
     public function withPivot(Pivot $pivot)
     {
         $this->pivot = $pPivot;
         return $this;
     }
-    
+
     /**
      * @return Pivot
      */
     public function getPivot() 
     {
+        if (null !== $this->pivot) 
+        {
+            // Define target
+            $this->getTarget();
+
+            if (null === $this->pivot->getForeignKey()) 
+            {
+                $this->pivot->setForeignKey($this->target->getStockageName() . '_id');
+            }
+
+            if (null === $this->pivot->getOtherKey())
+            {
+                $this->pivot->setOtherKey($this->target->getStockageName() . '_id');
+            }
+        }
+
         return $this->pivot;
     }
 
     /**
      * @param callable $criteria
-     * @return RelationAbstract
+     * @return BaseAbstract
      */
     public function addCriteria(callable $criteria)
     {
         $this->criterias[] = $criteria;
         return $this;
     }
-    
+
     /**
      * @return array
      */
-    public function getCriterias() 
+    public function getCriterias()
     {
         return $this->criterias;
     }
@@ -159,16 +203,16 @@ abstract class RelationAbstract implements RelationInterface
     /**
      * @see RelationInterface::setRelated()
      */
-    public function setRelated($value, $filled = true) 
+    public function setRelated($value, $filled = true)
     {
-        if ($this->related instanceof Collection) 
+        if ($this->related instanceof Collection)
         {
             $this->related->removeListener(CollectionEvent::VALUE_ADDED, [$this, 'onValueAdded']);
             $this->related->removeListener(CollectionEvent::VALUE_REMOVED, [$this, 'onValueRemoved']);
             $this->related = null;
         }
-        
-        if (is_array($value)) 
+
+        if (is_array($value))
         {
             $value = new Collection($value, true);
         }
@@ -184,7 +228,7 @@ abstract class RelationAbstract implements RelationInterface
 
         $this->filled = $filled;
     }
-    
+
     /**
      * @param CollectionEvent $e
      */
@@ -194,11 +238,11 @@ abstract class RelationAbstract implements RelationInterface
      * @param CollectionEvent $e
      */
     abstract public function onValueRemoved(CollectionEvent $e);
-    
+
     /**
      * @see RelationInterface::getRelated()
      */
-    public function getRelated() 
+    public function getRelated()
     {
         return $this->related;
     }
@@ -206,7 +250,7 @@ abstract class RelationAbstract implements RelationInterface
     /**
      * @see RelationInterface::isFilled()
      */
-    public function isFilled() 
+    public function isFilled()
     {
         return $this->filled;
     }
@@ -214,27 +258,26 @@ abstract class RelationAbstract implements RelationInterface
     /**
      * @see RelationInterface::load()
      */
-    public function load() 
+    public function load()
     {
-        if (!$this->target instanceof RepositoryInterface) 
-        {
-            $class = $this->target;
-            $this->target = $class::factory();
-            $this->target->setConnectionManager($this->repository->getConnectionManager());
-        }
+        // Define keys, pivot and target
+        $this->getTarget();
+        $this->getForeignKey();
+        $this->getLocalKey();
+        $this->getPivot();
 
         $findable = $this->target->find();
 
-        if($this->prepareQuery($findable))
+        if ($this->prepareQuery($findable))
         {
-            if($this->extendQuery($findable))
+            if ($this->extendQuery($findable))
             {
                 $this->setRelated($this->match($findable), true);
                 return;
             }
         }
-        
-        switch ($this->type)
+
+        switch ($this->type) 
         {
             case self::HAS_ONE:
             case self::BELONGS_TO:
@@ -246,38 +289,25 @@ abstract class RelationAbstract implements RelationInterface
                 break;
         }
     }
-    
+
     /**
      * @param FindableInterface $findable
      * @return boolean
      */
-    protected function prepareQuery(FindableInterface $findable) 
+    protected function prepareQuery(FindableInterface $findable)
     {
         return null !== $this->pivot ? $this->parsePivot($findable) : $this->parseQuery($findable);
     }
-    
+
     /**
      * @param FindableInterface $findable
      * @return boolean
      */
     protected function parsePivot(FindableInterface $findable) 
     {
-        $this->foreignKey = $this->foreignKey ?: $this->target->getPrimaryKey();
-        $this->localKey = $this->localKey ?: $this->repository->getPrimaryKey();
-        
-        if (null === $this->pivot->getForeignKey()) 
-        {
-            $this->pivot->setForeignKey($this->target->getStockageName() . '_id');
-        }
-
-        if (null === $this->pivot->getOtherKey()) 
-        {
-            $this->pivot->setOtherKey($this->repository->getStockageName() . '_id');
-        }
-
         $findable->innerJoin(
             $this->pivot->getPivot(), 
-            function(JoinClause $join) 
+            function(JoinClause $join)
             {
                 $join->on(
                     sprintf(
@@ -298,25 +328,22 @@ abstract class RelationAbstract implements RelationInterface
                     )
                 );
 
-                foreach ($this->pivot->getCriterias() as $criteria) 
+                foreach ($this->pivot->getCriterias() as $criteria)
                 {
                     call_user_func_array($criteria, [$join]);
                 }
             }
         );
-        
+
         return true;
     }
-    
+
     /**
      * @param FindableInterface $findable
      * @return boolean
      */
-    protected function parseQuery(FindableInterface $findable) 
+    protected function parseQuery(FindableInterface $findable)
     {
-        $this->foreignKey = $this->foreignKey ?: $this->target->getStockageName() . '_id';
-        $this->localKey = $this->localKey ?: $this->repository->getPrimaryKey();
-
         $value = $this->repository->get($this->localKey);
 
         if (null === $value)
@@ -329,7 +356,7 @@ abstract class RelationAbstract implements RelationInterface
                 '`%s`.`%s` = ?', 
                 $this->target->getStockageName(), 
                 $this->foreignKey
-            ),
+            ), 
             $value
         );
 
@@ -344,22 +371,22 @@ abstract class RelationAbstract implements RelationInterface
     {
         foreach ($this->criterias as $criteria) 
         {
-            if (false === call_user_func_array($criteria, [$findable, $this])) 
+            if (false === call_user_func_array($criteria, [$findable, $this]))
             {
                 return false;
             }
         }
-        
+
         return true;
     }
 
     /**
-     * @param FindableInterface $select
+     * @param FindableInterface $findable
      * @return mixed
      */
-    protected function match(FindableInterface $findable)
+    protected function match(FindableInterface $findable) 
     {
-        switch ($this->type)
+        switch ($this->type) 
         {
             case self::HAS_ONE:
             case self::BELONGS_TO:
