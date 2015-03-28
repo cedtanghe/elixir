@@ -94,12 +94,12 @@ class BelongsTo extends BaseAbstract
     }
 
     /**
-     * @see BaseAbstract::onValueAdded();
+     * @see BaseAbstract::objectAdded();
      */
-    public function onValueAdded(CollectionEvent $e) {}
+    protected function objectAdded($object) {}
 
     /**
-     * @see BaseAbstract::onValueRemoved();
+     * @see BaseAbstract::objectRemoved();
      */
-    public function onValueRemoved(CollectionEvent $e) {}
+    protected function objectRemoved($object) {}
 }

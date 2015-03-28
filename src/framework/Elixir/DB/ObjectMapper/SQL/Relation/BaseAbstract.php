@@ -172,7 +172,7 @@ abstract class BaseAbstract implements RelationInterfaceMetas
             {
                 $this->pivot->setForeignKey($this->target->getStockageName() . '_id');
             }
-
+            
             if (null === $this->pivot->getOtherKey())
             {
                 $this->pivot->setOtherKey($this->target->getStockageName() . '_id');
@@ -205,10 +205,23 @@ abstract class BaseAbstract implements RelationInterfaceMetas
      */
     public function setRelated($value, $filled = true)
     {
-        if ($this->related instanceof Collection)
+        if (null !== $this->related)
         {
-            $this->related->removeListener(CollectionEvent::VALUE_ADDED, [$this, 'onValueAdded']);
-            $this->related->removeListener(CollectionEvent::VALUE_REMOVED, [$this, 'onValueRemoved']);
+            if ($this->related instanceof Collection)
+            {
+                $this->related->removeListener(CollectionEvent::VALUE_ADDED, [$this, 'onValueAdded']);
+                $this->related->removeListener(CollectionEvent::VALUE_REMOVED, [$this, 'onValueRemoved']);
+
+                foreach ($this->related as $object)
+                {
+                    $this->objectRemoved($object);
+                }
+            }
+            else
+            {
+                $this->objectRemoved($this->related);
+            }
+            
             $this->related = null;
         }
 
@@ -224,6 +237,15 @@ abstract class BaseAbstract implements RelationInterfaceMetas
             $this->related->setUseEvents(true);
             $this->related->addListener(CollectionEvent::VALUE_ADDED, [$this, 'onValueAdded']);
             $this->related->addListener(CollectionEvent::VALUE_REMOVED, [$this, 'onValueRemoved']);
+            
+            foreach ($this->related as $object)
+            {
+                $this->objectAdded($object);
+            }
+        }
+        else
+        {
+            $this->objectAdded($this->related);
         }
 
         $this->filled = $filled;
@@ -232,12 +254,28 @@ abstract class BaseAbstract implements RelationInterfaceMetas
     /**
      * @param CollectionEvent $e
      */
-    abstract public function onValueAdded(CollectionEvent $e);
+    public function onValueAdded(CollectionEvent $e)
+    {
+        $this->objectAdded($e->getObject());
+    }
 
     /**
      * @param CollectionEvent $e
      */
-    abstract public function onValueRemoved(CollectionEvent $e);
+    public function onValueRemoved(CollectionEvent $e)
+    {
+        $this->objectRemoved($e->getObject());
+    }
+    
+    /**
+     * @param mixed $object
+     */
+    abstract protected function objectAdded($object);
+    
+    /**
+     * @param mixed $object
+     */
+    abstract protected function objectRemoved($object);
 
     /**
      * @see RelationInterface::getRelated()
