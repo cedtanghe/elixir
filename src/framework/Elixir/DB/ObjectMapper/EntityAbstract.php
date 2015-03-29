@@ -325,7 +325,7 @@ abstract class EntityAbstract implements EntityInterface
             if (array_key_exists($key, $this->related))
             {
                 $relation = $this->get($key);
-                $relation->setRelated($value, $value !== $this->ignoreValue);
+                $relation->setRelated($value, ['filled' => $value !== $this->ignoreValue]);
 
                 $value = $relation;
             } 

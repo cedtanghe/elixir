@@ -4,6 +4,7 @@ namespace Elixir\DB\ObjectMapper\SQL\Relation;
 
 use Elixir\DB\ObjectMapper\Collection;
 use Elixir\DB\ObjectMapper\CollectionEvent;
+use Elixir\DB\ObjectMapper\EntityInterface;
 use Elixir\DB\ObjectMapper\FindableInterface;
 use Elixir\DB\ObjectMapper\RelationInterface;
 use Elixir\DB\ObjectMapper\RelationInterfaceMetas;
@@ -203,8 +204,16 @@ abstract class BaseAbstract implements RelationInterfaceMetas
     /**
      * @see RelationInterface::setRelated()
      */
-    public function setRelated($value, $filled = true)
+    public function setRelated($value, array $options = [])
     {
+        $options = array_merge(
+            [
+                'filled' => true,
+                'internal' => false
+            ],
+            $options
+        );
+        
         if (null !== $this->related)
         {
             if ($this->related instanceof Collection)
@@ -212,14 +221,20 @@ abstract class BaseAbstract implements RelationInterfaceMetas
                 $this->related->removeListener(CollectionEvent::VALUE_ADDED, [$this, 'onValueAdded']);
                 $this->related->removeListener(CollectionEvent::VALUE_REMOVED, [$this, 'onValueRemoved']);
 
-                foreach ($this->related as $object)
+                if(!$options['internal'])
                 {
-                    $this->objectRemoved($object);
+                    foreach ($this->related as $object)
+                    {
+                        $this->objectRemoved($object);
+                    }
                 }
             }
             else
             {
-                $this->objectRemoved($this->related);
+                if(!$options['internal'])
+                {
+                    $this->objectRemoved($this->related);
+                }
             }
             
             $this->related = null;
@@ -238,17 +253,23 @@ abstract class BaseAbstract implements RelationInterfaceMetas
             $this->related->addListener(CollectionEvent::VALUE_ADDED, [$this, 'onValueAdded']);
             $this->related->addListener(CollectionEvent::VALUE_REMOVED, [$this, 'onValueRemoved']);
             
-            foreach ($this->related as $object)
+            if(!$options['internal'])
             {
-                $this->objectAdded($object);
+                foreach ($this->related as $object)
+                {
+                    $this->objectAdded($object);
+                }
             }
         }
         else
         {
-            $this->objectAdded($this->related);
+            if(!$options['internal'])
+            {
+                $this->objectAdded($this->related);
+            }
         }
 
-        $this->filled = $filled;
+        $this->filled = $options['filled'];
     }
 
     /**
@@ -310,7 +331,14 @@ abstract class BaseAbstract implements RelationInterfaceMetas
         {
             if ($this->extendQuery($findable))
             {
-                $this->setRelated($this->match($findable), true);
+                $this->setRelated(
+                    $this->match($findable), 
+                    [
+                        'filled' => true, 
+                        'internal' => true
+                    ]
+                );
+                
                 return;
             }
         }
@@ -319,11 +347,25 @@ abstract class BaseAbstract implements RelationInterfaceMetas
         {
             case self::HAS_ONE:
             case self::BELONGS_TO:
-                $this->setRelated(null, true);
+                $this->setRelated(
+                    null,
+                    [
+                        'filled' => true, 
+                        'internal' => true
+                    ]
+                );
+                
                 break;
             case self::HAS_MANY:
             case self::BELONGS_TO_MANY:
-                $this->setRelated(new Collection([], true), true);
+                $this->setRelated(
+                    new Collection([], true), 
+                    [
+                        'filled' => true, 
+                        'internal' => true
+                    ]
+                );
+                
                 break;
         }
     }
