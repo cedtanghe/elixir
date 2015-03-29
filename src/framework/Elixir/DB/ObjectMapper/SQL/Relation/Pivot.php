@@ -2,6 +2,8 @@
 
 namespace Elixir\DB\ObjectMapper\SQL\Relation;
 
+use Elixir\DI\ContainerInterface;
+
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
@@ -113,5 +115,27 @@ class Pivot
     public function getCriterias() 
     {
         return $this->criterias;
+    }
+    
+    /**
+     * @param ContainerInterface $connectionManager
+     * @param mixed $foreignValue
+     * @param mixed $otherValue
+     * @return boolean
+     */
+    public function insert(ContainerInterface $connectionManager, $foreignValue, $otherValue)
+    {
+        // Todo
+    }
+    
+    /**
+     * @param ContainerInterface $connectionManager
+     * @param mixed $foreignValue
+     * @param mixed $otherValue
+     * @return boolean
+     */
+    public function delete(ContainerInterface $connectionManager, $foreignValue, $otherValue)
+    {
+        // Todo
     }
 }

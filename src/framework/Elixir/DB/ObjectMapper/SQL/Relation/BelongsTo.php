@@ -3,7 +3,6 @@
 namespace Elixir\DB\ObjectMapper\SQL\Relation;
 
 use Elixir\DB\ObjectMapper\BaseAbstract;
-use Elixir\DB\ObjectMapper\CollectionEvent;
 use Elixir\DB\ObjectMapper\RepositoryInterface;
 use Elixir\DB\ObjectMapper\SQL\Relation\Pivot;
 
@@ -94,12 +93,32 @@ class BelongsTo extends BaseAbstract
     }
 
     /**
-     * @see BaseAbstract::objectAdded();
+     * @see BaseAbstract::associate();
      */
-    protected function objectAdded($object) {}
+    public function associate(RepositoryInterface $target)
+    {
+        if (null === $this->pivot)
+        {
+            $this->repository->get($this->localKey) = $object->set($this->foreignKey);
+        }
+        else
+        {
+            // Not yet
+        }
+    }
 
     /**
-     * @see BaseAbstract::objectRemoved();
+     * @see BaseAbstract::dissociate();
      */
-    protected function objectRemoved($object) {}
+    public function dissociate(RepositoryInterface $target)
+    {
+        if (null === $this->pivot)
+        {
+            $this->repository->get($this->localKey) = $this->repository->getIgnoreValue();
+        }
+        else
+        {
+            // Not yet
+        }
+    }
 }

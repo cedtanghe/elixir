@@ -4,7 +4,6 @@ namespace Elixir\DB\ObjectMapper\SQL\Relation;
 
 use Elixir\DB\ObjectMapper\Collection;
 use Elixir\DB\ObjectMapper\CollectionEvent;
-use Elixir\DB\ObjectMapper\EntityInterface;
 use Elixir\DB\ObjectMapper\FindableInterface;
 use Elixir\DB\ObjectMapper\RelationInterface;
 use Elixir\DB\ObjectMapper\RelationInterfaceMetas;
@@ -225,7 +224,7 @@ abstract class BaseAbstract implements RelationInterfaceMetas
                 {
                     foreach ($this->related as $object)
                     {
-                        $this->objectRemoved($object);
+                        $this->dissociate($object);
                     }
                 }
             }
@@ -233,7 +232,7 @@ abstract class BaseAbstract implements RelationInterfaceMetas
             {
                 if(!$options['internal'])
                 {
-                    $this->objectRemoved($this->related);
+                    $this->dissociate($this->related);
                 }
             }
             
@@ -257,7 +256,7 @@ abstract class BaseAbstract implements RelationInterfaceMetas
             {
                 foreach ($this->related as $object)
                 {
-                    $this->objectAdded($object);
+                    $this->associate($object);
                 }
             }
         }
@@ -265,7 +264,7 @@ abstract class BaseAbstract implements RelationInterfaceMetas
         {
             if(!$options['internal'])
             {
-                $this->objectAdded($this->related);
+                $this->associate($this->related);
             }
         }
 
@@ -277,26 +276,36 @@ abstract class BaseAbstract implements RelationInterfaceMetas
      */
     public function onValueAdded(CollectionEvent $e)
     {
-        $this->objectAdded($e->getObject());
+        $object = $e->getObject();
+        
+        if ($object instanceof RepositoryInterface)
+        {
+            $this->associate($object);
+        }
     }
-
+    
     /**
      * @param CollectionEvent $e
      */
     public function onValueRemoved(CollectionEvent $e)
     {
-        $this->objectRemoved($e->getObject());
+        $object = $e->getObject();
+        
+        if ($object instanceof RepositoryInterface)
+        {
+            $this->dissociate($object);
+        }
     }
     
     /**
-     * @param mixed $object
+     * @param RepositoryInterface $target
      */
-    abstract protected function objectAdded($object);
+    abstract public function associate(RepositoryInterface $target);
     
     /**
-     * @param mixed $object
+     * @param RepositoryInterface $target
      */
-    abstract protected function objectRemoved($object);
+    abstract public function dissociate(RepositoryInterface $target);
 
     /**
      * @see RelationInterface::getRelated()

@@ -58,12 +58,18 @@ class BelongsToMany extends BaseAbstract
     }
 
     /**
-     * @see BaseAbstract::objectAdded();
+     * @see BaseAbstract::associate();
      */
-    protected function objectAdded($object) {}
+    public function associate(RepositoryInterface $target)
+    {
+        // Not yet
+    }
 
     /**
-     * @see BaseAbstract::objectRemoved();
+     * @see BaseAbstract::associate();
      */
-    protected function objectRemoved($object) {}
+    public function dissociate(RepositoryInterface $target)
+    {
+        // Not yet
+    }
 }

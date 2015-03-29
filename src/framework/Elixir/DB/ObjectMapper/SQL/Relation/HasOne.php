@@ -60,12 +60,32 @@ class HasOne extends BaseAbstract
     }
     
     /**
-     * @see BaseAbstract::objectAdded();
+     * @see BaseAbstract::associate();
      */
-    protected function objectAdded($object) {}
+    public function associate(RepositoryInterface $target)
+    {
+        if (null === $this->pivot)
+        {
+            $target->set($this->foreignKey) = $this->repository->get($this->localKey);
+        }
+        else
+        {
+            // Not yet
+        }
+    }
 
     /**
-     * @see BaseAbstract::objectRemoved();
+     * @see BaseAbstract::associate();
      */
-    protected function objectRemoved($object) {}
+    public function dissociate(RepositoryInterface $target)
+    {
+        if (null === $this->pivot)
+        {
+            $target->set($this->foreignKey) = $target->getIgnoreValue();
+        }
+        else
+        {
+            // Not yet
+        }
+    }
 }
