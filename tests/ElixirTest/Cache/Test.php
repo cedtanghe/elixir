@@ -21,15 +21,6 @@ class Test extends \PHPUnit_Framework_TestCase
     
     public function testAPC()
     {
-        print_r(preg_replace_callback(
-            '/[^a-z0-9]*(' . preg_quote('pilou', '/') . ')[^a-z0-9]*\./',
-            function($matches)
-            {
-                return str_replace('pilou', 'p', $matches[0]);
-            },
-            '#SELECT pilou.* FROM pilou as tutu WHERE `pilou`.id = 6#'
-        ));
-        
         if(!extension_loaded('apc'))
         {
             return;
