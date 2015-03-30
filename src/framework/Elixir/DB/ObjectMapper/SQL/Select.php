@@ -248,11 +248,13 @@ class Select implements FindableInterface
             if($m instanceof RelationInterfaceMetas)
             {
                 $eagerLoad = new EagerLoad(
+                    $this->repository,
                     $m->getTarget(),
                     [
                         'foreign_key' => $m->getForeignKey(),
                         'local_key' => $m->getLocalKey(),
                         'pivot' => $m->getPivot(),
+                        'type' => $m->getType(),
                         'criterias' => $m->getCriterias()
                     ]
                 );
@@ -264,6 +266,7 @@ class Select implements FindableInterface
                 
                 $class = '\\' . ltrim(implode('\\', $parts) . '\\' . ucfirst($m), '\\');
                 $eagerLoad = new EagerLoad(
+                    $this->repository,
                     $class, 
                     ['local_key' => $this->repository->getPrimaryKey()]
                 );

@@ -4,7 +4,6 @@ namespace Elixir\DB\ObjectMapper\SQL\Relation;
 
 use Elixir\DB\ObjectMapper\BaseAbstract;
 use Elixir\DB\ObjectMapper\RepositoryInterface;
-use Elixir\DB\ObjectMapper\SQL\Relation\Pivot;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
@@ -35,90 +34,14 @@ class BelongsTo extends BaseAbstract
         $this->foreignKey = $config['foreign_key'];
         $this->localKey = $config['local_key'];
 
-        if (null !== $config['pivot'] && false !== $config['pivot'])
+        if( false !== $config['pivot'])
         {
-            if (true === $config['pivot'])
-            {
-                // Define target
-                $this->getTarget();
-
-                $table = $this->target->getStockageName() . '_' . $this->repository->getStockageName();
-                $config['pivot'] = new Pivot($table);
-            } 
-            else if (!$config['pivot'] instanceof Pivot)
-            {
-                $config['pivot'] = new Pivot($config['pivot']);
-            }
-
-            $this->withPivot($config['pivot']);
+            $this->pivot = $config['pivot'];
         }
 
         foreach ($config['criterias'] as $criteria)
         {
             $this->addCriteria($criteria);
-        }
-    }
-
-    /**
-     * @return string
-     */
-    public function getForeignKey()
-    {
-        if (null === $this->foreignKey)
-        {
-            if ($this->pivot)
-            {
-                $this->foreignKey = $this->getTarget()->getPrimaryKey();
-            } 
-            else 
-            {
-                $this->foreignKey = $this->repository->getPrimaryKey();
-            }
-        }
-
-        return $this->foreignKey;
-    }
-
-    /**
-     * @return string
-     */
-    public function getLocalKey() 
-    {
-        if (null === $this->localKey)
-        {
-            $this->localKey = $this->repository->getStockageName() . '_id';
-        }
-
-        return $this->localKey;
-    }
-
-    /**
-     * @see BaseAbstract::associate();
-     */
-    public function associate(RepositoryInterface $target)
-    {
-        if (null === $this->pivot)
-        {
-            $this->repository->get($this->localKey) = $object->set($this->foreignKey);
-        }
-        else
-        {
-            // Not yet
-        }
-    }
-
-    /**
-     * @see BaseAbstract::dissociate();
-     */
-    public function dissociate(RepositoryInterface $target)
-    {
-        if (null === $this->pivot)
-        {
-            $this->repository->get($this->localKey) = $this->repository->getIgnoreValue();
-        }
-        else
-        {
-            // Not yet
         }
     }
 }

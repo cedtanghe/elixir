@@ -2,6 +2,7 @@
 
 namespace Elixir\DB\ObjectMapper;
 
+use Elixir\DB\ObjectMapper\RepositoryInterface;
 use Elixir\DB\ObjectMapper\SQL\Relation\Pivot;
 
 /**
@@ -9,6 +10,16 @@ use Elixir\DB\ObjectMapper\SQL\Relation\Pivot;
  */
 interface RelationInterfaceMetas extends RelationInterface 
 {
+    /**
+     * @return RepositoryInterface
+     */
+    public function getRepository();
+    
+    /**
+     * @return RepositoryInterface
+     */
+    public function getTarget();
+            
     /**
      * @return string
      */

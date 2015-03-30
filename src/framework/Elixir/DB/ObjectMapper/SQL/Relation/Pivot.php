@@ -17,12 +17,12 @@ class Pivot
     /**
      * @var string
      */
-    protected $foreignKey;
+    protected $firstKey;
 
     /**
      * @var string
      */
-    protected $otherKey;
+    protected $secondKey;
 
     /**
      * @var array 
@@ -39,15 +39,15 @@ class Pivot
 
         $config = array_merge(
             [
-                'foreign_key' => null,
-                'other_key' => null,
+                'first_key' => null,
+                'second_key' => null,
                 'criterias' => []
             ], 
             $config
         );
 
-        $this->foreignKey = $config['foreign_key'];
-        $this->otherKey = $config['other_key'];
+        $this->firstKey = $config['first_key'];
+        $this->secondKey = $config['second_key'];
 
         foreach ($config['criterias'] as $criteria)
         {
@@ -67,36 +67,36 @@ class Pivot
      * @param string $value
      * @return Pivot
      */
-    public function setForeignKey($value) 
+    public function setFirstKey($value) 
     {
-        $this->foreignKey = $value;
+        $this->firstKey = $value;
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getForeignKey() 
+    public function getFirstKey() 
     {
-        return $this->foreignKey;
+        return $this->firstKey;
     }
 
     /**
      * @param string $value
      * @return Pivot
      */
-    public function setOtherKey($value)
+    public function setSecondKey($value)
     {
-        $this->otherKey = $value;
+        $this->secondKey = $value;
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getOtherKey() 
+    public function getSecondKey() 
     {
-        return $this->otherKey;
+        return $this->secondKey;
     }
 
     /**

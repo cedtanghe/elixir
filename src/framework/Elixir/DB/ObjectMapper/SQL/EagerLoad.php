@@ -3,6 +3,7 @@
 namespace Elixir\DB\ObjectMapper\SQL;
 
 use Elixir\DB\ObjectMapper\FindableInterface;
+use Elixir\DB\ObjectMapper\RelationInterface;
 use Elixir\DB\ObjectMapper\RepositoryInterface;
 use Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract;
 use Elixir\DB\ObjectMapper\SQL\Relation\Pivot;
@@ -37,14 +38,14 @@ class EagerLoad
      * @var string 
      */
     protected $foreignKey;
-
+    
     /**
      * @var string 
      */
     protected $localKey;
 
     /**
-     * @var Pivot 
+     * @var string|boolean|Pivot 
      */
     protected $pivot;
 
@@ -68,6 +69,7 @@ class EagerLoad
                 'foreign_key' => null,
                 'local_key' => null,
                 'pivot' => null,
+                'type' => RelationInterface::HAS_ONE,
                 'criterias' => []
             ], 
             $config
@@ -76,22 +78,9 @@ class EagerLoad
         $this->foreignKey = $config['foreign_key'];
         $this->localKey = $config['local_key'];
         
-        if (null !== $config['pivot'] && false !== $config['pivot']) 
+        if (false !== $config['pivot'])
         {
-            if (true === $config['pivot']) 
-            {
-                // Define target
-                $this->getTarget();
-
-                $table = $this->repository->getStockageName() . '_' . $this->target->getStockageName();
-                $config['pivot'] = new Pivot($table);
-            } 
-            else if (!$config['pivot'] instanceof Pivot) 
-            {
-                $config['pivot'] = new Pivot($config['pivot']);
-            }
-
-            $this->withPivot($config['pivot']);
+            $this->pivot = $config['pivot'];
         }
 
         foreach ($config['criterias'] as $criteria)
@@ -138,18 +127,25 @@ class EagerLoad
      */
     public function getForeignKey() 
     {
-        if (null === $this->foreignKey)
+        if (null === $this->foreignKey) 
         {
             // Define target
             $this->getTarget();
-
-            if ($this->pivot) 
+            
+            if (null !== $this->pivot) 
             {
                 $this->foreignKey = $this->target->getPrimaryKey();
-            } 
+            }
             else
             {
-                $this->foreignKey = $this->target->getStockageName() . '_id';
+                if ($this->type == self::BELONGS_TO)
+                {
+                    $this->foreignKey = $this->target->getPrimaryKey();
+                }
+                else
+                {
+                    $this->foreignKey = $this->target->getStockageName() . '_id';
+                }
             }
         }
 
@@ -173,7 +169,21 @@ class EagerLoad
     {
         if (null === $this->localKey)
         {
-            $this->localKey = $this->repository->getPrimaryKey();
+            if(null !== $this->pivot)
+            {
+                $this->localKey = $this->repository->getPrimaryKey();
+            }
+            else
+            {
+                if ($this->type == self::BELONGS_TO)
+                {
+                    $this->localKey = $this->repository->getStockageName() . '_id';
+                }
+                else
+                {
+                    $this->localKey = $this->repository->getPrimaryKey();
+                }
+            }
         }
 
         return $this->localKey;
@@ -198,15 +208,50 @@ class EagerLoad
         {
             // Define target
             $this->getTarget();
-
-            if (null === $this->pivot->getForeignKey()) 
+            
+            if (is_string($this->pivot)) 
             {
-                $this->pivot->setForeignKey($this->target->getStockageName() . '_id');
+                $this->withPivot(new Pivot($this->pivot));
             }
-
-            if (null === $this->pivot->getOtherKey()) 
+            
+            switch ($this->type) 
             {
-                $this->pivot->setOtherKey($this->target->getStockageName() . '_id');
+                case self::HAS_ONE:
+                case self::HAS_MANY:
+                    if (true === $this->pivot) 
+                    {
+                        $table = $this->repository->getStockageName() . '_' . $this->target->getStockageName();
+                        $this->withPivot(new Pivot($table));
+                    }
+                    
+                    if (null === $this->pivot->getFirstKey()) 
+                    {
+                        $this->pivot->setFirstKey($this->repository->getStockageName() . '_id');
+                    }
+
+                    if (null === $this->pivot->getSecondKey())
+                    {
+                        $this->pivot->setSecondKey($this->target->getStockageName() . '_id');
+                    }
+                    break;
+                case self::BELONGS_TO:
+                case self::BELONGS_TO_MANY:
+                    if (true === $this->pivot) 
+                    {
+                        $table = $this->target->getStockageName() . '_' . $this->repository->getStockageName();
+                        $this->withPivot(new Pivot($table));
+                    }
+            
+                    if (null === $this->pivot->getFirstKey()) 
+                    {
+                        $this->pivot->setFirstKey($this->target->getStockageName() . '_id');
+                    }
+
+                    if (null === $this->pivot->getSecondKey())
+                    {
+                        $this->pivot->setSecondKey($this->repository->getStockageName() . '_id');
+                    }
+                    break; 
             }
         }
 
@@ -338,24 +383,51 @@ class EagerLoad
             $this->pivot->getPivot(), 
             function(JoinClause $join) use($values) 
             {
-                $join->on(
-                    sprintf(
-                        '`%s`.`%s` IN(?)', 
-                        $this->pivot->getPivot(), 
-                        $this->pivot->getOtherKey()
-                    ), 
-                    $values
-                );
-
-                $join->on(
-                    sprintf(
-                        '`%s`.`%s` = `%s`.`%s`', 
-                        $this->pivot->getPivot(), 
-                        $this->pivot->getForeignKey(), 
-                        $this->target->getStockageName(), 
-                        $this->foreignKey
-                    )
-                );
+                switch ($this->type) 
+                {
+                    case self::HAS_ONE:
+                    case self::HAS_MANY:
+                        $join->on(
+                            sprintf(
+                                '`%s`.`%s` IN(?)', 
+                                $this->pivot->getPivot(), 
+                                $this->pivot->getFirstKey()
+                            ), 
+                            $values
+                        );
+                        
+                        $join->on(
+                            sprintf(
+                                '`%s`.`%s` = `%s`.`%s`', 
+                                $this->pivot->getPivot(), 
+                                $this->pivot->getSecondKey(), 
+                                $this->target->getStockageName(), 
+                                $this->foreignKey
+                            )
+                        );
+                        break;
+                    case self::BELONGS_TO:
+                    case self::BELONGS_TO_MANY:
+                        $join->on(
+                            sprintf(
+                                '`%s`.`%s` IN(?)', 
+                                $this->pivot->getPivot(), 
+                                $this->pivot->getSecondKey()
+                            ), 
+                            $values
+                        );
+                        
+                        $join->on(
+                            sprintf(
+                                '`%s`.`%s` = `%s`.`%s`', 
+                                $this->pivot->getPivot(), 
+                                $this->pivot->getFirstKey(), 
+                                $this->target->getStockageName(), 
+                                $this->foreignKey
+                            )
+                        );
+                        break;
+                }
 
                 foreach ($this->pivot->getCriterias() as $criteria) 
                 {
@@ -366,7 +438,7 @@ class EagerLoad
             sprintf(
                 '`%s`.`%s` as `%s`', 
                 $this->pivot->getPivot(), 
-                $this->pivot->getForeignKey(), 
+                $this->pivot->getFirstKey(), 
                 self::REFERENCE_KEY
             )
         );

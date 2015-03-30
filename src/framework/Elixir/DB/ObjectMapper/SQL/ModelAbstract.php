@@ -508,8 +508,7 @@ abstract class ModelAbstract extends EntityAbstract implements RepositoryInterfa
     public function &__get($key) 
     {
         $value = parent::__get($key);
-
-        // Property is a relationship
+        
         if (array_key_exists($key, $this->related))
         {
             if (!$value->isFilled()) 

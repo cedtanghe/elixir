@@ -4,7 +4,6 @@ namespace Elixir\DB\ObjectMapper\SQL\Relation;
 
 use Elixir\DB\ObjectMapper\BaseAbstract;
 use Elixir\DB\ObjectMapper\RepositoryInterface;
-use Elixir\DB\ObjectMapper\SQL\Relation\Pivot;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
@@ -35,57 +34,14 @@ class HasMany extends BaseAbstract
         $this->foreignKey = $config['foreign_key'];
         $this->localKey = $config['local_key'];
 
-        if (null !== $config['pivot'] && false !== $config['pivot']) 
+        if (false !== $config['pivot'])
         {
-            if (true === $config['pivot']) 
-            {
-                // Define target
-                $this->getTarget();
-
-                $table = $this->repository->getStockageName() . '_' . $this->target->getStockageName();
-                $config['pivot'] = new Pivot($table);
-            } 
-            else if (!$config['pivot'] instanceof Pivot) 
-            {
-                $config['pivot'] = new Pivot($config['pivot']);
-            }
-
-            $this->withPivot($config['pivot']);
+            $this->pivot = $config['pivot'];
         }
 
         foreach ($config['criterias'] as $criteria) 
         {
             $this->addCriteria($criteria);
-        }
-    }
-
-    /**
-     * @see BaseAbstract::associate();
-     */
-    public function associate(RepositoryInterface $target)
-    {
-        if (null === $this->pivot)
-        {
-            $target->set($this->foreignKey) = $this->repository->get($this->localKey);
-        }
-        else
-        {
-            // Not yet
-        }
-    }
-
-    /**
-     * @see BaseAbstract::associate();
-     */
-    public function dissociate(RepositoryInterface $target)
-    {
-        if (null === $this->pivot)
-        {
-            $target->set($this->foreignKey) = $target->getIgnoreValue();
-        }
-        else
-        {
-            // Not yet
         }
     }
 }

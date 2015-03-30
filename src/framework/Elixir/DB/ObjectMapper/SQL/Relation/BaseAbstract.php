@@ -41,7 +41,7 @@ abstract class BaseAbstract implements RelationInterfaceMetas
     protected $localKey;
 
     /**
-     * @var Pivot 
+     * @var string|boolean|Pivot 
      */
     protected $pivot;
 
@@ -69,7 +69,7 @@ abstract class BaseAbstract implements RelationInterfaceMetas
     }
 
     /**
-     * @return RepositoryInterface
+     * @see RelationInterfaceMetas::getType()
      */
     public function getRepository()
     {
@@ -77,7 +77,7 @@ abstract class BaseAbstract implements RelationInterfaceMetas
     }
 
     /**
-     * @return RepositoryInterface
+     * @see RelationInterfaceMetas::getTarget()
      */
     public function getTarget() 
     {
@@ -102,7 +102,7 @@ abstract class BaseAbstract implements RelationInterfaceMetas
     }
 
     /**
-     * @return string
+     * @see RelationInterfaceMetas::getForeignKey()
      */
     public function getForeignKey()
     {
@@ -110,14 +110,21 @@ abstract class BaseAbstract implements RelationInterfaceMetas
         {
             // Define target
             $this->getTarget();
-
-            if ($this->pivot) 
+            
+            if (null !== $this->pivot) 
             {
                 $this->foreignKey = $this->target->getPrimaryKey();
-            } 
-            else 
+            }
+            else
             {
-                $this->foreignKey = $this->target->getStockageName() . '_id';
+                if ($this->type == self::BELONGS_TO)
+                {
+                    $this->foreignKey = $this->target->getPrimaryKey();
+                }
+                else
+                {
+                    $this->foreignKey = $this->target->getStockageName() . '_id';
+                }
             }
         }
 
@@ -135,15 +142,29 @@ abstract class BaseAbstract implements RelationInterfaceMetas
     }
 
     /**
-     * @return string
+     * @see RelationInterfaceMetas::getLocalKey()
      */
     public function getLocalKey() 
     {
         if (null === $this->localKey)
         {
-            $this->localKey = $this->repository->getPrimaryKey();
+            if(null !== $this->pivot)
+            {
+                $this->localKey = $this->repository->getPrimaryKey();
+            }
+            else
+            {
+                if ($this->type == self::BELONGS_TO)
+                {
+                    $this->localKey = $this->repository->getStockageName() . '_id';
+                }
+                else
+                {
+                    $this->localKey = $this->repository->getPrimaryKey();
+                }
+            }
         }
-
+        
         return $this->localKey;
     }
 
@@ -158,7 +179,7 @@ abstract class BaseAbstract implements RelationInterfaceMetas
     }
 
     /**
-     * @return Pivot
+     * @see RelationInterfaceMetas::getPivot()
      */
     public function getPivot() 
     {
@@ -166,15 +187,50 @@ abstract class BaseAbstract implements RelationInterfaceMetas
         {
             // Define target
             $this->getTarget();
-
-            if (null === $this->pivot->getForeignKey()) 
+            
+            if (is_string($this->pivot)) 
             {
-                $this->pivot->setForeignKey($this->target->getStockageName() . '_id');
+                $this->withPivot(new Pivot($this->pivot));
             }
             
-            if (null === $this->pivot->getOtherKey())
+            switch ($this->type) 
             {
-                $this->pivot->setOtherKey($this->target->getStockageName() . '_id');
+                case self::HAS_ONE:
+                case self::HAS_MANY:
+                    if (true === $this->pivot) 
+                    {
+                        $table = $this->repository->getStockageName() . '_' . $this->target->getStockageName();
+                        $this->withPivot(new Pivot($table));
+                    }
+                    
+                    if (null === $this->pivot->getFirstKey()) 
+                    {
+                        $this->pivot->setFirstKey($this->repository->getStockageName() . '_id');
+                    }
+
+                    if (null === $this->pivot->getSecondKey())
+                    {
+                        $this->pivot->setSecondKey($this->target->getStockageName() . '_id');
+                    }
+                    break;
+                case self::BELONGS_TO:
+                case self::BELONGS_TO_MANY:
+                    if (true === $this->pivot) 
+                    {
+                        $table = $this->target->getStockageName() . '_' . $this->repository->getStockageName();
+                        $this->withPivot(new Pivot($table));
+                    }
+            
+                    if (null === $this->pivot->getFirstKey()) 
+                    {
+                        $this->pivot->setFirstKey($this->target->getStockageName() . '_id');
+                    }
+
+                    if (null === $this->pivot->getSecondKey())
+                    {
+                        $this->pivot->setSecondKey($this->repository->getStockageName() . '_id');
+                    }
+                    break; 
             }
         }
 
@@ -192,7 +248,7 @@ abstract class BaseAbstract implements RelationInterfaceMetas
     }
 
     /**
-     * @return array
+     * @see RelationInterfaceMetas::getCriterias()
      */
     public function getCriterias()
     {
@@ -288,24 +344,51 @@ abstract class BaseAbstract implements RelationInterfaceMetas
             $this->pivot->getPivot(), 
             function(JoinClause $join)
             {
-                $join->on(
-                    sprintf(
-                        '`%s`.`%s` = ?', 
-                        $this->pivot->getPivot(), 
-                        $this->pivot->getOtherKey()
-                    ), 
-                    $this->repository->get($this->localKey)
-                );
-
-                $join->on(
-                    sprintf(
-                        '`%s`.`%s` = `%s`.`%s`', 
-                        $this->pivot->getPivot(), 
-                        $this->pivot->getForeignKey(), 
-                        $this->target->getStockageName(), 
-                        $this->foreignKey
-                    )
-                );
+                switch ($this->type) 
+                {
+                    case self::HAS_ONE:
+                    case self::HAS_MANY:
+                        $join->on(
+                            sprintf(
+                                '`%s`.`%s` = ?', 
+                                $this->pivot->getPivot(), 
+                                $this->pivot->getFirstKey()
+                            ), 
+                            $this->repository->get($this->localKey)
+                        );
+                        
+                        $join->on(
+                            sprintf(
+                                '`%s`.`%s` = `%s`.`%s`', 
+                                $this->pivot->getPivot(), 
+                                $this->pivot->getSecondKey(), 
+                                $this->target->getStockageName(), 
+                                $this->foreignKey
+                            )
+                        );
+                        break;
+                    case self::BELONGS_TO:
+                    case self::BELONGS_TO_MANY:
+                        $join->on(
+                            sprintf(
+                                '`%s`.`%s` = ?', 
+                                $this->pivot->getPivot(), 
+                                $this->pivot->getSecondKey()
+                            ), 
+                            $this->repository->get($this->localKey)
+                        );
+                        
+                        $join->on(
+                            sprintf(
+                                '`%s`.`%s` = `%s`.`%s`', 
+                                $this->pivot->getPivot(), 
+                                $this->pivot->getFirstKey(), 
+                                $this->target->getStockageName(), 
+                                $this->foreignKey
+                            )
+                        );
+                        break;
+                }
 
                 foreach ($this->pivot->getCriterias() as $criteria)
                 {
