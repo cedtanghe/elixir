@@ -2,13 +2,12 @@
 
 namespace Elixir\DB\ObjectMapper;
 
-use Elixir\DB\ObjectMapper\CollectionEvent;
 use Elixir\Dispatcher\Dispatcher;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-class Collection extends Dispatcher implements \Iterator, \Countable 
+class Collection extends Dispatcher implements \IteratorAggregate
 {
     /**
      * @var array
@@ -16,34 +15,12 @@ class Collection extends Dispatcher implements \Iterator, \Countable
     protected $data = [];
 
     /**
-     * @var boolean
-     */
-    protected $useEvents;
-
-    /**
      * @param array $data
      * @param boolean $useEvents
      */
-    public function __construct(array $data = [], $useEvents = false) 
+    public function __construct(array $data = []) 
     {
         $this->data = $data;
-        $this->setUseEvents($useEvents);
-    }
-
-    /**
-     * @param boolean $value
-     */
-    public function setUseEvents($value) 
-    {
-        $this->useEvents = $value;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isUseEvents() 
-    {
-        return $this->useEvents;
     }
 
     /**
@@ -52,11 +29,6 @@ class Collection extends Dispatcher implements \Iterator, \Countable
     public function append($value)
     {
         array_push($this->data, $value);
-        
-        if($this->useEvents)
-        {
-            $this->dispatch(new CollectionEvent(CollectionEvent::VALUE_ADDED, ['object' => $value]));
-        }
     }
 
     /**
@@ -65,11 +37,6 @@ class Collection extends Dispatcher implements \Iterator, \Countable
     public function prepend($value) 
     {
         array_unshift($this->data, $value);
-        
-        if($this->useEvents)
-        {
-            $this->dispatch(new CollectionEvent(CollectionEvent::VALUE_ADDED, ['object' => $value]));
-        }
     }
 
     /**
@@ -82,11 +49,6 @@ class Collection extends Dispatcher implements \Iterator, \Countable
         if (false !== $pos) 
         {
             $this->splice($pos, 1);
-            
-            if($this->useEvents)
-            {
-                $this->dispatch(new CollectionEvent(CollectionEvent::VALUE_REMOVED, ['object' => $value]));
-            }
         }
     }
     
@@ -116,17 +78,7 @@ class Collection extends Dispatcher implements \Iterator, \Countable
      */
     public function splice($offset, $length, $replacement = [])
     {
-        $values = array_splice($this->data, $offset, $length, $replacement);
-        
-        if ($this->useEvents)
-        {
-            foreach ($values as $value)
-            {
-                $this->dispatch(new CollectionEvent(CollectionEvent::VALUE_REMOVED, ['object' => $value]));
-            }
-        }
-        
-        return $values;
+        return array_splice($this->data, $offset, $length, $replacement);
     }
     
     /**
@@ -155,14 +107,7 @@ class Collection extends Dispatcher implements \Iterator, \Countable
      */
     public function shift() 
     {
-        $value = array_shift($this->data);
-        
-        if($this->useEvents)
-        {
-            $this->dispatch(new CollectionEvent(CollectionEvent::VALUE_REMOVED, ['object' => $value]));
-        }
-        
-        return $value;
+        return array_shift($this->data);
     }
 
     /**
@@ -170,14 +115,7 @@ class Collection extends Dispatcher implements \Iterator, \Countable
      */
     public function pop()
     {
-        $value = array_pop($this->data);
-        
-        if($this->useEvents)
-        {
-            $this->dispatch(new CollectionEvent(CollectionEvent::VALUE_REMOVED, ['object' => $value]));
-        }
-        
-        return $value;
+        return array_pop($this->data);
     }
     
     /**
@@ -214,62 +152,6 @@ class Collection extends Dispatcher implements \Iterator, \Countable
     }
     
     /**
-     * @ignore
-     */
-    public function rewind() 
-    {
-        return reset($this->data);
-    }
-
-    /**
-     * @ignore
-     */
-    public function current() 
-    {
-        return current($this->data);
-    }
-
-    /**
-     * @ignore
-     */
-    public function key()
-    {
-        return key($this->data);
-    }
-
-    /**
-     * @ignore
-     */
-    public function next() 
-    {
-        return next($this->data);
-    }
-
-    /**
-     * @ignore
-     */
-    public function valid()
-    {
-        return null !== key($this->data);
-    }
-
-    /**
-     * @ignore
-     */
-    public function count() 
-    {
-        return count($this->data);
-    }
-    
-    /**
-     * @return array
-     */
-    public function getArrayCopy() 
-    {
-        return array_slice($this->data, 0);
-    }
-    
-    /**
      * @param array|Collection $data
      */
     public function merge($data) 
@@ -278,6 +160,14 @@ class Collection extends Dispatcher implements \Iterator, \Countable
         {
             $this->append($value);
         }
+    }
+    
+    /**
+     * @ignore
+     */
+    public function getIterator()
+    {
+        return new \ArrayIterator($this->data);
     }
     
     /**

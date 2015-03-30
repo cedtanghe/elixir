@@ -282,7 +282,7 @@ abstract class EntityAbstract implements EntityInterface
 
         if (is_array($value)) 
         {
-            $value = new Collection($value, false);
+            $value = new Collection($value);
         }
         
         if ($this->isFillable()) 

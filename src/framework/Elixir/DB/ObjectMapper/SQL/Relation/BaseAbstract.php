@@ -3,7 +3,6 @@
 namespace Elixir\DB\ObjectMapper\SQL\Relation;
 
 use Elixir\DB\ObjectMapper\Collection;
-use Elixir\DB\ObjectMapper\CollectionEvent;
 use Elixir\DB\ObjectMapper\FindableInterface;
 use Elixir\DB\ObjectMapper\RelationInterface;
 use Elixir\DB\ObjectMapper\RelationInterfaceMetas;
@@ -206,106 +205,18 @@ abstract class BaseAbstract implements RelationInterfaceMetas
     public function setRelated($value, array $options = [])
     {
         $options = array_merge(
-            [
-                'filled' => true,
-                'internal' => false
-            ],
+            ['filled' => true], 
             $options
         );
         
-        if (null !== $this->related)
-        {
-            if ($this->related instanceof Collection)
-            {
-                $this->related->removeListener(CollectionEvent::VALUE_ADDED, [$this, 'onValueAdded']);
-                $this->related->removeListener(CollectionEvent::VALUE_REMOVED, [$this, 'onValueRemoved']);
-
-                if(!$options['internal'])
-                {
-                    foreach ($this->related as $object)
-                    {
-                        $this->dissociate($object);
-                    }
-                }
-            }
-            else
-            {
-                if(!$options['internal'])
-                {
-                    $this->dissociate($this->related);
-                }
-            }
-            
-            $this->related = null;
-        }
-
         if (is_array($value))
         {
-            $value = new Collection($value, true);
+            $value = new Collection($value);
         }
 
         $this->related = $value;
-
-        if ($this->related instanceof Collection)
-        {
-            $this->related->setUseEvents(true);
-            $this->related->addListener(CollectionEvent::VALUE_ADDED, [$this, 'onValueAdded']);
-            $this->related->addListener(CollectionEvent::VALUE_REMOVED, [$this, 'onValueRemoved']);
-            
-            if(!$options['internal'])
-            {
-                foreach ($this->related as $object)
-                {
-                    $this->associate($object);
-                }
-            }
-        }
-        else
-        {
-            if(!$options['internal'])
-            {
-                $this->associate($this->related);
-            }
-        }
-
         $this->filled = $options['filled'];
     }
-
-    /**
-     * @param CollectionEvent $e
-     */
-    public function onValueAdded(CollectionEvent $e)
-    {
-        $object = $e->getObject();
-        
-        if ($object instanceof RepositoryInterface)
-        {
-            $this->associate($object);
-        }
-    }
-    
-    /**
-     * @param CollectionEvent $e
-     */
-    public function onValueRemoved(CollectionEvent $e)
-    {
-        $object = $e->getObject();
-        
-        if ($object instanceof RepositoryInterface)
-        {
-            $this->dissociate($object);
-        }
-    }
-    
-    /**
-     * @param RepositoryInterface $target
-     */
-    abstract public function associate(RepositoryInterface $target);
-    
-    /**
-     * @param RepositoryInterface $target
-     */
-    abstract public function dissociate(RepositoryInterface $target);
 
     /**
      * @see RelationInterface::getRelated()
@@ -340,14 +251,7 @@ abstract class BaseAbstract implements RelationInterfaceMetas
         {
             if ($this->extendQuery($findable))
             {
-                $this->setRelated(
-                    $this->match($findable), 
-                    [
-                        'filled' => true, 
-                        'internal' => true
-                    ]
-                );
-                
+                $this->setRelated($this->match($findable), ['filled' => true]);
                 return;
             }
         }
@@ -356,25 +260,11 @@ abstract class BaseAbstract implements RelationInterfaceMetas
         {
             case self::HAS_ONE:
             case self::BELONGS_TO:
-                $this->setRelated(
-                    null,
-                    [
-                        'filled' => true, 
-                        'internal' => true
-                    ]
-                );
-                
+                $this->setRelated(null, ['filled' => true]);
                 break;
             case self::HAS_MANY:
             case self::BELONGS_TO_MANY:
-                $this->setRelated(
-                    new Collection([], true), 
-                    [
-                        'filled' => true, 
-                        'internal' => true
-                    ]
-                );
-                
+                $this->setRelated(new Collection([]), ['filled' => true]);
                 break;
         }
     }
@@ -482,7 +372,7 @@ abstract class BaseAbstract implements RelationInterfaceMetas
                 return $findable->one();
             case self::HAS_MANY:
             case self::BELONGS_TO_MANY:
-                return new Collection($findable->all(), true);
+                return new Collection($findable->all());
         }
 
         return null;

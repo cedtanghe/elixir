@@ -40,7 +40,6 @@ class Select implements FindableInterface
     
     /**
      * @var DBInterface
-     * @var QueryBuilderInterface
      */
     protected $DB;
     
@@ -52,6 +51,7 @@ class Select implements FindableInterface
     /**
      * @param RepositoryInterface $repository
      * @param mixed $options
+     * @throws \LogicException
      */
     public function __construct(RepositoryInterface $repository, $options = null)
     {
@@ -64,6 +64,14 @@ class Select implements FindableInterface
         );
         
         $this->DB = $this->repository->getConnection('db.read');
+        
+        if(!$this->DB instanceof QueryBuilderInterface)
+        {
+            throw new \LogicException(
+                'This class requires the db object implements the interface "\Elixir\DB\Query\QueryBuilderInterface" for convenience.'
+            );
+        }
+        
         $this->SQL = $this->DB->createSelect('`' . $this->repository->getStockageName() . '`');
     }
     

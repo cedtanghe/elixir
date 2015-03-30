@@ -97,7 +97,6 @@ abstract class ModelAbstract extends EntityAbstract implements RepositoryInterfa
     /**
      * @see RepositoryInterface::getConnection()
      * @return DBInterface
-     * @return QueryBuilderInterface
      */
     public function getConnection($key) 
     {
@@ -214,8 +213,6 @@ abstract class ModelAbstract extends EntityAbstract implements RepositoryInterfa
         }
         
         $this->dispatch(new RepositoryEvent(RepositoryEvent::PRE_INSERT));
-
-        $DB = $this->getConnection('db.write');
         $data = [];
 
         foreach ($this->fillable as $column) 
@@ -231,6 +228,15 @@ abstract class ModelAbstract extends EntityAbstract implements RepositoryInterfa
             {
                 $values['`' . $key . '`'] = $value;
             }
+        }
+        
+        $DB = $this->getConnection('db.write');
+        
+        if(!$DB instanceof QueryBuilderInterface)
+        {
+            throw new \LogicException(
+                'This class requires the db object implements the interface "\Elixir\DB\Query\QueryBuilderInterface" for convenience.'
+            );
         }
         
         $query = $DB->createInsert('`' . $this->table . '`');
@@ -284,8 +290,7 @@ abstract class ModelAbstract extends EntityAbstract implements RepositoryInterfa
             $this->dispatch(new RepositoryEvent(RepositoryEvent::UPDATE));
             return true;
         }
-
-        $DB = $this->getConnection('db.write');
+        
         $data = [];
 
         foreach (array_keys($this->getModified(self::SYNC_FILLABLE)) as $column) 
@@ -313,6 +318,15 @@ abstract class ModelAbstract extends EntityAbstract implements RepositoryInterfa
             $this->dispatch(new RepositoryEvent(RepositoryEvent::UPDATE));
             return true;
         }
+        
+        if(!$DB instanceof QueryBuilderInterface)
+        {
+            throw new \LogicException(
+                'This class requires the db object implements the interface "\Elixir\DB\Query\QueryBuilderInterface" for convenience.'
+            );
+        }
+        
+        $DB = $this->getConnection('db.write');
 
         $query = $DB->createUpdate('`' . $this->table . '`');
         $query->set($values, SQLInterface::VALUES_SET);
@@ -358,6 +372,14 @@ abstract class ModelAbstract extends EntityAbstract implements RepositoryInterfa
         $this->dispatch(new RepositoryEvent(RepositoryEvent::PRE_DELETE));
 
         $DB = $this->getConnection('db.write');
+        
+        if(!$DB instanceof QueryBuilderInterface)
+        {
+            throw new \LogicException(
+                'This class requires the db object implements the interface "\Elixir\DB\Query\QueryBuilderInterface" for convenience.'
+            );
+        }
+        
         $query = $DB->createDelete('`' . $this->table . '`');
 
         if (null === $this->primaryKey) 

@@ -53,7 +53,7 @@ class Relation implements RelationInterface
         
         if (is_array($value))
         {
-            $value = new Collection($value, false);
+            $value = new Collection($value);
         }
 
         $this->related = $value;
