@@ -541,14 +541,13 @@ abstract class ModelAbstract extends EntityAbstract implements RepositoryInterfa
      */
     public function __callStatic($name, $arguments) 
     {
-        $self = new static();
-        
-        if ($name == 'withConnectionManager')
+        if ($name == 'withConfig')
         {
-            $self->setConnectionManager($arguments[0]);
+            $self = static::factory($arguments);
             return $self->find();
         }
-
+        
+        $self = static::factory();
         return call_user_func_array([$self->find(), $name], $arguments);
     }
     
