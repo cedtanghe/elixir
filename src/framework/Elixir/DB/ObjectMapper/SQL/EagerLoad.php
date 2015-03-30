@@ -75,7 +75,24 @@ class EagerLoad
 
         $this->foreignKey = $config['foreign_key'];
         $this->localKey = $config['local_key'];
-        $this->pivot = $config['pivot'];
+        
+        if (null !== $config['pivot'] && false !== $config['pivot']) 
+        {
+            if (true === $config['pivot']) 
+            {
+                // Define target
+                $this->getTarget();
+
+                $table = $this->repository->getStockageName() . '_' . $this->target->getStockageName();
+                $config['pivot'] = new Pivot($table);
+            } 
+            else if (!$config['pivot'] instanceof Pivot) 
+            {
+                $config['pivot'] = new Pivot($config['pivot']);
+            }
+
+            $this->withPivot($config['pivot']);
+        }
 
         foreach ($config['criterias'] as $criteria)
         {

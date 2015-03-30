@@ -3,7 +3,6 @@
 namespace Elixir\DB\ObjectMapper\SQL\Relation;
 
 use Elixir\DB\ObjectMapper\BaseAbstract;
-use Elixir\DB\ObjectMapper\CollectionEvent;
 use Elixir\DB\ObjectMapper\RepositoryInterface;
 use Elixir\DB\ObjectMapper\SQL\Relation\Pivot;
 
@@ -59,14 +58,34 @@ class HasOne extends BaseAbstract
             $this->addCriteria($criteria);
         }
     }
+    
+    /**
+     * @see BaseAbstract::associate();
+     */
+    public function associate(RepositoryInterface $target)
+    {
+        if (null === $this->pivot)
+        {
+            $target->set($this->foreignKey) = $this->repository->get($this->localKey);
+        }
+        else
+        {
+            // Not yet
+        }
+    }
 
     /**
-     * @see BaseAbstract::onValueAdded();
+     * @see BaseAbstract::associate();
      */
-    public function onValueAdded(CollectionEvent $e) {}
-
-    /**
-     * @see BaseAbstract::onValueRemoved();
-     */
-    public function onValueRemoved(CollectionEvent $e) {}
+    public function dissociate(RepositoryInterface $target)
+    {
+        if (null === $this->pivot)
+        {
+            $target->set($this->foreignKey) = $target->getIgnoreValue();
+        }
+        else
+        {
+            // Not yet
+        }
+    }
 }

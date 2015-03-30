@@ -39,9 +39,9 @@ interface RelationInterface
 
     /**
      * @param mixed $value
-     * @param boolean $filled
+     * @param array $options
      */
-    public function setRelated($value, $filled = true);
+    public function setRelated($value, array $options = []);
 
     /**
      * @return mixed
