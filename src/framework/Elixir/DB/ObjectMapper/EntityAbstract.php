@@ -298,6 +298,21 @@ abstract class EntityAbstract implements EntityInterface
             {
                 $this->guarded[] = $key;
             }
+<<<<<<< HEAD
+=======
+
+            if (array_key_exists($key, $this->related))
+            {
+                $relation = $this->get($key);
+                $relation->setRelated($value, ['filled' => $value !== $this->ignoreValue]);
+
+                $value = $relation;
+            } 
+            else if ($value instanceof RelationInterface) 
+            {
+                $this->related[$key] = $value->getType();
+            }
+>>>>>>> 920b6b5c12e07720d915cd8cca92ef0ba7863c3b
         }
 
         $this->data[$key] = $value;

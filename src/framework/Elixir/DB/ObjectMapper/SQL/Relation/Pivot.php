@@ -123,7 +123,11 @@ class Pivot
      * @param mixed $otherValue
      * @return boolean
      */
+<<<<<<< HEAD
     public function attach(ContainerInterface $connectionManager, $foreignValue, $otherValue)
+=======
+    public function insert(ContainerInterface $connectionManager, $foreignValue, $otherValue)
+>>>>>>> 920b6b5c12e07720d915cd8cca92ef0ba7863c3b
     {
         // Todo
     }
@@ -134,7 +138,11 @@ class Pivot
      * @param mixed $otherValue
      * @return boolean
      */
+<<<<<<< HEAD
     public function detach(ContainerInterface $connectionManager, $foreignValue, $otherValue)
+=======
+    public function delete(ContainerInterface $connectionManager, $foreignValue, $otherValue)
+>>>>>>> 920b6b5c12e07720d915cd8cca92ef0ba7863c3b
     {
         // Todo
     }
