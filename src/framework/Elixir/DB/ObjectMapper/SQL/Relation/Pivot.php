@@ -123,7 +123,7 @@ class Pivot
      * @param mixed $otherValue
      * @return boolean
      */
-    public function insert(ContainerInterface $connectionManager, $foreignValue, $otherValue)
+    public function attach(ContainerInterface $connectionManager, $foreignValue, $otherValue)
     {
         // Todo
     }
@@ -134,7 +134,7 @@ class Pivot
      * @param mixed $otherValue
      * @return boolean
      */
-    public function delete(ContainerInterface $connectionManager, $foreignValue, $otherValue)
+    public function detach(ContainerInterface $connectionManager, $foreignValue, $otherValue)
     {
         // Todo
     }

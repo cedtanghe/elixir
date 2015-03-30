@@ -3,7 +3,10 @@
 namespace Elixir\DB\ObjectMapper\SQL;
 
 use Elixir\DB\DBInterface;
+use Elixir\DB\ObjectMapper\Collection;
 use Elixir\DB\ObjectMapper\EntityAbstract;
+use Elixir\DB\ObjectMapper\EntityInterface;
+use Elixir\DB\ObjectMapper\RelationInterface;
 use Elixir\DB\ObjectMapper\RepositoryEvent;
 use Elixir\DB\ObjectMapper\RepositoryInterface;
 use Elixir\DB\ObjectMapper\SQL\Select;
@@ -45,6 +48,11 @@ abstract class ModelAbstract extends EntityAbstract implements RepositoryInterfa
      * @var boolean
      */
     protected $autoIncrement = true;
+    
+    /**
+     * @var array
+     */
+    protected $related = [];
 
     /**
      * @see EntityAbstract::__construct()
@@ -123,6 +131,38 @@ abstract class ModelAbstract extends EntityAbstract implements RepositoryInterfa
     public function getPrimaryKey() 
     {
         return $this->primaryKey;
+    }
+    
+    /**
+     * @return array
+     */
+    public function getRelatedKeys()
+    {
+        return array_keys($this->related);
+    }
+
+    /**
+     * @param string $key
+     * @return string
+     */
+    public function getRelatedType($key) 
+    {
+        return isset($this->related[$key]) ? $this->related[$key] : null;
+    }
+    
+    /**
+     * @param string $key
+     * @return RelationInterface
+     * @throws \InvalidArgumentException
+     */
+    public function relation($key)
+    {
+        if (array_key_exists($key, $this->related))
+        {
+            return $this->get($key);
+        }
+        
+        throw new \InvalidArgumentException(sprintf('Property "%so" is not a relationship.', $key));
     }
     
     /**
@@ -343,13 +383,33 @@ abstract class ModelAbstract extends EntityAbstract implements RepositoryInterfa
 
         $this->dispatch(new RepositoryEvent(RepositoryEvent::DELETE));
 
-        foreach ($this->_data as $key => $value)
+        foreach ($this->data as $key => $value)
         {
             $this->set($key, $this->_ignoreValue);
         }
 
         $this->sync(self::SYNC_FILLABLE);
         return $result;
+    }
+    
+    /**
+     * @see EntityAbstract::set()
+     */
+    public function set($key, $value) 
+    {
+        parent::set($key, $value);
+        
+        if (array_key_exists($key, $this->related))
+        {
+            $relation = $this->get($key);
+            $relation->setRelated($value, ['filled' => $value !== $this->ignoreValue]);
+            
+            $this->data[$key] = $relation;
+        } 
+        else if ($value instanceof RelationInterface) 
+        {
+            $this->related[$key] = $value->getType();
+        }
     }
     
     /**
@@ -361,6 +421,97 @@ abstract class ModelAbstract extends EntityAbstract implements RepositoryInterfa
         $instance->setConnectionManager($this->connectionManager);
         
         return $instance;
+    }
+    
+    /**
+     * @see EntityAbstract::export()
+     */
+    public function export(array $members = [], array $omitMembers = [], array $options = [])
+    {
+        $options = array_merge(
+            [
+                'raw' => true,
+                'format' => self::FORMAT_PHP
+            ],
+            $options
+        );
+        
+        $data = [];
+
+        foreach (array_keys($this->data) as $key)
+        {
+            if (in_array($key, $omitMembers) || (count($members) > 0 && !in_array($key, $members)))
+            {
+                continue;
+            } 
+            else 
+            {
+                if (array_key_exists($key, $this->related))
+                {
+                    if ($v instanceof RelationInterface) 
+                    {
+                        $v = $v->getRelated();
+                    }
+                }
+                else
+                {
+                    $v = $options['raw'] ? $this->get($key) : $this->$key;
+                }
+                
+                if ($v instanceof EntityInterface) 
+                {
+                    $v = $v->export([], [], $options);
+                } 
+                else if ($v instanceof Collection)
+                {
+                    $v = $this->exportCollection($v, $options);
+                }
+                
+                $data[$key] = $v;
+                $data['_class'] = $this->className;
+            }
+        }
+        
+        if ($options['format'] == self::FORMAT_JSON)
+        {
+            $data = json_encode($data);
+        }
+        
+        return $data;
+    }
+    
+    /**
+     * @ignore
+     */
+    public function &__get($key) 
+    {
+        $value = parent::__get($key);
+
+        // Property is a relationship
+        if (array_key_exists($key, $this->related))
+        {
+            if (!$value->isFilled()) 
+            {
+                $value->load();
+            }
+
+            $value = $value->getRelated();
+        }
+
+        return $value;
+    }
+    
+    /**
+     * @ignore
+     */
+    public function __call($name, $arguments) 
+    {
+        if (array_key_exists($name, $this->related))
+        {
+            return $this->get($name);
+        }
+        
+        throw new \BadMethodCallException(sprintf('The "%s" method does not exist.', $name));
     }
     
     /**
@@ -377,5 +528,18 @@ abstract class ModelAbstract extends EntityAbstract implements RepositoryInterfa
         }
 
         return call_user_func_array([$self->find(), $name], $arguments);
+    }
+    
+    /**
+     * @ignore
+     */
+    public function __clone() 
+    {
+        foreach ((array)$this->primaryKey as $key) 
+        {
+            $this->set($key, $this->_ignoreValue);
+        }
+
+        $this->sync(self::SYNC_FILLABLE);
     }
 }

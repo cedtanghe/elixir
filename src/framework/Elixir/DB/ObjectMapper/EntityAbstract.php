@@ -4,7 +4,6 @@ namespace Elixir\DB\ObjectMapper;
 
 use Elixir\DB\ObjectMapper\Collection;
 use Elixir\DB\ObjectMapper\EntityEvent;
-use Elixir\DB\ObjectMapper\Relation\RelationInterface;
 use Elixir\Dispatcher\DispatcherTrait;
 use Elixir\Util\Str;
 
@@ -52,11 +51,6 @@ abstract class EntityAbstract implements EntityInterface
      * @var array
      */
     protected $guarded = [];
-
-    /**
-     * @var array
-     */
-    protected $related = [];
     
     /**
      * @var array
@@ -164,24 +158,7 @@ abstract class EntityAbstract implements EntityInterface
     {
         return $this->guarded;
     }
-
-    /**
-     * @return array
-     */
-    public function getRelatedKeys()
-    {
-        return array_keys($this->related);
-    }
-
-    /**
-     * @param string $key
-     * @return string
-     */
-    public function getRelatedType($key) 
-    {
-        return isset($this->related[$key]) ? $this->related[$key] : null;
-    }
-
+    
     /**
      * @return boolean
      */
@@ -321,21 +298,9 @@ abstract class EntityAbstract implements EntityInterface
             {
                 $this->guarded[] = $key;
             }
-
-            if (array_key_exists($key, $this->related))
-            {
-                $relation = $this->get($key);
-                $relation->setRelated($value, ['filled' => $value !== $this->ignoreValue]);
-
-                $value = $relation;
-            } 
-            else if ($value instanceof RelationInterface) 
-            {
-                $this->related[$key] = $value->getType();
-            }
         }
 
-        $this->data[$key] = $value;;
+        $this->data[$key] = $value;
     }
 
     /**
@@ -493,39 +458,31 @@ abstract class EntityAbstract implements EntityInterface
         
         $data = [];
 
-        foreach (array_keys($this->data) as $value)
+        foreach (array_keys($this->data) as $key)
         {
-            if (in_array($value, $omitMembers) || (count($members) > 0 && !in_array($value, $members)))
+            if (in_array($key, $omitMembers) || (count($members) > 0 && !in_array($key, $members)))
             {
                 continue;
             } 
             else 
             {
-                $v = $options['raw'] ? $this->get($value) : $this->$value;
-
-                if (array_key_exists($value, $this->related))
+                $value = $options['raw'] ? $this->get($key) : $this->$key;
+                
+                if ($value instanceof EntityInterface) 
                 {
-                    if ($v instanceof RelationInterface) 
-                    {
-                        $v = $v->getRelated();
-                    }
-                }
-
-                if ($v instanceof EntityInterface) 
-                {
-                    $v = $v->export([], [], $options);
+                    $value = $value->export([], [], $options);
                 } 
                 else if ($v instanceof Collection)
                 {
-                    $v = $this->exportCollection($v, $options);
+                    $value = $this->exportCollection($value, $options);
                 }
 
-                $data[$value] = $v;
+                $data[$key] = $value;
                 $data['_class'] = $this->className;
             }
         }
         
-        if($options['format'] == self::FORMAT_JSON)
+        if ($options['format'] == self::FORMAT_JSON)
         {
             $data = json_encode($data);
         }
@@ -600,20 +557,7 @@ abstract class EntityAbstract implements EntityInterface
             }
         }
 
-        $value = $this->get($key);
-
-        // Property is a relationship
-        if (array_key_exists($key, $this->related))
-        {
-            if (!$value->isFilled()) 
-            {
-                $value->load();
-            }
-
-            $value = $value->getRelated();
-        }
-
-        return $value;
+        return $this->get($key);
     }
 
     /**
@@ -656,7 +600,7 @@ abstract class EntityAbstract implements EntityInterface
     {
         $this->set($key, $this->ignoreValue);
     }
-
+    
     /**
      * @ignore
      */

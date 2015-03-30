@@ -16,7 +16,7 @@ class EagerLoad
     /**
      * @var string
      */
-    const REFERENCE_KEY = '_pivot_';
+    const REFERENCE_KEY = 'pivot_';
 
     /**
      * @var array
