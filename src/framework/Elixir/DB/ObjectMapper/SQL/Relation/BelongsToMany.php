@@ -40,4 +40,51 @@ class BelongsToMany extends BaseAbstract
             $this->addCriteria($criteria);
         }
     }
+    
+    /**
+     * @param RepositoryInterface $target
+     * @return boolean
+     */
+    public function associate(RepositoryInterface $target)
+    {
+        $result = $this->pivot->attach(
+            $target->getConnectionManager(), 
+            $target->get($this->foreignKey), 
+            $this->repository->get($this->localKey)
+        );
+        
+        if (null !== $this->related)
+        {
+            if (!$this->related->in($target))
+            {
+                $this->related->append($target);
+            }
+        }
+        else
+        {
+            $this->setRelated(new Collection([$target]), ['filled' => true]);
+        }
+        
+        return $result;
+    }
+    
+    /**
+     * @param RepositoryInterface $target
+     * @return boolean
+     */
+    public function dissociate(RepositoryInterface $target)
+    {
+        $result = $this->pivot->detach(
+            $target->getConnectionManager(), 
+            $target->get($this->foreignKey), 
+            $this->repository->get($this->localKey)
+        );
+        
+        if (null !== $this->related)
+        {
+            $this->related->remove($target);
+        }
+        
+        return $result;
+    }
 }

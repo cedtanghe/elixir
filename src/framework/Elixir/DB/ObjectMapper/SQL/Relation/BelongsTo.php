@@ -2,8 +2,8 @@
 
 namespace Elixir\DB\ObjectMapper\SQL\Relation;
 
-use Elixir\DB\ObjectMapper\BaseAbstract;
 use Elixir\DB\ObjectMapper\RepositoryInterface;
+use Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
@@ -34,7 +34,7 @@ class BelongsTo extends BaseAbstract
         $this->foreignKey = $config['foreign_key'];
         $this->localKey = $config['local_key'];
 
-        if( false !== $config['pivot'])
+        if ( false !== $config['pivot'])
         {
             $this->pivot = $config['pivot'];
         }
@@ -43,5 +43,53 @@ class BelongsTo extends BaseAbstract
         {
             $this->addCriteria($criteria);
         }
+    }
+    
+    /**
+     * @param RepositoryInterface $target
+     * @return boolean
+     */
+    public function associate(RepositoryInterface $target)
+    {
+        if (null !== $this->pivot)
+        {
+            $result = $this->pivot->attach(
+                $target->getConnectionManager(), 
+                $target->get($this->foreignKey), 
+                $this->repository->get($this->localKey)
+            );
+        }
+        else
+        {
+            $this->repository->set($this->localKey, $target->get($this->foreignKey));
+            $result = $this->repository->save();
+        }
+        
+        $this->setRelated($target, ['filled' => true]);
+        return $result;
+    }
+    
+    /**
+     * @param RepositoryInterface $target
+     * @return boolean
+     */
+    public function dissociate(RepositoryInterface $target)
+    {
+        if (null !== $this->pivot)
+        {
+            $result = $this->pivot->detach(
+                $target->getConnectionManager(), 
+                $target->get($this->foreignKey), 
+                $this->repository->get($this->localKey)
+            );
+        }
+        else
+        {
+            $this->repository->set($this->localKey, $this->repository->getIgnoreValue());
+            $result = $this->repository->save();
+        }
+        
+        $this->related = null;
+        return $result;
     }
 }

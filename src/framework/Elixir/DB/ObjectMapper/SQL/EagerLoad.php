@@ -17,7 +17,7 @@ class EagerLoad
     /**
      * @var string
      */
-    const REFERENCE_KEY = 'pivot_';
+    const REFERENCE_KEY = '_pivot';
 
     /**
      * @var array
@@ -169,7 +169,7 @@ class EagerLoad
     {
         if (null === $this->localKey)
         {
-            if(null !== $this->pivot)
+            if (null !== $this->pivot)
             {
                 $this->localKey = $this->repository->getPrimaryKey();
             }

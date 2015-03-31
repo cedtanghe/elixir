@@ -39,6 +39,11 @@ class Select implements FindableInterface
     protected $with = [];
     
     /**
+     * @var array
+     */
+    protected $scopes = [];
+    
+    /**
      * @var DBInterface
      */
     protected $DB;
@@ -65,7 +70,7 @@ class Select implements FindableInterface
         
         $this->DB = $this->repository->getConnection('db.read');
         
-        if(!$this->DB instanceof QueryBuilderInterface)
+        if (!$this->DB instanceof QueryBuilderInterface)
         {
             throw new \LogicException(
                 'This class requires the db object implements the interface "\Elixir\DB\Query\QueryBuilderInterface" for convenience.'
@@ -82,14 +87,14 @@ class Select implements FindableInterface
     {
         $extension->setFindable($this);
         
-        foreach($extension->getRegisteredMethods() as $method)
+        foreach ($extension->getRegisteredMethods() as $method)
         {
             $this->extensions[$method] = $extension;
         }
         
         return $this;
     }
-
+    
     /**
      * @param string $part
      * @return Select
@@ -176,12 +181,12 @@ class Select implements FindableInterface
     {
         $SQL = clone $this->SQL;
         
-        if(false === strpos($SQL->render(), 'COUNT('))
+        if (false === strpos($SQL->render(), 'COUNT('))
         {
             $SQL->column('COUNT(*)', true);
         }
         
-        if(false === strpos($SQL->render(), 'GROUP BY'))
+        if (false === strpos($SQL->render(), 'GROUP BY'))
         {
             return current($this->DB->query($SQL)->one());
         }
@@ -197,18 +202,23 @@ class Select implements FindableInterface
      */
     public function scope($method)
     {
-        $options = [];
-
-        if (func_num_args() > 1) 
+        if (!in_array($method, $this->scopes))
         {
-            $args = func_get_args();
+            $options = [];
 
-            array_shift($args);
-            $options = $args;
+            if (func_num_args() > 1) 
+            {
+                $args = func_get_args();
+
+                array_shift($args);
+                $options = $args;
+            }
+
+            array_unshift($options, $this);
+            call_user_func_array([$this->repository, 'scope' . Str::camelize($method)], $options);
+            
+            $this->scopes[] = $method;
         }
-
-        array_unshift($options, $this);
-        call_user_func_array([$this->repository, 'scope' . Str::camelize($method)], $options);
 
         return $this;
     }
@@ -245,7 +255,7 @@ class Select implements FindableInterface
             $m = explode('.', $member);
             $m = $this->repository->get(array_pop($m));
             
-            if($m instanceof RelationInterfaceMetas)
+            if ($m instanceof RelationInterfaceMetas)
             {
                 $eagerLoad = new EagerLoad(
                     $this->repository,
@@ -352,7 +362,7 @@ class Select implements FindableInterface
     {
         $key = $this->_repository->getPrimaryKey();
         
-        if(is_array($key))
+        if (is_array($key))
         {
             throw new \LogicException('It is impossible to do a search if multiple primary keys are defined.');
         }

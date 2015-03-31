@@ -4,12 +4,12 @@ namespace Elixir\DB\ObjectMapper;
 
 use Elixir\DB\ObjectMapper\FindableInterface;
 use Elixir\DB\Query\QueryInterface;
-use Elixir\Dispatcher\Event;
+use Elixir\Dispatcher\EntityEvent;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-class RepositoryEvent extends Event
+class RepositoryEvent extends EntityEvent
 {
     /**
      * @var string

@@ -141,7 +141,7 @@ class Collection extends Dispatcher implements \IteratorAggregate
      */
     public function filter(\Closure $callback = null) 
     {
-        if(null === $callback)
+        if (null === $callback)
         {
             array_filter($this->data);
         }

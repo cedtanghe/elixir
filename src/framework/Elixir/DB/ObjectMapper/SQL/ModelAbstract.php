@@ -28,6 +28,11 @@ abstract class ModelAbstract extends EntityAbstract implements RepositoryInterfa
      * @var ContainerInterface
      */
     public static $defaultConnectionManager;
+    
+    /**
+     * @var boolean
+     */
+    protected $enableInitTraits = true;
 
     /**
      * @var ContainerInterface
@@ -53,7 +58,7 @@ abstract class ModelAbstract extends EntityAbstract implements RepositoryInterfa
      * @var array
      */
     protected $related = [];
-
+    
     /**
      * @see EntityAbstract::__construct()
      */
@@ -70,6 +75,16 @@ abstract class ModelAbstract extends EntityAbstract implements RepositoryInterfa
         if (null === $this->table) 
         {
             $this->table = lcfirst(pathinfo($this->className, PATHINFO_BASENAME));
+        }
+        
+        if ($this->enableInitTraits)
+        {
+            $traits = class_uses($this);
+
+            foreach ($traits as $trait)
+            {
+                $this->{'init' . $trait}();
+            }
         }
     }
 
@@ -232,7 +247,7 @@ abstract class ModelAbstract extends EntityAbstract implements RepositoryInterfa
         
         $DB = $this->getConnection('db.write');
         
-        if(!$DB instanceof QueryBuilderInterface)
+        if (!$DB instanceof QueryBuilderInterface)
         {
             throw new \LogicException(
                 'This class requires the db object implements the interface "\Elixir\DB\Query\QueryBuilderInterface" for convenience.'
@@ -319,7 +334,7 @@ abstract class ModelAbstract extends EntityAbstract implements RepositoryInterfa
             return true;
         }
         
-        if(!$DB instanceof QueryBuilderInterface)
+        if (!$DB instanceof QueryBuilderInterface)
         {
             throw new \LogicException(
                 'This class requires the db object implements the interface "\Elixir\DB\Query\QueryBuilderInterface" for convenience.'
@@ -373,7 +388,7 @@ abstract class ModelAbstract extends EntityAbstract implements RepositoryInterfa
 
         $DB = $this->getConnection('db.write');
         
-        if(!$DB instanceof QueryBuilderInterface)
+        if (!$DB instanceof QueryBuilderInterface)
         {
             throw new \LogicException(
                 'This class requires the db object implements the interface "\Elixir\DB\Query\QueryBuilderInterface" for convenience.'

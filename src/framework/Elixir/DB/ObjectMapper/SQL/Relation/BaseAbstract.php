@@ -148,7 +148,7 @@ abstract class BaseAbstract implements RelationInterfaceMetas
     {
         if (null === $this->localKey)
         {
-            if(null !== $this->pivot)
+            if (null !== $this->pivot)
             {
                 $this->localKey = $this->repository->getPrimaryKey();
             }

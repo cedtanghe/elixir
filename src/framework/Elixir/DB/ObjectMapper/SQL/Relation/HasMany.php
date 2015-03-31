@@ -2,8 +2,9 @@
 
 namespace Elixir\DB\ObjectMapper\SQL\Relation;
 
-use Elixir\DB\ObjectMapper\BaseAbstract;
+use Elixir\DB\ObjectMapper\Collection;
 use Elixir\DB\ObjectMapper\RepositoryInterface;
+use Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
@@ -43,5 +44,101 @@ class HasMany extends BaseAbstract
         {
             $this->addCriteria($criteria);
         }
+    }
+    
+    /**
+     * @param RepositoryInterface $target
+     * @return boolean
+     */
+    public function attach(RepositoryInterface $target)
+    {
+        if (null !== $this->pivot)
+        {
+            $result = $this->pivot->attach(
+                $this->repository->getConnectionManager(), 
+                $this->repository->get($this->localKey), 
+                $target->get($this->foreignKey)
+            );
+        }
+        else
+        {
+            $target->set($this->foreignKey, $this->localKey);
+            $result = $target->save();
+        }
+        
+        if (null !== $this->related)
+        {
+            if (!$this->related->in($target))
+            {
+                $this->related->append($target);
+            }
+        }
+        else
+        {
+            $this->setRelated(new Collection([$target]), ['filled' => true]);
+        }
+        
+        return $r;
+    }
+    
+    /**
+     * @param RepositoryInterface $target
+     * @return boolean
+     */
+    public function detach(RepositoryInterface $target)
+    {
+        if (null !== $this->pivot)
+        {
+            $result = $this->pivot->detach(
+                $this->repository->getConnectionManager(), 
+                $this->repository->get($this->localKey), 
+                $target->get($this->foreignKey)
+            );
+        }
+        else
+        {
+            $target->set($this->foreignKey, $target->getIgnoreValue());
+            $result = $target->save();
+        }
+        
+        if (null !== $this->related)
+        {
+            $this->related->remove($target);
+        }
+        
+        return $result;
+    }
+    
+    /**
+     * @param RepositoryInterface $target
+     * @return boolean
+     */
+    public function detachAndDelete(RepositoryInterface $target)
+    {
+        if (null !== $this->pivot)
+        {
+            $result = $this->pivot->detach(
+                $this->repository->getConnectionManager(), 
+                $this->repository->get($this->localKey), 
+                $target->get($this->foreignKey)
+            );
+            
+            if ($result)
+            {
+                $result = $target->delete();
+            }
+        }
+        else
+        {
+            $target->set($this->foreignKey, $target->getIgnoreValue());
+            $result = $target->delete();
+        }
+        
+        if (null !== $this->related)
+        {
+            $this->related->remove($target);
+        }
+        
+        return $result;
     }
 }

@@ -2,6 +2,8 @@
 
 namespace Elixir\DB\ObjectMapper\SQL\Relation;
 
+use Elixir\DB\Query\QueryBuilderInterface;
+use Elixir\DB\Query\SQL\SQLInterface;
 use Elixir\DI\ContainerInterface;
 
 /**
@@ -119,23 +121,71 @@ class Pivot
     
     /**
      * @param ContainerInterface $connectionManager
-     * @param mixed $foreignValue
-     * @param mixed $otherValue
+     * @param mixed $firstValue
+     * @param mixed $secondValue
      * @return boolean
+     * @throws \LogicException
      */
-    public function attach(ContainerInterface $connectionManager, $foreignValue, $otherValue)
+    public function attach(ContainerInterface $connectionManager, $firstValue, $secondValue)
     {
-        // Todo
+        $DB = $connectionManager->get('db.write');
+        
+        if (!$DB instanceof QueryBuilderInterface)
+        {
+            throw new \LogicException(
+                'This class requires the db object implements the interface "\Elixir\DB\Query\QueryBuilderInterface" for convenience.'
+            );
+        }
+        
+        try
+        {
+            $query = $DB->createInsert('`' . $this->pivot . '`');
+
+            if (method_exists($query, 'ignore'))
+            {
+                $query->ignore(true);
+            }
+            
+            $query->values(
+                [
+                    $this->firstKey => $firstValue, 
+                    $this->secondKey => $secondValue
+                ], 
+                SQLInterface::VALUES_SET
+            );
+
+            $result = $DB->exec($query);
+            return $result > 0;
+        }
+        catch (\Exception $e)
+        {
+            return false;
+        }
     }
     
     /**
      * @param ContainerInterface $connectionManager
-     * @param mixed $foreignValue
-     * @param mixed $otherValue
+     * @param mixed $firstValue
+     * @param mixed $secondValue
      * @return boolean
+     * @throws \LogicException
      */
-    public function detach(ContainerInterface $connectionManager, $foreignValue, $otherValue)
+    public function detach(ContainerInterface $connectionManager, $firstValue, $secondValue)
     {
-        // Todo
+        $DB = $connectionManager->get('db.write');
+        
+        if (!$DB instanceof QueryBuilderInterface)
+        {
+            throw new \LogicException(
+                'This class requires the db object implements the interface "\Elixir\DB\Query\QueryBuilderInterface" for convenience.'
+            );
+        }
+        
+        $query = $DB->createDelete('`' . $this->pivot . '`');
+        $query->where(sprintf('`%s`.`%s` = ?', $this->pivot, $this->firstKey), $firstValue);
+        $query->where(sprintf('`%s`.`%s` = ?', $this->pivot, $this->secondKey), $secondValue);
+        
+        $result = $DB->exec($query);
+        return $result > 0;
     }
 }

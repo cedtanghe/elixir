@@ -2,8 +2,8 @@
 
 namespace Elixir\DB\ObjectMapper\SQL\Relation;
 
-use Elixir\DB\ObjectMapper\BaseAbstract;
 use Elixir\DB\ObjectMapper\RepositoryInterface;
+use Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
@@ -43,5 +43,82 @@ class HasOne extends BaseAbstract
         {
             $this->addCriteria($criteria);
         }
+    }
+    
+    /**
+     * @param RepositoryInterface $target
+     * @return boolean
+     */
+    public function attach(RepositoryInterface $target)
+    {
+        if (null !== $this->pivot)
+        {
+            $result = $this->pivot->attach(
+                $this->repository->getConnectionManager(), 
+                $this->repository->get($this->localKey), 
+                $target->get($this->foreignKey)
+            );
+        }
+        else
+        {
+            $target->set($this->foreignKey, $this->localKey);
+            $result = $target->save();
+        }
+        
+        $this->setRelated($target, ['filled' => true]);
+        return $result;
+    }
+    
+    /**
+     * @param RepositoryInterface $target
+     * @return boolean
+     */
+    public function detach(RepositoryInterface $target)
+    {
+        if (null !== $this->pivot)
+        {
+            $result = $this->pivot->detach(
+                $this->repository->getConnectionManager(), 
+                $this->repository->get($this->localKey), 
+                $target->get($this->foreignKey)
+            );
+        }
+        else
+        {
+            $target->set($this->foreignKey, $target->getIgnoreValue());
+            $result = $target->save();
+        }
+        
+        $this->related = null;
+        return $result;
+    }
+    
+    /**
+     * @param RepositoryInterface $target
+     * @return boolean
+     */
+    public function detachAndDelete(RepositoryInterface $target)
+    {
+        if (null !== $this->pivot)
+        {
+            $result = $this->pivot->detach(
+                $this->repository->getConnectionManager(), 
+                $this->repository->get($this->localKey), 
+                $target->get($this->foreignKey)
+            );
+            
+            if ($result)
+            {
+                $result = $target->delete();
+            }
+        }
+        else
+        {
+            $target->set($this->foreignKey, $target->getIgnoreValue());
+            $result = $target->delete();
+        }
+        
+        $this->related = null;
+        return $result;
     }
 }
