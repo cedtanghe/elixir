@@ -59,9 +59,9 @@ abstract class CacheAbstract implements CacheInterface
     }
     
     /**
-     * @see CacheInterface::findOrStore()
+     * @see CacheInterface::remember()
      */
-    public function findOrStore($key, $value, $TTL = 0)
+    public function remember($key, $value, $ttl = self::DEFAULT_TTL)
     {
         $get = $this->get($key, null);
 
@@ -76,43 +76,41 @@ abstract class CacheAbstract implements CacheInterface
                 $get = $value;
             }
             
-            $this->set($key, $get, $TTL);
+            $this->set($key, $get, $ttl);
         }
 
         return $get;
     }
     
     /**
-     * @param integer|string|\DateTime $TTL
+     * @param integer|string|\DateTime $ttl
      * @return integer
      */
-    public function convertTTL($TTL)
+    public function parseTimeToLive($ttl = self::DEFAULT_TTL)
     {
-        $default = 31556926;
-        
-        if (0 == $TTL)
+        if (0 == $ttl)
         {
-            return $default;
+            return self::DEFAULT_TTL;
         }
         
-        if ($TTL instanceof \DateTime)
+        if ($ttl instanceof \DateTime)
         {
-            $now = new \DateTime(null, $TTL->getTimezone());
-            $TTL = $TTL->getTimestamp() - $now->getTimestamp();
+            $now = new \DateTime(null, $ttl->getTimezone());
+            $ttl = $ttl->getTimestamp() - $now->getTimestamp();
         }
-        else if (!is_numeric($TTL))
+        else if (!is_numeric($ttl))
         {
-            $time = strtotime($TTL);
+            $time = strtotime($ttl);
             
             if (false === $time)
             {
-                return $default;
+                return self::DEFAULT_TTL;
             }
             
             $now = new \DateTime();
-            $TTL = $time - $now->getTimestamp();
+            $ttl = $time - $now->getTimestamp();
         }
         
-        return $TTL;
+        return $ttl;
     }
 }

@@ -27,9 +27,9 @@ class Arr extends CacheAbstract
     }
 
     /**
-     * @see CacheAbstract::has()
+     * @see CacheAbstract::exists()
      */
-    public function has($key)
+    public function exists($key)
     {
         return ArrUtils::has([$this->identifier, $key], $this->provider);
     }
@@ -50,30 +50,70 @@ class Arr extends CacheAbstract
     }
     
     /**
-     * @see CacheAbstract::set()
+     * @see CacheAbstract::store()
      */
-    public function set($key, $value, $TTL = 0)
+    public function store($key, $value, $ttl = self::DEFAULT_TTL)
     {
-        ArrUtils::set(
-            [$this->identifier, $key], 
-            $this->getEncoder()->encode($value),
-            $this->provider
-        );
+        if (null !== $this->encoder)
+        {
+            $value = $this->getEncoder()->encode($value);
+        }
+        
+        ArrUtils::set([$this->identifier, $key], $value, $this->provider);
+        return true;
     }
     
     /**
-     * @see CacheAbstract::remove()
+     * @see CacheAbstract::delete()
      */
-    public function remove($key)
+    public function delete($key)
     {
         ArrUtils::remove([$this->identifier, $key], $this->provider);
+        return true;
     }
     
     /**
-     * @see CacheAbstract::has()
+     * @see CacheAbstract::incremente()
      */
-    public function clear()
+    public function incremente($key, $step = 1)
+    {
+        $value = $this->get($key, null);
+        
+        if (null === $value)
+        {
+            return 0;
+        }
+        
+        $value += $step;
+        $this->store($key, $value);
+        
+        return $value;
+    }
+    
+    /**
+     * @see CacheAbstract::decremente()
+     */
+    public function decremente($key, $step = 1)
+    {
+        $value = $this->get($key, 0) - $step;
+        
+        if (null === $value)
+        {
+            return 0;
+        }
+        
+        $value -= $step;
+        $this->store($key, $value);
+        
+        return $value;
+    }
+    
+    /**
+     * @see CacheAbstract::flush()
+     */
+    public function flush()
     {
         ArrUtils::remove($this->identifier, $this->provider);
+        return true;
     }
 }

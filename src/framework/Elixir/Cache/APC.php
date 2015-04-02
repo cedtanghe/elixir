@@ -25,9 +25,9 @@ class APC extends CacheAbstract
     }
     
     /**
-     * @see CacheAbstract::has()
+     * @see CacheAbstract::exists()
      */
-    public function has($key)
+    public function exists($key)
     {
         return apc_exists($this->identifier . $key);
     }
@@ -53,55 +53,47 @@ class APC extends CacheAbstract
     }
     
     /**
-     * @see CacheAbstract::set()
+     * @see CacheAbstract::store()
      */
-    public function set($key, $value, $TTL = 0)
+    public function store($key, $value, $ttl = self::DEFAULT_TTL)
     {
-        $TTL = $this->convertTTL($TTL);
-        
         if (null !== $this->encoder)
         {
             $value = $this->getEncoder()->encode($value);
         }
         
-        apc_store($this->identifier . $key, $value, $TTL);
+        return apc_store($this->identifier . $key, $value, $this->parseTimeToLive($ttl));
     }
     
     /**
-     * @param string $key
-     * @param integer $step
-     * @return integer|null
+     * @see CacheAbstract::delete()
+     */
+    public function delete($key)
+    {
+        return apc_delete($key);
+    }
+    
+    /**
+     * @see CacheAbstract::incremente()
      */
     public function incremente($key, $step = 1)
     {
-        apc_inc($this->identifier . $key, $step);
-        return $this->get($pKey);
+        return apc_inc($this->identifier . $key, $step);
     }
     
     /**
-     * @param string $key
-     * @param integer $step
-     * @return integer|null
+     * @see CacheAbstract::decremente()
      */
     public function decremente($key, $step = 1)
     {
-        apc_dec($this->identifier . $key, $step);
-        return $this->get($pKey);
-    }
-
-    /**
-     * @see CacheAbstract::remove()
-     */
-    public function remove($key)
-    {
-        apc_delete($key);
+        return apc_dec($this->identifier . $key, $step);
     }
     
     /**
-     * @see CacheAbstract::has()
+     * @see CacheAbstract::flush()
      */
-    public function clear()
+    public function flush()
     {
-        apc_clear_cache('user');
+        return apc_clear_cache('user');
     }
 }

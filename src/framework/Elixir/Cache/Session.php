@@ -13,7 +13,7 @@ use Elixir\HTTP\Session\SessionInterface;
 class Session extends CacheAbstract
 {
     /**
-     * @var Elixir\HTTP\Session\SessionInterface
+     * @var SessionInterface
      */
     protected $session;
     
@@ -28,25 +28,11 @@ class Session extends CacheAbstract
     }
 
     /**
-     * @see CacheAbstract::has()
+     * @see CacheAbstract::exists()
      */
-    public function has($key)
+    public function exists($key)
     {
-        $data = $this->session->get([$this->identifier, $key], null);
-        
-        if (null !== $data)
-        {
-            $expired = time() > (int)$data['TTL'];
-            
-            if ($expired)
-            {
-                $this->session->remove([$this->identifier, $key]);
-            }
-            
-            return !$expired;
-        }
-        
-        return false;
+        return null !== $this->get($key, null);
     }
     
     /**
@@ -58,7 +44,7 @@ class Session extends CacheAbstract
 
         if (null !== $data)
         {
-            $expired = time() > (int)$data['TTL'];
+            $expired = time() > (int)$data['ttl'];
 
             if ($expired) 
             {
@@ -66,39 +52,115 @@ class Session extends CacheAbstract
                 return is_callable($default) ? call_user_func($default) : $default;
             }
             
-            return $this->getEncoder()->decode($data['value']);
+            if (null !== $this->encoder)
+            {
+                $data['value'] = $this->getEncoder()->encode($data['value']);
+            }
+            
+            return $data['value'];
         }
 
         return is_callable($default) ? call_user_func($default) : $default;
     }
     
     /**
-     * @see CacheAbstract::set()
+     * @see CacheAbstract::store()
      */
-    public function set($key, $value, $TTL = 0)
+    public function store($key, $value, $ttl = self::DEFAULT_TTL)
     {
+        if (null !== $this->encoder)
+        {
+            $value = $this->getEncoder()->encode($value);
+        }
+        
         $this->session->set(
             [$this->identifier, $key], 
             [
-                'value' => $this->getEncoder()->encode($value),
-                'TTL' => time() + $this->convertTTL($TTL)
+                'value' => $value,
+                'ttl' => time() + $this->parseTimeToLive($ttl)
             ]
         );
+        
+        return true;
     }
     
     /**
-     * @see CacheAbstract::remove()
+     * @see CacheAbstract::delete()
      */
-    public function remove($key)
+    public function delete($key)
     {
         $this->session->remove([$this->identifier, $key]);
+        return true;
     }
     
     /**
-     * @see CacheAbstract::has()
+     * @see CacheAbstract::incremente()
      */
-    public function clear()
+    public function incremente($key, $step = 1) 
+    {
+        $data = $this->session->get([$this->identifier, $key], null);
+
+        if (null !== $data)
+        {
+            $expired = time() > (int)$data['ttl'];
+
+            if ($expired) 
+            {
+                $this->session->remove([$this->identifier, $key]);
+                return 0;
+            }
+            
+            if (null !== $this->encoder)
+            {
+                $data['value'] = $this->getEncoder()->encode($data['value']);
+            }
+            
+            $data['value'] += $step;
+            $this->session->set([$this->identifier, $key], $data);
+            
+            return $data['value'];
+        }
+        
+        return 0;
+    }
+
+    /**
+     * @see CacheAbstract::decremente()
+     */
+    public function decremente($key, $step = 1) 
+    {
+        $data = $this->session->get([$this->identifier, $key], null);
+
+        if (null !== $data)
+        {
+            $expired = time() > (int)$data['ttl'];
+
+            if ($expired) 
+            {
+                $this->session->remove([$this->identifier, $key]);
+                return 0;
+            }
+            
+            if (null !== $this->encoder)
+            {
+                $data['value'] = $this->getEncoder()->encode($data['value']);
+            }
+            
+            $data['value'] -= $step;
+            $this->session->set([$this->identifier, $key], $data);
+            
+            return $data['value'];
+        }
+        
+        return 0;
+    }
+    
+    /**
+     * @see CacheAbstract::flush()
+     */
+    public function flush()
     {
         $this->session->remove($this->identifier);
+        return true;
     }
 }

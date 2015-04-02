@@ -2,12 +2,10 @@
 
 namespace Elixir\DB\ObjectMapper;
 
-use Elixir\Dispatcher\Dispatcher;
-
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-class Collection extends Dispatcher implements \IteratorAggregate
+class Collection implements \IteratorAggregate
 {
     /**
      * @var array

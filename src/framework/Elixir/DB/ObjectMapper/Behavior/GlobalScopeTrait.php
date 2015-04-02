@@ -12,15 +12,15 @@ trait GlobalScopeTrait
     /**
      * @var array
      */
-    protected $scopes = [];
+    protected $globalScope = ['scopes' => []];
     
-    public function initGlobalScopeTrait()
+    public function bootGlobalScopeTrait()
     {
         $this->addListener(RepositoryEvent::PRE_FIND, function(RepositoryEvent $e)
         {
             $findable = $e->getQuery();
-
-            foreach ($this->scopes as $method)
+            
+            foreach ($this->globalScope['scopes'] as $method)
             {
                 $findable->scope($method);
             }
@@ -34,7 +34,7 @@ trait GlobalScopeTrait
     {
         if (!in_array($method, $this->scopes))
         {
-            $this->scopes[] = $method;
+            $this->globalScope['scopes'][] = $method;
         }
     }
     
@@ -43,6 +43,6 @@ trait GlobalScopeTrait
      */
     public function getGlobalScopes()
     {
-        return $this->scopes;
+        return $this->globalScope['scopes'];
     }
 }

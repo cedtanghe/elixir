@@ -9,10 +9,15 @@ namespace Elixir\Cache;
 interface CacheInterface
 {
     /**
+     * @var integer
+     */
+    const DEFAULT_TTL = 31556926;
+    
+    /**
      * @param string $key 
      * @return boolean
      */
-    public function has($key);
+    public function exists($key);
     
     /**
      * @param string $key
@@ -24,22 +29,41 @@ interface CacheInterface
     /**
      * @param string $key
      * @param mixed $value
-     * @param integer|string|\DateTime $TTL 
+     * @param integer|string|\DateTime $ttl
+     * @return boolean
      */
-    public function set($key, $value, $TTL = 0);
-
-    /**
-     * @param string $key 
-     */
-    public function remove($key);
+    public function store($key, $value, $ttl = self::DEFAULT_TTL);
     
     /**
      * @param string $key
      * @param mixed $value
-     * @param integer|string|\DateTime $TTL
+     * @param integer|string|\DateTime $ttl 
      * @return mixed
      */
-    public function findOrStore($key, $value, $TTL = 0);
+    public function remember($key, $value, $ttl = self::DEFAULT_TTL);
+
+    /**
+     * @param string $key 
+     * @return boolean
+     */
+    public function delete($key);
     
-    public function clear();
+    /**
+     * @param string $key
+     * @param integer $step
+     * @return integer
+     */
+    public function incremente($key, $step = 1);
+    
+    /**
+     * @param string $key
+     * @param integer $step
+     * @return integer
+     */
+    public function decremente($key, $step = 1);
+    
+    /**
+     * @return boolean
+     */
+    public function flush();
 }

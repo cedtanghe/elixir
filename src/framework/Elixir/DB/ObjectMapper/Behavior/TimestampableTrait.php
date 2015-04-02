@@ -11,43 +11,33 @@ use Elixir\DB\ObjectMapper\RepositoryEvent;
 trait TimestampableTrait
 {
     /**
-     * @var string 
+     * @var array 
      */
-    protected $dateFormat = 'Y-m-d H:i:s';
+    protected $timestampable = [
+        'format' => 'Y-m-d H:i:s',
+        'columns' => [
+            'create' => 'create_at',
+            'update' => 'update_at'
+        ]
+    ];
     
-    public function initTimestampableTrait()
+    public function bootTimestampableTrait()
     {
         $this->addListener(EntityEvent::DEFINE_FILLABLE, function(EntityEvent $e)
         {
-            $this->create_at = $this->getIgnoreValue();
-            $this->update_at = $this->getIgnoreValue();
+            $this->{$this->timestampable['columns']['create']} = $this->getIgnoreValue();
+            $this->{$this->timestampable['columns']['update']} = $this->getIgnoreValue();
         });
 
         $this->addListener(RepositoryEvent::PRE_INSERT, function(RepositoryEvent $e) 
         {
             $this->touch(false);
         });
-
+        
         $this->addListener(RepositoryEvent::PRE_UPDATE, function(RepositoryEvent $e) 
         {
             $this->touch(false);
         });
-    }
-
-    /**
-     * @param string $value
-     */
-    public function setDateFormat($value)
-    {
-        $this->dateFormat = $value;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDateFormat()
-    {
-        return $this->dateFormat;
     }
 
     /**
@@ -56,14 +46,17 @@ trait TimestampableTrait
      */
     public function touch($save = false) 
     {
-        if ($this->create_at === $this->getIgnoreValue()) 
+        $create = &$this->{$this->timestampable['columns']['create']};
+        $update = &$this->{$this->timestampable['columns']['update']};
+        
+        if ($create === $this->getIgnoreValue()) 
         {
-            $this->create_at = date($this->getDateFormat());
-            $this->update_at = $this->create_at;
+            $create = date($this->timestampable['format']);
+            $update = $create;
         } 
         else 
         {
-            $this->update_at = date($this->getDateFormat());
+            $update = date($this->timestampable['format']);
         }
 
         if ($save) 

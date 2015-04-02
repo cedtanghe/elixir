@@ -36,9 +36,9 @@ class Memcached extends CacheAbstract
     }
 
     /**
-     * @see CacheAbstract::has()
+     * @see CacheAbstract::exists()
      */
-    public function has($key) 
+    public function exists($key) 
     {
         if (!$this->engine->get($key)) 
         {
@@ -53,17 +53,24 @@ class Memcached extends CacheAbstract
      */
     public function get($key, $default = null) 
     {
-        return $this->engine->get($key, $default);
+        $value = $this->engine->get($key, $default);
+        
+        if (null !== $this->encoder)
+        {
+            $value = $this->getEncoder()->encode($value);
+        }
+        
+        return $value;
     }
 
     /**
      * @see CacheAbstract::set()
      */
-    public function set($key, $value, $TTL = 0)
+    public function store($key, $value, $ttl = self::DEFAULT_TTL)
     {
-        if ($TTL != 0) 
+        if ($ttl != 0) 
         {
-            $TTL = time() + $this->convertTTL($TTL);
+            $ttl = time() + $this->parseTimeToLive($ttl);
         }
 
         if (null !== $this->encoder)
@@ -71,50 +78,43 @@ class Memcached extends CacheAbstract
             $value = $this->getEncoder()->encode($value);
         }
 
-        $this->engine->set($key, $value, $TTL);
+        return $this->engine->set($key, $value, $ttl);
+    }
+    
+    /**
+     * @see CacheAbstract::delete()
+     */
+    public function delete($key) 
+    {
+        return $this->engine->delete($key);
     }
 
     /**
-     * @param string $key
-     * @param integer $step
-     * @return integer|null
+     * @see CacheAbstract::incremente()
      */
     public function incremente($key, $step = 1) 
     {
-        $this->engine->increment($key, $step);
-        return $this->get($key);
+        return $this->engine->increment($key, $step);
     }
 
     /**
-     * @param string $key
-     * @param integer $step
-     * @return integer|null
+     * @see CacheAbstract::decremente()
      */
     public function decremente($key, $step = 1) 
     {
-        $this->engine->decrement($key, $step);
-        return $this->get($key);
+        return $this->engine->decrement($key, $step);
     }
-
+    
     /**
-     * @see CacheAbstract::remove()
+     * @see CacheAbstract::flush()
      */
-    public function remove($key) 
+    public function flush()
     {
-        $this->engine->delete($key);
+        return $this->engine->flush();
     }
 
     /**
-     * @see CacheAbstract::has()
-     */
-    public function clear()
-    {
-        $this->engine->flush();
-    }
-
-    /**
-     * @param string $method
-     * @param array $arguments
+     * @ignore
      */
     public function __call($method, $arguments) 
     {

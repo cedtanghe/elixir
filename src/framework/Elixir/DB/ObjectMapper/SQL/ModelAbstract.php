@@ -30,6 +30,11 @@ abstract class ModelAbstract extends EntityAbstract implements RepositoryInterfa
     public static $defaultConnectionManager;
     
     /**
+     * @var array
+     */
+    public static $traitsDefinition = [];
+    
+    /**
      * @var boolean
      */
     protected $enableInitTraits = true;
@@ -79,12 +84,39 @@ abstract class ModelAbstract extends EntityAbstract implements RepositoryInterfa
         
         if ($this->enableInitTraits)
         {
+            $this->booTraits();
+        }
+    }
+    
+    protected function booTraits()
+    {
+        if (isset(static::$traitsDefinition[$this->className]))
+        {
+            if (false !== static::$traitsDefinition[$this->className])
+            {
+                foreach (static::$traitsDefinition[$this->className] as $method)
+                {
+                    $this->$method();
+                }
+            }
+        }
+        else 
+        {
+            $methods = [];
             $traits = class_uses($this);
 
             foreach ($traits as $trait)
             {
-                $this->{'init' . $trait}();
+                $method = 'boot' . $trait;
+
+                if (method_exists($this, $method))
+                {
+                    $this->$method();
+                    $methods[] = $method;
+                }
             }
+
+            static::$traitsDefinition[$this->className] = count($methods) > 0 ? $methods : false;
         }
     }
 
@@ -176,7 +208,7 @@ abstract class ModelAbstract extends EntityAbstract implements RepositoryInterfa
             return $this->get($key);
         }
         
-        throw new \InvalidArgumentException(sprintf('Property "%so" is not a relationship.', $key));
+        throw new \InvalidArgumentException(sprintf('Property "%s" is not a relationship.', $key));
     }
     
     /**

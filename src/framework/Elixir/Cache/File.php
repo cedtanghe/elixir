@@ -63,7 +63,7 @@ class File extends CacheAbstract
     /**
      * @see CacheAbstract::has()
      */
-    public function has($key)
+    public function exists($key)
     {
         $file = $this->file($key);
         
@@ -95,9 +95,9 @@ class File extends CacheAbstract
         if (file_exists($file))
         {
             $handle = fopen($file, 'r');
-            $expired = time() > (int) trim(fgets($handle));
+            $ttl = (int)trim(fgets($handle));
 
-            if ($expired) 
+            if (time() > $ttl) 
             {
                 fclose($handle);
                 unlink($file);
@@ -120,33 +120,128 @@ class File extends CacheAbstract
     }
     
     /**
-     * @see CacheAbstract::set()
+     * @see CacheAbstract::store()
      */
-    public function set($key, $value, $TTL = 0)
+    public function store($key, $value, $ttl = self::DEFAULT_TTL)
     {
-        $TTL = time() + $this->convertTTL($TTL);
-        $data = $TTL . "\n" . $this->getEncoder()->encode($value);
+        $ttl = time() + $this->parseTimeToLive($ttl);
 
-        file_put_contents($this->file($key), $data, LOCK_EX);
+        file_put_contents(
+            $this->file($key), 
+            $ttl . "\n" . $this->getEncoder()->encode($value), 
+            LOCK_EX
+        );
+        
+        return true;
     }
     
     /**
-     * @see CacheAbstract::remove()
+     * @see CacheAbstract::delete()
      */
-    public function remove($key)
+    public function delete($key)
     {
         $file = $this->file($key);
 
         if (file_exists($file))
         {
-            unlink($file);
+            return unlink($file);
         }
+        
+        return false;
     }
     
     /**
-     * @see CacheAbstract::has()
+     * @see CacheAbstract::incremente()
      */
-    public function clear()
+    public function incremente($key, $step = 1)
+    {
+        $file = $this->file($key);
+
+        if (file_exists($file))
+        {
+            $handle = fopen($file, 'r');
+            $ttl = (int)trim(fgets($handle));
+
+            if (time() > $ttl) 
+            {
+                fclose($handle);
+                unlink($file);
+
+                return 0;
+            }
+
+            $data = '';
+
+            while (!feof($handle)) 
+            {
+                $data .= fgets($handle);
+            }
+            
+            fclose($handle);
+            
+            $data = (int)$this->getEncoder()->decode($data);
+            $data += $step;
+            
+            file_put_contents(
+                $this->file($key), 
+                $ttl . "\n" . $this->getEncoder()->encode($data), 
+                LOCK_EX
+            );
+            
+            return $data;
+        }
+        
+        return 0;
+    }
+    
+    /**
+     * @see CacheAbstract::decremente()
+     */
+    public function decremente($key, $step = 1)
+    {
+        $file = $this->file($key);
+
+        if (file_exists($file))
+        {
+            $handle = fopen($file, 'r');
+            $ttl = (int)trim(fgets($handle));
+
+            if (time() > $ttl) 
+            {
+                fclose($handle);
+                unlink($file);
+
+                return 0;
+            }
+
+            $data = '';
+
+            while (!feof($handle)) 
+            {
+                $data .= fgets($handle);
+            }
+            
+            fclose($handle);
+            
+            $data = (int)$this->getEncoder()->decode($data);
+            $data -= $step;
+            
+            file_put_contents(
+                $this->file($key), 
+                $ttl . "\n" . $this->getEncoder()->encode($data), 
+                LOCK_EX
+            );
+            
+            return $data;
+        }
+        
+        return 0;
+    }
+    
+    /**
+     * @see CacheAbstract::flush()
+     */
+    public function flush()
     {
         $files = glob($this->path . DIRECTORY_SEPARATOR . $this->identifier . '*.cache');
 
@@ -154,5 +249,7 @@ class File extends CacheAbstract
         {
             unlink($file);
         }
+        
+        return true;
     }
 }
