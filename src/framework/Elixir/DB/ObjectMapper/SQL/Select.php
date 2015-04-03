@@ -360,7 +360,7 @@ class Select implements FindableInterface
      */
     public function primary($id)
     {
-        $key = $this->_repository->getPrimaryKey();
+        $key = $this->repository->getPrimaryKey();
         
         if (is_array($key))
         {

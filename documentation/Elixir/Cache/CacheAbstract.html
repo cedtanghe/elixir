@@ -128,7 +128,7 @@
                     mixed
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_findOrStore">findOrStore</a>(string $key, mixed $value, integer|string|<a href="http://php.net/DateTime"><abbr title="DateTime">DateTime</abbr></a> $TTL)
+                    <a href="#method_remember">remember</a>(string $key, mixed $value, integer|string|<a href="http://php.net/DateTime"><abbr title="DateTime">DateTime</abbr></a> $ttl = self::DEFAULT_TTL)
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -138,7 +138,7 @@
                     integer
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_convertTTL">convertTTL</a>(integer|string|<a href="http://php.net/DateTime"><abbr title="DateTime">DateTime</abbr></a> $TTL)
+                    <a href="#method_parseTimeToLive">parseTimeToLive</a>(integer|string|<a href="http://php.net/DateTime"><abbr title="DateTime">DateTime</abbr></a> $ttl = self::DEFAULT_TTL)
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -252,10 +252,10 @@
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_findOrStore">
+                    <h3 id="method_remember">
         <div class="location">at line 64</div>
         <code>                    mixed
-    <strong>findOrStore</strong>(string $key, mixed $value, integer|string|<a href="http://php.net/DateTime"><abbr title="DateTime">DateTime</abbr></a> $TTL)</code>
+    <strong>remember</strong>(string $key, mixed $value, integer|string|<a href="http://php.net/DateTime"><abbr title="DateTime">DateTime</abbr></a> $ttl = self::DEFAULT_TTL)</code>
     </h3>
     <div class="details">
                 <div class="tags">
@@ -276,7 +276,7 @@
             </tr>
                     <tr>
                 <td>integer|string|<a href="http://php.net/DateTime"><abbr title="DateTime">DateTime</abbr></a></td>
-                <td>$TTL</td>
+                <td>$ttl</td>
                 <td>
 </td>
             </tr>
@@ -299,7 +299,7 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td>CacheInterface::findOrStore()</td>
+                <td>CacheInterface::remember()</td>
                 <td></td>
             </tr>
             </table>
@@ -309,10 +309,10 @@
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_convertTTL">
+                    <h3 id="method_parseTimeToLive">
         <div class="location">at line 89</div>
         <code>                    integer
-    <strong>convertTTL</strong>(integer|string|<a href="http://php.net/DateTime"><abbr title="DateTime">DateTime</abbr></a> $TTL)</code>
+    <strong>parseTimeToLive</strong>(integer|string|<a href="http://php.net/DateTime"><abbr title="DateTime">DateTime</abbr></a> $ttl = self::DEFAULT_TTL)</code>
     </h3>
     <div class="details">
                 <div class="tags">
@@ -321,7 +321,7 @@
                     <table class="table table-condensed">
                     <tr>
                 <td>integer|string|<a href="http://php.net/DateTime"><abbr title="DateTime">DateTime</abbr></a></td>
-                <td>$TTL</td>
+                <td>$ttl</td>
                 <td>
 </td>
             </tr>

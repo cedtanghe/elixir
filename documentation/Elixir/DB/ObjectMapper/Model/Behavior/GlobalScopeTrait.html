@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="robots" content="index, follow, all" />
-    <title>Elixir\DB\ObjectMapper\Model\Behavior\TimestampableTrait | Elixir</title>
+    <title>Elixir\DB\ObjectMapper\Model\Behavior\GlobalScopeTrait | Elixir</title>
 
             <link rel="stylesheet" type="text/css" href="../../../../../css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="../../../../../css/bootstrap-theme.min.css">
@@ -16,7 +16,7 @@
     
     </head>
 
-    <body id="class" data-name="class:Elixir_DB_ObjectMapper_Model_Behavior_TimestampableTrait" data-root-path="../../../../../">
+    <body id="class" data-name="class:Elixir_DB_ObjectMapper_Model_Behavior_GlobalScopeTrait" data-root-path="../../../../../">
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
@@ -66,17 +66,17 @@
                                         <li><a href="../../../../../Elixir/DB/ObjectMapper/Model.html">Model</a></li>
                                         <li><a href="../../../../../Elixir/DB/ObjectMapper/Model/Behavior.html">Behavior</a></li>
     
-                <li>TimestampableTrait</li>
+                <li>GlobalScopeTrait</li>
             </ol>
         </div>
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>TimestampableTrait</h1>
+        <h1>GlobalScopeTrait</h1>
     </div>
 
     <p>    trait
-    <strong>TimestampableTrait</strong></p>
+    <strong>GlobalScopeTrait</strong></p>
 
     
     
@@ -90,57 +90,27 @@
                     
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_bootTimestampableTrait">bootTimestampableTrait</a>()
+                    <a href="#method_bootGlobalScopeTrait">bootGlobalScopeTrait</a>()
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    string
+                    
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_getCreatedColumn">getCreatedColumn</a>()
+                    <a href="#method_addGlobalScope">addGlobalScope</a>(string $method)
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    string
+                    array
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_getCreatedFormat">getCreatedFormat</a>()
-                                            <p class="no-description">No description</p>
-                                    </div>
-                <div class="col-md-2"></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    string
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_getUpdatedColumn">getUpdatedColumn</a>()
-                                            <p class="no-description">No description</p>
-                                    </div>
-                <div class="col-md-2"></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    string
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_getUpdatedFormat">getUpdatedFormat</a>()
-                                            <p class="no-description">No description</p>
-                                    </div>
-                <div class="col-md-2"></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    boolean
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_touch">touch</a>(boolean $save = false)
+                    <a href="#method_getGlobalScopes">getGlobalScopes</a>()
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -152,10 +122,10 @@
 
             <div id="method-details">
                     <div class="method-item">
-                    <h3 id="method_bootTimestampableTrait">
-        <div class="location">at line 12</div>
+                    <h3 id="method_bootGlobalScopeTrait">
+        <div class="location">at line 17</div>
         <code>                    
-    <strong>bootTimestampableTrait</strong>()</code>
+    <strong>bootGlobalScopeTrait</strong>()</code>
     </h3>
     <div class="details">
                 <div class="tags">
@@ -167,110 +137,10 @@
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_getCreatedColumn">
-        <div class="location">at line 34</div>
-        <code>                    string
-    <strong>getCreatedColumn</strong>()</code>
-    </h3>
-    <div class="details">
-                <div class="tags">
-            
-                            <h4>Return Value</h4>
-
-                    <table class="table table-condensed">
-        <tr>
-            <td>string</td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_getCreatedFormat">
-        <div class="location">at line 42</div>
-        <code>                    string
-    <strong>getCreatedFormat</strong>()</code>
-    </h3>
-    <div class="details">
-                <div class="tags">
-            
-                            <h4>Return Value</h4>
-
-                    <table class="table table-condensed">
-        <tr>
-            <td>string</td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_getUpdatedColumn">
-        <div class="location">at line 50</div>
-        <code>                    string
-    <strong>getUpdatedColumn</strong>()</code>
-    </h3>
-    <div class="details">
-                <div class="tags">
-            
-                            <h4>Return Value</h4>
-
-                    <table class="table table-condensed">
-        <tr>
-            <td>string</td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_getUpdatedFormat">
-        <div class="location">at line 58</div>
-        <code>                    string
-    <strong>getUpdatedFormat</strong>()</code>
-    </h3>
-    <div class="details">
-                <div class="tags">
-            
-                            <h4>Return Value</h4>
-
-                    <table class="table table-condensed">
-        <tr>
-            <td>string</td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_touch">
-        <div class="location">at line 67</div>
-        <code>                    boolean
-    <strong>touch</strong>(boolean $save = false)</code>
+                    <h3 id="method_addGlobalScope">
+        <div class="location">at line 33</div>
+        <code>                    
+    <strong>addGlobalScope</strong>(string $method)</code>
     </h3>
     <div class="details">
                 <div class="tags">
@@ -278,19 +148,34 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td>boolean</td>
-                <td>$save</td>
+                <td>string</td>
+                <td>$method</td>
                 <td>
 </td>
             </tr>
             </table>
 
             
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getGlobalScopes">
+        <div class="location">at line 44</div>
+        <code>                    array
+    <strong>getGlobalScopes</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
                             <h4>Return Value</h4>
 
                     <table class="table table-condensed">
         <tr>
-            <td>boolean</td>
+            <td>array</td>
             <td>
 </td>
         </tr>

@@ -2,7 +2,6 @@
 
 namespace Elixir\DB\ObjectMapper\Model\Behavior;
 
-use Elixir\DB\ObjectMapper\EntityEvent;
 use Elixir\DB\ObjectMapper\RepositoryEvent;
 
 /**
@@ -10,23 +9,12 @@ use Elixir\DB\ObjectMapper\RepositoryEvent;
  */
 trait TimestampableTrait
 {
-    /**
-     * @var array 
-     */
-    protected $timestampable = [
-        'format' => 'Y-m-d H:i:s',
-        'columns' => [
-            'create' => 'create_at',
-            'update' => 'update_at'
-        ]
-    ];
-    
     public function bootTimestampableTrait()
     {
-        $this->addListener(EntityEvent::DEFINE_FILLABLE, function(EntityEvent $e)
+        $this->addListener(RepositoryEvent::DEFINE_FILLABLE, function(RepositoryEvent $e)
         {
-            $this->{$this->timestampable['columns']['create']} = $this->getIgnoreValue();
-            $this->{$this->timestampable['columns']['update']} = $this->getIgnoreValue();
+            $this->{$this->getCreatedColumn()} = $this->getIgnoreValue();
+            $this->{$this->getUpdatedColumn()} = $this->getIgnoreValue();
         });
 
         $this->addListener(RepositoryEvent::PRE_INSERT, function(RepositoryEvent $e) 
@@ -39,6 +27,38 @@ trait TimestampableTrait
             $this->touch(false);
         });
     }
+    
+    /**
+     * @return string
+     */
+    public function getCreatedColumn()
+    {
+        return 'created_at';
+    }
+    
+    /**
+     * @return string
+     */
+    public function getCreatedFormat()
+    {
+        return 'Y-m-d H:i:s';
+    }
+    
+    /**
+     * @return string
+     */
+    public function getUpdatedColumn()
+    {
+        return 'updated_at';
+    }
+    
+    /**
+     * @return string
+     */
+    public function getUpdatedFormat()
+    {
+        return 'Y-m-d H:i:s';
+    }
 
     /**
      * @param boolean $save
@@ -46,17 +66,14 @@ trait TimestampableTrait
      */
     public function touch($save = false) 
     {
-        $create = &$this->{$this->timestampable['columns']['create']};
-        $update = &$this->{$this->timestampable['columns']['update']};
-        
         if ($create === $this->getIgnoreValue()) 
         {
-            $create = date($this->timestampable['format']);
-            $update = $create;
+            $this->{$this->getCreatedColumn()} = date($this->getCreatedFormat());
+            $this->{$this->getUpdatedColumn()} = $create;
         } 
         else 
         {
-            $update = date($this->timestampable['format']);
+            $this->{$this->getUpdatedColumn()} = date($this->getUpdatedFormat());
         }
 
         if ($save) 

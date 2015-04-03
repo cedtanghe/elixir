@@ -10,9 +10,9 @@ use Elixir\DB\ObjectMapper\FindableInterface;
 interface FindableExtensionInterface
 {
     /**
-     * @param FindableInterface $findable
+     * @param FindableInterface $value
      */
-    public function setFindable(FindableInterface $findable);
+    public function setFindable(FindableInterface $value);
     
     /**
      * @return array

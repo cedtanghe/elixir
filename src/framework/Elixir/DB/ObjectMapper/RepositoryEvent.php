@@ -77,6 +77,16 @@ class RepositoryEvent extends EntityEvent
     protected $query;
     
     /**
+     * @var booleean
+     */
+    protected $queryExecuted;
+    
+    /**
+     * @var booleean
+     */
+    protected $querySuccess;
+    
+    /**
      * @see Event::__contruct()
      * @param array $params
      */
@@ -85,7 +95,11 @@ class RepositoryEvent extends EntityEvent
         parent::__construct($type);
 
         $params = array_merge(
-            ['query' => null], 
+            [
+                'query' => null, 
+                'query_executed' => false,
+                'query_success' => false,
+            ], 
             $params
         );
         
@@ -106,5 +120,37 @@ class RepositoryEvent extends EntityEvent
     public function setQuery($value) 
     {
         $this->query = $value;
+    }
+    
+    /**
+     * @return boolean
+     */
+    public function isQueryExecuted()
+    {
+        return $this->queryExecuted;
+    }
+    
+    /**
+     * @param boolean $value
+     */
+    public function setQueryExecuted($value) 
+    {
+        $this->queryExecuted = $value;
+    }
+    
+    /**
+     * @return boolean
+     */
+    public function isQuerySuccess()
+    {
+        return $this->querySuccess;
+    }
+    
+    /**
+     * @param boolean $value
+     */
+    public function setQuerySuccess($value) 
+    {
+        $this->querySuccess = $value;
     }
 }

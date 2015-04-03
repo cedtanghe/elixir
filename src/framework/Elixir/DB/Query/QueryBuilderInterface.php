@@ -10,6 +10,21 @@ use Elixir\DB\Query\QueryInterface;
 interface QueryBuilderInterface 
 {
     /**
+     * @var string
+     */
+    const DRIVER_MYSQL = 'mysql';
+
+    /**
+     * @var string
+     */
+    const DRIVER_SQLITE = 'sqlite';
+    
+    /**
+     * @return string
+     */
+    public function getDriver();
+    
+    /**
      * @param string $table
      * @return QueryInterface
      */

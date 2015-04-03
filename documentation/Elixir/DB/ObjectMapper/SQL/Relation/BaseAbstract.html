@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="robots" content="index, follow, all" />
-    <title>Elixir\Cache\File | Elixir</title>
+    <title>Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract | Elixir</title>
 
-            <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="../../css/bootstrap-theme.min.css">
-        <link rel="stylesheet" type="text/css" href="../../css/sami.css">
-        <script src="../../js/jquery-1.11.1.min.js"></script>
-        <script src="../../js/bootstrap.min.js"></script>
-        <script src="../../js/typeahead.min.js"></script>
-        <script src="../../sami.js"></script>
+            <link rel="stylesheet" type="text/css" href="../../../../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../../../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../../../css/sami.css">
+        <script src="../../../../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../../../../js/bootstrap.min.js"></script>
+        <script src="../../../../../js/typeahead.min.js"></script>
+        <script src="../../../../../sami.js"></script>
     
     
     </head>
 
-    <body id="class" data-name="class:Elixir_Cache_File" data-root-path="../../">
+    <body id="class" data-name="class:Elixir_DB_ObjectMapper_SQL_Relation_BaseAbstract" data-root-path="../../../../../">
             <div id="content">
         <div id="left-column">
                 <div id="control-panel">
-                <form id="search-form" action="../../search.html" method="GET">
+                <form id="search-form" action="../../../../../search.html" method="GET">
             <span class="glyphicon glyphicon-search"></span>
             <input name="search"
                    class="typeahead form-control"
@@ -42,16 +42,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="../../index.html">Elixir</a>
+                <a class="navbar-brand" href="../../../../../index.html">Elixir</a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-elements">
                 <ul class="nav navbar-nav">
-                    <li><a href="../../classes.html">Classes</a></li>
-                                            <li><a href="../../namespaces.html">Namespaces</a></li>
-                                        <li><a href="../../interfaces.html">Interfaces</a></li>
-                    <li><a href="../../traits.html">Traits</a></li>
-                    <li><a href="../../doc-index.html">Index</a></li>
-                    <li><a href="../../search.html">Search</a></li>
+                    <li><a href="../../../../../classes.html">Classes</a></li>
+                                            <li><a href="../../../../../namespaces.html">Namespaces</a></li>
+                                        <li><a href="../../../../../interfaces.html">Interfaces</a></li>
+                    <li><a href="../../../../../traits.html">Traits</a></li>
+                    <li><a href="../../../../../doc-index.html">Index</a></li>
+                    <li><a href="../../../../../search.html">Search</a></li>
                 </ul>
             </div>
         </div>
@@ -60,37 +60,27 @@
                         <div class="namespace-breadcrumbs">
             <ol class="breadcrumb">
                 <li><span class="label label-default">class</span></li>
-                                                            <li><a href="../../Elixir.html">Elixir</a></li>
-                                        <li><a href="../../Elixir/Cache.html">Cache</a></li>
+                                                            <li><a href="../../../../../Elixir.html">Elixir</a></li>
+                                        <li><a href="../../../../../Elixir/DB.html">DB</a></li>
+                                        <li><a href="../../../../../Elixir/DB/ObjectMapper.html">ObjectMapper</a></li>
+                                        <li><a href="../../../../../Elixir/DB/ObjectMapper/SQL.html">SQL</a></li>
+                                        <li><a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation.html">Relation</a></li>
     
-                <li>File</li>
+                <li>BaseAbstract</li>
             </ol>
         </div>
                 <div id="page-content">
                 
     <div class="page-header">
-        <h1>File</h1>
+        <h1>BaseAbstract</h1>
     </div>
 
-    <p>    class
-    <strong>File</strong>        extends <a href="../../Elixir/Cache/CacheAbstract.html"><abbr title="Elixir\Cache\CacheAbstract">CacheAbstract</abbr></a></p>
+    <p>abstract     class
+    <strong>BaseAbstract</strong>        implements
+        <a href="../../../../../Elixir/DB/ObjectMapper/RelationInterfaceMetas.html"><abbr title="Elixir\DB\ObjectMapper\RelationInterfaceMetas">RelationInterfaceMetas</abbr></a></p>
 
     
     
-            <h2>Constants</h2>
-
-            <table class="table table-condensed">
-                    <tr>
-                <td>DEFAULT_ENCODER</td>
-                <td class="last">
-                    <p><em>
-</em></p>
-                    <p>
-</p>
-                </td>
-            </tr>
-            </table>
-
     
     
             <h2>Methods</h2>
@@ -98,10 +88,40 @@
             <div class="container-fluid underlined">
                     <div class="row">
                 <div class="col-md-2 type">
-                    
+                    string
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method___construct">__construct</a>(string $identifier, $path = null)
+                    <a href="#method_getType">getType</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../../../Elixir/DB/ObjectMapper/RepositoryInterface.html"><abbr title="Elixir\DB\ObjectMapper\RepositoryInterface">RepositoryInterface</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getRepository">getRepository</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../../../Elixir/DB/ObjectMapper/RepositoryInterface.html"><abbr title="Elixir\DB\ObjectMapper\RepositoryInterface">RepositoryInterface</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getTarget">getTarget</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setForeignKey">setForeignKey</a>(string $value)
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -111,27 +131,77 @@
                     string
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_getIdentifier">getIdentifier</a>()
+                    <a href="#method_getForeignKey">getForeignKey</a>()
                                             <p class="no-description">No description</p>
                                     </div>
-                <div class="col-md-2"><small>from&nbsp;<a href="../../Elixir/Cache/CacheAbstract.html#method_getIdentifier"><abbr title="Elixir\Cache\CacheAbstract">CacheAbstract</abbr></a></small></div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setLocalKey">setLocalKey</a>(string $value)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getLocalKey">getLocalKey</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_withPivot">withPivot</a>(<a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/Pivot.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\Pivot">Pivot</abbr></a> $pivot)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/Pivot.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\Pivot">Pivot</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getPivot">getPivot</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_addCriteria">addCriteria</a>(callable $criteria)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    array
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getCriterias">getCriterias</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
                     
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_setEncoder">setEncoder</a>(<a href="../../Elixir/Cache/Encoder/EncoderInterface.html"><abbr title="Elixir\Cache\Encoder\EncoderInterface">EncoderInterface</abbr></a> $value)
-                                            <p class="no-description">No description</p>
-                                    </div>
-                <div class="col-md-2"><small>from&nbsp;<a href="../../Elixir/Cache/CacheAbstract.html#method_setEncoder"><abbr title="Elixir\Cache\CacheAbstract">CacheAbstract</abbr></a></small></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    <a href="../../Elixir/Cache/Encoder/EncoderInterface.html"><abbr title="Elixir\Cache\Encoder\EncoderInterface">EncoderInterface</abbr></a>
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_getEncoder">getEncoder</a>()
+                    <a href="#method_setRelated">setRelated</a>(mixed $value, array $options = array())
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -141,37 +211,7 @@
                     mixed
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_remember">remember</a>(string $key, mixed $value, integer|string|<a href="http://php.net/DateTime"><abbr title="DateTime">DateTime</abbr></a> $ttl = self::DEFAULT_TTL)
-                                            <p class="no-description">No description</p>
-                                    </div>
-                <div class="col-md-2"><small>from&nbsp;<a href="../../Elixir/Cache/CacheAbstract.html#method_remember"><abbr title="Elixir\Cache\CacheAbstract">CacheAbstract</abbr></a></small></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    integer
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_parseTimeToLive">parseTimeToLive</a>(integer|string|<a href="http://php.net/DateTime"><abbr title="DateTime">DateTime</abbr></a> $ttl = self::DEFAULT_TTL)
-                                            <p class="no-description">No description</p>
-                                    </div>
-                <div class="col-md-2"><small>from&nbsp;<a href="../../Elixir/Cache/CacheAbstract.html#method_parseTimeToLive"><abbr title="Elixir\Cache\CacheAbstract">CacheAbstract</abbr></a></small></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    boolean
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_exists">exists</a>(string $key)
-                                            <p class="no-description">No description</p>
-                                    </div>
-                <div class="col-md-2"></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    mixed
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_get">get</a>(string $key, mixed $default = null)
+                    <a href="#method_getRelated">getRelated</a>()
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -181,47 +221,17 @@
                     boolean
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_store">store</a>(string $key, mixed $value, integer|string|<a href="http://php.net/DateTime"><abbr title="DateTime">DateTime</abbr></a> $ttl = self::DEFAULT_TTL)
+                    <a href="#method_isFilled">isFilled</a>()
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
-                    boolean
+                    
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_delete">delete</a>(string $key)
-                                            <p class="no-description">No description</p>
-                                    </div>
-                <div class="col-md-2"></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    integer
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_incremente">incremente</a>(string $key, integer $step = 1)
-                                            <p class="no-description">No description</p>
-                                    </div>
-                <div class="col-md-2"></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    integer
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_decremente">decremente</a>(string $key, integer $step = 1)
-                                            <p class="no-description">No description</p>
-                                    </div>
-                <div class="col-md-2"></div>
-            </div>
-                    <div class="row">
-                <div class="col-md-2 type">
-                    boolean
-                </div>
-                <div class="col-md-8 type">
-                    <a href="#method_flush">flush</a>()
+                    <a href="#method_load">load</a>()
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -233,51 +243,10 @@
 
             <div id="method-details">
                     <div class="method-item">
-                    <h3 id="method___construct">
-        <div class="location">at line 27</div>
-        <code>                    
-    <strong>__construct</strong>(string $identifier, $path = null)</code>
-    </h3>
-    <div class="details">
-                <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td>string</td>
-                <td>$identifier</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
-                <td></td>
-                <td>$path</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-            
-            
-                            <h4>See also</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td>CacheAbstract::__construct()</td>
-                <td></td>
-            </tr>
-            </table>
-
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_getIdentifier">
-        <div class="location">in <a href="../../Elixir/Cache/CacheAbstract.html#method_getIdentifier"><abbr title="Elixir\Cache\CacheAbstract">CacheAbstract</abbr></a> at line 40</div>
+                    <h3 id="method_getType">
+        <div class="location">at line 66</div>
         <code>                    string
-    <strong>getIdentifier</strong>()</code>
+    <strong>getType</strong>()</code>
     </h3>
     <div class="details">
                 <div class="tags">
@@ -294,15 +263,92 @@
 
             
             
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>RelationInterface::getType()</td>
+                <td></td>
+            </tr>
+            </table>
+
                     </div>
     </div>
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_setEncoder">
-        <div class="location">in <a href="../../Elixir/Cache/CacheAbstract.html#method_setEncoder"><abbr title="Elixir\Cache\CacheAbstract">CacheAbstract</abbr></a> at line 48</div>
-        <code>                    
-    <strong>setEncoder</strong>(<a href="../../Elixir/Cache/Encoder/EncoderInterface.html"><abbr title="Elixir\Cache\Encoder\EncoderInterface">EncoderInterface</abbr></a> $value)</code>
+                    <h3 id="method_getRepository">
+        <div class="location">at line 74</div>
+        <code>                    <a href="../../../../../Elixir/DB/ObjectMapper/RepositoryInterface.html"><abbr title="Elixir\DB\ObjectMapper\RepositoryInterface">RepositoryInterface</abbr></a>
+    <strong>getRepository</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../../../Elixir/DB/ObjectMapper/RepositoryInterface.html"><abbr title="Elixir\DB\ObjectMapper\RepositoryInterface">RepositoryInterface</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>RelationInterfaceMetas::getType()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getTarget">
+        <div class="location">at line 82</div>
+        <code>                    <a href="../../../../../Elixir/DB/ObjectMapper/RepositoryInterface.html"><abbr title="Elixir\DB\ObjectMapper\RepositoryInterface">RepositoryInterface</abbr></a>
+    <strong>getTarget</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../../../Elixir/DB/ObjectMapper/RepositoryInterface.html"><abbr title="Elixir\DB\ObjectMapper\RepositoryInterface">RepositoryInterface</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>RelationInterfaceMetas::getTarget()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setForeignKey">
+        <div class="location">at line 98</div>
+        <code>                    <a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a>
+    <strong>setForeignKey</strong>(string $value)</code>
     </h3>
     <div class="details">
                 <div class="tags">
@@ -310,7 +356,7 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td><a href="../../Elixir/Cache/Encoder/EncoderInterface.html"><abbr title="Elixir\Cache\Encoder\EncoderInterface">EncoderInterface</abbr></a></td>
+                <td>string</td>
                 <td>$value</td>
                 <td>
 </td>
@@ -318,6 +364,16 @@
             </table>
 
             
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
             
             
                     </div>
@@ -325,10 +381,10 @@
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_getEncoder">
-        <div class="location">at line 43</div>
-        <code>                    <a href="../../Elixir/Cache/Encoder/EncoderInterface.html"><abbr title="Elixir\Cache\Encoder\EncoderInterface">EncoderInterface</abbr></a>
-    <strong>getEncoder</strong>()</code>
+                    <h3 id="method_getForeignKey">
+        <div class="location">at line 107</div>
+        <code>                    string
+    <strong>getForeignKey</strong>()</code>
     </h3>
     <div class="details">
                 <div class="tags">
@@ -337,7 +393,7 @@
 
                     <table class="table table-condensed">
         <tr>
-            <td><a href="../../Elixir/Cache/Encoder/EncoderInterface.html"><abbr title="Elixir\Cache\Encoder\EncoderInterface">EncoderInterface</abbr></a></td>
+            <td>string</td>
             <td>
 </td>
         </tr>
@@ -349,7 +405,7 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td>CacheAbstract::getEncoder()</td>
+                <td>RelationInterfaceMetas::getForeignKey()</td>
                 <td></td>
             </tr>
             </table>
@@ -359,10 +415,10 @@
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_remember">
-        <div class="location">in <a href="../../Elixir/Cache/CacheAbstract.html#method_remember"><abbr title="Elixir\Cache\CacheAbstract">CacheAbstract</abbr></a> at line 64</div>
-        <code>                    mixed
-    <strong>remember</strong>(string $key, mixed $value, integer|string|<a href="http://php.net/DateTime"><abbr title="DateTime">DateTime</abbr></a> $ttl = self::DEFAULT_TTL)</code>
+                    <h3 id="method_setLocalKey">
+        <div class="location">at line 138</div>
+        <code>                    <a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a>
+    <strong>setLocalKey</strong>(string $value)</code>
     </h3>
     <div class="details">
                 <div class="tags">
@@ -371,22 +427,10 @@
                     <table class="table table-condensed">
                     <tr>
                 <td>string</td>
-                <td>$key</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
-                <td>mixed</td>
                 <td>$value</td>
                 <td>
 </td>
             </tr>
-                    <tr>
-                <td>integer|string|<a href="http://php.net/DateTime"><abbr title="DateTime">DateTime</abbr></a></td>
-                <td>$ttl</td>
-                <td>
-</td>
-            </tr>
             </table>
 
             
@@ -394,7 +438,32 @@
 
                     <table class="table table-condensed">
         <tr>
-            <td>mixed</td>
+            <td><a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getLocalKey">
+        <div class="location">at line 147</div>
+        <code>                    string
+    <strong>getLocalKey</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
             <td>
 </td>
         </tr>
@@ -406,7 +475,7 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td>CacheInterface::remember()</td>
+                <td>RelationInterfaceMetas::getLocalKey()</td>
                 <td></td>
             </tr>
             </table>
@@ -416,10 +485,10 @@
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_parseTimeToLive">
-        <div class="location">in <a href="../../Elixir/Cache/CacheAbstract.html#method_parseTimeToLive"><abbr title="Elixir\Cache\CacheAbstract">CacheAbstract</abbr></a> at line 89</div>
-        <code>                    integer
-    <strong>parseTimeToLive</strong>(integer|string|<a href="http://php.net/DateTime"><abbr title="DateTime">DateTime</abbr></a> $ttl = self::DEFAULT_TTL)</code>
+                    <h3 id="method_withPivot">
+        <div class="location">at line 175</div>
+        <code>                    <a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a>
+    <strong>withPivot</strong>(<a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/Pivot.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\Pivot">Pivot</abbr></a> $pivot)</code>
     </h3>
     <div class="details">
                 <div class="tags">
@@ -427,8 +496,8 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td>integer|string|<a href="http://php.net/DateTime"><abbr title="DateTime">DateTime</abbr></a></td>
-                <td>$ttl</td>
+                <td><a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/Pivot.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\Pivot">Pivot</abbr></a></td>
+                <td>$pivot</td>
                 <td>
 </td>
             </tr>
@@ -439,7 +508,7 @@
 
                     <table class="table table-condensed">
         <tr>
-            <td>integer</td>
+            <td><a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a></td>
             <td>
 </td>
         </tr>
@@ -452,30 +521,19 @@
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_exists">
-        <div class="location">at line 66</div>
-        <code>                    boolean
-    <strong>exists</strong>(string $key)</code>
+                    <h3 id="method_getPivot">
+        <div class="location">at line 184</div>
+        <code>                    <a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/Pivot.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\Pivot">Pivot</abbr></a>
+    <strong>getPivot</strong>()</code>
     </h3>
     <div class="details">
                 <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td>string</td>
-                <td>$key</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
             
                             <h4>Return Value</h4>
 
                     <table class="table table-condensed">
         <tr>
-            <td>boolean</td>
+            <td><a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/Pivot.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\Pivot">Pivot</abbr></a></td>
             <td>
 </td>
         </tr>
@@ -487,7 +545,7 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td>CacheAbstract::has()</td>
+                <td>RelationInterfaceMetas::getPivot()</td>
                 <td></td>
             </tr>
             </table>
@@ -497,265 +555,155 @@
 
             </div>
                     <div class="method-item">
-                    <h3 id="method_get">
-        <div class="location">at line 91</div>
-        <code>                    mixed
-    <strong>get</strong>(string $key, mixed $default = null)</code>
-    </h3>
-    <div class="details">
-                <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td>string</td>
-                <td>$key</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
-                <td>mixed</td>
-                <td>$default</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-                            <h4>Return Value</h4>
-
-                    <table class="table table-condensed">
-        <tr>
-            <td>mixed</td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                            <h4>See also</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td>CacheAbstract::get()</td>
-                <td></td>
-            </tr>
-            </table>
-
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_store">
-        <div class="location">at line 125</div>
-        <code>                    boolean
-    <strong>store</strong>(string $key, mixed $value, integer|string|<a href="http://php.net/DateTime"><abbr title="DateTime">DateTime</abbr></a> $ttl = self::DEFAULT_TTL)</code>
-    </h3>
-    <div class="details">
-                <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td>string</td>
-                <td>$key</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
-                <td>mixed</td>
-                <td>$value</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
-                <td>integer|string|<a href="http://php.net/DateTime"><abbr title="DateTime">DateTime</abbr></a></td>
-                <td>$ttl</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-                            <h4>Return Value</h4>
-
-                    <table class="table table-condensed">
-        <tr>
-            <td>boolean</td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                            <h4>See also</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td>CacheAbstract::store()</td>
-                <td></td>
-            </tr>
-            </table>
-
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_delete">
-        <div class="location">at line 141</div>
-        <code>                    boolean
-    <strong>delete</strong>(string $key)</code>
-    </h3>
-    <div class="details">
-                <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td>string</td>
-                <td>$key</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-                            <h4>Return Value</h4>
-
-                    <table class="table table-condensed">
-        <tr>
-            <td>boolean</td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                            <h4>See also</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td>CacheAbstract::delete()</td>
-                <td></td>
-            </tr>
-            </table>
-
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_incremente">
-        <div class="location">at line 156</div>
-        <code>                    integer
-    <strong>incremente</strong>(string $key, integer $step = 1)</code>
-    </h3>
-    <div class="details">
-                <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td>string</td>
-                <td>$key</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
-                <td>integer</td>
-                <td>$step</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-                            <h4>Return Value</h4>
-
-                    <table class="table table-condensed">
-        <tr>
-            <td>integer</td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                            <h4>See also</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td>CacheAbstract::incremente()</td>
-                <td></td>
-            </tr>
-            </table>
-
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_decremente">
-        <div class="location">at line 200</div>
-        <code>                    integer
-    <strong>decremente</strong>(string $key, integer $step = 1)</code>
-    </h3>
-    <div class="details">
-                <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td>string</td>
-                <td>$key</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
-                <td>integer</td>
-                <td>$step</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-                            <h4>Return Value</h4>
-
-                    <table class="table table-condensed">
-        <tr>
-            <td>integer</td>
-            <td>
-</td>
-        </tr>
-    </table>
-
-            
-            
-                            <h4>See also</h4>
-
-                    <table class="table table-condensed">
-                    <tr>
-                <td>CacheAbstract::decremente()</td>
-                <td></td>
-            </tr>
-            </table>
-
-                    </div>
-    </div>
-
-            </div>
-                    <div class="method-item">
-                    <h3 id="method_flush">
+                    <h3 id="method_addCriteria">
         <div class="location">at line 244</div>
+        <code>                    <a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a>
+    <strong>addCriteria</strong>(callable $criteria)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>callable</td>
+                <td>$criteria</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getCriterias">
+        <div class="location">at line 253</div>
+        <code>                    array
+    <strong>getCriterias</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>array</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>RelationInterfaceMetas::getCriterias()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setRelated">
+        <div class="location">at line 261</div>
+        <code>                    
+    <strong>setRelated</strong>(mixed $value, array $options = array())</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>mixed</td>
+                <td>$value</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$options</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>RelationInterface::setRelated()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getRelated">
+        <div class="location">at line 280</div>
+        <code>                    mixed
+    <strong>getRelated</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>mixed</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>RelationInterface::getRelated()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isFilled">
+        <div class="location">at line 288</div>
         <code>                    boolean
-    <strong>flush</strong>()</code>
+    <strong>isFilled</strong>()</code>
     </h3>
     <div class="details">
                 <div class="tags">
@@ -776,7 +724,31 @@
 
                     <table class="table table-condensed">
                     <tr>
-                <td>CacheAbstract::flush()</td>
+                <td>RelationInterface::isFilled()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_load">
+        <div class="location">at line 296</div>
+        <code>                    
+    <strong>load</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>RelationInterface::load()</td>
                 <td></td>
             </tr>
             </table>

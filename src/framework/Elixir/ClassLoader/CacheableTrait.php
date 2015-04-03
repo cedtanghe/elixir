@@ -44,12 +44,12 @@ trait CacheableTrait
         {
             if(null !== $version)
             {
-                $this->_cacheVersion = $version;
+                $this->cacheVersion = $version;
             }
             
-            $this->_classes = array_merge(
+            $this->classes = array_merge(
                 Arr::get('classes', $data, []),
-                $this->_classes
+                $this->classes
             );
         }
     }
@@ -63,7 +63,7 @@ trait CacheableTrait
         $cache->set(
             $key, 
             [
-                'classes' => $this->_classes,
+                'classes' => $this->classes,
                 'cache_version' => $this->cacheVersion
             ]
         );

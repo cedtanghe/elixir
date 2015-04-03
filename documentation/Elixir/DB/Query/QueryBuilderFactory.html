@@ -78,29 +78,6 @@
 
     
     
-            <h2>Constants</h2>
-
-            <table class="table table-condensed">
-                    <tr>
-                <td>DRIVER_MYSQL</td>
-                <td class="last">
-                    <p><em>
-</em></p>
-                    <p>
-</p>
-                </td>
-            </tr>
-                    <tr>
-                <td>DRIVER_SQLITE</td>
-                <td class="last">
-                    <p><em>
-</em></p>
-                    <p>
-</p>
-                </td>
-            </tr>
-            </table>
-
     
     
             <h2>Methods</h2>
@@ -111,7 +88,7 @@
                     static&nbsp;<a href="../../../Elixir/DB/Query/QueryInterface.html"><abbr title="Elixir\DB\Query\QueryInterface">QueryInterface</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_select">select</a>(string $table = null, string $driver = self::DRIVER_MYSQL)
+                    <a href="#method_select">select</a>(string $table = null, string $driver = QueryBuilderInterface::DRIVER_MYSQL)
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -121,7 +98,7 @@
                     static&nbsp;<a href="../../../Elixir/DB/Query/QueryInterface.html"><abbr title="Elixir\DB\Query\QueryInterface">QueryInterface</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_insert">insert</a>(string $table = null, string $driver = self::DRIVER_MYSQL)
+                    <a href="#method_insert">insert</a>(string $table = null, string $driver = QueryBuilderInterface::DRIVER_MYSQL)
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -131,7 +108,7 @@
                     static&nbsp;<a href="../../../Elixir/DB/Query/QueryInterface.html"><abbr title="Elixir\DB\Query\QueryInterface">QueryInterface</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_update">update</a>(string $table = null, string $driver = self::DRIVER_MYSQL)
+                    <a href="#method_update">update</a>(string $table = null, string $driver = QueryBuilderInterface::DRIVER_MYSQL)
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -141,7 +118,7 @@
                     static&nbsp;<a href="../../../Elixir/DB/Query/QueryInterface.html"><abbr title="Elixir\DB\Query\QueryInterface">QueryInterface</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_delete">delete</a>(string $table = null, string $driver = self::DRIVER_MYSQL)
+                    <a href="#method_delete">delete</a>(string $table = null, string $driver = QueryBuilderInterface::DRIVER_MYSQL)
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -151,7 +128,7 @@
                     static&nbsp;<a href="../../../Elixir/DB/Query/QueryInterface.html"><abbr title="Elixir\DB\Query\QueryInterface">QueryInterface</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_createTable">createTable</a>(string $table = null, string $driver = self::DRIVER_MYSQL)
+                    <a href="#method_createTable">createTable</a>(string $table = null, string $driver = QueryBuilderInterface::DRIVER_MYSQL)
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -161,7 +138,7 @@
                     static&nbsp;<a href="../../../Elixir/DB/Query/QueryInterface.html"><abbr title="Elixir\DB\Query\QueryInterface">QueryInterface</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_createAlterTable">createAlterTable</a>(string $table = null, string $driver = self::DRIVER_MYSQL)
+                    <a href="#method_createAlterTable">createAlterTable</a>(string $table = null, string $driver = QueryBuilderInterface::DRIVER_MYSQL)
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -171,7 +148,7 @@
                     static&nbsp;<a href="../../../Elixir/DB/Query/QueryInterface.html"><abbr title="Elixir\DB\Query\QueryInterface">QueryInterface</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_dropTable">dropTable</a>(string $table = null, string $driver = self::DRIVER_MYSQL)
+                    <a href="#method_dropTable">dropTable</a>(string $table = null, string $driver = QueryBuilderInterface::DRIVER_MYSQL)
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -181,7 +158,7 @@
                     static&nbsp;<a href="../../../Elixir/DB/Query/QueryInterface.html"><abbr title="Elixir\DB\Query\QueryInterface">QueryInterface</abbr></a>
                 </div>
                 <div class="col-md-8 type">
-                    <a href="#method_truncateTable">truncateTable</a>(string $table = null, string $driver = self::DRIVER_MYSQL)
+                    <a href="#method_truncateTable">truncateTable</a>(string $table = null, string $driver = QueryBuilderInterface::DRIVER_MYSQL)
                                             <p class="no-description">No description</p>
                                     </div>
                 <div class="col-md-2"></div>
@@ -194,9 +171,9 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method_select">
-        <div class="location">at line 48</div>
+        <div class="location">at line 39</div>
         <code>        static            <a href="../../../Elixir/DB/Query/QueryInterface.html"><abbr title="Elixir\DB\Query\QueryInterface">QueryInterface</abbr></a>
-    <strong>select</strong>(string $table = null, string $driver = self::DRIVER_MYSQL)</code>
+    <strong>select</strong>(string $table = null, string $driver = QueryBuilderInterface::DRIVER_MYSQL)</code>
     </h3>
     <div class="details">
                 <div class="tags">
@@ -236,9 +213,9 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_insert">
-        <div class="location">at line 64</div>
+        <div class="location">at line 55</div>
         <code>        static            <a href="../../../Elixir/DB/Query/QueryInterface.html"><abbr title="Elixir\DB\Query\QueryInterface">QueryInterface</abbr></a>
-    <strong>insert</strong>(string $table = null, string $driver = self::DRIVER_MYSQL)</code>
+    <strong>insert</strong>(string $table = null, string $driver = QueryBuilderInterface::DRIVER_MYSQL)</code>
     </h3>
     <div class="details">
                 <div class="tags">
@@ -278,9 +255,9 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_update">
-        <div class="location">at line 82</div>
+        <div class="location">at line 73</div>
         <code>        static            <a href="../../../Elixir/DB/Query/QueryInterface.html"><abbr title="Elixir\DB\Query\QueryInterface">QueryInterface</abbr></a>
-    <strong>update</strong>(string $table = null, string $driver = self::DRIVER_MYSQL)</code>
+    <strong>update</strong>(string $table = null, string $driver = QueryBuilderInterface::DRIVER_MYSQL)</code>
     </h3>
     <div class="details">
                 <div class="tags">
@@ -320,9 +297,9 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_delete">
-        <div class="location">at line 100</div>
+        <div class="location">at line 91</div>
         <code>        static            <a href="../../../Elixir/DB/Query/QueryInterface.html"><abbr title="Elixir\DB\Query\QueryInterface">QueryInterface</abbr></a>
-    <strong>delete</strong>(string $table = null, string $driver = self::DRIVER_MYSQL)</code>
+    <strong>delete</strong>(string $table = null, string $driver = QueryBuilderInterface::DRIVER_MYSQL)</code>
     </h3>
     <div class="details">
                 <div class="tags">
@@ -362,9 +339,9 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_createTable">
-        <div class="location">at line 118</div>
+        <div class="location">at line 109</div>
         <code>        static            <a href="../../../Elixir/DB/Query/QueryInterface.html"><abbr title="Elixir\DB\Query\QueryInterface">QueryInterface</abbr></a>
-    <strong>createTable</strong>(string $table = null, string $driver = self::DRIVER_MYSQL)</code>
+    <strong>createTable</strong>(string $table = null, string $driver = QueryBuilderInterface::DRIVER_MYSQL)</code>
     </h3>
     <div class="details">
                 <div class="tags">
@@ -404,9 +381,9 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_createAlterTable">
-        <div class="location">at line 136</div>
+        <div class="location">at line 127</div>
         <code>        static            <a href="../../../Elixir/DB/Query/QueryInterface.html"><abbr title="Elixir\DB\Query\QueryInterface">QueryInterface</abbr></a>
-    <strong>createAlterTable</strong>(string $table = null, string $driver = self::DRIVER_MYSQL)</code>
+    <strong>createAlterTable</strong>(string $table = null, string $driver = QueryBuilderInterface::DRIVER_MYSQL)</code>
     </h3>
     <div class="details">
                 <div class="tags">
@@ -446,9 +423,9 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_dropTable">
-        <div class="location">at line 154</div>
+        <div class="location">at line 145</div>
         <code>        static            <a href="../../../Elixir/DB/Query/QueryInterface.html"><abbr title="Elixir\DB\Query\QueryInterface">QueryInterface</abbr></a>
-    <strong>dropTable</strong>(string $table = null, string $driver = self::DRIVER_MYSQL)</code>
+    <strong>dropTable</strong>(string $table = null, string $driver = QueryBuilderInterface::DRIVER_MYSQL)</code>
     </h3>
     <div class="details">
                 <div class="tags">
@@ -488,9 +465,9 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_truncateTable">
-        <div class="location">at line 173</div>
+        <div class="location">at line 164</div>
         <code>        static            <a href="../../../Elixir/DB/Query/QueryInterface.html"><abbr title="Elixir\DB\Query\QueryInterface">QueryInterface</abbr></a>
-    <strong>truncateTable</strong>(string $table = null, string $driver = self::DRIVER_MYSQL)</code>
+    <strong>truncateTable</strong>(string $table = null, string $driver = QueryBuilderInterface::DRIVER_MYSQL)</code>
     </h3>
     <div class="details">
                 <div class="tags">

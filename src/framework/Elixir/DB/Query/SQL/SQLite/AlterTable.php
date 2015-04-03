@@ -62,7 +62,7 @@ class AlterTable extends BaseAlterTable
     protected function renderAddColumn($data) 
     {
         $column = $data['column'];
-        $SQL = 'ALTER TABLE ' . $this->_table . ' ADD COLUMN ';
+        $SQL = 'ALTER TABLE ' . $this->table . ' ADD COLUMN ';
 
         // Name
         $SQL .= $column->getName();

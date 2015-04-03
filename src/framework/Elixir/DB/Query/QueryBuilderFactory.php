@@ -2,6 +2,7 @@
 
 namespace Elixir\DB\Query;
 
+use Elixir\DB\Query\QueryBuilderInterface;
 use Elixir\DB\Query\QueryInterface;
 use Elixir\DB\Query\SQL\AlterTable;
 use Elixir\DB\Query\SQL\CreateTable;
@@ -31,25 +32,15 @@ use Elixir\DB\Query\SQL\Update;
 class QueryBuilderFactory 
 {
     /**
-     * @var string
-     */
-    const DRIVER_MYSQL = 'mysql';
-
-    /**
-     * @var string
-     */
-    const DRIVER_SQLITE = 'sqlite';
-
-    /**
      * @param string $table
      * @param string $driver
      * @return QueryInterface
      */
-    public static function select($table = null, $driver = self::DRIVER_MYSQL) 
+    public static function select($table = null, $driver = QueryBuilderInterface::DRIVER_MYSQL) 
     {
         switch (strtolower($driver)) 
         {
-            case self::DRIVER_SQLITE:
+            case QueryBuilderInterface::DRIVER_SQLITE:
                 return new SQLiteSelect($table);
         }
         
@@ -61,13 +52,13 @@ class QueryBuilderFactory
      * @param string $driver
      * @return QueryInterface
      */
-    public static function insert($table = null, $driver = self::DRIVER_MYSQL) 
+    public static function insert($table = null, $driver = QueryBuilderInterface::DRIVER_MYSQL) 
     {
         switch (strtolower($driver))
         {
-            case self::DRIVER_MYSQL:
+            case QueryBuilderInterface::DRIVER_MYSQL:
                 return new MySQLInsert($table);
-            case self::DRIVER_SQLITE:
+            case QueryBuilderInterface::DRIVER_SQLITE:
                 return new SQLiteInsert($table);
         }
 
@@ -79,13 +70,13 @@ class QueryBuilderFactory
      * @param string $driver
      * @return QueryInterface
      */
-    public static function update($table = null, $driver = self::DRIVER_MYSQL) 
+    public static function update($table = null, $driver = QueryBuilderInterface::DRIVER_MYSQL) 
     {
         switch (strtolower($driver))
         {
-            case self::DRIVER_MYSQL:
+            case QueryBuilderInterface::DRIVER_MYSQL:
                 return new MySQLUpdate($table);
-            case self::DRIVER_SQLITE:
+            case QueryBuilderInterface::DRIVER_SQLITE:
                 return new SQLiteUpdate($table);
         }
 
@@ -97,13 +88,13 @@ class QueryBuilderFactory
      * @param string $driver
      * @return QueryInterface
      */
-    public static function delete($table = null, $driver = self::DRIVER_MYSQL) 
+    public static function delete($table = null, $driver = QueryBuilderInterface::DRIVER_MYSQL) 
     {
         switch (strtolower($driver)) 
         {
-            case self::DRIVER_MYSQL:
+            case QueryBuilderInterface::DRIVER_MYSQL:
                 return new MySQLDelete($table);
-            case self::DRIVER_SQLITE:
+            case QueryBuilderInterface::DRIVER_SQLITE:
                 return new SQLiteDelete($table);
         }
 
@@ -115,13 +106,13 @@ class QueryBuilderFactory
      * @param string $driver
      * @return QueryInterface
      */
-    public static function createTable($table = null, $driver = self::DRIVER_MYSQL) 
+    public static function createTable($table = null, $driver = QueryBuilderInterface::DRIVER_MYSQL) 
     {
         switch (strtolower($driver))
         {
-            case self::DRIVER_MYSQL:
+            case QueryBuilderInterface::DRIVER_MYSQL:
                 return new MySQLCreateTable($table);
-            case self::DRIVER_SQLITE:
+            case QueryBuilderInterface::DRIVER_SQLITE:
                 return new SQLiteCreateTable($table);
         }
 
@@ -133,13 +124,13 @@ class QueryBuilderFactory
      * @param string $driver
      * @return QueryInterface
      */
-    public static function createAlterTable($table = null, $driver = self::DRIVER_MYSQL)
+    public static function createAlterTable($table = null, $driver = QueryBuilderInterface::DRIVER_MYSQL)
     {
         switch (strtolower($driver))
         {
-            case self::DRIVER_MYSQL:
+            case QueryBuilderInterface::DRIVER_MYSQL:
                 return new MySQLAlterTable($table);
-            case self::DRIVER_SQLITE:
+            case QueryBuilderInterface::DRIVER_SQLITE:
                 return new SQLiteAlterTable($table);
         }
 
@@ -151,13 +142,13 @@ class QueryBuilderFactory
      * @param string $driver
      * @return QueryInterface
      */
-    public static function dropTable($table = null, $driver = self::DRIVER_MYSQL) 
+    public static function dropTable($table = null, $driver = QueryBuilderInterface::DRIVER_MYSQL) 
     {
         switch (strtolower($driver)) 
         {
-            case self::DRIVER_MYSQL:
+            case QueryBuilderInterface::DRIVER_MYSQL:
                 return new MySQLDropTable($table);
-            case self::DRIVER_SQLITE:
+            case QueryBuilderInterface::DRIVER_SQLITE:
                 return new SQLiteDropTable($table);
         }
 
@@ -170,11 +161,11 @@ class QueryBuilderFactory
      * @return QueryInterface
      * @throws \RuntimeException
      */
-    public static function truncateTable($table = null, $driver = self::DRIVER_MYSQL)
+    public static function truncateTable($table = null, $driver = QueryBuilderInterface::DRIVER_MYSQL)
     {
         switch (strtolower($driver)) 
         {
-            case self::DRIVER_SQLITE:
+            case QueryBuilderInterface::DRIVER_SQLITE:
                 throw new \RuntimeException('TRUNCATE TABLE command for sqlite does not exist.');
         }
 

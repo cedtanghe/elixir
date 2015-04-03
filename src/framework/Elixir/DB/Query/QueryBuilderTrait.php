@@ -11,11 +11,6 @@ use Elixir\DB\Query\QueryBuilderInterface;
 trait QueryBuilderTrait
 {
     /**
-     * @return string
-     */
-    abstract public function getDriver();
-
-    /**
      * @see QueryBuilderInterface::createSelect()
      */
     public function createSelect($table = null) 

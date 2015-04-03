@@ -259,60 +259,69 @@ abstract class ModelAbstract extends EntityAbstract implements RepositoryInterfa
             return false;
         }
         
-        $this->dispatch(new RepositoryEvent(RepositoryEvent::PRE_INSERT));
-        $data = [];
-
-        foreach ($this->fillable as $column) 
-        {
-            $data[$column] = $this->get($column);
-        }
-
-        $values = [];
-
-        foreach ($data as $key => $value) 
-        {
-            if ($this->ignoreValue !== $value) 
-            {
-                $values['`' . $key . '`'] = $value;
-            }
-        }
-        
-        $DB = $this->getConnection('db.write');
-        
-        if (!$DB instanceof QueryBuilderInterface)
-        {
-            throw new \LogicException(
-                'This class requires the db object implements the interface "\Elixir\DB\Query\QueryBuilderInterface" for convenience.'
-            );
-        }
-        
-        $query = $DB->createInsert('`' . $this->table . '`');
-        $query->values($values, SQLInterface::VALUES_SET);
-
-        $event = new RepositoryEvent(
-            RepositoryEvent::PARSE_QUERY_INSERT, 
-            ['query' => $query]
-        );
-        
+        $event = new RepositoryEvent(RepositoryEvent::PRE_INSERT);
         $this->dispatch($event);
-        $query = $event->getQuery();
-
-        $result = $DB->exec($query);
-        $result = $result > 0;
-
-        if ($result) 
+        
+        if (!$event->isQueryExecuted())
         {
-            if ($this->autoIncrement && null !== $this->primaryKey)
-            {
-                if (is_array($this->primaryKey))
-                {
-                    throw new \LogicException('It is impossible to increment several primary keys.');
-                }
+            $data = [];
 
-                $this->{$this->primaryKey} = $DB->lastInsertId();
+            foreach ($this->fillable as $column) 
+            {
+                $data[$column] = $this->get($column);
+            }
+
+            $values = [];
+
+            foreach ($data as $key => $value) 
+            {
+                if ($this->ignoreValue !== $value) 
+                {
+                    $values['`' . $key . '`'] = $value;
+                }
+            }
+
+            $DB = $this->getConnection('db.write');
+
+            if (!$DB instanceof QueryBuilderInterface)
+            {
+                throw new \LogicException(
+                    'This class requires the db object implements the interface "\Elixir\DB\Query\QueryBuilderInterface" for convenience.'
+                );
+            }
+
+            $query = $DB->createInsert('`' . $this->table . '`');
+            $query->values($values, SQLInterface::VALUES_SET);
+
+            $event = new RepositoryEvent(
+                RepositoryEvent::PARSE_QUERY_INSERT, 
+                ['query' => $query]
+            );
+
+            $this->dispatch($event);
+            $query = $event->getQuery();
+
+            $result = $DB->exec($query);
+            $result = $result > 0;
+            
+            if ($result) 
+            {
+                if ($this->autoIncrement && null !== $this->primaryKey)
+                {
+                    if (is_array($this->primaryKey))
+                    {
+                        throw new \LogicException('It is impossible to increment several primary keys.');
+                    }
+
+                    $this->{$this->primaryKey} = $DB->lastInsertId();
+                }
             }
         }
-
+        else
+        {
+            $result = $event->isQuerySuccess();
+        }
+        
         $this->dispatch(new RepositoryEvent(RepositoryEvent::INSERT));
         $this->sync(self::SYNC_FILLABLE);
 
@@ -329,75 +338,83 @@ abstract class ModelAbstract extends EntityAbstract implements RepositoryInterfa
         {
             return false;
         }
-
-        $this->dispatch(new RepositoryEvent(RepositoryEvent::PRE_UPDATE));
-
-        if (!$this->isModified(self::SYNC_FILLABLE)) 
-        {
-            $this->dispatch(new RepositoryEvent(RepositoryEvent::UPDATE));
-            return true;
-        }
         
-        $data = [];
-
-        foreach (array_keys($this->getModified(self::SYNC_FILLABLE)) as $column) 
-        {
-            if (in_array($column, $omitMembers) || (count($members) > 0 && !in_array($column, $members))) 
-            {
-                continue;
-            }
-
-            $data[$column] = $this->get($column);
-        }
-
-        $values = [];
-
-        foreach ($data as $key => $value)
-        {
-            if ($this->ignoreValue !== $value) 
-            {
-                $values['`' . $key . '`'] = $value;
-            }
-        }
-
-        if (count($values) == 0) 
-        {
-            $this->dispatch(new RepositoryEvent(RepositoryEvent::UPDATE));
-            return true;
-        }
-        
-        if (!$DB instanceof QueryBuilderInterface)
-        {
-            throw new \LogicException(
-                'This class requires the db object implements the interface "\Elixir\DB\Query\QueryBuilderInterface" for convenience.'
-            );
-        }
-        
-        $DB = $this->getConnection('db.write');
-
-        $query = $DB->createUpdate('`' . $this->table . '`');
-        $query->set($values, SQLInterface::VALUES_SET);
-
-        if (null === $this->primaryKey) 
-        {
-            throw new \LogicException('No primary key is defined');
-        }
-
-        foreach ((array)$this->primaryKey as $key)
-        {
-            $query->where(sprintf('`%s`.`%s` = ?', $this->table, $key), $this->get($key));
-        }
-        
-        $event = new RepositoryEvent(
-            RepositoryEvent::PARSE_QUERY_UPDATE, 
-            ['query' => $query]
-        );
-        
+        $event = new RepositoryEvent(RepositoryEvent::PRE_UPDATE);
         $this->dispatch($event);
-        $query = $event->getQuery();
+        
+        if (!$event->isQueryExecuted())
+        {
+            if (!$this->isModified(self::SYNC_FILLABLE)) 
+            {
+                $this->dispatch(new RepositoryEvent(RepositoryEvent::UPDATE));
+                return true;
+            }
 
-        $result = $DB->exec($query);
-        $result = $result > 0;
+            $data = [];
+
+            foreach (array_keys($this->getModified(self::SYNC_FILLABLE)) as $column) 
+            {
+                if (in_array($column, $omitMembers) || (count($members) > 0 && !in_array($column, $members))) 
+                {
+                    continue;
+                }
+
+                $data[$column] = $this->get($column);
+            }
+
+            $values = [];
+
+            foreach ($data as $key => $value)
+            {
+                if ($this->ignoreValue !== $value) 
+                {
+                    $values['`' . $key . '`'] = $value;
+                }
+            }
+
+            if (count($values) == 0) 
+            {
+                $this->dispatch(new RepositoryEvent(RepositoryEvent::UPDATE));
+                return true;
+            }
+
+            if (!$DB instanceof QueryBuilderInterface)
+            {
+                throw new \LogicException(
+                    'This class requires the db object implements the interface "\Elixir\DB\Query\QueryBuilderInterface" for convenience.'
+                );
+            }
+
+            $DB = $this->getConnection('db.write');
+
+            $query = $DB->createUpdate('`' . $this->table . '`');
+            $query->set($values, SQLInterface::VALUES_SET);
+
+            if (null === $this->primaryKey) 
+            {
+                throw new \LogicException('No primary key is defined');
+            }
+
+            foreach ((array)$this->primaryKey as $key)
+            {
+                $query->where(sprintf('`%s`.`%s` = ?', $this->table, $key), $this->get($key));
+            }
+
+            $event = new RepositoryEvent(
+                RepositoryEvent::PARSE_QUERY_UPDATE, 
+                ['query' => $query]
+            );
+
+            $this->dispatch($event);
+            $query = $event->getQuery();
+
+            $result = $DB->exec($query);
+            $result = $result > 0;
+        }
+        else
+        {
+            $result = $event->isQuerySuccess();
+        }
         
         $this->dispatch(new RepositoryEvent(RepositoryEvent::UPDATE));
         $this->sync(self::SYNC_FILLABLE);
@@ -415,49 +432,57 @@ abstract class ModelAbstract extends EntityAbstract implements RepositoryInterfa
         {
             return false;
         }
-
-        $this->dispatch(new RepositoryEvent(RepositoryEvent::PRE_DELETE));
-
-        $DB = $this->getConnection('db.write');
         
-        if (!$DB instanceof QueryBuilderInterface)
-        {
-            throw new \LogicException(
-                'This class requires the db object implements the interface "\Elixir\DB\Query\QueryBuilderInterface" for convenience.'
-            );
-        }
-        
-        $query = $DB->createDelete('`' . $this->table . '`');
-
-        if (null === $this->primaryKey) 
-        {
-            throw new \LogicException('No primary key is defined.');
-        }
-
-        foreach ((array)$this->primaryKey as $key) 
-        {
-            $query->where(sprintf('`%s`.`%s` = ?', $this->table, $key), $this->get($key));
-        }
-        
-        $event = new RepositoryEvent(
-            RepositoryEvent::PARSE_QUERY_DELETE, 
-            ['query' => $query]
-        );
-        
+        $event = new RepositoryEvent(RepositoryEvent::PRE_DELETE);
         $this->dispatch($event);
-        $query = $event->getQuery();
+        
+        if (!$event->isQueryExecuted())
+        {
+            $DB = $this->getConnection('db.write');
 
-        $result = $DB->exec($query);
-        $result = $result > 0;
+            if (!$DB instanceof QueryBuilderInterface)
+            {
+                throw new \LogicException(
+                    'This class requires the db object implements the interface "\Elixir\DB\Query\QueryBuilderInterface" for convenience.'
+                );
+            }
+
+            $query = $DB->createDelete('`' . $this->table . '`');
+            
+            if (null === $this->primaryKey) 
+            {
+                throw new \LogicException('No primary key is defined.');
+            }
+
+            foreach ((array)$this->primaryKey as $key) 
+            {
+                $query->where(sprintf('`%s`.`%s` = ?', $this->table, $key), $this->get($key));
+            }
+
+            $event = new RepositoryEvent(
+                RepositoryEvent::PARSE_QUERY_DELETE, 
+                ['query' => $query]
+            );
+
+            $this->dispatch($event);
+            $query = $event->getQuery();
+
+            $result = $DB->exec($query);
+            $result = $result > 0;
+            
+            foreach ($this->data as $key => $value)
+            {
+                $this->set($key, $this->ignoreValue);
+            }
+        }
+        else
+        {
+            $result = $event->isQuerySuccess();
+        }
 
         $this->dispatch(new RepositoryEvent(RepositoryEvent::DELETE));
-
-        foreach ($this->data as $key => $value)
-        {
-            $this->set($key, $this->_ignoreValue);
-        }
-
         $this->sync(self::SYNC_FILLABLE);
+        
         return $result;
     }
     
@@ -604,9 +629,14 @@ abstract class ModelAbstract extends EntityAbstract implements RepositoryInterfa
     {
         foreach ((array)$this->primaryKey as $key) 
         {
-            $this->set($key, $this->_ignoreValue);
+            $this->set($key, $this->ignoreValue);
         }
-
+        
+        foreach ((array)$this->getRelatedKeys() as $key) 
+        {
+            $this->set($key, $this->ignoreValue);
+        }
+        
         $this->sync(self::SYNC_FILLABLE);
     }
 }
