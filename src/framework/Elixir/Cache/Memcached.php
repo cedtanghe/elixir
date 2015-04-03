@@ -30,6 +30,9 @@ class Memcached extends CacheAbstract
         $this->engine = new \Memcached($this->identifier);
     }
 
+    /**
+     * @ignore
+     */
     public function __destruct() 
     {
         $this->engine = null;

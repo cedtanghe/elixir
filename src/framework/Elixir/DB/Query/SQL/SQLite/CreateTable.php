@@ -35,7 +35,7 @@ class CreateTable extends BaseCreateTable
         
         switch ($part) 
         {
-            case 'if-not-exists':
+            case 'if_not_exists':
                 $this->ifNotExists(false);
                 break;
         }
@@ -50,7 +50,7 @@ class CreateTable extends BaseCreateTable
     {
         switch ($part) 
         {
-            case 'if-not-exists':
+            case 'if_not_exists':
                 return $this->ifNotExists;
         }
         
@@ -66,7 +66,7 @@ class CreateTable extends BaseCreateTable
         
         switch ($part) 
         {
-            case 'if-not-exists':
+            case 'if_not_exists':
                 $this->ifNotExists($data);
                 break;
         }

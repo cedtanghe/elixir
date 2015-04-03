@@ -9,6 +9,9 @@ use Elixir\DB\ObjectMapper\RepositoryEvent;
  */
 trait TimestampableTrait
 {
+    /**
+     * @return void
+     */
     public function bootTimestampableTrait()
     {
         $this->addListener(RepositoryEvent::DEFINE_FILLABLE, function(RepositoryEvent $e)

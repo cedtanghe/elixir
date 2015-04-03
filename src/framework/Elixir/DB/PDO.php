@@ -55,6 +55,9 @@ class PDO implements DBInterface, QueryBuilderInterface
         }
     }
 
+    /**
+     * @ignore
+     */
     public function __destruct() 
     {
         if ($this->autoDestruct) 

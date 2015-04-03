@@ -62,6 +62,9 @@ class Event
         return $this->stopPropagation;
     }
 
+    /**
+     * @return void
+     */
     public function stopPropagation() 
     {
         $this->stopPropagation = true;

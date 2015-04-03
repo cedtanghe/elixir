@@ -12,6 +12,9 @@ interface LoaderInterface
      */
     public function register($prepend = false);
     
+    /**
+     * @return void
+     */
     public function unregister();
 
     /**

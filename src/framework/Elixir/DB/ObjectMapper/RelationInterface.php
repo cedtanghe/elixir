@@ -53,5 +53,8 @@ interface RelationInterface
      */
     public function isFilled();
 
+    /**
+     * @return void
+     */
     public function load();
 }

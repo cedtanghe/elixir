@@ -88,6 +88,9 @@ abstract class ModelAbstract extends EntityAbstract implements RepositoryInterfa
         }
     }
     
+    /**
+     * @return void
+     */
     protected function booTraits()
     {
         if (isset(static::$traitsDefinition[$this->className]))

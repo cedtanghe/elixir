@@ -95,11 +95,13 @@ abstract class EntityAbstract implements EntityInterface
     
     /**
      * Declares columns
+     * @return void
      */
     abstract protected function defineFillable();
     
     /**
      * Declares relations and others
+     * @return void
      */
     protected function defineGuarded(){}
     
@@ -556,7 +558,7 @@ abstract class EntityAbstract implements EntityInterface
                 static::$mutatorsGet[$this->className][$key] = false;
             }
         }
-
+        
         return $this->get($key);
     }
 

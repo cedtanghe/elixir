@@ -48,6 +48,9 @@ interface DispatcherInterface
      */
     public function getListeners();
     
+    /**
+     * @return void
+     */
     public function removeListeners();
     
     /**

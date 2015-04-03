@@ -14,6 +14,9 @@ trait GlobalScopeTrait
      */
     protected $globalScope = ['scopes' => []];
     
+    /**
+     * @return void
+     */
     public function bootGlobalScopeTrait()
     {
         $this->addListener(RepositoryEvent::PRE_FIND, function(RepositoryEvent $e)

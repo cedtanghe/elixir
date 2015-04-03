@@ -90,11 +90,17 @@ class Collection implements \IteratorAggregate
         return array_slice($this->data, $offset, $length, $preserveKeys);
     }
     
+    /**
+     * @return void
+     */
     public function shuffle() 
     {
         shuffle($this->data);
     }
     
+    /**
+     * @return void
+     */
     public function reverse() 
     {
         array_reverse($this->data);
