@@ -4,6 +4,7 @@ namespace Elixir\DB\ObjectMapper\SQL\Extension;
 
 use Elixir\DB\ObjectMapper\FindableExtensionInterface;
 use Elixir\DB\ObjectMapper\FindableInterface;
+use Elixir\DB\ObjectMapper\RepositoryEvent;
 use Elixir\DB\ObjectMapper\RepositoryInterface;
 
 /**
@@ -22,11 +23,39 @@ class SoftDelete implements FindableExtensionInterface
     protected $repository;
     
     /**
+     * @var boolean 
+     */
+    protected $withTrashed = false;
+    
+    /**
      * @param RepositoryInterface $repository
      */
     public function __construct(RepositoryInterface $repository)
     {
         $this->repository = $repository;
+        $this->repository->addListener(RepositoryEvent::PARSE_QUERY_FIND, function(RepositoryEvent $e)
+        {
+            if(!$this->withTrashed())
+            {
+                $addBehavior = true;
+                
+                foreach ($this->findable->get('where') as $where)
+                {
+                    if(false !== strpos($where, $this->repository->getDeletedColumn()))
+                    {
+                        $addBehavior = false;
+                    }
+                }
+                
+                $this->findable->where(
+                    sprintf(
+                        '`%s`.`%s` IS NULL',
+                        $this->repository->getStockageName(),
+                        $this->repository->getDeletedColumn() 
+                    )
+                );
+            }
+        });
     }
 
     /**
@@ -38,51 +67,92 @@ class SoftDelete implements FindableExtensionInterface
     }
     
     /**
-     * @return void
+     * @return FindableInterface
      */
     public function withTrashed()
     {
-        // Todo
+        $this->withTrashed = true;
+        return $this->findable;
     }
     
     /**
-     * @return void
+     * @return FindableInterface
      */
     public function onlyTrashed()
     {
-        // Todo
+        $this->withTrashed = false;
+        
+        $this->findable->where(
+            sprintf(
+                '`%s`.`%s` IS NOT NULL',
+                $this->repository->getStockageName(),
+                $this->repository->getDeletedColumn() 
+            )
+        );
+        
+        return $this->findable;
     }
     
     /**
      * @param integer|string|\DateTime $date
+     * @return FindableInterface
      */
     public function trashedBefore($date)
     {
-        $date = $this->convertDate($date);
+        $this->withTrashed = false;
         
-        // Todo
+        $this->findable->where(
+            sprintf(
+                '`%s`.`%s` < ?',
+                $this->repository->getStockageName(),
+                $this->repository->getDeletedColumn() 
+            ),
+            $this->convertDate($date)
+        );
+        
+        return $this->findable;
     }
     
     /**
      * @param integer|string|\DateTime $date
+     * @return FindableInterface
      */
     public function trashedAfter($date)
     {
-        $date = $this->convertDate($date);
+        $this->withTrashed = false;
         
-        // Todo
+        $this->findable->where(
+            sprintf(
+                '`%s`.`%s` > ?',
+                $this->repository->getStockageName(),
+                $this->repository->getDeletedColumn() 
+            ),
+            $this->convertDate($date)
+        );
+        
+        return $this->findable;
     }
     
     /**
      * @param integer|string|\DateTime $start
      * @param integer|string|\DateTime $end
+     * @return FindableInterface
      */
     public function trashedBetween($start, $end)
     {
-        $start = $this->convertDate($start);
-        $end = $this->convertDate($end);
+        $this->withTrashed = false;
         
-        // Todo
+        $this->findable->where(
+            sprintf(
+                '`%s`.`%s` BETWEEN ? AND ?',
+                $this->repository->getStockageName(),
+                $this->repository->getDeletedColumn() 
+            ),
+            $this->convertDate($start),
+            $this->convertDate($end)
+        );
+        
+        return $this->findable;
     }
     
     /**

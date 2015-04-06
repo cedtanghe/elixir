@@ -69,7 +69,7 @@ trait TimestampableTrait
      */
     public function touch($save = false) 
     {
-        if ($create === $this->getIgnoreValue()) 
+        if ($this->{$this->getCreatedColumn()} === $this->getIgnoreValue()) 
         {
             $this->{$this->getCreatedColumn()} = date($this->getCreatedFormat());
             $this->{$this->getUpdatedColumn()} = $create;
