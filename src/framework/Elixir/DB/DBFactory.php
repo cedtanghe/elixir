@@ -39,6 +39,10 @@ class DBFactory
             {
                 if (substr($config['type'], 0, 3) == 'pdo') 
                 {
+                    $username = isset($config['username']) ? $config['username'] : null;
+                    $password = isset($config['password']) ? $config['password'] : null;
+                    $options = isset($config['options']) ? $config['options'] : [];
+                    
                     switch ($config['type']) 
                     {
                         case self::PDO_MYSQL:
@@ -53,6 +57,11 @@ class DBFactory
                             {
                                 $DNS .= ';port=' . $config['port'];
                             }
+                            
+                            if (!isset($options[\PDO::MYSQL_ATTR_INIT_COMMAND])) 
+                            {
+                                $options[\PDO::MYSQL_ATTR_INIT_COMMAND] = 'SET NAMES \'UTF8\'';
+                            }
                             break;
                         case self::PDO_SQLITE:
                             $DNS = 'sqlite:' . (isset($config['dbname']) ? $config['dbname'] : ':memory:');
@@ -60,16 +69,7 @@ class DBFactory
                         default:
                             throw new \RuntimeException(sprintf('Driver %s is not implemented.', $config['type']));
                     }
-
-                    $username = isset($config['username']) ? $config['username'] : null;
-                    $password = isset($config['password']) ? $config['password'] : null;
-                    $options = isset($config['options']) ? $config['options'] : [];
-
-                    if (!isset($options[\PDO::MYSQL_ATTR_INIT_COMMAND])) 
-                    {
-                        $options[\PDO::MYSQL_ATTR_INIT_COMMAND] = 'SET NAMES \'UTF8\'';
-                    }
-
+                    
                     if (!isset($options[\PDO::ATTR_PERSISTENT])) 
                     {
                         $options[\PDO::ATTR_PERSISTENT] = false;

@@ -3,13 +3,15 @@
 namespace Elixir\DB\ObjectMapper\Model\Behavior;
 
 use Elixir\DB\ObjectMapper\RepositoryEvent;
-use Elixir\DB\ObjectMapper\SQL\Extension\SoftDelete;
+use Elixir\DB\ObjectMapper\SQL\Extension\SoftDeleted;
 use Elixir\DB\Query\QueryBuilderInterface;
+use Elixir\DB\Query\SQL\ColumnFactory;
+use Elixir\DB\Query\SQL\CreateTable;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-trait SoftDeleteTrait 
+trait SoftDeletedTrait 
 {
     /**
      * @var boolean
@@ -20,19 +22,19 @@ trait SoftDeleteTrait
      * @throws \LogicException
      * @throws \RuntimeException
      */
-    public function bootSoftDeleteTrait() 
+    public function bootSoftDeletedTrait() 
     {
-        $DB = $this->getConnection('db.write');
+        $DB = $this->getConnection();
         
-        if (!$DB instanceof QueryBuilderInterface)
+        if (!method_exists($DB, 'getDriver'))
         {
             throw new \LogicException(
-                'This class requires the db object implements the interface "\Elixir\DB\Query\QueryBuilderInterface" for convenience.'
+                'Unable to determine the driver of the connection to the database.'
             );
         }
 
         $driver = $DB->getDriver();
-
+        
         switch ($driver) 
         {
             case QueryBuilderInterface::DRIVER_MYSQL:
@@ -40,7 +42,7 @@ trait SoftDeleteTrait
                 $this->addListener(RepositoryEvent::PRE_FIND, function(RepositoryEvent $e)
                 {
                     $findable = $e->getQuery();
-                    $findable->extend(new SoftDelete($this));
+                    $findable->extend(new SoftDeleted($this));
                 });
                 break;
             default:
@@ -86,7 +88,7 @@ trait SoftDeleteTrait
      */
     public function isTrashed()
     {
-        return $this->getDeletedColumn() === $this->getIgnoreValue();
+        return $this->{$this->getDeletedColumn()} === $this->getIgnoreValue();
     }
 
     /**
@@ -113,5 +115,15 @@ trait SoftDeleteTrait
         }
 
         return true;
+    }
+    
+    /**
+     * @param CreateTable $create
+     */
+    public static function build(CreateTable $create)
+    {
+        $create->column(
+            ColumnFactory::timestamp(static::factory()->getDeletedColumn(), null, null, true)
+        );
     }
 }

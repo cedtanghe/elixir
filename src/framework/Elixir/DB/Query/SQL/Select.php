@@ -61,7 +61,7 @@ class Select extends SQLAbstract
         {
             $this->columns = [];
         }
-
+        
         $this->columns = array_merge($this->columns, (array)$column);
         return $this;
     }

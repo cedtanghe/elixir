@@ -3,12 +3,15 @@
 namespace Elixir\DB\Query\SQL;
 
 use Elixir\DB\Query\SQL\Constraint;
+use Elixir\Util\MacroableTrait;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 class ConstraintFactory 
 {
+    use MacroableTrait;
+    
     /**
      * @param Column|string|array $columns
      * @return Constraint

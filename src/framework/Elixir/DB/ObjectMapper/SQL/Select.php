@@ -173,6 +173,24 @@ class Select implements FindableInterface
     {
         return $this->count() > 0;
     }
+    
+    /**
+     * @param integer $page
+     * @param integer $numberPerPage
+     * @return Select
+     */
+    public function paginate($page, $numberPerPage = 25)
+    {
+        if($page < 1)
+        {
+            $page = 1;
+        }
+        
+        $this->SQL->limit($numberPerPage);
+        $this->SQL->offset(($page - 1) * $numberPerPage);
+        
+        return $this;
+    }
 
     /**
      * @see FindableInterface::count()

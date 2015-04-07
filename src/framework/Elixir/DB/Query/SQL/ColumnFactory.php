@@ -3,12 +3,15 @@
 namespace Elixir\DB\Query\SQL;
 
 use Elixir\DB\Query\SQL\Column;
+use Elixir\Util\MacroableTrait;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 class ColumnFactory
 {
+    use MacroableTrait;
+    
     /**
      * @param string $name
      * @param boolean $default

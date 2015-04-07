@@ -397,6 +397,12 @@ abstract class EntityAbstract implements EntityInterface
             {
                 $class = $value['class'];
                 $entity = $this->createInstance($class);
+                
+                if (null === $entities)
+                {
+                    continue;
+                }
+                
                 $entity->hydrate($value['value'], $options);
 
                 if ($options['raw']) 
@@ -427,6 +433,12 @@ abstract class EntityAbstract implements EntityInterface
         {   
             $class = $data['_class'];
             $entity = $this->createInstance($class);
+            
+            if (null === $entity)
+            {
+                return null;
+            }
+            
             $entity->hydrate($data, $options);
             
             $data = $entity;
@@ -541,7 +553,8 @@ abstract class EntityAbstract implements EntityInterface
         {
             if (false !== static::$mutatorsGet[$this->className][$key]) 
             {
-                return $this->{static::$mutatorsGet[$this->className][$key]}();
+                $get = $this->{static::$mutatorsGet[$this->className][$key]}();
+                return $get;
             }
         } 
         else 
@@ -551,7 +564,9 @@ abstract class EntityAbstract implements EntityInterface
             if (method_exists($this, $method)) 
             {
                 static::$mutatorsGet[$this->className][$key] = $method;
-                return $this->{$method}();
+                
+                $get = $this->{$method}();
+                return $get;
             } 
             else
             {
@@ -559,7 +574,8 @@ abstract class EntityAbstract implements EntityInterface
             }
         }
         
-        return $this->get($key);
+        $get = $this->get($key);
+        return $get;
     }
 
     /**

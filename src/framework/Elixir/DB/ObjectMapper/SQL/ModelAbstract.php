@@ -148,9 +148,9 @@ abstract class ModelAbstract extends EntityAbstract implements RepositoryInterfa
      * @see RepositoryInterface::getConnection()
      * @return DBInterface
      */
-    public function getConnection($key) 
+    public function getConnection($key = null) 
     {
-        if (!$this->connectionManager->has($key)) 
+        if (null === $key || !$this->connectionManager->has($key)) 
         {
             $key = self::DEFAULT_CONNECTION_KEY;
         }
@@ -259,7 +259,7 @@ abstract class ModelAbstract extends EntityAbstract implements RepositoryInterfa
     {
         if ($this->isReadOnly())
         {
-            return false;
+            throw new \LogicException('This repository is read-only.');
         }
         
         $event = new RepositoryEvent(RepositoryEvent::PRE_INSERT);
@@ -325,8 +325,20 @@ abstract class ModelAbstract extends EntityAbstract implements RepositoryInterfa
             $result = $event->isQuerySuccess();
         }
         
-        $this->dispatch(new RepositoryEvent(RepositoryEvent::INSERT));
-        $this->sync(self::SYNC_FILLABLE);
+        $this->dispatch(
+            new RepositoryEvent(
+                RepositoryEvent::INSERT, 
+                [
+                    'query_executed' => true,
+                    'query_success' => $result
+                ]
+            )
+        );
+        
+        if($result)
+        {
+            $this->sync(self::SYNC_FILLABLE);
+        }
 
         return $result;
     }
@@ -339,7 +351,7 @@ abstract class ModelAbstract extends EntityAbstract implements RepositoryInterfa
     {
         if ($this->isReadOnly()) 
         {
-            return false;
+            throw new \LogicException('This repository is read-only.');
         }
         
         $event = new RepositoryEvent(RepositoryEvent::PRE_UPDATE);
@@ -349,7 +361,16 @@ abstract class ModelAbstract extends EntityAbstract implements RepositoryInterfa
         {
             if (!$this->isModified(self::SYNC_FILLABLE)) 
             {
-                $this->dispatch(new RepositoryEvent(RepositoryEvent::UPDATE));
+                $this->dispatch(
+                    new RepositoryEvent(
+                        RepositoryEvent::UPDATE, 
+                        [
+                            'query_executed' => false,
+                            'query_success' => true
+                        ]
+                    )
+                );
+                
                 return true;
             }
 
@@ -377,7 +398,16 @@ abstract class ModelAbstract extends EntityAbstract implements RepositoryInterfa
 
             if (count($values) == 0) 
             {
-                $this->dispatch(new RepositoryEvent(RepositoryEvent::UPDATE));
+                $this->dispatch(
+                    new RepositoryEvent(
+                        RepositoryEvent::UPDATE, 
+                        [
+                            'query_executed' => false,
+                            'query_success' => true
+                        ]
+                    )
+                );
+                
                 return true;
             }
 
@@ -419,8 +449,20 @@ abstract class ModelAbstract extends EntityAbstract implements RepositoryInterfa
             $result = $event->isQuerySuccess();
         }
         
-        $this->dispatch(new RepositoryEvent(RepositoryEvent::UPDATE));
-        $this->sync(self::SYNC_FILLABLE);
+        $this->dispatch(
+            new RepositoryEvent(
+                RepositoryEvent::UPDATE, 
+                [
+                    'query_executed' => true,
+                    'query_success' => $result
+                ]
+            )
+        );
+        
+        if($result)
+        {
+            $this->sync(self::SYNC_FILLABLE);
+        }
 
         return $result;
     }
@@ -433,7 +475,7 @@ abstract class ModelAbstract extends EntityAbstract implements RepositoryInterfa
     {
         if ($this->isReadOnly()) 
         {
-            return false;
+            throw new \LogicException('This repository is read-only.');
         }
         
         $event = new RepositoryEvent(RepositoryEvent::PRE_DELETE);
@@ -482,9 +524,21 @@ abstract class ModelAbstract extends EntityAbstract implements RepositoryInterfa
         {
             $result = $event->isQuerySuccess();
         }
-
-        $this->dispatch(new RepositoryEvent(RepositoryEvent::DELETE));
-        $this->sync(self::SYNC_FILLABLE);
+        
+        $this->dispatch(
+            new RepositoryEvent(
+                RepositoryEvent::DELETE, 
+                [
+                    'query_executed' => true,
+                    'query_success' => $result
+                ]
+            )
+        );
+        
+        if($result)
+        {
+            $this->sync(self::SYNC_FILLABLE);
+        }
         
         return $result;
     }
@@ -582,19 +636,19 @@ abstract class ModelAbstract extends EntityAbstract implements RepositoryInterfa
      */
     public function &__get($key) 
     {
-        $value = parent::__get($key);
+        $get = parent::__get($key);
         
         if (array_key_exists($key, $this->related))
         {
-            if (!$value->isFilled()) 
+            if (!$get->isFilled()) 
             {
-                $value->load();
+                $get->load();
             }
 
-            $value = $value->getRelated();
+            $get = $get->getRelated();
         }
 
-        return $value;
+        return $get;
     }
     
     /**

@@ -32,7 +32,7 @@ interface RepositoryInterface extends EntityInterface, DispatcherInterface
      * @param string $key
      * @return DBInterface
      */
-    public function getConnection($key);
+    public function getConnection($key = null);
 
     /**
      * @return string

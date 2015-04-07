@@ -3,17 +3,41 @@
 namespace Elixir\DB\ObjectMapper\Model\Behavior;
 
 use Elixir\DB\ObjectMapper\RepositoryEvent;
+use Elixir\DB\ObjectMapper\SQL\Extension\Timestamped;
+use Elixir\DB\Query\QueryBuilderInterface;
+use Elixir\DB\Query\SQL\Column;
+use Elixir\DB\Query\SQL\ColumnFactory;
+use Elixir\DB\Query\SQL\CreateTable;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-trait TimestampableTrait
+trait TimestampedTrait
 {
     /**
      * @return void
      */
-    public function bootTimestampableTrait()
+    public function bootTimestampedTrait()
     {
+        $DB = $this->getConnection();
+        
+        if (method_exists($DB, 'getDriver'))
+        {
+            $driver = $DB->getDriver();
+            
+            switch ($driver) 
+            {
+                case QueryBuilderInterface::DRIVER_MYSQL:
+                case QueryBuilderInterface::DRIVER_SQLITE:
+                    $this->addListener(RepositoryEvent::PRE_FIND, function(RepositoryEvent $e)
+                    {
+                        $findable = $e->getQuery();
+                        $findable->extend(new Timestamped($this));
+                    });
+                    break;
+            }
+        }
+        
         $this->addListener(RepositoryEvent::DEFINE_FILLABLE, function(RepositoryEvent $e)
         {
             $this->{$this->getCreatedColumn()} = $this->getIgnoreValue();
@@ -72,7 +96,7 @@ trait TimestampableTrait
         if ($this->{$this->getCreatedColumn()} === $this->getIgnoreValue()) 
         {
             $this->{$this->getCreatedColumn()} = date($this->getCreatedFormat());
-            $this->{$this->getUpdatedColumn()} = $create;
+            $this->{$this->getUpdatedColumn()} = date($this->getUpdatedFormat(), strtotime($this->{$this->getCreatedColumn()}));
         } 
         else 
         {
@@ -85,5 +109,21 @@ trait TimestampableTrait
         }
 
         return true;
+    }
+    
+    /**
+     * @param CreateTable $create
+     */
+    public static function build(CreateTable $create)
+    {
+        $r = static::factory();
+        
+        $create->column(
+            ColumnFactory::timestamp($r->getCreatedColumn(), Column::CURRENT_TIMESTAMP, null, false)
+        );
+        
+        $create->column(
+            ColumnFactory::timestamp($r->getUpdatedColumn(), Column::CURRENT_TIMESTAMP, Column::UPDATE_CURRENT_TIMESTAMP, false)
+        );
     }
 }

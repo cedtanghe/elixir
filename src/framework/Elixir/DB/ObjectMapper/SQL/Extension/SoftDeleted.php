@@ -10,7 +10,7 @@ use Elixir\DB\ObjectMapper\RepositoryInterface;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-class SoftDelete implements FindableExtensionInterface 
+class SoftDeleted implements FindableExtensionInterface 
 {
     /**
      * @var FindableInterface 
@@ -35,25 +35,28 @@ class SoftDelete implements FindableExtensionInterface
         $this->repository = $repository;
         $this->repository->addListener(RepositoryEvent::PARSE_QUERY_FIND, function(RepositoryEvent $e)
         {
-            if(!$this->withTrashed())
+            if(!$this->withTrashed)
             {
-                $addBehavior = true;
+                $hasContraint = false;
                 
                 foreach ($this->findable->get('where') as $where)
                 {
-                    if(false !== strpos($where, $this->repository->getDeletedColumn()))
+                    if (false !== strpos($where, $this->repository->getDeletedColumn()))
                     {
-                        $addBehavior = false;
+                        $hasContraint = true;
                     }
                 }
                 
-                $this->findable->where(
-                    sprintf(
-                        '`%s`.`%s` IS NULL',
-                        $this->repository->getStockageName(),
-                        $this->repository->getDeletedColumn() 
-                    )
-                );
+                if (!$hasContraint)
+                {
+                    $this->findable->where(
+                        sprintf(
+                            '`%s`.`%s` IS NULL',
+                            $this->repository->getStockageName(),
+                            $this->repository->getDeletedColumn() 
+                        )
+                    );
+                }
             }
         });
     }
@@ -80,8 +83,6 @@ class SoftDelete implements FindableExtensionInterface
      */
     public function onlyTrashed()
     {
-        $this->withTrashed = false;
-        
         $this->findable->where(
             sprintf(
                 '`%s`.`%s` IS NOT NULL',
@@ -90,6 +91,7 @@ class SoftDelete implements FindableExtensionInterface
             )
         );
         
+        $this->withTrashed();
         return $this->findable;
     }
     
@@ -99,8 +101,6 @@ class SoftDelete implements FindableExtensionInterface
      */
     public function trashedBefore($date)
     {
-        $this->withTrashed = false;
-        
         $this->findable->where(
             sprintf(
                 '`%s`.`%s` < ?',
@@ -110,6 +110,7 @@ class SoftDelete implements FindableExtensionInterface
             $this->convertDate($date)
         );
         
+        $this->withTrashed();
         return $this->findable;
     }
     
@@ -119,8 +120,6 @@ class SoftDelete implements FindableExtensionInterface
      */
     public function trashedAfter($date)
     {
-        $this->withTrashed = false;
-        
         $this->findable->where(
             sprintf(
                 '`%s`.`%s` > ?',
@@ -130,6 +129,7 @@ class SoftDelete implements FindableExtensionInterface
             $this->convertDate($date)
         );
         
+        $this->withTrashed();
         return $this->findable;
     }
     
@@ -140,8 +140,6 @@ class SoftDelete implements FindableExtensionInterface
      */
     public function trashedBetween($start, $end)
     {
-        $this->withTrashed = false;
-        
         $this->findable->where(
             sprintf(
                 '`%s`.`%s` BETWEEN ? AND ?',
@@ -152,6 +150,7 @@ class SoftDelete implements FindableExtensionInterface
             $this->convertDate($end)
         );
         
+        $this->withTrashed();
         return $this->findable;
     }
     
@@ -163,7 +162,7 @@ class SoftDelete implements FindableExtensionInterface
     {
         if ($date instanceof \DateTime)
         {
-            $timestamp = $ttl->getTimestamp();
+            $timestamp = $date->getTimestamp();
             return date($this->repository->getDeletedFormat(), $timestamp);
         }
         else if (is_numeric($date))
