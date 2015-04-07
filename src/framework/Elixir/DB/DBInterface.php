@@ -4,12 +4,11 @@ namespace Elixir\DB;
 
 use Elixir\DB\Query\QueryInterface;
 use Elixir\DB\ResultSet\ResultSetAbstract;
-use Elixir\Dispatcher\DispatcherInterface;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-interface DBInterface extends DispatcherInterface 
+interface DBInterface
 {
     /**
      * @return integer
