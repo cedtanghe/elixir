@@ -204,7 +204,7 @@ abstract class ModelAbstract extends EntityAbstract implements RepositoryInterfa
      * @return RelationInterface
      * @throws \InvalidArgumentException
      */
-    public function relation($key)
+    public function related($key)
     {
         if (array_key_exists($key, $this->related))
         {

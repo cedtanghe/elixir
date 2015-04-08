@@ -28,12 +28,12 @@ class DBEvent extends Event
     /**
      * @var array 
      */
-    protected $values;
+    protected $bindings;
 
     /**
-     * @var float 
+     * @var integer 
      */
-    protected $time;
+    protected $elapsedTime;
 
     /**
      * @see Event::__contruct()
@@ -46,15 +46,15 @@ class DBEvent extends Event
         $params = array_merge(
             [
                 'query' => null,
-                'values' => [],
-                'time' => 0
+                'bindings' => [],
+                'elapsed_time' => 0
             ], 
             $params
         );
         
         $this->query = $params['query'];
-        $this->values = $params['values'];
-        $this->time = $params['time'];
+        $this->bindings = $params['bindings'];
+        $this->elapsedTime = $params['elapsed_time'];
     }
     
     /**
@@ -76,24 +76,24 @@ class DBEvent extends Event
     /**
      * @return array
      */
-    public function getValues() 
+    public function getBindings() 
     {
-        return $this->values;
+        return $this->bindings;
     }
     
     /**
-     * @param array $value
+     * @param array $values
      */
-    public function setValues(array $value) 
+    public function setBindings(array $values) 
     {
-        $this->values = $value;
+        $this->bindings = $values;
     }
     
     /**
-     * @return float
+     * @return integer
      */
-    public function getTime() 
+    public function getElapsedTime() 
     {
-        return $this->time;
+        return $this->elapsedTime;
     }
 }

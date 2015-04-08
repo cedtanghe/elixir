@@ -14,6 +14,16 @@ use Elixir\DB\Query\SQL\CreateTable;
 trait VersionedTrait 
 {
     /**
+     * @param CreateTable $create
+     */
+    public static function build(CreateTable $create)
+    {
+        $create->column(
+            ColumnFactory::int(static::factory()->getVersionedColumn())
+        );
+    }
+    
+    /**
      * @var integer
      */
     protected $recordVersion;
@@ -106,15 +116,5 @@ trait VersionedTrait
     public function isCurrentVersion()
     {
         return $this->{$this->getVersionedColumn()} === $this->getCurrentVersion();
-    }
-    
-    /**
-     * @param CreateTable $create
-     */
-    public static function build(CreateTable $create)
-    {
-        $create->column(
-            ColumnFactory::int(static::factory()->getVersionedColumn())
-        );
     }
 }

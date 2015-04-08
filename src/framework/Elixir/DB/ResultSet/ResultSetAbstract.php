@@ -27,7 +27,7 @@ abstract class ResultSetAbstract implements \Iterator, \Countable
     {
         return $this->resource;
     }
-    
+
     /**
      * @return mixed
      */

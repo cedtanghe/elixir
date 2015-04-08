@@ -14,6 +14,16 @@ use Elixir\DB\Query\SQL\CreateTable;
 trait SoftDeletedTrait 
 {
     /**
+     * @param CreateTable $create
+     */
+    public static function build(CreateTable $create)
+    {
+        $create->column(
+            ColumnFactory::timestamp(static::factory()->getDeletedColumn(), null, null, true)
+        );
+    }
+    
+    /**
      * @var boolean
      */
     protected $forceDeleting = false;
@@ -115,15 +125,5 @@ trait SoftDeletedTrait
         }
 
         return true;
-    }
-    
-    /**
-     * @param CreateTable $create
-     */
-    public static function build(CreateTable $create)
-    {
-        $create->column(
-            ColumnFactory::timestamp(static::factory()->getDeletedColumn(), null, null, true)
-        );
     }
 }

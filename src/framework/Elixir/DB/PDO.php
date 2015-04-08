@@ -18,6 +18,28 @@ class PDO implements DBInterface, QueryBuilderInterface
 {
     use DispatcherTrait;
     use QueryBuilderTrait;
+    
+    /**
+     * @param mixed $value
+     * @return integer
+     */
+    public static function getParamType($value) 
+    {
+        if (is_int($value) || is_float($value)) 
+        {
+            return \PDO::PARAM_INT;
+        } 
+        else if (is_bool($value)) 
+        {
+            return \PDO::PARAM_BOOL;
+        } 
+        else if (is_null($value)) 
+        {
+            return \PDO::PARAM_NULL;
+        }
+
+        return \PDO::PARAM_STR;
+    }
 
     /**
      * @var \PDO 
@@ -131,28 +153,6 @@ class PDO implements DBInterface, QueryBuilderInterface
     }
     
     /**
-     * @param mixed $value
-     * @return integer
-     */
-    protected function getParamType($value) 
-    {
-        if (is_int($value) || is_float($value)) 
-        {
-            return \PDO::PARAM_INT;
-        } 
-        else if (is_bool($value)) 
-        {
-            return \PDO::PARAM_BOOL;
-        } 
-        else if (is_null($value)) 
-        {
-            return \PDO::PARAM_NULL;
-        }
-
-        return \PDO::PARAM_STR;
-    }
-
-    /**
      * @see DBInterface::quote()
      */
     public function quote($value, $type = null) 
@@ -178,15 +178,15 @@ class PDO implements DBInterface, QueryBuilderInterface
         {
             foreach ($value as &$v) 
             {
-                $v = $this->quote($v, (null === $type ? $this->getParamType($v) : $type));
+                $v = $this->quote($v, (null === $type ? static::getParamType($v) : $type));
             }
 
             return implode(', ', $value);
         }
 
-        return $this->connection->quote($value, (null === $type ? $this->getParamType($value) : $type));
+        return $this->connection->quote($value, (null === $type ? static::getParamType($value) : $type));
     }
-
+    
     /**
      * @see DBInterface::exec()
      */
@@ -213,7 +213,7 @@ class PDO implements DBInterface, QueryBuilderInterface
                 DBEvent::QUERY, 
                 [
                     'query' => $query,
-                    'time' => microtime(true) - $time
+                    'elapsed_time' => microtime(true) - $time
                 ]
             )
         );
@@ -224,7 +224,7 @@ class PDO implements DBInterface, QueryBuilderInterface
     /**
      * @see DBInterface::query()
      */
-    public function query($query, array $values = [], array $options = []) 
+    public function query($query, array $bindings = [], array $options = []) 
     {
         $findAndReplace = function($query, $value, $nth) 
         {
@@ -243,27 +243,27 @@ class PDO implements DBInterface, QueryBuilderInterface
             DBEvent::PRE_QUERY, 
             [
                 'query' => $query, 
-                'values' => $values
+                'bindings' => $bindings
             ]
         );
         
         $this->dispatch($event);
         $query = $event->getQuery();
-        $values = $event->getValues();
+        $bindings = $event->getBindings();
         
         if ($query instanceof SQLInterface) 
         {
-            $values = array_merge($values, $query->getBindValues());
+            $bindings = array_merge($bindings, $query->getBindValues());
             $query = $query->getQuery();
         }
         
-        $parsedValues = [];
+        $parsedBindValues = [];
         
-        if (count($values) > 0) 
+        if (count($bindings) > 0) 
         {
             $c = 0;
 
-            foreach ($values as $key => $value) 
+            foreach ($bindings as $key => $value) 
             {
                 $isInt = is_int($key);
 
@@ -285,14 +285,14 @@ class PDO implements DBInterface, QueryBuilderInterface
                             {
                                 $k = $key . '_' . ++$pos;
                             } 
-                            while (array_key_exists($k, $values));
+                            while (array_key_exists($k, $bindings));
 
-                            $parsedValues[$k] = $v;
+                            $parsedBindValues[$k] = $v;
                             $keys[] = $k;
                         } 
                         else 
                         {
-                            array_splice($parsedValues, ($c + (++$pos)), 0, $v);
+                            array_splice($parsedBindValues, ($c + (++$pos)), 0, $v);
                             $keys[] = '?';
                         }
                     }
@@ -319,7 +319,7 @@ class PDO implements DBInterface, QueryBuilderInterface
                 } 
                 else 
                 {
-                    $parsedValues[$key] = $value;
+                    $parsedBindValues[$key] = $value;
                 }
                 
                 $c++;
@@ -328,14 +328,14 @@ class PDO implements DBInterface, QueryBuilderInterface
 
         $stmt = $this->connection->prepare($query, $options);
 
-        foreach ($parsedValues as $key => $value) 
+        foreach ($parsedBindValues as $key => $value) 
         {
             if ($isInt)
             {
                 $key = $key + 1;
             }
 
-            $stmt->bindValue($key, $value, $this->getParamType($value));
+            $stmt->bindValue($key, $value, static::getParamType($value));
         }
         
         $time = microtime(true);
@@ -346,8 +346,8 @@ class PDO implements DBInterface, QueryBuilderInterface
                 DBEvent::QUERY, 
                 [
                     'query' => $query, 
-                    'values' => $parsedValues,
-                    'time' => microtime(true) - $time
+                    'bindings' => $parsedBindValues,
+                    'elapsed_time' => microtime(true) - $time
                 ]
             )
         );
@@ -358,6 +358,87 @@ class PDO implements DBInterface, QueryBuilderInterface
         }
 
         return new ResultSet($stmt);
+    }
+    
+    /**
+     * @see PDO::query()
+     * @return array
+     */
+    public function select($query, array $bindings = [], array $options = [])
+    {
+        $stmt = $this->query($query, $bindings, $options);
+        return $stmt->all();
+    }
+    
+    /**
+     * @see PDO::query()
+     * @see PDO::exec()
+     * @return integer
+     */
+    public function insert($query, array $bindings = [], array $options = [])
+    {
+        if (count($bindings) > 0 || count($options) > 0)
+        {
+            $stmt = $this->query($query, $bindings, $options);
+            return $stmt->rowCount();
+        }
+        
+        return $this->exec($query);
+    }
+    
+    /**
+     * @see PDO::query()
+     * @see PDO::exec()
+     * @return integer
+     */
+    public function update($query, array $bindings = [], array $options = [])
+    {
+        if (count($bindings) > 0 || count($options) > 0)
+        {
+            $stmt = $this->query($query, $bindings, $options);
+            return $stmt->rowCount();
+        }
+        
+        return $this->exec($query);
+    }
+    
+    /**
+     * @see PDO::query()
+     * @see PDO::exec()
+     * @return integer
+     */
+    public function delete($query, array $bindings = [], array $options = [])
+    {
+        if (count($bindings) > 0 || count($options) > 0)
+        {
+            $stmt = $this->query($query, $bindings, $options);
+            return $stmt->rowCount();
+        }
+        
+        return $this->exec($query);
+    }
+
+    /**
+     * @param callable $callback
+     * @return mixed
+     * @throws \Exception
+     */
+    public function transaction(callable $callback)
+    {
+        $this->begin();
+        
+        try
+        {
+            $result = call_user_func_array($callback, [$this]);
+            $this->commit();
+        }
+        catch (\Exception $e)
+        {
+            $this->rollBack();
+            throw $e;
+        }
+        
+        return $result;
     }
 
     /**

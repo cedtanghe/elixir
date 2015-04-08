@@ -15,6 +15,22 @@ use Elixir\DB\Query\SQL\CreateTable;
 trait TimestampedTrait
 {
     /**
+     * @param CreateTable $create
+     */
+    public static function build(CreateTable $create)
+    {
+        $r = static::factory();
+        
+        $create->column(
+            ColumnFactory::timestamp($r->getCreatedColumn(), Column::CURRENT_TIMESTAMP, null, false)
+        );
+        
+        $create->column(
+            ColumnFactory::timestamp($r->getUpdatedColumn(), Column::CURRENT_TIMESTAMP, Column::UPDATE_CURRENT_TIMESTAMP, false)
+        );
+    }
+    
+    /**
      * @return void
      */
     public function bootTimestampedTrait()
@@ -109,21 +125,5 @@ trait TimestampedTrait
         }
 
         return true;
-    }
-    
-    /**
-     * @param CreateTable $create
-     */
-    public static function build(CreateTable $create)
-    {
-        $r = static::factory();
-        
-        $create->column(
-            ColumnFactory::timestamp($r->getCreatedColumn(), Column::CURRENT_TIMESTAMP, null, false)
-        );
-        
-        $create->column(
-            ColumnFactory::timestamp($r->getUpdatedColumn(), Column::CURRENT_TIMESTAMP, Column::UPDATE_CURRENT_TIMESTAMP, false)
-        );
     }
 }
