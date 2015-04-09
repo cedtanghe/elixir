@@ -13,6 +13,7 @@ use Elixir\DB\ObjectMapper\SQL\Select;
 use Elixir\DB\Query\QueryBuilderInterface;
 use Elixir\DB\Query\SQL\SQLInterface;
 use Elixir\DI\ContainerInterface;
+use Elixir\Util\Str;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
@@ -623,9 +624,9 @@ abstract class ModelAbstract extends EntityAbstract implements RepositoryInterfa
             }
         }
         
-        if ($options['format'] == self::FORMAT_JSON)
+        if (isset($options['format']))
         {
-            $data = json_encode($data);
+            $data = $this->{'to' . Str::camelize($options['format'])}($data);
         }
         
         return $data;

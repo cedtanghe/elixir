@@ -3,7 +3,7 @@
 namespace Elixir\DB\ObjectMapper\Model\Behavior;
 
 use Elixir\DB\ObjectMapper\RepositoryEvent;
-use Elixir\DB\ObjectMapper\SQL\Extension\Timestamped;
+use Elixir\DB\ObjectMapper\SQL\Extension\Timestampable;
 use Elixir\DB\Query\QueryBuilderInterface;
 use Elixir\DB\Query\SQL\Column;
 use Elixir\DB\Query\SQL\ColumnFactory;
@@ -12,7 +12,7 @@ use Elixir\DB\Query\SQL\CreateTable;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-trait TimestampedTrait
+trait TimestampableTrait
 {
     /**
      * @param CreateTable $create
@@ -33,7 +33,7 @@ trait TimestampedTrait
     /**
      * @return void
      */
-    public function bootTimestampedTrait()
+    public function bootTimestampableTrait()
     {
         $DB = $this->getConnection();
         
@@ -48,7 +48,7 @@ trait TimestampedTrait
                     $this->addListener(RepositoryEvent::PRE_FIND, function(RepositoryEvent $e)
                     {
                         $findable = $e->getQuery();
-                        $findable->extend(new Timestamped($this));
+                        $findable->extend(new Timestampable($this));
                     });
                     break;
             }

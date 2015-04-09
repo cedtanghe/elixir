@@ -10,7 +10,7 @@ use Elixir\DB\ObjectMapper\RepositoryInterface;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-class SoftDeleted implements FindableExtensionInterface 
+class SoftDeletable implements FindableExtensionInterface 
 {
     /**
      * @var FindableInterface 
@@ -25,7 +25,7 @@ class SoftDeleted implements FindableExtensionInterface
     /**
      * @var boolean 
      */
-    protected $withTrashed = false;
+    protected $addConstraint = true;
     
     /**
      * @param RepositoryInterface $repository
@@ -35,7 +35,7 @@ class SoftDeleted implements FindableExtensionInterface
         $this->repository = $repository;
         $this->repository->addListener(RepositoryEvent::PARSE_QUERY_FIND, function(RepositoryEvent $e)
         {
-            if(!$this->withTrashed)
+            if($this->addConstraint)
             {
                 $hasContraint = false;
                 
@@ -74,7 +74,7 @@ class SoftDeleted implements FindableExtensionInterface
      */
     public function withTrashed()
     {
-        $this->withTrashed = true;
+        $this->addConstraint = false;
         return $this->findable;
     }
     
@@ -91,7 +91,7 @@ class SoftDeleted implements FindableExtensionInterface
             )
         );
         
-        $this->withTrashed();
+        $this->addConstraint = false;
         return $this->findable;
     }
     
@@ -110,7 +110,7 @@ class SoftDeleted implements FindableExtensionInterface
             $this->convertDate($date)
         );
         
-        $this->withTrashed();
+        $this->addConstraint = false;
         return $this->findable;
     }
     
@@ -129,7 +129,7 @@ class SoftDeleted implements FindableExtensionInterface
             $this->convertDate($date)
         );
         
-        $this->withTrashed();
+        $this->addConstraint = false;
         return $this->findable;
     }
     
@@ -150,7 +150,7 @@ class SoftDeleted implements FindableExtensionInterface
             $this->convertDate($end)
         );
         
-        $this->withTrashed();
+        $this->addConstraint = false;
         return $this->findable;
     }
     

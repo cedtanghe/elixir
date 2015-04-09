@@ -9,7 +9,7 @@ use Elixir\DB\ObjectMapper\RepositoryInterface;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-class Timestamped implements FindableExtensionInterface 
+class Timestampable implements FindableExtensionInterface 
 {
     /**
      * @var FindableInterface 

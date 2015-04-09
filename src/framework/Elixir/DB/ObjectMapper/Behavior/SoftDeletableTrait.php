@@ -3,7 +3,7 @@
 namespace Elixir\DB\ObjectMapper\Model\Behavior;
 
 use Elixir\DB\ObjectMapper\RepositoryEvent;
-use Elixir\DB\ObjectMapper\SQL\Extension\SoftDeleted;
+use Elixir\DB\ObjectMapper\SQL\Extension\SoftDeletable;
 use Elixir\DB\Query\QueryBuilderInterface;
 use Elixir\DB\Query\SQL\ColumnFactory;
 use Elixir\DB\Query\SQL\CreateTable;
@@ -11,7 +11,7 @@ use Elixir\DB\Query\SQL\CreateTable;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-trait SoftDeletedTrait 
+trait SoftDeletableTrait 
 {
     /**
      * @param CreateTable $create
@@ -32,7 +32,7 @@ trait SoftDeletedTrait
      * @throws \LogicException
      * @throws \RuntimeException
      */
-    public function bootSoftDeletedTrait() 
+    public function bootSoftDeletableTrait() 
     {
         $DB = $this->getConnection();
         
@@ -52,7 +52,7 @@ trait SoftDeletedTrait
                 $this->addListener(RepositoryEvent::PRE_FIND, function(RepositoryEvent $e)
                 {
                     $findable = $e->getQuery();
-                    $findable->extend(new SoftDeleted($this));
+                    $findable->extend(new SoftDeletable($this));
                 });
                 break;
             default:

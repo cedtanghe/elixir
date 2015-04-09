@@ -10,7 +10,7 @@ use Elixir\DB\ObjectMapper\RepositoryInterface;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-class Versioned implements FindableExtensionInterface 
+class Versionable implements FindableExtensionInterface 
 {
     /**
      * @var FindableInterface 
@@ -25,7 +25,7 @@ class Versioned implements FindableExtensionInterface
     /**
      * @var boolean 
      */
-    protected $unversioned = false;
+    protected $addConstraint = true;
     
     /**
      * @param RepositoryInterface $repository
@@ -35,7 +35,7 @@ class Versioned implements FindableExtensionInterface
         $this->repository = $repository;
         $this->repository->addListener(RepositoryEvent::PARSE_QUERY_FIND, function(RepositoryEvent $e)
         {
-            if(!$this->unversioned)
+            if($this->addConstraint)
             {
                 $hasContraint = false;
                 
@@ -84,7 +84,7 @@ class Versioned implements FindableExtensionInterface
             $value
         );
         
-        $this->unversioned = true;
+        $this->addConstraint = false;
         return $this->findable;
     }
     
@@ -93,7 +93,7 @@ class Versioned implements FindableExtensionInterface
      */
     public function unversioned()
     {
-        $this->unversioned = true;
+        $this->addConstraint = false;
         return $this->findable;
     }
 

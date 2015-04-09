@@ -496,12 +496,30 @@ abstract class EntityAbstract implements EntityInterface
             }
         }
         
-        if ($options['format'] == self::FORMAT_JSON)
+        if (isset($options['format']))
         {
-            $data = json_encode($data);
+            $data = $this->{'to' . Str::camelize($options['format'])}($data);
         }
         
         return $data;
+    }
+    
+    /**
+     * @param array $data
+     * @return array
+     */
+    protected function formatPHP(array $data)
+    {
+        return $data;
+    }
+    
+    /**
+     * @param array $data
+     * @return string
+     */
+    protected function formatJSON(array $data)
+    {
+        return json_encode($data);
     }
 
     /**

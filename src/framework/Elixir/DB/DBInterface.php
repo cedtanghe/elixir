@@ -50,9 +50,8 @@ interface DBInterface
 
     /**
      * @param QueryInterface|string $query
-     * @param array $values
-     * @param array $options
+     * @param array $bindings
      * @return ResultSetAbstract|boolean
      */
-    public function query($query, array $values = [], array $options = []);
+    public function query($query, array $bindings = []);
 }

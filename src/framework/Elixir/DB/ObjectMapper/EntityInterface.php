@@ -45,12 +45,12 @@ interface EntityInterface
     /**
      * @var string
      */
-    const FORMAT_PHP = 'php';
+    const FORMAT_PHP = 'PHP';
     
     /**
      * @var string
      */
-    const FORMAT_JSON = 'json';
+    const FORMAT_JSON = 'JSON';
     
     /**
      * @var string

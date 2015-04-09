@@ -4,20 +4,23 @@ namespace Elixir\DB;
 
 use Elixir\DB\DBEvent;
 use Elixir\DB\DBInterface;
+use Elixir\DB\DBUtilTrait;
 use Elixir\DB\Query\QueryBuilderInterface;
 use Elixir\DB\Query\QueryBuilderTrait;
 use Elixir\DB\Query\SQL\Expr;
 use Elixir\DB\Query\SQL\SQLInterface;
 use Elixir\DB\ResultSet\PDO as ResultSet;
+use Elixir\Dispatcher\DispatcherInterface;
 use Elixir\Dispatcher\DispatcherTrait;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-class PDO implements DBInterface, QueryBuilderInterface 
+class PDO implements DBInterface, DispatcherInterface, QueryBuilderInterface
 {
     use DispatcherTrait;
     use QueryBuilderTrait;
+    use DBUtilTrait;
     
     /**
      * @param mixed $value
@@ -224,7 +227,7 @@ class PDO implements DBInterface, QueryBuilderInterface
     /**
      * @see DBInterface::query()
      */
-    public function query($query, array $bindings = [], array $options = []) 
+    public function query($query, array $bindings = []) 
     {
         $findAndReplace = function($query, $value, $nth) 
         {
@@ -326,7 +329,7 @@ class PDO implements DBInterface, QueryBuilderInterface
             }
         }
 
-        $stmt = $this->connection->prepare($query, $options);
+        $stmt = $this->connection->prepare($query);
 
         foreach ($parsedBindValues as $key => $value) 
         {
@@ -358,87 +361,6 @@ class PDO implements DBInterface, QueryBuilderInterface
         }
 
         return new ResultSet($stmt);
-    }
-    
-    /**
-     * @see PDO::query()
-     * @return array
-     */
-    public function select($query, array $bindings = [], array $options = [])
-    {
-        $stmt = $this->query($query, $bindings, $options);
-        return $stmt->all();
-    }
-    
-    /**
-     * @see PDO::query()
-     * @see PDO::exec()
-     * @return integer
-     */
-    public function insert($query, array $bindings = [], array $options = [])
-    {
-        if (count($bindings) > 0 || count($options) > 0)
-        {
-            $stmt = $this->query($query, $bindings, $options);
-            return $stmt->rowCount();
-        }
-        
-        return $this->exec($query);
-    }
-    
-    /**
-     * @see PDO::query()
-     * @see PDO::exec()
-     * @return integer
-     */
-    public function update($query, array $bindings = [], array $options = [])
-    {
-        if (count($bindings) > 0 || count($options) > 0)
-        {
-            $stmt = $this->query($query, $bindings, $options);
-            return $stmt->rowCount();
-        }
-        
-        return $this->exec($query);
-    }
-    
-    /**
-     * @see PDO::query()
-     * @see PDO::exec()
-     * @return integer
-     */
-    public function delete($query, array $bindings = [], array $options = [])
-    {
-        if (count($bindings) > 0 || count($options) > 0)
-        {
-            $stmt = $this->query($query, $bindings, $options);
-            return $stmt->rowCount();
-        }
-        
-        return $this->exec($query);
-    }
-
-    /**
-     * @param callable $callback
-     * @return mixed
-     * @throws \Exception
-     */
-    public function transaction(callable $callback)
-    {
-        $this->begin();
-        
-        try
-        {
-            $result = call_user_func_array($callback, [$this]);
-            $this->commit();
-        }
-        catch (\Exception $e)
-        {
-            $this->rollBack();
-            throw $e;
-        }
-        
-        return $result;
     }
 
     /**

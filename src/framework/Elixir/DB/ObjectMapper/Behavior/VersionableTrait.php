@@ -3,7 +3,7 @@
 namespace Elixir\DB\ObjectMapper\Model\Behavior;
 
 use Elixir\DB\ObjectMapper\RepositoryEvent;
-use Elixir\DB\ObjectMapper\SQL\Extension\Versioned;
+use Elixir\DB\ObjectMapper\SQL\Extension\Versionable;
 use Elixir\DB\Query\QueryBuilderInterface;
 use Elixir\DB\Query\SQL\ColumnFactory;
 use Elixir\DB\Query\SQL\CreateTable;
@@ -11,7 +11,7 @@ use Elixir\DB\Query\SQL\CreateTable;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-trait VersionedTrait 
+trait VersionableTrait 
 {
     /**
      * @param CreateTable $create
@@ -32,7 +32,7 @@ trait VersionedTrait
      * @throws \LogicException
      * @throws \RuntimeException
      */
-    public function bootVersionedTrait() 
+    public function bootVersionableTrait() 
     {
         if (!defined('DEFAULT_RECORD_VERSION'))
         {
@@ -57,7 +57,7 @@ trait VersionedTrait
                 $this->addListener(RepositoryEvent::PRE_FIND, function(RepositoryEvent $e)
                 {
                     $findable = $e->getQuery();
-                    $findable->extend(new Versioned($this));
+                    $findable->extend(new Versionable($this));
                 });
                 break;
             default:

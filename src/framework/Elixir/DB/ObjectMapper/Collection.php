@@ -14,7 +14,6 @@ class Collection implements \IteratorAggregate
 
     /**
      * @param array $data
-     * @param boolean $useEvents
      */
     public function __construct(array $data = []) 
     {
