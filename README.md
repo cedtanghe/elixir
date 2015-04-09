@@ -1,13 +1,12 @@
-->### Framework PHP ###<-
+# Framework PHP
 
-<p align="center"><img alt="Framework Peoleo PHP" src="./resources/images/ELIXIR_PHP.jpg"/></p>
-
+![Elixir](./resources/images/ELIXIR_PHP.jpg)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/c359963b-45e2-4a32-aed5-1b27d7bb22b7/big.png)](https://insight.sensiolabs.com/projects/c359963b-45e2-4a32-aed5-1b27d7bb22b7)
 
-### TODO LIST ###
+### TODO LIST
 
-- Create "migration" command.
-- Add "menu" helper ("Tree" component).
-- Add More Field type, themes, etc. in a "Form" module.
-- Create "Admin" module.
-- Global refactorisation.
++ Create "migration" command.
++ Add "menu" helper ("Tree" component).
++ Add More Field type, themes, etc. in a "Form" module.
++ Create "Admin" module.
++ Global refactorisation.
