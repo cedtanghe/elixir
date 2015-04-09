@@ -1,8 +1,6 @@
 {
-    "name": "cedtanghe/Elixir",
-    "type": "library",
-    "description": "The Elixir PHP framework",
-    "keywords": ["framework"],
+    "name": "cedtanghe/Elixir/Config",
+    "description": "Config component",
     "license": "proprietary",
     "authors": [{
             "name": "Cédric Tanghe",
@@ -14,14 +12,8 @@
         "cedtanghe/Elixir": "dev-master"
     },
     "autoload": {
-        "psr-0": 
-        {
-            "PHPChecker_":"/src/framework/",
-            "Elixir\\Module\\":"/src/modules/"
-        },
         "psr-4": {
             "Elixir\\": "/src/framework/"
         }
     }
 }
-

@@ -1,4 +1,4 @@
-<h1 align="center">Framework PHP</h1>
+->### Framework PHP ###<-
 
 <p align="center"><img alt="Framework Peoleo PHP" src="./resources/images/ELIXIR_PHP.jpg"/></p>
 
@@ -6,8 +6,6 @@
 
 ### TODO LIST ###
 
-- Test method "with" to model.
-- Add methods "save", "add", "remove", etc. to collection relation in model.
 - Create "migration" command.
 - Add "menu" helper ("Tree" component).
 - Add More Field type, themes, etc. in a "Form" module.
