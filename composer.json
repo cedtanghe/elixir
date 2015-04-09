@@ -16,11 +16,11 @@
     "autoload": {
         "psr-0": 
         {
-            "PHPChecker_":"/src/framework/",
-            "Elixir\\Module\\":"/src/modules/"
+            "PHPChecker_":"/src/framework/"
         },
         "psr-4": {
-            "Elixir\\": "/src/framework/"
+            "Elixir\\": "/src/framework/Elixir",
+            "Elixir\\Module\\":"/src/modules/"
         }
     }
 }
