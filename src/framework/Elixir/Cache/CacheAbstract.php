@@ -18,31 +18,6 @@ abstract class CacheAbstract implements CacheInterface
     protected $encoder;
     
     /**
-     * @var string 
-     */
-    protected $identifier;
-
-    /**
-     * @param string $identifier
-     */
-    public function __construct($identifier)
-    {
-        $this->identifier = preg_replace(
-            '/[^a-z0-9\-]+/i', 
-            '-', 
-            strtolower(Str::removeAccents($identifier))
-        );
-    }
-    
-    /**
-     * @return string
-     */
-    public function getIdentifier()
-    {
-        return $this->identifier;
-    }
-    
-    /**
      * @param EncoderInterface $value
      */
     public function setEncoder(EncoderInterface $value)

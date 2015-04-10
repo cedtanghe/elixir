@@ -18,13 +18,26 @@ class Session extends CacheAbstract
     protected $session;
     
     /**
-     * @see CacheAbstract::__construct()
+     * @var string 
+     */
+    protected $identifier;
+    
+    /**
+     * @param string $identifier
      * @param SessionInterface $session
      */
-    public function __construct($identifier, SessionInterface $session = null) 
+    public function __construct($identifier = '___CACHE_SESSION___', SessionInterface $session = null) 
     {
-        parent::__construct($identifier);
+        $this->identifier = preg_replace('/[^a-z0-9\-_]+/i', '', strtolower($identifier));
         $this->session = $session ?: SessionData::instance();
+    }
+    
+    /**
+     * @return string
+     */
+    public function getIdentifier()
+    {
+        return $this->identifier;
     }
 
     /**
@@ -54,7 +67,7 @@ class Session extends CacheAbstract
             
             if (null !== $this->encoder)
             {
-                $data['value'] = $this->getEncoder()->encode($data['value']);
+                $data['value'] = $this->encoder->encode($data['value']);
             }
             
             return $data['value'];
@@ -70,7 +83,7 @@ class Session extends CacheAbstract
     {
         if (null !== $this->encoder)
         {
-            $value = $this->getEncoder()->encode($value);
+            $value = $this->encoder->encode($value);
         }
         
         $this->session->set(
@@ -112,7 +125,7 @@ class Session extends CacheAbstract
             
             if (null !== $this->encoder)
             {
-                $data['value'] = $this->getEncoder()->encode($data['value']);
+                $data['value'] = $this->encoder->encode($data['value']);
             }
             
             $data['value'] += $step;
@@ -143,7 +156,7 @@ class Session extends CacheAbstract
             
             if (null !== $this->encoder)
             {
-                $data['value'] = $this->getEncoder()->encode($data['value']);
+                $data['value'] = $this->encoder->encode($data['value']);
             }
             
             $data['value'] -= $step;

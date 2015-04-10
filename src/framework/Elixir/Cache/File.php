@@ -21,10 +21,9 @@ class File extends CacheAbstract
     protected $path;
     
     /**
-     * @see CacheAbstract::__construct()
      * @param string $path
      */
-    public function __construct($identifier, $path = null) 
+    public function __construct($path = null) 
     {
         $path = $path ?: 'application' . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR;
         
@@ -34,7 +33,6 @@ class File extends CacheAbstract
         }
         
         $this->path = rtrim($path, DIRECTORY_SEPARATOR);
-        parent::__construct($identifier);
     }
     
     /**
@@ -57,7 +55,7 @@ class File extends CacheAbstract
      */
     protected function file($key)
     {
-        return $this->path . DIRECTORY_SEPARATOR . $this->identifier .  md5($key) . '.cache';
+        return $this->path . DIRECTORY_SEPARATOR . md5($key) . '.cache';
     }
 
     /**
@@ -243,7 +241,7 @@ class File extends CacheAbstract
      */
     public function flush()
     {
-        $files = glob($this->path . DIRECTORY_SEPARATOR . $this->identifier . '*.cache');
+        $files = glob($this->path . DIRECTORY_SEPARATOR . '*.cache');
 
         foreach ($files as $file)
         {

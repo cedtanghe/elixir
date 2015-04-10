@@ -11,6 +11,11 @@ use Elixir\Cache\CacheAbstract;
 class APC extends CacheAbstract
 {
     /**
+     * @var string 
+     */
+    protected $identifier;
+    
+    /**
      * @see CacheAbstract::__construct()
      * @throws \RuntimeException
      */
@@ -21,7 +26,15 @@ class APC extends CacheAbstract
             throw new \RuntimeException('APC is not available.');
         }
         
-        parent::__construct($identifier);
+        $this->identifier = preg_replace('/[^a-z0-9\-_]+/i', '', strtolower($identifier));
+    }
+    
+    /**
+     * @return string
+     */
+    public function getIdentifier()
+    {
+        return $this->identifier;
     }
     
     /**
@@ -43,7 +56,7 @@ class APC extends CacheAbstract
         {
             if (null !== $this->encoder)
             {
-                $result = $this->getEncoder()->decode($result);
+                $result = $this->encoder->decode($result);
             }
             
             return $result;
@@ -59,7 +72,7 @@ class APC extends CacheAbstract
     {
         if (null !== $this->encoder)
         {
-            $value = $this->getEncoder()->encode($value);
+            $value = $this->encoder->encode($value);
         }
         
         return apc_store($this->identifier . $key, $value, $this->parseTimeToLive($ttl));

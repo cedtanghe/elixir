@@ -17,12 +17,10 @@ class Arr extends CacheAbstract
     protected $provider;
     
     /**
-     * @see CacheAbstract::__construct()
      * @param array|\ArrayAccess $provider
      */
-    public function __construct($identifier, &$provider) 
+    public function __construct(&$provider) 
     {
-        parent::__construct($identifier);
         $this->provider = &$provider;
     }
 
@@ -31,7 +29,7 @@ class Arr extends CacheAbstract
      */
     public function exists($key)
     {
-        return ArrUtils::has([$this->identifier, $key], $this->provider);
+        return ArrUtils::has($key, $this->provider);
     }
     
     /**
@@ -39,11 +37,11 @@ class Arr extends CacheAbstract
      */
     public function get($key, $default = null)
     {
-        $value = ArrUtils::get([$this->identifier, $key], $this->provider, null);
+        $value = ArrUtils::get($key, $this->provider, null);
 
         if (null !== $value)
         {
-            return $this->getEncoder()->decode($value);
+            return $this->encoder->decode($value);
         }
 
         return is_callable($default) ? call_user_func($default) : $default;
@@ -56,10 +54,10 @@ class Arr extends CacheAbstract
     {
         if (null !== $this->encoder)
         {
-            $value = $this->getEncoder()->encode($value);
+            $value = $this->encoder->encode($value);
         }
         
-        ArrUtils::set([$this->identifier, $key], $value, $this->provider);
+        ArrUtils::set($key, $value, $this->provider);
         return true;
     }
     
@@ -68,7 +66,7 @@ class Arr extends CacheAbstract
      */
     public function delete($key)
     {
-        ArrUtils::remove([$this->identifier, $key], $this->provider);
+        ArrUtils::remove($key, $this->provider);
         return true;
     }
     
@@ -113,7 +111,7 @@ class Arr extends CacheAbstract
      */
     public function flush()
     {
-        ArrUtils::remove($this->identifier, $this->provider);
+        $this->provider = [];
         return true;
     }
 }

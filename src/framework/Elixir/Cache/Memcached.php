@@ -14,6 +14,11 @@ class Memcached extends CacheAbstract
      * @var \Memcached
      */
     protected $engine;
+    
+    /**
+     * @var string 
+     */
+    protected $identifier;
 
     /**
      * @see CacheAbstract::__construct()
@@ -26,7 +31,7 @@ class Memcached extends CacheAbstract
             throw new \RuntimeException('Memcached is not available.');
         }
 
-        parent::__construct($identifier);
+        $this->identifier = preg_replace('/[^a-z0-9\-_]+/i', '', strtolower($identifier));
         $this->engine = new \Memcached($this->identifier);
     }
 
@@ -36,6 +41,14 @@ class Memcached extends CacheAbstract
     public function __destruct() 
     {
         $this->engine = null;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getIdentifier()
+    {
+        return $this->identifier;
     }
 
     /**
@@ -60,7 +73,7 @@ class Memcached extends CacheAbstract
         
         if (null !== $this->encoder)
         {
-            $value = $this->getEncoder()->encode($value);
+            $value = $this->encoder->encode($value);
         }
         
         return $value;
@@ -78,7 +91,7 @@ class Memcached extends CacheAbstract
 
         if (null !== $this->encoder)
         {
-            $value = $this->getEncoder()->encode($value);
+            $value = $this->encoder->encode($value);
         }
 
         return $this->engine->set($key, $value, $ttl);
