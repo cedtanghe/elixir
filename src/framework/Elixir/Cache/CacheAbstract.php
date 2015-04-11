@@ -4,12 +4,10 @@ namespace Elixir\Cache;
 
 use Elixir\Cache\CacheInterface;
 use Elixir\Cache\Encoder\EncoderInterface;
-use Elixir\Util\Str;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
 abstract class CacheAbstract implements CacheInterface
 {
     /**
@@ -32,7 +30,7 @@ abstract class CacheAbstract implements CacheInterface
     {
         return $this->encoder;
     }
-    
+
     /**
      * @see CacheInterface::remember()
      */

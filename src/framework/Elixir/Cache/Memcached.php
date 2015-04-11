@@ -7,7 +7,6 @@ use Elixir\Cache\CacheAbstract;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
 class Memcached extends CacheAbstract
 {
     /**
@@ -52,9 +51,9 @@ class Memcached extends CacheAbstract
     }
 
     /**
-     * @see CacheAbstract::exists()
+     * @see CacheAbstract::has()
      */
-    public function exists($key) 
+    public function has($key) 
     {
         if (!$this->engine->get($key)) 
         {
@@ -73,7 +72,7 @@ class Memcached extends CacheAbstract
         
         if (null !== $this->encoder)
         {
-            $value = $this->encoder->encode($value);
+            $value = $this->encoder->decode($value);
         }
         
         return $value;
@@ -82,25 +81,24 @@ class Memcached extends CacheAbstract
     /**
      * @see CacheAbstract::set()
      */
-    public function store($key, $value, $ttl = self::DEFAULT_TTL)
+    public function set($key, $value, $ttl = self::DEFAULT_TTL)
     {
-        if ($ttl != 0) 
-        {
-            $ttl = time() + $this->parseTimeToLive($ttl);
-        }
-
         if (null !== $this->encoder)
         {
             $value = $this->encoder->encode($value);
         }
 
-        return $this->engine->set($key, $value, $ttl);
+        return $this->engine->set(
+            $key, 
+            $value, 
+            time() + $this->parseTimeToLive($ttl)
+        );
     }
     
     /**
-     * @see CacheAbstract::delete()
+     * @see CacheAbstract::remove()
      */
-    public function delete($key) 
+    public function remove($key) 
     {
         return $this->engine->delete($key);
     }

@@ -92,7 +92,7 @@ interface ContainerInterface
      * @param array $pOptions
      */
     public function sets(array $pData, array $pOptions = []);
-
+    
     /**
      * @param string $pAlias
      * @param string $pKey

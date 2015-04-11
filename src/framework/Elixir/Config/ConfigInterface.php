@@ -7,7 +7,6 @@ namespace Elixir\Config;
  */
 interface ConfigInterface 
 {
-
     /**
      * @param mixed $key
      * @return boolean

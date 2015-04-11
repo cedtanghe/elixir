@@ -9,7 +9,6 @@ use Elixir\HTTP\Session\SessionInterface;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
 class Session extends CacheAbstract
 {
     /**
@@ -41,9 +40,9 @@ class Session extends CacheAbstract
     }
 
     /**
-     * @see CacheAbstract::exists()
+     * @see CacheAbstract::has()
      */
-    public function exists($key)
+    public function has($key)
     {
         return null !== $this->get($key, null);
     }
@@ -67,7 +66,7 @@ class Session extends CacheAbstract
             
             if (null !== $this->encoder)
             {
-                $data['value'] = $this->encoder->encode($data['value']);
+                $data['value'] = $this->encoder->decode($data['value']);
             }
             
             return $data['value'];
@@ -77,9 +76,9 @@ class Session extends CacheAbstract
     }
     
     /**
-     * @see CacheAbstract::store()
+     * @see CacheAbstract::set()
      */
-    public function store($key, $value, $ttl = self::DEFAULT_TTL)
+    public function set($key, $value, $ttl = self::DEFAULT_TTL)
     {
         if (null !== $this->encoder)
         {
@@ -98,9 +97,9 @@ class Session extends CacheAbstract
     }
     
     /**
-     * @see CacheAbstract::delete()
+     * @see CacheAbstract::remove()
      */
-    public function delete($key)
+    public function remove($key)
     {
         $this->session->remove([$this->identifier, $key]);
         return true;
@@ -123,15 +122,23 @@ class Session extends CacheAbstract
                 return 0;
             }
             
+            $value = $data['value'];
+            
+            if (null !== $this->encoder)
+            {
+                $value = $this->encoder->decode($data['value']);
+            }
+            
+            $value = (int)$value + $step;
+            $data['value'] = $value;
+            
             if (null !== $this->encoder)
             {
                 $data['value'] = $this->encoder->encode($data['value']);
             }
             
-            $data['value'] += $step;
             $this->session->set([$this->identifier, $key], $data);
-            
-            return $data['value'];
+            return $value;
         }
         
         return 0;
@@ -154,15 +161,23 @@ class Session extends CacheAbstract
                 return 0;
             }
             
+            $value = $data['value'];
+            
+            if (null !== $this->encoder)
+            {
+                $value = $this->encoder->decode($data['value']);
+            }
+            
+            $value = (int)$value - $step;
+            $data['value'] = $value;
+            
             if (null !== $this->encoder)
             {
                 $data['value'] = $this->encoder->encode($data['value']);
             }
             
-            $data['value'] -= $step;
             $this->session->set([$this->identifier, $key], $data);
-            
-            return $data['value'];
+            return $value;
         }
         
         return 0;

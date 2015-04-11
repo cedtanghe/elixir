@@ -7,7 +7,6 @@ use Elixir\Cache\Encoder\EncoderInterface;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
 class Serialize implements EncoderInterface
 {
     /**

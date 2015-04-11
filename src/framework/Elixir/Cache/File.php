@@ -7,7 +7,6 @@ use Elixir\Cache\CacheAbstract;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
 class File extends CacheAbstract
 {
     /**
@@ -61,7 +60,7 @@ class File extends CacheAbstract
     /**
      * @see CacheAbstract::has()
      */
-    public function exists($key)
+    public function has($key)
     {
         $file = $this->file($key);
         
@@ -118,9 +117,9 @@ class File extends CacheAbstract
     }
     
     /**
-     * @see CacheAbstract::store()
+     * @see CacheAbstract::set()
      */
-    public function store($key, $value, $ttl = self::DEFAULT_TTL)
+    public function set($key, $value, $ttl = self::DEFAULT_TTL)
     {
         $ttl = time() + $this->parseTimeToLive($ttl);
 
@@ -134,9 +133,9 @@ class File extends CacheAbstract
     }
     
     /**
-     * @see CacheAbstract::delete()
+     * @see CacheAbstract::remove()
      */
-    public function delete($key)
+    public function remove($key)
     {
         $file = $this->file($key);
 
@@ -176,9 +175,7 @@ class File extends CacheAbstract
             }
             
             fclose($handle);
-            
-            $data = (int)$this->getEncoder()->decode($data);
-            $data += $step;
+            $data = (int)$this->getEncoder()->decode($data) + $step;
             
             file_put_contents(
                 $this->file($key), 
@@ -220,9 +217,7 @@ class File extends CacheAbstract
             }
             
             fclose($handle);
-            
-            $data = (int)$this->getEncoder()->decode($data);
-            $data -= $step;
+            $data = (int)$this->getEncoder()->decode($data) - $step;
             
             file_put_contents(
                 $this->file($key), 

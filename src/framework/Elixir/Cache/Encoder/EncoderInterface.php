@@ -5,7 +5,6 @@ namespace Elixir\Cache\Encoder;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
 interface EncoderInterface
 {
     /**

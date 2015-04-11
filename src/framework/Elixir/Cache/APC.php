@@ -7,7 +7,6 @@ use Elixir\Cache\CacheAbstract;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
 class APC extends CacheAbstract
 {
     /**
@@ -38,9 +37,9 @@ class APC extends CacheAbstract
     }
     
     /**
-     * @see CacheAbstract::exists()
+     * @see CacheAbstract::has()
      */
-    public function exists($key)
+    public function has($key)
     {
         return apc_exists($this->identifier . $key);
     }
@@ -66,9 +65,9 @@ class APC extends CacheAbstract
     }
     
     /**
-     * @see CacheAbstract::store()
+     * @see CacheAbstract::set()
      */
-    public function store($key, $value, $ttl = self::DEFAULT_TTL)
+    public function set($key, $value, $ttl = self::DEFAULT_TTL)
     {
         if (null !== $this->encoder)
         {
@@ -79,9 +78,9 @@ class APC extends CacheAbstract
     }
     
     /**
-     * @see CacheAbstract::delete()
+     * @see CacheAbstract::remove()
      */
-    public function delete($key)
+    public function remove($key)
     {
         return apc_delete($key);
     }

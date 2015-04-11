@@ -5,7 +5,6 @@ namespace Elixir\Cache;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
 interface CacheInterface
 {
     /**
@@ -17,7 +16,7 @@ interface CacheInterface
      * @param string $key 
      * @return boolean
      */
-    public function exists($key);
+    public function has($key);
     
     /**
      * @param string $key
@@ -32,7 +31,7 @@ interface CacheInterface
      * @param integer|string|\DateTime $ttl
      * @return boolean
      */
-    public function store($key, $value, $ttl = self::DEFAULT_TTL);
+    public function set($key, $value, $ttl = self::DEFAULT_TTL);
     
     /**
      * @param string $key
@@ -46,7 +45,7 @@ interface CacheInterface
      * @param string $key 
      * @return boolean
      */
-    public function delete($key);
+    public function remove($key);
     
     /**
      * @param string $key

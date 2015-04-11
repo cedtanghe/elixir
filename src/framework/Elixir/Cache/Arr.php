@@ -8,7 +8,6 @@ use Elixir\Util\Arr as ArrUtils;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
 class Arr extends CacheAbstract
 {
     /**
@@ -25,9 +24,9 @@ class Arr extends CacheAbstract
     }
 
     /**
-     * @see CacheAbstract::exists()
+     * @see CacheAbstract::has()
      */
-    public function exists($key)
+    public function has($key)
     {
         return ArrUtils::has($key, $this->provider);
     }
@@ -41,16 +40,21 @@ class Arr extends CacheAbstract
 
         if (null !== $value)
         {
-            return $this->encoder->decode($value);
+            if (null !== $this->encoder)
+            {
+                $value = $this->encoder->decode($value);
+            }
+        
+            return $value;
         }
 
         return is_callable($default) ? call_user_func($default) : $default;
     }
     
     /**
-     * @see CacheAbstract::store()
+     * @see CacheAbstract::set()
      */
-    public function store($key, $value, $ttl = self::DEFAULT_TTL)
+    public function set($key, $value, $ttl = self::DEFAULT_TTL)
     {
         if (null !== $this->encoder)
         {
@@ -62,9 +66,9 @@ class Arr extends CacheAbstract
     }
     
     /**
-     * @see CacheAbstract::delete()
+     * @see CacheAbstract::remove()
      */
-    public function delete($key)
+    public function remove($key)
     {
         ArrUtils::remove($key, $this->provider);
         return true;
@@ -82,8 +86,8 @@ class Arr extends CacheAbstract
             return 0;
         }
         
-        $value += $step;
-        $this->store($key, $value);
+        $value = (int)$value + $step;
+        $this->set($key, $value);
         
         return $value;
     }
@@ -100,8 +104,8 @@ class Arr extends CacheAbstract
             return 0;
         }
         
-        $value -= $step;
-        $this->store($key, $value);
+        $value = (int)$value - $step;
+        $this->set($key, $value);
         
         return $value;
     }

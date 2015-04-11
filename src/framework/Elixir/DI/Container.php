@@ -175,7 +175,7 @@ class Container extends Dispatcher implements ContainerInterface
     }
     
     /**
-     * @see ContainerInterface::gets()
+     * @see ContainerInterface::all()
      */
     public function gets(array $pOptions = [])
     {
