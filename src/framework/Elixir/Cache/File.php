@@ -24,7 +24,7 @@ class File extends CacheAbstract
      */
     public function __construct($path = null) 
     {
-        $path = $path ?: 'application' . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR;
+        $path = $path ?: 'application' . DIRECTORY_SEPARATOR . 'storage' . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR;
         
         if (!is_dir($path))
         {

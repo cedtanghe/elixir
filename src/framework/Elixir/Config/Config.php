@@ -2,6 +2,8 @@
 
 namespace Elixir\Config;
 
+use Elixir\Config\CacheableInterface;
+use Elixir\Config\CacheableTrait;
 use Elixir\Config\ConfigInterface;
 use Elixir\Config\Loader\LoaderFactory;
 use Elixir\Config\Processor\ProcessorInterface;
@@ -12,9 +14,10 @@ use Elixir\Util\Arr;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-class Config implements ConfigInterface, \ArrayAccess, \Iterator, \Countable 
+class Config implements ConfigInterface, CacheableInterface, \ArrayAccess, \Iterator, \Countable 
 {
     use ProcessorTrait;
+    use CacheableTrait;
     
     /**
      * @var string 
@@ -128,7 +131,8 @@ class Config implements ConfigInterface, \ArrayAccess, \Iterator, \Countable
     /**
      * @see ConfigInterface::remove()
      */
-    public function remove($key) {
+    public function remove($key) 
+    {
         Arr::remove($key, $this->data);
     }
 
