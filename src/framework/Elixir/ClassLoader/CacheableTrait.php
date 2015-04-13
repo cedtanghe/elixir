@@ -37,7 +37,7 @@ trait CacheableTrait
     public function loadFromCache($cache, $key = self::DEFAULT_CACHE_KEY)
     {
         $data = $cache->get($key, []) ?: [];
-        $version = Arr::get('cache_version', $data);
+        $version = Arr::get('version', $data);
         
         if (null === $this->cacheVersion || null === $version || $version === $this->cacheVersion)
         {
@@ -62,7 +62,7 @@ trait CacheableTrait
             $key, 
             [
                 'classes' => $this->classes,
-                'cache_version' => $this->cacheVersion
+                'version' => $this->cacheVersion
             ]
         );
     }

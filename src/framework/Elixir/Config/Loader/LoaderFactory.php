@@ -25,7 +25,7 @@ class LoaderFactory
      */
     public static function create($config, array $options = []) 
     {
-        if(!isset(static::$factories['Arr']))
+        if (!isset(static::$factories['Arr']))
         {
             static::$factories['Arr'] = function($config, $options)
             {
@@ -38,7 +38,7 @@ class LoaderFactory
             };
         }
         
-        if(!isset(static::$factories['JSON']))
+        if (!isset(static::$factories['JSON']))
         {
             static::$factories['JSON'] = function($config, $options)
             {
@@ -51,7 +51,7 @@ class LoaderFactory
             };
         }
         
-        if(!isset(static::$factories['YAML']))
+        if (!isset(static::$factories['YAML']))
         {
             static::$factories['YAML'] = function($config, $options)
             {
@@ -71,7 +71,7 @@ class LoaderFactory
         {
             $result = $loader($config, $options);
             
-            if(null !== $result)
+            if (null !== $result)
             {
                 return $result;
             }

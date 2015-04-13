@@ -22,12 +22,12 @@ class Arr extends WriterAbstract
      */
     public function export($file)
     {
-        if(substr($file, -4) != '.php')
+        if (!strstr($file, '.php'))
         {
             $file .= '.php';
         }
         
-        file_put_contents($file, '<?php return ' . var_export($this->write(), true));
+        file_put_contents($file, '<?php return ' . var_export($this->write(), true) . ';');
         return file_exists($file);
     }
 }

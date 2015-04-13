@@ -56,7 +56,7 @@ class YAML extends WriterAbstract
      */
     public function write() 
     {
-        return call_user_func($this->getYAMLEncoder(), $this->config);
+        return call_user_func($this->getYAMLEncoder(), $this->config->gets());
     }
 
     /**
@@ -64,7 +64,7 @@ class YAML extends WriterAbstract
      */
     public function export($file)
     {
-        if(substr($file, -4) != '.yml')
+        if (!strstr($file, '.yml'))
         {
             $file .= '.yml';
         }

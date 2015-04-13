@@ -15,10 +15,20 @@ interface CacheableInterface
     public function setConfig(ConfigInterface $value);
     
     /**
+     * @return boolean
+     */
+    public function loadCache();
+    
+    /**
+     * @return boolean
+     */
+    public function cacheLoaded();
+    
+    /**
      * @param mixed $file
      * @return array
      */
-    public function loadFromCache($file);
+    public function loadFromCache($file, array $options = []);
     
     /**
      * @return boolean

@@ -21,6 +21,25 @@ class Test extends \PHPUnit_Framework_TestCase
     
     public function testAPC()
     {
+        $content = "<?php
+return [
+    'development' => [
+        'session' => ['name' => ''],
+        'db' => [
+            'type' => 'pdo_mysql',
+            'host' => '',
+            'username' => '',
+            'password' => '',
+            'dbname' => ''
+        ]
+    ],
+    'preproduction:development' => [],
+    'production:development' => []\n
+];";
+        
+        print_r(preg_replace('/^(<\?php\s+return)|(;\s*?(\?>)?)$/i', '', $content));
+        die();
+        
         if(!extension_loaded('apc'))
         {
             return;

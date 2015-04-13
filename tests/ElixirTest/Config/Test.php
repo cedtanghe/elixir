@@ -3,10 +3,11 @@
 namespace ElixirTest\Config;
 
 use Elixir\ClassLoader\PSR4;
+use Elixir\Config\Cache\Compiled;
 use Elixir\Config\Config;
 use Elixir\Config\Loader\LoaderFactory;
-use Elixir\Config\Loader\YAML;
 use Elixir\Config\Processor\Filter;
+use Elixir\Config\Writer\WriterFactory;
 use Elixir\Filter\Replace;
 
 class Test extends \PHPUnit_Framework_TestCase
@@ -26,7 +27,17 @@ class Test extends \PHPUnit_Framework_TestCase
         {
             if (substr($config, -4) == '.yml')
             {
-                return new YAML($options['environment'], $options['strict'], 'Spyc::YAMLLoad');
+                return new \Elixir\Config\Loader\YAML($options['environment'], $options['strict'], 'Spyc::YAMLLoad');
+            }
+
+            return null;
+        };
+        
+        WriterFactory::$factories['YAML'] = function($file)
+        {
+            if (substr($file, -4) == '.yml')
+            {
+                return new \Elixir\Config\Writer\YAML(null, 'Spyc::YAMLDump');
             }
 
             return null;
@@ -35,11 +46,19 @@ class Test extends \PHPUnit_Framework_TestCase
     
     public function testConfig()
     {
+        $time = microtime();
         $config = new Config('test');
+        
+        //$config->setCacheStrategy(new PreservePHP(__DIR__ . '/../../config/', 'cache', false));
+        //$config->setCacheStrategy(new Grouped(__DIR__ . '/../../config/', 'cache'));
+        $config->setCacheStrategy(new Compiled(__DIR__ . '/../../config/', 'cache.yml'));
+        
         $config->load([__DIR__ . '/../../config/config.php',
                        __DIR__ . '/../../config/config.json',
                        __DIR__ . '/../../config/config.yml']);
         
+        $config->exportToCache();
+        echo $time - microtime();
         $this->assertEquals('new value-2', $config->get('key-2'));
     }
     
@@ -51,7 +70,7 @@ class Test extends \PHPUnit_Framework_TestCase
         $this->assertEquals('{REPLACE}value-4-2', $config->get(['key-4', 'key-4-3']));
         
         $processor = new Filter(new Replace(), ['regex' => '/{REPLACE}/', 'by' => 'VALUE_REPLACED_']);
-        $config->addProcessor($processor);
+        $config->setProcessor($processor);
         
         $this->assertEquals('VALUE_REPLACED_value-4-2', $config->get(['key-4', 'key-4-3']));
     }

@@ -6,7 +6,6 @@ use Elixir\Config\Cache\CacheableInterface;
 use Elixir\Config\ConfigInterface;
 use Elixir\Config\Loader\LoaderFactory;
 use Elixir\Config\Processor\ProcessorInterface;
-use Elixir\Config\Processor\ProcessorTrait;
 use Elixir\Config\Writer\WriterInterface;
 use Elixir\Util\Arr;
 
@@ -15,8 +14,6 @@ use Elixir\Util\Arr;
  */
 class Config implements ConfigInterface, CacheableInterface, \ArrayAccess, \Iterator, \Countable 
 {
-    use ProcessorTrait;
-    
     /**
      * @var string 
      */
@@ -53,6 +50,7 @@ class Config implements ConfigInterface, CacheableInterface, \ArrayAccess, \Iter
     public function setCacheStrategy(CacheableInterface $value)
     {
         $this->cache = $value;
+        $this->cache->setConfig($this);
     }
     
     /**
@@ -80,6 +78,41 @@ class Config implements ConfigInterface, CacheableInterface, \ArrayAccess, \Iter
     }
     
     /**
+     * @see CacheableInterface::setConfig()
+     * @throws \LogicException
+     */
+    public function setConfig(ConfigInterface $value) 
+    {
+        throw new \LogicException('Needless to self inject.');
+    }
+    
+    /**
+     * @see CacheableInterface::loadCache()
+     */
+    public function loadCache()
+    {
+        if (null === $this->cache)
+        {
+            return false;
+        }
+        
+        return $this->cache->loadCache();
+    }
+    
+    /**
+     * @see CacheableInterface::cacheLoaded()
+     */
+    public function cacheLoaded()
+    {
+        if (null === $this->cache)
+        {
+            return false;
+        }
+        
+        return null !== $this->cache->cacheLoaded();
+    }
+    
+    /**
      * @param mixed $config
      * @param array $options
      */
@@ -99,9 +132,9 @@ class Config implements ConfigInterface, CacheableInterface, \ArrayAccess, \Iter
             {
                 $data = false;
                 
-                if(null !== $this->cache && is_file($config))
+                if (null !== $this->cache && ($isFile = is_file($config)))
                 {
-                    $data = $this->loadFromCache($file);
+                    $data = $this->loadFromCache($config, $options);
                 }
                 
                 if (false === $data)
@@ -117,18 +150,17 @@ class Config implements ConfigInterface, CacheableInterface, \ArrayAccess, \Iter
 
     /**
      * @see CacheableInterface::loadFromCache()
-     * @throws \LogicException
      */
-    public function loadFromCache($file)
+    public function loadFromCache($file, array $options = [])
     {
         if (null === $this->cache)
         {
-            throw new \LogicException('No cache strategy has been defined.');
+            return null;
         }
         
-        return $this->cache->loadFromCache($file);
+        return $this->cache->loadFromCache($file, $options);
     }
-
+    
     /**
      * @param WriterInterface $writer
      * @param string $file
@@ -142,16 +174,15 @@ class Config implements ConfigInterface, CacheableInterface, \ArrayAccess, \Iter
     
     /**
      * @see CacheableInterface::exportToCache()
-     * @throws \LogicException
      */
     public function exportToCache()
     {
         if (null === $this->cache)
         {
-            throw new \LogicException('No cache strategy has been defined.');
+            return;
         }
         
-        return $this->cache->exportCache();
+        return $this->cache->exportToCache();
     }
     
     /**
@@ -169,7 +200,7 @@ class Config implements ConfigInterface, CacheableInterface, \ArrayAccess, \Iter
     {
         $data = Arr::get($key, $this->data, $default);
         
-        if(null !== $this->processor)
+        if (null !== $this->processor)
         {
             $data = $this->processor->process($data);
         }
@@ -200,7 +231,7 @@ class Config implements ConfigInterface, CacheableInterface, \ArrayAccess, \Iter
     {
         $data = $this->data;
         
-        if(null !== $this->processor)
+        if (null !== $this->processor)
         {
             $data = $this->processor->process($data);
         }

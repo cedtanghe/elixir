@@ -9,7 +9,7 @@ use Elixir\Config\Loader\LoaderFactory;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-class PreservePHP implements CacheableInterface 
+class Grouped implements CacheableInterface 
 {
     /**
      * @var string 
@@ -63,8 +63,6 @@ class PreservePHP implements CacheableInterface
      */
     public function __construct($path = null, $name = 'cache', $debug = true) 
     {
-        define('ELIXIR_CONFIG_CACHE', true);
-        
         $path = $path ? : 'application' . DIRECTORY_SEPARATOR . 'storage' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR;
         
         if (!is_dir($path)) 
@@ -100,7 +98,7 @@ class PreservePHP implements CacheableInterface
         if (file_exists($this->getMetaFile()) && file_exists($this->getCacheFile()))
         {
             $this->metadata = unserialize(file_get_contents($this->getMetaFile()));
-            $this->cachedata = include $this->getCacheFile();
+            $this->cachedata = unserialize(file_get_contents($this->getCacheFile()));
             
             if($this->metadata['_type'] != __CLASS__)
             {
@@ -143,15 +141,7 @@ class PreservePHP implements CacheableInterface
         
         if ($this->isFresh($file)) 
         {
-            if (strstr($file, '.php'))
-            {
-                $loader = LoaderFactory::create($file, $options);
-                $data = $loader->load($this->cachedata[md5($file)], $recursive);
-            }
-            else
-            {
-                $data = $this->cachedata[md5($file)];
-            }
+            $data = $this->cachedata[md5($file)];
         }
         else
         {
@@ -171,16 +161,6 @@ class PreservePHP implements CacheableInterface
      */
     protected function injectToCache($file, array $data)
     {
-        if (strstr($file, '.php'))
-        {
-            // Closure and var_export (or serialization, etc.) are not friends.
-            $data = preg_replace('/^(<\?php\s+return)|(;\s*?(\?>)?[\n\r\t]*)$/i', '', file_get_contents($file));
-        }
-        else
-        {
-            $data = var_export($data, true);
-        }
-        
         $this->files[$file] = $data;
     }
 
@@ -213,17 +193,13 @@ class PreservePHP implements CacheableInterface
         if ($this->build)
         {
             $metadata = ['_type' => __CLASS__];
-            $cachedata = "<?php \n\n";
-            $cachedata .= 'if (!defined("ELIXIR_CONFIG_CACHE")) { header("HTTP/1.0 403 Forbidden"); exit(); }';
-            $cachedata .= "\n\nreturn [\n";
+            $cachedata = [];
             
             foreach ($this->files as $file => $data)
             {
                 $metadata[md5($file)] = filemtime($file);
-                $cachedata .= sprintf('\'%s\' => %s,', md5($file), $data) . "\n";
+                $cachedata[md5($file)] = $data;
             }
-            
-            $cachedata .= "];";
             
             $writed = file_put_contents(
                 $this->getMetaFile(), 
@@ -238,7 +214,7 @@ class PreservePHP implements CacheableInterface
             
             $writed = file_put_contents(
                 $this->getCacheFile(), 
-                $cachedata, 
+                serialize($cachedata), 
                 LOCK_EX
             );
             
@@ -266,6 +242,6 @@ class PreservePHP implements CacheableInterface
      */
     protected function getCacheFile() 
     {
-        return $this->path . DIRECTORY_SEPARATOR . $this->name . '.php';
+        return $this->path . DIRECTORY_SEPARATOR . $this->name . '.cache';
     }
 }

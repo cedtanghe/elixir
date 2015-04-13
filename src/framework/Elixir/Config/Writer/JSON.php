@@ -22,7 +22,7 @@ class JSON extends WriterAbstract
      */
     public function export($file)
     {
-        if(substr($file, -5) != '.json')
+        if (!strstr($file, '.json'))
         {
             $file .= '.json';
         }

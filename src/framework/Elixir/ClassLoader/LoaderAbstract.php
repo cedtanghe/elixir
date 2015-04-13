@@ -2,6 +2,7 @@
 
 namespace Elixir\ClassLoader;
 
+require_once 'CacheableInterface.php';
 require_once 'LoaderInterface.php';
 
 use Elixir\ClassLoader\CacheableInterface;
