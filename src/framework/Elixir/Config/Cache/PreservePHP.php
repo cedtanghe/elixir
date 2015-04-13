@@ -139,14 +139,13 @@ class PreservePHP implements CacheableInterface
     public function loadFromCache($file, array $options = []) 
     {
         $this->loadCache();
-        $recursive = isset($options['recursive']) ? $options['recursive'] : false;
         
         if ($this->isFresh($file)) 
         {
             if (strstr($file, '.php'))
             {
                 $loader = LoaderFactory::create($file, $options);
-                $data = $loader->load($this->cachedata[md5($file)], $recursive);
+                $data = $loader->load($this->cachedata[md5($file)], $options['recursive']);
             }
             else
             {
@@ -158,7 +157,7 @@ class PreservePHP implements CacheableInterface
             $this->build = true;
             
             $loader = LoaderFactory::create($file, $options);
-            $data = $loader->load($file, $recursive);
+            $data = $loader->load($file, $options['recursive']);
         }
         
         $this->injectToCache($file, $data);
@@ -190,7 +189,7 @@ class PreservePHP implements CacheableInterface
      */
     protected function isFresh($file)
     {
-        if(!$this->debug)
+        if(!$this->debug && $this->cacheLoaded())
         {
             return true;
         }

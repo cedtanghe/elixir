@@ -118,15 +118,14 @@ class Config implements ConfigInterface, CacheableInterface, \ArrayAccess, \Iter
      */
     public function load($config, array $options = [])
     {
-        $recursive = isset($options['recursive']) ? $options['recursive'] : false;
-
         if ($config instanceof self)
         {
-            $this->merge($config, $recursive);
+            $this->merge($config, isset($options['recursive']) ? $options['recursive'] : false);
         } 
         else 
         {
             $options['environment'] = $this->environment;
+            $options['recursive'] = isset($options['recursive']) ? $options['recursive'] : false;
             
             foreach ((array)$config as $config) 
             {
@@ -135,15 +134,20 @@ class Config implements ConfigInterface, CacheableInterface, \ArrayAccess, \Iter
                 if (null !== $this->cache && ($isFile = is_file($config)))
                 {
                     $data = $this->loadFromCache($config, $options);
+                    
+                    if (true === $data)
+                    {
+                        continue;
+                    }
                 }
                 
                 if (false === $data)
                 {
                     $loader = LoaderFactory::create($config, $options);
-                    $data = $loader->load($config, $recursive);
+                    $data = $loader->load($config, $options['recursive']);
                 }
                 
-                $this->merge($data, $recursive);
+                $this->merge($data, $options['recursive']);
             }
         }
     }

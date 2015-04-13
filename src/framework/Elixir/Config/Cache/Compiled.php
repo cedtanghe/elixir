@@ -166,13 +166,7 @@ class Compiled implements CacheableInterface
     public function loadFromCache($file, array $options = []) 
     {
         $this->loadCache();
-        
-        if($this->cacheLoaded())
-        {
-            return [];
-        }
-        
-        return false;
+        return $this->cacheLoaded();
     }
     
     /**

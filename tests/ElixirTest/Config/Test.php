@@ -3,6 +3,8 @@
 namespace ElixirTest\Config;
 
 use Elixir\ClassLoader\PSR4;
+use Elixir\Config\Cache\Grouped;
+use Elixir\Config\Cache\PreservePHP;
 use Elixir\Config\Cache\Compiled;
 use Elixir\Config\Config;
 use Elixir\Config\Loader\LoaderFactory;

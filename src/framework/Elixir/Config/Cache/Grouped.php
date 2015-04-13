@@ -137,7 +137,6 @@ class Grouped implements CacheableInterface
     public function loadFromCache($file, array $options = []) 
     {
         $this->loadCache();
-        $recursive = isset($options['recursive']) ? $options['recursive'] : false;
         
         if ($this->isFresh($file)) 
         {
@@ -148,7 +147,7 @@ class Grouped implements CacheableInterface
             $this->build = true;
             
             $loader = LoaderFactory::create($file, $options);
-            $data = $loader->load($file, $recursive);
+            $data = $loader->load($file, $options['recursive']);
         }
         
         $this->injectToCache($file, $data);
@@ -170,7 +169,7 @@ class Grouped implements CacheableInterface
      */
     protected function isFresh($file)
     {
-        if(!$this->debug)
+        if(!$this->debug && $this->cacheLoaded())
         {
             return true;
         }
