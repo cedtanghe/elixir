@@ -100,7 +100,7 @@ class Grouped implements CacheableInterface
             $this->metadata = unserialize(file_get_contents($this->getMetaFile()));
             $this->cachedata = unserialize(file_get_contents($this->getCacheFile()));
             
-            if($this->metadata['_type'] != __CLASS__)
+            if ($this->metadata['_type'] != __CLASS__)
             {
                 $this->metadata = null;
                 $this->cachedata = null;

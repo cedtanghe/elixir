@@ -189,7 +189,7 @@ class PreservePHP implements CacheableInterface
      */
     protected function isFresh($file)
     {
-        if(!$this->debug && $this->cacheLoaded())
+        if (!$this->debug && $this->cacheLoaded())
         {
             return true;
         }
