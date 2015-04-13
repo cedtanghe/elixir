@@ -2,8 +2,7 @@
 
 namespace Elixir\Config;
 
-use Elixir\Config\CacheableInterface;
-use Elixir\Config\CacheableTrait;
+use Elixir\Config\Cache\CacheableInterface;
 use Elixir\Config\ConfigInterface;
 use Elixir\Config\Loader\LoaderFactory;
 use Elixir\Config\Processor\ProcessorInterface;
@@ -17,12 +16,16 @@ use Elixir\Util\Arr;
 class Config implements ConfigInterface, CacheableInterface, \ArrayAccess, \Iterator, \Countable 
 {
     use ProcessorTrait;
-    use CacheableTrait;
     
     /**
      * @var string 
      */
     protected $environment;
+    
+    /**
+     * @var CacheableInterface 
+     */
+    protected $cache;
     
     /**
      * @var ProcessorInterface 
@@ -45,6 +48,22 @@ class Config implements ConfigInterface, CacheableInterface, \ArrayAccess, \Iter
     }
     
     /**
+     * @param CacheableInterface $value
+     */
+    public function setCacheStrategy(CacheableInterface $value)
+    {
+        $this->cache = $value;
+    }
+    
+    /**
+     * @return CacheableInterface
+     */
+    public function getCacheStrategy()
+    {
+        return $this->cache;
+    }
+    
+    /**
      * @param ProcessorInterface $value
      */
     public function setProcessor(ProcessorInterface $value)
@@ -59,7 +78,7 @@ class Config implements ConfigInterface, CacheableInterface, \ArrayAccess, \Iter
     {
         return $this->processor;
     }
-
+    
     /**
      * @param mixed $config
      * @param array $options
@@ -78,12 +97,36 @@ class Config implements ConfigInterface, CacheableInterface, \ArrayAccess, \Iter
             
             foreach ((array)$config as $config) 
             {
-                $loader = LoaderFactory::create($config, $options);
-                $data = $loader->load($config, $recursive);
+                $data = false;
+                
+                if(null !== $this->cache && is_file($config))
+                {
+                    $data = $this->loadFromCache($file);
+                }
+                
+                if (false === $data)
+                {
+                    $loader = LoaderFactory::create($config, $options);
+                    $data = $loader->load($config, $recursive);
+                }
                 
                 $this->merge($data, $recursive);
             }
         }
+    }
+
+    /**
+     * @see CacheableInterface::loadFromCache()
+     * @throws \LogicException
+     */
+    public function loadFromCache($file)
+    {
+        if (null === $this->cache)
+        {
+            throw new \LogicException('No cache strategy has been defined.');
+        }
+        
+        return $this->cache->loadFromCache($file);
     }
 
     /**
@@ -95,6 +138,20 @@ class Config implements ConfigInterface, CacheableInterface, \ArrayAccess, \Iter
     {
         $writer->setConfig($this);
         return $writer->export($file);
+    }
+    
+    /**
+     * @see CacheableInterface::exportToCache()
+     * @throws \LogicException
+     */
+    public function exportToCache()
+    {
+        if (null === $this->cache)
+        {
+            throw new \LogicException('No cache strategy has been defined.');
+        }
+        
+        return $this->cache->exportCache();
     }
     
     /**

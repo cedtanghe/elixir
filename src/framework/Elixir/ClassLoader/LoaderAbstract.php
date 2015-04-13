@@ -4,12 +4,13 @@ namespace Elixir\ClassLoader;
 
 require_once 'LoaderInterface.php';
 
+use Elixir\ClassLoader\CacheableInterface;
 use Elixir\ClassLoader\LoaderInterface;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-abstract class LoaderAbstract implements LoaderInterface 
+abstract class LoaderAbstract implements LoaderInterface, CacheableInterface
 {
     /**
      * @var array 

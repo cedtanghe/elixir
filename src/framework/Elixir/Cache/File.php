@@ -52,7 +52,7 @@ class File extends CacheAbstract
      * @param string $key
      * @return string
      */
-    protected function file($key)
+    protected function getFile($key)
     {
         return $this->path . DIRECTORY_SEPARATOR . md5($key) . '.cache';
     }
@@ -62,7 +62,7 @@ class File extends CacheAbstract
      */
     public function has($key)
     {
-        $file = $this->file($key);
+        $file = $this->getFile($key);
         
         if (file_exists($file))
         {
@@ -87,7 +87,7 @@ class File extends CacheAbstract
      */
     public function get($key, $default = null)
     {
-        $file = $this->file($key);
+        $file = $this->getFile($key);
 
         if (file_exists($file))
         {
@@ -124,7 +124,7 @@ class File extends CacheAbstract
         $ttl = time() + $this->parseTimeToLive($ttl);
 
         file_put_contents(
-            $this->file($key), 
+            $this->getFile($key), 
             $ttl . "\n" . $this->getEncoder()->encode($value), 
             LOCK_EX
         );
@@ -137,7 +137,7 @@ class File extends CacheAbstract
      */
     public function remove($key)
     {
-        $file = $this->file($key);
+        $file = $this->getFile($key);
 
         if (file_exists($file))
         {
@@ -152,7 +152,7 @@ class File extends CacheAbstract
      */
     public function incremente($key, $step = 1)
     {
-        $file = $this->file($key);
+        $file = $this->getFile($key);
 
         if (file_exists($file))
         {
@@ -178,7 +178,7 @@ class File extends CacheAbstract
             $data = (int)$this->getEncoder()->decode($data) + $step;
             
             file_put_contents(
-                $this->file($key), 
+                $this->getFile($key), 
                 $ttl . "\n" . $this->getEncoder()->encode($data), 
                 LOCK_EX
             );
@@ -194,7 +194,7 @@ class File extends CacheAbstract
      */
     public function decremente($key, $step = 1)
     {
-        $file = $this->file($key);
+        $file = $this->getFile($key);
 
         if (file_exists($file))
         {
@@ -220,7 +220,7 @@ class File extends CacheAbstract
             $data = (int)$this->getEncoder()->decode($data) - $step;
             
             file_put_contents(
-                $this->file($key), 
+                $this->getFile($key), 
                 $ttl . "\n" . $this->getEncoder()->encode($data), 
                 LOCK_EX
             );

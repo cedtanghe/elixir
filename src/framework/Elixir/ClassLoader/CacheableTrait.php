@@ -2,7 +2,7 @@
 
 namespace Elixir\ClassLoader;
 
-use Elixir\Cache\CacheInterface;
+use Elixir\ClassLoader\CacheableInterface;
 use Elixir\Routing\Loader\Arr;
 
 /**
@@ -16,7 +16,7 @@ trait CacheableTrait
     protected $cacheVersion = null;
     
     /**
-     * @param string|numeric|null $value
+     * @see CacheableInterface::setCacheVersion()
      */
     public function setCacheVersion($value)
     {
@@ -32,17 +32,16 @@ trait CacheableTrait
     }
     
     /**
-     * @param CacheInterface|SessionInterface $cache
-     * @param string $key
+     * @see CacheableInterface::loadFromCache()
      */
-    public function loadFromCache($cache, $key = '___CACHE_LOADER___')
+    public function loadFromCache($cache, $key = self::DEFAULT_CACHE_KEY)
     {
         $data = $cache->get($key, []) ?: [];
         $version = Arr::get('cache_version', $data);
         
-        if(null === $this->cacheVersion || null === $version || $version === $this->cacheVersion)
+        if (null === $this->cacheVersion || null === $version || $version === $this->cacheVersion)
         {
-            if(null !== $version)
+            if (null !== $version)
             {
                 $this->cacheVersion = $version;
             }
@@ -55,10 +54,9 @@ trait CacheableTrait
     }
     
     /**
-     * @param CacheInterface|SessionInterface $cache
-     * @param string $key
+     * @see CacheableInterface::loadFromCache()
      */
-    public function exportToCache($cache, $key = '___CACHE_LOADER___')
+    public function exportToCache($cache, $key = self::DEFAULT_CACHE_KEY)
     {
         $cache->set(
             $key, 

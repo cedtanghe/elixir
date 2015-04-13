@@ -42,7 +42,7 @@ class LoaderFactory
         {
             static::$factories['JSON'] = function($config, $options)
             {
-                if (substr($config, -5) == '.json')
+                if (strstr($config, '.json'))
                 {
                     return new JSON($options['environment'], $options['strict']);
                 }
@@ -55,7 +55,7 @@ class LoaderFactory
         {
             static::$factories['YAML'] = function($config, $options)
             {
-                if (substr($config, -4) == '.yml')
+                if (strstr($config, '.yml'))
                 {
                     return new YAML($options['environment'], $options['strict']);
                 }
