@@ -229,6 +229,29 @@ class Grouped implements CacheableInterface
     }
     
     /**
+     * @see CacheableInterface::loadFromCache()
+     */
+    public function invalidateCache()
+    {
+        $this->files = [];
+        $this->metadata = null;
+        $this->cachedata = null;
+        $this->build = false;
+        
+        if (file_exists($this->getCacheFile()))
+        {
+            unlink($this->getCacheFile());
+        }
+        
+        if (file_exists($this->getMetaFile()))
+        {
+            unlink($this->getMetaFile());
+        }
+        
+        return true;
+    }
+    
+    /**
      * @return string
      */
     protected function getMetaFile()

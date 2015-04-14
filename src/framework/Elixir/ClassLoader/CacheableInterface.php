@@ -13,22 +13,23 @@ interface CacheableInterface
     /**
      * @var string
      */
-    const DEFAULT_CACHE_KEY = '___CACHE_LOADER___';
+    const DEFAULT_CACHE_KEY = '_CACHE_LOADER';
     
     /**
-     * @param string|numeric|null $value
-     */
-    public function setCacheVersion($value);
-    
-    /**
-     * @param CacheInterface|SessionInterface $cache
+     * @param CacheInterface|SessionInterface  $cache
+     * @param string|numeric|null $version
      * @param string $key
+     * @return boolean
      */
-    public function loadFromCache($cache, $key = self::DEFAULT_CACHE_KEY);
+    public function loadFromCache($cache, $version = null, $key = self::DEFAULT_CACHE_KEY);
     
     /**
-     * @param CacheInterface|SessionInterface $cache
-     * @param string $key
+     * @return boolean
      */
-    public function exportToCache($cache, $key = self::DEFAULT_CACHE_KEY);
+    public function exportToCache();
+    
+    /**
+     * @return boolean
+     */
+    public function invalidateCache();
 }

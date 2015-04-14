@@ -2,8 +2,10 @@
 
 namespace Elixir\ClassLoader;
 
+use Elixir\Cache\CacheInterface;
 use Elixir\ClassLoader\CacheableInterface;
-use Elixir\Routing\Loader\Arr;
+use Elixir\HTTP\Session\SessionInterface;
+use Elixir\Util\Arr;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
@@ -11,16 +13,26 @@ use Elixir\Routing\Loader\Arr;
 trait CacheableTrait 
 {
     /**
+     * @var CacheInterface|SessionInterface 
+     */
+    protected $cache;
+    
+    /**
      * @var string|numeric|null
      */
     protected $cacheVersion = null;
     
     /**
-     * @see CacheableInterface::setCacheVersion()
+     * @var string 
      */
-    public function setCacheVersion($value)
+    protected $cacheKey;
+    
+    /**
+     * @return CacheInterface|SessionInterface 
+     */
+    public function getCache()
     {
-        $this->cacheVersion = $value;
+        return $this->cache;
     }
     
     /**
@@ -32,11 +44,23 @@ trait CacheableTrait
     }
     
     /**
+     * @return string
+     */
+    public function getCacheKey()
+    {
+        return $this->cacheKey;
+    }
+    
+    /**
      * @see CacheableInterface::loadFromCache()
      */
-    public function loadFromCache($cache, $key = self::DEFAULT_CACHE_KEY)
+    public function loadFromCache($cache, $version = null, $key = self::DEFAULT_CACHE_KEY)
     {
-        $data = $cache->get($key, []) ?: [];
+        $this->cache = $cache;
+        $this->cacheVersion = $version;
+        $this->cacheKey = $key;
+        
+        $data = $this->cache->get($this->cacheKey, []) ?: [];
         $version = Arr::get('version', $data);
         
         if (null === $this->cacheVersion || null === $version || $version === $this->cacheVersion)
@@ -50,20 +74,45 @@ trait CacheableTrait
                 Arr::get('classes', $data, []),
                 $this->classes
             );
+            
+            return true;
         }
+        
+        return false;
     }
     
     /**
      * @see CacheableInterface::loadFromCache()
      */
-    public function exportToCache($cache, $key = self::DEFAULT_CACHE_KEY)
+    public function exportToCache()
     {
-        $cache->set(
-            $key, 
-            [
-                'classes' => $this->classes,
-                'version' => $this->cacheVersion
-            ]
-        );
+        if (null !== $this->cache)
+        {
+            $this->cache->set(
+                $this->cacheKey, 
+                [
+                    'classes' => $this->classes,
+                    'version' => $this->cacheVersion
+                ]
+            );
+
+            return true;
+        }
+        
+        return false;
+    }
+    
+    /**
+     * @see CacheableInterface::loadFromCache()
+     */
+    public function invalidateCache()
+    {
+        if (null !== $this->cache)
+        {
+            $this->cache->remove($this->cacheKey);
+            return true;
+        }
+        
+        return false;
     }
 }

@@ -34,4 +34,9 @@ interface CacheableInterface
      * @return boolean
      */
     public function exportToCache();
+    
+    /**
+     * @return boolean
+     */
+    public function invalidateCache();
 }

@@ -194,6 +194,22 @@ class Compiled implements CacheableInterface
     }
     
     /**
+     * @see CacheableInterface::loadFromCache()
+     */
+    public function invalidateCache()
+    {
+        $this->cachedata = null;
+        $this->build = false;
+        
+        if (file_exists($this->getCacheFile()))
+        {
+            unlink($this->getCacheFile());
+        }
+        
+        return true;
+    }
+    
+    /**
      * @return string
      */
     protected function getCacheFile() 
