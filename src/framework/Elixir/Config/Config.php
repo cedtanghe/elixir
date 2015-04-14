@@ -177,19 +177,6 @@ class Config implements ConfigInterface, CacheableInterface, \ArrayAccess, \Iter
     }
     
     /**
-     * @see CacheableInterface::exportToCache()
-     */
-    public function exportToCache()
-    {
-        if (null === $this->cache)
-        {
-            return;
-        }
-        
-        return $this->cache->exportToCache();
-    }
-    
-    /**
      * @see ConfigInterface::has()
      */
     public function has($key)
@@ -366,6 +353,32 @@ class Config implements ConfigInterface, CacheableInterface, \ArrayAccess, \Iter
     public function __unset($key) 
     {
         $this->remove($key);
+    }
+    
+    /**
+     * @see CacheableInterface::exportToCache()
+     */
+    public function exportToCache()
+    {
+        if (null === $this->cache)
+        {
+            return false;
+        }
+        
+        return $this->cache->exportToCache();
+    }
+    
+    /**
+     * @see CacheableInterface::loadFromCache()
+     */
+    public function invalidateCache()
+    {
+        if (null === $this->cache)
+        {
+            return false;
+        }
+        
+        return $this->cache->exportToCache();
     }
 
     /**

@@ -11,7 +11,7 @@ class Collection implements \IteratorAggregate
      * @var array
      */
     protected $data = [];
-
+    
     /**
      * @param array $data
      */
