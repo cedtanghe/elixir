@@ -206,7 +206,7 @@ class Select implements FindableInterface
         
         if (false === strpos($SQL->render(), 'GROUP BY'))
         {
-            return current($this->DB->query($SQL)->one());
+            return current($this->DB->query($SQL)->first());
         }
         else
         {
@@ -398,9 +398,9 @@ class Select implements FindableInterface
     }
 
     /**
-     * @see FindableInterface::one()
+     * @see FindableInterface::first()
      */
-    public function one() 
+    public function first() 
     {
         $this->SQL->limit(1);
         $repositories = $this->all();

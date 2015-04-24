@@ -35,7 +35,7 @@ interface FindableInterface
     /**
      * @return RepositoryInterface|null
      */
-    public function one();
+    public function first();
     
     /**
      * @return Collection

@@ -18,14 +18,14 @@ class APC extends CacheAbstract
      * @see CacheAbstract::__construct()
      * @throws \RuntimeException
      */
-    public function __construct($identifier) 
+    public function __construct($identifier = '___CACHE_APC___') 
     {
         if (!(extension_loaded('apc') && ini_get('apc.enabled')))
         {
             throw new \RuntimeException('APC is not available.');
         }
         
-        $this->identifier = preg_replace('/[^a-z0-9\-_]+/i', '', strtolower($identifier));
+        $this->identifier = preg_replace('/[^a-z0-9\-_]+/', '', strtolower($identifier));
     }
     
     /**

@@ -27,7 +27,7 @@ class Session extends CacheAbstract
      */
     public function __construct($identifier = '___CACHE_SESSION___', SessionInterface $session = null) 
     {
-        $this->identifier = preg_replace('/[^a-z0-9\-_]+/i', '', strtolower($identifier));
+        $this->identifier = preg_replace('/[^a-z0-9\-_]+/', '', strtolower($identifier));
         $this->session = $session ?: SessionData::instance();
     }
     

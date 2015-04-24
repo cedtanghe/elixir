@@ -5,14 +5,17 @@ namespace Elixir\DI;
 use Elixir\DI\ContainerEvent;
 use Elixir\DI\ContainerInterface;
 use Elixir\DI\ProviderInterface;
-use Elixir\Dispatcher\Dispatcher;
+use Elixir\Dispatcher\DispatcherInterface;
+use Elixir\Dispatcher\DispatcherTrait;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
-class Container extends Dispatcher implements ContainerInterface
+class Container implements ContainerInterface, DispatcherInterface
 {
+    use DispatcherTrait;
+    
     /**
      * @var array 
      */
@@ -22,6 +25,11 @@ class Container extends Dispatcher implements ContainerInterface
      * @var array 
      */
     protected $_aliases = [];
+    
+    /**
+     * @var array 
+     */
+    protected $_providers = [];
     
     /**
      * @var string 
@@ -54,14 +62,34 @@ class Container extends Dispatcher implements ContainerInterface
             $pKey = $this->_aliases[$pKey];
         }
         
-        return isset($this->_data[$pKey]);
+        if(isset($this->_data[$pKey]))
+        {
+            return true;
+        }
+        
+        $i = count($this->_providers);
+        
+        while ($i--)
+        {
+            $provider = $this->_providers[$i];
+            
+            if(in_array($pKey, $provider->provides()))
+            {
+                $provider->register($this);
+                array_splice($this->_providers, $i, 1);
+                
+                return $this->has($pKey);
+            }
+        }
+        
+        return false;
     }
     
     /**
      * @see ContainerInterface::get()
      * @throws \LogicException
      */
-    public function get($pKey, array $pArguments = null, $pDefault = null)
+    public function get($pKey, array $pOptions = [], $pDefault = null)
     {
         if($this->has($pKey))
         {
@@ -73,14 +101,14 @@ class Container extends Dispatcher implements ContainerInterface
             $data = $this->_data[$pKey]['value'];
             $arguments = [$this];
             
-            if(null !== $pArguments)
+            if(isset($pOptions['arguments']) && count($pOptions['arguments']) > 0)
             {
-                if($this->_data[$pKey]['type'] != self::SIMPLE)
+                if($this->_data[$pKey]['type'] != self::BIND)
                 {
-                    throw new \LogicException(sprintf('"%s" service must be "simple" type.', $root));
+                    throw new \LogicException(sprintf('"%s" service must be simple "bind" type.', $pKey));
                 }
                 
-                $arguments[] = $pArguments;
+                $arguments[] = $pOptions['arguments'];
             }
             
             if(is_callable($data))
@@ -89,6 +117,10 @@ class Container extends Dispatcher implements ContainerInterface
             }
 
             return $data;
+        }
+        else
+        {
+            // Todo resolve
         }
         
         return is_callable($pDefault) ? $pDefault() : $pDefault;
@@ -111,7 +143,7 @@ class Container extends Dispatcher implements ContainerInterface
                 {
                     if($this->_lockMode == self::THROW_IF_ALREADY_EXISTS)
                     {
-                        throw new \LogicException(sprintf('"%s" service has already been defined.', $pKey));
+                        throw new \LogicException(sprintf('Service "%s" has already been defined.', $pKey));
                     }
                     
                     return;
@@ -121,7 +153,7 @@ class Container extends Dispatcher implements ContainerInterface
         
         if(!isset($pOptions['type']))
         {
-            $pOptions['type'] = self::SIMPLE;
+            $pOptions['type'] = self::BIND;
         }
         
         $type = $pOptions['type'];
@@ -133,22 +165,14 @@ class Container extends Dispatcher implements ContainerInterface
             case self::SINGLETON:
                 $this->singleton($pKey, $pValue, $tags, $aliases);
             break;
-            case self::PROTECT:
-                $this->protect($pKey, $pValue, $tags, $aliases);
+            case self::WRAP:
+                $this->wrap($pKey, $pValue, $tags, $aliases);
+            break;
+            case self::EXTEND:
+                $this->extend($pKey, $pValue);
             break;
             default:
-                $this->_data[$pKey] = [
-                    'type' => self::SIMPLE, 
-                    'value' => $pValue,
-                    'tags' => $tags
-                ];
-                
-                $this->dispatch(new ContainerEvent(ContainerEvent::SERVICE_CREATED, $pKey, null, self::SIMPLE));
-                
-                foreach($aliases as $alias)
-                {
-                    $this->addAlias($pKey, $alias);
-                }
+                $this->bind($pKey, $pValue, $tags, $aliases);
             break;
         }
     }
@@ -179,42 +203,64 @@ class Container extends Dispatcher implements ContainerInterface
      */
     public function gets(array $pOptions = [])
     {
+        $result = [];
         $data = [];
         $raw = isset($pOptions['raw']) && $pOptions['raw'];
-        $withConfiguration = isset($pOptions['withConfiguration']) && $pOptions['withConfiguration'];
+        $providers = isset($pOptions['providers']) && $pOptions['providers'];
+        
+        if($providers)
+        {
+            $result['data'] = &$data;
+            $result['providers'] = $this->_providers;
+        }
+        else
+        {
+            $result = &$data;
+        }
         
         foreach($this->_data as $key => $value)
         {
-            $data[$key] = $raw ? $this->raw($key, $withConfiguration) : $this->get($key);
+            $data[$key] = $raw ? $this->raw($key) : $this->get($key);
         }
 
-        return $data;
+        return $result;
     }
     
     /**
      * @see ContainerInterface::sets()
      */
-    public function sets(array $pData, array $pOptions = [])
+    public function sets(array $pData, array $pGlobalOptions = [])
     {
-        $this->_data = [];
-        
-        foreach($pData as $key => $value)
+        if(isset($pData['data']))
         {
-            $this->set($key, $value, $pOptions);
-        }
-    }
-    
-    /**
-     * @see ContainerInterface::hasAlias()
-     */
-    public function hasAlias($pAlias, $pKey = null)
-    {
-        if(isset($this->_aliases[$pAlias]))
-        {
-            return null !== $pKey ? $this->_aliases[$pAlias] == $pKey : true;
+            $this->_data = [];
+            
+            foreach($pData['data'] as $key => $config)
+            {
+                if(is_array($config))
+                {
+                    $value = $config['value'];
+                    $options = isset($config['options']) ? $config['options'] : [];
+                }
+                else
+                {
+                    $value = $config;
+                    $options = [];
+                }
+                
+                $this->set($key, $value, array_merge($options, $pGlobalOptions));
+            }
         }
         
-        return false;
+        if(isset($pData['providers']))
+        {
+            $this->_providers = [];
+            
+            foreach($pData['providers'] as $provider)
+            {
+                $this->addProvider($pProvider);
+            }
+        }
     }
     
     /**
@@ -232,24 +278,6 @@ class Container extends Dispatcher implements ContainerInterface
             $this->_aliases[$pAlias] = $pKey;
             $this->dispatch(new ContainerEvent(ContainerEvent::SERVICE_ALIAS, $pKey, $pAlias, null));
         }
-    }
-    
-    /**
-     * @see ContainerInterface::hasTag()
-     */
-    public function hasTag($pKey, $pTag)
-    {
-        if($this->has($pKey))
-        {
-            if(isset($this->_aliases[$pKey]))
-            {
-                $pKey = $this->_aliases[$pKey];
-            }
-            
-            return in_array($pTag, $this->_data[$pKey]['tags']);
-        }
-        
-        return false;
     }
     
     /**
@@ -274,7 +302,7 @@ class Container extends Dispatcher implements ContainerInterface
     /**
      * @see ContainerInterface::findByTag()
      */
-    public function findByTag($pTag, array $pArguments = null, $pDefault = null)
+    public function findByTag($pTag, array $pArguments = [], $pDefault = null)
     {
         $keys = [];
         
@@ -290,7 +318,7 @@ class Container extends Dispatcher implements ContainerInterface
         
         foreach($keys as $key)
         {
-            $s = $this->get($key, $pArguments, null);
+            $s = $this->get($key, ['arguments' => $pArguments, 'resolve' => false], null);
             
             if(null !== $s)
             {
@@ -300,6 +328,16 @@ class Container extends Dispatcher implements ContainerInterface
         
         if(count($result) == 0)
         {
+            if(count($this->_providers) > 0)
+            {
+                foreach($this->_providers as $providers)
+                {
+                    $providers->register($this);
+                }
+
+                return $this->findByTag($pTag, $pArguments, $pDefault);
+            }
+            
             return is_callable($pDefault) ? $pDefault() : $pDefault;
         }
         
@@ -310,11 +348,11 @@ class Container extends Dispatcher implements ContainerInterface
      * @see ContainerInterface::raw()
      * @throws \InvalidArgumentException
      */
-    public function raw($pKey, $pWithConfiguration = false)
+    public function raw($pKey)
     {
         if(!$this->has($pKey))
         {
-            throw new \InvalidArgumentException(sprintf('Key "%s" is not defined.', $pKey));
+            throw new \InvalidArgumentException(sprintf('Service "%s" is not defined.', $pKey));
         }
         
         if(isset($this->_aliases[$pKey]))
@@ -323,33 +361,26 @@ class Container extends Dispatcher implements ContainerInterface
         }
         
         $data = $this->_data[$pKey];
-        
-        if($pWithConfiguration)
+        $data['aliases'] = [];
+            
+        foreach($this->_aliases as $key => $value)
         {
-            $data['aliases'] = [];
-            
-            foreach($this->_aliases as $key => $value)
+            if($value == $pKey)
             {
-                if($value == $pKey)
-                {
-                    $data['aliases'][] = $key;
-                }
+                $data['aliases'][] = $key;
             }
-            
-            return $data;
         }
-        
-        return $data['value'];
+
+        return $data;
     }
     
     /**
      * @param string $pKey
      * @param mixed $pValue
-     * @param mixed $pTags
-     * @param mixed $pAliases
+     * @param array $pOptions
      * @throws \LogicException
      */
-    public function singleton($pKey, $pValue, $pTags = [], $pAliases = [])
+    public function bind($pKey, $pValue, array $pOptions = [])
     {
         switch($this->_lockMode)
         {
@@ -362,7 +393,52 @@ class Container extends Dispatcher implements ContainerInterface
                 {
                     if($this->_lockMode == self::THROW_IF_ALREADY_EXISTS)
                     {
-                        throw new \LogicException(sprintf('"%s" service has already been defined.', $pKey));
+                        throw new \LogicException(sprintf('Service "%s" has already been defined.', $pKey));
+                    }
+                    
+                    return;
+                }
+            break;
+        }
+        
+        $this->_data[$pKey] = [
+            'type' => self::BIND, 
+            'value' => $pValue,
+            'tags' => isset($pOptions['tags']) ?(array)$pOptions['tags'] : []
+        ];
+        
+        if(isset($pOptions['alias']))
+        {
+            foreach((array)$pOptions['alias'] as $alias)
+            {
+                $this->addAlias($pKey, $alias);
+            }
+        }
+        
+        $this->dispatch(new ContainerEvent(ContainerEvent::SERVICE_CREATED, $pKey, null, self::BIND));
+    }
+
+    /**
+     * @param string $pKey
+     * @param mixed $pValue
+     * @param array $pOptions
+     * @param mixed $pAliases
+     * @throws \LogicException
+     */
+    public function singleton($pKey, $pValue, array $pOptions = [])
+    {
+        switch($this->_lockMode)
+        {
+            case self::READ_ONLY:
+                throw new \LogicException('The dependency injection container is read only.');
+            break;
+            case self::IGNORE_IF_ALREADY_EXISTS:
+            case self::THROW_IF_ALREADY_EXISTS:
+                if($this->has($pKey))
+                {
+                    if($this->_lockMode == self::THROW_IF_ALREADY_EXISTS)
+                    {
+                        throw new \LogicException(sprintf('Service "%s" has already been defined.', $pKey));
                     }
                     
                     return;
@@ -385,25 +461,27 @@ class Container extends Dispatcher implements ContainerInterface
         $this->_data[$pKey] = [
             'type' => self::SINGLETON, 
             'value' => $value,
-            'tags' => (array)$pTags
+            'tags' => isset($pOptions['tags']) ?(array)$pOptions['tags'] : []
         ];
         
-        $this->dispatch(new ContainerEvent(ContainerEvent::SERVICE_CREATED, $pKey, null, self::SINGLETON));
-        
-        foreach((array)$pAliases as $alias)
+        if(isset($pOptions['alias']))
         {
-            $this->addAlias($pKey, $alias);
+            foreach((array)$pOptions['alias'] as $alias)
+            {
+                $this->addAlias($pKey, $alias);
+            }
         }
+        
+        $this->dispatch(new ContainerEvent(ContainerEvent::SERVICE_CREATED, $pKey, null, self::SINGLETON));
     }
     
     /**
      * @param string $pKey
      * @param callable $pValue
-     * @param mixed $pTags
-     * @param mixed $pAliases
+     * @param array $pOptions
      * @throws \LogicException
      */
-    public function protect($pKey, callable $pValue, $pTags = [], $pAliases = [])
+    public function wrap($pKey, callable $pValue, array $pOptions = [])
     {
         switch($this->_lockMode)
         {
@@ -416,7 +494,7 @@ class Container extends Dispatcher implements ContainerInterface
                 {
                     if($this->_lockMode == self::THROW_IF_ALREADY_EXISTS)
                     {
-                        throw new \LogicException(sprintf('"%s" service has already been defined.', $pKey));
+                        throw new \LogicException(sprintf('Service "%s" has already been defined.', $pKey));
                     }
                     
                     return;
@@ -430,27 +508,31 @@ class Container extends Dispatcher implements ContainerInterface
         };
         
         $this->_data[$pKey] = [
-            'type' => self::PROTECT, 
+            'type' => self::WRAP, 
             'value' => $value,
-            'tags' => (array)$pTags
+            'tags' => isset($pOptions['tags']) ?(array)$pOptions['tags'] : []
         ];
         
-        $this->dispatch(new ContainerEvent(ContainerEvent::SERVICE_CREATED, $pKey, null, self::PROTECT));
-        
-        foreach((array)$pAliases as $alias)
+        if(isset($pOptions['alias']))
         {
-            $this->addAlias($pKey, $alias);
+            foreach((array)$pOptions['alias'] as $alias)
+            {
+                $this->addAlias($pKey, $alias);
+            }
         }
+        
+        $this->dispatch(new ContainerEvent(ContainerEvent::SERVICE_CREATED, $pKey, null, self::WRAP));
     }
     
     /**
-     * @see ContainerInterface::extend()
+     * @param string $pKey
+     * @param callable $pValue
      */
     public function extend($pKey, callable $pValue)
     {
         if(!$this->has($pKey))
         {
-            throw new \InvalidArgumentException(sprintf('Key "%s" is not defined.', $pKey));
+            throw new \InvalidArgumentException(sprintf('Service "%s" is not defined.', $pKey));
         }
         
         if(isset($this->_aliases[$pKey]))
@@ -484,25 +566,30 @@ class Container extends Dispatcher implements ContainerInterface
             return $pValue($service(), $pContainer);
         };
     }
-    
-    /**
-     * @param string $pKey
-     * @return string
-     */
-    public function getStorageType($pKey)
-    {
-        $data = $this->raw($pKey, true);
-        return $data['type'];
-    }
 
-        /**
+    /**
      * @see ContainerInterface::load()
      */
-    public function load(ProviderInterface $pProvider)
+    public function addProvider(ProviderInterface $pProvider)
     {
-        $pProvider->load($this);
+        if(!$pProvider->isDeferred())
+        {
+            $pProvider->register($this);
+        }
+        else
+        {
+            $this->_providers[] = $pProvider;
+        }
     }
     
+    /**
+     * @return array
+     */
+    public function getProviders()
+    {
+        return $this->_providers;
+    }
+
     /**
      * @see ContainerInterface::merge()
      * @throws \LogicException
@@ -511,7 +598,8 @@ class Container extends Dispatcher implements ContainerInterface
     {
         if($pData instanceof self)
         {
-            $pData = $pData->gets(['raw' => true, 'withConfiguration' => true]);
+            $gets = $pData->gets(['raw' => true, 'providers' => true]);
+            $pData = $gets['data'];
         }
         
         $aliases = [];
@@ -529,7 +617,7 @@ class Container extends Dispatcher implements ContainerInterface
                     {
                         if($this->_lockMode == self::THROW_IF_ALREADY_EXISTS)
                         {
-                            throw new \LogicException(sprintf('"%s" service has already been defined.', $key));
+                            throw new \LogicException(sprintf('Service "%s" has already been defined.', $key));
                         }
                         
                         unset($pData[$key]);
@@ -551,9 +639,42 @@ class Container extends Dispatcher implements ContainerInterface
         
         $this->_data = array_merge($this->_data, $pData);
         
+        if(isset($gets['providers']))
+        {
+            foreach($gets['providers'] as $provider)
+            {
+                $this->addProvider($provider);
+            }
+        }
+        
         foreach($aliases as $key => $value)
         {
             $this->addAlias($value, $key);
         }
+    }
+
+    /**
+     * @ignore
+     */
+    public function __debugInfo()
+    {
+        $data = $this->gets(['raw' => true, 'providers' => true]);
+        $provides = [];
+        
+        foreach ($data['data'] as $key => &$config)
+        {
+            unset($config['value']);
+        }
+        
+        foreach($data['providers'] as $provider)
+        {
+            $provides = array_merge($provides, $provider->provides());
+        }
+        
+        return [
+            'data' => $data['data'],
+            'aliases' => $this->_aliases,
+            'provides' => $provides,
+        ];
     }
 }

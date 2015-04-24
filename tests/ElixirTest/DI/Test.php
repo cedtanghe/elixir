@@ -65,7 +65,7 @@ class Test extends \PHPUnit_Framework_TestCase
     {
         $container = new Container();
         
-        $container->protect('param', function($pContainer)
+        $container->wrap('param', function($pContainer)
         {
             return 'This is a service';
         });

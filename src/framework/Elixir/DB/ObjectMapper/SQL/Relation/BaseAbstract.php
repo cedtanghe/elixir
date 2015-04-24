@@ -452,7 +452,7 @@ abstract class BaseAbstract implements RelationInterfaceMetas
         {
             case self::HAS_ONE:
             case self::BELONGS_TO:
-                return $findable->one();
+                return $findable->first();
             case self::HAS_MANY:
             case self::BELONGS_TO_MANY:
                 return new Collection($findable->all());

@@ -31,7 +31,7 @@ abstract class ResultSetAbstract implements \Iterator, \Countable
     /**
      * @return mixed
      */
-    abstract public function one();
+    abstract public function first();
     
     /**
      * @return array

@@ -23,14 +23,14 @@ class Memcached extends CacheAbstract
      * @see CacheAbstract::__construct()
      * @throws \RuntimeException
      */
-    public function __construct($identifier) 
+    public function __construct($identifier = '___CACHE_MEMCACHED___') 
     {
         if (!class_exists('\Memcached')) 
         {
             throw new \RuntimeException('Memcached is not available.');
         }
 
-        $this->identifier = preg_replace('/[^a-z0-9\-_]+/i', '', strtolower($identifier));
+        $this->identifier = preg_replace('/[^a-z0-9\-_]+/', '', strtolower($identifier));
         $this->engine = new \Memcached($this->identifier);
     }
 

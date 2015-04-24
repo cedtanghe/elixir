@@ -47,7 +47,7 @@ class Arr extends CacheAbstract
         
             return $value;
         }
-
+        
         return is_callable($default) ? call_user_func($default) : $default;
     }
     

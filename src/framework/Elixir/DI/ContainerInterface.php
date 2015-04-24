@@ -2,6 +2,7 @@
 
 namespace Elixir\DI;
 
+use Elixir\DI\ContainerInterface;
 use Elixir\DI\ProviderInterface;
 
 /**
@@ -13,7 +14,7 @@ interface ContainerInterface
     /**
      * @var string
      */
-    const SIMPLE = 'simple';
+    const BIND = 'bind';
     
     /**
      * @var string
@@ -23,7 +24,12 @@ interface ContainerInterface
     /**
      * @var string
      */
-    const PROTECT = 'protect';
+    const WRAP = 'wrap';
+    
+    /**
+     * @var string
+     */
+    const EXTEND = 'extend';
     
     /**
      * @var string
@@ -63,11 +69,11 @@ interface ContainerInterface
     
     /**
      * @param string $pKey
-     * @param array $pArguments
+     * @param array $pOptions
      * @param mixed $pDefault
      * @return mixed 
      */
-    public function get($pKey, array $pArguments = null, $pDefault = null);
+    public function get($pKey, array $pOptions = [], $pDefault = null);
     
     /**
      * @param string $pKey
@@ -89,29 +95,15 @@ interface ContainerInterface
     
     /**
      * @param array $pData
-     * @param array $pOptions
+     * @param array $pGlobalOptions
      */
-    public function sets(array $pData, array $pOptions = []);
-    
-    /**
-     * @param string $pAlias
-     * @param string $pKey
-     * @return boolean
-     */
-    public function hasAlias($pAlias, $pKey = null);
+    public function sets(array $pData, array $pGlobalOptions = []);
     
     /**
      * @param string $pKey
      * @param string $pAlias
      */
     public function addAlias($pKey, $pAlias);
-    
-    /**
-     * @param string $pKey
-     * @param string $pTag
-     * @return boolean
-     */
-    public function hasTag($pKey, $pTag);
     
     /**
      * @param string $pKey
@@ -125,31 +117,18 @@ interface ContainerInterface
      * @param mixed $pDefault
      * @return array|mixed
      */
-    public function findByTag($pTag, array $pArguments = null, $pDefault = null);
+    public function findByTag($pTag, array $pArguments = [], $pDefault = null);
     
     /**
      * @param string $pKey
-     * @param callable $pValue
+     * @return array 
      */
-    public function extend($pKey, callable $pValue);
-    
-    /**
-     * @param string $pKey
-     * @param boolean $pWithConfiguration
-     * @return mixed 
-     */
-    public function raw($pKey, $pWithConfiguration = false);
-    
-    /**
-     * @param string $pKey
-     * @return string
-     */
-    public function getStorageType($pKey);
+    public function raw($pKey);
 
     /**
      * @param ProviderInterface $pProvider
      */
-    public function load(ProviderInterface $pProvider);
+    public function addProvider(ProviderInterface $pProvider);
     
     /**
      * @param array|ContainerInterface $pData 

@@ -64,9 +64,9 @@ class PDO extends ResultSetAbstract
     }
     
     /**
-     * @see ResultSetAbstract::one()
+     * @see ResultSetAbstract::first()
      */
-    public function one()
+    public function first()
     {
         return $this->next();
     }

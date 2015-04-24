@@ -59,7 +59,7 @@ abstract class CacheAbstract implements CacheInterface
      * @param integer|string|\DateTime $ttl
      * @return integer
      */
-    public function parseTimeToLive($ttl = self::DEFAULT_TTL)
+    protected function parseTimeToLive($ttl = self::DEFAULT_TTL)
     {
         if (0 == $ttl)
         {

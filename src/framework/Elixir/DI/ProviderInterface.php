@@ -11,7 +11,17 @@ use Elixir\DI\ContainerInterface;
 interface ProviderInterface 
 {
     /**
+     * @return boolean
+     */
+    public function isDeferred();
+    
+    /**
+     * @return array
+     */
+    public function provides();
+    
+    /**
      * @param ContainerInterface $pContainer
      */
-    public function load(ContainerInterface $pContainer);
+    public function register(ContainerInterface $pContainer);
 }
