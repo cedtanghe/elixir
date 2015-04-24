@@ -16,8 +16,7 @@ class PSR0 extends LoaderAbstract
     use CacheableTrait;
     
     /**
-     * @param string $className
-     * @return array 
+     * @see LoaderAbstract::paths()
      */
     protected function paths($className)
     {

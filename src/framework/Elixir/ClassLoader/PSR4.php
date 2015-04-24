@@ -31,8 +31,7 @@ class PSR4 extends LoaderAbstract
     }
     
     /**
-     * @param string $className
-     * @return array 
+     * @see LoaderAbstract::paths()
      */
     protected function paths($className)
     {
