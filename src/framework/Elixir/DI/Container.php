@@ -118,7 +118,7 @@ class Container implements ContainerInterface, DispatcherInterface
 
             return $data;
         }
-        else
+        else if (isset($pOptions['resolve']) && $pOptions['resolve'])
         {
             // Todo resolve
         }
@@ -306,6 +306,11 @@ class Container implements ContainerInterface, DispatcherInterface
     {
         $keys = [];
         
+        foreach($this->_providers as $providers)
+        {
+            $providers->register($this);
+        }
+        
         foreach($this->_data as $key => $value)
         {
             if(in_array($pTag, $value['tags']))
@@ -328,16 +333,6 @@ class Container implements ContainerInterface, DispatcherInterface
         
         if(count($result) == 0)
         {
-            if(count($this->_providers) > 0)
-            {
-                foreach($this->_providers as $providers)
-                {
-                    $providers->register($this);
-                }
-
-                return $this->findByTag($pTag, $pArguments, $pDefault);
-            }
-            
             return is_callable($pDefault) ? $pDefault() : $pDefault;
         }
         
