@@ -69,7 +69,7 @@ abstract class FacadeAbstract
         {
             $instance = static::$_container->get($pKey);
             
-            if(static::$_container->getStorageType($pKey) == ContainerInterface::SINGLETON)
+            if(static::$_container->getStorageType($pKey) == ContainerInterface::SHARED)
             {
                 static::$_resolvedInstances[$pKey] = $instance;
             }

@@ -11,56 +11,6 @@ use Elixir\DI\ProviderInterface;
 interface ContainerInterface 
 {
     /**
-     * @var string
-     */
-    const BIND = 'bind';
-
-    /**
-     * @var string
-     */
-    const SINGLETON = 'singleton';
-
-    /**
-     * @var string
-     */
-    const WRAP = 'wrap';
-
-    /**
-     * @var string
-     */
-    const EXTEND = 'extend';
-
-    /**
-     * @var string
-     */
-    const UNLOCKED = 'unlocked';
-
-    /**
-     * @var string
-     */
-    const READ_ONLY = 'read_only';
-
-    /**
-     * @var string
-     */
-    const IGNORE_IF_ALREADY_EXISTS = 'ignore_if_already_exists';
-
-    /**
-     * @var string
-     */
-    const THROW_IF_ALREADY_EXISTS = 'throw_if_already_exists';
-
-    /**
-     * @param string $value
-     */
-    public function setLockMode($value);
-
-    /**
-     * @return string
-     */
-    public function getLockMode();
-
-    /**
      * @param string $key
      * @return boolean 
      */
@@ -98,6 +48,18 @@ interface ContainerInterface
      */
     public function sets(array $data, array $options = []);
 
+    /**
+     * @param string $key
+     * @param callable $value
+     */
+    public function extend($key, callable $value);
+    
+    /**
+     * @param mixed $value
+     * @return \Closure
+     */
+    public function wrap($value);
+    
     /**
      * @param string $key
      * @param string $alias

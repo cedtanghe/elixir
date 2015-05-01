@@ -32,7 +32,7 @@ class ServicesHelper implements ProviderInterface
             return $pContainer->get('request');
         }, 
         [
-            'type' => ContainerInterface::SINGLETON, 
+            'type' => ContainerInterface::SHARED, 
             'tags' => [ViewHelper::HELPER_TAG_KEY]
         ]);
         
@@ -43,7 +43,7 @@ class ServicesHelper implements ProviderInterface
             return new Locator($pContainer->get('application'));
         }, 
         [
-            'type' => ContainerInterface::SINGLETON, 
+            'type' => ContainerInterface::SHARED, 
             'tags' => [
                 ViewHelper::HELPER_TAG_KEY, 
                 ControllerHelper::HELPER_TAG_KEY
@@ -57,7 +57,7 @@ class ServicesHelper implements ProviderInterface
             return new Forward();
         }, 
         [
-            'type' => ContainerInterface::SINGLETON, 
+            'type' => ContainerInterface::SHARED, 
             'tags' => [ControllerHelper::HELPER_TAG_KEY]
         ]);
         
@@ -68,7 +68,7 @@ class ServicesHelper implements ProviderInterface
             return new Action();
         }, 
         [
-            'type' => ContainerInterface::SINGLETON, 
+            'type' => ContainerInterface::SHARED, 
             'tags' => [ControllerHelper::HELPER_TAG_KEY]
         ]);
         
@@ -79,7 +79,7 @@ class ServicesHelper implements ProviderInterface
             return new Renderer();
         }, 
         [
-            'type' => ContainerInterface::SINGLETON, 
+            'type' => ContainerInterface::SHARED, 
             'tags' => [ControllerHelper::HELPER_TAG_KEY]
         ]);
         
@@ -93,7 +93,7 @@ class ServicesHelper implements ProviderInterface
             return $partial;
         }, 
         [
-            'type' => ContainerInterface::SINGLETON, 
+            'type' => ContainerInterface::SHARED, 
             'tags' => [ViewHelper::HELPER_TAG_KEY]
         ]);
         
@@ -104,7 +104,7 @@ class ServicesHelper implements ProviderInterface
             return new Escaper('UTF-8');
         }, 
         [
-            'type' => ContainerInterface::SINGLETON,
+            'type' => ContainerInterface::SHARED,
             'tags' => [
                 ViewHelper::HELPER_TAG_KEY, 
                 ControllerHelper::HELPER_TAG_KEY
@@ -123,7 +123,7 @@ class ServicesHelper implements ProviderInterface
             return $URL;
         }, 
         [
-            'type' => ContainerInterface::SINGLETON, 
+            'type' => ContainerInterface::SHARED, 
             'tags' => [
                 ViewHelper::HELPER_TAG_KEY,
                 ControllerHelper::HELPER_TAG_KEY

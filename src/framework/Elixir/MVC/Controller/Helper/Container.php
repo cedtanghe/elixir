@@ -94,7 +94,7 @@ class Container
             else
             {
                 $options = [
-                    'type' => ContainerInterface::SINGLETON,
+                    'type' => ContainerInterface::SHARED,
                     'tags' => self::HELPER_TAG_KEY
                 ];
                 

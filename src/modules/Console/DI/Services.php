@@ -50,6 +50,6 @@ class Services implements ProviderInterface
             
             return $console;
         }, 
-        ['type' => ContainerInterface::SINGLETON]);
+        ['type' => ContainerInterface::SHARED]);
     }
 }

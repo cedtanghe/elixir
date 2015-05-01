@@ -33,9 +33,9 @@ class XML implements LoaderInterface
             $parameters = [];
             $options = [];
             
-            if(isset($route->services))
+            if(isset($route->data))
             {
-                foreach($route->services->children() as $key => $value)
+                foreach($route->data->children() as $key => $value)
                 {
                     $parameters[$key] = (string)$value;
                 }
@@ -88,9 +88,9 @@ class XML implements LoaderInterface
             $xml = $pConfig->{self::GLOBALS};
             $routes = $collection->gets();
             
-            if(isset($xml->services))
+            if(isset($xml->data))
             {
-                foreach($xml->services->children() as $key => $value)
+                foreach($xml->data->children() as $key => $value)
                 {
                     foreach($routes as $route)
                     {
