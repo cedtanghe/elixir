@@ -34,12 +34,12 @@ interface ConfigInterface
     /**
      * @return array
      */
-    public function gets();
+    public function all();
 
     /**
      * @param array $data
      */
-    public function sets(array $data);
+    public function replace(array $data);
 
     /**
      * @param ConfigInterface|array

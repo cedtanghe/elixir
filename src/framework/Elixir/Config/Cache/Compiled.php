@@ -137,7 +137,7 @@ class Compiled implements CacheableInterface
                 return false;
             }
             
-            $this->config->sets($this->cachedata);
+            $this->config->replace($this->cachedata);
             return true;
         } 
         else

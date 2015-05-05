@@ -15,9 +15,29 @@ class ContainerEvent extends Event
     const CREATED = 'created';
     
     /**
+     * @var string
+     */
+    const TAGGED = 'taged';
+    
+    /**
+     * @var string
+     */
+    const ALIASED = 'aliased';
+    
+    /**
      * @var string 
      */
-    protected $name;
+    protected $service;
+    
+    /**
+     * @var string 
+     */
+    protected $tag;
+    
+    /**
+     * @var string 
+     */
+    protected $alias;
 
     /**
      * @see Event::__contruct()
@@ -27,8 +47,15 @@ class ContainerEvent extends Event
     {
         parent::__construct($pType);
         
-        $params += ['name' => null];
-        $this->name = $params['name'];
+        $params += [
+            'service' => null,
+            'tag' => null,
+            'alias' => null
+        ];
+        
+        $this->service = $params['service'];
+        $this->tag = $params['tag'];
+        $this->alias = $params['alias'];
     }
 
     /**
@@ -36,6 +63,22 @@ class ContainerEvent extends Event
      */
     public function getName()
     {
-        return $this->name;
+        return $this->service;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getTag()
+    {
+        return $this->tag;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getAlias()
+    {
+        return $this->alias;
     }
 }

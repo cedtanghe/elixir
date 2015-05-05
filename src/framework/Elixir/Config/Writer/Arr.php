@@ -14,7 +14,7 @@ class Arr extends WriterAbstract
      */
     public function write() 
     {
-        return $this->config->gets();
+        return $this->config->all();
     }
 
     /**

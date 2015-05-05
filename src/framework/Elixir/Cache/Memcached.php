@@ -51,9 +51,9 @@ class Memcached extends CacheAbstract
     }
 
     /**
-     * @see CacheAbstract::has()
+     * @see CacheAbstract::exists()
      */
-    public function has($key) 
+    public function exists($key) 
     {
         if (!$this->engine->get($key)) 
         {
@@ -79,9 +79,9 @@ class Memcached extends CacheAbstract
     }
 
     /**
-     * @see CacheAbstract::set()
+     * @see CacheAbstract::store()
      */
-    public function set($key, $value, $ttl = self::DEFAULT_TTL)
+    public function store($key, $value, $ttl = self::DEFAULT_TTL)
     {
         if (null !== $this->encoder)
         {
@@ -96,9 +96,9 @@ class Memcached extends CacheAbstract
     }
     
     /**
-     * @see CacheAbstract::remove()
+     * @see CacheAbstract::delete()
      */
-    public function remove($key) 
+    public function delete($key) 
     {
         return $this->engine->delete($key);
     }

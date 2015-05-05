@@ -10,6 +10,11 @@ use Elixir\DI\ProviderInterface;
 interface ContainerInterface 
 {
     /**
+     * @param ProviderInterface $provider
+     */
+    public function addProvider(ProviderInterface $provider);
+    
+    /**
      * @param string $key
      * @return boolean 
      */
@@ -28,24 +33,30 @@ interface ContainerInterface
      * @param mixed $value 
      * @param array $options 
      */
-    public function set($key, $value, array $options = []);
+    public function bind($key, $value, array $options = []);
+    
+    /**
+     * @param string $key
+     * @param mixed $value 
+     * @param array $options 
+     */
+    public function share($key, $value, array $options = []);
     
     /**
      * @param string $key 
      */
-    public function remove($key);
+    public function unbind($key);
 
     /**
      * @param array $options
      * @return array 
      */
-    public function gets(array $options = []);
+    public function all(array $options = []);
 
     /**
      * @param array $data
-     * @param array $options
      */
-    public function sets(array $data, array $options = []);
+    public function replace(array $data);
 
     /**
      * @param string $key
@@ -76,12 +87,7 @@ interface ContainerInterface
      * @return array 
      */
     public function raw($key);
-
-    /**
-     * @param ProviderInterface $provider
-     */
-    public function addProvider(ProviderInterface $provider);
-
+    
     /**
      * @param array|ContainerInterface $data 
      */

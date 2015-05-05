@@ -24,9 +24,9 @@ class Arr extends CacheAbstract
     }
 
     /**
-     * @see CacheAbstract::has()
+     * @see CacheAbstract::exists()
      */
-    public function has($key)
+    public function exists($key)
     {
         return ArrUtils::has($key, $this->provider);
     }
@@ -52,9 +52,9 @@ class Arr extends CacheAbstract
     }
     
     /**
-     * @see CacheAbstract::set()
+     * @see CacheAbstract::store()
      */
-    public function set($key, $value, $ttl = self::DEFAULT_TTL)
+    public function store($key, $value, $ttl = self::DEFAULT_TTL)
     {
         if (null !== $this->encoder)
         {
@@ -66,9 +66,9 @@ class Arr extends CacheAbstract
     }
     
     /**
-     * @see CacheAbstract::remove()
+     * @see CacheAbstract::delete()
      */
-    public function remove($key)
+    public function delete($key)
     {
         ArrUtils::remove($key, $this->provider);
         return true;
@@ -87,7 +87,7 @@ class Arr extends CacheAbstract
         }
         
         $value = (int)$value + $step;
-        $this->set($key, $value);
+        $this->store($key, $value);
         
         return $value;
     }
@@ -105,7 +105,7 @@ class Arr extends CacheAbstract
         }
         
         $value = (int)$value - $step;
-        $this->set($key, $value);
+        $this->store($key, $value);
         
         return $value;
     }

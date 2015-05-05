@@ -23,7 +23,7 @@ class Test extends \PHPUnit_Framework_TestCase
     {
         $container = new Container();
         
-        $container->set('param', 'This is a parameter');
+        $container->bind('param', 'This is a parameter');
         $this->assertEquals('This is a parameter', $container->get('param'));
     }
     
@@ -31,7 +31,7 @@ class Test extends \PHPUnit_Framework_TestCase
     {
         $container = new Container();
         
-        $container->set('param', function($pContainer)
+        $container->bind('param', function($pContainer)
         {
             return 'This is a service';
         });
@@ -42,7 +42,7 @@ class Test extends \PHPUnit_Framework_TestCase
     public function testAddServiceWithDefinitionAbstractClass()
     {
         $container = new Container();
-        $container->set('param', new Definition());
+        $container->bind('param', new Definition());
         
         $this->assertEquals('This is a definition', $container->get('param'));
     }
@@ -51,9 +51,9 @@ class Test extends \PHPUnit_Framework_TestCase
     {
         $container = new Container();
         
-        $container->set('param-1', 'This is a parameter');
+        $container->bind('param-1', 'This is a parameter');
         
-        $container->set('param-2', function($pContainer)
+        $container->bind('param-2', function($pContainer)
         {
             return $pContainer->get('param-1');
         });
@@ -98,7 +98,7 @@ class Test extends \PHPUnit_Framework_TestCase
         $container = new Container();
         
         $data = [];
-        $container->set('param', $data);
+        $container->bind('param', $data);
         
         $container->extend('param', function($pService, $pContainer)
         {
@@ -115,7 +115,7 @@ class Test extends \PHPUnit_Framework_TestCase
     {
         $container = new Container();
         
-        $container->set('param', function($pContainer)
+        $container->bind('param', function($pContainer)
         {
             return 'This is a service';
         }, 

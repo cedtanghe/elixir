@@ -37,9 +37,9 @@ class APC extends CacheAbstract
     }
     
     /**
-     * @see CacheAbstract::has()
+     * @see CacheAbstract::exists()
      */
-    public function has($key)
+    public function exists($key)
     {
         return apc_exists($this->identifier . $key);
     }
@@ -65,9 +65,9 @@ class APC extends CacheAbstract
     }
     
     /**
-     * @see CacheAbstract::set()
+     * @see CacheAbstract::store()
      */
-    public function set($key, $value, $ttl = self::DEFAULT_TTL)
+    public function store($key, $value, $ttl = self::DEFAULT_TTL)
     {
         if (null !== $this->encoder)
         {
@@ -78,9 +78,9 @@ class APC extends CacheAbstract
     }
     
     /**
-     * @see CacheAbstract::remove()
+     * @see CacheAbstract::delete()
      */
-    public function remove($key)
+    public function delete($key)
     {
         return apc_delete($key);
     }

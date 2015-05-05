@@ -58,9 +58,9 @@ class File extends CacheAbstract
     }
 
     /**
-     * @see CacheAbstract::has()
+     * @see CacheAbstract::exists()
      */
-    public function has($key)
+    public function exists($key)
     {
         $file = $this->getFile($key);
         
@@ -117,9 +117,9 @@ class File extends CacheAbstract
     }
     
     /**
-     * @see CacheAbstract::set()
+     * @see CacheAbstract::store()
      */
-    public function set($key, $value, $ttl = self::DEFAULT_TTL)
+    public function store($key, $value, $ttl = self::DEFAULT_TTL)
     {
         $ttl = time() + $this->parseTimeToLive($ttl);
 
@@ -133,9 +133,9 @@ class File extends CacheAbstract
     }
     
     /**
-     * @see CacheAbstract::remove()
+     * @see CacheAbstract::delete()
      */
-    public function remove($key)
+    public function delete($key)
     {
         $file = $this->getFile($key);
 

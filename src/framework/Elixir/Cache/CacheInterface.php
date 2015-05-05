@@ -16,7 +16,7 @@ interface CacheInterface
      * @param string $key 
      * @return boolean
      */
-    public function has($key);
+    public function exists($key);
     
     /**
      * @param string $key
@@ -31,7 +31,7 @@ interface CacheInterface
      * @param integer|string|\DateTime $ttl
      * @return boolean
      */
-    public function set($key, $value, $ttl = self::DEFAULT_TTL);
+    public function store($key, $value, $ttl = self::DEFAULT_TTL);
     
     /**
      * @param string $key
@@ -45,7 +45,7 @@ interface CacheInterface
      * @param string $key 
      * @return boolean
      */
-    public function remove($key);
+    public function delete($key);
     
     /**
      * @param string $key

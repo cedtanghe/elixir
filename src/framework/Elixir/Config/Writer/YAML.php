@@ -56,7 +56,7 @@ class YAML extends WriterAbstract
      */
     public function write() 
     {
-        return call_user_func($this->getYAMLEncoder(), $this->config->gets());
+        return call_user_func($this->getYAMLEncoder(), $this->config->all());
     }
 
     /**

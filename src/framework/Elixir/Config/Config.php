@@ -216,9 +216,9 @@ class Config implements ConfigInterface, CacheableInterface, \ArrayAccess, \Iter
     }
 
     /**
-     * @see ConfigInterface::gets()
+     * @see ConfigInterface::all()
      */
-    public function gets() 
+    public function all() 
     {
         $data = $this->data;
         
@@ -233,7 +233,7 @@ class Config implements ConfigInterface, CacheableInterface, \ArrayAccess, \Iter
     /**
      * @see ConfigInterface::sets()
      */
-    public function sets(array $data) 
+    public function replace(array $data) 
     {
         $this->data = $data;
     }
@@ -388,7 +388,7 @@ class Config implements ConfigInterface, CacheableInterface, \ArrayAccess, \Iter
     {
         if ($data instanceof self) 
         {
-            $data = $data->gets();
+            $data = $data->all();
         }
 
         $this->data = $recursive ? array_merge_recursive($this->data, $data) : array_merge($this->data, $data);

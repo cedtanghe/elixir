@@ -49,7 +49,7 @@ abstract class CacheAbstract implements CacheInterface
                 $get = $value;
             }
             
-            $this->set($key, $get, $ttl);
+            $this->store($key, $get, $ttl);
         }
 
         return $get;

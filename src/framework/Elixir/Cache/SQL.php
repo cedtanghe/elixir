@@ -134,9 +134,9 @@ class SQL extends CacheAbstract
     }
 
     /**
-     * @see CacheAbstract::has()
+     * @see CacheAbstract::exists()
      */
-    public function has($key) 
+    public function exists($key) 
     {
         return null !== $this->get($key, null);
     }
@@ -158,7 +158,7 @@ class SQL extends CacheAbstract
 
             if ($expired) 
             {
-                $this->remove($key);
+                $this->delete($key);
                 return is_callable($default) ? call_user_func($default) : $default;
             }
             
@@ -169,9 +169,9 @@ class SQL extends CacheAbstract
     }
 
     /**
-     * @see CacheAbstract::set()
+     * @see CacheAbstract::store()
      */
-    public function set($key, $value, $ttl = self::DEFAULT_TTL)
+    public function store($key, $value, $ttl = self::DEFAULT_TTL)
     {
         $value = $this->getEncoder()->encode($value);
         $ttl = time() + $this->parseTimeToLive($ttl);
@@ -211,9 +211,9 @@ class SQL extends CacheAbstract
     }
     
     /**
-     * @see CacheAbstract::remove()
+     * @see CacheAbstract::delete()
      */
-    public function remove($key) 
+    public function delete($key) 
     {
         $this->DB->exec(
             $this->DB->createDelete($this->table)
