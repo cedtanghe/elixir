@@ -36,11 +36,11 @@ trait MacroableTrait
      */
     public static function __callStatic($name, $arguments)
     {
-        if (static::hasMacro($method)) 
+        if (static::hasMacro($name)) 
         {
-            return call_user_func_array(static::$macros[$method], $parameters);
+            return call_user_func_array(static::$macros[$name], $arguments);
         }
 
-        throw new \BadMethodCallException(sprintf('Method "%s" is not available.', $method));
+        throw new \BadMethodCallException(sprintf('Method "%s" is not available.', $name));
     }
 }

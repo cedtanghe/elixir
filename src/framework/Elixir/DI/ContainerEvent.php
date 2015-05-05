@@ -27,7 +27,7 @@ class ContainerEvent extends Event
     {
         parent::__construct($pType);
         
-        $params = array_merge(['name' => null], $params);
+        $params += ['name' => null];
         $this->name = $params['name'];
     }
 

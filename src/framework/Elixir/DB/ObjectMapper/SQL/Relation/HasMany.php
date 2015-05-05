@@ -22,15 +22,12 @@ class HasMany extends BaseAbstract
         $this->repository = $repository;
         $this->target = $target;
 
-        $config = array_merge(
-            [
-                'foreign_key' => null,
-                'local_key' => null,
-                'pivot' => null,
-                'criterias' => []
-            ], 
-            $config
-        );
+        $config += [
+            'foreign_key' => null,
+            'local_key' => null,
+            'pivot' => null,
+            'criterias' => []
+        ];
 
         $this->foreignKey = $config['foreign_key'];
         $this->localKey = $config['local_key'];

@@ -131,11 +131,11 @@ class JoinClause
     }
 
     /**
-     * @param array $data
+     * @param mixed $data
      * @param string $part
      * @return JoinClause
      */
-    public function merge(array $data, $part) 
+    public function merge($data, $part) 
     {
         switch ($part) 
         {

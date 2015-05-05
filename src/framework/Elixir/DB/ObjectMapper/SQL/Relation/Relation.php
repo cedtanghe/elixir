@@ -46,16 +46,13 @@ class Relation implements RelationInterface
      */
     public function setRelated($value, array $options = []) 
     {
-        $options = array_merge(
-            ['filled' => true],
-            $options
-        );
+        $options += ['filled' => true];
         
         if (is_array($value))
         {
             $value = new Collection($value);
         }
-
+        
         $this->related = $value;
         $this->filled = $options['filled'];
     }

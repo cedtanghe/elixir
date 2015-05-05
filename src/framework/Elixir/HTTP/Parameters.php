@@ -335,7 +335,7 @@ class Parameters implements ParametersInterface, \ArrayAccess, \Iterator, \Count
         
         if($pRecursive)
         {
-            $this->_data = Arr::merge($this->_data, $pData);
+            $this->_data = array_merge_recursive($this->_data, $pData);
         }
         else
         {

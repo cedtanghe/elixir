@@ -580,13 +580,10 @@ abstract class ModelAbstract extends EntityAbstract implements RepositoryInterfa
      */
     public function export(array $members = [], array $omitMembers = [], array $options = [])
     {
-        $options = array_merge(
-            [
-                'raw' => true,
-                'format' => self::FORMAT_PHP
-            ],
-            $options
-        );
+        $options += [
+            'raw' => true,
+            'format' => self::FORMAT_PHP
+        ];
         
         $data = [];
 

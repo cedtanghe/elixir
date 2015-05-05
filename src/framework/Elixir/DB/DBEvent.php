@@ -43,14 +43,11 @@ class DBEvent extends Event
     {
         parent::__construct($type);
 
-        $params = array_merge(
-            [
-                'query' => null,
-                'bindings' => [],
-                'elapsed_time' => 0
-            ], 
-            $params
-        );
+        $params += [
+            'query' => null,
+            'bindings' => [],
+            'elapsed_time' => 0
+        ];
         
         $this->query = $params['query'];
         $this->bindings = $params['bindings'];

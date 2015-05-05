@@ -94,15 +94,12 @@ class RepositoryEvent extends EntityEvent
     {
         parent::__construct($type);
 
-        $params = array_merge(
-            [
-                'query' => null, 
-                'query_executed' => false,
-                'query_success' => false,
-            ], 
-            $params
-        );
-        
+        $params += [
+            'query' => null, 
+            'query_executed' => false,
+            'query_success' => false,
+        ];
+
         $this->query = $params['query'];
     }
     

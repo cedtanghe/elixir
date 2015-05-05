@@ -86,13 +86,10 @@ class Container implements ContainerInterface, DispatcherInterface
     {
         if ($this->has($key))
         {
-            $options = array_merge(
-                [
-                    'resolve' => true,
-                    'throw' => true
-                ],
-                $options
-            );
+            $options += [
+                'resolve' => true,
+                'throw' => true
+            ];
             
             if (isset($this->aliases[$key]))
             {
@@ -109,7 +106,7 @@ class Container implements ContainerInterface, DispatcherInterface
                     throw new \LogicException(sprintf('"%s" object must be simple "bind" type.', $key));
                 }
 
-                $arguments[] = $options['arguments'];
+                $arguments = array_merge($arguments, $options['arguments']);
             }
 
             if (!$this->data[$key]['shared'] || !array_key_exists($key, $this->shared))

@@ -237,7 +237,7 @@ class TextDomain
     /**
      * @param TextDomain $pData
      */
-    public function merge(self $pTextDomain)
+    public function merge(self $pData)
     {
         $this->mergeResources($pTextDomain->getResources());
         $this->mergeData($pTextDomain->gets(false));

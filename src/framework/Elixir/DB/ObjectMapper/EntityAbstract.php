@@ -323,13 +323,10 @@ abstract class EntityAbstract implements EntityInterface
      */
     public function hydrate(array $data, array $options = [])
     {
-        $options = array_merge(
-            [
-                'raw' => true,
-                'sync' => true
-            ],
-            $options
-        );
+        $options += [
+            'raw' => true,
+            'sync' => true
+        ];
         
         $references = [];
         $entities = [];
@@ -462,13 +459,10 @@ abstract class EntityAbstract implements EntityInterface
      */
     public function export(array $members = [], array $omitMembers = [], array $options = [])
     {
-        $options = array_merge(
-            [
-                'raw' => true,
-                'format' => self::FORMAT_PHP
-            ],
-            $options
-        );
+        $options += [
+            'raw' => true,
+            'format' => self::FORMAT_PHP
+        ];
         
         $data = [];
 

@@ -39,15 +39,12 @@ class Pivot
     {
         $this->pivot = $pivot;
 
-        $config = array_merge(
-            [
-                'first_key' => null,
-                'second_key' => null,
-                'criterias' => []
-            ], 
-            $config
-        );
-
+        $config += [
+            'first_key' => null,
+            'second_key' => null,
+            'criterias' => []
+        ];
+        
         $this->firstKey = $config['first_key'];
         $this->secondKey = $config['second_key'];
 

@@ -2,7 +2,6 @@
 
 namespace Elixir\DI;
 
-use Elixir\DI\ContainerInterface;
 use Elixir\DI\ProviderInterface;
 
 /**
@@ -30,7 +29,7 @@ interface ContainerInterface
      * @param array $options 
      */
     public function set($key, $value, array $options = []);
-
+    
     /**
      * @param string $key 
      */
@@ -55,12 +54,6 @@ interface ContainerInterface
     public function extend($key, callable $value);
     
     /**
-     * @param mixed $value
-     * @return \Closure
-     */
-    public function wrap($value);
-    
-    /**
      * @param string $key
      * @param string $alias
      */
@@ -74,11 +67,9 @@ interface ContainerInterface
 
     /**
      * @param string $tag
-     * @param array $arguments
-     * @param mixed $default
-     * @return array|mixed
+     * @return array
      */
-    public function findByTag($tag, array $arguments = [], $default = null);
+    public function findByTag($tag);
 
     /**
      * @param string $key

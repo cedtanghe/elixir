@@ -64,16 +64,13 @@ class EagerLoad
         $this->repository = $repository;
         $this->target = $target;
 
-        $config = array_merge(
-            [
-                'foreign_key' => null,
-                'local_key' => null,
-                'pivot' => null,
-                'type' => RelationInterface::HAS_ONE,
-                'criterias' => []
-            ], 
-            $config
-        );
+        $config += [
+            'foreign_key' => null,
+            'local_key' => null,
+            'pivot' => null,
+            'type' => RelationInterface::HAS_ONE,
+            'criterias' => []
+        ];
 
         $this->foreignKey = $config['foreign_key'];
         $this->localKey = $config['local_key'];

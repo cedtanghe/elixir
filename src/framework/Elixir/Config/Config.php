@@ -391,14 +391,7 @@ class Config implements ConfigInterface, CacheableInterface, \ArrayAccess, \Iter
             $data = $data->gets();
         }
 
-        if ($recursive) 
-        {
-            $this->data = array_merge_recursive($this->data, $data);
-        } 
-        else
-        {
-            $this->data = array_merge($this->data, $data);
-        }
+        $this->data = $recursive ? array_merge_recursive($this->data, $data) : array_merge($this->data, $data);
     }
     
     /**
