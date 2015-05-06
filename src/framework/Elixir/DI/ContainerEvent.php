@@ -12,7 +12,12 @@ class ContainerEvent extends Event
     /**
      * @var string
      */
-    const CREATED = 'created';
+    const BINDED = 'binded';
+    
+    /**
+     * @var string
+     */
+    const RESOLVED = 'resolved';
     
     /**
      * @var string

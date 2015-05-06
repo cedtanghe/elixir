@@ -27,6 +27,13 @@ interface ContainerInterface
      * @return mixed 
      */
     public function get($key, array $options = [], $default = null);
+    
+    /**
+     * @param callable|string $callback
+     * @param array $available
+     * @return array
+     */
+    public function resolve($callback, array $available = []);
 
     /**
      * @param string $key
