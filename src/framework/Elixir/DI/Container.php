@@ -41,6 +41,16 @@ class Container implements ContainerInterface, DispatcherInterface
     protected $contextual = [];
     
     /**
+     * @var array 
+     */
+    protected $converters = [];
+    
+    /**
+     * @var boolean 
+     */
+    protected $disableConverter = false;
+    
+    /**
      * @var array
      */
     protected $resolvedStack = [];
@@ -108,17 +118,37 @@ class Container implements ContainerInterface, DispatcherInterface
                 return $this->has($key);
             }
         }
+        
+        if (!$this->disableConverter)
+        {
+            $converted = $this->convert($key);
 
+            if ($converted !== $key)
+            {
+                $this->disableConverter = true;
+                $has = $this->has($converted);
+                $this->disableConverter = false;
+
+                return $has;
+            }
+        }
+        
         return false;
     }
     
     /**
      * @see ContainerInterface::get()
-     * @throws \LogicException
+     * @throws \InvalidArgumentException
      */
     public function get($key, array $options = [], $default = null)
     {
-        $options += ['throw' => true, 'rebuild' => false];
+        $options += ['throw' => true, 'rebuild' => false, 'rebuild_all' => false];
+        
+        if ($options['rebuild_all'])
+        {
+            $options['rebuild'] = true;
+        }
+        
         $fire = false;
         
         if ($this->has($key))
@@ -138,7 +168,7 @@ class Container implements ContainerInterface, DispatcherInterface
                 {
                     if ($this->data[$key]['shared']) 
                     {
-                        throw new \LogicException(sprintf('A service (%s) with arguments can not be shared.', $key));
+                        throw new \InvalidArgumentException(sprintf('A service (%s) with arguments can not be shared.', $key));
                     }
 
                     $arguments = array_merge($arguments, $options['arguments']);
@@ -152,8 +182,12 @@ class Container implements ContainerInterface, DispatcherInterface
                 {
                     try
                     {
-                        $available = isset($options['resolver_provider']) ? $options['resolver_provider'] : [];
-                        $value = $this->resolveClass($key, $available);
+                        if (!$options['rebuild_all'])
+                        {
+                            $options['rebuild'] = false;
+                        }
+                        
+                        $value = $this->resolveClass($key, $options);
                     }
                     catch (\RuntimeException $e)
                     {
@@ -179,8 +213,12 @@ class Container implements ContainerInterface, DispatcherInterface
         {
             try
             {
-                $available = isset($options['resolver_provider']) ? $options['resolver_provider'] : [];
-                $value = $this->resolveClass($key, $available);
+                if (!$options['rebuild_all'])
+                {
+                    $options['rebuild'] = false;
+                }
+                
+                $value = $this->resolveClass($key, $options);
             } 
             catch (\RuntimeException $e)
             {
@@ -215,8 +253,30 @@ class Container implements ContainerInterface, DispatcherInterface
         {
             $this->dispatch(new ContainerEvent(ContainerEvent::RESOLVED, ['service' => $key]));
         }
-
+        
         return $value;
+    }
+    
+    /**
+     * @param callable $converter
+     */
+    public function addConverter(callable $converter)
+    {
+        $this->converters[] = $converter;
+    }
+    
+    /**
+     * @param string $id
+     * @return string
+     */
+    public function convert($id)
+    {
+        foreach ($this->converters as $converter)
+        {
+            $id = call_user_func_array($converter, [$id, $this]);
+        }
+        
+        return $id;
     }
     
     /**
@@ -248,31 +308,31 @@ class Container implements ContainerInterface, DispatcherInterface
     /**
      * @see ContainerInterface::resolve()
      */
-    public function resolve($callback, array $available = [])
+    public function resolve($callback, array $options = [])
     {
+        if (isset($options['available']))
+        {
+            $options['resolver_arguments_available'] = $options['available'];
+            unset($options['available']);
+        }
+        
         if (is_string($callback) && false === strpos($callback, '::'))
         {
-            return $this->get(
-                $callback, 
-                [
-                    'throw' => true,
-                    'resolver_provider' => $available
-                ]
-            );
+            return $this->get($callback, $options);
         }
         else
         {
-            return $this->resolveCallable($callback, $available);
+            return $this->resolveCallable($callback, $options);
         }
     }
     
     /**
      * @param string $callback
-     * @param array $available
+     * @param array $options
      * @return array
      * @throws \RuntimeException
      */
-    protected function resolveCallable($callback, array $available = [])
+    protected function resolveCallable($callback, array $options = [])
     {
         if (is_string($callback) && false !== strpos($callback, '::'))
         {
@@ -290,18 +350,19 @@ class Container implements ContainerInterface, DispatcherInterface
         
         return [
             $callback, 
-            $this->getDependencies($constructor->getParameters(), $available)
+            $this->getDependencies($reflector->getParameters(), $options)
         ];
     }
     
     /**
      * @param string $class
-     * @param array $available
+     * @param array $options
      * @return mixed
      * @throws \RuntimeException
      */
-    protected function resolveClass($class, array $available = [])
+    protected function resolveClass($class, array $options = [])
     {
+        $class = $this->convert($class);
         $contextual = $this->getContextualObject($class);
         
         if (null !== $contextual)
@@ -329,7 +390,7 @@ class Container implements ContainerInterface, DispatcherInterface
         }
 
         $this->resolvedStack[] = $class;
-        $arguments = $this->getDependencies($constructor->getParameters(), $available);
+        $arguments = $this->getDependencies($constructor->getParameters(), $options);
         array_pop($this->resolvedStack);
         
         return $reflector->newInstanceArgs($arguments);
@@ -337,14 +398,15 @@ class Container implements ContainerInterface, DispatcherInterface
 
     /**
      * @param array $dependencies
-     * @param array $available
+     * @param array $options
      * @return array
      * @throws \RuntimeException
      * @throws \Exception
      */
-    protected function getDependencies(array $dependencies, array $available = [])
+    protected function getDependencies(array $dependencies, array $options = [])
     {
         $arguments = [];
+        $available = isset($options['resolver_arguments_available']) ? $options['resolver_arguments_available'] : [];
         
         foreach ($dependencies as $dependency)
         {
@@ -373,7 +435,8 @@ class Container implements ContainerInterface, DispatcherInterface
                 {
                     try 
                     {
-                        $arguments[] = $this->get($class->name, ['throw' => true]);
+                        $o = ['throw' => true] + $options;
+                        $arguments[] = $this->get($class->name, $o);
                     } 
                     catch (\Exception $e)
                     {
@@ -600,7 +663,7 @@ class Container implements ContainerInterface, DispatcherInterface
     /**
      * @see ContainerInterface::findByTag()
      */
-    public function findByTag($tag)
+    public function findByTag($tag, array $options = [])
     {
         foreach ($this->providers as $providers)
         {
@@ -608,12 +671,13 @@ class Container implements ContainerInterface, DispatcherInterface
         }
         
         $services = [];
+        $options += ['throw' => false];
         
         if (isset($this->tags[$tag]))
         {
             foreach ($this->tags[$tag] as $key)
             {
-                $services[$key] = $this->get($key, ['throw' => false]);
+                $services[$key] = $this->get($key, $options);
             }
         }
 

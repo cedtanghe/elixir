@@ -30,10 +30,10 @@ interface ContainerInterface
     
     /**
      * @param callable|string $callback
-     * @param array $available
+     * @param array $options
      * @return array
      */
-    public function resolve($callback, array $available = []);
+    public function resolve($callback, array $options = []);
 
     /**
      * @param string $key
@@ -85,9 +85,10 @@ interface ContainerInterface
 
     /**
      * @param string $tag
+     * @param array $options
      * @return array
      */
-    public function findByTag($tag);
+    public function findByTag($tag, array $options = []);
 
     /**
      * @param string $key
