@@ -24,6 +24,11 @@ class Container implements ContainerInterface, DispatcherInterface
      * @var array 
      */
     protected $instances = [];
+    
+    /**
+     * @var array 
+     */
+    protected $resolved = [];
 
     /**
      * @var array 
@@ -246,6 +251,8 @@ class Container implements ContainerInterface, DispatcherInterface
             unset($this->extenders[$key]);
             $this->instances[$key] = $value;
         }
+        
+        $this->resolved[$key] = true;
         
         if ($fireResolvedEvent)
         {
@@ -472,15 +479,13 @@ class Container implements ContainerInterface, DispatcherInterface
             $key = $this->aliases[$key];
         }
         
-        if (!$options['shared'])
-        {
-            unset($this->instances[$key]);
-        }
-        
         $this->bindings[$key] = [
             'shared' => $options['shared'],
             'value' => $value
         ];
+        
+        unset($this->instances[$key]);
+        unset($this->resolved[$key]);
         
         foreach ($options['extenders'] as $extender)
         {
@@ -505,7 +510,7 @@ class Container implements ContainerInterface, DispatcherInterface
      */
     public function share($key, $value, array $options = [])
     {
-        $options['share'] = true;
+        $options['shared'] = true;
         $this->bind($key, $value, $options);
     }
     
@@ -514,15 +519,11 @@ class Container implements ContainerInterface, DispatcherInterface
      */
     public function instance($key, $value, array $options = [])
     {
-        if (isset($this->aliases[$key])) 
-        {
-            $key = $this->aliases[$key];
-        }
+        $options['shared'] = true;
+        $this->bind($key, $this->wrap($value), $options);
         
-        $options['share'] = true;
-        $this->instance[$key] = $value;
-        
-        $this->bind($key, $value, $options);
+        $this->resolved[$key] = true;
+        $this->instances[$key] = $value;
     }
     
     /**
@@ -565,6 +566,32 @@ class Container implements ContainerInterface, DispatcherInterface
         unset($this->extenders[$key]);
         unset($this->bindings[$key]);
         unset($this->instances[$key]);
+        unset($this->resolved[$key]);
+    }
+    
+    /**
+     *  @see ContainerInterface::extend()
+     */
+    public function extend($key, callable $value) 
+    {
+        if (isset($this->aliases[$key]))
+        {
+            $key = $this->aliases[$key];
+        }
+        
+        $this->extenders[$key][] = $value;
+    }
+    
+    /**
+     * @param mixed $value
+     * @return \Closure
+     */
+    public function wrap($value)
+    {
+        return function() use ($value)
+        {
+            return $value;
+        };
     }
 
     /**
@@ -615,38 +642,17 @@ class Container implements ContainerInterface, DispatcherInterface
      */
     public function replace(array $data)
     {
-        if (isset($data['services']))
+        $services = array_keys($data);
+        
+        foreach ($services as $service)
         {
-            $this->bindings = [];
-
-            foreach ($data['services'] as $key => $service) 
-            {
-                if (is_array($service) && isset($service['options']))
-                {
-                    $value = $service['value'];
-                    $options = $service['options'];
-                } 
-                else 
-                {
-                    $value = $service;
-                    $options = [];
-                }
-
-                $this->bind($key, $value, $options);
-            }
+            $this->unbind($service);
         }
         
-        if (isset($data['providers']))
-        {
-            $this->providers = [];
-
-            foreach ($data['providers'] as $provider)
-            {
-                $this->addProvider($provider);
-            }
-        }
+        $this->bindings = [];
+        $this->merge($data);
     }
-
+    
     /**
      * @see ContainerInterface::addAlias()
      */
@@ -725,6 +731,17 @@ class Container implements ContainerInterface, DispatcherInterface
         }
         
         $data = $this->bindings[$key];
+        
+        if (array_key_exists($key, $this->instances))
+        {
+            $data['instance'] = $this->instances[$key];
+            $data['resolved'] = true;
+        }
+        else
+        {
+            $data['resolved'] = false;
+        }
+        
         $data['extenders'] = isset($this->extenders[$key]) ? $this->extenders[$key] : [];
         $data['aliases'] = [];
         $data['tags'] = [];
@@ -816,30 +833,19 @@ class Container implements ContainerInterface, DispatcherInterface
         
         return false;
     }
-
+    
     /**
-     *  @see ContainerInterface::extend()
+     * @param string $key
+     * @return boolean
      */
-    public function extend($key, callable $value) 
+    public function isResolved($key)
     {
         if (isset($this->aliases[$key]))
         {
             $key = $this->aliases[$key];
         }
         
-        $this->extenders[$key][] = $value;
-    }
-    
-    /**
-     * @param mixed $value
-     * @return \Closure
-     */
-    public function wrap($value)
-    {
-        return function() use ($value)
-        {
-            return $value;
-        };
+        return isset($this->resolved[$key]) && $this->resolved[$key];
     }
 
     /**
@@ -855,7 +861,16 @@ class Container implements ContainerInterface, DispatcherInterface
                 'contextual_bindings' => true
             ]);
             
-            $data = $gets['services'];
+            foreach ($gets['services'] as $key => $config)
+            {
+                $this->bind($key, $config['value'], $config);
+                
+                if ($config['resolved'] && isset($config['instance']))
+                {
+                    $this->resolved[$key] = true;
+                    $this->instances[$key] = $config['instance'];
+                }
+            }
             
             foreach ($all['providers'] as $provider)
             {
@@ -864,21 +879,23 @@ class Container implements ContainerInterface, DispatcherInterface
             
             $this->contextual = array_merge($this->contextual, $all['contextual_bindings']);
         }
-        
-        foreach ($data as $key => $service)
+        else
         {
-            if (is_array($service) && isset($service['options']))
+            foreach ($data as $key => $service)
             {
-                $value = $service['value'];
-                $options = $service['options'];
-            } 
-            else 
-            {
-                $value = $service;
-                $options = [];
-            }
+                if (is_array($service) && isset($service['options']))
+                {
+                    $value = $service['value'];
+                    $options = $service['options'];
+                } 
+                else 
+                {
+                    $value = $service;
+                    $options = [];
+                }
 
-            $this->bind($key, $value, $options);
+                $this->bind($key, $value, $options);
+            }
         }
     }
 
@@ -908,6 +925,7 @@ class Container implements ContainerInterface, DispatcherInterface
 
         return [
             'services' => $services,
+            'resolved' => array_keys($this->resolved),
             'aliases' => $this->aliases,
             'tags' => $this->tags,
             'provides' => $provides,
