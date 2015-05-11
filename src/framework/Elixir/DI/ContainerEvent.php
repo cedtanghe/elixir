@@ -22,11 +22,6 @@ class ContainerEvent extends Event
     /**
      * @var string
      */
-    const RETRIEVED = 'retrieved';
-    
-    /**
-     * @var string
-     */
     const TAGGED = 'taged';
     
     /**

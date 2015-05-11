@@ -115,7 +115,7 @@ class Container implements ContainerInterface, DispatcherInterface
         {
             $provider = $this->providers[$i];
 
-            if (in_array($key, $provider->provides()))
+            if ($provider->provided($key))
             {
                 $provider->register($this);
                 array_splice($this->providers, $i, 1);
@@ -126,16 +126,20 @@ class Container implements ContainerInterface, DispatcherInterface
         
         if (!$this->disableConverter)
         {
-            $converted = $this->convert($key);
-
-            if ($converted !== $key)
+            $this->disableConverter = true;
+            
+            foreach ($this->converters as $converter)
             {
-                $this->disableConverter = true;
-                $has = $this->has($converted);
-                $this->disableConverter = false;
-
-                return $has;
+                $converted = call_user_func_array($converter, [$key, $this]);
+                
+                if ($converted !== $key && $this->has($converted))
+                {
+                    $this->addAlias($key, $converted);
+                    return true;
+                }
             }
+            
+            $this->disableConverter = false;
         }
         
         return false;
@@ -143,7 +147,6 @@ class Container implements ContainerInterface, DispatcherInterface
     
     /**
      * @see ContainerInterface::get()
-     * @throws \InvalidArgumentException
      */
     public function get($key, array $options = [], $default = null)
     {
@@ -153,8 +156,6 @@ class Container implements ContainerInterface, DispatcherInterface
         {
             $options['rebuild'] = true;
         }
-        
-        $fireResolvedEvent = false;
         
         if ($this->has($key))
         {
@@ -173,11 +174,6 @@ class Container implements ContainerInterface, DispatcherInterface
                 
                 if (isset($options['arguments']) && count($options['arguments']) > 0)
                 {
-                    if ($this->bindings[$key]['shared']) 
-                    {
-                        throw new \InvalidArgumentException(sprintf('A service (%s) with arguments can not be shared.', $key));
-                    }
-
                     $arguments = array_merge($arguments, $options['arguments']);
                 }
                 
@@ -208,8 +204,6 @@ class Container implements ContainerInterface, DispatcherInterface
                         }
                     }
                 }
-                
-                $fireResolvedEvent = true;
             }
         } 
         else
@@ -234,8 +228,6 @@ class Container implements ContainerInterface, DispatcherInterface
                     return is_callable($default) ? call_user_func($default) : $default;
                 }
             }
-            
-            $fireResolvedEvent = true;
         }
 
         if (isset($this->extenders[$key]))
@@ -253,22 +245,25 @@ class Container implements ContainerInterface, DispatcherInterface
         }
         
         $this->resolved[$key] = true;
+        $this->dispatch(new ContainerEvent(ContainerEvent::RESOLVED, ['service' => $key]));
         
-        if ($fireResolvedEvent)
-        {
-            $this->dispatch(new ContainerEvent(ContainerEvent::RESOLVED, ['service' => $key]));
-        }
-        
-        $this->dispatch(new ContainerEvent(ContainerEvent::RETRIEVED, ['service' => $key]));
         return $value;
     }
     
     /**
-     * @param callable $converter
+     * @see ContainerInterface::addConverter();
      */
     public function addConverter(callable $converter)
     {
         $this->converters[] = $converter;
+    }
+    
+    /**
+     * @return array
+     */
+    public function getConverters()
+    {
+        return $this->converters;
     }
     
     /**
@@ -286,13 +281,19 @@ class Container implements ContainerInterface, DispatcherInterface
     }
     
     /**
-     * @param string $when
-     * @param string $needs
-     * @param mixed $implementation
+     * @see ContainerInterface::addContextualBinding()
      */
     public function addContextualBinding($when, $needs, $implementation)
     {
         $this->contextual[$when][$needs] = $implementation;
+    }
+    
+    /**
+     * @return array
+     */
+    public function getContextualBindings()
+    {
+        return $this->contextual;
     }
     
     /**
@@ -368,7 +369,6 @@ class Container implements ContainerInterface, DispatcherInterface
      */
     protected function resolveClass($class, array $options = [])
     {
-        $class = $this->convert($class);
         $contextual = $this->getContextualObject($class);
         
         if (null !== $contextual)
@@ -715,14 +715,14 @@ class Container implements ContainerInterface, DispatcherInterface
     }
 
     /**
-     * @see ContainerInterface::raw()
-     * @throws \InvalidArgumentException
+     * @param string $key
+     * @return array 
      */
     public function raw($key)
     {
         if (!$this->has($key))
         {
-            throw new \InvalidArgumentException(sprintf('Service "%s" is not defined.', $key));
+            return null;
         }
 
         if (isset($this->aliases[$key]))
@@ -731,15 +731,11 @@ class Container implements ContainerInterface, DispatcherInterface
         }
         
         $data = $this->bindings[$key];
+        $data['resolved'] = $this->isResolved($key);
         
         if (array_key_exists($key, $this->instances))
         {
             $data['instance'] = $this->instances[$key];
-            $data['resolved'] = true;
-        }
-        else
-        {
-            $data['resolved'] = false;
         }
         
         $data['extenders'] = isset($this->extenders[$key]) ? $this->extenders[$key] : [];

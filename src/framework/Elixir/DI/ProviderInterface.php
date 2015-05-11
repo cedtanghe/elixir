@@ -13,14 +13,20 @@ interface ProviderInterface
      * @return boolean
      */
     public function isDeferred();
-
-    /**
-     * @return array
-     */
-    public function provides();
-
+    
     /**
      * @param ContainerInterface $container
      */
     public function register(ContainerInterface $container);
+    
+    /**
+     * @param string $service
+     * @return boolean
+     */
+    public function provided($service);
+    
+    /**
+     * @return array
+     */
+    public function provides();
 }
