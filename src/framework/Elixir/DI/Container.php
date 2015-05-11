@@ -519,7 +519,9 @@ class Container implements ContainerInterface, DispatcherInterface
             $key = $this->aliases[$key];
         }
         
+        $options['share'] = true;
         $this->instance[$key] = $value;
+        
         $this->bind($key, $value, $options);
     }
     
