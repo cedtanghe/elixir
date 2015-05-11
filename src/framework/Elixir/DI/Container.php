@@ -18,7 +18,12 @@ class Container implements ContainerInterface, DispatcherInterface
     /**
      * @var array 
      */
-    protected $data = [];
+    protected $bindings = [];
+    
+    /**
+     * @var array 
+     */
+    protected $instances = [];
 
     /**
      * @var array 
@@ -54,12 +59,7 @@ class Container implements ContainerInterface, DispatcherInterface
      * @var array
      */
     protected $resolvedStack = [];
-
-    /**
-     * @var array 
-     */
-    protected $shared = [];
-
+    
     /**
      * @var array 
      */
@@ -99,7 +99,7 @@ class Container implements ContainerInterface, DispatcherInterface
             $key = $this->aliases[$key];
         }
 
-        if (isset($this->data[$key]))
+        if (isset($this->bindings[$key]))
         {
             return true;
         }
@@ -149,7 +149,7 @@ class Container implements ContainerInterface, DispatcherInterface
             $options['rebuild'] = true;
         }
         
-        $fire = false;
+        $fireResolvedEvent = false;
         
         if ($this->has($key))
         {
@@ -157,16 +157,18 @@ class Container implements ContainerInterface, DispatcherInterface
             {
                 $key = $this->aliases[$key];
             }
-
-            $value = $this->data[$key]['value'];
             
-            if (!$this->data[$key]['shared'] || !array_key_exists($key, $this->shared) || $options['rebuild'])
+            if (array_key_exists($key, $this->instances) && !$options['rebuild'])
+            {
+                $value = $this->instances[$key];
+            }
+            else
             {
                 $arguments = [$this];
                 
                 if (isset($options['arguments']) && count($options['arguments']) > 0)
                 {
-                    if ($this->data[$key]['shared']) 
+                    if ($this->bindings[$key]['shared']) 
                     {
                         throw new \InvalidArgumentException(sprintf('A service (%s) with arguments can not be shared.', $key));
                     }
@@ -174,9 +176,9 @@ class Container implements ContainerInterface, DispatcherInterface
                     $arguments = array_merge($arguments, $options['arguments']);
                 }
                 
-                if (is_callable($value)) 
+                if (is_callable($this->bindings[$key]['value'])) 
                 {
-                    $value = call_user_func_array($value, $arguments);
+                    $value = call_user_func_array($this->bindings[$key]['value'], $arguments);
                 }
                 else
                 {
@@ -202,11 +204,7 @@ class Container implements ContainerInterface, DispatcherInterface
                     }
                 }
                 
-                $fire = true;
-            }
-            else
-            {
-                $value = $this->shared[$key];
+                $fireResolvedEvent = true;
             }
         } 
         else
@@ -232,7 +230,7 @@ class Container implements ContainerInterface, DispatcherInterface
                 }
             }
             
-            $fire = true;
+            $fireResolvedEvent = true;
         }
 
         if (isset($this->extenders[$key]))
@@ -243,17 +241,18 @@ class Container implements ContainerInterface, DispatcherInterface
             }
         }
 
-        if ($this->data[$key]['shared'])
+        if ($this->bindings[$key]['shared'])
         {
             unset($this->extenders[$key]);
-            $this->shared[$key] = $value;
+            $this->instances[$key] = $value;
         }
         
-        if ($fire)
+        if ($fireResolvedEvent)
         {
             $this->dispatch(new ContainerEvent(ContainerEvent::RESOLVED, ['service' => $key]));
         }
         
+        $this->dispatch(new ContainerEvent(ContainerEvent::RETRIEVED, ['service' => $key]));
         return $value;
     }
     
@@ -473,7 +472,15 @@ class Container implements ContainerInterface, DispatcherInterface
             $key = $this->aliases[$key];
         }
         
-        $this->data[$key] = ['shared' => $options['shared'], 'value' => $value];
+        if (!$options['shared'])
+        {
+            unset($this->instances[$key]);
+        }
+        
+        $this->bindings[$key] = [
+            'shared' => $options['shared'],
+            'value' => $value
+        ];
         
         foreach ($options['extenders'] as $extender)
         {
@@ -501,7 +508,21 @@ class Container implements ContainerInterface, DispatcherInterface
         $options['share'] = true;
         $this->bind($key, $value, $options);
     }
-
+    
+    /**
+     * @see ContainerInterface::protect()
+     */
+    public function instance($key, $value, array $options = [])
+    {
+        if (isset($this->aliases[$key])) 
+        {
+            $key = $this->aliases[$key];
+        }
+        
+        $this->instance[$key] = $value;
+        $this->bind($key, $value, $options);
+    }
+    
     /**
      * @see ContainerInterface::unbind()
      */
@@ -540,7 +561,8 @@ class Container implements ContainerInterface, DispatcherInterface
         }
 
         unset($this->extenders[$key]);
-        unset($this->data[$key]);
+        unset($this->bindings[$key]);
+        unset($this->instances[$key]);
     }
 
     /**
@@ -576,7 +598,7 @@ class Container implements ContainerInterface, DispatcherInterface
             $data = &$services;
         }
         
-        $keys = array_keys($this->data);
+        $keys = array_keys($this->bindings);
         
         foreach ($keys as $key)
         {
@@ -593,7 +615,7 @@ class Container implements ContainerInterface, DispatcherInterface
     {
         if (isset($data['services']))
         {
-            $this->data = [];
+            $this->bindings = [];
 
             foreach ($data['services'] as $key => $service) 
             {
@@ -700,7 +722,7 @@ class Container implements ContainerInterface, DispatcherInterface
             $key = $this->aliases[$key];
         }
         
-        $data = $this->data[$key];
+        $data = $this->bindings[$key];
         $data['extenders'] = isset($this->extenders[$key]) ? $this->extenders[$key] : [];
         $data['aliases'] = [];
         $data['tags'] = [];
@@ -737,7 +759,7 @@ class Container implements ContainerInterface, DispatcherInterface
                 $key = $this->aliases[$key];
             }
             
-            return $this->data[$key]['shared'];
+            return $this->bindings[$key]['shared'];
         }
         
         return false;

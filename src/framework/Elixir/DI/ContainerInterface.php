@@ -50,10 +50,17 @@ interface ContainerInterface
     public function share($key, $value, array $options = []);
     
     /**
+     * @param string $key
+     * @param mixed $value 
+     * @param array $options 
+     */
+    public function instance($key, $value, array $options = []);
+    
+    /**
      * @param string $key 
      */
     public function unbind($key);
-
+    
     /**
      * @param array $options
      * @return array 
