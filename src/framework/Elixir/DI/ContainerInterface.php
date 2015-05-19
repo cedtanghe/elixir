@@ -10,6 +10,11 @@ use Elixir\DI\ProviderInterface;
 interface ContainerInterface 
 {
     /**
+     * @param ProviderInterface $provider
+     */
+    public function addProvider(ProviderInterface $provider);
+    
+    /**
      * @param string $key
      * @return boolean 
      */
@@ -22,13 +27,6 @@ interface ContainerInterface
      * @return mixed 
      */
     public function get($key, array $options = [], $default = null);
-    
-    /**
-     * @param callable|string $callback
-     * @param array $options
-     * @return array
-     */
-    public function resolve($callback, array $options = []);
 
     /**
      * @param string $key
@@ -91,23 +89,6 @@ interface ContainerInterface
      * @return array
      */
     public function findByTag($tag, array $options = []);
-    
-    /**
-     * @param ProviderInterface $provider
-     */
-    public function addProvider(ProviderInterface $provider);
-    
-    /**
-     * @param callable $converter
-     */
-    public function addConverter(callable $converter);
-    
-    /**
-     * @param string $when
-     * @param string $needs
-     * @param mixed $implementation
-     */
-    public function addContextualBinding($when, $needs, $implementation);
     
     /**
      * @param array|ContainerInterface $data 

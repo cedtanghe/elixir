@@ -11,7 +11,7 @@ use Elixir\Dispatcher\DispatcherTrait;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-class Container implements ContainerInterface, DispatcherInterface
+class Container implements ContainerResolvableInterface, DispatcherInterface
 {
     use DispatcherTrait;
 
@@ -93,7 +93,6 @@ class Container implements ContainerInterface, DispatcherInterface
         return $this->providers;
     }
     
-
     /**
      * @see ContainerInterface::has()
      */
@@ -251,7 +250,7 @@ class Container implements ContainerInterface, DispatcherInterface
     }
     
     /**
-     * @see ContainerInterface::addConverter();
+     * @see ContainerResolvableInterface::addConverter()
      */
     public function addConverter(callable $converter)
     {
@@ -267,8 +266,7 @@ class Container implements ContainerInterface, DispatcherInterface
     }
     
     /**
-     * @param string $id
-     * @return string
+     * @see ContainerResolvableInterface::convert()
      */
     public function convert($id)
     {
@@ -281,7 +279,7 @@ class Container implements ContainerInterface, DispatcherInterface
     }
     
     /**
-     * @see ContainerInterface::addContextualBinding()
+     * @see ContainerResolvableInterface::addContextualBinding()
      */
     public function addContextualBinding($when, $needs, $implementation)
     {
@@ -313,7 +311,7 @@ class Container implements ContainerInterface, DispatcherInterface
     }
     
     /**
-     * @see ContainerInterface::resolve()
+     * @see ContainerResolvableInterface::resolve()
      */
     public function resolve($callback, array $options = [])
     {

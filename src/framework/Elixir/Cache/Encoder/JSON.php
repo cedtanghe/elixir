@@ -14,7 +14,7 @@ class JSON implements EncoderInterface
      */
     public function encode($value)
     {
-        return json_encode($value);
+        return json_encode($value, JSON_PRETTY_PRINT);
     }
     
     /**

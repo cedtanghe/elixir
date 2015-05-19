@@ -10,7 +10,7 @@ use Elixir\Util\Str;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-abstract class EntityAbstract implements EntityInterface
+abstract class EntityAbstract implements EntityInterface, \JsonSerializable
 {
     use DispatcherTrait;
     
@@ -513,7 +513,7 @@ abstract class EntityAbstract implements EntityInterface
      */
     protected function formatJSON(array $data)
     {
-        return json_encode($data);
+        return json_encode($data, JSON_PRETTY_PRINT);
     }
 
     /**
@@ -634,12 +634,12 @@ abstract class EntityAbstract implements EntityInterface
     /**
      * @ignore
      */
-    public function __toString() 
+    public function jsonSerialize() 
     {
-        return $this->export([], [], ['format' => self::FORMAT_JSON]);
+        return $this->__debugInfo();
     }
-    
-    /**
+
+        /**
      * @ignore
      */
     public function __debugInfo()

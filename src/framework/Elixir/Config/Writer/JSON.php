@@ -14,7 +14,7 @@ class JSON extends WriterAbstract
      */
     public function write() 
     {
-        return json_encode($this->config->all());
+        return json_encode($this->config->all(), JSON_PRETTY_PRINT);
     }
 
     /**

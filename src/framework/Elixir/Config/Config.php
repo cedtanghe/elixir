@@ -12,7 +12,7 @@ use Elixir\Util\Arr;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-class Config implements ConfigInterface, CacheableInterface, \ArrayAccess, \Iterator, \Countable 
+class Config implements ConfigInterface, CacheableInterface, \ArrayAccess, \Iterator, \Countable, \JsonSerializable
 {
     /**
      * @var string 
@@ -392,6 +392,14 @@ class Config implements ConfigInterface, CacheableInterface, \ArrayAccess, \Iter
         }
 
         $this->data = $recursive ? array_merge_recursive($this->data, $data) : array_merge($this->data, $data);
+    }
+    
+    /**
+     * @ignore
+     */
+    public function jsonSerialize() 
+    {
+        return $this->__debugInfo();
     }
     
     /**
