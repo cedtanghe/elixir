@@ -91,7 +91,7 @@ class SessionParameters implements ParametersInterface
             $pData = $this->gets();
         }
         
-        $this->sets($pRecursive ? Arr::merge($this->gets(), $pData) : array_merge($$this->gets(), $pData));
+        $this->sets($pRecursive ? array_merge_recursive($this->gets(), $pData) : array_merge($$this->gets(), $pData));
     }
     
     /**

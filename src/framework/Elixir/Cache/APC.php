@@ -7,101 +7,105 @@ use Elixir\Cache\CacheAbstract;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
 class APC extends CacheAbstract
 {
+    /**
+     * @var string 
+     */
+    protected $identifier;
+    
     /**
      * @see CacheAbstract::__construct()
      * @throws \RuntimeException
      */
-    public function __construct($pIdentifier) 
+    public function __construct($identifier = '___CACHE_APC___') 
     {
-        if(!(extension_loaded('apc') && ini_get('apc.enabled')))
+        if (!(extension_loaded('apc') && ini_get('apc.enabled')))
         {
             throw new \RuntimeException('APC is not available.');
         }
         
-        parent::__construct($pIdentifier);
+        $this->identifier = preg_replace('/[^a-z0-9\-_]+/', '', strtolower($identifier));
     }
     
     /**
-     * @see CacheInterface::has()
+     * @return string
      */
-    public function has($pKey)
+    public function getIdentifier()
     {
-        return apc_exists($this->_identifier . $pKey);
+        return $this->identifier;
     }
     
     /**
-     * @see CacheInterface::get()
+     * @see CacheAbstract::exists()
      */
-    public function get($pKey, $pDefault = null)
+    public function exists($key)
     {
-        $result = apc_fetch($this->_identifier . $pKey, $success);
+        return apc_exists($this->identifier . $key);
+    }
+    
+    /**
+     * @see CacheAbstract::get()
+     */
+    public function get($key, $default = null)
+    {
+        $result = apc_fetch($this->identifier . $key, $success);
         
-        if($success)
+        if ($success)
         {
-            if(null !== $this->_encoder)
+            if (null !== $this->encoder)
             {
-                $result = $this->getEncoder()->decode($result);
+                $result = $this->encoder->decode($result);
             }
             
             return $result;
         }
         
-        return is_callable($pDefault) ? $pDefault() : $pDefault;
+        return is_callable($default) ? call_user_func($default) : $default;
     }
     
     /**
-     * @see CacheInterface::set()
+     * @see CacheAbstract::store()
      */
-    public function set($pKey, $pValue, $pTTL = 0)
+    public function store($key, $value, $ttl = self::DEFAULT_TTL)
     {
-        $pTTL = $this->convertTTL($pTTL);
-        
-        if(null !== $this->_encoder)
+        if (null !== $this->encoder)
         {
-            $pValue = $this->getEncoder()->encode($pValue);
+            $value = $this->encoder->encode($value);
         }
         
-        apc_store($this->_identifier . $pKey, $pValue, $pTTL);
+        return apc_store($this->identifier . $key, $value, $this->parseTimeToLive($ttl));
     }
     
     /**
-     * @param string $pKey
-     * @param integer $pStep
-     * @return integer|null
+     * @see CacheAbstract::delete()
      */
-    public function incremente($pKey, $pStep = 1)
+    public function delete($key)
     {
-        apc_inc($this->_identifier . $pKey, $pStep);
-        return $this->get($pKey);
+        return apc_delete($key);
     }
     
     /**
-     * @param string $pKey
-     * @param integer $pStep
-     * @return integer|null
+     * @see CacheAbstract::incremente()
      */
-    public function decremente($pKey, $pStep = 1)
+    public function incremente($key, $step = 1)
     {
-        apc_dec($this->_identifier . $pKey, $pStep);
-        return $this->get($pKey);
-    }
-
-    /**
-     * @see CacheInterface::remove()
-     */
-    public function remove($pKey)
-    {
-        apc_delete($pKey);
+        return apc_inc($this->identifier . $key, $step);
     }
     
     /**
-     * @see CacheInterface::has()
+     * @see CacheAbstract::decremente()
      */
-    public function clear()
+    public function decremente($key, $step = 1)
     {
-        apc_clear_cache('user');
+        return apc_dec($this->identifier . $key, $step);
+    }
+    
+    /**
+     * @see CacheAbstract::flush()
+     */
+    public function flush()
+    {
+        return apc_clear_cache('user');
     }
 }

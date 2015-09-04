@@ -7,117 +7,131 @@ use Elixir\Cache\CacheAbstract;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
 class Memcached extends CacheAbstract
 {
     /**
      * @var \Memcached
      */
-    protected $_memcached;
+    protected $engine;
+    
+    /**
+     * @var string 
+     */
+    protected $identifier;
 
     /**
      * @see CacheAbstract::__construct()
      * @throws \RuntimeException
      */
-    public function __construct($pIdentifier) 
+    public function __construct($identifier = '___CACHE_MEMCACHED___') 
     {
-        if(!class_exists('\Memcached'))
+        if (!class_exists('\Memcached')) 
         {
             throw new \RuntimeException('Memcached is not available.');
         }
-        
-        parent::__construct($pIdentifier);
-        $this->_memcached = new \Memcached($this->_identifier);
+
+        $this->identifier = preg_replace('/[^a-z0-9\-_]+/', '', strtolower($identifier));
+        $this->engine = new \Memcached($this->identifier);
     }
-    
+
+    /**
+     * @ignore
+     */
     public function __destruct() 
     {
-        $this->_memcached = null;
+        $this->engine = null;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getIdentifier()
+    {
+        return $this->identifier;
     }
 
     /**
-     * @see CacheInterface::has()
+     * @see CacheAbstract::exists()
      */
-    public function has($pKey)
+    public function exists($key) 
     {
-        if(!$this->_memcached->get($pKey))
+        if (!$this->engine->get($key)) 
         {
-            return $this->_memcached->getResultCode() == \Memcached::RES_NOTFOUND;
+            return $this->engine->getResultCode() == \Memcached::RES_NOTFOUND;
         }
-        
+
         return true;
     }
-    
+
     /**
-     * @see CacheInterface::get()
+     * @see CacheAbstract::get()
      */
-    public function get($pKey, $pDefault = null)
+    public function get($key, $default = null) 
     {
-        return $this->_memcached->get($pKey, $pDefault);
-    }
-    
-    /**
-     * @see CacheInterface::set()
-     */
-    public function set($pKey, $pValue, $pTTL = 0)
-    {
-        if($pTTL != 0)
+        $value = $this->engine->get($key, $default);
+        
+        if (null !== $this->encoder)
         {
-            $pTTL = time() + $this->convertTTL($pTTL);
+            $value = $this->encoder->decode($value);
         }
         
-        if(null !== $this->_encoder)
-        {
-            $pValue = $this->getEncoder()->encode($pValue);
-        }
-        
-        $this->_memcached->set($pKey, $pValue, $pTTL);
-    }
-    
-    /**
-     * @param string $pKey
-     * @param integer $pStep
-     * @return integer|null
-     */
-    public function incremente($pKey, $pStep = 1)
-    {
-        $this->_memcached->increment($pKey, $pStep);
-        return $this->get($pKey);
-    }
-    
-    /**
-     * @param string $pKey
-     * @param integer $pStep
-     * @return integer|null
-     */
-    public function decremente($pKey, $pStep = 1)
-    {
-        $this->_memcached->decrement($pKey, $pStep);
-        return $this->get($pKey);
+        return $value;
     }
 
     /**
-     * @see CacheInterface::remove()
+     * @see CacheAbstract::store()
      */
-    public function remove($pKey)
+    public function store($key, $value, $ttl = self::DEFAULT_TTL)
     {
-        $this->_memcached->delete($key);
+        if (null !== $this->encoder)
+        {
+            $value = $this->encoder->encode($value);
+        }
+
+        return $this->engine->set(
+            $key, 
+            $value, 
+            time() + $this->parseTimeToLive($ttl)
+        );
     }
     
     /**
-     * @see CacheInterface::has()
+     * @see CacheAbstract::delete()
      */
-    public function clear()
+    public function delete($key) 
     {
-        $this->_memcached->flush();
+        return $this->engine->delete($key);
+    }
+
+    /**
+     * @see CacheAbstract::incremente()
+     */
+    public function incremente($key, $step = 1) 
+    {
+        return $this->engine->increment($key, $step);
+    }
+
+    /**
+     * @see CacheAbstract::decremente()
+     */
+    public function decremente($key, $step = 1) 
+    {
+        return $this->engine->decrement($key, $step);
     }
     
     /**
-     * @param string $pMethod
-     * @param array $pArguments
+     * @see CacheAbstract::flush()
      */
-    public function __call($pMethod, $pArguments) 
+    public function flush()
     {
-        return call_user_func_array([$this->_memcached, $pMethod], $pArguments);
+        return $this->engine->flush();
+    }
+
+    /**
+     * @ignore
+     */
+    public function __call($method, $arguments) 
+    {
+        return call_user_func_array([$this->engine, $method], $arguments);
     }
 }

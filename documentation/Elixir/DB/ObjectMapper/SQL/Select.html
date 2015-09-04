@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow, all" />
+    <title>Elixir\DB\ObjectMapper\SQL\Select | Elixir</title>
+
+            <link rel="stylesheet" type="text/css" href="../../../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../../css/sami.css">
+        <script src="../../../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../../../js/bootstrap.min.js"></script>
+        <script src="../../../../js/typeahead.min.js"></script>
+        <script src="../../../../sami.js"></script>
+    
+    
+    </head>
+
+    <body id="class" data-name="class:Elixir_DB_ObjectMapper_SQL_Select" data-root-path="../../../../">
+            <div id="content">
+        <div id="left-column">
+                <div id="control-panel">
+                <form id="search-form" action="../../../../search.html" method="GET">
+            <span class="glyphicon glyphicon-search"></span>
+            <input name="search"
+                   class="typeahead form-control"
+                   type="search"
+                   placeholder="Search">
+        </form>
+    </div>
+
+                <div id="api-tree"></div>
+
+        </div>
+        <div id="right-column">
+                <nav id="site-nav" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-elements">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../../../../index.html">Elixir</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-elements">
+                <ul class="nav navbar-nav">
+                    <li><a href="../../../../classes.html">Classes</a></li>
+                                            <li><a href="../../../../namespaces.html">Namespaces</a></li>
+                                        <li><a href="../../../../interfaces.html">Interfaces</a></li>
+                    <li><a href="../../../../traits.html">Traits</a></li>
+                    <li><a href="../../../../doc-index.html">Index</a></li>
+                    <li><a href="../../../../search.html">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+                        <div class="namespace-breadcrumbs">
+            <ol class="breadcrumb">
+                <li><span class="label label-default">class</span></li>
+                                                            <li><a href="../../../../Elixir.html">Elixir</a></li>
+                                        <li><a href="../../../../Elixir/DB.html">DB</a></li>
+                                        <li><a href="../../../../Elixir/DB/ObjectMapper.html">ObjectMapper</a></li>
+                                        <li><a href="../../../../Elixir/DB/ObjectMapper/SQL.html">SQL</a></li>
+    
+                <li>Select</li>
+            </ol>
+        </div>
+                <div id="page-content">
+                
+    <div class="page-header">
+        <h1>Select</h1>
+    </div>
+
+    <p>    class
+    <strong>Select</strong>        implements
+        <a href="../../../../Elixir/DB/ObjectMapper/FindableInterface.html"><abbr title="Elixir\DB\ObjectMapper\FindableInterface">FindableInterface</abbr></a></p>
+
+    
+    
+    
+    
+            <h2>Methods</h2>
+
+            <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___construct">__construct</a>(<a href="../../../../Elixir/DB/ObjectMapper/RepositoryInterface.html"><abbr title="Elixir\DB\ObjectMapper\RepositoryInterface">RepositoryInterface</abbr></a> $repository, mixed $options = null)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../../Elixir/DB/ObjectMapper/FindableInterface.html"><abbr title="Elixir\DB\ObjectMapper\FindableInterface">FindableInterface</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_extend">extend</a>(<a href="../../../../Elixir/DB/ObjectMapper/FindableExtensionInterface.html"><abbr title="Elixir\DB\ObjectMapper\FindableExtensionInterface">FindableExtensionInterface</abbr></a> $extension)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../../Elixir/DB/ObjectMapper/SQL/Select.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Select">Select</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_reset">reset</a>(string $part)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_get">get</a>(string $part)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../../Elixir/DB/ObjectMapper/SQL/Select.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Select">Select</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_merge">merge</a>(mixed $data, string $part)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    boolean
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_has">has</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    integer
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_count">count</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../../Elixir/DB/ObjectMapper/SQL/Select.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Select">Select</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_scope">scope</a>(string $method)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../../Elixir/DB/ObjectMapper/SQL/Select.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Select">Select</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_load">load</a>(string $method)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../../Elixir/DB/ObjectMapper/SQL/Select.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Select">Select</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_with">with</a>(string $member, <a href="../../../../Elixir/DB/ObjectMapper/SQL/EagerLoad.html"><abbr title="Elixir\DB\ObjectMapper\SQL\EagerLoad">EagerLoad</abbr></a> $eagerLoad = null)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    array
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_raw">raw</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../../Elixir/DB/ObjectMapper/SQL/Select.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Select">Select</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_current">current</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../../Elixir/DB/ObjectMapper/SQL/Select.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Select">Select</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_primary">primary</a>(integer|array $id)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../../Elixir/DB/ObjectMapper/RepositoryInterface.html"><abbr title="Elixir\DB\ObjectMapper\RepositoryInterface">RepositoryInterface</abbr></a>|null
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_one">one</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../../Elixir/DB/ObjectMapper/Collection.html"><abbr title="Elixir\DB\ObjectMapper\Collection">Collection</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_all">all</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___call">__call</a>($name, $arguments)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___toString">__toString</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+            </div>
+
+
+        <h2>Details</h2>
+
+            <div id="method-details">
+                    <div class="method-item">
+                    <h3 id="method___construct">
+        <div class="location">at line 61</div>
+        <code>                    
+    <strong>__construct</strong>(<a href="../../../../Elixir/DB/ObjectMapper/RepositoryInterface.html"><abbr title="Elixir\DB\ObjectMapper\RepositoryInterface">RepositoryInterface</abbr></a> $repository, mixed $options = null)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../../Elixir/DB/ObjectMapper/RepositoryInterface.html"><abbr title="Elixir\DB\ObjectMapper\RepositoryInterface">RepositoryInterface</abbr></a></td>
+                <td>$repository</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>mixed</td>
+                <td>$options</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="http://php.net/LogicException"><abbr title="LogicException">LogicException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_extend">
+        <div class="location">at line 86</div>
+        <code>                    <a href="../../../../Elixir/DB/ObjectMapper/FindableInterface.html"><abbr title="Elixir\DB\ObjectMapper\FindableInterface">FindableInterface</abbr></a>
+    <strong>extend</strong>(<a href="../../../../Elixir/DB/ObjectMapper/FindableExtensionInterface.html"><abbr title="Elixir\DB\ObjectMapper\FindableExtensionInterface">FindableExtensionInterface</abbr></a> $extension)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../../Elixir/DB/ObjectMapper/FindableExtensionInterface.html"><abbr title="Elixir\DB\ObjectMapper\FindableExtensionInterface">FindableExtensionInterface</abbr></a></td>
+                <td>$extension</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../../Elixir/DB/ObjectMapper/FindableInterface.html"><abbr title="Elixir\DB\ObjectMapper\FindableInterface">FindableInterface</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FindableInterface::extend()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_reset">
+        <div class="location">at line 102</div>
+        <code>                    <a href="../../../../Elixir/DB/ObjectMapper/SQL/Select.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Select">Select</abbr></a>
+    <strong>reset</strong>(string $part)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$part</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../../Elixir/DB/ObjectMapper/SQL/Select.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Select">Select</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_get">
+        <div class="location">at line 124</div>
+        <code>                    mixed
+    <strong>get</strong>(string $part)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$part</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>mixed</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_merge">
+        <div class="location">at line 142</div>
+        <code>                    <a href="../../../../Elixir/DB/ObjectMapper/SQL/Select.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Select">Select</abbr></a>
+    <strong>merge</strong>(mixed $data, string $part)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>mixed</td>
+                <td>$data</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>string</td>
+                <td>$part</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../../Elixir/DB/ObjectMapper/SQL/Select.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Select">Select</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_has">
+        <div class="location">at line 172</div>
+        <code>                    boolean
+    <strong>has</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FindableInterface::has()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_count">
+        <div class="location">at line 180</div>
+        <code>                    integer
+    <strong>count</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>integer</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FindableInterface::count()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_scope">
+        <div class="location">at line 203</div>
+        <code>                    <a href="../../../../Elixir/DB/ObjectMapper/SQL/Select.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Select">Select</abbr></a>
+    <strong>scope</strong>(string $method)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$method</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../../Elixir/DB/ObjectMapper/SQL/Select.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Select">Select</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_load">
+        <div class="location">at line 230</div>
+        <code>                    <a href="../../../../Elixir/DB/ObjectMapper/SQL/Select.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Select">Select</abbr></a>
+    <strong>load</strong>(string $method)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$method</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../../Elixir/DB/ObjectMapper/SQL/Select.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Select">Select</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_with">
+        <div class="location">at line 251</div>
+        <code>                    <a href="../../../../Elixir/DB/ObjectMapper/SQL/Select.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Select">Select</abbr></a>
+    <strong>with</strong>(string $member, <a href="../../../../Elixir/DB/ObjectMapper/SQL/EagerLoad.html"><abbr title="Elixir\DB\ObjectMapper\SQL\EagerLoad">EagerLoad</abbr></a> $eagerLoad = null)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$member</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td><a href="../../../../Elixir/DB/ObjectMapper/SQL/EagerLoad.html"><abbr title="Elixir\DB\ObjectMapper\SQL\EagerLoad">EagerLoad</abbr></a></td>
+                <td>$eagerLoad</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../../Elixir/DB/ObjectMapper/SQL/Select.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Select">Select</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_raw">
+        <div class="location">at line 322</div>
+        <code>                    array
+    <strong>raw</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>array</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FindableInterface::raw()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_current">
+        <div class="location">at line 339</div>
+        <code>                    <a href="../../../../Elixir/DB/ObjectMapper/SQL/Select.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Select">Select</abbr></a>
+    <strong>current</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../../Elixir/DB/ObjectMapper/SQL/Select.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Select">Select</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_primary">
+        <div class="location">at line 361</div>
+        <code>                    <a href="../../../../Elixir/DB/ObjectMapper/SQL/Select.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Select">Select</abbr></a>
+    <strong>primary</strong>(integer|array $id)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>integer|array</td>
+                <td>$id</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../../Elixir/DB/ObjectMapper/SQL/Select.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Select">Select</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+                            <h4>Exceptions</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="http://php.net/LogicException"><abbr title="LogicException">LogicException</abbr></a></td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_one">
+        <div class="location">at line 385</div>
+        <code>                    <a href="../../../../Elixir/DB/ObjectMapper/RepositoryInterface.html"><abbr title="Elixir\DB\ObjectMapper\RepositoryInterface">RepositoryInterface</abbr></a>|null
+    <strong>one</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../../Elixir/DB/ObjectMapper/RepositoryInterface.html"><abbr title="Elixir\DB\ObjectMapper\RepositoryInterface">RepositoryInterface</abbr></a>|null</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FindableInterface::one()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_all">
+        <div class="location">at line 397</div>
+        <code>                    <a href="../../../../Elixir/DB/ObjectMapper/Collection.html"><abbr title="Elixir\DB\ObjectMapper\Collection">Collection</abbr></a>
+    <strong>all</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../../Elixir/DB/ObjectMapper/Collection.html"><abbr title="Elixir\DB\ObjectMapper\Collection">Collection</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>FindableInterface::all()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method___call">
+        <div class="location">at line 451</div>
+        <code>                    
+    <strong>__call</strong>($name, $arguments)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td></td>
+                <td>$name</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td></td>
+                <td>$arguments</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method___toString">
+        <div class="location">at line 473</div>
+        <code>                    string
+    <strong>__toString</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+            </div>
+
+    
+            </div>
+                <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/">Sami, the API Documentation Generator</a>.
+    </div>
+
+        </div>
+    </div>
+    </body>
+
+</html>

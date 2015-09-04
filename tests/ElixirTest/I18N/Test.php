@@ -2,7 +2,7 @@
 
 namespace ElixirTest\I18N;
 
-use Elixir\ClassLoader\Loader;
+use Elixir\ClassLoader\PSR4;
 use Elixir\I18N\I18N;
 use Elixir\I18N\Plural;
 
@@ -12,9 +12,9 @@ class Test extends \PHPUnit_Framework_TestCase
 
     public function __construct()
     {
-        require_once __DIR__ . '/../../../src/framework/Elixir/ClassLoader/Loader.php';
+        require_once __DIR__ . '/../../../src/framework/Elixir/ClassLoader/PSR4.php';
         
-        $this->_loader = new Loader();
+        $this->_loader = new PSR4();
         $this->_loader->addNamespace('ElixirTest', __DIR__ . './../');
         $this->_loader->register();
     }
@@ -40,17 +40,17 @@ class Test extends \PHPUnit_Framework_TestCase
     public function testPluralize()
     {
         $plural = new Plural();
-        $messages = ['There are no dogs', 'There is 1 dog', 'There are {COUNT} dogs'];
+        $messages = ['There are no dogs', 'There is 1 dog', 'There are %d dogs'];
         
         $this->assertEquals('There are no dogs', $plural->pluralize($messages, -5, 'fr-FR'));
         $this->assertEquals('There is 1 dog', $plural->pluralize($messages, 1, 'fr-FR'));
-        $this->assertEquals('There are 5 dogs', $plural->pluralize($messages, 5, 'fr-FR'));
+        $this->assertEquals('There are 5 dogs', sprintf($plural->pluralize($messages, 5, 'fr-FR'), 5));
         
-        $str = 'I have [no fingers|one finger|{COUNT} fingers] and [{COUNT} leg|{COUNT} legs]';
+        $str = 'I have [no fingers|one finger|%1$d fingers] and [%1$d leg|%1$d legs]';
         
-        $this->assertEquals('I have no fingers and 0 leg', $plural->pluralize($str, 0, 'fr-FR'));
-        $this->assertEquals('I have one finger and 1 leg', $plural->pluralize($str, 1, 'fr-FR'));
-        $this->assertEquals('I have 6 fingers and 6 legs', $plural->pluralize($str, 6, 'fr-FR'));
+        $this->assertEquals('I have no fingers and 0 leg', sprintf($plural->pluralize($str, 0, 'fr-FR'), 0));
+        $this->assertEquals('I have one finger and 1 leg', sprintf($plural->pluralize($str, 1, 'fr-FR'), 1));
+        $this->assertEquals('I have 6 fingers and 6 legs', sprintf($plural->pluralize($str, 6, 'fr-FR'), 6));
     }
     
     public function testTransPluralize()

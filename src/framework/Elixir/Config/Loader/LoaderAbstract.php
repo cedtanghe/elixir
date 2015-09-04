@@ -9,43 +9,43 @@ abstract class LoaderAbstract implements LoaderInterface
     /**
      * @var string 
      */
-    protected $_environment;
-    
+    protected $environment;
+
     /**
      * @var boolean 
      */
-    protected $_strict;
+    protected $strict;
 
     /**
-     * @param string $pEnvironment
-     * @param boolean $pStrict
+     * @param string $environment
+     * @param boolean $strict
      */
-    public function __construct($pEnvironment = null, $pStrict = false) 
+    public function __construct($environment = null, $strict = false)
     {
-        $this->_environment = $pEnvironment;
-        $this->_strict = $pStrict;
+        $this->environment = $environment;
+        $this->strict = $strict;
     }
-    
+
     /**
      * @return string
      */
     public function getEnvironment()
     {
-        return $this->_environment;
+        return $this->environment;
     }
-    
+
     /**
      * @return boolean
      */
-    public function isStrict()
+    public function isStrict() 
     {
-        return $this->_strict;
+        return $this->strict;
     }
-    
-    /**
-     * @param mixed $pData
-     * @param boolean $pRecursive
-     */
-    abstract protected function parse($pData, $pRecursive = false);
-}
 
+    /**
+     * @param mixed $data
+     * @param boolean $recursive
+     * @return array
+     */
+    abstract protected function parse($data, $recursive);
+}

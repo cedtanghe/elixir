@@ -5,268 +5,685 @@ namespace Elixir\DI;
 use Elixir\DI\ContainerEvent;
 use Elixir\DI\ContainerInterface;
 use Elixir\DI\ProviderInterface;
-use Elixir\Dispatcher\Dispatcher;
+use Elixir\Dispatcher\DispatcherInterface;
+use Elixir\Dispatcher\DispatcherTrait;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
-class Container extends Dispatcher implements ContainerInterface
+class Container implements ContainerResolvableInterface, DispatcherInterface
 {
+    use DispatcherTrait;
+
     /**
      * @var array 
      */
-    protected $_data = [];
+    protected $bindings = [];
     
     /**
      * @var array 
      */
-    protected $_aliases = [];
+    protected $instances = [];
     
     /**
-     * @var string 
+     * @var array 
      */
-    protected $_lockMode = self::UNLOCKED;
+    protected $resolved = [];
+
+    /**
+     * @var array 
+     */
+    protected $tags = [];
+
+    /**
+     * @var array 
+     */
+    protected $aliases = [];
     
-   /**
-     * @see ContainerInterface::setLockMode()
+    /**
+     * @var array 
      */
-    public function setLockMode($pValue)
+    protected $extenders = [];
+    
+    /**
+     * @var array 
+     */
+    protected $contextual = [];
+    
+    /**
+     * @var array 
+     */
+    protected $converters = [];
+    
+    /**
+     * @var boolean 
+     */
+    protected $disableConverter = false;
+    
+    /**
+     * @var array
+     */
+    protected $resolvedStack = [];
+    
+    /**
+     * @var array 
+     */
+    protected $providers = [];
+    
+    /**
+     * @see ContainerInterface::addProvider()
+     */
+    public function addProvider(ProviderInterface $provider)
     {
-        $this->_lockMode = $pValue;
+        if (!$pProvider->isDeferred())
+        {
+            $pProvider->register($this);
+        } 
+        else 
+        {
+            $this->providers[] = $provider;
+        }
     }
-    
+
     /**
-     * @see ContainerInterface::getLockMode()
+     * @return array
      */
-    public function getLockMode()
+    public function getProviders() 
     {
-        return $this->_lockMode;
+        return $this->providers;
     }
     
     /**
      * @see ContainerInterface::has()
      */
-    public function has($pKey)
+    public function has($key) 
     {
-        if(isset($this->_aliases[$pKey]))
+        if (isset($this->aliases[$key]))
         {
-            $pKey = $this->_aliases[$pKey];
+            $key = $this->aliases[$key];
+        }
+
+        if (isset($this->bindings[$key]))
+        {
+            return true;
+        }
+
+        $i = count($this->providers);
+
+        while ($i--)
+        {
+            $provider = $this->providers[$i];
+
+            if ($provider->provided($key))
+            {
+                $provider->register($this);
+                array_splice($this->providers, $i, 1);
+
+                return $this->has($key);
+            }
         }
         
-        return isset($this->_data[$pKey]);
+        if (!$this->disableConverter)
+        {
+            $this->disableConverter = true;
+            
+            foreach ($this->converters as $converter)
+            {
+                $converted = call_user_func_array($converter, [$key, $this]);
+                
+                if ($converted !== $key && $this->has($converted))
+                {
+                    $this->addAlias($key, $converted);
+                    return true;
+                }
+            }
+            
+            $this->disableConverter = false;
+        }
+        
+        return false;
     }
     
     /**
      * @see ContainerInterface::get()
-     * @throws \LogicException
      */
-    public function get($pKey, array $pArguments = null, $pDefault = null)
+    public function get($key, array $options = [], $default = null)
     {
-        if($this->has($pKey))
+        $options += ['throw' => true, 'rebuild' => false, 'rebuild_all' => false];
+        
+        if ($options['rebuild_all'])
         {
-            if(isset($this->_aliases[$pKey]))
-            {
-                $pKey = $this->_aliases[$pKey];
-            }
-            
-            $data = $this->_data[$pKey]['value'];
-            $arguments = [$this];
-            
-            if(null !== $pArguments)
-            {
-                if($this->_data[$pKey]['type'] != self::SIMPLE)
-                {
-                    throw new \LogicException(sprintf('"%s" service must be "simple" type.', $root));
-                }
-                
-                $arguments[] = $pArguments;
-            }
-            
-            if(is_callable($data))
-            {
-                return call_user_func_array($data, $arguments);
-            }
-
-            return $data;
+            $options['rebuild'] = true;
         }
         
-        return is_callable($pDefault) ? $pDefault() : $pDefault;
+        if ($this->has($key))
+        {
+            if (isset($this->aliases[$key]))
+            {
+                $key = $this->aliases[$key];
+            }
+            
+            if (array_key_exists($key, $this->instances) && !$options['rebuild'])
+            {
+                $value = $this->instances[$key];
+            }
+            else
+            {
+                $arguments = [$this];
+                
+                if (isset($options['arguments']) && count($options['arguments']) > 0)
+                {
+                    $arguments = array_merge($arguments, $options['arguments']);
+                }
+                
+                if (is_callable($this->bindings[$key]['value'])) 
+                {
+                    $value = call_user_func_array($this->bindings[$key]['value'], $arguments);
+                }
+                else
+                {
+                    try
+                    {
+                        if (!$options['rebuild_all'])
+                        {
+                            $options['rebuild'] = false;
+                        }
+                        
+                        $value = $this->resolveClass($key, $options);
+                    }
+                    catch (\RuntimeException $e)
+                    {
+                        if ($options['throw'])
+                        {
+                            throw $e;
+                        }
+                        else
+                        {
+                            return is_callable($default) ? call_user_func($default) : $default;
+                        }
+                    }
+                }
+            }
+        } 
+        else
+        {
+            try
+            {
+                if (!$options['rebuild_all'])
+                {
+                    $options['rebuild'] = false;
+                }
+                
+                $value = $this->resolveClass($key, $options);
+            } 
+            catch (\RuntimeException $e)
+            {
+                if ($options['throw'])
+                {
+                    throw $e;
+                }
+                else
+                {
+                    return is_callable($default) ? call_user_func($default) : $default;
+                }
+            }
+        }
+
+        if (isset($this->extenders[$key]))
+        {
+            foreach ($this->extenders[$key] as $extender)
+            {
+                $value = call_user_func_array($extender, [$value, $this]);
+            }
+        }
+
+        if ($this->bindings[$key]['shared'])
+        {
+            unset($this->extenders[$key]);
+            $this->instances[$key] = $value;
+        }
+        
+        $this->resolved[$key] = true;
+        $this->dispatch(new ContainerEvent(ContainerEvent::RESOLVED, ['service' => $key]));
+        
+        return $value;
+    }
+    
+    /**
+     * @see ContainerResolvableInterface::addConverter()
+     */
+    public function addConverter(callable $converter)
+    {
+        $this->converters[] = $converter;
+    }
+    
+    /**
+     * @return array
+     */
+    public function getConverters()
+    {
+        return $this->converters;
+    }
+    
+    /**
+     * @see ContainerResolvableInterface::convert()
+     */
+    public function convert($id)
+    {
+        foreach ($this->converters as $converter)
+        {
+            $id = call_user_func_array($converter, [$id, $this]);
+        }
+        
+        return $id;
+    }
+    
+    /**
+     * @see ContainerResolvableInterface::addContextualBinding()
+     */
+    public function addContextualBinding($when, $needs, $implementation)
+    {
+        $this->contextual[$when][$needs] = $implementation;
+    }
+    
+    /**
+     * @return array
+     */
+    public function getContextualBindings()
+    {
+        return $this->contextual;
+    }
+    
+    /**
+     * @param string $needs
+     * @return mixed
+     */
+    protected function getContextualObject($needs)
+    {
+        $when = end($this->resolvedStack);
+        
+        if (isset($this->contextual[$when][$needs]))
+        {
+            return $this->contextual[$when][$needs];
+        }
+        
+        return null;
+    }
+    
+    /**
+     * @see ContainerResolvableInterface::resolve()
+     */
+    public function resolve($callback, array $options = [])
+    {
+        if (isset($options['available']))
+        {
+            $options['resolver_arguments_available'] = $options['available'];
+            unset($options['available']);
+        }
+        
+        if (is_string($callback) && false === strpos($callback, '::'))
+        {
+            return $this->get($callback, $options);
+        }
+        else
+        {
+            return $this->resolveCallable($callback, $options);
+        }
+    }
+    
+    /**
+     * @param string $callback
+     * @param array $options
+     * @return array
+     * @throws \RuntimeException
+     */
+    protected function resolveCallable($callback, array $options = [])
+    {
+        if (is_string($callback) && false !== strpos($callback, '::'))
+        {
+            $callback = explode('::', $callback);
+        }
+        
+        if (is_array($callback))
+        {
+            $reflector = new ReflectionMethod($callback[0], $callback[1]);
+        }
+        else
+        {
+            $reflector = new ReflectionFunction($callback);
+        }
+        
+        return [
+            $callback, 
+            $this->getDependencies($reflector->getParameters(), $options)
+        ];
+    }
+    
+    /**
+     * @param string $class
+     * @param array $options
+     * @return mixed
+     * @throws \RuntimeException
+     */
+    protected function resolveClass($class, array $options = [])
+    {
+        $contextual = $this->getContextualObject($class);
+        
+        if (null !== $contextual)
+        {
+            if (is_callable($contextual))
+            {
+                return call_user_func_array($contextual, [$this]);
+            }
+            
+            $class = $contextual;
+        }
+        
+        $reflector = new \ReflectionClass($class);
+            
+        if (!$reflector->isInstantiable())
+        {
+            throw new \RuntimeException(sprintf('Class %s is not instanciable.', $class));
+        }
+        
+        $constructor = $reflector->getConstructor();
+
+        if (null === $constructor)
+        {
+            return new $class();
+        }
+
+        $this->resolvedStack[] = $class;
+        $arguments = $this->getDependencies($constructor->getParameters(), $options);
+        array_pop($this->resolvedStack);
+        
+        return $reflector->newInstanceArgs($arguments);
+    }
+
+    /**
+     * @param array $dependencies
+     * @param array $options
+     * @return array
+     * @throws \RuntimeException
+     * @throws \Exception
+     */
+    protected function getDependencies(array $dependencies, array $options = [])
+    {
+        $arguments = [];
+        $available = isset($options['resolver_arguments_available']) ? $options['resolver_arguments_available'] : [];
+        
+        foreach ($dependencies as $dependency)
+        {
+            $name = $dependency->getName();
+            
+            if (array_key_exists($name, $available))
+            {
+                $arguments[] = $available[$name];
+            }
+            else
+            {
+                $class = $dependency->getClass();
+                
+                if (null === $class)
+                {
+                    if ($dependency->isDefaultValueAvailable())
+                    {
+                        $arguments[] = $dependency->getDefaultValue();
+                    }
+                    else
+                    {
+                        throw  new \RuntimeException(sprintf('No default value available for parameter %s.', $name));
+                    }
+                }
+                else
+                {
+                    try 
+                    {
+                        $o = ['throw' => true] + $options;
+                        $arguments[] = $this->get($class->name, $o);
+                    } 
+                    catch (\Exception $e)
+                    {
+                        if ($dependency->isOptional())
+			{
+                            $arguments[] = $dependency->getDefaultValue();
+			}
+                        else
+                        {
+                            throw $e;
+                        }
+                    }
+                }
+            }
+        }
+        
+        return $arguments;
     }
 
     /**
      * @see ContainerInterface::set()
-     * @throws \LogicException
      */
-    public function set($pKey, $pValue, array $pOptions = [])
+    public function bind($key, $value, array $options = [])
     {
-        switch($this->_lockMode)
+        $options += [
+            'shared' => false,
+            'tags' => [],
+            'aliases' => [],
+            'extenders' => []
+        ];
+        
+        if (isset($this->aliases[$key])) 
         {
-            case self::READ_ONLY:
-                throw new \LogicException('The dependency injection container is read only.');
-            break;
-            case self::IGNORE_IF_ALREADY_EXISTS:
-            case self::THROW_IF_ALREADY_EXISTS:
-                if($this->has($pKey))
-                {
-                    if($this->_lockMode == self::THROW_IF_ALREADY_EXISTS)
-                    {
-                        throw new \LogicException(sprintf('"%s" service has already been defined.', $pKey));
-                    }
-                    
-                    return;
-                }
-            break;
+            $key = $this->aliases[$key];
         }
         
-        if(!isset($pOptions['type']))
+        $this->bindings[$key] = [
+            'shared' => $options['shared'],
+            'value' => $value
+        ];
+        
+        unset($this->instances[$key]);
+        unset($this->resolved[$key]);
+        
+        foreach ($options['extenders'] as $extender)
         {
-            $pOptions['type'] = self::SIMPLE;
+            $this->extend($key, $extender);
         }
         
-        $type = $pOptions['type'];
-        $tags = (array)(isset($pOptions['tags']) ? $pOptions['tags'] : []);
-        $aliases = (array)(isset($pOptions['aliases']) ? $pOptions['aliases'] : []);
+        $this->dispatch(new ContainerEvent(ContainerEvent::BINDED, ['service' => $key]));
         
-        switch($type)
+        foreach ($options['tags'] as $tag)
         {
-            case self::SINGLETON:
-                $this->singleton($pKey, $pValue, $tags, $aliases);
-            break;
-            case self::PROTECT:
-                $this->protect($pKey, $pValue, $tags, $aliases);
-            break;
-            default:
-                $this->_data[$pKey] = [
-                    'type' => self::SIMPLE, 
-                    'value' => $pValue,
-                    'tags' => $tags
-                ];
-                
-                $this->dispatch(new ContainerEvent(ContainerEvent::SERVICE_CREATED, $pKey, null, self::SIMPLE));
-                
-                foreach($aliases as $alias)
-                {
-                    $this->addAlias($pKey, $alias);
-                }
-            break;
+            $this->addTag($key, $tag);
+        }
+        
+        foreach ($options['aliases'] as $alias)
+        {
+            $this->addAlias($key, $alias);
         }
     }
     
     /**
-     * @see ContainerInterface::remove()
+     * @see ContainerInterface::share()
      */
-    public function remove($pKey)
+    public function share($key, $value, array $options = [])
     {
-        if(isset($this->_aliases[$pKey]))
-        {
-            $pKey = $this->_aliases[$pKey];
-        }
-        
-        foreach($this->_aliases as $key => $value)
-        {
-            if($value == $pKey)
-            {
-                unset($this->_aliases[$key]);
-            }
-        }
-        
-        unset($this->_data[$pKey]);
+        $options['shared'] = true;
+        $this->bind($key, $value, $options);
     }
     
     /**
-     * @see ContainerInterface::gets()
+     * @see ContainerInterface::protect()
      */
-    public function gets(array $pOptions = [])
+    public function instance($key, $value, array $options = [])
     {
-        $data = [];
-        $raw = isset($pOptions['raw']) && $pOptions['raw'];
-        $withConfiguration = isset($pOptions['withConfiguration']) && $pOptions['withConfiguration'];
+        $options['shared'] = true;
+        $this->bind($key, $this->wrap($value), $options);
         
-        foreach($this->_data as $key => $value)
+        $this->resolved[$key] = true;
+        $this->instances[$key] = $value;
+    }
+    
+    /**
+     * @see ContainerInterface::unbind()
+     */
+    public function unbind($key) 
+    {
+        if (isset($this->aliases[$key])) 
         {
-            $data[$key] = $raw ? $this->raw($key, $withConfiguration) : $this->get($key);
+            $key = $this->aliases[$key];
         }
 
+        foreach ($this->aliases as $alias => $k)
+        {
+            if ($key == $k) 
+            {
+                unset($this->aliases[$alias]);
+            }
+        }
+
+        foreach ($this->tags as $tag => &$ks) 
+        {
+            $i = count($ks);
+
+            while ($i--) 
+            {
+                if ($ks[$i] == $key)
+                {
+                    array_splice($ks, $i, 1);
+                    break;
+                }
+            }
+            
+            if (count($ks) == 0)
+            {
+                unset($this->tags[$tag]);
+            }
+        }
+
+        unset($this->extenders[$key]);
+        unset($this->bindings[$key]);
+        unset($this->instances[$key]);
+        unset($this->resolved[$key]);
+    }
+    
+    /**
+     *  @see ContainerInterface::extend()
+     */
+    public function extend($key, callable $value) 
+    {
+        if (isset($this->aliases[$key]))
+        {
+            $key = $this->aliases[$key];
+        }
+        
+        $this->extenders[$key][] = $value;
+    }
+    
+    /**
+     * @param mixed $value
+     * @return \Closure
+     */
+    public function wrap($value)
+    {
+        return function() use ($value)
+        {
+            return $value;
+        };
+    }
+
+    /**
+     * @see ContainerInterface::all()
+     */
+    public function all(array $options = []) 
+    {
+        $options += [
+            'raw' => false,
+            'providers' => false,
+            'contextual_bindings' => false
+        ];
+        
+        $services = [];
+        $data = [];
+        
+        if ($options['providers'] || $options['contextual_bindings'])
+        {
+            $data['services'] = &$services;
+            
+            if ($options['providers'])
+            {
+                $data['providers'] = $this->providers;
+            }
+            
+            if ($options['contextual_bindings'])
+            {
+                $data['contextual_bindings'] = $this->contextual;
+            }
+        }
+        else
+        {
+            $data = &$services;
+        }
+        
+        $keys = array_keys($this->bindings);
+        
+        foreach ($keys as $key)
+        {
+            $services[$key] = $raw ? $this->raw($key) : $this->get($key, ['throw' => false]);
+        }
+        
         return $data;
     }
-    
+
     /**
-     * @see ContainerInterface::sets()
+     * @see ContainerInterface::replace()
      */
-    public function sets(array $pData, array $pOptions = [])
+    public function replace(array $data)
     {
-        $this->_data = [];
+        $services = array_keys($data);
         
-        foreach($pData as $key => $value)
+        foreach ($services as $service)
         {
-            $this->set($key, $value, $pOptions);
-        }
-    }
-    
-    /**
-     * @see ContainerInterface::hasAlias()
-     */
-    public function hasAlias($pAlias, $pKey = null)
-    {
-        if(isset($this->_aliases[$pAlias]))
-        {
-            return null !== $pKey ? $this->_aliases[$pAlias] == $pKey : true;
+            $this->unbind($service);
         }
         
-        return false;
+        $this->bindings = [];
+        $this->merge($data);
     }
     
     /**
      * @see ContainerInterface::addAlias()
      */
-    public function addAlias($pKey, $pAlias)
+    public function addAlias($key, $alias)
     {
-        if($this->has($pKey))
+        if ($this->has($key)) 
         {
-            if(isset($this->_aliases[$pKey]))
+            if (isset($this->aliases[$key]))
             {
-                $pKey = $this->_aliases[$pKey];
+                $key = $this->aliases[$key];
             }
-            
-            $this->_aliases[$pAlias] = $pKey;
-            $this->dispatch(new ContainerEvent(ContainerEvent::SERVICE_ALIAS, $pKey, $pAlias, null));
+
+            $this->aliases[$alias] = $key;
+            $this->dispatch(new ContainerEvent(ContainerEvent::ALIASED, ['service' => $key, 'alias' => $alias]));
         }
     }
-    
-    /**
-     * @see ContainerInterface::hasTag()
-     */
-    public function hasTag($pKey, $pTag)
-    {
-        if($this->has($pKey))
-        {
-            if(isset($this->_aliases[$pKey]))
-            {
-                $pKey = $this->_aliases[$pKey];
-            }
-            
-            return in_array($pTag, $this->_data[$pKey]['tags']);
-        }
-        
-        return false;
-    }
-    
+
     /**
      * @see ContainerInterface::addTag()
      */
-    public function addTag($pKey, $pTag)
+    public function addTag($key, $tag) 
     {
-        if($this->has($pKey))
+        if ($this->has($key))
         {
-            if(isset($this->_aliases[$pKey]))
+            if (isset($this->aliases[$key]))
             {
-                $pKey = $this->_aliases[$pKey];
+                $key = $this->aliases[$key];
             }
             
-            if(!in_array($pTag, $this->_data[$pKey]['tags']))
+            if (!isset($this->tags[$tag]) || !in_array($key, $this->tags[$tag]))
             {
-                $this->_data[$pKey]['tags'][] = $pTag;
+                $this->tags[$tag][] = $key;
+                $this->dispatch(new ContainerEvent(ContainerEvent::TAGGED, ['service' => $key, 'tag' => $tag]));
             }
         }
     }
@@ -274,286 +691,240 @@ class Container extends Dispatcher implements ContainerInterface
     /**
      * @see ContainerInterface::findByTag()
      */
-    public function findByTag($pTag, array $pArguments = null, $pDefault = null)
+    public function findByTag($tag, array $options = [])
     {
-        $keys = [];
-        
-        foreach($this->_data as $key => $value)
+        foreach ($this->providers as $providers)
         {
-            if(in_array($pTag, $value['tags']))
+            $providers->register($this);
+        }
+        
+        $services = [];
+        $options += ['throw' => false];
+        
+        if (isset($this->tags[$tag]))
+        {
+            foreach ($this->tags[$tag] as $key)
             {
-                $keys[] = $key;
+                $services[$key] = $this->get($key, $options);
             }
         }
-        
-        $result = [];
-        
-        foreach($keys as $key)
+
+        return $services;
+    }
+
+    /**
+     * @param string $key
+     * @return array 
+     */
+    public function raw($key)
+    {
+        if (!$this->has($key))
         {
-            $s = $this->get($key, $pArguments, null);
-            
-            if(null !== $s)
+            return null;
+        }
+
+        if (isset($this->aliases[$key]))
+        {
+            $key = $this->aliases[$key];
+        }
+        
+        $data = $this->bindings[$key];
+        $data['resolved'] = $this->isResolved($key);
+        
+        if (array_key_exists($key, $this->instances))
+        {
+            $data['instance'] = $this->instances[$key];
+        }
+        
+        $data['extenders'] = isset($this->extenders[$key]) ? $this->extenders[$key] : [];
+        $data['aliases'] = [];
+        $data['tags'] = [];
+        
+        foreach ($this->aliases as $alias => $k)
+        {
+            if ($key == $k) 
             {
-                $result[$key] = $s;
+                $data['aliases'][] = $alias;
             }
         }
-        
-        if(count($result) == 0)
+
+        foreach ($this->tags as $tag => $ks) 
         {
-            return is_callable($pDefault) ? $pDefault() : $pDefault;
+            if (in_array($key, $ks))
+            {
+                $data['tags'][] = $tag;
+            }
         }
-        
-        return $result;
+
+        return $data;
     }
     
     /**
-     * @see ContainerInterface::raw()
-     * @throws \InvalidArgumentException
+     * @param string $key
+     * @return boolean
      */
-    public function raw($pKey, $pWithConfiguration = false)
+    public function isShared($key)
     {
-        if(!$this->has($pKey))
+        if ($this->has($key))
         {
-            throw new \InvalidArgumentException(sprintf('Key "%s" is not defined.', $pKey));
-        }
-        
-        if(isset($this->_aliases[$pKey]))
-        {
-            $pKey = $this->_aliases[$pKey];
-        }
-        
-        $data = $this->_data[$pKey];
-        
-        if($pWithConfiguration)
-        {
-            $data['aliases'] = [];
-            
-            foreach($this->_aliases as $key => $value)
+            if (isset($this->aliases[$key]))
             {
-                if($value == $pKey)
+                $key = $this->aliases[$key];
+            }
+            
+            return $this->bindings[$key]['shared'];
+        }
+        
+        return false;
+    }
+    
+    /**
+     * @param string $key
+     * @return boolean
+     */
+    public function isTagged($key)
+    {
+        if ($this->has($key))
+        {
+            if (isset($this->aliases[$key]))
+            {
+                $key = $this->aliases[$key];
+            }
+            
+            foreach ($this->tags as $tag => $keys) 
+            {
+                if (in_array($key, $keys))
                 {
-                    $data['aliases'][] = $key;
+                    return true;
                 }
             }
-            
-            return $data;
         }
         
-        return $data['value'];
+        return false;
     }
     
     /**
-     * @param string $pKey
-     * @param mixed $pValue
-     * @param mixed $pTags
-     * @param mixed $pAliases
-     * @throws \LogicException
+     * @param string $key
+     * @return boolean
      */
-    public function singleton($pKey, $pValue, $pTags = [], $pAliases = [])
+    public function isAliased($key)
     {
-        switch($this->_lockMode)
+        if ($this->has($key))
         {
-            case self::READ_ONLY:
-                throw new \LogicException('The dependency injection container is read only.');
-            break;
-            case self::IGNORE_IF_ALREADY_EXISTS:
-            case self::THROW_IF_ALREADY_EXISTS:
-                if($this->has($pKey))
-                {
-                    if($this->_lockMode == self::THROW_IF_ALREADY_EXISTS)
-                    {
-                        throw new \LogicException(sprintf('"%s" service has already been defined.', $pKey));
-                    }
-                    
-                    return;
-                }
-            break;
-        }
-        
-        $value = function(self $pContainer) use ($pValue)
-        {
-            static $instance;
-            
-            if(null === $instance)
+            if (isset($this->aliases[$key]))
             {
-                $instance = is_callable($pValue) ? $pValue($pContainer) : $pValue;
+                $key = $this->aliases[$key];
             }
             
-            return $instance;
-        };
-        
-        $this->_data[$pKey] = [
-            'type' => self::SINGLETON, 
-            'value' => $value,
-            'tags' => (array)$pTags
-        ];
-        
-        $this->dispatch(new ContainerEvent(ContainerEvent::SERVICE_CREATED, $pKey, null, self::SINGLETON));
-        
-        foreach((array)$pAliases as $alias)
-        {
-            $this->addAlias($pKey, $alias);
-        }
-    }
-    
-    /**
-     * @param string $pKey
-     * @param callable $pValue
-     * @param mixed $pTags
-     * @param mixed $pAliases
-     * @throws \LogicException
-     */
-    public function protect($pKey, callable $pValue, $pTags = [], $pAliases = [])
-    {
-        switch($this->_lockMode)
-        {
-            case self::READ_ONLY:
-                throw new \LogicException('The dependency injection container is read only.');
-            break;
-            case self::IGNORE_IF_ALREADY_EXISTS:
-            case self::THROW_IF_ALREADY_EXISTS:
-                if($this->has($pKey))
-                {
-                    if($this->_lockMode == self::THROW_IF_ALREADY_EXISTS)
-                    {
-                        throw new \LogicException(sprintf('"%s" service has already been defined.', $pKey));
-                    }
-                    
-                    return;
-                }
-            break;
-        }
-        
-        $value = function() use ($pValue)
-        {
-            return $pValue;
-        };
-        
-        $this->_data[$pKey] = [
-            'type' => self::PROTECT, 
-            'value' => $value,
-            'tags' => (array)$pTags
-        ];
-        
-        $this->dispatch(new ContainerEvent(ContainerEvent::SERVICE_CREATED, $pKey, null, self::PROTECT));
-        
-        foreach((array)$pAliases as $alias)
-        {
-            $this->addAlias($pKey, $alias);
-        }
-    }
-    
-    /**
-     * @see ContainerInterface::extend()
-     */
-    public function extend($pKey, callable $pValue)
-    {
-        if(!$this->has($pKey))
-        {
-            throw new \InvalidArgumentException(sprintf('Key "%s" is not defined.', $pKey));
-        }
-        
-        if(isset($this->_aliases[$pKey]))
-        {
-            $pKey = $this->_aliases[$pKey];
-        }
-
-        $value = $this->_data[$pKey]['value'];
-        
-        $service = function() use($value)
-        {
-            return is_callable($value) ? $value($this) : $value;
-        };
-
-        $type = $this->_data[$pKey]['type'];
-
-        $this->_data[$pKey]['value'] = function(self $pContainer) use ($service, $pValue, $type) 
-        {
-            if($type == self::SINGLETON)
+            foreach ($this->aliases as $alias => $k)
             {
-                static $instance;
-
-                if(null === $instance)
+                if ($key == $k) 
                 {
-                    $instance = $pValue($service(), $pContainer);
+                    return true;
                 }
-
-                return $instance;
             }
-
-            return $pValue($service(), $pContainer);
-        };
+        }
+        
+        return false;
     }
     
     /**
-     * @param string $pKey
-     * @return string
+     * @param string $key
+     * @return boolean
      */
-    public function getStorageType($pKey)
+    public function isResolved($key)
     {
-        $data = $this->raw($pKey, true);
-        return $data['type'];
+        if (isset($this->aliases[$key]))
+        {
+            $key = $this->aliases[$key];
+        }
+        
+        return isset($this->resolved[$key]) && $this->resolved[$key];
     }
 
-        /**
-     * @see ContainerInterface::load()
-     */
-    public function load(ProviderInterface $pProvider)
-    {
-        $pProvider->load($this);
-    }
-    
     /**
      * @see ContainerInterface::merge()
-     * @throws \LogicException
      */
-    public function merge($pData)
+    public function merge($data) 
     {
-        if($pData instanceof self)
+        if ($data instanceof self) 
         {
-            $pData = $pData->gets(['raw' => true, 'withConfiguration' => true]);
-        }
-        
-        $aliases = [];
-        
-        foreach($pData as $key => &$value)
-        {
-            switch($this->_lockMode)
+            $all = $data->all([
+                'raw' => true,
+                'providers' => true,
+                'contextual_bindings' => true
+            ]);
+            
+            foreach ($gets['services'] as $key => $config)
             {
-                case self::READ_ONLY:
-                    throw new \LogicException('The dependency injection container is read only.');
-                break;
-                case self::IGNORE_IF_ALREADY_EXISTS:
-                case self::THROW_IF_ALREADY_EXISTS:
-                    if($this->has($pKey))
-                    {
-                        if($this->_lockMode == self::THROW_IF_ALREADY_EXISTS)
-                        {
-                            throw new \LogicException(sprintf('"%s" service has already been defined.', $key));
-                        }
-                        
-                        unset($pData[$key]);
-                        continue 2;
-                    }
-                break;
+                $this->bind($key, $config['value'], $config);
+                
+                if ($config['resolved'] && isset($config['instance']))
+                {
+                    $this->resolved[$key] = true;
+                    $this->instances[$key] = $config['instance'];
+                }
             }
             
-            if(isset($value['aliases']))
+            foreach ($all['providers'] as $provider)
             {
-                foreach($value['aliases'] as $alias)
+                $this->addProvider($provider);
+            }
+            
+            $this->contextual = array_merge($this->contextual, $all['contextual_bindings']);
+        }
+        else
+        {
+            foreach ($data as $key => $service)
+            {
+                if (is_array($service) && isset($service['options']))
                 {
-                    $aliases[$alias] = $key;
+                    $value = $service['value'];
+                    $options = $service['options'];
+                } 
+                else 
+                {
+                    $value = $service;
+                    $options = [];
                 }
-                
-                unset($value['aliases']);
+
+                $this->bind($key, $value, $options);
             }
         }
-        
-        $this->_data = array_merge($this->_data, $pData);
-        
-        foreach($aliases as $key => $value)
+    }
+
+    /**
+     * @ignore
+     */
+    public function __debugInfo() 
+    {
+        $services = $this->all(['raw' => true]);
+        $provides = [];
+        $contextualBindings = [];
+
+        foreach ($services as $key => &$data) 
         {
-            $this->addAlias($value, $key);
+            unset($data['value']);
         }
+        
+        foreach ($this->providers as $provider)
+        {
+            $provides = array_merge($provides, $provider->provides());
+        }
+        
+        foreach ($this->contextual as $key => $value)
+        {
+            $contextualBindings[$key] = array_keys($value);
+        }
+
+        return [
+            'services' => $services,
+            'resolved' => array_keys($this->resolved),
+            'aliases' => $this->aliases,
+            'tags' => $this->tags,
+            'provides' => $provides,
+            'extenders' => array_keys($this->extenders),
+            'contextual_bindings' => $contextualBindings
+        ];
     }
 }

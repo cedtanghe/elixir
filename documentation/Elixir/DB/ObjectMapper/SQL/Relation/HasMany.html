@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow, all" />
+    <title>Elixir\DB\ObjectMapper\SQL\Relation\HasMany | Elixir</title>
+
+            <link rel="stylesheet" type="text/css" href="../../../../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../../../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../../../css/sami.css">
+        <script src="../../../../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../../../../js/bootstrap.min.js"></script>
+        <script src="../../../../../js/typeahead.min.js"></script>
+        <script src="../../../../../sami.js"></script>
+    
+    
+    </head>
+
+    <body id="class" data-name="class:Elixir_DB_ObjectMapper_SQL_Relation_HasMany" data-root-path="../../../../../">
+            <div id="content">
+        <div id="left-column">
+                <div id="control-panel">
+                <form id="search-form" action="../../../../../search.html" method="GET">
+            <span class="glyphicon glyphicon-search"></span>
+            <input name="search"
+                   class="typeahead form-control"
+                   type="search"
+                   placeholder="Search">
+        </form>
+    </div>
+
+                <div id="api-tree"></div>
+
+        </div>
+        <div id="right-column">
+                <nav id="site-nav" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-elements">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../../../../../index.html">Elixir</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-elements">
+                <ul class="nav navbar-nav">
+                    <li><a href="../../../../../classes.html">Classes</a></li>
+                                            <li><a href="../../../../../namespaces.html">Namespaces</a></li>
+                                        <li><a href="../../../../../interfaces.html">Interfaces</a></li>
+                    <li><a href="../../../../../traits.html">Traits</a></li>
+                    <li><a href="../../../../../doc-index.html">Index</a></li>
+                    <li><a href="../../../../../search.html">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+                        <div class="namespace-breadcrumbs">
+            <ol class="breadcrumb">
+                <li><span class="label label-default">class</span></li>
+                                                            <li><a href="../../../../../Elixir.html">Elixir</a></li>
+                                        <li><a href="../../../../../Elixir/DB.html">DB</a></li>
+                                        <li><a href="../../../../../Elixir/DB/ObjectMapper.html">ObjectMapper</a></li>
+                                        <li><a href="../../../../../Elixir/DB/ObjectMapper/SQL.html">SQL</a></li>
+                                        <li><a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation.html">Relation</a></li>
+    
+                <li>HasMany</li>
+            </ol>
+        </div>
+                <div id="page-content">
+                
+    <div class="page-header">
+        <h1>HasMany</h1>
+    </div>
+
+    <p>    class
+    <strong>HasMany</strong>        extends <a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a></p>
+
+    
+    
+    
+    
+            <h2>Methods</h2>
+
+            <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getType">getType</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html#method_getType"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../../../Elixir/DB/ObjectMapper/RepositoryInterface.html"><abbr title="Elixir\DB\ObjectMapper\RepositoryInterface">RepositoryInterface</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getRepository">getRepository</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html#method_getRepository"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../../../Elixir/DB/ObjectMapper/RepositoryInterface.html"><abbr title="Elixir\DB\ObjectMapper\RepositoryInterface">RepositoryInterface</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getTarget">getTarget</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html#method_getTarget"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setForeignKey">setForeignKey</a>(string $value)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html#method_setForeignKey"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getForeignKey">getForeignKey</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html#method_getForeignKey"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setLocalKey">setLocalKey</a>(string $value)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html#method_setLocalKey"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getLocalKey">getLocalKey</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html#method_getLocalKey"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_withPivot">withPivot</a>(<a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/Pivot.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\Pivot">Pivot</abbr></a> $pivot)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html#method_withPivot"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/Pivot.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\Pivot">Pivot</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getPivot">getPivot</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html#method_getPivot"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_addCriteria">addCriteria</a>(callable $criteria)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html#method_addCriteria"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    array
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getCriterias">getCriterias</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html#method_getCriterias"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_setRelated">setRelated</a>(mixed $value, array $options = array())
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html#method_setRelated"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    mixed
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_getRelated">getRelated</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html#method_getRelated"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    boolean
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_isFilled">isFilled</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html#method_isFilled"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_load">load</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html#method_load"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method___construct">__construct</a>(<a href="../../../../../Elixir/DB/ObjectMapper/RepositoryInterface.html"><abbr title="Elixir\DB\ObjectMapper\RepositoryInterface">RepositoryInterface</abbr></a> $repository, string|<a href="../../../../../Elixir/DB/ObjectMapper/RepositoryInterface.html"><abbr title="Elixir\DB\ObjectMapper\RepositoryInterface">RepositoryInterface</abbr></a> $target, array $config = array())
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    boolean
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_attach">attach</a>(<a href="../../../../../Elixir/DB/ObjectMapper/RepositoryInterface.html"><abbr title="Elixir\DB\ObjectMapper\RepositoryInterface">RepositoryInterface</abbr></a> $target)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    boolean
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_detach">detach</a>(<a href="../../../../../Elixir/DB/ObjectMapper/RepositoryInterface.html"><abbr title="Elixir\DB\ObjectMapper\RepositoryInterface">RepositoryInterface</abbr></a> $target)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    boolean
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_detachAndDelete">detachAndDelete</a>(<a href="../../../../../Elixir/DB/ObjectMapper/RepositoryInterface.html"><abbr title="Elixir\DB\ObjectMapper\RepositoryInterface">RepositoryInterface</abbr></a> $target)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+            </div>
+
+
+        <h2>Details</h2>
+
+            <div id="method-details">
+                    <div class="method-item">
+                    <h3 id="method_getType">
+        <div class="location">in <a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html#method_getType"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a> at line 66</div>
+        <code>                    string
+    <strong>getType</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>RelationInterface::getType()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getRepository">
+        <div class="location">in <a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html#method_getRepository"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a> at line 74</div>
+        <code>                    <a href="../../../../../Elixir/DB/ObjectMapper/RepositoryInterface.html"><abbr title="Elixir\DB\ObjectMapper\RepositoryInterface">RepositoryInterface</abbr></a>
+    <strong>getRepository</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../../../Elixir/DB/ObjectMapper/RepositoryInterface.html"><abbr title="Elixir\DB\ObjectMapper\RepositoryInterface">RepositoryInterface</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>RelationInterfaceMetas::getType()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getTarget">
+        <div class="location">in <a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html#method_getTarget"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a> at line 82</div>
+        <code>                    <a href="../../../../../Elixir/DB/ObjectMapper/RepositoryInterface.html"><abbr title="Elixir\DB\ObjectMapper\RepositoryInterface">RepositoryInterface</abbr></a>
+    <strong>getTarget</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../../../Elixir/DB/ObjectMapper/RepositoryInterface.html"><abbr title="Elixir\DB\ObjectMapper\RepositoryInterface">RepositoryInterface</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>RelationInterfaceMetas::getTarget()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setForeignKey">
+        <div class="location">in <a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html#method_setForeignKey"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a> at line 98</div>
+        <code>                    <a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a>
+    <strong>setForeignKey</strong>(string $value)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$value</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getForeignKey">
+        <div class="location">in <a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html#method_getForeignKey"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a> at line 107</div>
+        <code>                    string
+    <strong>getForeignKey</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>RelationInterfaceMetas::getForeignKey()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setLocalKey">
+        <div class="location">in <a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html#method_setLocalKey"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a> at line 138</div>
+        <code>                    <a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a>
+    <strong>setLocalKey</strong>(string $value)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$value</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getLocalKey">
+        <div class="location">in <a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html#method_getLocalKey"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a> at line 147</div>
+        <code>                    string
+    <strong>getLocalKey</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>RelationInterfaceMetas::getLocalKey()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_withPivot">
+        <div class="location">in <a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html#method_withPivot"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a> at line 175</div>
+        <code>                    <a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a>
+    <strong>withPivot</strong>(<a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/Pivot.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\Pivot">Pivot</abbr></a> $pivot)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/Pivot.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\Pivot">Pivot</abbr></a></td>
+                <td>$pivot</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getPivot">
+        <div class="location">in <a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html#method_getPivot"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a> at line 184</div>
+        <code>                    <a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/Pivot.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\Pivot">Pivot</abbr></a>
+    <strong>getPivot</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/Pivot.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\Pivot">Pivot</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>RelationInterfaceMetas::getPivot()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_addCriteria">
+        <div class="location">in <a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html#method_addCriteria"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a> at line 244</div>
+        <code>                    <a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a>
+    <strong>addCriteria</strong>(callable $criteria)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>callable</td>
+                <td>$criteria</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td><a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a></td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getCriterias">
+        <div class="location">in <a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html#method_getCriterias"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a> at line 253</div>
+        <code>                    array
+    <strong>getCriterias</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>array</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>RelationInterfaceMetas::getCriterias()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_setRelated">
+        <div class="location">in <a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html#method_setRelated"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a> at line 261</div>
+        <code>                    
+    <strong>setRelated</strong>(mixed $value, array $options = array())</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>mixed</td>
+                <td>$value</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$options</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>RelationInterface::setRelated()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getRelated">
+        <div class="location">in <a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html#method_getRelated"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a> at line 280</div>
+        <code>                    mixed
+    <strong>getRelated</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>mixed</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>RelationInterface::getRelated()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_isFilled">
+        <div class="location">in <a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html#method_isFilled"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a> at line 288</div>
+        <code>                    boolean
+    <strong>isFilled</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>RelationInterface::isFilled()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_load">
+        <div class="location">in <a href="../../../../../Elixir/DB/ObjectMapper/SQL/Relation/BaseAbstract.html#method_load"><abbr title="Elixir\DB\ObjectMapper\SQL\Relation\BaseAbstract">BaseAbstract</abbr></a> at line 296</div>
+        <code>                    
+    <strong>load</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+            
+            
+                            <h4>See also</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>RelationInterface::load()</td>
+                <td></td>
+            </tr>
+            </table>
+
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method___construct">
+        <div class="location">at line 19</div>
+        <code>                    
+    <strong>__construct</strong>(<a href="../../../../../Elixir/DB/ObjectMapper/RepositoryInterface.html"><abbr title="Elixir\DB\ObjectMapper\RepositoryInterface">RepositoryInterface</abbr></a> $repository, string|<a href="../../../../../Elixir/DB/ObjectMapper/RepositoryInterface.html"><abbr title="Elixir\DB\ObjectMapper\RepositoryInterface">RepositoryInterface</abbr></a> $target, array $config = array())</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../../../Elixir/DB/ObjectMapper/RepositoryInterface.html"><abbr title="Elixir\DB\ObjectMapper\RepositoryInterface">RepositoryInterface</abbr></a></td>
+                <td>$repository</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>string|<a href="../../../../../Elixir/DB/ObjectMapper/RepositoryInterface.html"><abbr title="Elixir\DB\ObjectMapper\RepositoryInterface">RepositoryInterface</abbr></a></td>
+                <td>$target</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>array</td>
+                <td>$config</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_attach">
+        <div class="location">at line 53</div>
+        <code>                    boolean
+    <strong>attach</strong>(<a href="../../../../../Elixir/DB/ObjectMapper/RepositoryInterface.html"><abbr title="Elixir\DB\ObjectMapper\RepositoryInterface">RepositoryInterface</abbr></a> $target)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../../../Elixir/DB/ObjectMapper/RepositoryInterface.html"><abbr title="Elixir\DB\ObjectMapper\RepositoryInterface">RepositoryInterface</abbr></a></td>
+                <td>$target</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_detach">
+        <div class="location">at line 88</div>
+        <code>                    boolean
+    <strong>detach</strong>(<a href="../../../../../Elixir/DB/ObjectMapper/RepositoryInterface.html"><abbr title="Elixir\DB\ObjectMapper\RepositoryInterface">RepositoryInterface</abbr></a> $target)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../../../Elixir/DB/ObjectMapper/RepositoryInterface.html"><abbr title="Elixir\DB\ObjectMapper\RepositoryInterface">RepositoryInterface</abbr></a></td>
+                <td>$target</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_detachAndDelete">
+        <div class="location">at line 116</div>
+        <code>                    boolean
+    <strong>detachAndDelete</strong>(<a href="../../../../../Elixir/DB/ObjectMapper/RepositoryInterface.html"><abbr title="Elixir\DB\ObjectMapper\RepositoryInterface">RepositoryInterface</abbr></a> $target)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../../../../Elixir/DB/ObjectMapper/RepositoryInterface.html"><abbr title="Elixir\DB\ObjectMapper\RepositoryInterface">RepositoryInterface</abbr></a></td>
+                <td>$target</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+            </div>
+
+    
+            </div>
+                <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/">Sami, the API Documentation Generator</a>.
+    </div>
+
+        </div>
+    </div>
+    </body>
+
+</html>

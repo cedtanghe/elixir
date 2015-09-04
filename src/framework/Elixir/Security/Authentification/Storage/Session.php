@@ -2,6 +2,7 @@
 
 namespace Elixir\Security\Authentification\Storage;
 
+use Elixir\HTTP\Session\Session as SessionData;
 use Elixir\HTTP\Session\SessionInterface;
 use Elixir\Security\Authentification\Identity;
 use Elixir\Security\Authentification\Storage\StorageInterface;
@@ -25,9 +26,9 @@ class Session implements StorageInterface
     /**
      * @param SessionInterface $pSession
      */
-    public function __construct(SessionInterface $pSession) 
+    public function __construct(SessionInterface $pSession = null) 
     {
-        $this->_session = $pSession;
+        $this->_session = $pSession ?: SessionData::instance();
     }
     
     /**

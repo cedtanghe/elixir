@@ -7,23 +7,27 @@ use Elixir\Config\Writer\WriterAbstract;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
-class Arr extends WriterAbstract
+class Arr extends WriterAbstract 
 {
     /**
      * @see WriterAbstract::write()
      */
-    public function write()
+    public function write() 
     {
-        return $this->_config->gets();
+        return $this->config->all();
     }
-    
+
     /**
      * @see WriterAbstract::export()
      */
-    public function export($pFile)
+    public function export($file)
     {
-        file_put_contents($pFile, '<?php return ' . var_export($this->write(), true));
-        return file_exists($pFile);
+        if (!strstr($file, '.php'))
+        {
+            $file .= '.php';
+        }
+        
+        file_put_contents($file, '<?php return ' . var_export($this->write(), true) . ';');
+        return file_exists($file);
     }
 }

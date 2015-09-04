@@ -19,7 +19,7 @@ class Arr extends WriterAbstract
         
         foreach($this->_I18N->getTextDomains() as $key => $domain)
         {
-            $data[$key] = $domain->gets(true);
+            $data[$key] = $domain->all(true);
         }
         
         return $data;

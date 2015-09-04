@@ -7,152 +7,91 @@ use Elixir\DI\ProviderInterface;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
-interface ContainerInterface
+interface ContainerInterface 
 {
     /**
-     * @var string
+     * @param ProviderInterface $provider
      */
-    const SIMPLE = 'simple';
+    public function addProvider(ProviderInterface $provider);
     
     /**
-     * @var string
-     */
-    const SINGLETON = 'singleton';
-    
-    /**
-     * @var string
-     */
-    const PROTECT = 'protect';
-    
-    /**
-     * @var string
-     */
-    const UNLOCKED = 'unlocked';
-    
-    /**
-     * @var string
-     */
-    const READ_ONLY = 'read_only';
-    
-    /**
-     * @var string
-     */
-    const IGNORE_IF_ALREADY_EXISTS = 'ignore_if_already_exists';
-    
-    /**
-     * @var string
-     */
-    const THROW_IF_ALREADY_EXISTS = 'throw_if_already_exists';
-    
-    /**
-     * @param string $pValue
-     */
-    public function setLockMode($pValue);
-    
-    /**
-     * @return string
-     */
-    public function getLockMode();
-    
-    /**
-     * @param string $pKey
+     * @param string $key
      * @return boolean 
      */
-    public function has($pKey);
-    
+    public function has($key);
+
     /**
-     * @param string $pKey
-     * @param array $pArguments
-     * @param mixed $pDefault
+     * @param string $key
+     * @param array $options
+     * @param mixed $default
      * @return mixed 
      */
-    public function get($pKey, array $pArguments = null, $pDefault = null);
-    
+    public function get($key, array $options = [], $default = null);
+
     /**
-     * @param string $pKey
-     * @param mixed $pValue 
-     * @param array $pOptions 
+     * @param string $key
+     * @param mixed $value 
+     * @param array $options 
      */
-    public function set($pKey, $pValue, array $pOptions = []);
+    public function bind($key, $value, array $options = []);
     
     /**
-     * @param string $pKey 
+     * @param string $key
+     * @param mixed $value 
+     * @param array $options 
      */
-    public function remove($pKey);
+    public function share($key, $value, array $options = []);
     
     /**
-     * @param array $pOptions
+     * @param string $key
+     * @param mixed $value 
+     * @param array $options 
+     */
+    public function instance($key, $value, array $options = []);
+    
+    /**
+     * @param string $key 
+     */
+    public function unbind($key);
+    
+    /**
+     * @param array $options
      * @return array 
      */
-    public function gets(array $pOptions = []);
-    
-    /**
-     * @param array $pData
-     * @param array $pOptions
-     */
-    public function sets(array $pData, array $pOptions = []);
+    public function all(array $options = []);
 
     /**
-     * @param string $pAlias
-     * @param string $pKey
-     * @return boolean
+     * @param array $data
      */
-    public function hasAlias($pAlias, $pKey = null);
-    
-    /**
-     * @param string $pKey
-     * @param string $pAlias
-     */
-    public function addAlias($pKey, $pAlias);
-    
-    /**
-     * @param string $pKey
-     * @param string $pTag
-     * @return boolean
-     */
-    public function hasTag($pKey, $pTag);
-    
-    /**
-     * @param string $pKey
-     * @param string $pTag
-     */
-    public function addTag($pKey, $pTag);
-    
-    /**
-     * @param string $pTag
-     * @param array $pArguments
-     * @param mixed $pDefault
-     * @return array|mixed
-     */
-    public function findByTag($pTag, array $pArguments = null, $pDefault = null);
-    
-    /**
-     * @param string $pKey
-     * @param callable $pValue
-     */
-    public function extend($pKey, callable $pValue);
-    
-    /**
-     * @param string $pKey
-     * @param boolean $pWithConfiguration
-     * @return mixed 
-     */
-    public function raw($pKey, $pWithConfiguration = false);
-    
-    /**
-     * @param string $pKey
-     * @return string
-     */
-    public function getStorageType($pKey);
+    public function replace(array $data);
 
     /**
-     * @param ProviderInterface $pProvider
+     * @param string $key
+     * @param callable $value
      */
-    public function load(ProviderInterface $pProvider);
+    public function extend($key, callable $value);
     
     /**
-     * @param array|ContainerInterface $pData 
+     * @param string $key
+     * @param string $alias
      */
-    public function merge($pData);
+    public function addAlias($key, $alias);
+
+    /**
+     * @param string $key
+     * @param string $tag
+     */
+    public function addTag($key, $tag);
+
+    /**
+     * @param string $tag
+     * @param array $options
+     * @return array
+     */
+    public function findByTag($tag, array $options = []);
+    
+    /**
+     * @param array|ContainerInterface $data 
+     */
+    public function merge($data);
 }

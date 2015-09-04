@@ -2,59 +2,51 @@
 
 namespace Elixir\Config\Processor;
 
-use Elixir\Config\ConfigInterface;
-use Elixir\Config\Processor\ProcessorAbstract;
+use Elixir\Config\Processor\ProcessorInterface;
 use Elixir\Filter\FilterInterface;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
-class Filter extends ProcessorAbstract
+class Filter implements ProcessorInterface
 {
     /**
      * @var FilterInterface 
      */
-    protected $_filter;
-    
+    protected $filter;
+
     /**
      * @var array 
      */
-    protected $_filterOptions = [];
-    
+    protected $options = [];
+
     /**
-     * @param FilterInterface $pFilter
-     * @param array $pOptions
+     * @param FilterInterface $filter
+     * @param array $options
      */
-    public function __construct(FilterInterface $pFilter, array $pOptions = []) 
+    public function __construct(FilterInterface $filter, array $options = []) 
     {
-        $this->_filter = $pFilter;
-        $this->_filterOptions = $pOptions;
+        $this->filter = $filter;
+        $this->options = $options;
     }
-    
+
     /**
      * @see ProcessorInterface::process()
      */
-    public function process($pValue)
+    public function process($value)
     {
-        if($pValue instanceof ConfigInterface)
+        if (is_array($value) || is_object($value) || $value instanceof \Traversable) 
         {
-            return $this->processConfig($pValue);
-        }
-        
-        if(is_array($pValue) || is_object($pValue) || $pValue instanceof \Traversable)
-        {
-            foreach($pValue as &$value)
+            foreach ($value as &$value) 
             {
                 $value = $this->process($value);
             }
-        }
-        else
+        } 
+        else 
         {
-            $pValue = $this->_filter->filter($pValue, $this->_filterOptions);
+            $value = $this->filter->filter($value, $this->options);
         }
-        
-        return $pValue;
+
+        return $value;
     }
 }
-

@@ -5,32 +5,33 @@ namespace Elixir\ClassLoader;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
 interface LoaderInterface 
 {
     /**
-     * @var string
+     * @param boolean $prepend
      */
-    const NAMESPACE_SEPARATOR = '\\';
+    public function register($prepend = false);
     
     /**
-     * @var string
+     * @return void
      */
-    const PREFIX_SEPARATOR = '_';
-    
-    public function register();
     public function unregister();
-    
+
     /**
-     * @param string $pClassName
-     * @return boolean 
-     */
-    public function classExist($pClassName);
-    
-    /**
-     * @param string $pClassName
+     * @param string $className
      * @return boolean
      */
-    public function loadClass($pClassName);
+    public function classExist($className);
+    
+    /**
+     * @param string $className
+     * @return string|null
+     */
+    public function findClass($className);
+    
+    /**
+     * @param string $className
+     * @return boolean
+     */
+    public function loadClass($className);
 }
-

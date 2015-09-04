@@ -4,46 +4,23 @@ namespace Elixir\Cache;
 
 use Elixir\Cache\CacheInterface;
 use Elixir\Cache\Encoder\EncoderInterface;
-use Elixir\Util\Str;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
 abstract class CacheAbstract implements CacheInterface
 {
     /**
      * @var EncoderInterface 
      */
-    protected $_encoder;
+    protected $encoder;
     
     /**
-     * @var string 
+     * @param EncoderInterface $value
      */
-    protected $_identifier;
-
-    /**
-     * @param string $pIdentifier
-     */
-    public function __construct($pIdentifier)
+    public function setEncoder(EncoderInterface $value)
     {
-        $this->_identifier = preg_replace('/[^a-z0-9\-]+/i', '-', strtolower(Str::removeAccents($pIdentifier)));
-    }
-    
-    /**
-     * @return string
-     */
-    public function getIdentifier()
-    {
-        return $this->_identifier;
-    }
-    
-    /**
-     * @param EncoderInterface $pValue
-     */
-    public function setEncoder(EncoderInterface $pValue)
-    {
-        $this->_encoder = $pValue;
+        $this->encoder = $value;
     }
     
     /**
@@ -51,40 +28,62 @@ abstract class CacheAbstract implements CacheInterface
      */
     public function getEncoder()
     {
-        return $this->_encoder;
+        return $this->encoder;
     }
 
     /**
-     * @param integer|string|\DateTime $pTTL
-     * @param integer $pDefault
+     * @see CacheInterface::remember()
+     */
+    public function remember($key, $value, $ttl = self::DEFAULT_TTL)
+    {
+        $get = $this->get($key, null);
+
+        if (null === $get)
+        {
+            if (is_callable($value))
+            {
+                $get = call_user_func($value);
+            } 
+            else 
+            {
+                $get = $value;
+            }
+            
+            $this->store($key, $get, $ttl);
+        }
+
+        return $get;
+    }
+    
+    /**
+     * @param integer|string|\DateTime $ttl
      * @return integer
      */
-    public function convertTTL($pTTL, $pDefault = 31556926)
+    protected function parseTimeToLive($ttl = self::DEFAULT_TTL)
     {
-        if(0 == $pTTL)
+        if (0 == $ttl)
         {
-            return $pDefault;
+            return self::DEFAULT_TTL;
         }
         
-        if($pTTL instanceof \DateTime)
+        if ($ttl instanceof \DateTime)
         {
-            $now = new \DateTime(null, $pTTL->getTimezone());
-            $pTTL = $pTTL->getTimestamp() - $now->getTimestamp();
+            $now = new \DateTime(null, $ttl->getTimezone());
+            $ttl = $ttl->getTimestamp() - $now->getTimestamp();
         }
-        else if(!is_numeric($pTTL))
+        else if (!is_numeric($ttl))
         {
-            $time = strtotime($pTTL);
+            $time = strtotime($ttl);
             
-            if(false === $time)
+            if (false === $time)
             {
-                return $pDefault;
+                return self::DEFAULT_TTL;
             }
             
             $now = new \DateTime();
-            $pTTL = $time - $now->getTimestamp();
+            $ttl = $time - $now->getTimestamp();
         }
         
-        return $pTTL;
+        return $ttl;
     }
 }
-

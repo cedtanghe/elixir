@@ -165,10 +165,6 @@ class Session extends Dispatcher implements SessionInterface, \ArrayAccess, \Ite
             {
                 session_set_save_handler($this->_handler, true);
             }
-            else
-            {
-                ini_set('session.save_handler', 'files');
-            }
             
             session_start();
             $this->dispatch(new SessionEvent(SessionEvent::START));
@@ -279,7 +275,7 @@ class Session extends Dispatcher implements SessionInterface, \ArrayAccess, \Ite
      */
     public function rewind() 
     {
-        $this->_parameters->rewind();
+        return $this->_parameters->rewind();
     }
     
     /**
@@ -303,7 +299,7 @@ class Session extends Dispatcher implements SessionInterface, \ArrayAccess, \Ite
      */
     public function next() 
     {
-        $this->_parameters->next();
+        return $this->_parameters->next();
     }
     
     /**

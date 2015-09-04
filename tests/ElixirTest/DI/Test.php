@@ -2,7 +2,7 @@
 
 namespace ElixirTest\DI;
 
-use Elixir\ClassLoader\Loader;
+use Elixir\ClassLoader\PSR4;
 use Elixir\DI\ContainerInterface;
 use Elixir\DI\Container;
 
@@ -12,9 +12,9 @@ class Test extends \PHPUnit_Framework_TestCase
 
     public function __construct()
     {
-        require_once __DIR__ . '/../../../src/framework/Elixir/ClassLoader/Loader.php';
+        require_once __DIR__ . '/../../../src/framework/Elixir/ClassLoader/PSR4.php';
         
-        $this->_loader = new Loader();
+        $this->_loader = new PSR4();
         $this->_loader->addNamespace('ElixirTest', __DIR__ . './../');
         $this->_loader->register();
     }
@@ -23,7 +23,7 @@ class Test extends \PHPUnit_Framework_TestCase
     {
         $container = new Container();
         
-        $container->set('param', 'This is a parameter');
+        $container->bind('param', 'This is a parameter');
         $this->assertEquals('This is a parameter', $container->get('param'));
     }
     
@@ -31,7 +31,7 @@ class Test extends \PHPUnit_Framework_TestCase
     {
         $container = new Container();
         
-        $container->set('param', function($pContainer)
+        $container->bind('param', function($pContainer)
         {
             return 'This is a service';
         });
@@ -42,7 +42,7 @@ class Test extends \PHPUnit_Framework_TestCase
     public function testAddServiceWithDefinitionAbstractClass()
     {
         $container = new Container();
-        $container->set('param', new Definition());
+        $container->bind('param', new Definition());
         
         $this->assertEquals('This is a definition', $container->get('param'));
     }
@@ -51,9 +51,9 @@ class Test extends \PHPUnit_Framework_TestCase
     {
         $container = new Container();
         
-        $container->set('param-1', 'This is a parameter');
+        $container->bind('param-1', 'This is a parameter');
         
-        $container->set('param-2', function($pContainer)
+        $container->bind('param-2', function($pContainer)
         {
             return $pContainer->get('param-1');
         });
@@ -65,7 +65,7 @@ class Test extends \PHPUnit_Framework_TestCase
     {
         $container = new Container();
         
-        $container->protect('param', function($pContainer)
+        $container->wrap('param', function($pContainer)
         {
             return 'This is a service';
         });
@@ -98,7 +98,7 @@ class Test extends \PHPUnit_Framework_TestCase
         $container = new Container();
         
         $data = [];
-        $container->set('param', $data);
+        $container->bind('param', $data);
         
         $container->extend('param', function($pService, $pContainer)
         {
@@ -115,11 +115,11 @@ class Test extends \PHPUnit_Framework_TestCase
     {
         $container = new Container();
         
-        $container->set('param', function($pContainer)
+        $container->bind('param', function($pContainer)
         {
             return 'This is a service';
         }, 
-        ['type' => ContainerInterface::SINGLETON, 'tags' => 'tag']);
+        ['type' => ContainerInterface::SHARED, 'tags' => 'tag']);
         
         $services = array_values($container->findByTag('tag'));
         $this->assertEquals('This is a service', $services[0]);

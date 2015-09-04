@@ -7,16 +7,15 @@ use Elixir\Dispatcher\DispatcherInterface;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
 interface SubscriberInterface 
 {
     /**
-     * @param Dispatcher $pDispatcher
+     * @param DispatcherInterface $dispatcher
      */
-    public function subscribe(DispatcherInterface $pDispatcher);
-    
+    public function subscribe(DispatcherInterface $dispatcher);
+
     /**
-     * @param Dispatcher $pDispatcher
+     * @param DispatcherInterface $dispatcher
      */
-    public function unsubscribe(DispatcherInterface $pDispatcher);
+    public function unsubscribe(DispatcherInterface $dispatcher);
 }

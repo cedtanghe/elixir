@@ -30,7 +30,7 @@ class Parameters implements ParametersInterface, \ArrayAccess, \Iterator, \Count
     /**
      * @param array|\ArrayAccess $pData
      */
-    public function __construct(&$pData = [])
+    public function __construct(&$pData)
     {
         $this->_data = &$pData;
     }
@@ -251,7 +251,7 @@ class Parameters implements ParametersInterface, \ArrayAccess, \Iterator, \Count
     
     public function rewind() 
     {
-        reset($this->_data);
+        return reset($this->_data);
     }
     
     /**
@@ -272,7 +272,7 @@ class Parameters implements ParametersInterface, \ArrayAccess, \Iterator, \Count
     
     public function next() 
     {
-        next($this->_data);
+        return next($this->_data);
     }
     
     /**
@@ -335,7 +335,7 @@ class Parameters implements ParametersInterface, \ArrayAccess, \Iterator, \Count
         
         if($pRecursive)
         {
-            $this->_data = Arr::merge($this->_data, $pData);
+            $this->_data = array_merge_recursive($this->_data, $pData);
         }
         else
         {

@@ -91,7 +91,7 @@ class Listeners implements SubscriberInterface
             {
                 $e->getRequest()->setRoute($match);
 
-                foreach($match->gets() as $key => $value)
+                foreach($match->all() as $key => $value)
                 {
                     switch($key)
                     {

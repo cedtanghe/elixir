@@ -8,35 +8,34 @@ use Elixir\Config\Writer\WriterInterface;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
 abstract class WriterAbstract implements WriterInterface
 {
     /**
      * @var ConfigInterface
      */
-    protected $_config;
-    
+    protected $config;
+
     /**
-     * @param ConfigInterface $pConfig
+     * @param ConfigInterface $config
      */
-    public function __construct(ConfigInterface $pConfig = null)
+    public function __construct(ConfigInterface $config = null)
     {
-        $this->_config = $pConfig;
+        $this->config = $config;
     }
 
     /**
-     * @param ConfigInterface $pValue
+     * @see WriterInterface::setConfig()
      */
-    public function setConfig(ConfigInterface $pValue)
+    public function setConfig(ConfigInterface $value)
     {
-        $this->_config = $pValue;
+        $this->config = $value;
     }
-    
+
     /**
      * @return ConfigInterface
      */
-    public function getConfig()
+    public function getConfig() 
     {
-        return $this->_config;
+        return $this->config;
     }
 }

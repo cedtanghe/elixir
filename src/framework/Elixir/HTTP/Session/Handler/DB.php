@@ -3,16 +3,16 @@
 namespace Elixir\HTTP\Session\Handler;
 
 use Elixir\DB\DBInterface;
+use Elixir\DB\Query\SQL\Insert;
+use Elixir\DB\Query\SQL\Update;
 use Elixir\DB\QueryBuilderInterface;
-use Elixir\DB\Result\SetAbstract;
-use Elixir\DB\SQL\Insert;
-use Elixir\DB\SQL\Update;
+use SessionHandlerInterface;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
-class DB implements \SessionHandlerInterface
+class DB implements SessionHandlerInterface
 {
     /**
      * @var mixed
@@ -69,7 +69,7 @@ class DB implements \SessionHandlerInterface
     }
 
     /**
-     * @see \SessionHandlerInterface::open()
+     * @see SessionHandlerInterface::open()
      */
     public function open($pSavePath, $pName)
     {
@@ -77,7 +77,7 @@ class DB implements \SessionHandlerInterface
     }
     
     /**
-     * @see \SessionHandlerInterface::close()
+     * @see SessionHandlerInterface::close()
      */
     public function close()
     {
@@ -86,17 +86,17 @@ class DB implements \SessionHandlerInterface
     }
     
     /**
-     * @see \SessionHandlerInterface::read()
+     * @see SessionHandlerInterface::read()
      */
     public function read($pId)
     {
         $select = $this->_DB->createSelect('`sessions`')
-                  ->columns('`data`')
+                  ->column('`data`')
                   ->where('`id` = ?', $pId)
                   ->where('`expires` > ?', time());
         
         $result = $this->_DB->query($select);
-        $row = $result->fetch(SetAbstract::FETCH_ASSOC);
+        $row = $result->next();
         
         if(false !== $row)
         {
@@ -107,14 +107,14 @@ class DB implements \SessionHandlerInterface
     }
     
     /**
-     * @see \SessionHandlerInterface::write()
+     * @see SessionHandlerInterface::write()
      */
     public function write($pId, $pData)
     {
         $life = time() + $this->_lifeTime;
         
         $select = $this->_DB->createSelect('`sessions`')
-                  ->columns('COUNT(*)')
+                  ->column('COUNT(*)')
                   ->where('`id` = ?', $pId);
         
         $result = $this->_DB->query($select);
@@ -146,7 +146,7 @@ class DB implements \SessionHandlerInterface
     }
     
     /**
-     * @see \SessionHandlerInterface::destroy()
+     * @see SessionHandlerInterface::destroy()
      */
     public function destroy($pId)
     {
@@ -157,7 +157,7 @@ class DB implements \SessionHandlerInterface
     }
     
     /**
-     * @see \SessionHandlerInterface::gc()
+     * @see SessionHandlerInterface::gc()
      */
     public function gc($pMaxLifetime)
     {

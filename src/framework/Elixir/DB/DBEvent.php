@@ -2,75 +2,95 @@
 
 namespace Elixir\DB;
 
+use Elixir\DB\Query\QueryInterface;
 use Elixir\Dispatcher\Event;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
-class DBEvent extends Event
+class DBEvent extends Event 
 {
     /**
      * @var string
      */
     const PRE_QUERY = 'pre_query';
-    
+
     /**
      * @var string
      */
     const QUERY = 'query';
-    
+
     /**
-     * @var string 
+     * @var QueryInterface|string 
      */
-    protected $_SQL;
-    
+    protected $query;
+
     /**
      * @var array 
      */
-    protected $_values;
-    
+    protected $bindings;
+
     /**
-     * @var float 
+     * @var integer 
      */
-    protected $_time;
-    
+    protected $elapsedTime;
+
     /**
      * @see Event::__contruct()
-     * @param string $pSQL
-     * @param array $pValues
-     * @param float $pTime
+     * @param array $params
      */
-    public function __construct($pType, $pSQL = null, array $pValues = [], $pTime = 0) 
+    public function __construct($type, array $params = []) 
     {
-        parent::__construct($pType);
+        parent::__construct($type);
+
+        $params += [
+            'query' => null,
+            'bindings' => [],
+            'elapsed_time' => 0
+        ];
         
-        $this->_SQL = $pSQL;
-        $this->_values = $pValues;
-        $this->_time = $pTime;
+        $this->query = $params['query'];
+        $this->bindings = $params['bindings'];
+        $this->elapsedTime = $params['elapsed_time'];
     }
     
     /**
-     * @return string
+     * @return QueryInterface|string
      */
-    public function getSQL()
+    public function getQuery() 
     {
-        return $this->_SQL;
+        return $this->query;
     }
     
+    /**
+     * @param QueryInterface|string $value
+     */
+    public function setQuery($value) 
+    {
+        $this->query = $value;
+    }
+
     /**
      * @return array
      */
-    public function getValues()
+    public function getBindings() 
     {
-        return $this->_values;
+        return $this->bindings;
     }
     
     /**
-     * @return float
+     * @param array $values
      */
-    public function getTime()
+    public function setBindings(array $values) 
     {
-        return $this->_time;
+        $this->bindings = $values;
+    }
+    
+    /**
+     * @return integer
+     */
+    public function getElapsedTime() 
+    {
+        return $this->elapsedTime;
     }
 }

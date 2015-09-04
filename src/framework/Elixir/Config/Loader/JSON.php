@@ -7,21 +7,18 @@ use Elixir\Config\Loader\Arr;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
-class JSON extends Arr
+class JSON extends Arr 
 {
     /**
      * @see Arr::load()
      */
-    public function load($pConfig, $pRecursive = false)
+    public function load($config, $recursive = false)
     {
-        if(is_file($pConfig))
+        if (is_file($config)) 
         {
-            $pConfig = file_get_contents($pConfig);
+            $config = file_get_contents($config);
         }
         
-        $pConfig = json_decode($pConfig, true);
-        
-        return parent::load($pConfig, $pRecursive);
+        return parent::load(json_decode($config, true), $recursive);
     }
 }

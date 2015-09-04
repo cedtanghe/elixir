@@ -2,9 +2,9 @@
 
 namespace ElixirTest\Cache;
 
-use Elixir\ClassLoader\Loader;
 use Elixir\Cache\APC;
 use Elixir\Cache\File;
+use Elixir\ClassLoader\PSR4;
 
 class Test extends \PHPUnit_Framework_TestCase
 {
@@ -12,15 +12,34 @@ class Test extends \PHPUnit_Framework_TestCase
 
     public function __construct()
     {
-        require_once __DIR__ . '/../../../src/framework/Elixir/ClassLoader/Loader.php';
+        require_once __DIR__ . '/../../../src/framework/Elixir/ClassLoader/PSR4.php';
         
-        $this->_loader = new Loader();
+        $this->_loader = new PSR4();
         $this->_loader->addNamespace('ElixirTest', __DIR__ . './../');
         $this->_loader->register();
     }
     
     public function testAPC()
     {
+        $content = "<?php
+return [
+    'development' => [
+        'session' => ['name' => ''],
+        'db' => [
+            'type' => 'pdo_mysql',
+            'host' => '',
+            'username' => '',
+            'password' => '',
+            'dbname' => ''
+        ]
+    ],
+    'preproduction:development' => [],
+    'production:development' => []\n
+];";
+        
+        print_r(preg_replace('/^(<\?php\s+return)|(;\s*?(\?>)?)$/i', '', $content));
+        die();
+        
         if(!extension_loaded('apc'))
         {
             return;

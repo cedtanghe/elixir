@@ -13,5 +13,10 @@ class AuthEvent extends Event
     /**
      * @var string
      */
+    const UPDATE = 'update';
+    
+    /**
+     * @var string
+     */
     const IDENTITY_REMOVED = 'identity_removed';
 }

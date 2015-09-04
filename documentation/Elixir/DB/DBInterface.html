@@ -1,241 +1,278 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="robots" content="index, follow, all" />
-        <title>Elixir\DB\DBInterface | Elixir</title>
-                    <script type="text/javascript" src="../../js/jquery-1.3.2.min.js"></script>
-			
-			<link rel="stylesheet" type="text/css" href="../../stylesheet.css">
-			<link rel="stylesheet" type="text/css" href="../../styles.css">
-			
-            <link rel="stylesheet" type="text/css" href="../../prismjs/prism.css">
-            <script type="text/javascript" src="../../prismjs/prism.js" data-manual></script>
-            
-                            </head>
-        <body id="class">
-            <div class="header">
-        <ul>
-            <li><a href="../../classes.html">Classes</a></li>
-                            <li><a href="../../namespaces.html">Namespaces</a></li>
-                        <li><a href="../../interfaces.html">Interfaces</a></li>
-            <li><a href="../../doc-index.html">Index</a></li>
-            
-        </ul>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="index, follow, all" />
+    <title>Elixir\DB\DBInterface | Elixir</title>
 
-        <div id="title">Elixir</div>
+            <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="../../css/sami.css">
+        <script src="../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../js/bootstrap.min.js"></script>
+        <script src="../../js/typeahead.min.js"></script>
+        <script src="../../sami.js"></script>
+    
+    
+    </head>
 
-            <div class="type">Interface</div>
-    <h1><a href="../../Elixir/DB.html">Elixir\DB</a>\DBInterface</h1>
+    <body id="class" data-name="class:Elixir_DB_DBInterface" data-root-path="../../">
+            <div id="content">
+        <div id="left-column">
+                <div id="control-panel">
+                <form id="search-form" action="../../search.html" method="GET">
+            <span class="glyphicon glyphicon-search"></span>
+            <input name="search"
+                   class="typeahead form-control"
+                   type="search"
+                   placeholder="Search">
+        </form>
     </div>
-        <div class="content">
-                <p>interface    <strong>DBInterface</strong>        implements
+
+                <div id="api-tree"></div>
+
+        </div>
+        <div id="right-column">
+                <nav id="site-nav" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-elements">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../../index.html">Elixir</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-elements">
+                <ul class="nav navbar-nav">
+                    <li><a href="../../classes.html">Classes</a></li>
+                                            <li><a href="../../namespaces.html">Namespaces</a></li>
+                                        <li><a href="../../interfaces.html">Interfaces</a></li>
+                    <li><a href="../../traits.html">Traits</a></li>
+                    <li><a href="../../doc-index.html">Index</a></li>
+                    <li><a href="../../search.html">Search</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+                        <div class="namespace-breadcrumbs">
+            <ol class="breadcrumb">
+                <li><span class="label label-default">interface</span></li>
+                                                            <li><a href="../../Elixir.html">Elixir</a></li>
+                                        <li><a href="../../Elixir/DB.html">DB</a></li>
+    
+                <li>DBInterface</li>
+            </ol>
+        </div>
+                <div id="page-content">
+                
+    <div class="page-header">
+        <h1>DBInterface</h1>
+    </div>
+
+    <p>    interface
+    <strong>DBInterface</strong>        implements
         <a href="../../Elixir/Dispatcher/DispatcherInterface.html"><abbr title="Elixir\Dispatcher\DispatcherInterface">DispatcherInterface</abbr></a></p>
 
     
     
     
+    
             <h2>Methods</h2>
 
-            <table>
-                    <tr>
-                <td class="type">
+            <div class="container-fluid underlined">
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
-                    <a href="#method_hasListener">hasListener</a>(string $pType)
-                    <p>
-</p>
-                </td>
-                <td><small>from&nbsp;<a href="../../Elixir/Dispatcher/DispatcherInterface.html#method_hasListener"><abbr title="Elixir\Dispatcher\DispatcherInterface">DispatcherInterface</abbr></a></small></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_addSubscriber">addSubscriber</a>(<a href="../../Elixir/Dispatcher/SubscriberInterface.html"><abbr title="Elixir\Dispatcher\SubscriberInterface">SubscriberInterface</abbr></a> $subscriber)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Elixir/Dispatcher/DispatcherInterface.html#method_addSubscriber"><abbr title="Elixir\Dispatcher\DispatcherInterface">DispatcherInterface</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
-                    <a href="#method_addListener">addListener</a>(string $pType, <abbr title="Elixir\Dispatcher\callable">callable</abbr> $pCallback, integer $pPriority)
-                    <p>
-</p>
-                </td>
-                <td><small>from&nbsp;<a href="../../Elixir/Dispatcher/DispatcherInterface.html#method_addListener"><abbr title="Elixir\Dispatcher\DispatcherInterface">DispatcherInterface</abbr></a></small></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_removeSubscriber">removeSubscriber</a>(<a href="../../Elixir/Dispatcher/SubscriberInterface.html"><abbr title="Elixir\Dispatcher\SubscriberInterface">SubscriberInterface</abbr></a> $subscriber)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Elixir/Dispatcher/DispatcherInterface.html#method_removeSubscriber"><abbr title="Elixir\Dispatcher\DispatcherInterface">DispatcherInterface</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    boolean
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_hasListener">hasListener</a>(string $type)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Elixir/Dispatcher/DispatcherInterface.html#method_hasListener"><abbr title="Elixir\Dispatcher\DispatcherInterface">DispatcherInterface</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_addListener">addListener</a>(string $type, callable $callback, integer $priority)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Elixir/Dispatcher/DispatcherInterface.html#method_addListener"><abbr title="Elixir\Dispatcher\DispatcherInterface">DispatcherInterface</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_removeListener">removeListener</a>(string $type, callable $callback = null)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Elixir/Dispatcher/DispatcherInterface.html#method_removeListener"><abbr title="Elixir\Dispatcher\DispatcherInterface">DispatcherInterface</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    boolean
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_hasListeners">hasListeners</a>()
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Elixir/Dispatcher/DispatcherInterface.html#method_hasListeners"><abbr title="Elixir\Dispatcher\DispatcherInterface">DispatcherInterface</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     array
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_getListeners">getListeners</a>()
-                    <p>
-</p>
-                </td>
-                <td><small>from&nbsp;<a href="../../Elixir/Dispatcher/DispatcherInterface.html#method_getListeners"><abbr title="Elixir\Dispatcher\DispatcherInterface">DispatcherInterface</abbr></a></small></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Elixir/Dispatcher/DispatcherInterface.html#method_getListeners"><abbr title="Elixir\Dispatcher\DispatcherInterface">DispatcherInterface</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
-                    <a href="#method_removeListener">removeListener</a>(string $pType, <abbr title="Elixir\Dispatcher\callable">callable</abbr> $pCallback)
-                    <p>
-</p>
-                </td>
-                <td><small>from&nbsp;<a href="../../Elixir/Dispatcher/DispatcherInterface.html#method_removeListener"><abbr title="Elixir\Dispatcher\DispatcherInterface">DispatcherInterface</abbr></a></small></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_removeListeners">removeListeners</a>()
-                    <p>
-</p>
-                </td>
-                <td><small>from&nbsp;<a href="../../Elixir/Dispatcher/DispatcherInterface.html#method_removeListeners"><abbr title="Elixir\Dispatcher\DispatcherInterface">DispatcherInterface</abbr></a></small></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Elixir/Dispatcher/DispatcherInterface.html#method_removeListeners"><abbr title="Elixir\Dispatcher\DispatcherInterface">DispatcherInterface</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     
-                </td>
-                <td class="last">
-                    <a href="#method_addSubscriber">addSubscriber</a>(<a href="../../Elixir/Dispatcher/SubscriberInterface.html"><abbr title="Elixir\Dispatcher\SubscriberInterface">SubscriberInterface</abbr></a> $pSubscriber)
-                    <p>
-</p>
-                </td>
-                <td><small>from&nbsp;<a href="../../Elixir/Dispatcher/DispatcherInterface.html#method_addSubscriber"><abbr title="Elixir\Dispatcher\DispatcherInterface">DispatcherInterface</abbr></a></small></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    
-                </td>
-                <td class="last">
-                    <a href="#method_removeSubscriber">removeSubscriber</a>(<a href="../../Elixir/Dispatcher/SubscriberInterface.html"><abbr title="Elixir\Dispatcher\SubscriberInterface">SubscriberInterface</abbr></a> $pSubscriber)
-                    <p>
-</p>
-                </td>
-                <td><small>from&nbsp;<a href="../../Elixir/Dispatcher/DispatcherInterface.html#method_removeSubscriber"><abbr title="Elixir\Dispatcher\DispatcherInterface">DispatcherInterface</abbr></a></small></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    
-                </td>
-                <td class="last">
-                    <a href="#method_dispatch">dispatch</a>(<a href="../../Elixir/Dispatcher/Event.html"><abbr title="Elixir\Dispatcher\Event">Event</abbr></a> $pEvent)
-                    <p>
-</p>
-                </td>
-                <td><small>from&nbsp;<a href="../../Elixir/Dispatcher/DispatcherInterface.html#method_dispatch"><abbr title="Elixir\Dispatcher\DispatcherInterface">DispatcherInterface</abbr></a></small></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_dispatch">dispatch</a>(<a href="../../Elixir/Dispatcher/Event.html"><abbr title="Elixir\Dispatcher\Event">Event</abbr></a> $event)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"><small>from&nbsp;<a href="../../Elixir/Dispatcher/DispatcherInterface.html#method_dispatch"><abbr title="Elixir\Dispatcher\DispatcherInterface">DispatcherInterface</abbr></a></small></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     integer
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_lastInsertId">lastInsertId</a>()
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     boolean
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_begin">begin</a>()
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     boolean
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_rollBack">rollBack</a>()
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     boolean
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_commit">commit</a>()
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     boolean
-                </td>
-                <td class="last">
+                </div>
+                <div class="col-md-8 type">
                     <a href="#method_inTransaction">inTransaction</a>()
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     mixed
-                </td>
-                <td class="last">
-                    <a href="#method_quote">quote</a>(mixed $pValue, integer $pType = null)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_quote">quote</a>(mixed $value, integer $type = null)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     integer
-                </td>
-                <td class="last">
-                    <a href="#method_exec">exec</a>(<a href="../../Elixir/DB/SQL/SQLInterface.html"><abbr title="Elixir\DB\SQL\SQLInterface">SQLInterface</abbr></a>|string $pSQL)
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-                    <tr>
-                <td class="type">
-                    <a href="../../Elixir/DB/Result/SetAbstract.html"><abbr title="Elixir\DB\Result\SetAbstract">SetAbstract</abbr></a>|boolean
-                </td>
-                <td class="last">
-                    <a href="#method_query">query</a>(<a href="../../Elixir/DB/SQL/SQLInterface.html"><abbr title="Elixir\DB\SQL\SQLInterface">SQLInterface</abbr></a>|string $pSQL, array $pValues = array(), array $pOptions = array())
-                    <p>
-</p>
-                </td>
-                <td></td>
-            </tr>
-            </table>
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_exec">exec</a>(<a href="../../Elixir/DB/Query/QueryInterface.html"><abbr title="Elixir\DB\Query\QueryInterface">QueryInterface</abbr></a>|string $query)
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    <a href="../../Elixir/DB/ResultSet/ResultSetAbstract.html"><abbr title="Elixir\DB\ResultSet\ResultSetAbstract">ResultSetAbstract</abbr></a>|boolean
+                </div>
+                <div class="col-md-8 type">
+                    <a href="#method_query">query</a>(<a href="../../Elixir/DB/Query/QueryInterface.html"><abbr title="Elixir\DB\Query\QueryInterface">QueryInterface</abbr></a>|string $query, array $values = array(), array $options = array())
+                                            <p class="no-description">No description</p>
+                                    </div>
+                <div class="col-md-2"></div>
+            </div>
+            </div>
 
 
         <h2>Details</h2>
 
-                        <h3 id="method_hasListener">
-        <div class="location">in <a href="../../Elixir/Dispatcher/DispatcherInterface.html#method_hasListener"><abbr title="Elixir\Dispatcher\DispatcherInterface">DispatcherInterface</abbr></a> at line 16</div>
-        <code>            public            
-    <strong>hasListener</strong>(string $pType)</code>
+            <div id="method-details">
+                    <div class="method-item">
+                    <h3 id="method_addSubscriber">
+        <div class="location">in <a href="../../Elixir/Dispatcher/DispatcherInterface.html#method_addSubscriber"><abbr title="Elixir\Dispatcher\DispatcherInterface">DispatcherInterface</abbr></a> at line 15</div>
+        <code>                    
+    <strong>addSubscriber</strong>(<a href="../../Elixir/Dispatcher/SubscriberInterface.html"><abbr title="Elixir\Dispatcher\SubscriberInterface">SubscriberInterface</abbr></a> $subscriber)</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
-                <td>string</td>
-                <td>$pType</td>
+                <td><a href="../../Elixir/Dispatcher/SubscriberInterface.html"><abbr title="Elixir\Dispatcher\SubscriberInterface">SubscriberInterface</abbr></a></td>
+                <td>$subscriber</td>
                 <td>
 </td>
             </tr>
@@ -247,35 +284,95 @@
                     </div>
     </div>
 
-                <h3 id="method_addListener">
-        <div class="location">in <a href="../../Elixir/Dispatcher/DispatcherInterface.html#method_addListener"><abbr title="Elixir\Dispatcher\DispatcherInterface">DispatcherInterface</abbr></a> at line 23</div>
-        <code>            public            
-    <strong>addListener</strong>(string $pType, <abbr title="Elixir\Dispatcher\callable">callable</abbr> $pCallback, integer $pPriority)</code>
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_removeSubscriber">
+        <div class="location">in <a href="../../Elixir/Dispatcher/DispatcherInterface.html#method_removeSubscriber"><abbr title="Elixir\Dispatcher\DispatcherInterface">DispatcherInterface</abbr></a> at line 20</div>
+        <code>                    
+    <strong>removeSubscriber</strong>(<a href="../../Elixir/Dispatcher/SubscriberInterface.html"><abbr title="Elixir\Dispatcher\SubscriberInterface">SubscriberInterface</abbr></a> $subscriber)</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
+                    <tr>
+                <td><a href="../../Elixir/Dispatcher/SubscriberInterface.html"><abbr title="Elixir\Dispatcher\SubscriberInterface">SubscriberInterface</abbr></a></td>
+                <td>$subscriber</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_hasListener">
+        <div class="location">in <a href="../../Elixir/Dispatcher/DispatcherInterface.html#method_hasListener"><abbr title="Elixir\Dispatcher\DispatcherInterface">DispatcherInterface</abbr></a> at line 26</div>
+        <code>                    boolean
+    <strong>hasListener</strong>(string $type)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
                     <tr>
                 <td>string</td>
-                <td>$pType</td>
+                <td>$type</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_addListener">
+        <div class="location">in <a href="../../Elixir/Dispatcher/DispatcherInterface.html#method_addListener"><abbr title="Elixir\Dispatcher\DispatcherInterface">DispatcherInterface</abbr></a> at line 33</div>
+        <code>                    
+    <strong>addListener</strong>(string $type, callable $callback, integer $priority)</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$type</td>
                 <td>
 </td>
             </tr>
                     <tr>
-                <td><abbr title="Elixir\Dispatcher\callable">callable</abbr></td>
-                <td>$pCallback</td>
+                <td>callable</td>
+                <td>$callback</td>
                 <td>
 </td>
             </tr>
                     <tr>
                 <td>integer</td>
-                <td>$pPriority</td>
+                <td>$priority</td>
                 <td>
 </td>
             </tr>
@@ -287,21 +384,76 @@
                     </div>
     </div>
 
-                <h3 id="method_getListeners">
-        <div class="location">in <a href="../../Elixir/Dispatcher/DispatcherInterface.html#method_getListeners"><abbr title="Elixir\Dispatcher\DispatcherInterface">DispatcherInterface</abbr></a> at line 28</div>
-        <code>            public            array
-    <strong>getListeners</strong>()</code>
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_removeListener">
+        <div class="location">in <a href="../../Elixir/Dispatcher/DispatcherInterface.html#method_removeListener"><abbr title="Elixir\Dispatcher\DispatcherInterface">DispatcherInterface</abbr></a> at line 39</div>
+        <code>                    
+    <strong>removeListener</strong>(string $type, callable $callback = null)</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
+                            <h4>Parameters</h4>
+
+                    <table class="table table-condensed">
+                    <tr>
+                <td>string</td>
+                <td>$type</td>
+                <td>
+</td>
+            </tr>
+                    <tr>
+                <td>callable</td>
+                <td>$callback</td>
+                <td>
+</td>
+            </tr>
+            </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_hasListeners">
+        <div class="location">in <a href="../../Elixir/Dispatcher/DispatcherInterface.html#method_hasListeners"><abbr title="Elixir\Dispatcher\DispatcherInterface">DispatcherInterface</abbr></a> at line 44</div>
+        <code>                    boolean
+    <strong>hasListeners</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
+        <tr>
+            <td>boolean</td>
+            <td>
+</td>
+        </tr>
+    </table>
+
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_getListeners">
+        <div class="location">in <a href="../../Elixir/Dispatcher/DispatcherInterface.html#method_getListeners"><abbr title="Elixir\Dispatcher\DispatcherInterface">DispatcherInterface</abbr></a> at line 49</div>
+        <code>                    array
+    <strong>getListeners</strong>()</code>
+    </h3>
+    <div class="details">
+                <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
         <tr>
             <td>array</td>
             <td>
@@ -314,130 +466,36 @@
                     </div>
     </div>
 
-                <h3 id="method_removeListener">
-        <div class="location">in <a href="../../Elixir/Dispatcher/DispatcherInterface.html#method_removeListener"><abbr title="Elixir\Dispatcher\DispatcherInterface">DispatcherInterface</abbr></a> at line 34</div>
-        <code>            public            
-    <strong>removeListener</strong>(string $pType, <abbr title="Elixir\Dispatcher\callable">callable</abbr> $pCallback)</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table>
-                    <tr>
-                <td>string</td>
-                <td>$pType</td>
-                <td>
-</td>
-            </tr>
-                    <tr>
-                <td><abbr title="Elixir\Dispatcher\callable">callable</abbr></td>
-                <td>$pCallback</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-            
-            
-                    </div>
-    </div>
-
-                <h3 id="method_removeListeners">
-        <div class="location">in <a href="../../Elixir/Dispatcher/DispatcherInterface.html#method_removeListeners"><abbr title="Elixir\Dispatcher\DispatcherInterface">DispatcherInterface</abbr></a> at line 36</div>
-        <code>            public            
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_removeListeners">
+        <div class="location">in <a href="../../Elixir/Dispatcher/DispatcherInterface.html#method_removeListeners"><abbr title="Elixir\Dispatcher\DispatcherInterface">DispatcherInterface</abbr></a> at line 51</div>
+        <code>                    
     <strong>removeListeners</strong>()</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
             
             
             
                     </div>
     </div>
 
-                <h3 id="method_addSubscriber">
-        <div class="location">in <a href="../../Elixir/Dispatcher/DispatcherInterface.html#method_addSubscriber"><abbr title="Elixir\Dispatcher\DispatcherInterface">DispatcherInterface</abbr></a> at line 41</div>
-        <code>            public            
-    <strong>addSubscriber</strong>(<a href="../../Elixir/Dispatcher/SubscriberInterface.html"><abbr title="Elixir\Dispatcher\SubscriberInterface">SubscriberInterface</abbr></a> $pSubscriber)</code>
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_dispatch">
+        <div class="location">in <a href="../../Elixir/Dispatcher/DispatcherInterface.html#method_dispatch"><abbr title="Elixir\Dispatcher\DispatcherInterface">DispatcherInterface</abbr></a> at line 56</div>
+        <code>                    
+    <strong>dispatch</strong>(<a href="../../Elixir/Dispatcher/Event.html"><abbr title="Elixir\Dispatcher\Event">Event</abbr></a> $event)</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
-                    <tr>
-                <td><a href="../../Elixir/Dispatcher/SubscriberInterface.html"><abbr title="Elixir\Dispatcher\SubscriberInterface">SubscriberInterface</abbr></a></td>
-                <td>$pSubscriber</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-            
-            
-                    </div>
-    </div>
-
-                <h3 id="method_removeSubscriber">
-        <div class="location">in <a href="../../Elixir/Dispatcher/DispatcherInterface.html#method_removeSubscriber"><abbr title="Elixir\Dispatcher\DispatcherInterface">DispatcherInterface</abbr></a> at line 46</div>
-        <code>            public            
-    <strong>removeSubscriber</strong>(<a href="../../Elixir/Dispatcher/SubscriberInterface.html"><abbr title="Elixir\Dispatcher\SubscriberInterface">SubscriberInterface</abbr></a> $pSubscriber)</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table>
-                    <tr>
-                <td><a href="../../Elixir/Dispatcher/SubscriberInterface.html"><abbr title="Elixir\Dispatcher\SubscriberInterface">SubscriberInterface</abbr></a></td>
-                <td>$pSubscriber</td>
-                <td>
-</td>
-            </tr>
-            </table>
-
-            
-            
-            
-                    </div>
-    </div>
-
-                <h3 id="method_dispatch">
-        <div class="location">in <a href="../../Elixir/Dispatcher/DispatcherInterface.html#method_dispatch"><abbr title="Elixir\Dispatcher\DispatcherInterface">DispatcherInterface</abbr></a> at line 51</div>
-        <code>            public            
-    <strong>dispatch</strong>(<a href="../../Elixir/Dispatcher/Event.html"><abbr title="Elixir\Dispatcher\Event">Event</abbr></a> $pEvent)</code>
-    </h3>
-    <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
-                            <h4>Parameters</h4>
-
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td><a href="../../Elixir/Dispatcher/Event.html"><abbr title="Elixir\Dispatcher\Event">Event</abbr></a></td>
-                <td>$pEvent</td>
+                <td>$event</td>
                 <td>
 </td>
             </tr>
@@ -449,21 +507,19 @@
                     </div>
     </div>
 
-                <h3 id="method_lastInsertId">
-        <div class="location">at line 18</div>
-        <code>            public            integer
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_lastInsertId">
+        <div class="location">at line 17</div>
+        <code>                    integer
     <strong>lastInsertId</strong>()</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td>integer</td>
             <td>
@@ -476,21 +532,19 @@
                     </div>
     </div>
 
-                <h3 id="method_begin">
-        <div class="location">at line 23</div>
-        <code>            public            boolean
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_begin">
+        <div class="location">at line 22</div>
+        <code>                    boolean
     <strong>begin</strong>()</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td>boolean</td>
             <td>
@@ -503,21 +557,19 @@
                     </div>
     </div>
 
-                <h3 id="method_rollBack">
-        <div class="location">at line 28</div>
-        <code>            public            boolean
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_rollBack">
+        <div class="location">at line 27</div>
+        <code>                    boolean
     <strong>rollBack</strong>()</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td>boolean</td>
             <td>
@@ -530,21 +582,19 @@
                     </div>
     </div>
 
-                <h3 id="method_commit">
-        <div class="location">at line 33</div>
-        <code>            public            boolean
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_commit">
+        <div class="location">at line 32</div>
+        <code>                    boolean
     <strong>commit</strong>()</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td>boolean</td>
             <td>
@@ -557,21 +607,19 @@
                     </div>
     </div>
 
-                <h3 id="method_inTransaction">
-        <div class="location">at line 38</div>
-        <code>            public            boolean
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_inTransaction">
+        <div class="location">at line 37</div>
+        <code>                    boolean
     <strong>inTransaction</strong>()</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td>boolean</td>
             <td>
@@ -584,29 +632,27 @@
                     </div>
     </div>
 
-                <h3 id="method_quote">
-        <div class="location">at line 45</div>
-        <code>            public            mixed
-    <strong>quote</strong>(mixed $pValue, integer $pType = null)</code>
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_quote">
+        <div class="location">at line 44</div>
+        <code>                    mixed
+    <strong>quote</strong>(mixed $value, integer $type = null)</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
                 <td>mixed</td>
-                <td>$pValue</td>
+                <td>$value</td>
                 <td>
 </td>
             </tr>
                     <tr>
                 <td>integer</td>
-                <td>$pType</td>
+                <td>$type</td>
                 <td>
 </td>
             </tr>
@@ -615,7 +661,7 @@
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td>mixed</td>
             <td>
@@ -628,23 +674,21 @@
                     </div>
     </div>
 
-                <h3 id="method_exec">
-        <div class="location">at line 51</div>
-        <code>            public            integer
-    <strong>exec</strong>(<a href="../../Elixir/DB/SQL/SQLInterface.html"><abbr title="Elixir\DB\SQL\SQLInterface">SQLInterface</abbr></a>|string $pSQL)</code>
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_exec">
+        <div class="location">at line 50</div>
+        <code>                    integer
+    <strong>exec</strong>(<a href="../../Elixir/DB/Query/QueryInterface.html"><abbr title="Elixir\DB\Query\QueryInterface">QueryInterface</abbr></a>|string $query)</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
-                <td><a href="../../Elixir/DB/SQL/SQLInterface.html"><abbr title="Elixir\DB\SQL\SQLInterface">SQLInterface</abbr></a>|string</td>
-                <td>$pSQL</td>
+                <td><a href="../../Elixir/DB/Query/QueryInterface.html"><abbr title="Elixir\DB\Query\QueryInterface">QueryInterface</abbr></a>|string</td>
+                <td>$query</td>
                 <td>
 </td>
             </tr>
@@ -653,7 +697,7 @@
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
             <td>integer</td>
             <td>
@@ -666,35 +710,33 @@
                     </div>
     </div>
 
-                <h3 id="method_query">
-        <div class="location">at line 59</div>
-        <code>            public            <a href="../../Elixir/DB/Result/SetAbstract.html"><abbr title="Elixir\DB\Result\SetAbstract">SetAbstract</abbr></a>|boolean
-    <strong>query</strong>(<a href="../../Elixir/DB/SQL/SQLInterface.html"><abbr title="Elixir\DB\SQL\SQLInterface">SQLInterface</abbr></a>|string $pSQL, array $pValues = array(), array $pOptions = array())</code>
+            </div>
+                    <div class="method-item">
+                    <h3 id="method_query">
+        <div class="location">at line 58</div>
+        <code>                    <a href="../../Elixir/DB/ResultSet/ResultSetAbstract.html"><abbr title="Elixir\DB\ResultSet\ResultSetAbstract">ResultSetAbstract</abbr></a>|boolean
+    <strong>query</strong>(<a href="../../Elixir/DB/Query/QueryInterface.html"><abbr title="Elixir\DB\Query\QueryInterface">QueryInterface</abbr></a>|string $query, array $values = array(), array $options = array())</code>
     </h3>
     <div class="details">
-        <p>
-</p>
-        <p>
-</p>
-        <div class="tags">
+                <div class="tags">
                             <h4>Parameters</h4>
 
-                    <table>
+                    <table class="table table-condensed">
                     <tr>
-                <td><a href="../../Elixir/DB/SQL/SQLInterface.html"><abbr title="Elixir\DB\SQL\SQLInterface">SQLInterface</abbr></a>|string</td>
-                <td>$pSQL</td>
+                <td><a href="../../Elixir/DB/Query/QueryInterface.html"><abbr title="Elixir\DB\Query\QueryInterface">QueryInterface</abbr></a>|string</td>
+                <td>$query</td>
                 <td>
 </td>
             </tr>
                     <tr>
                 <td>array</td>
-                <td>$pValues</td>
+                <td>$values</td>
                 <td>
 </td>
             </tr>
                     <tr>
                 <td>array</td>
-                <td>$pOptions</td>
+                <td>$options</td>
                 <td>
 </td>
             </tr>
@@ -703,9 +745,9 @@
             
                             <h4>Return Value</h4>
 
-                    <table>
+                    <table class="table table-condensed">
         <tr>
-            <td><a href="../../Elixir/DB/Result/SetAbstract.html"><abbr title="Elixir\DB\Result\SetAbstract">SetAbstract</abbr></a>|boolean</td>
+            <td><a href="../../Elixir/DB/ResultSet/ResultSetAbstract.html"><abbr title="Elixir\DB\ResultSet\ResultSetAbstract">ResultSetAbstract</abbr></a>|boolean</td>
             <td>
 </td>
         </tr>
@@ -716,24 +758,17 @@
                     </div>
     </div>
 
+            </div>
+            </div>
+
     
             </div>
-            <div id="footer">
-        Generated by <a href="http://sami.sensiolabs.org/" target="_top">Sami, the API Documentation Generator</a>.
+                <div id="footer">
+        Generated by <a href="http://sami.sensiolabs.org/">Sami, the API Documentation Generator</a>.
     </div>
-		<script type="text/javascript">
-			$('.description code').addClass('language-php');
-			Prism.highlightAll();
-			
-			$('.description p').each(function(e)
-			{
-				if($(this).text().substr(-1) == ':')
-				{
-					$(this).css({"font-weight": "bold"});
-				}
-			});
-			
-			$('.description p:empty').remove();
-		</script>
+
+        </div>
+    </div>
     </body>
+
 </html>

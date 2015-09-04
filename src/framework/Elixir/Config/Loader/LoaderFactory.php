@@ -3,43 +3,80 @@
 namespace Elixir\Config\Loader;
 
 use Elixir\Config\Loader\Arr;
-use Elixir\Config\Loader\INI;
 use Elixir\Config\Loader\JSON;
-use Elixir\Config\Loader\XML;
+use Elixir\Config\Loader\LoaderInterface;
+use Elixir\Config\Loader\YAML;
 
-class LoaderFactory
+/**
+ * @author Cédric Tanghe <ced.tanghe@gmail.com>
+ */
+class LoaderFactory 
 {
     /**
-     * @param mixed $pConfig
-     * @param array $pOptions
+     * @var array 
+     */
+    public static $factories = [];
+
+    /**
+     * @param mixed $config
+     * @param array $options
      * @return LoaderInterface
      * @throws \InvalidArgumentException
      */
-    public static function create($pConfig, array $pOptions = [])
+    public static function create($config, array $options = []) 
     {
-        $environment = isset($pOptions['environment']) ? $pOptions['environment'] : null;
-        $strict = isset($pOptions['strict']) ? $pOptions['strict'] : false;
+        if (!isset(static::$factories['Arr']))
+        {
+            static::$factories['Arr'] = function($config, $options)
+            {
+                if (is_array($config) || strstr($config, '.php'))
+                {
+                    return new Arr($options['environment'], $options['strict']);
+                }
+                
+                return null;
+            };
+        }
         
-        if(is_array($pConfig) || strstr($pConfig, '.php')) 
+        if (!isset(static::$factories['JSON']))
         {
-            return new Arr($environment, $strict);
+            static::$factories['JSON'] = function($config, $options)
+            {
+                if (strstr($config, '.json'))
+                {
+                    return new JSON($options['environment'], $options['strict']);
+                }
+                
+                return null;
+            };
         }
-        else if(strstr($pConfig, '.xml')) 
+        
+        if (!isset(static::$factories['YAML']))
         {
-            return new XML($environment, $strict);
+            static::$factories['YAML'] = function($config, $options)
+            {
+                if (strstr($config, '.yml'))
+                {
+                    return new YAML($options['environment'], $options['strict']);
+                }
+                
+                return null;
+            };
         }
-        else if(strstr($pConfig, '.ini')) 
+        
+        $options['environment'] = isset($options['environment']) ? $options['environment'] : null;
+        $options['strict'] = isset($options['strict']) ? $options['strict'] : false;
+        
+        foreach(static::$factories as $loader)
         {
-            return new INI($environment, $strict);
+            $result = $loader($config, $options);
+            
+            if (null !== $result)
+            {
+                return $result;
+            }
         }
-        else if(strstr($pConfig, '.json')) 
-        {
-            return new JSON($environment, $strict);
-        }
-        else
-        {
-            throw new \InvalidArgumentException('No loader has been implemented for this type of resource.');
-        }
+        
+        throw new \InvalidArgumentException('No loader has been implemented for this type of resource.');
     }
 }
-

@@ -120,6 +120,11 @@ class Application extends Dispatcher implements ApplicationInterface
         
         if(null === $this->_cacheVersion || null === $version || $version === $this->_cacheVersion)
         {
+            if(null !== $version)
+            {
+                $this->_cacheVersion = $version;
+            }
+            
             $this->_classesLoaded = array_merge(
                 Arr::get('classes', $data, []),
                 $this->_classesLoaded

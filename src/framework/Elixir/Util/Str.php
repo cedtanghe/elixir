@@ -67,7 +67,7 @@ class Str
                 str_replace(
                     ['-', '_', '.'], 
                     ' ', 
-                    static::removeAccents($pStr)
+                    $pStr
                 )
             )
         );

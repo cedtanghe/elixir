@@ -7,7 +7,6 @@ use Elixir\Cache\CacheAbstract;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
 class File extends CacheAbstract
 {
     /**
@@ -18,21 +17,21 @@ class File extends CacheAbstract
     /**
      * @var string 
      */
-    protected $_path;
-
+    protected $path;
+    
     /**
-     * @see CacheAbstract::__construct()
-     * @param string $pPath
+     * @param string $path
      */
-    public function __construct($pIdentifier, $pPath = 'application/cache/') 
+    public function __construct($path = null) 
     {
-        if(!is_dir($pPath))
+        $path = $path ?: 'application' . DIRECTORY_SEPARATOR . 'storage' . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR;
+        
+        if (!is_dir($path))
         {
-            @mkdir($pPath, 0777, true);
+            mkdir($path, 0777, true);
         }
         
-        $this->_path = rtrim($pPath, '/');
-        parent::__construct($pIdentifier);
+        $this->path = rtrim($path, DIRECTORY_SEPARATOR);
     }
     
     /**
@@ -40,39 +39,39 @@ class File extends CacheAbstract
      */
     public function getEncoder() 
     {
-        if(null === $this->_encoder)
+        if (null === $this->encoder) 
         {
             $class = self::DEFAULT_ENCODER;
             $this->setEncoder(new $class());
         }
-        
+
         return parent::getEncoder();
     }
 
     /**
-     * @param string $pKey
+     * @param string $key
      * @return string
      */
-    protected function file($pKey)
+    protected function getFile($key)
     {
-        return $this->_path . '/' . $this->_identifier .  md5($pKey) . '.cache';
+        return $this->path . DIRECTORY_SEPARATOR . md5($key) . '.cache';
     }
 
     /**
-     * @see CacheInterface::has()
+     * @see CacheAbstract::exists()
      */
-    public function has($pKey)
+    public function exists($key)
     {
-        $file = $this->file($pKey);
+        $file = $this->getFile($key);
         
-        if(file_exists($file))
+        if (file_exists($file))
         {
             $handle = fopen($file, 'r');
             $expired = time() > (int)trim(fgets($handle));
             
             fclose($handle);
             
-            if($expired)
+            if ($expired)
             {
                 unlink($file);
             }
@@ -84,28 +83,28 @@ class File extends CacheAbstract
     }
     
     /**
-     * @see CacheInterface::get()
+     * @see CacheAbstract::get()
      */
-    public function get($pKey, $pDefault = null)
+    public function get($key, $default = null)
     {
-       $file = $this->file($pKey);
-        
-        if(file_exists($file))
+        $file = $this->getFile($key);
+
+        if (file_exists($file))
         {
             $handle = fopen($file, 'r');
-            $expired = time() > (int)trim(fgets($handle));
-            
-            if($expired)
+            $ttl = (int)trim(fgets($handle));
+
+            if (time() > $ttl) 
             {
                 fclose($handle);
                 unlink($file);
-                
-                return is_callable($pDefault) ? $pDefault() : $pDefault;
+
+                return is_callable($default) ? call_user_func($default) : $default;
             }
-            
+
             $data = '';
-            
-            while(!feof($handle))
+
+            while (!feof($handle)) 
             {
                 $data .= fgets($handle);
             }
@@ -113,45 +112,137 @@ class File extends CacheAbstract
             fclose($handle);
             return $this->getEncoder()->decode($data);
         }
-        
-        return is_callable($pDefault) ? $pDefault() : $pDefault;
+
+        return is_callable($default) ? call_user_func($default) : $default;
     }
     
     /**
-     * @see CacheInterface::set()
+     * @see CacheAbstract::store()
      */
-    public function set($pKey, $pValue, $pTTL = 0)
+    public function store($key, $value, $ttl = self::DEFAULT_TTL)
     {
-        $pTTL = time() + $this->convertTTL($pTTL);
-        $data = $pTTL . "\n" . $this->getEncoder()->encode($pValue);
+        $ttl = time() + $this->parseTimeToLive($ttl);
+
+        file_put_contents(
+            $this->getFile($key), 
+            $ttl . "\n" . $this->getEncoder()->encode($value), 
+            LOCK_EX
+        );
         
-        file_put_contents($this->file($pKey), $data, LOCK_EX);
+        return true;
     }
     
     /**
-     * @see CacheInterface::remove()
+     * @see CacheAbstract::delete()
      */
-    public function remove($pKey)
+    public function delete($key)
     {
-        $file = $this->file($pKey);
+        $file = $this->getFile($key);
+
+        if (file_exists($file))
+        {
+            return unlink($file);
+        }
         
-        if(file_exists($file))
+        return false;
+    }
+    
+    /**
+     * @see CacheAbstract::incremente()
+     */
+    public function incremente($key, $step = 1)
+    {
+        $file = $this->getFile($key);
+
+        if (file_exists($file))
+        {
+            $handle = fopen($file, 'r');
+            $ttl = (int)trim(fgets($handle));
+
+            if (time() > $ttl) 
+            {
+                fclose($handle);
+                unlink($file);
+
+                return 0;
+            }
+
+            $data = '';
+
+            while (!feof($handle)) 
+            {
+                $data .= fgets($handle);
+            }
+            
+            fclose($handle);
+            $data = (int)$this->getEncoder()->decode($data) + $step;
+            
+            file_put_contents(
+                $this->getFile($key), 
+                $ttl . "\n" . $this->getEncoder()->encode($data), 
+                LOCK_EX
+            );
+            
+            return $data;
+        }
+        
+        return 0;
+    }
+    
+    /**
+     * @see CacheAbstract::decremente()
+     */
+    public function decremente($key, $step = 1)
+    {
+        $file = $this->getFile($key);
+
+        if (file_exists($file))
+        {
+            $handle = fopen($file, 'r');
+            $ttl = (int)trim(fgets($handle));
+
+            if (time() > $ttl) 
+            {
+                fclose($handle);
+                unlink($file);
+
+                return 0;
+            }
+
+            $data = '';
+
+            while (!feof($handle)) 
+            {
+                $data .= fgets($handle);
+            }
+            
+            fclose($handle);
+            $data = (int)$this->getEncoder()->decode($data) - $step;
+            
+            file_put_contents(
+                $this->getFile($key), 
+                $ttl . "\n" . $this->getEncoder()->encode($data), 
+                LOCK_EX
+            );
+            
+            return $data;
+        }
+        
+        return 0;
+    }
+    
+    /**
+     * @see CacheAbstract::flush()
+     */
+    public function flush()
+    {
+        $files = glob($this->path . DIRECTORY_SEPARATOR . '*.cache');
+
+        foreach ($files as $file)
         {
             unlink($file);
         }
-    }
-    
-    /**
-     * @see CacheInterface::has()
-     */
-    public function clear()
-    {
-        $files = glob($this->_path . '/' . $this->_identifier . '*.cache');
         
-        foreach($files as $file)
-        {
-            unlink($file);
-        }
+        return true;
     }
 }
-

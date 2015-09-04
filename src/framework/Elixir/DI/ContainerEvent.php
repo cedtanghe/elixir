@@ -7,55 +7,76 @@ use Elixir\Dispatcher\Event;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
-class ContainerEvent extends Event
+class ContainerEvent extends Event 
 {
     /**
      * @var string
      */
-    const SERVICE_CREATED = 'service_created';
+    const BINDED = 'binded';
     
     /**
      * @var string
      */
-    const SERVICE_ALIAS = 'service_alias';
+    const RESOLVED = 'resolved';
+    
+    /**
+     * @var string
+     */
+    const TAGGED = 'taged';
+    
+    /**
+     * @var string
+     */
+    const ALIASED = 'aliased';
     
     /**
      * @var string 
      */
-    protected $_name;
+    protected $service;
     
     /**
      * @var string 
      */
-    protected $_alias;
+    protected $tag;
     
     /**
      * @var string 
      */
-    protected $_serviceType;
-    
+    protected $alias;
+
     /**
      * @see Event::__contruct()
-     * @param string $pName
-     * @param string $pAlias
-     * @param string $pServiceType
+     * @param array $params
      */
-    public function __construct($pType, $pName = null, $pAlias = null, $pServiceType = null) 
+    public function __construct($pType, array $params = [])
     {
         parent::__construct($pType);
         
-        $this->_name = $pName;
-        $this->_alias = $pAlias;
-        $this->_serviceType = $pServiceType;
+        $params += [
+            'service' => null,
+            'tag' => null,
+            'alias' => null
+        ];
+        
+        $this->service = $params['service'];
+        $this->tag = $params['tag'];
+        $this->alias = $params['alias'];
     }
-    
+
     /**
      * @return string
      */
     public function getName()
     {
-        return $this->_name;
+        return $this->service;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getTag()
+    {
+        return $this->tag;
     }
     
     /**
@@ -63,14 +84,6 @@ class ContainerEvent extends Event
      */
     public function getAlias()
     {
-        return $this->_alias;
-    }
-    
-    /**
-     * @return string
-     */
-    public function getServiceType()
-    {
-        return $this->_serviceType;
+        return $this->alias;
     }
 }

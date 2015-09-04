@@ -138,12 +138,11 @@ class Utils
      * @param string $pIdentifier
      * @param string|array $pWording
      * @param string $pMask
+     * @param array $options
      * @return array
      */
-    public static function createOptions(array $pData, $pIdentifier, $pWording = null, $pMask = '%s')
+    public static function createOptions(array $pData, $pIdentifier, $pWording = null, $pMask = '%s', $options = [])
     {
-        $options = [];
-        
         foreach($pData as $data)
         {
             if(!is_array($data))

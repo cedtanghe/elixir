@@ -5,106 +5,68 @@ namespace Elixir\Dispatcher;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
-class Event
+class Event 
 {
     /**
      * @var string
      */
-    const START = 'start';
-    
-    /**
-     * @var string
-     */
-    const CHANGE = 'change';
-    
-    /**
-     * @var string
-     */
-    const COMPLETE = 'complete';
-    
-    /**
-     * @var string
-     */
-    const CLOSE = 'close';
-    
-    /**
-     * @var string
-     */
-    const ERROR = 'error';
-    
-    /**
-     * @var string
-     */
-    const UPDATE = 'update';
-    
-    /**
-     * @var string
-     */
-    const CANCEL = 'cancel';
-    
-    /**
-     * @var string
-     */
-    const DESTROY = 'destroy';
+    protected $type;
 
-    /**
-     * @var string
-     */
-    protected $_type;
-    
     /**
      * @var mixed
      */
-    protected $_target;
-    
+    protected $target;
+
     /**
      * @var boolean
      */
-    protected $_stopPropagation = false;
-    
+    protected $stopPropagation = false;
+
     /**
-     * @param string $pType 
+     * @param string $type 
      */
-    public function __construct($pType) 
+    public function __construct($type) 
     {
-        $this->_type = $pType;
+        $this->type = $type;
     }
-    
+
     /**
      * @return string 
      */
-    public function getType()
+    public function getType() 
     {
-        return $this->_type;
+        return $this->type;
     }
-    
+
     /**
      * @return mixed
      */
-    public function getTarget()
+    public function getTarget() 
     {
-        return $this->_target;
+        return $this->target;
     }
-    
+
     /**
-     * @param mixed $pValue 
+     * @param mixed $value 
      */
-    public function setTarget($pValue)
+    public function setTarget($value) 
     {
-        $this->_target = $pValue;
+        $this->target = $value;
     }
-    
+
     /**
      * @return boolean 
      */
-    public function isStopped()
+    public function isStopped() 
     {
-        return $this->_stopPropagation;
+        return $this->stopPropagation;
     }
-    
-    public function stopPropagation()
+
+    /**
+     * @return void
+     */
+    public function stopPropagation() 
     {
-        $this->_stopPropagation = true;
+        $this->stopPropagation = true;
     }
 }

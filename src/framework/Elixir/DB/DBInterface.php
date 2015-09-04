@@ -2,59 +2,56 @@
 
 namespace Elixir\DB;
 
-use Elixir\DB\Result\SetAbstract;
-use Elixir\DB\SQL\SQLInterface;
-use Elixir\Dispatcher\DispatcherInterface;
+use Elixir\DB\Query\QueryInterface;
+use Elixir\DB\ResultSet\ResultSetAbstract;
 
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
-interface DBInterface extends DispatcherInterface
+interface DBInterface
 {
     /**
      * @return integer
      */
     public function lastInsertId();
-    
+
     /**
      * @return boolean
      */
     public function begin();
-    
+
     /**
      * @return boolean
      */
     public function rollBack();
-    
+
     /**
      * @return boolean
      */
     public function commit();
-    
+
     /**
      * @return boolean
      */
     public function inTransaction();
-    
+
     /**
-     * @param mixed $pValue
-     * @param integer $pType
+     * @param mixed $value
+     * @param integer $type
      * @return mixed
      */
-    public function quote($pValue, $pType = null);
-    
+    public function quote($value, $type = null);
+
     /**
-     * @param SQLInterface|string $pSQL
+     * @param QueryInterface|string $query
      * @return integer
      */
-    public function exec($pSQL);
-    
+    public function exec($query);
+
     /**
-     * @param SQLInterface|string $pSQL
-     * @param array $pValues
-     * @param array $pOptions
-     * @return SetAbstract|boolean
+     * @param QueryInterface|string $query
+     * @param array $bindings
+     * @return ResultSetAbstract|boolean
      */
-    public function query($pSQL, array $pValues = [], array $pOptions = []);
+    public function query($query, array $bindings = []);
 }

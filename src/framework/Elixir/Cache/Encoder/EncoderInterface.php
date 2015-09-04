@@ -5,18 +5,17 @@ namespace Elixir\Cache\Encoder;
 /**
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
-
 interface EncoderInterface
 {
     /**
-     * @param mixed $pValue 
+     * @param mixed $value 
      * @return mixed
      */
-    public function encode($pValue);
+    public function encode($value);
     
     /**
-     * @param mixed $pValue 
+     * @param mixed $value 
      * @return mixed
      */
-    public function decode($pValue);
+    public function decode($value);
 }
