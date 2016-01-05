@@ -25,11 +25,11 @@ class CSV
         $return = [];
         $data = [];
 
-        if(is_file($csv))
+        if(is_file($pCsv))
         {
-            if(($handle = fopen($csv, 'r')) !== false) 
+            if(($handle = fopen($pCsv, 'r')) !== false) 
             {
-                while(($d = fgetcsv($handle, 4096, $delimiter, $enclosure)) !== false) 
+                while(($d = fgetcsv($handle, 4096, $pDelimiter, $pEnclosure)) !== false) 
                 {
                     $data[] = $d;
                 }
@@ -39,7 +39,7 @@ class CSV
         }
         else
         {
-            $data = str_getcsv($csv, $delimiter, $enclosure);
+            $data = str_getcsv($pCsv, $pDelimiter, $pEnclosure);
         }
 
         $i = 0;

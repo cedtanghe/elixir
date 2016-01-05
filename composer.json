@@ -2,14 +2,21 @@
     "name":"cedtanghe/elixir",
     "description":"Library PHP",
     "license":"proprietary",
-    "autoload": 
-    {
-        "psr-0": 
-        {
+	"require": {
+        "php": ">=5.4"
+    },
+	"require-dev": {
+        "phpunit/PHPUnit": "~4.0"
+    },
+    "autoload": {
+        "psr-0": {
             "Elixir\\":"/src/framework/",
             "PHPChecker_":"/src/framework/",
             "Elixir\\Module\\":"/src/modules/"
         }
+    },
+    "suggest": {
+        "symfony/console": "*",
+        "twig/twig": "1.*"
     }
 }
-

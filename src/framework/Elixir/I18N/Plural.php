@@ -30,7 +30,7 @@ class Plural
                 $result = count($pMessages) >= 3 ? $pMessages[2] : $pMessages[1];
             }
             
-            return $result;
+            return str_replace('{COUNT}', $pNumber, $result);
         };
     }
 
