@@ -2,7 +2,7 @@
     "name":"cedtanghe/elixir",
     "description":"Library PHP",
     "license":"proprietary",
-	"require": {
+    "require": {
         "php": ">=5.4"
     },
 	"require-dev": {

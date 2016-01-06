@@ -117,7 +117,7 @@ class ModuleCreate extends Command
                 $content = str_replace('{MODULE}', $name, $content);
                 $content = str_replace('{MODULE_PARENT}', $parent, $content);
                 
-                file_put_contents($file, $content);
+                file_put_contents($file, $content . "\n");
             }
             
             /************ REGISTER MODULE ************/
@@ -146,7 +146,7 @@ class ModuleCreate extends Command
                     }
                 }
 
-                file_put_contents($file, implode("\n", $lines));
+                file_put_contents($file, implode("\n", $lines) . "\n");
             }
             
             /************ REGISTER AUTOLOAD ************/
@@ -196,7 +196,7 @@ class ModuleCreate extends Command
                 }
             }
 
-            file_put_contents($file, implode("\n", $lines));
+            file_put_contents($file, implode("\n", $lines) . "\n");
             $pOutput->writeln(sprintf('<info>Module %s created</info>', $name));
             
             return;

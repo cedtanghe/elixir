@@ -1,8 +1,10 @@
 <?php
 
+use Elixir\Util\Str;
+
 return [
     '{MODULE}-INDEX' => [
-        'regex' => \Elixir\Util\Str::slug(\Elixir\Util\Str::snake('{MODULE}')),
+        'regex' => Str::slug(Str::snake('{MODULE}')),
         'parameters' => ['_mvc' => '(@{MODULE})::index::index']
     ]
 ];
