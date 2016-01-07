@@ -305,7 +305,7 @@ class Select
                     );
                 }
                 
-                $data['eagerLoad']->sync($member, $pRepositories, $data['with']);
+                $data['eagerLoad']->sync($member, $repositories, $data['with']);
             }
         }
         

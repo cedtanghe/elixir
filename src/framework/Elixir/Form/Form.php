@@ -881,6 +881,22 @@ class Form extends Dispatcher implements FormInterface
     }
     
     /**
+     * @see FormInterface::bindErrors()
+     */
+    public function bindErrors(array $pData)
+    {
+        foreach($pData as $key => $value)
+        {
+            $item = $this->get($key);
+            
+            if ($item)
+            {
+                $item->bindErrors($value);
+            }
+        }
+    }
+    
+    /**
      * @see FormInterface::reset()
      */
     public function reset(array $pOmit = [])

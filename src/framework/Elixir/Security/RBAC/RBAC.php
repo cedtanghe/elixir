@@ -144,7 +144,7 @@ class RBAC implements RBACInterface
                 }
             }
             
-            $r = new Role($role);
+            $r = $role instanceof Role ? $role : new Role($role);
             
             if(count($permissions) > 0)
             {

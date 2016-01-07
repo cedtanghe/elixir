@@ -664,6 +664,14 @@ abstract class FieldAbstract extends Dispatcher implements FieldInterface
     }
     
     /**
+     * @see FieldInterface::bindErrors()
+     */
+    public function bindErrors(array $pData)
+    {
+        $this->_errors = $pData;
+    }
+    
+    /**
      * @see FieldInterface::reset()
      */
     public function reset()

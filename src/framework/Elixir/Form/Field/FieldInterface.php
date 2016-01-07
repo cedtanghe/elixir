@@ -177,5 +177,10 @@ interface FieldInterface extends DispatcherInterface
      */
     public function errors();
     
+    /**
+     * @param array $pData
+     */
+    public function bindErrors(array $pData);
+    
     public function reset();
 }
