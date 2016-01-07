@@ -110,19 +110,16 @@ class DBFixtures extends Command
         
         foreach($modules as $module)
         {
-            if($this->_application->hasModule($module))
+            $namespace = $module->getNamespace();
+            $path = $module->getPath() . '/resources/fixtures/';
+            $list = File::filesList($path);
+
+            foreach($list as $file)
             {
-                $namespace = $module->getNamespace();
-                $path = $module->getPath() . '/resources/fixtures/';
-                $list = File::filesList($path);
-                
-                foreach($list as $file)
-                {
-                    require_once $path . File::basename($file);
-                    
-                    $class = '\\' . $namespace . '\Fixture\\' . File::filename($file);
-                    $fixtures[$class] = new $class();
-                }
+                require_once $path . File::basename($file);
+
+                $class = '\\' . $namespace . '\Fixture\\' . File::filename($file);
+                $fixtures[$class] = new $class();
             }
         }
         
