@@ -105,7 +105,7 @@ class Role
     {
         foreach([$pName, self::ALL_PERMISSIONS_GRANTED] as $permission)
         {
-            if(array_key_exists($this->_permissions[$permission]))
+            if(array_key_exists($permission, $this->_permissions))
             {
                 if(true !== $this->_permissions[$permission])
                 {
