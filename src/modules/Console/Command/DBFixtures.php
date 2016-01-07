@@ -120,7 +120,7 @@ class DBFixtures extends Command
                 {
                     require_once $path . File::basename($file);
                     
-                    $class = '\\' . $namespace . '\Fixtures\\' . File::filename($file);
+                    $class = '\\' . $namespace . '\Fixture\\' . File::filename($file);
                     $fixtures[$class] = new $class();
                 }
             }
