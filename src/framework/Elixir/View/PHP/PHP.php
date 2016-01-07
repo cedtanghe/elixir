@@ -175,7 +175,7 @@ class PHP extends DataAbstract implements HelperInterface, EscaperInterface
      */
     public function extend($pTemplate)
     {
-        if (false !== strpos($module, '(@') && $this->helper('helper.locator'))
+        if (false !== strpos($pTemplate, '(@') && $this->helper('helper.locator'))
         {
             $pTemplate = $this->helper('helper.locator')->locateFile($pTemplate);
         }
