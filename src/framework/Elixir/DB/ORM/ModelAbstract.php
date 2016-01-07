@@ -230,7 +230,7 @@ abstract class ModelAbstract extends Dispatcher implements RepositoryInterface
         
         if(!empty($pData))
         {
-            $this->hydrate($pData, ['raw' => true, 'sync' => true]);
+            $this->hydrate($pData, ['raw' => true, 'sync' => false]);
         }
     }
     
