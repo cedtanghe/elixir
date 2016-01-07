@@ -125,7 +125,7 @@ class DBFixtures extends Command
         
         if(count($fixtures) > 0)
         {
-            usort($fixtures, [$this, 'compare']);
+            uasort($fixtures, [$this, 'compare']);
             
             $DB = $this->_container->get($DBName);
         
