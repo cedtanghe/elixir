@@ -12,7 +12,7 @@ use Elixir\Security\Firewall\FirewallInterface;
  * @author Cédric Tanghe <ced.tanghe@gmail.com>
  */
 
-class IdentityNotFound
+class Redirect
 {
     /**
      * @var string 
