@@ -196,9 +196,9 @@ interface FormInterface extends DispatcherInterface
     public function errors();
     
     /**
-     * @param array $pData
+     * @param string|array $pData
      */
-    public function bindErrors(array $pData);
+    public function bindErrors($pData);
     
     /**
      * @param array $pOmit
