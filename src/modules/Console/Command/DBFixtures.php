@@ -113,17 +113,15 @@ class DBFixtures extends Command
             if($this->_application->hasModule($module))
             {
                 $namespace = $module->getNamespace();
-                $path = $module->getPath() . '/database/fixtures/';
+                $path = $module->getPath() . '/resources/fixtures/';
                 $list = File::filesList($path);
                 
                 foreach($list as $file)
                 {
-                    $class = '\\' . $namespace . '\Fixtures\\' . File::filename($file);
+                    require_once $path . File::basename($file);
                     
-                    if(class_exists($class))
-                    {
-                        $fixtures[$class] = new $class();
-                    }
+                    $class = '\\' . $namespace . '\Fixtures\\' . File::filename($file);
+                    $fixtures[$class] = new $class();
                 }
             }
         }
