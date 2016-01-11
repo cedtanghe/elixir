@@ -140,7 +140,7 @@ class DBFixtures extends Command
             foreach($fixtures as $class => $fixture)
             {
                 $fixture->setContainer($this->_container);
-                $fixture->load($DB);
+                $fixture->load($DB, $pOutput);
                 
                 $pOutput->writeln(sprintf('<info>Loaded: %s</info>', $class));
             }

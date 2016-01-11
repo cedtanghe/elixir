@@ -892,6 +892,7 @@ class Form extends Dispatcher implements FormInterface
             if ($item)
             {
                 $item->bindErrors($value);
+                $this->_errors[$item->getName()] = $item->errors();
             }
         }
     }

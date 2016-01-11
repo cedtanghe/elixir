@@ -55,6 +55,11 @@ abstract class RESTFulControllerAbstract extends ControllerAbstract implements R
             }
         }
         
+        if (method_exists($this, $pMethod))
+        {
+            return $pMethod;
+        }
+        
         return null;
     }
 

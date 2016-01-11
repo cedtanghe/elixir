@@ -58,16 +58,28 @@ class Firewall extends FirewallAbstract
                 $this->dispatch(new FirewallEvent(FirewallEvent::RESOURCE_MATCHED, $pResource, $accessControl));
                 
                 $options = $accessControl->getOptions();
-                $domains = $options['domains'];
-                $roles = $options['roles'];
-                $permissions = $options['permissions'];
+                $domains = (array)$options['domains'];
+                $roles = (array)$options['roles'];
+                $permissions = (array)$options['permissions'];
                 $assert = $options['assert'];
                 
-                if(count($domains) == 0)
+                if(count($domains) == 0 || in_array(null, $domains, true))
                 {
-                    // Access granted
-                    $this->dispatch(new FirewallEvent(FirewallEvent::ACCESS_GRANTED, $pResource, $accessControl));
-                    return true;
+                    if (!empty($assert))
+                    {
+                        if(true === call_user_func_array($assert, [false, false, null]))
+                        {
+                            // Access granted
+                            $this->dispatch(new FirewallEvent(FirewallEvent::ACCESS_GRANTED, $pResource, $accessControl));
+                            return true;
+                        }
+                    }
+                    else
+                    {
+                        // Access granted
+                        $this->dispatch(new FirewallEvent(FirewallEvent::ACCESS_GRANTED, $pResource, $accessControl));
+                        return true;
+                    }
                 }
                 
                 $domainFound = false;
@@ -78,9 +90,21 @@ class Firewall extends FirewallAbstract
                     {
                         if(count($roles) == 0)
                         {
-                            // Access granted
-                            $this->dispatch(new FirewallEvent(FirewallEvent::ACCESS_GRANTED, $pResource, $accessControl));
-                            return true;
+                            if (!empty($assert))
+                            {
+                                if(true === call_user_func_array($assert, [true, false, null]))
+                                {
+                                    // Access granted
+                                    $this->dispatch(new FirewallEvent(FirewallEvent::ACCESS_GRANTED, $pResource, $accessControl));
+                                    return true;
+                                }
+                            }
+                            else
+                            {
+                                // Access granted
+                                $this->dispatch(new FirewallEvent(FirewallEvent::ACCESS_GRANTED, $pResource, $accessControl));
+                                return true;
+                            }
                         }
                         
                         $domainFound = true;

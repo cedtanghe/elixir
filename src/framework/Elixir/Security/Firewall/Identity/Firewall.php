@@ -56,13 +56,26 @@ class Firewall extends FirewallAbstract
                 $this->dispatch(new FirewallEvent(FirewallEvent::RESOURCE_MATCHED, $pResource, $accessControl));
                 
                 $options = $accessControl->getOptions();
-                $domains = $options['domains'];
+                $domains = (array)$options['domains'];
+                $assert = $options['assert'];
                 
-                if(count($domains) == 0)
+                if(count($domains) == 0 || in_array(null, $domains, true))
                 {
-                    // Access granted
-                    $this->dispatch(new FirewallEvent(FirewallEvent::ACCESS_GRANTED, $pResource, $accessControl));
-                    return true;
+                    if (!empty($assert))
+                    {
+                        if(true === call_user_func_array($assert, [false, false, null]))
+                        {
+                            // Access granted
+                            $this->dispatch(new FirewallEvent(FirewallEvent::ACCESS_GRANTED, $pResource, $accessControl));
+                            return true;
+                        }
+                    }
+                    else
+                    {
+                        // Access granted
+                        $this->dispatch(new FirewallEvent(FirewallEvent::ACCESS_GRANTED, $pResource, $accessControl));
+                        return true;
+                    }
                 }
                 else if($this->_authManager->isEmpty())
                 {
@@ -75,9 +88,21 @@ class Firewall extends FirewallAbstract
                 {
                     if($this->_authManager->has($domain))
                     {
-                        // Access granted
-                        $this->dispatch(new FirewallEvent(FirewallEvent::ACCESS_GRANTED, $pResource, $accessControl));
-                        return true;
+                        if (!empty($assert))
+                        {
+                            if(true === call_user_func_array($assert, [false, false, null]))
+                            {
+                                // Access granted
+                                $this->dispatch(new FirewallEvent(FirewallEvent::ACCESS_GRANTED, $pResource, $accessControl));
+                                return true;
+                            }
+                        }
+                        else
+                        {
+                            // Access granted
+                            $this->dispatch(new FirewallEvent(FirewallEvent::ACCESS_GRANTED, $pResource, $accessControl));
+                            return true;
+                        }
                     }
                 }
                 

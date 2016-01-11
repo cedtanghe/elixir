@@ -19,7 +19,10 @@ class AccessControl extends AccessControlAbstract
     /**
      * @var array
      */
-    protected $_options = ['domains' => []];
+    protected $_options = [
+        'assert' => null,
+        'domains' => []
+    ];
     
     /**
      * @param string $pPattern
@@ -48,7 +51,11 @@ class AccessControl extends AccessControlAbstract
      */
     public function setOption($pKey, $pValue)
     {
-        if($pKey === 'domains')
+        if($pKey === 'assert')
+        {
+            $this->setAssert($pValue);
+        }
+        else if($pKey === 'domains')
         {
             if(null === $pValue)
             {
@@ -61,6 +68,22 @@ class AccessControl extends AccessControlAbstract
         {
             parent::setOption($pKey, $pValue);
         }
+    }
+    
+    /**
+     * @param callable $pValue
+     */
+    public function setAssert(callable $pValue)
+    {
+        $this->_options['assert'] = $pValue;
+    }
+    
+    /**
+     * @return callable
+     */
+    public function getAssert()
+    {
+        return $this->_options['assert'];
     }
     
     /**

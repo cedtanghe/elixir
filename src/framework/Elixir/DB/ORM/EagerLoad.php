@@ -147,7 +147,7 @@ class EagerLoad
             $select->with($member, $eagerLoad);
         }
         
-        if(false !== $this->performConstraints($select))
+        if(false !== $this->performConstraints($select, $pRepositories))
         {
             if(false !== $this->performCriterions($select))
             {

@@ -18,8 +18,9 @@ interface FixtureInterface
     
     /**
      * @param DBInterface $pDB
+     * @param mixed $pOutput
      */
-    public function load(DBInterface $pDB);
+    public function load(DBInterface $pDB, $pOutput = null);
     
     /**
      * @return integer
