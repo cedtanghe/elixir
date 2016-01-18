@@ -99,9 +99,18 @@ class Identity extends Dispatcher
      * @param string $pKey
      * @return mixed
      */
+    public function __isset($pKey)
+    {
+        return isset($this->_data[$pKey]);
+    }
+    
+    /**
+     * @param string $pKey
+     * @return mixed
+     */
     public function __get($pKey)
     {
-        return $this->_data[$pKey];
+        return isset($this->_data[$pKey]) ? $this->_data[$pKey] : null;
     }
     
     /**
