@@ -148,17 +148,23 @@ class QueryGenerator extends URLGenerator
             $url = str_replace('{' . $value . '}', '', $url);
         }
         
+        if(!empty($attributes))
+        {
+            $url .= $attributes;
+        }
+        
         $url = preg_replace('/\((\/+)\)\?/U', '', $url);
         $url = trim(preg_replace_callback('/\((.*)\)\?/U', [$this, 'clean'], $url), '/');
         $query[$this->_queryKey] = $url;
+        $url = '';
         
-        if (isset($query['_sid']) && $query['_sid'] && defined('SID'))
+        if (isset($query[Route::SID]))
         {
-            $url = '?' . SID;
-            unset($query['_sid']);
+            $url = '?' . $query[Route::SID];
+            unset($query[Route::SID]);
         }
         
-        $url = (0 === strpos('?', $url) ? '&' : '?') . strtr(
+        $url .= (0 === strpos('?', $url) ? '&' : '?') . strtr(
             http_build_query($query),
             [
                 '%2F' => '/',
@@ -173,11 +179,6 @@ class QueryGenerator extends URLGenerator
                 '%7C' => '|'
             ]
         );
-        
-        if(!empty($attributes))
-        {
-            $url .= $attributes;
-        }
         
         if($pMode == self::URL_ABSOLUTE || $pMode == self::SHEMA_RELATIVE)
         {

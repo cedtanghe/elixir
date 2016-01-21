@@ -56,6 +56,11 @@ class Route
     /**
      * @var string
      */
+    const SID = '_sid';
+    
+    /**
+     * @var string
+     */
     const PREFIX = '_prefix';
     
     /**

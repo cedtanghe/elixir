@@ -139,10 +139,10 @@ class URLGenerator implements GeneratorInterface
         
         $q = '';
         
-        if (defined('SID') && isset($query['_sid']) && $query['_sid'])
+        if (isset($query[Route::SID]))
         {
-            $q = '?' . SID;
-            unset($query['_sid']);
+            $q = '?' . $query[Route::SID];
+            unset($query[Route::SID]);
         }
         
         if(count($query) > 0)
