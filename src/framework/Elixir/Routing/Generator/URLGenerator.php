@@ -139,15 +139,9 @@ class URLGenerator implements GeneratorInterface
         
         $q = '';
         
-        if (isset($query[Route::SID]))
-        {
-            $q = '?' . $query[Route::SID];
-            unset($query[Route::SID]);
-        }
-        
         if(count($query) > 0)
         {
-            $q .= (0 === strpos('?', $q) ? '&' : '?') . http_build_query($query);
+            $q .= '?' . http_build_query($query);
         }
         
         $url = $pRoute->getPattern();

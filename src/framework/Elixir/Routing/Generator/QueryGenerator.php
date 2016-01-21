@@ -156,15 +156,8 @@ class QueryGenerator extends URLGenerator
         $url = preg_replace('/\((\/+)\)\?/U', '', $url);
         $url = trim(preg_replace_callback('/\((.*)\)\?/U', [$this, 'clean'], $url), '/');
         $query[$this->_queryKey] = $url;
-        $url = '';
         
-        if (isset($query[Route::SID]))
-        {
-            $url = '?' . $query[Route::SID];
-            unset($query[Route::SID]);
-        }
-        
-        $url .= (0 === strpos('?', $url) ? '&' : '?') . strtr(
+        $url = '?' . strtr(
             http_build_query($query),
             [
                 '%2F' => '/',
