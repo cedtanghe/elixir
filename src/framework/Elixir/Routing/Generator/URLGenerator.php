@@ -147,7 +147,7 @@ class URLGenerator implements GeneratorInterface
         
         if(count($query) > 0)
         {
-            $q = (0 === strpos('?', $q) ? '&' : '?') . http_build_query($query);
+            $q .= (0 === strpos('?', $q) ? '&' : '?') . http_build_query($query);
         }
         
         $url = $pRoute->getPattern();
