@@ -148,16 +148,17 @@ class QueryGenerator extends URLGenerator
             $url = str_replace('{' . $value . '}', '', $url);
         }
         
-        if(count($query) == 0)
-        {
-            $query = [];
-        }
-        
         $url = preg_replace('/\((\/+)\)\?/U', '', $url);
         $url = trim(preg_replace_callback('/\((.*)\)\?/U', [$this, 'clean'], $url), '/');
         $query[$this->_queryKey] = $url;
         
-        $url = '?' . strtr(
+        if (isset($query['_sid']) && $query['_sid'] && defined('SID'))
+        {
+            $url = '?' . SID;
+            unset($query['_sid']);
+        }
+        
+        $url = (0 === strpos('?', $url) ? '&' : '?') . strtr(
             http_build_query($query),
             [
                 '%2F' => '/',

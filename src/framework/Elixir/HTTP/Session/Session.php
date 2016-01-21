@@ -165,10 +165,6 @@ class Session extends Dispatcher implements SessionInterface, \ArrayAccess, \Ite
             {
                 session_set_save_handler($this->_handler, true);
             }
-            else
-            {
-                ini_set('session.save_handler', 'files');
-            }
             
             session_start();
             $this->dispatch(new SessionEvent(SessionEvent::START));

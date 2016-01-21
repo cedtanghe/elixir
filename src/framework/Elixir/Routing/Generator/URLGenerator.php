@@ -137,13 +137,17 @@ class URLGenerator implements GeneratorInterface
             }
         }
         
+        $q = '';
+        
+        if (defined('SID') && isset($query['_sid']) && $query['_sid'])
+        {
+            $q = '?' . SID;
+            unset($query['_sid']);
+        }
+        
         if(count($query) > 0)
         {
-            $query = '?' . http_build_query($query);
-        }
-        else
-        {
-            $query = '';
+            $q = (0 === strpos('?', $q) ? '&' : '?') . http_build_query($query);
         }
         
         $url = $pRoute->getPattern();
@@ -228,9 +232,9 @@ class URLGenerator implements GeneratorInterface
             $url .= $attributes;
         }
         
-        if(!empty($query))
+        if(!empty($q))
         {
-            $url .= $query;
+            $url .= $q;
         }
         
         if($pMode == self::URL_ABSOLUTE || $pMode == self::SHEMA_RELATIVE)
