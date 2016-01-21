@@ -5,6 +5,7 @@ namespace Elixir\Module\AppBase\DI;
 use Elixir\Config\Config;
 use Elixir\DI\ContainerInterface;
 use Elixir\DI\ProviderInterface;
+use Elixir\HTTP\RequestFactory;
 use Elixir\Routing\Collection;
 use Elixir\Routing\Generator\URLGenerator;
 use Elixir\Routing\Matcher\URLMatcher;
@@ -23,6 +24,14 @@ class Services implements ProviderInterface
      */
     public function load(ContainerInterface $pContainer) 
     {
+        /************ REQUEST ************/
+        
+        $pContainer->set('request', function()
+        {
+            return RequestFactory::create();
+        }, 
+        ['type' => ContainerInterface::SINGLETON]);
+        
         /************ CONGIG ************/
         
         $pContainer->set('config', function()
