@@ -45,7 +45,7 @@ class DBFixtures extends Command
     protected function configure()
     {
         $this->setName('db:fixtures')
-             ->setDescription('Seed your database with test data using fixtures classes.')
+             ->setDescription('Seed your database using fixtures classes.')
              ->addOption(
                 'db',
                 null,
@@ -60,13 +60,13 @@ class DBFixtures extends Command
                 'Name of the module containing the fixtures classes'
              )
              ->addOption(
-                'class',
+                'classname',
                 null,
                 InputOption::VALUE_REQUIRED,
-                'Name of the fixtures class'
+                'Classname of the fixture class (without namespace)'
              );
     }
-
+    
     /**
      * @see Command::execute()
      */
@@ -75,22 +75,17 @@ class DBFixtures extends Command
         $fixtures = [];
         $DBName = $pInput->getOption('db');
         
-        $class = $pInput->getOption('class');
-        
-        if(null !== $class)
-        {
-            $fixtures[$class] = new $class();
-        }
-        
+        $classToExecute = $pInput->getOption('classname');
         $module = $pInput->getOption('module');
         
-        if(null === $module && null === $class)
+        if(null === $module && null === $classToExecute)
         {
             $dialog = $this->getHelperSet()->get('dialog');
 
-            if(!$dialog->askConfirmation($pOutput,
-                                         '<question>No modules defined, continue anyway and use all modules ? [y,n]</question>',
-                                         false)) 
+            if(!$dialog->askConfirmation(
+                $pOutput,
+                '<question>No modules defined, continue anyway and use all modules ? [y,n]</question>',
+                false)) 
             {
                 return;
             }
@@ -99,7 +94,12 @@ class DBFixtures extends Command
         }
         else
         {
-            if(!$this->_application->hasModule($module))
+            if (null === $module)
+            {
+                $pOutput->writeln('<error>No module defined</error>');
+                return;
+            }
+            else if (!$this->_application->hasModule($module))
             {
                 $pOutput->writeln(sprintf('<error>The %s module does not exist</error>', $module));
                 return;
@@ -108,18 +108,36 @@ class DBFixtures extends Command
             $modules[] = $this->_application->getModule($module);
         }
         
-        foreach($modules as $module)
+        if ($classToExecute && count($modules) > 0)
         {
-            $namespace = $module->getNamespace();
-            $path = $module->getPath() . '/resources/fixtures/';
-            $list = File::filesList($path);
-
-            foreach($list as $file)
+            if ($pos = strrpos($classToExecute, '\\')) 
             {
-                require_once $path . File::basename($file);
+                $classToExecute = substr($classToExecute, $pos + 1);
+            }
+            
+            $module = $modules[0];
+            $namespace = $module->getNamespace();
+            
+            require_once $module->getPath() . '/resources/fixtures/' . $classToExecute . '.php';
+            
+            $class = '\\' . $namespace . '\Fixture\\' . $classToExecute;
+            $fixtures[$class] = new $class();
+        }
+        else
+        {
+            foreach ($modules as $module)
+            {
+                $namespace = $module->getNamespace();
+                $path = $module->getPath() . '/resources/fixtures/';
+                $list = File::filesList($path);
 
-                $class = '\\' . $namespace . '\Fixture\\' . File::filename($file);
-                $fixtures[$class] = new $class();
+                foreach ($list as $file)
+                {
+                    require_once $path . File::basename($file);
+
+                    $class = '\\' . $namespace . '\Fixture\\' . File::filename($file);
+                    $fixtures[$class] = new $class();
+                }
             }
         }
         

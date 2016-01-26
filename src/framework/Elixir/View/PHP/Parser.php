@@ -73,6 +73,14 @@ class Parser
     {
         return $this->__view->gets();
     }
+    
+    /**
+     * @see PHP::setGlobal()
+     */
+    public function globalize($pKey, $pValue)
+    {
+        $this->__view->setGlobal($pKey, $pValue);
+    }
 
     /**
      * @see PHP::has()
