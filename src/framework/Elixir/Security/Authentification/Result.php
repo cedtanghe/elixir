@@ -92,7 +92,7 @@ class Result
      */
     public function hasCode($pCode)
     {
-        return ($this->_code & $pCode) == $pCode;
+        return ($this->_code & $pCode) === $pCode;
     }
     
     /**
